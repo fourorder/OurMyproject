@@ -10,8 +10,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <title>搜索结果</title>
-<link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap.css">
 <link rel="stylesheet" href="<%=path%>css/oindex.css">
+<%-- <link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap.css">  --%>
+
 <script type="text/javascript" src="<%=path%>js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="<%=path%>js/jquery.superslide.2.1.1.js"></script>
 <script src="<%=path%>js/jquery-1.4.2.min.js" type="text/javascript"></script>
@@ -75,6 +76,19 @@ left:370px;
 top:240px;
 left:620px;
 }
+
+.mybtn{
+    background-color: #04B6E9;
+    border: none;
+    color: white;
+     padding: 5px 8px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+   border-radius: 6px;
+    cursor: pointer;
+}
 </style>
 
 </head>
@@ -131,22 +145,22 @@ $(document).ready(function(){
 	<c:forEach items="${objList[0]}"  var="obj" varStatus="status">
 	<div class="item" id="img${status.count}">
 		<img width="150" height="150" alt="${obj.userName}" src="<%=path%>images/banner-touxiang.png" />
-		<div class="caption">
+		<div class="caption" style="text-align:center;" >
 			<a href="http://www.17sucai.com/">详细信息</a>
 			<p><a href="http://www.17sucai.com/">账户:${obj.userAccount}</a></p>
 		</div>
 		<div style="position:absolute;left:60px;top:120px;"><font color="red" size="4px">${obj.userName}</font></div>
 	</div>									
 	</c:forEach>
-<div  style="position:absolute;top:440px;left:240px;">
-<button class="btn btn-info btn-xs">首页</button>
+<div  style="position:absolute;top:460px;left:240px;">
+<button class="mybtn">首页</button>
 共${requestScope.count}条
 当前页数：[${requestScope.page}/${requestScope.countpage}]
-<button class="btn btn-info btn-xs">末页</button>
-<button class="btn btn-info btn-xs">上一页</button>
-<button class="btn btn-info btn-xs">下一页</button>
-到第<input type="text" style="width:30px;">页
-<button class="btn btn-info btn-xs">跳转</button>
+<button class="mybtn">末页</button>
+<button class="mybtn">上一页</button>
+<button class="mybtn">下一页</button>
+到第<input type="text" style="width:25px;">页
+<button class="mybtn">跳转</button>
 	</div> 
 
 	</div>
