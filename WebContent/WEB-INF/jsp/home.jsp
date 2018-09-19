@@ -38,8 +38,8 @@
 				<div class="width1180">
 					 <h1 class="fl"><img src="<%=path%>images/logo.png"></h1> 
 					<div class="o-search">
-						<form>
-							<input type="text" class="search-text"  placeholder="请输入您搜索的关键词"><button class="search-bnt"><img src="<%=path%>images/search-i.png">  搜索</button>
+						<form action="user/search.action" method="post">
+							<input type="text" class="search-text"  placeholder="请输入您搜索的关键词" name="name"><button class="search-bnt" type="submit"><img src="<%=path%>images/search-i.png">  搜索</button>
 						</form>
 					</div>
 					<!-- <div class="fl search-keywords">
@@ -417,22 +417,6 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 							</ul>
 						</div>							
 						</div>
-						<div class="clearfix"></div>
-						<div class="banner-anli">
-							<p>成功交易&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">更多</a></p>
-							<ul>
-							<c:forEach items="${fundlist}"  var="fund">
-								<li><a href="#" title=""></a></li>
-							</c:forEach>
-								<!-- <li><a href="#" title="">与长沙宏志贸易有限公司成功签</a></li>
-								<li><a href="#" title="">湘潭市岳塘区方正摩配商行签约...</a></li>
-								<li><a href="#" title="">首次签约长沙蒂芬美容服务有限公司</a></li>
-								<li><a href="#" title="">与鄢总签订公司注册、代理记账合同</a></li>
-								<li><a href="#" title="">客户肖总成功签订公司注册合同</a></li> -->
-							</ul>
-						</div>
->>>>>>> branch 'master' of https://github.com/vv871870674/Myproject.git
-					</div>
 				<!--右边-->
 				</div>
 

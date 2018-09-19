@@ -1,5 +1,12 @@
 package org.great.mapper;
 
-public interface UserMapper {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+import org.great.bean.UserBean;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserMapper {
+public List<UserBean> serachEmployer(@Param("name")String name);
 }
