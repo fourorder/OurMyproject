@@ -32,6 +32,8 @@ public List<Object> selectFund(String page,String state){//交易记录ajax分�
 		page1++;				
 	}else if(state.equals("last")&&(page1>1)){
 		page1--; 				
+	}else if (state.equals("jump")){
+		
 	}
 	int end=5*page1;
 	int start=end-4;

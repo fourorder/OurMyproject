@@ -87,6 +87,7 @@
 												<th>交易类型</th>
 												<th>接收人</th>
 												<th>交易金额</th>
+												<th>详细信息<th>
 											</tr>
 										</thead>
 										<tbody id="tb">
@@ -97,6 +98,7 @@
 												<td>${fund.businessBean.businessName}</td>
 												<td>${fund.toUserBean.userName}</td>
 												<td>${fund.dealMoney}</td>
+												<td><a href="#">详细信息</a></td>
 									</tr>
 									</c:forEach>											
 										</tbody>
@@ -105,7 +107,7 @@
 								<div class="ydc-pagination">
 									<ol>
 										<li class="ydc-previous-item">
-											<button class="ydc-previous-item-btn-medium ydc-disabled" onclick="selectFund('last')" id="last">
+											<button class="ydc-previous-item-btn-medium ydc-disabled" onclick="selectFund('last')" id="last"   disabled="disabled">
 												<span>上一页</span>
 											</button>
 										</li>
@@ -125,8 +127,8 @@
 											</button>
 										</li>
 										<li class="ydc-item-quick">
-											第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""></div>页
-											<button style="margin-left:5px;" class="ydc-previous-item-btn-medium">
+											第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class="" id="btn1"></div>页
+											<button style="margin-left:5px;" class="ydc-previous-item-btn-medium"  onclick="selectFund('jump')" >
 												<span>跳转</span>
 											</button>
 										</li>
@@ -185,7 +187,11 @@
 
 function selectFund(state){
     var page="${requestScope.page}";
-	$("#tb").empty();	
+	$("#tb").empty();
+	var num=$("#btn1").val();
+	if(num!=""){
+		page=num;		
+	}
 	$.ajax({	
 		 url:"<%=path%>fund/selectFund.action",
 		 data:"state="+state+"&page="+page,
@@ -202,13 +208,17 @@ function selectFund(state){
 		         } 	
 		         if(page==1){
 		        	 $("#last").attr("class","ydc-previous-item-btn-medium ydc-disabled"); 
+		        	 $("#last").attr("disabled",true);
 		         }else{
 		        	 $("#last").attr("class","ydc-previous-item-btn-medium");
+		        	 $("#last").attr("disabled",false);
 		         }
 		         if(page==size){
 		        	 $("#next").attr("class","ydc-previous-item-btn-medium ydc-disabled");
+		        	 $("#next").attr("disabled",true);
 		         }else{
 		        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+		        	 $("#next").attr("disabled",false);
 		         }
 		         $("#l1").html(page+"/"+size);
 		         
