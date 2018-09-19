@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <% 
+	String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,18 +24,20 @@ ul { list-style-type: none;}
 <body>
 <h1>搜索</h1>
 
+<a href="<%=path%>production/toManageProduction.action" >临时跳转，后期删掉，跳转进入服务商后台管理</a>
+
 <input class="keyword" placeholder="请输入关键字" data-search>
 
 <div class="jq22">
 	<div class="filtr-item" data-category="2">
 		<a href="#">
-			<img src="images/a1.png" alt="">
+			<img src="<%=path%>picture/findPicture.action?url=production1.png"  alt="">
 			<span class="ss">仿QQ绿钻抽奖转盘</span>
 		</a>
 	</div>
 	<div class="filtr-item" data-category="1">
 		<a href="#">
-			<img src="images/a2.png" alt="">
+			<img src="<%=path%>picture/findPicture.action?url=production2.png"  alt="">
 			<span>jQuery筛选过滤插件Filterizr</span>
 		</a>
 	</div>
@@ -93,8 +98,9 @@ ul { list-style-type: none;}
 	</div>
 </div>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.filterizr.js"></script>
+<script src="<%=path%>js/jquery.min.js"></script>
+<script src="<%=path%>js/jquery.filterizr.js"></script>
+
 <script>
 $(function() {
 	$('.jq22').filterizr();
