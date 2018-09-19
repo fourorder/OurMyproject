@@ -113,7 +113,7 @@
 							</div> -->
 						</li>
 						<li class="clearfix">
-							<p><a href="#" title="购买作品"><i class="o-index2"></i>购买作品<b>&gt;</b></a></p>
+							<p><a href="<%=path%>production/toProduction.action"  title="购买作品"><i class="o-index2"></i>购买作品<b>&gt;</b></a></p>
 							
 							<!-- <div class="lihover-box">
 								<dl>
