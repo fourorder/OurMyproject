@@ -38,7 +38,7 @@
 				<div class="width1180">
 					 <h1 class="fl"><img src="<%=path%>images/logo.png"></h1> 
 					<div class="o-search">
-						<form action="user/search.action?page=1" method="post">
+						<form action="user/search.action" method="post">
 							<input type="text" class="search-text"  placeholder="请输入您搜索的关键词" name="name"><button class="search-bnt" type="submit"><img src="<%=path%>images/search-i.png">  搜索</button>
 						</form>
 					</div>

@@ -10,9 +10,12 @@ select * from(select t.*,rownum rn from(select * from usertbl where characterid=
 <select id="employerNumber" resultType="org.great.bean.UserBean">
 select * from usertbl where characterid='1' and username like #{name}
 </select>
-<!-- <select id="serachBusiness" resultType="org.great.bean.UserBean" parameterType="java.lang.String">
-select * from usertbl where usercharacter=2 and username like #{name}
-</select> -->
+<select id="serachBusiness" resultType="org.great.bean.UserBean" >
+select * from(select t.*,rownum rn from(select * from usertbl where characterid='2' and username like #{name})t where rownum &lt;= #{end}) where rn &gt;= #{start}
+</select>
+<select id="businessNumber" resultType="org.great.bean.UserBean">
+select * from usertbl where characterid='2' and username like #{name}
+</select>
 <!-- <select id="serachWorks" resultType="org.great.bean.WorksBean" parameterType="java.lang.String">
 select * from fundtbl 
 </select> -->	 
