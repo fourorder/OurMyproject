@@ -14,7 +14,7 @@ public String userHead;
 public int userCredit;
 public int userMoney;
 public int stateId;
-public int userCharacter;
+public int characterId;
 public String userRegisterTime;
 public UserBean() {
 	super();
@@ -97,11 +97,11 @@ public int getStateId() {
 public void setStateId(int stateId) {
 	this.stateId = stateId;
 }
-public int getUserCharacter() {
-	return userCharacter;
+public int getCharacterId() {
+	return characterId;
 }
-public void setUserCharacter(int userCharacter) {
-	this.userCharacter = userCharacter;
+public void setCharacterId(int characterId) {
+	this.characterId = characterId;
 }
 public String getUserRegisterTime() {
 	return userRegisterTime;
