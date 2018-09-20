@@ -1,12 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="org.great.mapper.UserMapper">
+
+
+<select id="serachEmployer" resultType="org.great.bean.UserBean">
+select * from(select t.*,rownum rn from(select * from usertbl where characterid='1' and username like #{name})t where rownum &lt;= #{end}) where rn &gt;= #{start}
+</select>
+<select id="employerNumber" resultType="org.great.bean.UserBean">
+select * from usertbl where characterid='1' and username like #{name}
+</select>
+<!-- <select id="serachBusiness" resultType="org.great.bean.UserBean" parameterType="java.lang.String">
+select * from usertbl where usercharacter=2 and username like #{name}
+</select> -->
+<!-- <select id="serachWorks" resultType="org.great.bean.WorksBean" parameterType="java.lang.String">
+select * from fundtbl 
+</select> -->	
  <select id="login"  parameterType="String" resultType="org.great.bean.UserBean" >
 	 	select characterTbl.characterName,stateTbl.stateName,userTbl.* from userTbl,characterTbl,stateTbl where userAccount=#{0} and userPwd=#{1} and userTbl.stateId=stateTbl.stateId and userTbl.characterId=characterTbl.characterId  
  </select>
  <insert id="addUser">
  	insert into userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId) values (SEQID.nextval,#{userAccount},#{userPwd},#{userAccount},#{characterId},#{userAccount},#{userName},#{userTel},#{userIdentity},#{stateId})
- </insert>
-	 
+ </insert> 
 </mapper>
+

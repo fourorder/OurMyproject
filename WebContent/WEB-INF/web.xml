@@ -27,4 +27,12 @@
     <servlet-name>springmvc</servlet-name>
     <url-pattern>*.action</url-pattern>
   </servlet-mapping>
+  <filter>
+<filter-name>encofileter</filter-name>
+<filter-class>org.great.tools.EncoFileter</filter-class>
+</filter>
+<filter-mapping>
+<filter-name>encofileter</filter-name>
+<url-pattern>/*</url-pattern>
+</filter-mapping>
 </web-app>

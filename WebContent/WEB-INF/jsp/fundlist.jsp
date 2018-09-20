@@ -111,15 +111,6 @@
 												<span>上一页</span>
 											</button>
 										</li>
-										<!-- <li>
-											<button class="ydc-previous-item-btn-medium cur">1</button>
-										</li>
-										<li>
-											<button class="ydc-previous-item-btn-medium">2</button>
-										</li>
-										<li>
-											<button class="ydc-previous-item-btn-medium">3</button>
-										</li> -->
 										<li id="l1">${requestScope.page}/${requestScope.countPage}</li>
 										<li class="ydc-previous-item">
 											<button class="ydc-previous-item-btn-medium" onclick="selectFund('next')" id="next">
@@ -204,7 +195,7 @@ function selectFund(state){
 		         var size=redata[2];
 		         for(var i=0;i<len;i++){    			        	 
 		             var e = list[i];
-		             $("#tb").append("<tr><td>"+e.userBean.userName+"</td><td>"+e.dealDate+"</td><td>"+e.businessBean.businessName+"</td><td>"+e.toUserBean.userName+"</td><td>"+e.dealMoney+"</td></tr>"); 
+		             $("#tb").append("<tr><td>"+e.userBean.userName+"</td><td>"+e.dealDate+"</td><td>"+e.businessBean.businessName+"</td><td>"+e.toUserBean.userName+"</td><td>"+e.dealMoney+"</td><td><a href='#'>详细信息</a></td></tr>"); 
 		         } 	
 		         if(page==1){
 		        	 $("#last").attr("class","ydc-previous-item-btn-medium ydc-disabled"); 
