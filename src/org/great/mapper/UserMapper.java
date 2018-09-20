@@ -8,5 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserMapper {
-public List<UserBean> serachEmployer(@Param("name")String name);
+public List<UserBean> serachEmployer(@Param("name")String name,
+		@Param("end")int end,@Param("start")int start);
+public List<UserBean> employerNumber(@Param("name")String name);
 }

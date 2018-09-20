@@ -19,9 +19,9 @@ public class UserHandler {
 @Resource
 private UserBiz userBizImp;
 @RequestMapping("/search")
-public ModelAndView serach(String name,HttpServletRequest request) {
+public ModelAndView serach(String name,HttpServletRequest request,String page,String state) {
 	ModelAndView modelAndView=new ModelAndView();
-	request.setAttribute("objList", userBizImp.search(name));
+	request.setAttribute("objList", userBizImp.search(name,page,state));
 	modelAndView.setViewName("jsp/serachresult");
 	return modelAndView;
 }
