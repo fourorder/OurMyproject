@@ -25,6 +25,18 @@ public ModelAndView serach(String name,HttpServletRequest request) {
 	modelAndView.setViewName("jsp/serachresult");
 	return modelAndView;
 }
-
+@RequestMapping("/EmployerInformation.action")//用户详细信息
+public ModelAndView EmployerInformation(HttpServletRequest request,String userid){
+	ModelAndView modelAndView=new ModelAndView();
+	request.setAttribute("user", userBizImp.employer(userid));
+	modelAndView.setViewName("jsp/employerInfo.jsp");
+	return modelAndView;
+}
+@RequestMapping("/returnHome.action")
+public ModelAndView returnHome(){
+	ModelAndView modelAndView=new ModelAndView();
+	modelAndView.setViewName("home.jsp");
+	return modelAndView;
+}
 
 }

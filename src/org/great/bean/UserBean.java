@@ -16,6 +16,7 @@ public int userMoney;
 public int stateId;
 public int userCharacter;
 public String userRegisterTime;
+public String userProfile;
 public UserBean() {
 	super();
 }
@@ -109,4 +110,11 @@ public String getUserRegisterTime() {
 public void setUserRegisterTime(String userRegisterTime) {
 	this.userRegisterTime = userRegisterTime;
 }
+public String getUserProfile() {
+	return userProfile;
+}
+public void setUserProfile(String userProfile) {
+	this.userProfile = userProfile;
+}
+
 }
