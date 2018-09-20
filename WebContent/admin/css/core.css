@@ -340,3 +340,31 @@ input:focus,textarea:focus {
 	border-radius: 6px;
 	background-color: #000;
 }
+#s1{
+	border:1px solid red;
+	background-color:red;
+	color:#ff6980;
+	margin-top:20px;
+	
+	margin-right:20px;
+}
+
+ .btn2{
+	position: relative;
+	text-align: center;
+	line-height: 1;
+	cursor: pointer;
+	-webkit-appearance: none;
+	-webkit-transition: all .2s ease-out;
+	transition: all .2s ease-out;
+	border: 1px solid transparent;
+	margin: 0;
+	background-color: #f2f2f2;
+	border-color: #d7dde4;
+	color: #324050;
+	outline: 0;
+}
+
+/* .s1 .btn, .s1 .btn:active, .s1 .btn:focus {
+	outline: 0;
+} */

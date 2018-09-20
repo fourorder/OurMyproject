@@ -3,7 +3,7 @@
   <display-name>Struts2Test</display-name>
   <!-- 欢迎页 -->
   <welcome-file-list>
-    <welcome-file>/WEB-INF/jsp/home.jsp</welcome-file>
+    <welcome-file>/WEB-INF/jsp/login.jsp</welcome-file>
   </welcome-file-list>
   <listener>
     <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
