@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.great.mapper.UserMapper">
+ <select id="login"  parameterType="String" resultType="org.great.bean.UserBean" >
+	 	select characterTbl.characterName,stateTbl.stateName,userTbl.* from userTbl,characterTbl,stateTbl where userAccount=#{0} and userPwd=#{1} and userTbl.stateId=stateTbl.stateId and userTbl.characterId=characterTbl.characterId  
+ </select>
+ <insert id="addUser">
+ 	insert into userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId) values (SEQID.nextval,#{userAccount},#{userPwd},#{userAccount},#{characterId},#{userAccount},#{userName},#{userTel},#{userIdentity},#{stateId})
+ </insert>
+	 
+</mapper>
