@@ -14,4 +14,8 @@ public List<UserBean> serachEmployer(@Param("name")String name,
 public List<UserBean> employerNumber(@Param("name")String name);
 public UserBean employer(@Param("userid")String userid);
 public UserInfoBean userinfo(@Param("userid")String userid);
+public List<UserBean> employers(@Param("name")String name,@Param("page")int page);
+public int delEmployers(@Param("account")String account);//删除雇主
+public int countEmployers();//雇主总个数
+
 }

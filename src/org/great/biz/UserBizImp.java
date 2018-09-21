@@ -4,11 +4,9 @@ package org.great.biz;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.great.bean.UserBean;
 import org.great.bean.UserInfoBean;
+import javax.annotation.Resource;
+import org.great.bean.UserBean;
 import org.great.mapper.FundMapper;
 import org.great.mapper.UserMapper;
 import org.springframework.stereotype.Service;
@@ -44,6 +42,24 @@ public List<Object> search(String name,String page,String state){
 	objects.add(list);
 	return objects;
 }
+
+@Override
+public List<UserBean> employers(String name, int page) {
+	// TODO Auto-generated method stub
+	
+	return userMapper.employers(name,page);
+}
+@Override
+public int delEmployers(String account) {
+	// TODO Auto-generated method stub
+	return userMapper.delEmployers(account);
+}
+@Override
+public int countEmployers() {
+	// TODO Auto-generated method stub
+	return userMapper.countEmployers();
+
+}
 public UserBean employer(String userid){
 	
 	return userMapper.employer(userid);
@@ -53,5 +69,4 @@ public UserInfoBean userinfo(String userid) {
 	// TODO Auto-generated method stub
 	return userMapper.userinfo(userid);
 }
-
 }
