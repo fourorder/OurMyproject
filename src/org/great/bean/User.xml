@@ -2,7 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="org.great.mapper.UserMapper">
-
+	
+<!-- 查询雇主信息 -->
+<select id="employer" resultType="org.great.bean.UserBean">
+select * from usertbl where userid = #{userid}
+</select>
 
 <select id="serachEmployer" resultType="org.great.bean.UserBean">
 select * from(select t.*,rownum rn from(select * from usertbl where characterid='1' and username like #{name})t where rownum &lt;= #{end}) where rn &gt;= #{start}
@@ -10,16 +14,33 @@ select * from(select t.*,rownum rn from(select * from usertbl where characterid=
 <select id="employerNumber" resultType="org.great.bean.UserBean">
 select * from usertbl where characterid='1' and username like #{name}
 </select>
+
 <select id="serachBusiness" resultType="org.great.bean.UserBean" >
 select * from(select t.*,rownum rn from(select * from usertbl where characterid='2' and username like #{name})t where rownum &lt;= #{end}) where rn &gt;= #{start}
 </select>
 <select id="businessNumber" resultType="org.great.bean.UserBean">
 select * from usertbl where characterid='2' and username like #{name}
 </select>
-<!-- <select id="serachWorks" resultType="org.great.bean.WorksBean" parameterType="java.lang.String">
-select * from fundtbl 
-</select> -->	
+<!-- 个人中心 -->
+<select id="userinfo" resultMap="getUserInfo">
+select * from usertbl where userid = #{userid}
+</select>
+<select id="getStateName" parameterType="org.great.bean.UserInfoBean" resultType="org.great.bean.StateBean">
+select * from statetbl where stateid=#{stateid}
+</select>
+<select id="getCharacter" parameterType="org.great.bean.UserInfoBean" resultType="org.great.bean.CharacteBean">
+select * from charactertbl where characterid = #{characterid}
+</select>
 
+<resultMap type="org.great.bean.UserInfoBean" id="getUserInfo">
+
+<association property="stateBean" column="stateid" javaType="org.great.bean.StateBean" select="getStateName">
+</association>
+
+<association property="characteBean" column="characterid" javaType="org.great.bean.CharacteBean" select="getCharacter">
+</association>
+</resultMap>	
+ 
 <!-- 查询所有雇主 -->
 <select id="employers" resultType="org.great.bean.UserBean">
 select * from (

@@ -44,4 +44,27 @@ public List<Object> selectEpage(String name,String page,String state){
 public List<Object> selectBpage(String name,String page,String state){
 	return userBizImp.search(name,page,state,2);
 }
+@RequestMapping("/EmployerInformation.action")//用户详细信息
+public ModelAndView EmployerInformation(HttpServletRequest request,String userid){
+	ModelAndView modelAndView=new ModelAndView();
+	
+	request.setAttribute("user", userBizImp.userinfo(userid));
+	modelAndView.setViewName("jsp/employerInfo");
+	return modelAndView;
+}
+@RequestMapping("/returnHome.action")//返回主页
+public ModelAndView returnHome(){
+	ModelAndView modelAndView=new ModelAndView();
+	modelAndView.setViewName("jsp/home");
+	return modelAndView;
+}
+@RequestMapping("/UserInformation.action")//个人中心
+ModelAndView UserInformation(HttpServletRequest request,String userid){
+	ModelAndView modelAndView=new ModelAndView();
+	
+	request.setAttribute("userInfo", userBizImp.userinfo(userid));
+	modelAndView.setViewName("jsp/userInfo");
+	return modelAndView;
+
+}
 }
