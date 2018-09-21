@@ -116,13 +116,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<label>联系手机:</label>
 								<div class="ydc-reg-form-input">
 									<input type="text" id="userTel" name="userTel" onblur="checkTel()" class="ydc-form-control" autocomplete="off" placeholder="">
-									<span id="telspan"></span>
+								 	<span id="telspan"></span> 
+						
 									<div class="ydc-reg-form-text">
 										<p>请输入手机号并验证</p>
 									</div>
 								</div>
-								<div class="ydc-reg-yzm">
-									<button  >获取验证码</button> 
+								
+								<div class="ydc-reg-yzm" style="position:absolute; left:628px;top:473px; ">
+									<button>获取验证码</button> 
 								</div>
 
 							</div>
@@ -204,7 +206,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 	
 	function checkTel(){
-          alert("1111");
+         
         var  userTel  = document.getElementById("userTel").value;
 
        var tel = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;  // .com .com.cn
@@ -237,7 +239,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
 	<script type="text/javascript">
 	function checkIdentity(){
-alert("5555555");
         var  userIdentity  = document.getElementById("userIdentity").value;
 
        var identity = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|[xX])$/;  // .com .com.cn
@@ -323,5 +324,19 @@ alert("5555555");
 	 }
 
 	 </script>
+	 
+	 <script type="text/javascript">
+$(function(){
+ 
+    $("#agreement").click(function(){
+        if($(this).prop("checked")==true){
+            console.log("勾选");
+        } else{
+            console.log("未勾选");
+        }
+    });
+})
+
+</script>
 </body>
 </html>
