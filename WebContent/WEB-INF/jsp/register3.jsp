@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</ul>
 				</div>
 				<div class="ydc-reg-form clearfix">
-					<form action="<%=basePath%>register/register.action?userAccount=${userAccount}&userPwd=${userPwd}&stateId=1&characterId=${characterId}"name="myform" method="post">
+					<form action="<%=basePath%>register/register.action?userAccount=${userAccount}&userPwd=${userPwd}&stateId=1&characterId=${characterId}"name="myform" id="myform" method="post" >
 						<div class="ydc-reg-form-class ydc-reg-form-reg">
 							<div class="ydc-reg-form-group clearfix">
 								<label>姓名:</label>
@@ -131,13 +131,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="ydc-reg-form-group clearfix">
 								<label></label>
 								<div class="ydc-reg-form-input ydc-reg-form-input-agreement">
-									<label><input type="checkbox" value="yes" id="agreement" checked=""> 我已经阅读并同意 <a href="<%=basePath%>agreement.jsp" target="_blank">《众包平台注册协议》</a>。</label>
+									<label><input type="checkbox" value="yes" id="agreement" checked="checked" name="agreement"> 我已经阅读并同意 <a href="<%=basePath%>agreement.jsp" target="_blank">《众包平台注册协议》</a>。</label>
 								</div>
 							</div>
 						</div>
 						<div class="ydc-reg-form-group">
 							<div class="ydc-reg-form-button" style="margin-left:255px;">
-								<a class="btn fl" href="javascript:document.myform.submit();">提交申请</a>
+								<a class="btn fl" href="javascript:document.myform.submit();" id="sss"  onclick="return checkForm()">提交申请</a>
 							</div>
 						</div>
 					</form>
@@ -311,32 +311,71 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          var userName  = checkName();
          
          var userTel= checkTel();
+         
+         
 
          if(userIdentity&&userName&&userTel){
-
-             return true;
+        	 
+        	
+     	    	
+     	        if($("#agreement").prop("checked")==true){
+     	            alert("11111");
+     	            return true;
+     	        } else{
+     	           alert("请勾选按钮!");
+     	           return false;
+     	        }
+     	    
 
          }else{
 
              return false;
 
          }
+         
 	 }
 
 	 </script>
-	 
-	 <script type="text/javascript">
-$(function(){
- 
-    $("#agreement").click(function(){
-        if($(this).prop("checked")==true){
-            console.log("勾选");
-        } else{
-            console.log("未勾选");
-        }
-    });
-})
+	
+	 /* window.onload=function(){
 
-</script>
+	        
+	        var submitBtn = document.getElementById("myform");
+
+	        submitBtn.onsubmit = function () {
+	            if(!document.getElementById("agreement").checked) {
+	                alert("请勾选按钮!");
+	                return false;
+	            }
+	            return true;
+	        };
+	    } */
+	 
+	<script type="text/javascript">
+	    
+	    /* $(function(){
+   		 
+    	    $("#agreement").click(function(){
+    	    	
+    	        if($("#agreement").prop("checked")==true){
+    	            alert("11111");
+    	            return true;
+    	        } else{
+    	           alert("请勾选按钮!");
+    	           return false;
+    	        }
+    	    });
+    	}) */
+/* function check(){
+	    	if($("#agreement").prop("checked")==true){
+	            alert("11111");
+	            return true;
+	        } else{
+	           alert("请勾选按钮!");
+	           return false;
+	        }	    		    	
+	    } */
+	    </script>
+
 </body>
 </html>
