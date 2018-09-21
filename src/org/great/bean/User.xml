@@ -2,7 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="org.great.mapper.UserMapper">
-
+	
+<!-- 查询雇主信息 -->
+<select id="employer" resultType="org.great.bean.UserBean">
+select * from usertbl where userid = #{userid}
+</select>
 
 <select id="serachEmployer" resultType="org.great.bean.UserBean">
 select * from(select t.*,rownum rn from(select * from usertbl where characterid='1' and username like #{name})t where rownum &lt;= #{end}) where rn &gt;= #{start}
@@ -10,21 +14,51 @@ select * from(select t.*,rownum rn from(select * from usertbl where characterid=
 <select id="employerNumber" resultType="org.great.bean.UserBean">
 select * from usertbl where characterid='1' and username like #{name}
 </select>
-<!-- <select id="serachBusiness" resultType="org.great.bean.UserBean" parameterType="java.lang.String">
-select * from usertbl where usercharacter=2 and username like #{name}
-</select> -->
-<!-- <select id="serachWorks" resultType="org.great.bean.WorksBean" parameterType="java.lang.String">
-select * from fundtbl 
-</select> -->
+<select id="serachBusiness" resultType="org.great.bean.UserBean" >
+select * from(select t.*,rownum rn from(select * from usertbl where characterid='2' and username like #{name})t where rownum &lt;= #{end}) where rn &gt;= #{start}
+</select>
+<select id="businessNumber" resultType="org.great.bean.UserBean">
+select * from usertbl where characterid='2' and username like #{name}
+</select>
+<select id="login"  parameterType="String" resultType="org.great.bean.UserBean" >
+	 	select characterTbl.characterName,stateTbl.stateName,userTbl.* from userTbl,characterTbl,stateTbl where userAccount=#{0} and userPwd=#{1} and userTbl.stateId=stateTbl.stateId and userTbl.characterId=characterTbl.characterId  
+ </select>
+ <insert id="addUser" >
+ 	insert into userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId) values (SEQID.nextval,#{userAccount},#{userPwd},#{characterId},#{userName},#{userTel},#{userIdentity},#{stateId})
+ </insert> 
+ <select id="checkAccount" parameterType="String" resultType="org.great.bean.UserBean">
+         select * from userTbl where userAccount=#{userAccount}
+ </select>
 
-	 
+<!-- 个人中心 -->
+<select id="userinfo" resultMap="getUserInfo">
+select * from usertbl where userid = #{userid}
+</select>
+<select id="getStateName" parameterType="org.great.bean.UserInfoBean" resultType="org.great.bean.StateBean">
+select * from statetbl where stateid=#{stateid}
+</select>
+<select id="getCharacter" parameterType="org.great.bean.UserInfoBean" resultType="org.great.bean.CharacteBean">
+select * from charactertbl where characterid = #{characterid}
+</select>
+
+<resultMap type="org.great.bean.UserInfoBean" id="getUserInfo">
+
+<association property="stateBean" column="stateid" javaType="org.great.bean.StateBean" select="getStateName">
+</association>
+
+<association property="stateBean" column="stateid" javaType="org.great.bean.StateBean" select="getStateName">
+</association>
+
+	 <association property="characteBean" column="characterid" javaType="org.great.bean.CharacteBean" select="getCharacter">
+</association>
+</resultMap>
 <!-- 查询所有雇主 -->
 <select id="employers" resultType="org.great.bean.UserBean">
 select * from (
 select c.*,rownum rn from (
-select u.*,c.charactername from usertbl u,characterTbl c where  u.CharacterId=c.CharacterId 
+select u.*,c.charactername from usertbl u,characterTbl c where  u.CharacterId=c.CharacterId and u.characterid=1
 <if test="name != null">
-and u.username like '%'+#{name}+'%'
+and u.username like #{name}
 </if>
 
  ) c 
@@ -40,6 +74,7 @@ UPDATE usertbl set stateid=3 WHERE useraccount=#{account}
 
 <!-- 查询雇主总个数 -->
 <select id="countEmployers" resultType="java.lang.Integer">
-select count(*) from usertbl where characterid=1
+select count(*) from usertbl 
 </select>
+
 </mapper>

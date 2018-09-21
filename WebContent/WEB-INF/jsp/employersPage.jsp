@@ -10,11 +10,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>雇主管理页</title>
 
-    <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../plugins/layui/layui.js"></script>
-    <link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="../css/global.css" media="all">
-    <link rel="stylesheet" href="../laydate/theme/default/laydate.css" media="all">
+    <script type="text/javascript" src="<%=path %>js/jquery.min.js"></script>
+    <link rel="stylesheet" href="<%=path %>plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="<%=path %>css/global.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
 
 
@@ -25,7 +23,7 @@
     </style>
 </head>
 <body>
-<div style="height: 50%;width: 90%; margin:0 auto;">
+<div style="height: 50%;width: 95%; margin:0 auto;">
 <form action="<%=path %>employers/page.action?page=tpage" method="post">
 姓名：<input type="text" name="name"  placeholder="请输入内容"  >  
 <input type="submit" value="查询" 	class="layui-btn layui-btn-normal" />  
@@ -68,8 +66,8 @@
       <td>${fund.stateId}</td>
       <td>${fund.characterId}</td>
        <td>${fund.userRegisterTime}</td>
-       <td><a   class="layui-btn layui-btn-sm layui-btn-danger"  href="<%=path %>employers/operation.action?operation=${fund.userAccount}">删除</a>
-       <a   class="layui-btn"  href="<%=path %>employers/operation.action?operation=${fund.userAccount}">修改</a>
+       <td><a  class="layui-btn layui-btn-sm layui-btn-danger"  href="<%=path %>employers/operation.action?operation=${fund.userAccount}">删除</a>
+       <a   class="layui-btn" onclick="update()">修改</a>
        </td>
   </tr>
   </c:forEach>
@@ -80,7 +78,22 @@
    </tr>
   </tbody>
 </table>
-
 </div>
+
+ <script type="text/javascript" src="<%=path %>plugins/layui/layui.js"></script>
+<script type="text/javascript">
+function update() {
+	layer.open({
+		title: '修改',
+		content: '可以填写任意的layer代码',
+		area:  ['500px', '300px'],
+		btn: ['yes', 'no'],
+		yes: function(index, layero){
+			layer.alert('酷毙了', {icon: 1});
+		  }
+		});  
+}
+
+</script>
 </body>
 </html>

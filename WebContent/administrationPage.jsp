@@ -165,7 +165,7 @@
                         <a href="infor/page.action" target="menuFrame">最新资讯配置</a>
                     </dd>
                         <dd>
-                            <a href="adver/page.action" target="menuFrame">广告设置</a>
+                            <a href="adver/page.action" target="menuFrame" onclick="update()">广告设置</a>
                         </dd>
                     </dl>
                 </li>
@@ -255,6 +255,18 @@
             document.getElementById("show").style.display = 'none';
             $('body').css("overflow", "auto")
         }
+        function update() {
+        	layer.open({
+        		  title: '修改',
+        		  content: '可以填写任意的layer代码',
+        		area:  ['500px', '300px'],
+        		btn: ['yes', 'no'],
+        		yes: function(index, layero){
+        			layer.alert('酷毙了', {icon: 1});
+        		  }
+        		});  
+        }
+        
     </script>
 </div>
 </body>

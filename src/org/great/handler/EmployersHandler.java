@@ -22,7 +22,10 @@ public class EmployersHandler {
 	private UserBiz userBizImp;
 	
 	@RequestMapping("/page.action")//跳到资讯配置页面
-	public ModelAndView test(HttpServletRequest request,String name,String page){
+	public ModelAndView test(HttpServletRequest request,String name,String page,String number){
+		int countPage=userBizImp.countEmployers();
+		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
+		int num=Integer.parseInt(number);
 		if(page.equals("tpage")) {
 			num--;
 			if(num<=0) {
@@ -30,14 +33,16 @@ public class EmployersHandler {
 			}
 		}else if(page.equals("npage")) {
 			num++;
+			if(totalPages<num) {
+				num=totalPages;
+			}
 			
 		}
-		int countPage=userBizImp.countEmployers();
 		
 		List<UserBean> list=new ArrayList<UserBean>();
 		list=userBizImp.employers(name, num);
 		request.setAttribute("Elist", list);
-		request.setAttribute("countPage", countPage);
+		request.setAttribute("countPage", totalPages);
 		request.setAttribute("num", num);
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.setViewName("jsp/employersPage");
@@ -50,7 +55,7 @@ public class EmployersHandler {
 		System.out.println(operation);
 		int a =userBizImp.delEmployers(operation);
 		if(a>0) {
-			return new ModelAndView("redirect:page.action") ;
+			return new ModelAndView("redirect:page.action?page=tpage") ;
 		}else {
 			System.out.println("删除失败");
 		}
