@@ -19,9 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserHandler {
 @Resource
 private UserBiz userBizImp;
+
+
 @RequestMapping("/search.action")
-public ModelAndView serach(String name,HttpServletRequest request,String page) {
+public ModelAndView serach(String name,HttpServletRequest request,String page,String state) {
+
 	ModelAndView modelAndView=new ModelAndView();
+
 	request.setAttribute("objList", userBizImp.getAllList(name));
 	request.setAttribute("searchName", name);
 	request.setAttribute("page",1);

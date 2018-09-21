@@ -177,7 +177,7 @@
 	    
 var page="${requestScope.page}";
 function selectFund(state){
-
+	
 	$("#tb").empty();
 	var num=$("#btn1").val();
 	if(num!=""){
