@@ -19,5 +19,8 @@ public UserInfoBean userinfo(@Param("userid")String userid);
 public List<UserBean> employers(@Param("name")String name,@Param("page")int page);
 public int delEmployers(@Param("account")String account);//删除雇主
 public int countEmployers();//雇主总个数
+public List<UserBean> login(String userAccount,String userPwd);
+public void addUser(@Param(value="userAccount")String userAccount ,@Param(value="userPwd")String userPwd ,@Param(value="characterId")Integer characterId ,@Param(value="userName")String userName ,@Param(value="userTel")long userTel ,@Param(value="userIdentity")String userIdentity ,@Param(value="stateId")int stateId);
+public List<UserBean> checkAccount(String userAccount);
 
 }

@@ -1,6 +1,7 @@
 package org.great.bean;
 
 public class UserBean {
+
 public int userId;//用户id
 public String userName;//用户
 public String userPwd;//密码
@@ -8,7 +9,7 @@ public long userTel;//手机
 public String userAccount;//账户
 public String userSex;//性别
 public String userMail;//邮箱
-public long userIdentity;//身份证
+public String userIdentity;//身份证
 public String userAddress;//地址
 public String userHead;//头像
 public int userCredit;//信用分
@@ -17,9 +18,11 @@ public int stateId;//状态id
 public int characterId;//角色id
 public String userRegisterTime;//注册时间
 public String userProfile;//用户简介
+
 public UserBean() {
 	super();
 }
+
 public int getUserId() {
 	return userId;
 }
@@ -62,10 +65,10 @@ public String getUserMail() {
 public void setUserMail(String userMail) {
 	this.userMail = userMail;
 }
-public long getUserIdentity() {
+public String getUserIdentity() {
 	return userIdentity;
 }
-public void setUserIdentity(long userIdentity) {
+public void setUserIdentity(String userIdentity) {
 	this.userIdentity = userIdentity;
 }
 public String getUserAddress() {
@@ -110,6 +113,7 @@ public String getUserRegisterTime() {
 public void setUserRegisterTime(String userRegisterTime) {
 	this.userRegisterTime = userRegisterTime;
 }
+
 public String getUserProfile() {
 	return userProfile;
 }
@@ -117,4 +121,17 @@ public void setUserProfile(String userProfile) {
 	this.userProfile = userProfile;
 }
 
+
+public UserBean(String userAccount, String userPwd, int stateId, int characterId) {
+	super();
+	this.userAccount = userAccount;
+	this.userPwd = userPwd;
+	this.stateId = stateId;
+	this.characterId = characterId;
+
+}
+public UserBean(String userAccount,String userPwd) {
+	this.userAccount = userAccount;
+	this.userPwd = userPwd;
+}
 }

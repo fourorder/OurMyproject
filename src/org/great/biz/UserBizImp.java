@@ -1,7 +1,4 @@
 package org.great.biz;
-
-
-
 import java.util.ArrayList;
 import java.util.List;
 import org.great.bean.UserInfoBean;
@@ -55,6 +52,7 @@ public List<Object> search(String name,String page,String state,int falg){
 	return objects;
 }
 
+
 public List<Object> getAllList(String name){
 	List<Object> list=new ArrayList<Object>();
 	List<Object> list1=new ArrayList<Object>();
@@ -102,5 +100,16 @@ public UserBean employer(String userid){
 public UserInfoBean userinfo(String userid) {
 	// TODO Auto-generated method stub
 	return userMapper.userinfo(userid);
+}
+@Override
+public boolean checkAccount(String userAccount) {
+	// TODO Auto-generated method stub
+	List<UserBean> userBeans=userMapper.checkAccount(userAccount);
+	if(userBeans.size()>0) {
+		return true;
+	}else {
+		return false;
+	}
+	
 }
 }

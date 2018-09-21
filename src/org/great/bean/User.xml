@@ -14,13 +14,22 @@ select * from(select t.*,rownum rn from(select * from usertbl where characterid=
 <select id="employerNumber" resultType="org.great.bean.UserBean">
 select * from usertbl where characterid='1' and username like #{name}
 </select>
-
 <select id="serachBusiness" resultType="org.great.bean.UserBean" >
 select * from(select t.*,rownum rn from(select * from usertbl where characterid='2' and username like #{name})t where rownum &lt;= #{end}) where rn &gt;= #{start}
 </select>
 <select id="businessNumber" resultType="org.great.bean.UserBean">
 select * from usertbl where characterid='2' and username like #{name}
 </select>
+<select id="login"  parameterType="String" resultType="org.great.bean.UserBean" >
+	 	select characterTbl.characterName,stateTbl.stateName,userTbl.* from userTbl,characterTbl,stateTbl where userAccount=#{0} and userPwd=#{1} and userTbl.stateId=stateTbl.stateId and userTbl.characterId=characterTbl.characterId  
+ </select>
+ <insert id="addUser" >
+ 	insert into userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId) values (SEQID.nextval,#{userAccount},#{userPwd},#{characterId},#{userName},#{userTel},#{userIdentity},#{stateId})
+ </insert> 
+ <select id="checkAccount" parameterType="String" resultType="org.great.bean.UserBean">
+         select * from userTbl where userAccount=#{userAccount}
+ </select>
+
 <!-- 个人中心 -->
 <select id="userinfo" resultMap="getUserInfo">
 select * from usertbl where userid = #{userid}
@@ -65,4 +74,6 @@ UPDATE usertbl set stateid=3 WHERE useraccount=#{account}
 <select id="countEmployers" resultType="java.lang.Integer">
 select count(*) from usertbl 
 </select> 
+
 </mapper>
+
