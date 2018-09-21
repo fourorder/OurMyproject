@@ -33,11 +33,18 @@ public ModelAndView EmployerInformation(HttpServletRequest request,String userid
 	modelAndView.setViewName("jsp/employerInfo");
 	return modelAndView;
 }
-@RequestMapping("/returnHome.action")
+@RequestMapping("/returnHome.action")//返回主页
 public ModelAndView returnHome(){
 	ModelAndView modelAndView=new ModelAndView();
 	modelAndView.setViewName("jsp/home");
 	return modelAndView;
 }
-
+@RequestMapping("/UserInformation.action")//个人中心
+ModelAndView UserInformation(HttpServletRequest request,String userid){
+	ModelAndView modelAndView=new ModelAndView();
+	
+	request.setAttribute("userInfo", userBizImp.userinfo(userid));
+	modelAndView.setViewName("jsp/userInfo");
+	return modelAndView;
+}
 }

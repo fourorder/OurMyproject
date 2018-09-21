@@ -388,7 +388,8 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 						<div class="user-box">
 							<img src="<%=path%>images/banner-touxiang.png">
 							<p>hi,您好！</p>
-							<a href="#" title="" class="b-login">登录</a><a href="#" title="" class="b-regist">注册</a>
+							<a href="<%=path%>user/UserInformation.action?userid=203" title="" class="b-login">个人中心</a><a href="#" title="" class="b-regist">注册</a>
+							
 							<!--登录之后-->
 							<!--<p>邓丽群，<a href="#" title="" target="_blank" class="colorfa3508">去易知猴威客</a></p>
 							<!--登录之后-->

@@ -8,8 +8,8 @@
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
-	<meta name='TTUNION_verify' content='b846c3c2b85efabc496d2a2b8399cd62'>
+<title>Insert title here</title>
+<meta name='TTUNION_verify' content='b846c3c2b85efabc496d2a2b8399cd62'>
 	<meta name="sogou_site_verification" content="gI1bINaJcL"/>
 	<meta name="360-site-verification" content="37ae9186443cc6e270d8a52943cd3c5a"/>
 	<meta name="baidu_union_verify" content="99203948fbfbb64534dbe0f030cbe817">
@@ -24,7 +24,8 @@
 	<meta name="description" content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。。">
 	<meta name="author" content="AUI, a-ui.com">
 	<meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
-	<title>个人中心</title>
+	
+	<title>修改资料</title>
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
 	<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
 	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
@@ -56,7 +57,7 @@
 							<div class="ydc-user-info-func ydc-flex">
 								<span class="ydc-tag">账号审核中</span>
 								<span class="ydc-mal"><i class="ydc-icon ydc-icon-mail fl"></i><em>12</em></span>
-								<a href="login.html">退出</a>
+								<a href="javascript:;">退出</a>
 							</div>
 						</div>
 					</div>
@@ -144,7 +145,7 @@
                                     </span>
 								<ul>
 									<li>
-										<a href="customer.html">在线咨询</a>
+										<a href="#">在线咨询</a>
 									</li>
 								</ul>
 							</li>
@@ -162,110 +163,111 @@
 								</ul>
 							</div>
 							<div class="ydc-panes">
-								<div class="ydc-pane ydc-pane-clear" style="display:block;">
-									<div class="ydc-reg-form-group clearfix">
-										<label>帐号名称</label>
-										<div class="ydc-reg-form-input">
-											<label>${userInfo.userAccount}</label>
+								<form action="">
+									<div class="ydc-reg-form-class ydc-reg-form-reg" style="margin-top:40px;">
+										<div class="ydc-reg-form-group clearfix">
+											<label>帐号名称:${userInfo.userAccount}</label>
+											
 										</div>
+									<div class="ydc-reg-form-class ydc-reg-form-reg" style="margin-top:40px;">
+										<div class="ydc-reg-form-group clearfix">
+											<label>帐号类型:${userInfo.characteBean.characterName}</label>
+											
 									</div>
-									<div class="ydc-reg-form-group clearfix">
-										<label>帐号类别</label>
-										<div class="ydc-reg-form-input">
-											<label>${userInfo.characteBean.characterName}</label>
+					
 										</div>
-									</div>
+										<!-- <div class="ydc-reg-form-group clearfix">
+											<label>帐号图标:</label>
+											<div class="ydc-reg-form-input">
+												<input type="file" id="" name="username" class="" autocomplete="off" placeholder="">
+												<div class="ydc-reg-form-text">
+													<p>选取至少160*160尺寸的图片。请勿上传二维码或其他推广性质图片作为图标。</p>
+												</div>
+											</div>
+										</div> -->
+										<div class="ydc-reg-form-group clearfix">
+											<label>用户概述:</label>
+											<div class="ydc-reg-form-input ydc-reg-form-input-width">
+												<textarea>${userInfo.userProfile}</textarea>
+												<div class="ydc-reg-form-text">
+													<p>请输入账户简述</p>
+												</div>
+											</div>
+										</div>
+										
+										
+										<div class="ydc-reg-form-group clearfix">
+											<label>姓名:</label>
+											<div class="ydc-reg-form-input">
+												<input type="text" id="user1" name="username" class="ydc-form-control" autocomplete="off" placeholder="李嘉桦">
+											</div>
+										</div>
+										<div class="ydc-reg-form-group clearfix">
+											<label>身份证号:</label>
+											<div class="ydc-reg-form-input clearfix">
+												<input type="text" id="user2" name="username" class="ydc-form-control" readonly="true" autocomplete="off" placeholder="${userInfo.userIdentity}">
+												<div class="ydc-reg-form-text">
+													<p>帐号信息填写需真实有效，如发现虚假以及非个人真实信息导致帐号收益无法提取，责任由帐号个人承担</p>
+												</div>
+												
+											</div>
+
+										</div>
+										
 									
-									<div class="ydc-reg-form-group clearfix">
-										<label>帐号图标</label>
-										<div class="ydc-reg-form-input">
+										<div class="ydc-reg-form-group clearfix">
+											<label>联系手机:</label>
+											<div class="ydc-reg-form-input">
+												<input type="text" id="user4" name="username" class="ydc-form-control" autocomplete="off" placeholder="18519232899">
+												<div class="ydc-reg-form-text">
+													<p>请输入手机号并验证</p>
+												</div>
+											</div>
+											<div class="ydc-reg-yzm">
+												<button>获取验证码</button>
+											</div>
+
+										</div>
+										<div class="ydc-reg-form-group clearfix">
+											<label>邮箱:</label>
+											<div class="ydc-reg-form-input">
+												<input type="text" id="user5" name="username" class="ydc-form-control" autocomplete="off" placeholder="aui_cn@163.com">
+											</div>
+											<div class="ydc-reg-form-text">
+												<p>请使用自己日常使用邮箱便于接受相关信息</p>
+											</div>
+										</div>
+										<div class="ydc-reg-form-group clearfix">
+											<label>QQ/微信号:</label>
+											<div class="ydc-reg-form-input">
+												<input type="text" id="user6" name="username" class="ydc-form-control" autocomplete="off" placeholder="li_3104">
+											</div>
+											<div class="ydc-reg-form-text">
+												<p>请输入常用QQ/微信号方便联系沟通</p>
+											</div>
+										</div>
+										<div class="ydc-reg-form-group clearfix">
+											<label>推荐人:</label>
+											<div class="ydc-reg-form-input">
+												<input type="text" id="user7" name="username" class="ydc-form-control" autocomplete="off" placeholder="李晨">
+											</div>
+											<div class="ydc-reg-form-text">
+												<p>选填，若有网易员工推荐您入驻，请填写相应推荐码。</p>
+											</div>
+										</div>
+										<div class="ydc-reg-form-group clearfix">
 											<label></label>
-											<div class="ydc-reg-form-text ydc-reg-form-user-logo">
-												<img src="<%=path%>admin/images/icon/user-logo.png" alt="">
+											<div class="ydc-reg-form-input ydc-reg-form-input-agreement">
+												<label><input type="checkbox" value="yes" id="agreement" checked=""> 我已经阅读并同意 <a href="agreement.html" target="_blank">《车讯号媒体开放平台注册协议》</a>。</label>
 											</div>
 										</div>
 									</div>
-									
-									<div class="ydc-reg-form-group clearfix">
-										<label>用户概述</label>
-										<div class="ydc-reg-form-input">
-											<label>${userInfo.userProfile}</label>
-										</div>
-									</div>
-									
-									<div class="ydc-reg-form-group clearfix">
-										<label>姓名</label>
-										<div class="ydc-reg-form-input">
-											<label>${userInfo.userName}</label>
-										</div>
-									</div>
-									<div class="ydc-reg-form-group clearfix">
-										<label>用户状态</label>
-										<div class="ydc-reg-form-input">
-											<label>${userInfo.stateBean.stateName}</label>
-										</div>
-									</div>
-									<div class="ydc-reg-form-group clearfix">
-										<label>性别</label>
-										<div class="ydc-reg-form-input">
-											<label>${userInfo.userSex}</label>
-										</div>
-									</div>
-									<div class="ydc-reg-form-group clearfix">
-										<label>用户地址</label>
-										<div class="ydc-reg-form-input">
-											<label>${userInfo.userAddress}</label>
-										</div>
-									</div>
-									<div class="ydc-reg-form-group clearfix">
-										<label>身份证号</label>
-										<div class="ydc-reg-form-input">
-											<label>${userInfo.userIdentity}</label>
-										</div>
-									</div>
-									<div class="ydc-reg-form-group clearfix">
-										<label>身份证照片</label>
-										<div class="ydc-reg-form-input">
-											<label>已提交</label>
-										</div>
-									</div>
-									<div class="ydc-reg-form-group clearfix">
-										<label>联系手机</label>
-										<div class="ydc-reg-form-input">
-											<label>${userInfo.userTel}已验证</label>
-										</div>
-									</div>
-									<div class="ydc-reg-form-group clearfix">
-										<label>邮箱</label>
-										<div class="ydc-reg-form-input">
-											<label>${userInfo.userMail}</label>
-										</div>
-									</div>
-									<div class="ydc-reg-form-group clearfix">
-										<label>信用分</label>
-										<div class="ydc-reg-form-input">
-											<label>${userInfo.userCredit}</label>
-										</div>
-									</div>
-									<div class="ydc-reg-form-group clearfix">
-										<label>账户余额</label>
-										<div class="ydc-reg-form-input">
-											<label>${userInfo.userMoney}</label>
-										</div>
-									</div>
-									
-									<div class="ydc-reg-form-group clearfix">
-										<label>已有内容发布渠道</label>
-										<div class="ydc-reg-form-input">
-											<label>https://weibo.com/525135676</label>
-										</div>
-									</div>
-									<div class="ydc-reg-form-group clearfix" style="margin-top:40px;">
+									<div class="ydc-reg-form-group">
 										<div class="ydc-reg-form-button" style="margin-left:255px;">
-											<a class="btn fl" href="info-edit.html">修改</a>
+											<a class="btn fl" href="info.html">保存</a>
 										</div>
 									</div>
-								</div>
+								</form>
 							</div>
 						</div>
 					</div>
