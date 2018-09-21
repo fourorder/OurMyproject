@@ -93,7 +93,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="ydc-reg-text-center">
 								
 								 <div class="ydc-text-center-item">
-								 <a href="<%=basePath%>register/registerShow3.action?characterId=1&userAccount=${userAccount}&userPwd=${userPwd}">
+								 <form action="<%=basePath%>register/registerShow3.action"name="myform" method="post">
+								 <a href="javascript:document.myform.submit();">
+								 <input type="hidden" name="userAccount" value="${userAccount}"> 
+								  <input type="hidden" name="userPwd" value="${userPwd}"> 
+								   <input type="hidden" name="characterId" value="1"> 
+								 </form>
 									<div class="ydc-text-item-list">
 										<div class="ydc-text-item-list-title">
 											<div class="ydc-text-ab">
@@ -120,7 +125,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						            </div> --%>
 								</div>
 								<div class="ydc-text-center-item">
-								<a href="<%=basePath%>register/registerShow3.action?characterId=2&userAccount=${userAccount}&userPwd=${userPwd}">
+								 <form action="<%=basePath%>register/registerShow3.action"name="myform2" method="post">
+								 <a href="javascript:document.myform2.submit();">
+								 <input type="hidden" name="userAccount" value="${userAccount}"> 
+								  <input type="hidden" name="userPwd" value="${userPwd}"> 
+								   <input type="hidden" name="characterId" value="2"> 
+								 </form>
+								
 									<div class="ydc-text-item-list">
 										<div class="ydc-text-item-list-title">
 											<div class="ydc-text-ab">

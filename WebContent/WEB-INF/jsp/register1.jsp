@@ -93,7 +93,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<label>邮箱账号:</label>
 							<div class="ydc-reg-form-input">
 								<input type="text" id="userAccount" name="userAccount" onblur="checkAccount()" class="ydc-form-control" autocomplete="off" placeholder="账号通行证/邮箱">
-								<span id="accountspan"></span>
+								<!-- <span id="accountspan"></span> -->
+								 <div id="accountspan" style="position:absolute; left:350px;top:10px; width:100px;color:red;"></div>
 							</div>
 							<div class="ydc-reg-form-text">
 							</br></br>
@@ -167,12 +168,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 	 function checkAccount(){
 
-	       var  userAccount  = document.getElementById("userAccount").value;
+	        var  userAccount  = document.getElementById("userAccount").value;
 
 	       var account = /^[a-z0-9]\w+@[a-z0-9]{2,3}(\.[a-z]{2,3}){1,2}$/i;  // .com .com.cn
 
 	       var accountspan = document.getElementById("accountspan");
-
+	       $.ajax({	
+				
+				 url:"<%=basePath%>user/checkAccount.action",
+				 data:{"userAccount":$("#userAccount").val()},
+				 dataType:"json",
+				 type:"post",
+				 success:function(data){
+					 
+					 $("#accountspan").html(data[0]);			 
+				 }
+			 });
 	       if(account.test(userAccount)){
 
 	           //符合规则 
@@ -192,6 +203,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	           return false;
 
 	       }  
+	 	  
 
 	    }
 	 

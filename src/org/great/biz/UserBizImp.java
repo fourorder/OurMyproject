@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.great.bean.UserBean;
 import org.great.mapper.FundMapper;
 import org.great.mapper.UserMapper;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,17 @@ public List<Object> search(String name,String page,String state){
 	list.add(count1);
 	objects.add(list);
 	return objects;
+}
+@Override
+public boolean checkAccount(String userAccount) {
+	// TODO Auto-generated method stub
+	List<UserBean> userBeans=userMapper.checkAccount(userAccount);
+	if(userBeans.size()>0) {
+		return true;
+	}else {
+		return false;
+	}
+	
 }
 
 }

@@ -93,13 +93,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="ydc-reg-form-group clearfix">
 								<label>姓名:</label>
 								<div class="ydc-reg-form-input">
-									<input type="text" id="userName" name="userName" class="ydc-form-control" autocomplete="off" placeholder="">
+									<input type="text" id="userName" name="userName" class="ydc-form-control" onblur="checkName()" autocomplete="off" placeholder="">
+								<span id="namespan"></span> 
 								</div>
 							</div>
 							<div class="ydc-reg-form-group clearfix">
 								<label>身份证号:</label>
 								<div class="ydc-reg-form-input clearfix">
-									<input type="text" id="userIdentity" name="userIdentity" class="ydc-form-control" autocomplete="off" placeholder="">
+									<input type="text" id="userIdentity" name="userIdentity"  onblur="checkIdentity()" class="ydc-form-control" autocomplete="off" placeholder="">
+									<span id="identityspan"></span> 
 									<div class="ydc-reg-form-text">
 										<p>帐号信息填写需真实有效，如发现虚假以及非个人真实信息导致帐号收益无法提取，责任由帐号个人承担</p>
 									</div>
@@ -113,7 +115,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="ydc-reg-form-group clearfix">
 								<label>联系手机:</label>
 								<div class="ydc-reg-form-input">
-									<input type="text" id="userTel" name="userTel" class="ydc-form-control" autocomplete="off" placeholder="">
+									<input type="text" id="userTel" name="userTel" onblur="checkTel()" class="ydc-form-control" autocomplete="off" placeholder="">
+									<span id="telspan"></span>
 									<div class="ydc-reg-form-text">
 										<p>请输入手机号并验证</p>
 									</div>
@@ -198,6 +201,185 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        })
 	    })
 	</script>
+	<script type="text/javascript">
+	
+	function checkTel(){
+          alert("1111");
+        var  userTel  = document.getElementById("userTel").value;
 
+       var tel = ^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$;  // .com .com.cn
+    
+       var telspan = document.getElementById("telspan");
+      
+       if(tel.test(userTel)){
+
+           //符合规则 
+
+           telspan.innerHTML="手机号可以使用".fontcolor("green");
+
+          
+
+           return true;
+
+       }else{
+
+           //不符合规则
+
+           telspan.innerHTML="手机号格式输入错误".fontcolor("red");
+
+           return false;
+
+       }  
+ 	  
+
+    } 
+	
+	</script>
+	<script type="text/javascript">
+	function checkIdentity(){
+alert("5555555");
+        var  userIdentity  = document.getElementById("userIdentity").value;
+
+       var identity1 = ^[1-9]\\d{7}((0[1-9])||(1[0-2]))((0[1-9])||(1\\d)||(2\\d)||(3[0-1]))\\d{3}$;  // .com .com.cn
+       var identity2 = ^[1-9]\\d{5}[1-9]\\d{3}((0[1-9])||(1[0-2]))((0[1-9])||(1\\d)||(2\\d)||(3[0-1]))\\d{3}([0-9]||X)$;
+       var identityspan = document.getElementById("identityspan");
+      
+       if(identity1.test(userIdentity)||identity2.test(userIdentity)){
+
+           //符合规则 
+
+           identityspan.innerHTML="身份证可以使用".fontcolor("green");
+
+          
+
+           return true;
+
+       }else{
+
+           //不符合规则
+
+           identityspan.innerHTML="身份证格式输入错误".fontcolor("red");
+
+           return false;
+
+       }  
+ 	  
+
+    } 
+	
+	</script>
+<script type="text/javascript">
+	 /* function checkIdentity(){
+
+	        var  userIdentity  = document.getElementById("userIdentity").value;
+
+	       var identity1 = ^[1-9]\\d{7}((0[1-9])||(1[0-2]))((0[1-9])||(1\\d)||(2\\d)||(3[0-1]))\\d{3}$;  // .com .com.cn
+           var identity2 = ^[1-9]\\d{5}[1-9]\\d{3}((0[1-9])||(1[0-2]))((0[1-9])||(1\\d)||(2\\d)||(3[0-1]))\\d{3}([0-9]||X)$;
+	       var identityspan = document.getElementById("identityspan");
+	      
+	       if(identity1.test(userIdentity)||identity2.test(userIdentity)){
+
+	           //符合规则 
+
+	           identityspan.innerHTML="身份证可以使用".fontcolor("green");
+
+	          
+
+	           return true;
+
+	       }else{
+
+	           //不符合规则
+
+	           identityspan.innerHTML="身份证格式输入错误".fontcolor("red");
+
+	           return false;
+
+	       }  
+	 	  
+
+	    } */
+	   /* function checkTel(){
+
+	        var  userTel  = document.getElementById("userTel").value;
+
+	       var tel = ^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$;  // .com .com.cn
+        
+	       var telspan = document.getElementById("telspan");
+	      
+	       if(tel.test(userTel)){
+
+	           //符合规则 
+
+	           telspan.innerHTML="手机号可以使用".fontcolor("green");
+
+	          
+
+	           return true;
+
+	       }else{
+
+	           //不符合规则
+
+	           telspan.innerHTML="手机号格式输入错误".fontcolor("red");
+
+	           return false;
+
+	       }  
+	 	  
+
+	    }   */
+	 function checkName(){
+
+	        var  userName  = document.getElementById("userName").value;
+
+	       var name =  /^[\u4E00-\u9FA5A-Za-z]+$/;  // .com .com.cn
+     
+	       var namespan = document.getElementById("namespan");
+	      
+	       if(name.test(userName)){
+
+	           //符合规则 
+
+	           namespan.innerHTML="姓名可以使用".fontcolor("green");
+
+	          
+
+	           return true;
+
+	       }else{
+
+	           //不符合规则
+
+	           namespan.innerHTML="姓名格式输入错误".fontcolor("red");
+
+	           return false;
+
+	       }  
+	 	  
+
+	    }
+/* 	  function checkForm(){
+
+         var userIdentity = checkIdentity();
+
+         var userName  = checkName();
+         
+         var userTel= checkTel();
+
+         if(userIdentity&&userName&&userTel){
+
+             return true;
+
+         }else{
+
+             return false;
+
+         }
+
+
+
+}  */
+	 </script>
 </body>
 </html>

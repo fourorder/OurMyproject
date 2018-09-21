@@ -2,16 +2,20 @@ package org.great.handler;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.great.biz.FundBiz;
 import org.great.biz.LoginBiz;
-
+import org.great.biz.UserBiz;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -22,7 +26,9 @@ public class LoginHandler {
 private FundBiz fundBizImp;
 @Resource
 private  LoginBiz loginBizImp;
-
+@Resource
+private UserBiz userBizImp;
+private String msg;
 @RequestMapping("/login.action")
 public ModelAndView login(String userAccount,String userPwd,HttpServletRequest request) {
 	ModelAndView modelAndView=new ModelAndView();
@@ -54,5 +60,18 @@ modelAndView.setViewName("jsp/login");
 	return modelAndView;
 	
 }	
+@RequestMapping("/checkAccount.action")
+@ResponseBody
+public List<Object> checkAccount(String userAccount){
+	List<Object> list=new ArrayList<Object>();
+	if (userBizImp.checkAccount(userAccount)) {
+		msg="邮箱已被占用";
+		
+	}else {
+		msg="邮箱可以使用";
+	}
+	list.add(msg);
+	return list;
+}
 
 }

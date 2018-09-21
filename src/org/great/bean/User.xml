@@ -19,8 +19,11 @@ select * from fundtbl
  <select id="login"  parameterType="String" resultType="org.great.bean.UserBean" >
 	 	select characterTbl.characterName,stateTbl.stateName,userTbl.* from userTbl,characterTbl,stateTbl where userAccount=#{0} and userPwd=#{1} and userTbl.stateId=stateTbl.stateId and userTbl.characterId=characterTbl.characterId  
  </select>
- <insert id="addUser">
- 	insert into userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId) values (SEQID.nextval,#{userAccount},#{userPwd},#{userAccount},#{characterId},#{userAccount},#{userName},#{userTel},#{userIdentity},#{stateId})
+ <insert id="addUser" >
+ 	insert into userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId) values (SEQID.nextval,#{userAccount},#{userPwd},#{characterId},#{userName},#{userTel},#{userIdentity},#{stateId})
  </insert> 
+ <select id="checkAccount" parameterType="String" resultType="org.great.bean.UserBean">
+         select * from userTbl where userAccount=#{userAccount}
+ </select>
 </mapper>
 
