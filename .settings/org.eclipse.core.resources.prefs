@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//WebContent/WEB-INF/jsp/serachresult.jsp=UTF-8
+=======
+encoding/<project>=UTF-8
+>>>>>>> branch 'master' of https://github.com/fourorder/OurMyproject.git

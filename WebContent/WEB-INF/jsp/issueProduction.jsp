@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
     <% 
 	String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";	
 %>
@@ -68,6 +69,9 @@
     </head>
     <body>
         <!-- head YDC begin -->
+        
+      <form  method="post" action="<%=path%>production/toIssueProduction.action" enctype="multipart/form-data" >
+        
         <header class="ydc-header">
             <div class="ydc-entered">
                 <div class="ydc-header-content ydc-flex">
@@ -211,7 +215,7 @@
                                                 <p>标题字数需在11字到30字之间。</p>
                                             </div>
                                             <div class="ydc-release-form-group-input">
-                                                <input type="text" class="ydc-form-control" title="" placeholder="请输入标题，为了更好的展示效果，建议标题字数在30个汉字以内" onkeyUp="textLimitCheck(this, 30);">
+                                                <input type="text" class="ydc-form-control"  name="title" title="" placeholder="请输入标题，为了更好的展示效果，建议标题字数在30个汉字以内" onkeyUp="textLimitCheck(this, 30);">
                                                 <div class="ydc-form-group-jl">
                                                     <span id="messageCount">0</span>
                                                     /30
@@ -223,78 +227,17 @@
 										</textarea>
                                         </div>
                                         <div class="ydc-form-city">
-                                            <form action="">
+                                             
                                                 <div class="aui-card-form-item">
                                                     <label class="aui-card-form-label">分类:</label>
                                                     <div class="aui-card-form-input">
-                                                        <select id="province">
-                                                            <option>互联网</option>
-                                                            <option>人工智能</option>
-                                                            <option>人文</option>
-                                                            <option>教育</option>
-                                                            <option>汽车</option>
-                                                            <option>游戏</option>
-                                                            <option>财经</option>
-                                                            <option>要闻</option>
-                                                            <option>萌宝</option>
-                                                            <option>艺术</option>
-                                                            <option>育儿</option>
-                                                            <option>职场</option>
-                                                            <option>美女</option>
-                                                            <option>科技</option>
-                                                            <option>生活</option>
-                                                            <option>社会</option>
-                                                            <option>星座</option>
-                                                            <option>时尚</option>
-                                                            <option>旅游</option>
-                                                            <option>数码</option>
-                                                            <option>故事</option>
-                                                            <option>搞笑</option>
-                                                            <option>探索</option>
-                                                            <option>手机</option>
-                                                            <option>房产</option>
-                                                            <option>彩票</option>
-                                                            <option>小品</option>
-                                                            <option>明星</option>
-                                                            <option>家居</option>
+                                                        <select id="province" name="className" >
+                                                            <c:forEach items="${list}"  var="list" >	              
+	          <option value="${list.parameterId}" >${list.parameterName}</option>    
+	              
+</c:forEach>	
                                                         </select>
-                                                        <select class="city">
-                                                            <option>请选择二级分类</option>
-                                                        </select>
-                                                        <select class="city" style="display:none">
-                                                            <option>互联网金融</option>
-                                                            <option>干货</option>
-                                                            <option>电子商务</option>
-                                                            <option>互联网+</option>
-                                                            <option>物联网</option>
-                                                        </select>
-                                                        <select class="city" style="display:none">
-                                                            <option>人机交互</option>
-                                                            <option>AR</option>
-                                                            <option>虚拟现实</option>
-                                                        </select>
-                                                        <select class="city" style="display:none">
-                                                            <option>收藏</option>
-                                                            <option>国学</option>
-                                                            <option>哲学</option>
-                                                            <option>民俗</option>
-                                                            <option>风水</option>
-                                                            <option>文学</option>
-                                                        </select>
-                                                        <select class="city" style="display:none">
-                                                            <option>新车</option>
-                                                            <option>用车</option>
-                                                            <option>汽车保养</option>
-                                                            <option>二手车</option>
-                                                            <option>新车评测</option>
-                                                            <option>试驾</option>
-                                                        </select>
-                                                        <select class="city" style="display:none">
-                                                            <option>电子竞技</option>
-                                                            <option>手游</option>
-                                                            <option>页游</option>
-                                                            <option>电视游戏</option>
-                                                        </select>
+                                                 
                                                     </div>
                                                 </div>
                                                 <div class="aui-card-form-item preview  aui-news">
@@ -303,16 +246,17 @@
                                                         <img class="" id="imghead_0" border="0" src="<%=path%>/images/icon/noimg.gif">
                                                     </div>
                                                     <div class="aui-file-up-btn clearfix ">
-                                                        <div class="idPicFile aui-btn aui-file-new">
-                                                            <input type="file" name="file" id="1" class="file_photo aui-file-new-up" style="margin:0;"/>
+                                                          <div class="idPicFile aui-btn aui-file-new">  
+                                                            <input type="file" name="file"   id="1" class="file_photo aui-file-new-up" style="margin:0;"/>
                                                             <a>上传图片</a>
-                                                        </div>
-                                                        <div class="aui-remarks">
+                                                         </div> 
+                                                         </div> 
+                                                        <div >
                                                             <p>图片尺寸建议：800*400 图片大小不超过1MB</p>
                                                         </div>
-                                                    </div>
+                                                    
                                                 </div>
-                                                
+                                                上传作品文件:<input type="file"   name="productionFile" />
                                                 
                                                  <div>
                                             价格<input  type="text"  name="price"   />
@@ -323,63 +267,17 @@
                                                 
                                                 
                                                 <div class="ydc-btn">
-                                                    <button class="btn" onclick=toIssue() >发布</button>
-                                                         <a href="<%=path%>production/toIssueProduction.action">发布</a>
+                                                
+                                                <!-- <input type="submit"  class="btn"   value=" submit " />
+                                                <input type="submit "  class="btn"  value="发布" /> -->
+                                                    <button class="btn"   >发布</button>
+                                                    <%--      <a href="<%=path%>production/toIssueProduction.action">发布</a> --%>
                                                     <button class="btn btn-default">保存草稿</button>
                                                 </div>
-                                            </form>
+                                             
                                         </div>
                                     </div>
-                                    <div class="ydc-pane">
-                                        <div class="ydc-release-form-group ">
-                                            <div class="ydc-warning-default">
-                                                <p>标题字数需在11字到30字之间。</p>
-                                            </div>
-                                            <div class="ydc-release-form-group-input clearfix">
-                                                <label class="ydc-form-group-label">标题</label>
-                                                <input style="width:89.999%" type="text" class="ydc-form-control" title="" placeholder="请输入标题，为了更好的展示效果，建议标题字数在30个汉字以内" onkeyUp="textLimitCheck(this, 30);">
-                                                <div class="ydc-form-group-jl">
-                                                    <span id="messageCount1">0</span>/30
-                                                </div>
-                                            </div>
-                                            <div class="ydc-release-form-group-input ydc-release-form-group-ms clearfix">
-                                                <label class="ydc-form-group-label">描述</label>
-                                                <input style="width:89.999%" type="text" class="ydc-form-control" title="" placeholder="请输入描述，统一描述" onkeyUp="">
-                                                <div class="ydc-form-group-jl">
-                                                    <span id="">0</span>/30
-                                                </div>
-                                            </div>
-                                            <div class="aui-card-form-item preview  aui-news" style="margin-top:20px;">
-                                                <label class="aui-card-form-label">封面:</label>
-                                                <div class="aui-file-up-img" id="preview_0">
-                                                    <img class="" id="imghead_0" border="0" src="<%=path%>/images/icon/noimg.gif">
-                                                </div>
-                                                <div class="aui-file-up-btn clearfix ">
-                                                    <div class="idPicFile aui-btn aui-file-new">
-                                                        <input type="file" name="file" id="1" class="file_photo aui-file-new-up" style="margin:0;"/>
-                                                        <a>上传图片</a>
-                                                    </div>
-                                                    <div class="aui-remarks">
-                                                        <p>图片尺寸建议：800*400 图片大小不超过1MB</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div>
-                                            价格<input  type="text"  name="price"   />
-                                            
-                                            
-                                            </div>
-                                            
-                                            
-                                            
-                                            <div class="ydc-btn" style="margin-top:20px;">
-                                                <button class="btn"  onclick=toIssue() >发布</button>
-                                              <a href="<%=path%>production/toIssueProduction.action">发布</a>
-                                                <button class="btn btn-default">保存草稿</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -451,5 +349,7 @@
 	    }//标题输入框字数限制
 	
         </script>
+        
+        </form>
     </body>
 </html>
