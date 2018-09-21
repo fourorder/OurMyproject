@@ -19,23 +19,24 @@ public class UserHandler {
 @Resource
 private UserBiz userBizImp;
 @RequestMapping("/search")
-public ModelAndView serach(String name,HttpServletRequest request) {
+public ModelAndView serach(String name,HttpServletRequest request,String page,String state) {
 	ModelAndView modelAndView=new ModelAndView();
-	request.setAttribute("objList", userBizImp.search(name));
+	request.setAttribute("objList", userBizImp.search(name,page,state));
 	modelAndView.setViewName("jsp/serachresult");
 	return modelAndView;
 }
 @RequestMapping("/EmployerInformation.action")//用户详细信息
 public ModelAndView EmployerInformation(HttpServletRequest request,String userid){
 	ModelAndView modelAndView=new ModelAndView();
-	request.setAttribute("user", userBizImp.employer(userid));
-	modelAndView.setViewName("jsp/employerInfo.jsp");
+	
+	request.setAttribute("user", userBizImp.userinfo(userid));
+	modelAndView.setViewName("jsp/employerInfo");
 	return modelAndView;
 }
 @RequestMapping("/returnHome.action")
 public ModelAndView returnHome(){
 	ModelAndView modelAndView=new ModelAndView();
-	modelAndView.setViewName("home.jsp");
+	modelAndView.setViewName("jsp/home");
 	return modelAndView;
 }
 

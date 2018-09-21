@@ -142,20 +142,23 @@ $(document).ready(function(){
 		<li style="width:300px;">商品</li>
 	</ul>
 	<div class="con1" >
-	<c:forEach items="${objList[0]}"  var="obj" varStatus="status">
-	<div class="item" id="img${status.count}">
+	<c:forEach items="${objList[0][0]}"  var="obj" varStatus="status">
+	
+	<a href="<%=path%>user/EmployerInformation.action?userid=${obj.userId}"><div class="item" id="img${status.count}">
 		<img width="150" height="150" alt="${obj.userName}" src="<%=path%>images/banner-touxiang.png" />
 		<div class="caption" style="text-align:center;" >
-			<a href="http://www.17sucai.com/">详细信息</a>
-			<p><a href="http://www.17sucai.com/">账户:${obj.userAccount}</a></p>
+			<p>账户:${obj.userAccount}</p>
+			<p>昵称:${obj.userName}</p>
+			<p>注册时间:${obj.userRegisterTime}</p>
 		</div>
 		<div style="position:absolute;left:60px;top:120px;"><font color="red" size="4px">${obj.userName}</font></div>
-	</div>									
+	</div>	
+	</a>								
 	</c:forEach>
 <div  style="position:absolute;top:460px;left:240px;">
 <button class="mybtn">首页</button>
-共${requestScope.count}条
-当前页数：[${requestScope.page}/${requestScope.countpage}]
+共${requestScope.objList[0][3]}条
+当前页数：[${requestScope.objList[0][1]}/${requestScope.objList[0][2]}]
 <button class="mybtn">末页</button>
 <button class="mybtn">上一页</button>
 <button class="mybtn">下一页</button>

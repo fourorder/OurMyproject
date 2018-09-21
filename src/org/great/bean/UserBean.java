@@ -1,22 +1,22 @@
 package org.great.bean;
 
 public class UserBean {
-public int userId;
-public String userName;
-public String userPwd;
-public long userTel;
-public String userAccount;
-public String userSex;
-public String userMail;
-public long userIdentity;
-public String userAddress;
-public String userHead;
-public int userCredit;
-public int userMoney;
-public int stateId;
-public int userCharacter;
-public String userRegisterTime;
-public String userProfile;
+public int userId;//用户id
+public String userName;//用户
+public String userPwd;//密码
+public long userTel;//手机
+public String userAccount;//账户
+public String userSex;//性别
+public String userMail;//邮箱
+public long userIdentity;//身份证
+public String userAddress;//地址
+public String userHead;//头像
+public int userCredit;//信用分
+public int userMoney;//余额
+public int stateId;//状态id
+public int characterId;//角色id
+public String userRegisterTime;//注册时间
+public String userProfile;//用户简介
 public UserBean() {
 	super();
 }
@@ -98,11 +98,11 @@ public int getStateId() {
 public void setStateId(int stateId) {
 	this.stateId = stateId;
 }
-public int getUserCharacter() {
-	return userCharacter;
+public int getCharacterId() {
+	return characterId;
 }
-public void setUserCharacter(int userCharacter) {
-	this.userCharacter = userCharacter;
+public void setCharacterId(int characterId) {
+	this.characterId = characterId;
 }
 public String getUserRegisterTime() {
 	return userRegisterTime;
