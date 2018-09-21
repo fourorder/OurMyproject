@@ -122,7 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>
 								</div>
 								<div class="ydc-reg-yzm">
-									<button>获取验证码</button>
+									<button  >获取验证码</button> 
 								</div>
 
 							</div>
@@ -207,7 +207,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           alert("1111");
         var  userTel  = document.getElementById("userTel").value;
 
-       var tel = ^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$;  // .com .com.cn
+       var tel = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;  // .com .com.cn
     
        var telspan = document.getElementById("telspan");
       
@@ -240,11 +240,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 alert("5555555");
         var  userIdentity  = document.getElementById("userIdentity").value;
 
-       var identity1 = ^[1-9]\\d{7}((0[1-9])||(1[0-2]))((0[1-9])||(1\\d)||(2\\d)||(3[0-1]))\\d{3}$;  // .com .com.cn
-       var identity2 = ^[1-9]\\d{5}[1-9]\\d{3}((0[1-9])||(1[0-2]))((0[1-9])||(1\\d)||(2\\d)||(3[0-1]))\\d{3}([0-9]||X)$;
+       var identity = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|[xX])$/;  // .com .com.cn
        var identityspan = document.getElementById("identityspan");
       
-       if(identity1.test(userIdentity)||identity2.test(userIdentity)){
+       if(identity.test(userIdentity)){
 
            //符合规则 
 
@@ -269,66 +268,8 @@ alert("5555555");
 	
 	</script>
 <script type="text/javascript">
-	 /* function checkIdentity(){
-
-	        var  userIdentity  = document.getElementById("userIdentity").value;
-
-	       var identity1 = ^[1-9]\\d{7}((0[1-9])||(1[0-2]))((0[1-9])||(1\\d)||(2\\d)||(3[0-1]))\\d{3}$;  // .com .com.cn
-           var identity2 = ^[1-9]\\d{5}[1-9]\\d{3}((0[1-9])||(1[0-2]))((0[1-9])||(1\\d)||(2\\d)||(3[0-1]))\\d{3}([0-9]||X)$;
-	       var identityspan = document.getElementById("identityspan");
-	      
-	       if(identity1.test(userIdentity)||identity2.test(userIdentity)){
-
-	           //符合规则 
-
-	           identityspan.innerHTML="身份证可以使用".fontcolor("green");
-
-	          
-
-	           return true;
-
-	       }else{
-
-	           //不符合规则
-
-	           identityspan.innerHTML="身份证格式输入错误".fontcolor("red");
-
-	           return false;
-
-	       }  
-	 	  
-
-	    } */
-	   /* function checkTel(){
-
-	        var  userTel  = document.getElementById("userTel").value;
-
-	       var tel = ^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$;  // .com .com.cn
-        
-	       var telspan = document.getElementById("telspan");
-	      
-	       if(tel.test(userTel)){
-
-	           //符合规则 
-
-	           telspan.innerHTML="手机号可以使用".fontcolor("green");
-
-	          
-
-	           return true;
-
-	       }else{
-
-	           //不符合规则
-
-	           telspan.innerHTML="手机号格式输入错误".fontcolor("red");
-
-	           return false;
-
-	       }  
-	 	  
-
-	    }   */
+	
+	 
 	 function checkName(){
 
 	        var  userName  = document.getElementById("userName").value;
@@ -359,7 +300,10 @@ alert("5555555");
 	 	  
 
 	    }
-/* 	  function checkForm(){
+
+	 </script >
+	 <script type="text/javascript">
+	 function checkForm(){
 
          var userIdentity = checkIdentity();
 
@@ -376,10 +320,8 @@ alert("5555555");
              return false;
 
          }
+	 }
 
-
-
-}  */
 	 </script>
 </body>
 </html>
