@@ -15,5 +15,31 @@ select * from usertbl where usercharacter=2 and username like #{name}
 </select> -->
 <!-- <select id="serachWorks" resultType="org.great.bean.WorksBean" parameterType="java.lang.String">
 select * from fundtbl 
-</select> -->	 
+</select> -->
+
+	 
+<!-- 查询所有雇主 -->
+<select id="employers" resultType="org.great.bean.UserBean">
+select * from (
+select c.*,rownum rn from (
+select u.*,c.charactername from usertbl u,characterTbl c where  u.CharacterId=c.CharacterId 
+<if test="name != null">
+and u.username like '%'+#{name}+'%'
+</if>
+
+ ) c 
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= ((#{page}-1)*5)
+</select>
+
+
+<!-- 删除雇主 -->
+<update id="delEmployers" parameterType="java.lang.String">
+UPDATE usertbl set stateid=3 WHERE useraccount=#{account}
+</update>
+
+<!-- 查询雇主总个数 -->
+<select id="countEmployers" resultType="java.lang.Integer">
+select count(*) from usertbl where characterid=1
+</select>
 </mapper>
