@@ -13,6 +13,9 @@
 	
 	
 	</select>
+<!--查询平台抽成比例 -->
 
+
+<select resultType="java.lang.String" id="findCommission">select PARAMETERNAME from TBPARAMETER where PARAMETERID=285 </select>
 	 
 </mapper>

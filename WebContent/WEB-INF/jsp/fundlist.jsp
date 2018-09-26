@@ -21,6 +21,7 @@
 	<meta name="format-detection" content="telephone=no">
 	<meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
 	<title>交易记录</title>
+	<link rel="stylesheet" href="<%=path%>css/oindex.css">
 	<link rel="icon" type="image/x-icon" href="<%=path%>favicon.ico">
 	<link href="<%=path%>iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
 	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
@@ -32,36 +33,20 @@
 <body>
 
 <!-- head YDC begin -->
-	<header class="ydc-header">
-		<div class="ydc-entered">
-			<div class="ydc-header-content ydc-flex">
-				<div class="ydc-column">
-					<a href="index.html" class="ydc-column-ydc-logo">
-						<img src="<%=path%>admin/images/icon/ydc-logo.png" title="" about="" alt="">
-					</a>
-				</div>
-				<div class="ydc-column">
-					<div class="ydc-column-user">
-						<div class="ydc-user-photo">
-							<a href="javascript:;">
-								<img src="<%=path%>admin/images/icon/photo.png" title="" about="" alt="">
-							</a>
-						</div>
-						<div class="ydc-user-info">
-							<div class="ydc-user-info-name">
-								<a href="javascript:;">一点车</a>
-							</div>
-							<div class="ydc-user-info-func ydc-flex">
-								<span class="ydc-tag">账号审核中</span>
-								<span class="ydc-mal"><i class="ydc-icon ydc-icon-mail fl"></i><em>12</em></span>
-								<a href="javascript:;">退出</a>
-							</div>
-						</div>
-					</div>
+	 <div class="o-top">
+				<div class="width1180">
+					<span class="fr">
+						<!-- <a href="#" title="登录">登录</a>
+						<a href="#" title="注册">注册</a> -->
+						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
+						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
+						<!--登录后
+						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
+						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
+						-->
+					</span>
 				</div>
 			</div>
-		</div>
-	</header>
 <!-- head YDC end -->
 
 <!-- content YDC begin -->
@@ -87,10 +72,9 @@
 												<th>交易类型</th>
 												<th>接收人</th>
 												<th>交易金额</th>
-												<th>详细信息<th>
 											</tr>
 										</thead>
-										
+									<tbody id="tb">
 									<c:forEach items="${fundList}"  var="fund">
 									<tr>
 												<td>${fund.userBean.userName}</td>
@@ -98,7 +82,6 @@
 												<td>${fund.businessBean.businessName}</td>
 												<td>${fund.toUserBean.userName}</td>
 												<td>${fund.dealMoney}</td>
-												<td><a href="#">详细信息</a></td>
 									</tr>
 									</c:forEach>											
 										</tbody>
@@ -168,12 +151,12 @@
 	</script> -->
 
 	<script type="text/javascript">
-	    $(function(){
+	    /* $(function(){
 	        $('.ydc-tabPanel ul li').click(function(){
 	            $(this).addClass('hit').siblings().removeClass('hit');
 	            $('.ydc-panes>div:eq('+$(this).index()+')').show().siblings().hide();
 	        })
-	    })
+	    }) */
 	    
 var page="${requestScope.page}";
 function selectFund(state){
@@ -195,7 +178,7 @@ function selectFund(state){
 		         var size=redata[2];
 		         for(var i=0;i<len;i++){    			        	 
 		             var e = list[i];
-		             $("#tb").append("<tr><td>"+e.userBean.userName+"</td><td>"+e.dealDate+"</td><td>"+e.businessBean.businessName+"</td><td>"+e.toUserBean.userName+"</td><td>"+e.dealMoney+"</td><td><a href='#'>详细信息</a></td></tr>"); 
+		             $("#tb").append("<tr><td>"+e.userBean.userName+"</td><td>"+e.dealDate+"</td><td>"+e.businessBean.businessName+"</td><td>"+e.toUserBean.userName+"</td><td>"+e.dealMoney+"</td></tr>"); 
 		         } 	
 		         if(page==1){
 		        	 $("#last").attr("class","ydc-previous-item-btn-medium ydc-disabled"); 

@@ -91,7 +91,7 @@
 							
 						</li>
 						<li class="clearfix">
-						<p><a href="#"  title="发布作品"><i class="o-index2"></i>发布作品<b></b></a></p>
+						<p><a href="<%=path%>production/toManageProduction.action"  title="发布作品"><i class="o-index2"></i>发布作品<b></b></a></p>
 						
 						</li>
 						<li class="clearfix">
@@ -177,7 +177,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 							<p>成功交易&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=path%>fund/getFundList.action?page=1">更多</a></p>
 							<ul>
 							<c:forEach items="${fundList}"  var="fund">
-								<li><a href="#" title="">${fund.dealDate}&nbsp;&nbsp;&nbsp;${fund.userBean.userName}&nbsp;&nbsp;&nbsp;成功交易</a></li>
+								<li>${fund.dealDate}&nbsp;&nbsp;&nbsp;${fund.userBean.userName}&nbsp;&nbsp;&nbsp;成功交易</li>
 							</c:forEach>
 								<!-- <li class="fl"><img src="images/b-01.png">价格透明</li>
 								<li class="fr"><img src="images/b-02.png">安全保障</li>

@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
     <% 
 	String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
     <head>
- <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        
         <meta name='TTUNION_verify' content='b846c3c2b85efabc496d2a2b8399cd62'>
         <meta name="sogou_site_verification" content="gI1bINaJcL"/>
         <meta name="360-site-verification" content="37ae9186443cc6e270d8a52943cd3c5a"/>
@@ -24,7 +26,7 @@
         <meta name="description" content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。。">
         <meta name="author" content="AUI, a-ui.com">
         <meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
-        <title>发布文章--  媒体开放平台 一点车 -  让您多懂一点车</title>
+        <title>素材中心--  媒体开放平台 一点车 -  让您多懂一点车</title>
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
         <link type="text/css" rel="stylesheet" href="<%=path%>css/core.css">
@@ -57,34 +59,29 @@
                 }
             });
         }
-	<%--  function toIssue(){
-		
-		window.location.href="<%=path%>production/toIssueProduction.action";
-		
-		
-		
-		
-	} --%>  
+	
         </script>
+        <style type="text/css">
+        
+ .ydc-asset-img-list-img img { width: 100%; height: 240px;}       
+        </style>
+        
     </head>
     <body>
         <!-- head YDC begin -->
-        
-      <form  method="post" action="<%=path%>production/toIssueProduction.action" enctype="multipart/form-data" >
-        
         <header class="ydc-header">
             <div class="ydc-entered">
                 <div class="ydc-header-content ydc-flex">
                     <div class="ydc-column">
                         <a href="index.html" class="ydc-column-ydc-logo">
-                            <img src="<%=path%>/images/icon/ydc-logo.png" title="" about="" alt="">
+                            <img src="<%=path%>images/icon/ydc-logo.png" title="" about="" alt="">
                         </a>
                     </div>
                     <div class="ydc-column">
                         <div class="ydc-column-user">
                             <div class="ydc-user-photo">
                                 <a href="javascript:;">
-                                    <img src="<%=path%>/images/icon/photo.png" title="" about="" alt="">
+                                    <img src="<%=path%>mages/icon/photo.png" title="" about="" alt="">
                                 </a>
                             </div>
                             <div class="ydc-user-info">
@@ -92,7 +89,7 @@
                                     <a href="javascript:;">一点车</a>
                                 </div>
                                 <div class="ydc-user-info-func ydc-flex">
-                                    <span class="ydc-tag">新手期</span>
+                                    <span class="ydc-tag">账号审核中</span>
                                     <span class="ydc-mal">
                                         <i class="ydc-icon ydc-icon-mail fl"></i>
                                         <em>12</em>
@@ -121,7 +118,7 @@
                                     </a>
                                 </li>
                                 <li class="ydc-menu-item">
-                                    <a href="release.html" class="active">
+                                    <a href="release.html" class="">
                                         <i class="ydc-icon ydc-icon-find fl"></i>
                                         发布
                                     </a>
@@ -139,7 +136,7 @@
                                             <a href="related.html">内容同步</a>
                                         </li>
                                         <li>
-                                            <a href="<%=path%>production/productionToManage.action">作品管理</a>
+                                            <a href="asset.html" class="active">素材中心</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -198,86 +195,103 @@
                             <div class="ydc-tabPanel ydc-tabPanel-release">
                                 <div class="ydc-release-tab-head">
                                     <ul>
-                                        <li class="hit">发布文章</li>
-                                        <li>发布图集</li>
+                                        <li class="hit">图片素材</li>
+                                       
                                     </ul>
-                                    <div class="ydc-release-amount">
-                                        <span>
-                                            今日发布数量：<em>0</em>
-                                            /6 <a href="standard.html" target="_blank">发文规范</a>
-                                        </span>
-                                    </div>
                                 </div>
                                 <div class="ydc-panes">
                                     <div class="ydc-pane" style="display:block;">
                                         <div class="ydc-release-form-group ">
                                             <div class="ydc-warning-default">
-                                                <p>标题字数需在11字到30字之间。</p>
+                                                <p>搜索标题以及描述</p>
                                             </div>
-                                            <div class="ydc-release-form-group-input">
-                                                <input type="text" class="ydc-form-control"  name="title" title="" placeholder="请输入标题，为了更好的展示效果，建议标题字数在30个汉字以内" onkeyUp="textLimitCheck(this, 30);">
-                                                <div class="ydc-form-group-jl">
-                                                    <span id="messageCount">0</span>
-                                                    /30
-                                                </div>
+                                            <div class="ydc-group-input clearfix" style="width:100%; margin-bottom:20px;">
+                                                <input type="text" placeholder="请输入关键词进行搜索" style="width:91.333%">
+                                                <button class="ydc-group-button">搜 索</button>
                                             </div>
                                         </div>
-                                        <div class="ydc-release-form-text">
-                                            <textarea name="area2" style="width: 100%;">请输入内容
-										</textarea>
+                                        <div class="ydc-assetStyle">
+                                            <span>共<span class="ydc-assetStyle-span">28</span>条内容</span>
+                                          
                                         </div>
-                                        <div class="ydc-form-city">
-                                             
-                                                <div class="aui-card-form-item">
-                                                    <label class="aui-card-form-label">分类:</label>
-                                                    <div class="aui-card-form-input">
-                                                        <select id="province" name="className" >
-                                                            <c:forEach items="${list}"  var="list" >	              
-	          <option value="${list.parameterId}" >${list.parameterName}</option>    
-	              
-</c:forEach>	
-                                                        </select>
-                                                 
-                                                    </div>
+                                        <div class="ydc-asset-img clearfix">
+                                      
+                                            
+                                          
+                                        
+             <c:forEach items="${list}"  var="list" >	  
+             
+             
+            <div class="ydc-asset-img-list">
+                                                <div class="ydc-asset-img-list-img"  ><img src="<%=path%>picture/findPicture.action?url=${list.productionImage}"  alt=""></div>
+                                               <br>
+                                                <div class="ydc-asset-img-list-til">${list.productionName }</div>
+                                                <div class="ydc-asset-img-list-del">
+                                                    <button>编辑</button>
+                                                    <button>删除</button>
                                                 </div>
-                                                <div class="aui-card-form-item preview  aui-news">
-                                                    <label class="aui-card-form-label">封面:</label>
-                                                    <div class="aui-file-up-img" id="preview_0">
-                                                        <img class="" id="imghead_0" border="0" src="<%=path%>/images/icon/noimg.gif">
-                                                    </div>
-                                                    <div class="aui-file-up-btn clearfix ">
-                                                          <div class="idPicFile aui-btn aui-file-new">  
-                                                            <input type="file" name="file"   id="1" class="file_photo aui-file-new-up" style="margin:0;"/>
-                                                            <a>上传图片</a>
-                                                         </div> 
-                                                         </div> 
-                                                        <div >
-                                                            <p>图片尺寸建议：800*400 图片大小不超过1MB</p>
-                                                        </div>
-                                                    
-                                                </div>
-                                                上传作品文件:<input type="file"   name="productionFile" />
-                                                
-                                                 <div>
-                                            价格<input  type="text"  name="price"   />
+                                            </div> 
+             
+             
+                         
+	            
+</c:forEach>                               
+                                            
+        
+                                           
+                                          
+                                        </div>
+                                      
+                                    </div>
+                                    <div class="ydc-pane">
+                                      
+                                       
+                                       
                                             
                                             
-                                            </div>
-                                                
-                                                
-                                                
-                                                <div class="ydc-btn">
-                                                
-                                                <!-- <input type="submit"  class="btn"   value=" submit " />
-                                                <input type="submit "  class="btn"  value="发布" /> -->
-                                                    <button class="btn" type="submit"  >发布</button> 
-                                                         
-                                                    <button class="btn btn-default">保存草稿</button>
-                                                </div>
+                                            
                                              
+                                            
+                                            
+                                            
+                                           
+                                            
+                                           
+                                           
+                                            
+                                            
+                                             
+                                        </div>
+                                        <div class="ydc-pagination">
+                                            <ol>
+                                                <li class="ydc-previous-item">
+                                                    <button class="ydc-previous-item-btn-medium ydc-disabled">
+                                                        <span>上一页</span>
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button class="ydc-previous-item-btn-medium cur">1</button>
+                                                </li>
+                                                <li>
+                                                    <button class="ydc-previous-item-btn-medium">2</button>
+                                                </li>
+                                                <li>
+                                                    <button class="ydc-previous-item-btn-medium">3</button>
+                                                </li>
+                                                <li class="ydc-previous-item">
+                                                    <button class="ydc-previous-item-btn-medium">
+                                                        <span>下一页</span>
+                                                    </button>
+                                                </li>
+                                                <li class="ydc-item-quick">
+                                                    第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""></div>页
+                                                    <button style="margin-left:5px;" class="ydc-previous-item-btn-medium">
+                                                        <span>跳转</span>
+                                                    </button>
+                                                </li>
+                                            </ol>
                                         </div>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -310,7 +324,7 @@
         </script>
         <script type="text/javascript">
             
-	   /*  var slideIndex = 0;
+	    var slideIndex = 0;
 	    showSlides();
 
 	    function showSlides() {
@@ -323,7 +337,7 @@
 	        if (slideIndex> slides.length) {slideIndex = 1}
 	        slides[slideIndex-1].style.display = "block";
 	        setTimeout(showSlides, 3000); // AD滚动时间
-	    } */
+	    }
 	
         </script>
         <script type="text/javascript">
@@ -350,6 +364,6 @@
 	
         </script>
         
-        </form>
+        
     </body>
 </html>

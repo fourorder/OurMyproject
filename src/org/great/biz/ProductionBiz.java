@@ -20,6 +20,11 @@ public interface ProductionBiz {
 
 //查询作品信息
 	public ProductionBean findProductionDetal(int id);
+//生成购买记录,作品归属，插入两张表
+	
+	public void productionPayFinish(HttpServletRequest request,Integer  proId,
+			Integer userId,Integer  proUserId,Double price);	
+	
 	public List<ProductionBean> getProductionList();
 
 }

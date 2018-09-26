@@ -37,7 +37,7 @@ select * from usertbl where userid = #{userid}
 <select id="getStateName" parameterType="org.great.bean.UserInfoBean" resultType="org.great.bean.StateBean">
 select * from statetbl where stateid=#{stateid}
 </select>
-<select id="getCharacter" parameterType="org.great.bean.UserInfoBean" resultType="org.great.bean.CharacteBean">
+<select id="getCharacter" parameterType="org.great.bean.UserInfoBean" resultType="org.great.bean.CharacterBean">
 select * from charactertbl where characterid = #{characterid}
 </select>
 
@@ -46,7 +46,7 @@ select * from charactertbl where characterid = #{characterid}
 <association property="stateBean" column="stateid" javaType="org.great.bean.StateBean" select="getStateName">
 </association>
 
-<association property="characteBean" column="characterid" javaType="org.great.bean.CharacteBean" select="getCharacter">
+<association property="characterBean" column="characterid" javaType="org.great.bean.CharacterBean" select="getCharacter">
 </association>
 </resultMap>	
  
@@ -89,7 +89,7 @@ select * from usertbl where useraccount = #{username}
 </select>
 <resultMap type="org.great.bean.UserInfoBean" id="userInfo">
 
-<association property="characteBean" column="characterid" javaType="org.great.bean.CharacteBean" select="getCharacter">
+<association property="characterBean" column="characterid" javaType="org.great.bean.CharacterBean" select="getCharacter">
 </association>
 
 </resultMap>

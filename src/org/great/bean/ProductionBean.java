@@ -12,7 +12,7 @@ public class ProductionBean {
 	private int userId;
    private int classId;
    private int stateId;
-   private int  productionMoney;
+   private double  productionMoney;
    private String productionPublishTime;
    private String productionFile;
    private String productionImage;
@@ -59,7 +59,7 @@ public ProductionBean(int productionId, String productionName, int parameterId, 
 	this.productionDetal = productionDetal;
 }
 
-public ProductionBean(int productionId, String productionName, int parameterId, int userId, int classId, int stateId,
+/*public ProductionBean(int productionId, String productionName, int parameterId, int userId, int classId, int stateId,
 		int productionMoney, String productionPublishTime, String productionFile, String productionImage) {
 	super();
 	this.productionId = productionId;
@@ -72,7 +72,7 @@ public ProductionBean(int productionId, String productionName, int parameterId, 
 	this.productionPublishTime = productionPublishTime;
 	this.productionFile = productionFile;
 	this.productionImage = productionImage;
-}
+}*/
 
 public int getProductionId() {
 	return productionId;
@@ -107,10 +107,10 @@ public void setClassId(int classId) {
 	this.classId = classId;
 }
 
-public int getProductionMoney() {
+public double getProductionMoney() {
 	return productionMoney;
 }
-public void setProductionMoney(int productionMoney) {
+public void setProductionMoney(double productionMoney) {
 	this.productionMoney = productionMoney;
 }
 public String getProductionPublishTime() {

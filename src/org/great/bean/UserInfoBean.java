@@ -24,7 +24,7 @@ public class UserInfoBean {
 	private String userProfile;//用户简介
 	
 	private StateBean stateBean;//用户状态
-	private CharacteBean characteBean;//角色
+	private CharacterBean characterBean;//角色
 	
 	public UserInfoBean() {
 		super();
@@ -34,7 +34,7 @@ public class UserInfoBean {
 	public UserInfoBean(int userId, String userName, String userPwd, long userTel, String userAccount, String userSex,
 			String userMail, long userIdentity, String userAddress, String userHead, int userCredit, int userMoney,
 			int stateId, int characterId, String userRegisterTime, String userProfile, StateBean stateBean,
-			CharacteBean characteBean) {
+			CharacterBean characterBean) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -53,7 +53,7 @@ public class UserInfoBean {
 		this.userRegisterTime = userRegisterTime;
 		this.userProfile = userProfile;
 		this.stateBean = stateBean;
-		this.characteBean = characteBean;
+		this.characterBean = characterBean;
 	}
 
 	public int getUserId() {
@@ -192,12 +192,12 @@ public class UserInfoBean {
 		this.stateBean = stateBean;
 	}
 
-	public CharacteBean getCharacteBean() {
-		return characteBean;
+	public CharacterBean getCharacterBean() {
+		return characterBean;
 	}
 
-	public void setCharacteBean(CharacteBean characteBean) {
-		this.characteBean = characteBean;
+	public void setCharacterBean(CharacterBean characterBean) {
+		this.characterBean = characterBean;
 	}
 	
 	

@@ -58,7 +58,7 @@
 									<div class="ydc-reg-form-group clearfix">
 										<label>帐号类别</label>
 										<div class="ydc-reg-form-input">
-											<label>${userInfo.characteBean.characterName}</label>
+											<label>${userInfo.characterBean.characterName}</label>
 										</div>
 									</div>
 									
@@ -67,7 +67,7 @@
 										<div class="ydc-reg-form-input">
 											<label></label>
 											<div class="ydc-reg-form-text ydc-reg-form-user-logo">
-												<img src="<%=path%>admin/images/icon/user-logo.png" alt="">
+												<img src="<%=path%>picture/findPicture.action?url=${userInfo.userHead}" alt="">
 											</div>
 										</div>
 									</div>
