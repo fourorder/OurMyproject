@@ -16,5 +16,8 @@ public class AdvertisingBizImp implements AdvertisingBiz {
 	
 		return advertisingMapper.setAdvertising(ab);
 	}
+	public AdvertisingBean goToAdver(int num) {
+		return advertisingMapper.getAdver(num);
+	}
 
 }

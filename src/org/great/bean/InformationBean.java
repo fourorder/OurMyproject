@@ -6,6 +6,8 @@ public class InformationBean {
 	private String informationContent;
 	private String informationPublishTime;
 	private String informationAddress;
+	private int parameterId;
+	private String informationImg;
 	
 	public InformationBean() {
 		super();
@@ -42,6 +44,22 @@ public class InformationBean {
 	}
 	public void setInformationAddress(String informationAddress) {
 		this.informationAddress = informationAddress;
+	}
+
+	public int getParameterId() {
+		return parameterId;
+	}
+
+	public void setParameterId(int parameterId) {
+		this.parameterId = parameterId;
+	}
+
+	public String getInformationImg() {
+		return informationImg;
+	}
+
+	public void setInformationImg(String informationImg) {
+		this.informationImg = informationImg;
 	}
 	
 }

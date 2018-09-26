@@ -9,6 +9,7 @@ public class AdvertisingBean {
  private String advertisementPublishTime;
  private String advertisementAddress;
  private String advertisementImage;
+ private int advertisementNum;
  
  public AdvertisingBean() {
 		super();
@@ -51,6 +52,12 @@ public String getAdvertisementImage() {
 }
 public void setAdvertisementImage(String advertisementImage) {
 	this.advertisementImage = advertisementImage;
+}
+public int getAdvertisementNum() {
+	return advertisementNum;
+}
+public void setAdvertisementNum(int advertisementNum) {
+	this.advertisementNum = advertisementNum;
 }
  
 }

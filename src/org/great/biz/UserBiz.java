@@ -18,5 +18,7 @@ public interface UserBiz {
 	public int delEmployers(String account); //删除雇主
 	public int countEmployers();//查询雇主的总个数；
 	public boolean checkAccount(String userAccount);
+	public List<List<Object>> userCredit(String page,String state);
+	public UserInfoBean searchCredit(String username);
 
 }

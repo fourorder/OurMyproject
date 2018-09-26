@@ -90,7 +90,7 @@
 												<th>详细信息<th>
 											</tr>
 										</thead>
-										<tbody id="tb">
+										
 									<c:forEach items="${fundList}"  var="fund">
 									<tr>
 												<td>${fund.userBean.userName}</td>

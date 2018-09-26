@@ -6,6 +6,11 @@
 	 <insert id="setAdvertising" parameterType="org.great.bean.AdvertisingBean">
 	
 		insert into advertisementTbl values(SEQID.nextval,#{advertisementTitle},#{advertisementContent},#{advertisementPublishTime},#{advertisementAddress},#{advertisementImage})
-	</insert>  
+	</insert> 
+
+<select id="getAdver" resultType="org.great.bean.AdvertisingBean" >
+select * from ADVERTISEMENTTBL where ADVERTISEMENTNUM = #{flag}
+</select>
+ 
 	 
 </mapper>

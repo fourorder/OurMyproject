@@ -7,5 +7,13 @@
 	
 		insert into informationTbl values(SEQID.nextval,#{informationTitle},#{informationContent},#{informationPublishTime},#{informationAddress})
 	</insert>  
+<select id="getInformation" resultType="org.great.bean.InformationBean">
+select * from informationTbl where parameterid = #{parameterid}
+
+</select>	
+
+<select id="getInforList" resultType="org.great.bean.InformationBean">
+select * from(select t.*,rownum rn from(select * from informationTbl where parameterid = #{parameterid})t where rownum &lt;= #{end}) where rn &gt;= #{start}
+</select>
 	 
 </mapper>

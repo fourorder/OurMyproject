@@ -51,6 +51,16 @@ values (seqid.nextval,#{productionName},#{parameterId},#{userId},#{productionMon
 	  
 	 
 	
-		 </select> 
+</select> 
+<select id="getProductionList" resultType="org.great.bean.ProductionBean" >
+select * from(select t.*,rownum rn from(select * from PRODUCTIONTBL order by buycount desc)t where rownum &lt;= 3) where rn &gt;= 1
+</select>
 	 
+<select id="selectProduction" resultType="org.great.bean.ProductionBean" >
+select * from(select t.*,rownum rn from(select * from PRODUCTIONTBL where productionname like #{name})t where rownum &lt;= #{end}) where rn &gt;= #{start}
+</select>
+
+<select id="productionNumber" resultType="org.great.bean.ProductionBean" >
+select * from PRODUCTIONTBL where productionname like #{name}
+</select>
 </mapper>

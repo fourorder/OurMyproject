@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.great.mapper.UserStoryMapper">
+<!--查询雇主故事  -->	
+ <select id="getStory"  resultType="org.great.bean.UserStoryBean">
+	
+	select * from userstorytbl where stateid=1
+	
+</select>
+
+	 
+</mapper>

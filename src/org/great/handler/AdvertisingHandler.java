@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import oracle.net.aso.i;
+
 @Controller
 @Scope("prototype")
 @RequestMapping("/adver")//广告设置的handler包
@@ -25,6 +27,7 @@ public class AdvertisingHandler {
 		modelAndView.setViewName("jsp/advertisingSet");
 		return modelAndView;	
 	}
+	
 	
 	
 	@RequestMapping("/advertising.action")//跳到提交页
@@ -47,6 +50,24 @@ public class AdvertisingHandler {
 		return modelAndView;
 		
 	}
-	
+	@RequestMapping("/gotoadver.action")//跳到广告页面
+	public String goToAdver(String flag){
+		int num=Integer.parseInt(flag);
+		String url=null;
+		switch (num) {
+		case 1:
+			url="redirect:"+advertisingBizImp.goToAdver(num).getAdvertisementAddress();
+			break;
+		case 2:
+			url="redirect:"+advertisingBizImp.goToAdver(num).getAdvertisementAddress();
+			break;
+		case 3:
+			url="redirect:"+advertisingBizImp.goToAdver(num).getAdvertisementAddress();
+			break;			
+		default:
+			break;
+		}
+		return url;
+	}
 	
 }

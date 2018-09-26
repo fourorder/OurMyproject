@@ -74,6 +74,25 @@ UPDATE usertbl set stateid=3 WHERE useraccount=#{account}
 <select id="countEmployers" resultType="java.lang.Integer">
 select count(*) from usertbl 
 </select> 
+<!-- 分页查询低信誉用户 -->
+<select id="userCredit" resultType="org.great.bean.UserBean">
+select * from(select t.*,rownum rn from(select * from usertbl where usercredit &lt; 60 and CHARACTERID != 3)t where rownum &lt;= #{end}) where rn &gt;= #{start}
+</select>
 
+<!-- 查询低信誉用户数 -->
+<select id="getCredit" resultType="org.great.bean.UserBean">
+select * from usertbl where usercredit &lt; 60 and CHARACTERID != 3
+</select>
+<!-- 查询用户信誉 -->
+<select id="searchCredit" resultMap="userInfo">
+select * from usertbl where useraccount = #{username}
+</select>
+<resultMap type="org.great.bean.UserInfoBean" id="userInfo">
+
+<association property="characteBean" column="characterid" javaType="org.great.bean.CharacteBean" select="getCharacter">
+</association>
+
+</resultMap>
 </mapper>
+
 

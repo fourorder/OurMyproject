@@ -36,7 +36,7 @@
 			<div clear></div>
 			<div class="head-muild">
 				<div class="width1180">
-					 <h1 class="fl"><img src="<%=path%>images/logo.png"></h1> 
+					 <h1 class="fl"><img src="<%=path%>images/logo1.png"></h1> 
 					<div class="o-search">
 						<form action="<%=path%>user/search.action?page=1" method="post">
 							<input type="text" class="search-text"  placeholder="请输入您搜索的关键词" name="name"><button class="search-bnt" type="submit"><img src="<%=path%>images/search-i.png">  搜索</button>
@@ -50,12 +50,12 @@
 						<div class="fenlei-nav fl">用户操作</div>
 						<ul class="fl">
 							<li><a href="index.html" title="首页" class="on">首页</a></li>
-							<li><a href="#" title="最新需求">最新需求<img src="<%=path%>images/hot.gif"></a></li>
-							<li><a href="#" title="最新作品">最新作品<img src="<%=path%>images/hot.gif"></a></li>
-							<li><a href="#" title="曝光台">曝光台</a></li>
-							<li><a href="#" title="信用查询">信用查询</a></li>
-							<li><a href="#" title="规则介绍">规则介绍</a></li>
-							<li><a href="#" title="关于我们">关于我们</a></li>
+							<%-- <li><a href="#" title="最新需求">最新需求<img src="<%=path%>images/hot.gif"></a></li>
+							<li><a href="#" title="最新作品">最新作品<img src="<%=path%>images/hot.gif"></a></li> --%>
+							<li><a href="<%=path %>lighthouse/gotolighthouse.action?page=1" title="曝光台">曝光台<img src="<%=path%>images/hot.gif"></a></li>
+							<li><a href="<%=path %>skippage/gotosearchcredit.action" title="信用查询">信用查询<img src="<%=path%>images/hot.gif"></a></li>
+							<li><a href="<%=path %>introduction/getrule.action" title="规则介绍">规则介绍</a></li>
+							<!-- <li><a href="#" title="关于我们">关于我们</a></li> -->
 							<span class="fr"><img src="<%=path%>images/o-tel.gif"></span>
 						</ul>
 					</nav>
@@ -67,292 +67,52 @@
 		<div class="o-banner">
 			<div class="width1180">
 				<div class="banner-menu">
+				<c:if test="${user.characterId==1}">
 					<ul>
 						<li>
-						<p><a href="#" title="发布需求" ><i class="o-index1"></i>发布需求<b>&gt;</b></a></p>
-							<!-- <div class="lihover-box ">
-								<dl>
-									<dt class="fl">品牌设计</dt>
-									<dd class="fl">
-										<a href="#" title="logo设计">logo设计</a>
-										<a href="#" title="个体户注册">个体户注册</a>
-										<a href="#" title="股份公司注册">股份公司注册</a>
-										<a href="#" title="1元注册公司">1元注册公司</a>
-										<a href="#" title="一般纳税人公司注册">一般纳税人公司注册</a>
-										<a href="#" title="集团公司注册">集团公司注册</a>
-										<a href="#" title="分公司注册">分公司注册</a>
-										<a href="#" title="加急公司注册，2天出证">加急公司注册，2天出证</a>
-										<a href="#" title="子公司注册">子公司注册</a>
-										<a href="#" title="香港公司注册">香港公司注册</a>
-										<a href="#" title="加急公司注册，2天出证">加急公司注册，2天出证</a>
-									</dd>
-								</dl>
-								<dl>
-									<dt class="fl">公司变更</dt>
-									<dd class="fl">
-										<a href="#" title="有限责任公司注册">公司股权变更</a>
-										<a href="#" title="个体户注册">经营地址变更</a>
-										<a href="#" title="股份公司注册">经营范围变更</a>
-										<a href="#" title="1元注册公司"> 公司名称变更</a>
-										<a href="#" title="一般纳税人公司注册">公司法人变更</a>
-										<a href="#" title="集团公司注册">注册资本变更</a>
-										<a href="#" title="分公司注册">税务信息变更</a>
-									</dd>
-								</dl>
-								<dl>
-									<dt class="fl">公司注销</dt>
-									<dd class="fl">
-										<a href="#" title="小规模工商注销">小规模工商注销</a>
-										<a href="#" title="个体户注册">一般纳税人工商注销</a>
-										<a href="#" title="股份公司注册">个体工商户注销</a>
-										<a href="#" title="1元注册公司">  内资公司注销</a>
-									</dd>
-								</dl>
-
-								<a class="zixun-bnt" href="#">立即免费咨询</a>
-							</div> -->
+						<p><a href="#" title="发布需求" ><i class="o-index1"></i>发布需求<b></b></a></p>
+							
 						</li>
 						<li class="clearfix">
-							<p><a href="<%=path%>production/toProduction.action"  title="购买作品"><i class="o-index2"></i>购买作品<b>&gt;</b></a></p>
-							
-							<!-- <div class="lihover-box">
-								<dl>
-									<dt class="fl">注册公司</dt>
-									<dd class="fl">
-										<a href="#" title="有限责任公司注册">有限责任公司注册</a>
-										<a href="#" title="个体户注册">个体户注册</a>
-										<a href="#" title="股份公司注册">股份公司注册</a>
-										<a href="#" title="1元注册公司">1元注册公司</a>
-										<a href="#" title="一般纳税人公司注册">一般纳税人公司注册</a>
-										<a href="#" title="集团公司注册">集团公司注册</a>
-										<a href="#" title="分公司注册">分公司注册</a>
-										<a href="#" title="加急公司注册，2天出证">加急公司注册，2天出证</a>
-										<a href="#" title="子公司注册">子公司注册</a>
-										<a href="#" title="香港公司注册">香港公司注册</a>
-										<a href="#" title="加急公司注册，2天出证">加急公司注册，2天出证</a>
-									</dd>
-								</dl>
-								<dl>
-									<dt class="fl">公司变更</dt>
-									<dd class="fl">
-										<a href="#" title="有限责任公司注册">公司股权变更</a>
-										<a href="#" title="个体户注册">经营地址变更</a>
-										<a href="#" title="股份公司注册">经营范围变更</a>
-										<a href="#" title="1元注册公司"> 公司名称变更</a>
-										<a href="#" title="一般纳税人公司注册">公司法人变更</a>
-										<a href="#" title="集团公司注册">注册资本变更</a>
-										<a href="#" title="分公司注册">税务信息变更</a>
-									</dd>
-								</dl>
-								<dl>
-									<dt class="fl">公司注销</dt>
-									<dd class="fl">
-										<a href="#" title="小规模工商注销">小规模工商注销</a>
-										<a href="#" title="个体户注册">一般纳税人工商注销</a>
-										<a href="#" title="股份公司注册">个体工商户注销</a>
-										<a href="#" title="1元注册公司">  内资公司注销</a>
-									</dd>
-								</dl>
-
-								<a class="zixun-bnt" href="#">立即免费咨询</a>
-							</div> -->
+							<p><a href="<%=path%>production/toProduction.action"  title="购买作品"><i class="o-index2"></i>购买作品<b></b></a></p>
+						
 
 						</li>
 						<li class="clearfix">
-							<p><a href="#" title="寻找顾问"><i class="o-index3"></i>寻找顾问<b>&gt;</b></a></p>
-							
-							<!-- <div class="lihover-box">
-								<dl>
-									<dt class="fl">注册公司</dt>
-									<dd class="fl">
-										<a href="#" title="有限责任公司注册">有限责任公司注册</a>
-										<a href="#" title="个体户注册">个体户注册</a>
-										<a href="#" title="股份公司注册">股份公司注册</a>
-										<a href="#" title="1元注册公司">1元注册公司</a>
-										<a href="#" title="一般纳税人公司注册">一般纳税人公司注册</a>
-										<a href="#" title="集团公司注册">集团公司注册</a>
-										<a href="#" title="分公司注册">分公司注册</a>
-										<a href="#" title="加急公司注册，2天出证">加急公司注册，2天出证</a>
-										<a href="#" title="子公司注册">子公司注册</a>
-										<a href="#" title="香港公司注册">香港公司注册</a>
-										<a href="#" title="加急公司注册，2天出证">加急公司注册，2天出证</a>
-									</dd>
-								</dl>
-								<dl>
-									<dt class="fl">公司变更</dt>
-									<dd class="fl">
-										<a href="#" title="有限责任公司注册">公司股权变更</a>
-										<a href="#" title="个体户注册">经营地址变更</a>
-										<a href="#" title="股份公司注册">经营范围变更</a>
-										<a href="#" title="1元注册公司"> 公司名称变更</a>
-										<a href="#" title="一般纳税人公司注册">公司法人变更</a>
-										<a href="#" title="集团公司注册">注册资本变更</a>
-										<a href="#" title="分公司注册">税务信息变更</a>
-									</dd>
-								</dl>
-								<dl>
-									<dt class="fl">公司注销</dt>
-									<dd class="fl">
-										<a href="#" title="小规模工商注销">小规模工商注销</a>
-										<a href="#" title="个体户注册">一般纳税人工商注销</a>
-										<a href="#" title="股份公司注册">个体工商户注销</a>
-										<a href="#" title="1元注册公司">  内资公司注销</a>
-									</dd>
-								</dl>
-
-								<a class="zixun-bnt" href="#">立即免费咨询</a>
-							</div> -->
-
+							<p><a href="#" title="寻找顾问"><i class="o-index3"></i>寻找顾问<b></b></a></p>						
 						</li>
-						<!-- <li class="clearfix">
-							<p><a href="#" title="注册商标"><i class="o-index4"></i>游戏制作<b>&gt;</b></a></p>
+						
+					</ul>		
+				</c:if>
+				<c:if test="${user.characterId==2}">
+					<ul>
+						<li>
+						<p><a href="#" title="我要投标" ><i class="o-index1"></i>我要投标<b></b></a></p>
 							
-							<div class="lihover-box">
-								<dl>
-									<dt class="fl">注册公司</dt>
-									<dd class="fl">
-										<a href="#" title="有限责任公司注册">有限责任公司注册</a>
-										<a href="#" title="个体户注册">个体户注册</a>
-										<a href="#" title="股份公司注册">股份公司注册</a>
-										<a href="#" title="1元注册公司">1元注册公司</a>
-										<a href="#" title="一般纳税人公司注册">一般纳税人公司注册</a>
-										<a href="#" title="集团公司注册">集团公司注册</a>
-										<a href="#" title="分公司注册">分公司注册</a>
-										<a href="#" title="加急公司注册，2天出证">加急公司注册，2天出证</a>
-										<a href="#" title="子公司注册">子公司注册</a>
-										<a href="#" title="香港公司注册">香港公司注册</a>
-										<a href="#" title="加急公司注册，2天出证">加急公司注册，2天出证</a>
-									</dd>
-								</dl>
-								<dl>
-									<dt class="fl">公司变更</dt>
-									<dd class="fl">
-										<a href="#" title="有限责任公司注册">公司股权变更</a>
-										<a href="#" title="个体户注册">经营地址变更</a>
-										<a href="#" title="股份公司注册">经营范围变更</a>
-										<a href="#" title="1元注册公司"> 公司名称变更</a>
-										<a href="#" title="一般纳税人公司注册">公司法人变更</a>
-										<a href="#" title="集团公司注册">注册资本变更</a>
-										<a href="#" title="分公司注册">税务信息变更</a>
-									</dd>
-								</dl>
-								<dl>
-									<dt class="fl">公司注销</dt>
-									<dd class="fl">
-										<a href="#" title="小规模工商注销">小规模工商注销</a>
-										<a href="#" title="个体户注册">一般纳税人工商注销</a>
-										<a href="#" title="股份公司注册">个体工商户注销</a>
-										<a href="#" title="1元注册公司">  内资公司注销</a>
-									</dd>
-								</dl>
-
-								<a class="zixun-bnt" href="#">立即免费咨询</a>
-							</div>
 						</li>
 						<li class="clearfix">
-							<p><a href="#" title="资质代办"><i class="o-index5"></i>电商服务<b>&gt;</b></a></p>
-							
-							<div class="lihover-box">
-								<dl>
-									<dt class="fl">注册公司</dt>
-									<dd class="fl">
-										<a href="#" title="有限责任公司注册">有限责任公司注册</a>
-										<a href="#" title="个体户注册">个体户注册</a>
-										<a href="#" title="股份公司注册">股份公司注册</a>
-										<a href="#" title="1元注册公司">1元注册公司</a>
-										<a href="#" title="一般纳税人公司注册">一般纳税人公司注册</a>
-										<a href="#" title="集团公司注册">集团公司注册</a>
-										<a href="#" title="分公司注册">分公司注册</a>
-										<a href="#" title="加急公司注册，2天出证">加急公司注册，2天出证</a>
-										<a href="#" title="子公司注册">子公司注册</a>
-										<a href="#" title="香港公司注册">香港公司注册</a>
-										<a href="#" title="加急公司注册，2天出证">加急公司注册，2天出证</a>
-									</dd>
-								</dl>
-								<dl>
-									<dt class="fl">公司变更</dt>
-									<dd class="fl">
-										<a href="#" title="有限责任公司注册">公司股权变更</a>
-										<a href="#" title="个体户注册">经营地址变更</a>
-										<a href="#" title="股份公司注册">经营范围变更</a>
-										<a href="#" title="1元注册公司"> 公司名称变更</a>
-										<a href="#" title="一般纳税人公司注册">公司法人变更</a>
-										<a href="#" title="集团公司注册">注册资本变更</a>
-										<a href="#" title="分公司注册">税务信息变更</a>
-									</dd>
-								</dl>
-								<dl>
-									<dt class="fl">公司注销</dt>
-									<dd class="fl">
-										<a href="#" title="小规模工商注销">小规模工商注销</a>
-										<a href="#" title="个体户注册">一般纳税人工商注销</a>
-										<a href="#" title="股份公司注册">个体工商户注销</a>
-										<a href="#" title="1元注册公司">  内资公司注销</a>
-									</dd>
-								</dl>
-
-								<a class="zixun-bnt" href="#">立即免费咨询</a>
-							</div>
+						<p><a href="#"  title="发布作品"><i class="o-index2"></i>发布作品<b></b></a></p>
+						
 						</li>
 						<li class="clearfix">
-							<p><a href="#" title="注销公司"><i class="o-index6"></i>特色服务<b>&gt;</b></a></p>
-							
-							<div class="lihover-box">
-								<dl>
-									<dt class="fl">注册公司</dt>
-									<dd class="fl">
-										<a href="#" title="有限责任公司注册">有限责任公司注册</a>
-										<a href="#" title="个体户注册">个体户注册</a>
-										<a href="#" title="股份公司注册">股份公司注册</a>
-										<a href="#" title="1元注册公司">1元注册公司</a>
-										<a href="#" title="一般纳税人公司注册">一般纳税人公司注册</a>
-										<a href="#" title="集团公司注册">集团公司注册</a>
-										<a href="#" title="分公司注册">分公司注册</a>
-										<a href="#" title="加急公司注册，2天出证">加急公司注册，2天出证</a>
-										<a href="#" title="子公司注册">子公司注册</a>
-										<a href="#" title="香港公司注册">香港公司注册</a>
-										<a href="#" title="加急公司注册，2天出证">加急公司注册，2天出证</a>
-									</dd>
-								</dl>
-								<dl>
-									<dt class="fl">公司变更</dt>
-									<dd class="fl">
-										<a href="#" title="有限责任公司注册">公司股权变更</a>
-										<a href="#" title="个体户注册">经营地址变更</a>
-										<a href="#" title="股份公司注册">经营范围变更</a>
-										<a href="#" title="1元注册公司"> 公司名称变更</a>
-										<a href="#" title="一般纳税人公司注册">公司法人变更</a>
-										<a href="#" title="集团公司注册">注册资本变更</a>
-										<a href="#" title="分公司注册">税务信息变更</a>
-									</dd>
-								</dl>
-								<dl>
-									<dt class="fl">公司注销</dt>
-									<dd class="fl">
-										<a href="#" title="小规模工商注销">小规模工商注销</a>
-										<a href="#" title="个体户注册">一般纳税人工商注销</a>
-										<a href="#" title="股份公司注册">个体工商户注销</a>
-										<a href="#" title="1元注册公司">  内资公司注销</a>
-									</dd>
-								</dl>
-
-								<a class="zixun-bnt" href="#">立即免费咨询</a>
-							</div>
-						</li> -->
-					</ul>
+						<p><a href="#"  title="成为顾问"><i class="o-index2"></i>成为顾问<b></b></a></p>
+						
+						</li>
+					</ul>		
+				</c:if>	
 				</div>
 				<!--滚动图片-->
 				<div class="banner-mulid">
 					<div class="qianhong-b">
 				    	<ul class="qianhongpic" style="position: relative; width: 1920px; height: 460px;">
 				            <li style="position: absolute; width: 708px; left: 0px; top: 0px; display: list-item;"><a href="#" title="">
-								<img src="<%=path%>images/oindex-banner.png">
+								<a href="<%=path%>adver/gotoadver.action?flag=1"><img src="<%=path%>images/oindex-banner.png"></a>
 				            </a></li>
 				            <li style="position: absolute; width: 708px; left: 0px; top: 0px; display: list-item;"><a href="#" title="">
-								<img src="<%=path%>images/oindex-banner2.png">
+								<a href="<%=path%>adver/gotoadver.action?flag=2"><img src="<%=path%>images/oindex-banner2.png"></a>
 				            </a></li>
 				            <li style="position: absolute; width: 708px; left: 0px; top: 0px; display: list-item;"><a href="#" title="">
-								<img src="<%=path%>images/oindex-banner3.png">
+								<a href="<%=path%>adver/gotoadver.action?flag=3"><img src="<%=path%>images/oindex-banner3.png"></a>
 				            </a></li>
 				        </ul>
 				        <a class="prev" href="javascript:void(0)" style="opacity: 0.07474937499999999; display: none;"></a>
@@ -387,12 +147,20 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 					<div class="banner-right">
 						<div class="user-box">
 							<img src="<%=path%>images/banner-touxiang.png">
+							<c:if test="${user==null}">
 							<p>hi,您好！</p>
-							<a href="<%=path%>user/UserInformation.action?userid=203" title="" class="b-login">个人中心</a><a href="#" title="" class="b-regist">注册</a>
+							</c:if>
+							<c:if test="${user!=null}">
+							<p>${user.userName}</p>
+							</c:if>
+							<c:if test="${user==null}">
+							<a href="<%=path%>user/show.action" title="" class="b-login">登录</a><a href="<%=path%>user/gotoregister.action" title="" class="b-regist">注册</a>
+							</c:if>
+							<c:if test="${user!=null}">
+							<a href="<%=path%>user/UserInformation.action?userid=${user.userId}" title="" class="b-login">个人中心</a><a href="<%=path%>user/logout.action" title="" class="b-regist">退出登录</a>
+							</c:if>
 							
-							<!--登录之后-->
-							<!--<p>邓丽群，<a href="#" title="" target="_blank" class="colorfa3508">去易知猴威客</a></p>
-							<!--登录之后-->
+							
 						</div>
 						<div class="banner-baoz">
 							<p>全程服务无忧保障</p>
@@ -406,7 +174,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 						</div>
 						<div class="clearfix"></div>
 						<div class="banner-anli">
-							<p>成功交易&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="fund/getFundList.action?page=1">更多</a></p>
+							<p>成功交易&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=path%>fund/getFundList.action?page=1">更多</a></p>
 							<ul>
 							<c:forEach items="${fundList}"  var="fund">
 								<li><a href="#" title="">${fund.dealDate}&nbsp;&nbsp;&nbsp;${fund.userBean.userName}&nbsp;&nbsp;&nbsp;成功交易</a></li>
@@ -434,30 +202,30 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 		<ul>
 			<li>
 				<div class="tuijian-text">
-					<p class="t-title">有限责任公司注册</p>
-					<p class="t-decoration">最快3天拿执照</p>
-					<p class="t-price">¥588起<i>¥588起</i></p>
+					<p class="t-title">${productionList[0].productionName}</p>
+					<p class="t-decoration">${productionList[0].productionDetal}</p>
+					<p class="t-price">${productionList[0].productionMoney}</p>
 					<a href="#" title="立即购买">立即购买</a>
 				</div>
-				<div class="tuijian-img fl"><img src="<%=path%>images/oindex-20.png"></div>
+				<div class="tuijian-img fl"><img src="<%=path%>picture/findPicture.action?url=${productionList[0].productionImage}" width="148px" height="120px"></div>
 			</li>
 			<li>
 				<div class="tuijian-text">
-					<p class="t-title">代理记账</p>
-					<p class="t-decoration">专业会计团队为您服务</p>
-					<p class="t-price">¥3600起<i>¥4000起</i></p>
+					<p class="t-title">${productionList[1].productionName}</p>
+					<p class="t-decoration">${productionList[1].productionDetal}</p>
+					<p class="t-price">${productionList[1].productionMoney}</p>
 					<a href="#" title="立即购买">立即购买</a>
 				</div>
-				<div class="tuijian-img fl"><img src="<%=path%>images/oindex-21.png"></div>
+				<div class="tuijian-img fl"><img src="<%=path%>picture/findPicture.action?url=${productionList[1].productionImage}" width="148px" height="120px"></div>
 			</li>
 			<li>
 				<div class="tuijian-text">
-					<p class="t-title">食品经营许可证</p>
-					<p class="t-decoration">有证才能合法经营</p>
-					<p class="t-price">¥3500起<i>¥4000起</i></p>
+					<p class="t-title">${productionList[2].productionName}</p>
+					<p class="t-decoration">${productionList[2].productionDetal}</p>
+					<p class="t-price">${productionList[2].productionMoney}</p>
 					<a href="#" title="立即购买">立即购买</a>
 				</div>
-				<div class="tuijian-img fl"><img src="<%=path%>images/oindex-23.png"></div>
+				<div class="tuijian-img fl"><img src="<%=path%>picture/findPicture.action?url=${productionList[2].productionImage}" width="148px" height="120px"></div>
 			</li>
 		</ul>
 	</div>
@@ -544,40 +312,37 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 	<!--知识产权-->
 	<div class="zhishicq-box width1180">
 		<div class="o-indexttitle">
-				<span class="fl">服务商故事</span>
-				<div class="fr">
+				<span class="fl">雇主故事</span>
+				<!-- <div class="fr">
 					<a href="#" title="更多">更多</a>
-				</div>
+				</div> -->
 			</div>
 			<div class="clearfix"></div>
 			<div class="zhishicq-bigt">
 					<ul>
 						<li>
-							<a href="#" title=""><span class="s-line">商品服务</span><span>商标注册</span>
-							<p class="color666">不成功，退全款 </p>
-							<p class=" colorred">￥2100起</p>
+							<a href="${story[0].userStoryUrl}" title=""><span class="s-line">${story[0].userStoryTitle}</span>
+							<p class="color666">${story[0].userStoryTime} </p>
+							<!-- <p class=" colorred">￥2100起</p> -->
 							<img src="<%=path%>images/oindex-10.png">
 							</a>
 						</li>
 						<li>
-							<a href="#" title=""><span class="s-line">商标注册</span><span>包通过</span>
-							<p class="color666">98%通过率 </p>
-							<p class=" colorred">￥1500起</p>
+							<a href="${story[1].userStoryUrl}" title=""><span class="s-line">${story[1].userStoryTitle}</span>
+							<p class="color666">${story[1].userStoryTime} </p>
 							<img src="<%=path%>images/oindex-11.png">
 
 							</a>
 						</li>
 						<li>
-							<a href="#" title=""><span class="s-line">专利申请</span>
-							<p class="color666">快速响应，1对1服务 </p>
-							<p class=" colorred">￥2100起</p>
+							<a href="${story[2].userStoryUrl}" title=""><span class="s-line">${story[2].userStoryTitle}</span>
+							<p class="color666">${story[2].userStoryTime} </p>
 							<img src="<%=path%>images/oindex-12.png">
 							</a>
 						</li>
 						<li>
-							<a href="#" title=""><span class="s-line">美术作品</span><span>登记</span>
-							<p class="color666">快申报，高通过 </p>
-							<p class=" colorred">￥1000起</p>
+							<a href="${story[3].userStoryUrl}" title=""><span class="s-line">${story[3].userStoryTitle}</span>
+							<p class="color666">${story[3].userStoryTime} </p>
 							<img src="<%=path%>images/oindex-13.png">
 							</a>
 						</li>
@@ -617,7 +382,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 	</div>
 	<!--知识产权-->
 	<!--团队-->
-	<div class="o-indexttitle width1180">
+	<%-- <div class="o-indexttitle width1180">
 				<span>优秀团队</span>
 	</div>
 	<div class="oindex-team">
@@ -658,7 +423,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 				</li>
 			</ul>
 		</div>
-	</div>
+	</div> --%>
 	<!--团队-->
 	<!--知识百科-->
 	<!-- <div class="knowledge width1180">
@@ -718,68 +483,64 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 	<div class="knowledge-zixun width1180">
 		<div class="o-indexttitle">
 				<span class="fl">最新资讯</span>
-				<div class="fr">
+				<!-- <div class="fr">
 					<a href="#" title="创业资讯">创业资讯</a><a href="#" title="创业资讯">创业资讯</a><a href="#" title="法律资讯">法律资讯</a><a href="#" title="更多">更多</a>
-				</div>
+				</div> -->
 		</div>
 		<div class="clearfix"></div>
 		<ul>
-			<li>
+			<li style="height:400px;">
 				<div class="news-pic">
-					<a href="#" title=""><img src="http://www.yizhihou.net/file/upload/201708/07/141551771.jpg" width="240" height="160"></a>
-					<p class="ne-title"><a href="#" title="长沙公司注册后一般出现以下几
-种情况，税务局就会来查 ">长沙公司注册后一般出现以下几
-种情况，税务局就会来查 </a></p>
-					<p class="color999">时间：2015.2.12   09:40</p>
+					<a href="#" title=""><img src="<%=path%>picture/findPicture.action?url=${informationList1[0].informationImg}" width="240" height="160"></a>
+					<p class="ne-title"><a href="${informationList1[0].informationAddress}" title="">${informationList1[0].informationTitle}</a></p>
+					<p class="color999">时间：${informationList1[0].informationPublishTime}</p>
 				</div>
+				<a href="<%=path%>infor/infolist.action?typeid=${informationList1[0].parameterId}"><font color="red">更多</font></a>
 				<div class="news-text">
-					<p><a href="#" title="娄底市政协副主席苏旻一行来...">娄底市政协副主席苏旻一行来...</a></p>
-					<p><a href="#" title="国家知识产权局党组成员、机...">国家知识产权局党组成员、机...</a></p>
-					<p><a href="#" title="国家知识产权局党组成员、机...">湖北省知识产权局来我中心考...</a></p>
+					<p><a href="${informationList1[1].informationAddress}" title="">${informationList1[1].informationTitle}</a></p>
+					<p><a href="${informationList1[2].informationAddress}" title="">${informationList1[2].informationTitle}</a></p>
+					<p><a href="${informationList1[3].informationAddress}" title="">${informationList1[3].informationTitle}</a></p>
 				</div>
 			</li>
 
-			<li>
+			<li style="height:400px;">
 				<div class="news-pic">
 					<a href="#" title=""><img src="http://www.yizhihou.net/file/upload/201707/24/093409131.jpg" width="240" height="160"></a>
-					<p class="ne-title"><a href="#" title="长沙公司注册后一般出现以下几
-种情况，税务局就会来查 ">长沙公司注册后一般出现以下几
-种情况，税务局就会来查 </a></p>
-					<p class="color999">时间：2015.2.12   09:40</p>
+					<p class="ne-title"><a href="${informationList2[0].informationAddress}" title="">${informationList2[0].informationTitle}</a></p>
+					<p class="color999">时间：${informationList2[0].informationPublishTime}</p>
 				</div>
+				<a href="#"><font color="red">更多</font></a>
 				<div class="news-text">
-					<p><a href="#" title="娄底市政协副主席苏旻一行来...">娄底市政协副主席苏旻一行来...</a></p>
-					<p><a href="#" title="国家知识产权局党组成员、机...">国家知识产权局党组成员、机...</a></p>
-					<p><a href="#" title="国家知识产权局党组成员、机...">湖北省知识产权局来我中心考...</a></p>
+					<p><a href="${informationList2[1].informationAddress}" title="">${informationList2[1].informationTitle}</a></p>
+					<p><a href="${informationList2[2].informationAddress}" title="">${informationList2[2].informationTitle}</a></p>
+					<p><a href="${informationList2[3].informationAddress}" title="">${informationList2[3].informationTitle}</a></p>
 				</div>
 			</li>
 
-			<li>
-				<div class="news-pic">
+			<li style="height:400px;">
+				<div class="news-pic">				
 					<a href="#" title=""><img src="http://www.yizhihou.net/file/upload/201707/21/095355731.jpg" width="240" height="160"></a>
-					<p class="ne-title"><a href="#" title="长沙公司注册后一般出现以下几
-种情况，税务局就会来查 ">长沙公司注册后一般出现以下几
-种情况，税务局就会来查 </a></p>
-					<p class="color999">时间：2015.2.12   09:40</p>
+					<p class="ne-title"><a href="${informationList3[0].informationAddress}" title="">${informationList3[0].informationTitle}</a></p>
+					<p class="color999">时间：${informationList3[0].informationPublishTime}</p>
 				</div>
+				<a href="#"><font color="red">更多</font></a>
 				<div class="news-text">
-					<p><a href="#" title="娄底市政协副主席苏旻一行来...">娄底市政协副主席苏旻一行来...</a></p>
-					<p><a href="#" title="国家知识产权局党组成员、机...">国家知识产权局党组成员、机...</a></p>
-					<p><a href="#" title="国家知识产权局党组成员、机...">湖北省知识产权局来我中心考...</a></p>
+					<p><a href="${informationList3[1].informationAddress}" title="">${informationList3[1].informationTitle}</a></p>
+					<p><a href="${informationList3[2].informationAddress}" title="">${informationList3[2].informationTitle}</a></p>
+					<p><a href="${informationList3[3].informationAddress}" title="">${informationList3[3].informationTitle}</a></p>
 				</div>
 			</li>
-			<li>
+			<li style="height:400px;">
 				<div class="news-pic">
 					<a href="#" title=""><img src="http://www.yizhihou.net/file/upload/201707/14/094304311.jpg" width="240" height="160"></a>
-					<p class="ne-title"><a href="#" title="长沙公司注册后一般出现以下几
-种情况，税务局就会来查 ">长沙公司注册后一般出现以下几
-种情况，税务局就会来查 </a></p>
-					<p class="color999">时间：2015.2.12   09:40</p>
+					<p class="ne-title"><a href="${informationList4[0].informationAddress}" title="">${informationList4[0].informationTitle}</a></p>
+					<p class="color999">时间：${informationList4[0].informationPublishTime}</p>
 				</div>
+				<a href="#"><font color="red">更多</font></a>
 				<div class="news-text">
-					<p><a href="#" title="娄底市政协副主席苏旻一行来...">娄底市政协副主席苏旻一行来...</a></p>
-					<p><a href="#" title="国家知识产权局党组成员、机...">国家知识产权局党组成员、机...</a></p>
-					<p><a href="#" title="国家知识产权局党组成员、机...">湖北省知识产权局来我中心考...</a></p>
+					<p><a href="${informationList4[1].informationAddress}" title="">${informationList4[1].informationTitle}</a></p>
+					<p><a href="${informationList4[2].informationAddress}" title="">${informationList4[2].informationTitle}</a></p>
+					<p><a href="${informationList4[3].informationAddress}" title="">${informationList4[3].informationTitle}</a></p>
 				</div>
 			</li>
 		</ul>
@@ -839,7 +600,10 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 	<div class="oindex-link width1180">
 		<p class="fontsize16">友情连接</p>
 		<p>
-			<a href="#" title="阿里云">阿里云</a>
+		<c:forEach items="${lineList}"  var="line">
+			<a href="${line.lineAddress}" >${line.lineName}</a>
+		</c:forEach>
+			<!-- <a href="#" title="阿里云">阿里云</a>
 			<a href="#" title="腾讯云">腾讯云</a>
 			<a href="#" title="传一科技">传一科技</a>
 			<a href="#" title="微信网页版">微信网页版</a>
@@ -847,7 +611,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 			<a href="#" title="百度">百度</a>
 			<a href="#" title="搜狐">搜狐</a>
 			<a href="#" title="网易">网易</a>
-			<a href="#" title="腾讯">腾讯</a>
+			<a href="#" title="腾讯">腾讯</a> -->
 		</p>
 
 	</div>

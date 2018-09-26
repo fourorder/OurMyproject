@@ -3,6 +3,7 @@ package org.great.biz;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -129,6 +130,11 @@ public class ProductionBizImp implements ProductionBiz{
 		
 		
 		return productionBean;
+	}
+	//得到热卖作品列表
+	public List<ProductionBean> getProductionList(){
+				
+		return productionMapper.getProductionList();	
 	}
 	
 }

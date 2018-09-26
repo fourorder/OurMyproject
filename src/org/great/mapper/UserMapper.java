@@ -22,5 +22,8 @@ public int countEmployers();//雇主总个数
 public List<UserBean> login(String userAccount,String userPwd);
 public void addUser(@Param(value="userAccount")String userAccount ,@Param(value="userPwd")String userPwd ,@Param(value="characterId")Integer characterId ,@Param(value="userName")String userName ,@Param(value="userTel")long userTel ,@Param(value="userIdentity")String userIdentity ,@Param(value="stateId")int stateId);
 public List<UserBean> checkAccount(String userAccount);
+public List<UserBean> getCredit();//得到低信誉用户
+public List<UserBean> userCredit(@Param("end")int end,@Param("start")int start);//分页查询低信誉用户
+public UserInfoBean searchCredit(@Param("username")String username);//查询用户信誉
 
 }

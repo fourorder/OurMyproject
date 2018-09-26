@@ -1,5 +1,7 @@
 package org.great.handler;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,6 +10,7 @@ import org.great.biz.InformationBiz;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -45,6 +48,21 @@ public class InformationHandler {
 		return modelAndView;
 		
 		
+	}
+	@RequestMapping("/infolist.action")
+	public ModelAndView infolist(HttpServletRequest request,String typeid){
+		ModelAndView modelAndView=new ModelAndView();
+		request.setAttribute("informationList", informationBizImp.getInforList(Integer.parseInt(typeid), 5, 1));
+		request.setAttribute("typeid", typeid);
+		request.setAttribute("page", 1);
+		request.setAttribute("countPage",informationBizImp.getcountPage(Integer.parseInt(typeid)));
+		modelAndView.setViewName("jsp/informationList");
+		return modelAndView;
+	}
+	@RequestMapping("/selectInfo.action")
+	@ResponseBody
+	public List<Object> selectInfo(String page,String state,String parameterid){
+		return informationBizImp.selectInfo(page, state, parameterid);
 	}
 	
 

@@ -17,6 +17,7 @@ public class ProductionBean {
    private String productionFile;
    private String productionImage;
 private String productionDetal;
+private int buyCount;
    
    
    
@@ -148,6 +149,14 @@ public String getProductionDetal() {
 
 public void setProductionDetal(String productionDetal) {
 	this.productionDetal = productionDetal;
+}
+
+public int getBuyCount() {
+	return buyCount;
+}
+
+public void setBuyCount(int buyCount) {
+	this.buyCount = buyCount;
 }
 	 
   

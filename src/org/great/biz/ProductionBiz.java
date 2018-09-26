@@ -1,6 +1,7 @@
 package org.great.biz;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +20,6 @@ public interface ProductionBiz {
 
 //查询作品信息
 	public ProductionBean findProductionDetal(int id);
-
+	public List<ProductionBean> getProductionList();
 
 }

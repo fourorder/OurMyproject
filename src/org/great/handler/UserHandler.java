@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.great.biz.ProductionBiz;
 import org.great.biz.UserBiz;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserHandler {
 @Resource
 private UserBiz userBizImp;
+@Resource
+private ProductionBiz productionBizImp;
 
 
 @RequestMapping("/search.action")
@@ -29,20 +32,26 @@ public ModelAndView serach(String name,HttpServletRequest request,String page,St
 	request.setAttribute("objList", userBizImp.getAllList(name));
 	request.setAttribute("searchName", name);
 	request.setAttribute("page",1);
-	modelAndView.setViewName("jsp/serachresult");
+	modelAndView.setViewName("jsp/searchresult");
 	return modelAndView;
 }
 @RequestMapping("/selectepage.action")
 //雇主分页ajax
 @ResponseBody
-public List<Object> selectEpage(String name,String page,String state){
-	return userBizImp.search(name,page,state,1);
+public List<Object> selectEpage(String name,String epage,String state){
+	return userBizImp.search(name,epage,state,1);
 }
 @RequestMapping("/selectbpage.action")
 //服务商分页ajax
 @ResponseBody
-public List<Object> selectBpage(String name,String page,String state){
-	return userBizImp.search(name,page,state,2);
+public List<Object> selectBpage(String name,String bpage,String state){
+	return userBizImp.search(name,bpage,state,2);
+}
+@RequestMapping("/selectppage.action")
+//作品分页ajax
+@ResponseBody
+public List<Object> selectPpage(String name,String ppage,String state){
+	return userBizImp.search(name, ppage, state, 3);
 }
 @RequestMapping("/EmployerInformation.action")//用户详细信息
 public ModelAndView EmployerInformation(HttpServletRequest request,String userid){
@@ -64,6 +73,14 @@ ModelAndView UserInformation(HttpServletRequest request,String userid){
 	
 	request.setAttribute("userInfo", userBizImp.userinfo(userid));
 	modelAndView.setViewName("jsp/userInfo");
+	return modelAndView;
+
+}
+@RequestMapping("/searchcredit.action")//个人中心
+ModelAndView searchCredit(HttpServletRequest request,String username){
+	ModelAndView modelAndView=new ModelAndView();	
+	request.setAttribute("userInfo", userBizImp.searchCredit(username));
+	modelAndView.setViewName("jsp/searchcredit");
 	return modelAndView;
 
 }

@@ -1,7 +1,9 @@
 package org.great.mapper;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.great.bean.ConditionBean;
 import org.great.bean.ProductionBean;
 import org.springframework.stereotype.Repository;
@@ -20,6 +22,13 @@ public interface ProductionMapper {
 	//查询作品信息
 	public ProductionBean findProductionDetal(int id);
 	
+	//查询热卖作品
+	public List<ProductionBean> getProductionList(); 
 	
+	//搜索作品
+	public List<ProductionBean> selectProduction(@Param("name")String name,
+			@Param("end")int end,@Param("start")int start);
 	
+	//
+	public List<ProductionBean> productionNumber(@Param("name")String name);
 }
