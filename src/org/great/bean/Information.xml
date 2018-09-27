@@ -5,7 +5,7 @@
 	
 	 <insert id="setInformation" parameterType="org.great.bean.InformationBean">
 	
-		insert into informationTbl values(SEQID.nextval,#{informationTitle},#{informationContent},#{informationPublishTime},#{informationAddress})
+		insert into informationTbl (informationid,informationtitle,informationcontent,informationpublishtime,informationaddress)values(SEQID.nextval,#{informationTitle},#{informationContent},#{informationPublishTime},#{informationAddress})
 	</insert>  
 <select id="getInformation" resultType="org.great.bean.InformationBean">
 select * from informationTbl where parameterid = #{parameterid}

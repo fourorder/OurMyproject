@@ -320,30 +320,30 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 			<div class="clearfix"></div>
 			<div class="zhishicq-bigt">
 					<ul>
-						<li>
-							<a href="${story[0].userStoryUrl}" title=""><span class="s-line">${story[0].userStoryTitle}</span>
+						<li  style="height:300px;">
+							<a href="${story[0].userStoryUrl}" title="" target="_blank"><span class="s-line">${story[0].userStoryTitle}</span>
 							<p class="color666">${story[0].userStoryTime} </p>
 							<!-- <p class=" colorred">￥2100起</p> -->
-							<img src="<%=path%>images/oindex-10.png">
+							<img src="<%=path%>picture/findPicture.action?url=${story[0].storyImg}" width="150px" height="120px">
 							</a>
 						</li>
-						<li>
-							<a href="${story[1].userStoryUrl}" title=""><span class="s-line">${story[1].userStoryTitle}</span>
+						<li style="height:300px;">
+							<a href="${story[1].userStoryUrl}" title="" target="_blank"><span class="s-line">${story[1].userStoryTitle}</span>
 							<p class="color666">${story[1].userStoryTime} </p>
-							<img src="<%=path%>images/oindex-11.png">
+							<img src="<%=path%>picture/findPicture.action?url=${story[1].storyImg}" width="150px" height="120px">
 
 							</a>
 						</li>
-						<li>
-							<a href="${story[2].userStoryUrl}" title=""><span class="s-line">${story[2].userStoryTitle}</span>
+						<li style="height:300px;">
+							<a href="${story[2].userStoryUrl}" title="" target="_blank"><span class="s-line">${story[2].userStoryTitle}</span>
 							<p class="color666">${story[2].userStoryTime} </p>
-							<img src="<%=path%>images/oindex-12.png">
+							<img src="<%=path%>picture/findPicture.action?url=${story[2].storyImg}" width="150px" height="120px">
 							</a>
 						</li>
-						<li>
-							<a href="${story[3].userStoryUrl}" title=""><span class="s-line">${story[3].userStoryTitle}</span>
+						<li style="height:300px;">
+							<a href="${story[3].userStoryUrl}" title="" target="_blank"><span class="s-line">${story[3].userStoryTitle}</span>
 							<p class="color666">${story[3].userStoryTime} </p>
-							<img src="<%=path%>images/oindex-13.png">
+							<img src="<%=path%>picture/findPicture.action?url=${story[3].storyImg}" width="150px" height="120px">
 							</a>
 						</li>
 					</ul>
@@ -491,56 +491,56 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 		<ul>
 			<li style="height:400px;">
 				<div class="news-pic">
-					<a href="#" title=""><img src="<%=path%>picture/findPicture.action?url=${informationList1[0].informationImg}" width="240" height="160"></a>
-					<p class="ne-title"><a href="${informationList1[0].informationAddress}" title="">${informationList1[0].informationTitle}</a></p>
+					<a href="${informationList1[0].informationAddress}" title="" target="_blank"><img src="<%=path%>picture/findPicture.action?url=${informationList1[0].informationImg}" width="240" height="160"></a>
+					<p class="ne-title"><a href="${informationList1[0].informationAddress}" title="" target="_blank">${informationList1[0].informationTitle}</a></p>
 					<p class="color999">时间：${informationList1[0].informationPublishTime}</p>
 				</div>
-				<a href="<%=path%>infor/infolist.action?typeid=${informationList1[0].parameterId}"><font color="red">更多</font></a>
+				<a href="<%=path%>infor/infolist.action?typeid=${informationList1[0].parameterId}" target="_blank"><font color="red">更多</font></a>
 				<div class="news-text">
-					<p><a href="${informationList1[1].informationAddress}" title="">${informationList1[1].informationTitle}</a></p>
-					<p><a href="${informationList1[2].informationAddress}" title="">${informationList1[2].informationTitle}</a></p>
-					<p><a href="${informationList1[3].informationAddress}" title="">${informationList1[3].informationTitle}</a></p>
+					<p><a href="${informationList1[1].informationAddress}" title="" target="_blank">${informationList1[1].informationTitle}</a></p>
+					<p><a href="${informationList1[2].informationAddress}" title="" target="_blank">${informationList1[2].informationTitle}</a></p>
+					<p><a href="${informationList1[3].informationAddress}" title="" target="_blank">${informationList1[3].informationTitle}</a></p>
 				</div>
 			</li>
 
 			<li style="height:400px;">
 				<div class="news-pic">
-					<a href="#" title=""><img src="http://www.yizhihou.net/file/upload/201707/24/093409131.jpg" width="240" height="160"></a>
-					<p class="ne-title"><a href="${informationList2[0].informationAddress}" title="">${informationList2[0].informationTitle}</a></p>
+					<a href="${informationList2[0].informationAddress}" title="" target="_blank"><img src="<%=path%>picture/findPicture.action?url=${informationList2[0].informationImg}" width="240" height="160"></a>
+					<p class="ne-title"><a href="${informationList2[0].informationAddress}" title="" target="_blank">${informationList2[0].informationTitle}</a></p>
 					<p class="color999">时间：${informationList2[0].informationPublishTime}</p>
 				</div>
-				<a href="#"><font color="red">更多</font></a>
+				<a href="<%=path%>infor/infolist.action?typeid=${informationList2[0].parameterId}" target="_blank"><font color="red">更多</font></a>
 				<div class="news-text">
-					<p><a href="${informationList2[1].informationAddress}" title="">${informationList2[1].informationTitle}</a></p>
-					<p><a href="${informationList2[2].informationAddress}" title="">${informationList2[2].informationTitle}</a></p>
-					<p><a href="${informationList2[3].informationAddress}" title="">${informationList2[3].informationTitle}</a></p>
+					<p><a href="${informationList2[1].informationAddress}" title="" target="_blank">${informationList2[1].informationTitle}</a></p>
+					<p><a href="${informationList2[2].informationAddress}" title="" target="_blank">${informationList2[2].informationTitle}</a></p>
+					<p><a href="${informationList2[3].informationAddress}" title="" target="_blank">${informationList2[3].informationTitle}</a></p>
 				</div>
 			</li>
 
 			<li style="height:400px;">
 				<div class="news-pic">				
-					<a href="#" title=""><img src="http://www.yizhihou.net/file/upload/201707/21/095355731.jpg" width="240" height="160"></a>
-					<p class="ne-title"><a href="${informationList3[0].informationAddress}" title="">${informationList3[0].informationTitle}</a></p>
+					<a href="${informationList3[0].informationAddress}" title="" target="_blank"><img src="<%=path%>picture/findPicture.action?url=${informationList3[0].informationImg}" width="240" height="160"></a>
+					<p class="ne-title"><a href="${informationList3[0].informationAddress}" title="" target="_blank">${informationList3[0].informationTitle}</a></p>
 					<p class="color999">时间：${informationList3[0].informationPublishTime}</p>
 				</div>
-				<a href="#"><font color="red">更多</font></a>
+				<a href="<%=path%>infor/infolist.action?typeid=${informationList3[0].parameterId}" target="_blank"><font color="red">更多</font></a>
 				<div class="news-text">
-					<p><a href="${informationList3[1].informationAddress}" title="">${informationList3[1].informationTitle}</a></p>
-					<p><a href="${informationList3[2].informationAddress}" title="">${informationList3[2].informationTitle}</a></p>
-					<p><a href="${informationList3[3].informationAddress}" title="">${informationList3[3].informationTitle}</a></p>
+					<p><a href="${informationList3[1].informationAddress}" title="" target="_blank">${informationList3[1].informationTitle}</a></p>
+					<p><a href="${informationList3[2].informationAddress}" title="" target="_blank">${informationList3[2].informationTitle}</a></p>
+					<p><a href="${informationList3[3].informationAddress}" title="" target="_blank">${informationList3[3].informationTitle}</a></p>
 				</div>
 			</li>
 			<li style="height:400px;">
 				<div class="news-pic">
-					<a href="#" title=""><img src="http://www.yizhihou.net/file/upload/201707/14/094304311.jpg" width="240" height="160"></a>
-					<p class="ne-title"><a href="${informationList4[0].informationAddress}" title="">${informationList4[0].informationTitle}</a></p>
+					<a href="${informationList4[0].informationAddress}" title="" target="_blank"><img src="<%=path%>picture/findPicture.action?url=${informationList4[0].informationImg}" width="240" height="160"></a>
+					<p class="ne-title"><a href="${informationList4[0].informationAddress}" title="" target="_blank">${informationList4[0].informationTitle}</a></p>
 					<p class="color999">时间：${informationList4[0].informationPublishTime}</p>
 				</div>
-				<a href="#"><font color="red">更多</font></a>
+				<a href="<%=path%>infor/infolist.action?typeid=${informationList4[0].parameterId}" target="_blank"><font color="red">更多</font></a>
 				<div class="news-text">
-					<p><a href="${informationList4[1].informationAddress}" title="">${informationList4[1].informationTitle}</a></p>
-					<p><a href="${informationList4[2].informationAddress}" title="">${informationList4[2].informationTitle}</a></p>
-					<p><a href="${informationList4[3].informationAddress}" title="">${informationList4[3].informationTitle}</a></p>
+					<p><a href="${informationList4[1].informationAddress}" title="" target="_blank">${informationList4[1].informationTitle}</a></p>
+					<p><a href="${informationList4[2].informationAddress}" title="" target="_blank">${informationList4[2].informationTitle}</a></p>
+					<p><a href="${informationList4[3].informationAddress}" title="" target="_blank">${informationList4[3].informationTitle}</a></p>
 				</div>
 			</li>
 		</ul>

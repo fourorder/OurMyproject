@@ -13,6 +13,7 @@ public class UserStoryBean {
 	private String userAccount;
 	private int stateId;
 	private String userStoryUrl;
+	private String storyImg;
 	public UserStoryBean() {
 		
 	}
@@ -57,6 +58,12 @@ public class UserStoryBean {
 	}
 	public void setUserStoryUrl(String userStoryUrl) {
 		this.userStoryUrl = userStoryUrl;
+	}
+	public String getStoryImg() {
+		return storyImg;
+	}
+	public void setStoryImg(String storyImg) {
+		this.storyImg = storyImg;
 	}			
 	
 }
