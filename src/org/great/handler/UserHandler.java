@@ -59,6 +59,7 @@ public ModelAndView returnHome(){
 	return modelAndView;
 }
 @RequestMapping("/UserInformation.action")//个人中心
+
 ModelAndView UserInformation(HttpServletRequest request,String userid){
 	ModelAndView modelAndView=new ModelAndView();
 	

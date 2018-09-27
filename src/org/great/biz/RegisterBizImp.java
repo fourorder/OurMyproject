@@ -13,10 +13,11 @@ public class RegisterBizImp implements RegisterBiz {
     @Resource
 	private UserMapper userMapper;
 	@Override
-	public void register(String userAccount, String userPwd, int characterId, String userName, long userTel,
-			String userIdentity, int stateId, HttpServletRequest request) {
+	public void register(String userAccount, String userPwd, Integer characterId, String userName, long userTel,
+			String userIdentity, Integer stateId, HttpServletRequest request,String userRegisterTime) {
 		// TODO Auto-generated method stub
-		  userMapper.addUser(userAccount, userPwd, characterId, userName, userTel, userIdentity, stateId);
+		
+		  userMapper.addUser(userAccount, userPwd, characterId, userName, userTel, userIdentity, stateId,userRegisterTime);
 	}
 	
 	

@@ -76,7 +76,7 @@
    <tr>
    <td colspan="6"><a class="layui-btn layui-btn-sm" href="<%=path %>employers/page.action?page=tpage&number=${num}">上一页</a></td>
    <td ><a>当前页：${num}&nbsp;&nbsp;&nbsp;总页数：${countPage}</a></td>
-    <td colspan="6"><a class="layui-btn layui-btn-sm" href="<%=path %>employers/page.action?page=npage&number=${num}">下一页</a></td>
+    <td colspan="6"><a class="layui-btn layui-btn-sm" href="<%=path%>employers/page.action?page=npage&number=${num}">下一页</a></td>
    </tr>
   </tbody>
 </table>

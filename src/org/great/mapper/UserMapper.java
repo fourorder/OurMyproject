@@ -19,8 +19,18 @@ public UserInfoBean userinfo(@Param("userid")String userid);
 public List<UserBean> employers(@Param("name")String name,@Param("page")int page);
 public int delEmployers(@Param("account")String account);//删除雇主
 public int countEmployers();//雇主总个数
+public List<UserBean> countFacilitator();
+public List<UserBean> countFacilitator2();
+public List<UserBean> countFacilitator3(String userName);
+public List<UserBean> countFacilitator4(String userName);
+public List<UserBean> facilitator(@Param("name")String name,@Param("page")int page);
+
 public List<UserBean> login(String userAccount,String userPwd);
-public void addUser(@Param(value="userAccount")String userAccount ,@Param(value="userPwd")String userPwd ,@Param(value="characterId")Integer characterId ,@Param(value="userName")String userName ,@Param(value="userTel")long userTel ,@Param(value="userIdentity")String userIdentity ,@Param(value="stateId")int stateId);
+public void addUser(@Param(value="userAccount")String userAccount ,@Param(value="userPwd")String userPwd ,@Param(value="characterId")Integer characterId ,@Param(value="userName")String userName ,@Param(value="userTel")long userTel ,@Param(value="userIdentity")String userIdentity ,@Param(value="stateId")int stateId,@Param(value="userRegisterTime")String userRegisterTime);
 public List<UserBean> checkAccount(String userAccount);
+public void changeState(int userId);
+public void changeState2(int userId);
+public void changeState3(int userId);
+public void changeInfo(@Param(value="userId")int userId ,@Param(value="userName")String userName ,@Param(value="userTel")Long userTel ,@Param(value="userAccount")String userAccount ,@Param(value="userSex")String userSex ,@Param(value="userMail")String userMail ,@Param(value="userIdentity")String userIdentity,@Param(value="userCredit")int userCredit,@Param(value="userMoney")int userMoney,@Param(value="userRegisterTime")String userRegisterTime);
 
 }
