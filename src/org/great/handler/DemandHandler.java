@@ -83,9 +83,9 @@ public class DemandHandler {
 	@RequestMapping("/addBid.action")//ajax分页跳转
 	@ResponseBody
 	public ArrayList<BidBean> addBid(HttpServletRequest request,String demandid){	
-		System.out.println(demandid);
+		
 		UserBean userBean=(UserBean) request.getSession().getAttribute("user");
-		System.out.println(userBean.getUserId());
+		
 		demandBizImp.addBid(userBean.getUserId()+"", demandid);
 		return demandBizImp.getBidList(demandid);
 	}
