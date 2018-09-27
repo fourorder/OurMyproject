@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.great.bean.UserInfoBean;
-import javax.annotation.Resource;
+import org.great.bean.UserStoryBean;
 import javax.servlet.http.HttpServletRequest;
 import org.great.bean.ProductionBean;
-
+import javax.annotation.Resource;
+import org.great.bean.AdvertisingBean;
 import org.great.bean.UserBean;
 import org.great.mapper.FundMapper;
 import org.great.mapper.ProductionMapper;
@@ -129,22 +130,28 @@ public List<Object> getAllList(String name){
 	return objects;
 }
 @Override
-public List<UserBean> employers(String name, int page) {
+public List<UserBean> employers(String name, int page,int state) {
 	// TODO Auto-generated method stub
-	if (name!=null) {
+	if (name!=null && !("".equals(name))) {
 		name="%"+name+"%";
+		System.out.println("imp:"+name);
 	}
-	return userMapper.employers(name,page);
+
+	return userMapper.employers(name,page,state);
 }
 @Override
-public int delEmployers(String account) {
+public int delEmployers(String account,String num) {
 	// TODO Auto-generated method stub
-	return userMapper.delEmployers(account);
+	return userMapper.delEmployers(account,num);
 }
 @Override
-public int countEmployers() {
+public int countEmployers(String name,int state) {
 	// TODO Auto-generated method stub
-	return userMapper.countEmployers();
+	if (name!=null && !("".equals(name))) {
+		name="%"+name+"%";
+		System.out.println("imp:"+name);
+	}
+	return userMapper.countEmployers(name,state);
 
 }
 public UserBean employer(String userid){
@@ -178,8 +185,6 @@ public List<List<Object>> userCredit(String page,String state){
 	List<List<Object>> objects=new ArrayList<List<Object>>();
 	int page1=Integer.parseInt(page);
 	int count1=0;
-	
-
 	count1=userMapper.getCredit().size();	
 			
 	int countpage1=(int) Math.ceil(((float)count1)/6);
@@ -214,8 +219,11 @@ public UserInfoBean searchCredit(String username) {
 	// TODO Auto-generated method stub
 	return userMapper.searchCredit(username);
 }
-
-
+@Override
+public List<UserBean> updateInfo(String userAccount) {
+	// TODO Auto-generated method stub
+	return userMapper.updateInfo(userAccount);
+}
 @Override
 public boolean userInfoEdit(HttpServletRequest request,String userId, String userProfile, String userName, String userIdentity, String userTel,
 		String userMail,MultipartFile file) {
@@ -256,6 +264,100 @@ public String upLoadFile(HttpServletRequest request, MultipartFile file) {
 
 	return uploadDocName;
 }
+
+
+@Override
+public int updateUser(UserBean userBean) {
+	// TODO Auto-generated method stub
+	return userMapper.updateUser(userBean);
+}
+
+
+@Override
+public List<UserBean> selectAll() {
+	// TODO Auto-generated method stub
+	return userMapper.selectAll();
+}
+
+
+@Override
+public int insertStory(UserStoryBean usb) {
+	// TODO Auto-generated method stub
+	return userMapper.insertStory(usb);
+}
+
+
+@Override
+public List<UserStoryBean> selectStory(String userAccount) {
+	// TODO Auto-generated method stub
+	return userMapper.selectStory(userAccount);
+}
+
+
+@Override
+public int updateStory(UserStoryBean usb) {
+	// TODO Auto-generated method stub
+	return userMapper.updateStory(usb);
+}
+
+
+@Override
+public List<UserStoryBean> conditionQuery(String title, int page, int state) {
+	// TODO Auto-generated method stub
+	if (title!=null && !("".equals(title))) {
+		title="%"+title+"%";
+		System.out.println("imp:"+title);
+	}
+	return userMapper.conditionQuery(title, page, state);
+}
+
+
+@Override
+public int countStory(String title, int state) {
+	// TODO Auto-generated method stub
+	if (title!=null && !("".equals(title))) {
+		title="%"+title+"%";
+		System.out.println("imp:"+title);
+	}
+	return userMapper.countStory(title, state);
+}
+
+
+@Override
+public int delStory(String userAccount) {
+	// TODO Auto-generated method stub
+	return userMapper.delStory(userAccount);
+}
+
+
+@Override
+public List<UserStoryBean> updateOne(String userAccount) {
+	// TODO Auto-generated method stub
+	return userMapper.updateOne(userAccount);
+}
+
+
+@Override
+public int updateOk(UserStoryBean usb) {
+	// TODO Auto-generated method stub
+	return userMapper.updateOk(usb);
+}
+
+
+@Override
+public List<UserBean> employers(String name, int page) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+@Override
+public int delEmployers(String account) {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+
 
 
 

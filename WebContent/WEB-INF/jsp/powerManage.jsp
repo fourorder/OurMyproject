@@ -16,7 +16,7 @@
     <link href="<%=path%>plugins/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="<%=path%>plugins/tree-multiselect/jquery.tree-multiselect.min.css" rel="stylesheet" />
      <link href="<%=path%>css/style.min.css" rel="stylesheet" />
-	 	<link rel="stylesheet" href="<%=path%>css/jquery-ui.css">
+	 <link rel="stylesheet" href="<%=path%>css/jquery-ui.css">
     <link href="<%=path%>plugins/bootstrap/bootstrap.min.js"  />
     <link href="<%=path%>js/jquery.min.js"  />
     <style>
@@ -181,6 +181,7 @@
     <script src="~/Content/js/commonjs.js"></script>
     <script src="~/Content/js/config.router.js"></script>-->
     <script src="<%=path%>js/indexCJ.js"></script>
+
 </body>
 
 </html>

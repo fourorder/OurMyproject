@@ -50,6 +50,23 @@
 		resultType="org.great.bean.UserBean">
 		select * from userTbl where userAccount=#{userAccount}
 	</select>
+	<!-- 查询低信誉用户数 -->
+	<select id="getCredit" resultType="org.great.bean.UserBean">
+		select * from usertbl where
+		usercredit &lt; 60 and CHARACTERID != 3
+	</select>
+	<!-- 查询用户信誉 -->
+	<select id="searchCredit" resultMap="userInfo">
+		select * from usertbl where
+		useraccount = #{username}
+	</select>
+	<resultMap type="org.great.bean.UserInfoBean" id="userInfo">
+
+		<association property="characterBean" column="characterid"
+			javaType="org.great.bean.CharacterBean" select="getCharacter">
+		</association>
+
+	</resultMap>
 	<!-- 佳诚 -->
 	<!-- 个人中心 -->
 	<select id="userinfo" resultMap="getUserInfo">
@@ -65,7 +82,6 @@
 		select * from charactertbl where characterid =
 		#{characterid}
 	</select>
-
 	<resultMap type="org.great.bean.UserInfoBean" id="getUserInfo">
 
 		<association property="stateBean" column="stateid"
@@ -76,7 +92,6 @@
 			javaType="org.great.bean.CharacterBean" select="getCharacter">
 		</association>
 	</resultMap>
-
 	<!-- 修改用户资料 -->
 	<update id="updateUserInfo" parameterType="java.lang.String">
 		UPDATE usertbl
@@ -102,63 +117,151 @@
 		</set>
 		where userid = #{userId}
 	</update>
+	
 	<!-- 俱锋 -->
-	<!-- 查询所有雇主 -->
-	<select id="employers" resultType="org.great.bean.UserBean">
-		select * from (
-		select c.*,rownum rn from (
-		select u.*,c.charactername
-		from usertbl u,characterTbl c where
-		u.CharacterId=c.CharacterId
-		<if test="name != null">
-			and u.username like #{name}
-		</if>
+<!-- 删除雇主 -->
+<update id="delEmployers" parameterType="java.lang.String">
+<if test='num == "3"'>
+UPDATE usertbl set stateid=3 WHERE useraccount=#{account}
+</if>
+<if test='num == "2"'>
+UPDATE usertbl set stateid=2 WHERE useraccount=#{account}
+</if>
+<if test='num == "1"'>
+UPDATE usertbl set stateid=1 WHERE useraccount=#{account}
+</if>
 
-		) c
-		where rownum &lt;= (#{page}*5))
-		where rn &gt;= ((#{page}-1)*5)
-	</select>
-	<!-- 删除雇主 -->
-	<update id="delEmployers" parameterType="java.lang.String">
-		UPDATE usertbl set
-		stateid=3 WHERE useraccount=#{account}
-	</update>
+</update> 
+<!-- 模糊分页所有雇主 -->
+<select id="employers" resultType="org.great.bean.UserBean">
+select * from (
+select c.*,rownum rn from (
+select u.*,c.charactername from usertbl u,characterTbl c where  u.CharacterId=c.CharacterId and u.characterid=1
+<if test="name != null and name !=''">
+and u.username like #{name}
+</if>
+<if test="state != 0 ">
+and u.STATEID =#{state}
+</if>
+ ) c 
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= (#{page}*5-4)
+</select>
 
-	<!-- 查询雇主总个数 -->
-	<select id="countEmployers" resultType="java.lang.Integer">
-		select count(*) from
-		usertbl
-	</select>
+<!-- 查询雇主总个数 -->
+<select id="countEmployers" resultType="java.lang.Integer">
+select count(*) from usertbl  where characterid=1
+<if test="name != null and name !=''">
+and username like #{name}
+</if>
+<if test="state != 0">
+and STATEID =#{state}
+</if>
+</select>
 
-	<!-- 分页查询低信誉用户 -->
-	<select id="userCredit" resultType="org.great.bean.UserBean">
-		select * from(select
-		t.*,rownum rn from(select * from usertbl where
-		usercredit &lt; 60 and
-		CHARACTERID != 3)t where rownum &lt;= #{end})
-		where rn &gt;= #{start}
-	</select>
+<!-- 查询单个用户信息 -->
+<select id="updateInfo" resultType="org.great.bean.UserBean" >
+ select * from userTbl where userAccount=#{userAccount}
+</select>
+<!-- 查询总雇主 -->
+<select id="selectAll" resultType="org.great.bean.UserBean" >
+ select * from usertbl  where characterid=1
+</select>
 
-	<!-- 查询低信誉用户数 -->
-	<select id="getCredit" resultType="org.great.bean.UserBean">
-		select * from usertbl where
-		usercredit &lt; 60 and CHARACTERID != 3
-	</select>
-	<!-- 查询用户信誉 -->
-	<select id="searchCredit" resultMap="userInfo">
-		select * from usertbl where
-		useraccount = #{username}
-	</select>
-	<resultMap type="org.great.bean.UserInfoBean" id="userInfo">
+<!-- 修改雇主信息 -->
+<update id="updateUser" parameterType="org.great.bean.UserBean" >
+UPDATE usertbl set useraccount=#{userAccount} 
+<if test="userName != null and userName !=''">
+  ,username=#{userName}
+</if>
+<if test="userPwd != null and userPwd !=''">
+  ,userPwd=#{userPwd}
+</if>
+<if test="userTel != null and userPwd !=''">
+  ,userTel=#{userTel}
+</if>
+<if test="userSex != null and userSex !=''">
+  ,userSex=#{userSex}
+</if>
+<if test="userMail != null and userMail !=''">
+  ,userMail=#{userMail}
+</if>
+<if test="userAddress != null and userAddress !=''">
+  ,userAddress=#{userAddress}
+</if>
+<if test="userCredit != null and userCredit !=''">
+  ,userCredit=#{userCredit}
+</if>
+<if test="userProfile != null and userProfile !=''">
+  ,userProfile=#{userProfile}
+</if>
+WHERE useraccount=#{userAccount}
+</update>
 
-		<association property="characterBean" column="characterid"
-			javaType="org.great.bean.CharacterBean" select="getCharacter">
-		</association>
+<!-- 插入故事 -->
+<insert id="insertStory" parameterType="org.great.bean.UserStoryBean">
+insert into userStorytbl values(SEQID.nextval,#{userStoryTitle},#{userStoryContent},#{userStoryTime},#{userAccount})
+</insert>
 
-	</resultMap>
+<!--查询当前雇主是否故事 -->
+<select id="selectStory" resultType="org.great.bean.UserStoryBean">
+select * from userStorytbl where useraccount=#{userAccount}
+</select>
 
+<!--当前雇主存在故事 -->
+<update id="updateStory" parameterType="org.great.bean.UserStoryBean">
+UPDATE userStorytbl set userStoryTitle=#{userStoryTitle},userStoryContent=#{userStoryContent},userStoryTime=#{userStoryTime} where userAccount=#{userAccount}
+</update>
+<!--雇主故事模糊分页 -->
+<select id="conditionQuery" resultType="org.great.bean.UserStoryBean">
+select * from (select c.*,rownum rn from (select * from userStorytbl where userstoryid=userstoryid
+<if test="title != null and title !=''">
+ and userstorytitle like #{title}
+</if>
+<if test="state != 3">
+ and STATEID =#{state}
+</if>
 
+)c
+where rownum &lt;= (#{page}*5))
+ where rn &gt;= ((#{page}-1)*5)
 
+</select>
+<!--雇主故事总个数 -->
+<select id="countStory" resultType="java.lang.Integer">
+select count(*) from userStorytbl  where userstoryid=userstoryid
+<if test="title != null and title !=''">
+and userStoryTitle like #{title}
+</if>
+<if test="state != 3">
+and STATEID =#{state}
+</if>
+</select>
+<!--删除雇主故事 -->
+<update id="delStory" parameterType="java.lang.String">
+UPDATE userStorytbl set stateid=1 where userAccount=#{userAccount}
+</update>
+<!--查询单个雇主故事 -->
+<select id="updateOne" resultType="org.great.bean.UserStoryBean">
+ select * from userStorytbl where  userAccount=#{userAccount}
+</select>
+<!--确认修改雇主故事 -->
+<update id="updateOk" parameterType="org.great.bean.UserStoryBean">
+UPDATE userStorytbl set userAccount=#{userAccount}
+<if test="userStoryTitle != null and userStoryTitle !=''">
+  ,userStoryTitle=#{userStoryTitle}
+</if>
+<if test="userStoryContent != null and userStoryContent !=''">
+  ,userStoryContent=#{userStoryContent}
+</if>
+<if test="userStoryTime != null and userStoryTime !=''">
+  ,userStoryTime=#{userStoryTime}
+</if>
+<if test="stateId != null and stateId !=''">
+  ,stateId=#{stateId}
+</if>
+where userAccount=#{userAccount}
+</update>
 
 </mapper>
 

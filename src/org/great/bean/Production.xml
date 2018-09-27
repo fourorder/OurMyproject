@@ -52,28 +52,55 @@ values (seqid.nextval,#{productionName},#{parameterId},#{userId},#{productionMon
 	 
 	
 </select> 
-<insert parameterType="java.lang.Integer" id="productionPayFinish"> insert into PROANDUSER (PROANDUSERID,USERID,PRODUCTIONID,PAYTIME) values (seqid.nextval,#{userId},#{proId},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')) </insert>
 
-<insert id="addTradRecord"> insert into FUNDTBL (FUNDID,USERID,BUSINESSID,DEALDATE,TOUSERID,DEALMONEY) values (seqid.nextval,#{userId},#{businessId},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{proUserId},#{price}) </insert>
-
-<!-- 查找用户余额 -->
-
-
-<select parameterType="java.lang.Integer" id="findUserMoney" resultType="java.lang.Double">select USERMONEY from USERTBL where USERID=#{userId} </select>
-
-<!-- 设置用户余额 -->
-
-
-<update id="setNewUserMoney"> UPDATE USERTBL SET USERMONEY =#{userMoney} WHERE USERID =#{userId} </update>
 <select id="getProductionList" resultType="org.great.bean.ProductionBean" >
 select * from(select t.*,rownum rn from(select * from PRODUCTIONTBL order by buycount desc)t where rownum &lt;= 3) where rn &gt;= 1
 </select>
-	 
+	 	 
 <select id="selectProduction" resultType="org.great.bean.ProductionBean" >
 select * from(select t.*,rownum rn from(select * from PRODUCTIONTBL where productionname like #{name})t where rownum &lt;= #{end}) where rn &gt;= #{start}
 </select>
 
 <select id="productionNumber" resultType="org.great.bean.ProductionBean" >
 select * from PRODUCTIONTBL where productionname like #{name}
-</select>
+</select>	 
+	 
+	 <insert id="productionPayFinish"  parameterType="java.lang.Integer"
+	 
+	 >
+	 
+insert into PROANDUSER (PROANDUSERID,USERID,PRODUCTIONID,PAYTIME) 
+values (seqid.nextval,#{userId},#{proId},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'))
+	
+	
+</insert>
+
+
+	 <insert id="addTradRecord"   >
+	 
+insert into FUNDTBL (FUNDID,USERID,BUSINESSID,DEALDATE,TOUSERID,DEALMONEY) 
+values (seqid.nextval,#{userId},#{businessId},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{proUserId},#{price})
+	
+	
+</insert>
+<!-- 查找用户余额 -->
+<select id="findUserMoney" 
+	 resultType="java.lang.Double" 
+	 parameterType="java.lang.Integer">
+ 
+	 
+	 select USERMONEY from USERTBL where USERID=#{userId}
+	 	
+	  
+	 
+	
+		 </select> 
+
+<!-- 设置用户余额 -->
+<update id="setNewUserMoney">
+
+
+UPDATE USERTBL SET USERMONEY =#{userMoney}  WHERE USERID =#{userId}
+
+</update>
 </mapper>

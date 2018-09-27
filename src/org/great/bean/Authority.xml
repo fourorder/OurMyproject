@@ -28,6 +28,7 @@
 	
 	</select>
  
+
 <!--  查找该角色拥有的所有菜单，不区分父类子类 -->
  <select id="findOwnMune"  
 	resultType="org.great.bean.AuthorityBean" 
@@ -69,4 +70,5 @@
  
  
  
+
 </mapper>

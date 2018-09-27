@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.great.mapper.CounselorMapper">
+ 
+ <!-- 查询用户是否申请顾问 -->
+ <select id="select" resultType="org.great.bean.CounselorBean">
+ select * from counselorTbl where userAccount=#{account}
+ </select>
+	 <!-- 增加顾问 -->
+<insert id="applyFor" parameterType="org.great.bean.CounselorBean">
+
+insert into counselorTbl values(SEQID.nextval,#{userAccount},#{counselorIntroduction},#{counselorMoney},#{auditState})
+</insert>
+<!-- 查询顾问总数 -->
+<select id="countCounserlor" resultType="java.lang.Integer">
+select count(*) from counselorTbl where userAccount=userAccount
+<if test="state !=4">
+ and auditState=#{state}
+</if>
+</select>
+<!-- 条件查找 -->
+<select id="conditionQuery" resultType="org.great.bean.CounselorBean">
+select * from (
+select c.*,rownum rn from (
+select * from counselorTbl where userAccount=userAccount
+<if test="state !=4">
+ and auditState=#{state}
+</if>
+) c 
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= (#{page}*5-4)
+</select>
+<update id="applyForOk"  parameterType="java.lang.String">
+UPDATE counselorTbl set auditState=1 WHERE userAccount=#{account}
+</update>
+</mapper>

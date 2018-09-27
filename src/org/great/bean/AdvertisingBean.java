@@ -14,15 +14,18 @@ public class AdvertisingBean {
  public AdvertisingBean() {
 		super();
 	}
+
 public AdvertisingBean(String advertisementTitle, String advertisementContent, String advertisementPublishTime,
-		String advertisementAddress, String advertisementImage) {
+		String advertisementAddress, String advertisementImage, int advertisementNum) {
 	super();
 	this.advertisementTitle = advertisementTitle;
 	this.advertisementContent = advertisementContent;
 	this.advertisementPublishTime = advertisementPublishTime;
 	this.advertisementAddress = advertisementAddress;
 	this.advertisementImage = advertisementImage;
+	this.advertisementNum = advertisementNum;
 }
+
 public String getAdvertisementTitle() {
 	return advertisementTitle;
 }

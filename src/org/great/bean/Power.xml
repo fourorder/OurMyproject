@@ -45,5 +45,30 @@
 	</select>
  
     
+	
+	<!-- 查询所有父类菜单 -->
+  <select id="findAllParentMune"  
+	resultType="org.great.bean.AuthorityBean" 
+	
+	 >
+	
+	select * from AUTHORITYTBL where  PID=0
+	
+	
+	
+	</select>
+ 
+<!--  查找所有子类菜单 -->
+   <select id="findAllSubclassMune"  
+	resultType="org.great.bean.AuthorityBean" 
+	
+	 >
+	
+	select * from CHARACTERTBL
+	
+	
+	
+	</select>
+
  
 </mapper>

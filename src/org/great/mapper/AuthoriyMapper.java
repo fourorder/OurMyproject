@@ -2,6 +2,7 @@ package org.great.mapper;
 
 import java.util.ArrayList;
 
+
 import org.apache.ibatis.annotations.Param;
 import org.great.bean.AuthorityBean;
 import org.springframework.stereotype.Repository;
@@ -29,5 +30,8 @@ public interface AuthoriyMapper {
 		public void setRoleAndMenu( @Param(value="roleId")Integer roleId, @Param(value="menuId")Integer menuId);
 		
 	 
-		
+
+
+	
+
 }

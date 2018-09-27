@@ -187,5 +187,5 @@ public class PowerHandler {
 					return state;
 				}
 				
-				
+
 }

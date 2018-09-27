@@ -1,7 +1,6 @@
 package org.great.mapper;
 
 import java.util.ArrayList;
-
 import org.apache.ibatis.annotations.Param;
 import org.great.bean.AuthorityBean;
 import org.great.bean.CharacterBean;

@@ -1,5 +1,6 @@
 package org.great.bean;
 
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -41,5 +42,6 @@ public class CharacterBean {
 	public void setCharacterIntro(String characterIntro) {
 		this.characterIntro = characterIntro;
 	}
+
 	
 }

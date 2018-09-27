@@ -5,9 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
+import org.great.bean.AdvertisingBean;
 import org.great.bean.UserBean;
 import org.great.bean.UserInfoBean;
 import org.springframework.web.multipart.MultipartFile;
+
+import org.great.bean.UserStoryBean;
+
 
 
 public interface UserBiz {
@@ -18,12 +22,25 @@ public interface UserBiz {
 	public UserInfoBean userinfo(@Param("userid")String userid);//个人中心
 	public List<UserBean> employers(String name,int page);//分页模糊查找
 	public int delEmployers(String account); //删除雇主
-	public int countEmployers();//查询雇主的总个数；
 	public boolean checkAccount(String userAccount);
-
 	public List<List<Object>> userCredit(String page,String state);
 	public UserInfoBean searchCredit(String username);
 	//修改用户资料
 	public boolean userInfoEdit (HttpServletRequest request,String userId,String userProfile,String userName,String userIdentity,String userTel,String userMail,MultipartFile file);
+	public List<UserBean> employers(String name,int page,int state);//分页模糊查找
+	public int delEmployers(String account,String num); //删除雇主
+	public int countEmployers(String name,int state);//查询雇主的总个数；
+	public List<UserBean> updateInfo(String userAccount); //查询单个用户
+	public int updateUser(UserBean userBean); //修改雇主用户
+	public List<UserBean> selectAll();//查询总雇主
+	public int insertStory(UserStoryBean usb);//插入故事
+	public  List<UserStoryBean> selectStory(String userAccount);//插入当前雇主是否存在故事
+	public  int updateStory(UserStoryBean usb);//当前雇主存在故事运行
+	public List<UserStoryBean> conditionQuery(String title,int page,int state);//条件分页查找
+	public int countStory(String title,int state);//查询雇主故事的总个数；
+	public int delStory(String userAccount);//删除雇主故事
+	public List<UserStoryBean> updateOne(String userAccount); //查询单个故事
+	public int updateOk(UserStoryBean usb); //确认修改故事
+	
 
 }

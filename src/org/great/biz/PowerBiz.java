@@ -7,8 +7,6 @@ import org.great.bean.AuthorityBean;
 import org.great.bean.CharacterBean;
 
 
- 
-
 public interface PowerBiz {
 
 	//找到所以的角色
@@ -33,5 +31,8 @@ public interface PowerBiz {
 	//判断该角色 是否正在使用	
 	public Integer confirmRoleUsing(int id);
 	
+
+ 
+
 	
 }
