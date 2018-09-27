@@ -96,6 +96,7 @@ left:620px;
 <body>
 
 <script type="text/javascript">
+var page="${requestScope.page}";
 $(function () {
    $('.tab ul.menu li').click(function(){
         //获得当前被点击的元素索引值
@@ -108,31 +109,36 @@ $(function () {
    });
 });
 
-$(document).ready(function(){
+ $(document).ready(function(){
 	//移动像素的图像
-	var move = -15;
+	/* var move = -15;
 	//缩放比例，1.2 =120％
-	var zoom = 1.2;
+	var zoom = 1.2; */
 	//在对这些缩略图的鼠标滑过事件
 	$('.item').hover(function(){
-		//根据缩放百分比设置宽度和高度
+		/* //根据缩放百分比设置宽度和高度
 		width = $('.item').width() * zoom;
 		height = $('.item').height() * zoom;
 		//移动和缩放图像
-		$(this).find('img').stop(false,true).animate({'width':width, 'height':height, 'top':move, 'left':move}, {duration:200});
+		$(this).find('img').stop(false,true).animate({'width':width, 'height':height, 'top':move, 'left':move}, {duration:200}); */
 		//显示标题
 		$(this).find('div.caption').stop(false,true).fadeIn(200);
 	},function(){
-		//复位图像
-		$(this).find('img').stop(false,true).animate({'width':$('.item').width(), 'height':$('.item').height(), 'top':'0', 'left':'0'}, {duration:100});	
+		/* //复位图像
+		$(this).find('img').stop(false,true).animate({'width':$('.item').width(), 'height':$('.item').height(), 'top':'0', 'left':'0'}, {duration:100}); */	
 		//隐藏标题
 		$(this).find('div.caption').stop(false,true).fadeOut(200);
-	});
-});
+	}); 
+	
+/* 	$(this).find('div.caption').stop(false,true).fadeIn(200); */
+	
+}); 
+
+
 </script> 
 <div class="o-search" style="position:absolute;left:500px;top:80px;">
-<form action="<%=path%>user/search.action" method="post">
-<input type="text" class="search-text"  placeholder="请输入您搜索的关键词" name="name"><button class="search-bnt" type="submit"><img src="<%=path%>images/search-i.png">  搜索</button>
+<form action="<%=path%>user/search.action?page=1" method="post">
+<input type="text" class="search-text"  placeholder="请输入您搜索的关键词" name="name" value="${requestScope.searchName}" id="name"><button class="search-bnt" type="submit"><img src="<%=path%>images/search-i.png">  搜索</button>
 </form>
 </div>
 <div class="tab" style="height:500px;width:900px;position:absolute;top:10px;left:300px;">
@@ -140,37 +146,58 @@ $(document).ready(function(){
 		<li class="active" style="width:300px;">雇主</li>
 		<li style="width:300px;">服务商</li>
 		<li style="width:300px;">商品</li>
+
 	</ul>
-	<div class="con1" >
-	<c:forEach items="${objList[0][0]}"  var="obj" varStatus="status">
-	
-	<a href="#"><div class="item" id="img${status.count}">
+	<div class="con1" id="con1">
+	<c:forEach items="${objList[0][0]}"  var="obj" varStatus="status">	
+	<a href="<%=path%>user/EmployerInformation.action?userid=${obj.userId}"><div class="item" id="img${status.count}" >
 		<img width="150" height="150" alt="${obj.userName}" src="<%=path%>images/banner-touxiang.png" />
 		<div class="caption" style="text-align:center;" >
 			<p>账户:${obj.userAccount}</p>
 			<p>昵称:${obj.userName}</p>
 			<p>注册时间:${obj.userRegisterTime}</p>
 		</div>
-		<div style="position:absolute;left:60px;top:120px;"><font color="red" size="4px">${obj.userName}</font></div>
-	</div>	
+		<div style="position:absolute;top:120px;"><font color="red" size="4px">${obj.userName}</font></div>
+	</div >	
 	</a>								
 	</c:forEach>
-<div  style="position:absolute;top:460px;left:240px;">
-<button class="mybtn">首页</button>
+<div style="position:absolute;top:460px;left:240px;" id="div1">
+<button class="mybtn" onclick="selectepage('home')">首页</button>
 共${requestScope.objList[0][3]}条
 当前页数：[${requestScope.objList[0][1]}/${requestScope.objList[0][2]}]
-<button class="mybtn">末页</button>
-<button class="mybtn">上一页</button>
-<button class="mybtn">下一页</button>
-到第<input type="text" style="width:25px;">页
-<button class="mybtn">跳转</button>
-	</div> 
+<button class="mybtn" onclick="selectepage('end')">末页</button>
+<button class="mybtn" onclick="selectepage('last')">上一页</button>
+<button class="mybtn" onclick="selectepage('next')">下一页</button>
+到第<input type="text" style="width:25px;" id="epageNum" value="">页
+<button class="mybtn" onclick="selectepage('jump')">跳转</button>
+</div> 
+	</div>
+	<div class="con2" id="con2">
+<c:forEach items="${objList[1][0]}"  var="obj" varStatus="status">	
+	<a href="<%=path%>user/EmployerInformation.action?userid=${obj.userId}"><div class="item" id="img${status.count}" >
 
+		<img width="150" height="150" alt="${obj.userName}" src="<%=path%>images/banner-touxiang.png" />
+		<div class="caption" style="text-align:center;" >
+			<p>账户:${obj.userAccount}</p>
+			<p>昵称:${obj.userName}</p>
+			<p>注册时间:${obj.userRegisterTime}</p>
+		</div>
+		<div style="position:absolute;top:120px;"><font color="red" size="4px">${obj.userName}</font></div>
+	</div >	
+	</a>								
+	</c:forEach>
+<div style="position:absolute;top:460px;left:240px;" id="div1">
+<button class="mybtn" onclick="selectbpage('home')">首页</button>
+共${requestScope.objList[1][3]}条
+当前页数：[${requestScope.objList[1][1]}/${requestScope.objList[1][2]}]
+<button class="mybtn" onclick="selectbpage('end')">末页</button>
+<button class="mybtn" onclick="selectbpage('last')">上一页</button>
+<button class="mybtn" onclick="selectbpage('next')">下一页</button>
+到第<input type="text" style="width:25px;" id="bpageNum" value="">页
+<button class="mybtn" onclick="selectbpage('jump')">跳转</button>
+</div> 	
 	</div>
-	<div class="con2">
-		
-	</div>
-	<div class="con3">
+	<div class="con3" id="con3">
 		
 	</div>
 </div>
@@ -178,4 +205,103 @@ $(document).ready(function(){
 
 
 </body>
+<script type="text/javascript">
+function selectepage(state){
+	var num=$("#epageNum").val();
+	$("#con1").empty();
+	if(num!=""){
+		page=num;		
+	} 
+	$.ajax({	
+		 url:"<%=path%>user/selectepage.action",
+		 data:"state="+state+"&page="+page+"&name="+$('#name').val(),
+		 dataType:"json",
+		 type:"post",
+		 success:function(redata){	 		
+			   	 var objList=redata[0];
+			   	 var list=objList[0];
+		         var len = list.length+1;
+		         var nowPage=objList[1];
+		         var countPage=objList[2];		         
+		         var count=objList[3];
+		         for(var i=1;i<len;i++){    			        	 
+		             var e = list[i-1];
+		             $("#con1").append("<a href='#'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.userName+"' src='<%=path%>images/banner-touxiang.png' /><div class='caption' style='text-align:center;' ><p>账户:"+e.userAccount+"</p><p>昵称:"+e.userName+"</p><p>注册时间:"+e.userRegisterTime+"</p></div><div style='position:absolute;top:120px;'><font color='red' size='4px'>"+e.userName+"</font></div></div></a>"); 
+		         } 		         
+		       /* //移动像素的图像
+		     	var move = -15;
+		     	//缩放比例，1.2 =120％
+		     	var zoom = 1.2;
+		     	//在对这些缩略图的鼠标滑过事件 */
+		     	$('.item').hover(function(){
+		     		/* //根据缩放百分比设置宽度和高度
+		     		width = $('.item').width() * zoom;
+		     		height = $('.item').height() * zoom;
+		     		//移动和缩放图像
+		     		$(this).find('img').stop(false,true).animate({'width':width, 'height':height, 'top':move, 'left':move}, {duration:200}); */
+		     		//显示标题
+		     		$(this).find('div.caption').stop(false,true).fadeIn(200);
+		     	},function(){
+		     		/* //复位图像
+		     		$(this).find('img').stop(false,true).animate({'width':$('.item').width(), 'height':$('.item').height(), 'top':'0', 'left':'0'}, {duration:100});	 */
+		     		//隐藏标题
+		     		$(this).find('div.caption').stop(false,true).fadeOut(200);
+		     	});		     	
+		     	$("#con1").append("<div  style='position:absolute;top:460px;left:240px;' id='div1'><button class='mybtn' onclick=\"selectepage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectepage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectepage('last')\"> 上一页 </button> <button class='mybtn' onclick=\"selectepage('next')\"> 下一页 </button> 到第<input type='text' style='width:25px;' id='epageNum' value=''>页 <button class='mybtn' onclick=\"selectepage('jump')\"> 跳转 </button></div>");	         
+		 }
+	 }); 
+    	
+}
+
+
+function selectbpage(state){
+	var num=$("#bpageNum").val();
+	$("#con2").empty();
+	if(num!=""){
+		page=num;		
+	} 
+	$.ajax({	
+		 url:"<%=path%>user/selectbpage.action",
+		 data:"state="+state+"&page="+page+"&name="+$('#name').val(),
+		 dataType:"json",
+		 type:"post",
+		 success:function(redata){	 		
+			   	 var objList=redata[0];
+			   	 var list=objList[0];
+		         var len = list.length+1;
+		         var nowPage=objList[1];
+		         var countPage=objList[2];		         
+		         var count=objList[3];
+		         for(var i=1;i<len;i++){    			        	 
+		             var e = list[i-1];
+		             $("#con2").append("<a href='#'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.userName+"' src='<%=path%>images/banner-touxiang.png' /><div class='caption' style='text-align:center;' ><p>账户:"+e.userAccount+"</p><p>昵称:"+e.userName+"</p><p>注册时间:"+e.userRegisterTime+"</p></div><div style='position:absolute;top:120px;'><font color='red' size='4px'>"+e.userName+"</font></div></div></a>"); 
+		         } 		         
+		       //移动像素的图像
+		     	/* var move = -15;
+		     	//缩放比例，1.2 =120％
+		     	var zoom = 1.2;
+		     	//在对这些缩略图的鼠标滑过事件 */
+		     	$('.item').hover(function(){
+		     		//根据缩放百分比设置宽度和高度
+		     		/* width = $('.item').width() * zoom;
+		     		height = $('.item').height() * zoom;
+		     		//移动和缩放图像
+		     		$(this).find('img').stop(false,true).animate({'width':width, 'height':height, 'top':move, 'left':move}, {duration:200}); */
+		     		//显示标题
+		     		$(this).find('div.caption').stop(false,true).fadeIn(200);
+		     	},function(){
+		     		/* //复位图像
+		     		$(this).find('img').stop(false,true).animate({'width':$('.item').width(), 'height':$('.item').height(), 'top':'0', 'left':'0'}, {duration:100});	 */
+		     		//隐藏标题
+		     		$(this).find('div.caption').stop(false,true).fadeOut(200);
+		     	});		     	
+		     	$("#con2").append("<div  style='position:absolute;top:460px;left:240px;' ><button class='mybtn' onclick=\"selectbpage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectbpage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectbpage('last')\"> 上一页 </button> <button class='mybtn' onclick=\"selectbpage('next')\"> 下一页 </button> 到第<input type='text' style='width:25px;' id='bpageNum' value=''>页 <button class='mybtn' onclick=\"selectbpage('jump')\"> 跳转 </button></div>");	         
+		 }
+	 }); 
+    	
+}
+
+
+</script>
+
 </html>

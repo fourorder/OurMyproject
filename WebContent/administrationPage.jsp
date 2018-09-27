@@ -6,7 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<% 
+	String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";	
+%>
 
 <html>
 
@@ -109,16 +111,22 @@
                     <a href="javascript:;" style="font-size: 15px;">账号管理</a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="employers/page.action?page=tpage" target="menuFrame" id="aa" onclick="anr()">雇主管理</a>
+                            <a href="employers/page.action?page=tpage&number=1" target="menuFrame" id="aa">雇主管理</a>
                         </dd>
                         <dd>
                             <a href="" target="menuFrame">服务商管理</a>
                         </dd>
                         <dd>
-                            <a href="" target="menuFrame">顾问管理</a>
+                            <a href="<%=path %>counselor/application.action?account=aaa" target="menuFrame">测试申请顾问</a>
+                        </dd>
+                        <dd>
+                            <a href="<%=path %>counselor/list.action?number=1" target="menuFrame">顾问管理</a>
                         </dd>
                         <dd>
                             <a href="" target="menuFrame">管理员管理</a>
+                        </dd>
+                        <dd>
+                            <a href="<%=path%>powder/toFindCharacter.action"  target="menuFrame">权限管理</a>
                         </dd>
                     </dl>
                 </li>
@@ -150,7 +158,7 @@
                             <a href="">服务类型管理</a>
                         </dd>
                         <dd>
-                            <a href="">服务商故事配置</a>
+                            <a href="<%=path %>employers/list.action?page=tpage&number=1" target="menuFrame">雇主故事列表</a>
                         </dd>
                         <dd>
                             <a href="">曝光台配置</a>
@@ -165,7 +173,7 @@
                         <a href="infor/page.action" target="menuFrame">最新资讯配置</a>
                     </dd>
                         <dd>
-                            <a href="adver/page.action" target="menuFrame" onclick="update()">广告设置</a>
+                            <a href="adver/list.action?page=tpage&number=1" target="menuFrame">广告设置</a>
                         </dd>
                     </dl>
                 </li>
@@ -255,7 +263,7 @@
             document.getElementById("show").style.display = 'none';
             $('body').css("overflow", "auto")
         }
-        function update() {
+      function update() {
         	layer.open({
         		  title: '修改',
         		  content: '可以填写任意的layer代码',

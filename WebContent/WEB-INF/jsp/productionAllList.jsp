@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
     <% 
 	String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";	
 %>
@@ -22,82 +23,31 @@ ul { list-style-type: none;}
 </head>
 
 <body>
-<h1>搜索</h1>
+ 
 
 <a href="<%=path%>production/toManageProduction.action" >临时跳转，后期删掉，跳转进入服务商后台管理</a>
+<form  method="post" action="<%=path%>production/toProduction.action">
+ <input type="text"   name="conditionName"  id="conditionName" /><input type="text"   name="fieldName"  id="fieldName"  /> <input type="submit"  value="搜索" />
+ </form>
+<div class="jq22"  id="proList">
 
-<input class="keyword" placeholder="请输入关键字" data-search>
-
-<div class="jq22">
-	<div class="filtr-item" data-category="2">
-		<a href="#">
-			<img src="<%=path%>picture/findPicture.action?url=production1.png"  alt="">
-			<span class="ss">仿QQ绿钻抽奖转盘</span>
-		</a>
-	</div>
-	<div class="filtr-item" data-category="1">
-		<a href="#">
-			<img src="<%=path%>picture/findPicture.action?url=production2.png"  alt="">
-			<span>jQuery筛选过滤插件Filterizr</span>
-		</a>
-	</div>
-	<div class="filtr-item" data-category="1">
-		<a href="#">
-			<img src="images/a3.png" alt="">
-			<span>jQuery全屏滚动插件DD Full Screen Slider</span>
-		</a>
-	</div>
 	
-	<div class="filtr-item" data-category="3">
-		<a href="#">
-			<img src="images/a4.png" alt="">
-			<span>让IE7 IE8支持CSS3 background-size属性</span>
+	
+	  <c:forEach items="${list}"  var="list" >	              
+	           <div class="filtr-item" data-category="2">
+	              <a href="<%=path%>production/toProductionDetal.action?proId=${list.productionId}">
+			<img src="<%=path%>picture/findPicture.action?url=${list.productionImage}"  alt="">
+			<span class="ss">${list.productionName }</span>
 		</a>
 	</div>
-	<div class="filtr-item" data-category="1">
-		<a href="#">
-			<img src="images/a5.png" alt="">
-			<span>轻巧的jQuery提示框插件Tipso</span>
-		</a>
-	</div>
-	<div class="filtr-item" data-category="2">
-		<a href="#">
-			<img src="images/a6.png" alt="">
-			<span>简单的jQuery幻灯片插件ck_slide</span>
-		</a>
-	</div>
-	<div class="filtr-item" data-category="1">
-		<a href="#">
-			<img src="images/a7.png" alt="">
-			<span>WOW.js – 让页面滚动更有趣</span>
-		</a>
-	</div>
-	<div class="filtr-item" data-category="2">
-		<a href="#">
-			<img src="images/a8.png" alt="">
-			<span>fullPage.js制作网易邮箱大师页面</span>
-		</a>
-	</div>
-	<div class="filtr-item" data-category="2">
-		<a href="#">
-			<img src="images/a9.png" alt="">
-			<span>onepage-scroll制作iPhone 5s页面</span>
-		</a>
-	</div>
-	<div class="filtr-item" data-category="2">
-		<a href="#">
-			<img src="images/a1.png" alt="">
-			<span>jqueryrotate制作机锋网积分抽奖效果</span>
-		</a>
-	</div>
-	<div class="filtr-item abc" data-category="2">
-		<a href="#">
-			<img src="images/a2.png" alt="">
-			<span>jQuery左右垂直反向滚动插件multiscroll.js</span>
-		</a>
-	</div>
-</div>
+</c:forEach>	
+	
+		
 
+</div>
+当前页<span id="currentPage" >${currentPage}</span>  总页数<span id="totalPages"  >${totalPages } </span>  <a >上一页</a>  <a href="<%=path %>production/AddPages.action?currentPage=${currentPage}&totalPages=${totalPages}">下一页</a>
+<input type="button"   value="上一页"  onclick="addPages('last')" />
+<input type="button"   value="下一页"  onclick="addPages('next')" />
 <script src="<%=path%>js/jquery.min.js"></script>
 <script src="<%=path%>js/jquery.filterizr.js"></script>
 
@@ -109,6 +59,44 @@ $(function() {
 		$(this).toggleClass('active').siblings().removeClass('active');
 	});
 });
+
+function addPages(state){
+	 
+
+	$("#proList").empty();
+	
+	$.ajax({	
+		 url:"<%=path %>production/AddPages.action",
+		 data:"currentPage="+${currentPage}+"&state="+state+"&totalPages="+${totalPages}+"&conditionName="+$("#conditionName").val()+"&fieldName="+$("#fieldName").val(),
+		 dataType:"json",
+		 type:"post",
+		 success:function(redata){
+			 $("#currentPage").empty();
+			 $("#totalPages").empty();
+			 $("#currentPage").html(redata.currentPage);
+			 $("#totalPages").html(redata.totalPages);
+			 
+			 var list=redata.proList;
+			 var len = list.length;
+			
+			 for(var i=0;i<len;i++){    			        	 
+	             var e = list[i];
+	           
+	             $("#proList").append("<div class='filtr-item' data-category='2'> <a href='<%=path%>production/toProductionDetal.action?proId="+e.productionId+"'>"
+	            		+ 	"<img src='<%=path%>picture/findPicture.action?url="+e.productionImage+" ' >"
+	            				+"<span class='ss'>"+e.productionName +"</span>"
+	            				+"</a></div> "
+	             );
+	            
+			 
+			 
+			 } 	 
+			 
+		 }
+	});
+	
+}
+
 </script>
 
 <!-- 以下信息与演示无关，可不必理会 -->
@@ -142,14 +130,14 @@ pre { padding: 15px 0; border: 1px solid #f0f0f0; background-color: #f8f8f8;}
 
 
 
-<div class="menu">
+<!-- <div class="menu">
 	<a href="index.html">1、单选</a>
 	<a href="index2.html">2、多选</a>
 	<a href="index3.html">3、排序</a>
 	<a class="cur" href="index4.html">4、搜索</a>
 	<a href="index5.html">5、指定筛选过滤</a>
 	<a href="index6.html">6、回调函数</a>
-</div>
+</div> -->
 
 </body>
 </html>

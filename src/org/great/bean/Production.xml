@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.great.mapper.ProductionMapper">
+<!--新增作品  -->	
+ 
+	<insert id="addProduction"  parameterType="org.great.bean.ProductionBean">
+	 
+insert into PRODUCTIONTBL (PRODUCTIONID,PRODUCTIONNAME,PARAMETERID,USERID,PRODUCTIONMONEY,PRODUCTIONPUBLISHTIME,PRODUCTIONIMAGE,PRODUCTIONFILE,PRODUCTIONDETAL) 
+values (seqid.nextval,#{productionName},#{parameterId},#{userId},#{productionMoney},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{productionImage},#{productionFile},#{productionDetal})
+	
+	
+</insert>
+
+  <select id="findProductionList" 
+	 resultType="org.great.bean.ProductionBean" 
+	 parameterType="org.great.bean.ConditionBean">
+ 
+	  SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (	
+	 	select * from PRODUCTIONTBL  where 1=1 
+	 	
+	 	<if test="fieldName!=null"> and productionName like #{fieldName}</if>
+			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
+  ) A WHERE ROWNUM &lt;=(#{currentPage}*#{eachPageCum}))  WHERE RN &gt;=(1+(#{currentPage}-1)*#{eachPageCum}) 
+	 
+	
+		 </select>  
+
+
+<select id="findAllProductionList" 
+	 resultType="org.great.bean.ProductionBean" 
+	 parameterType="org.great.bean.ConditionBean">
+ 
+	 
+	 	select * from PRODUCTIONTBL  where 1=1 
+	 	
+	 	<if test="fieldName!=null"> and productionName like #{fieldName}</if>
+			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
+  
+	 
+	
+		 </select> 
+
+<select id="findProductionDetal" 
+	 resultType="org.great.bean.ProductionBean" 
+	 parameterType="java.lang.Integer">
+ 
+	 
+	 	select * from PRODUCTIONTBL  where productionId=#{id} 
+	 	
+	  
+	 
+	
+		 </select> 
+	 
+	 
+	 
+	 
+	 <insert id="productionPayFinish"  parameterType="java.lang.Integer"
+	 
+	 >
+	 
+insert into PROANDUSER (PROANDUSERID,USERID,PRODUCTIONID,PAYTIME) 
+values (seqid.nextval,#{userId},#{proId},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'))
+	
+	
+</insert>
+
+
+	 <insert id="addTradRecord"   >
+	 
+insert into FUNDTBL (FUNDID,USERID,BUSINESSID,DEALDATE,TOUSERID,DEALMONEY) 
+values (seqid.nextval,#{userId},#{businessId},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{proUserId},#{price})
+	
+	
+</insert>
+<!-- 查找用户余额 -->
+<select id="findUserMoney" 
+	 resultType="java.lang.Double" 
+	 parameterType="java.lang.Integer">
+ 
+	 
+	 select USERMONEY from USERTBL where USERID=#{userId}
+	 	
+	  
+	 
+	
+		 </select> 
+
+<!-- 设置用户余额 -->
+<update id="setNewUserMoney">
+
+
+UPDATE USERTBL SET USERMONEY =#{userMoney}  WHERE USERID =#{userId}
+
+</update>
+</mapper>

@@ -175,9 +175,9 @@
 	        })
 	    })
 	    
-
+var page="${requestScope.page}";
 function selectFund(state){
-    var page="${requestScope.page}";
+	
 	$("#tb").empty();
 	var num=$("#btn1").val();
 	if(num!=""){
