@@ -23,12 +23,17 @@ public List<UserBean> serachBusiness(@Param("name")String name,
 public List<UserBean> businessNumber(@Param("name")String name);
 public UserBean employer(@Param("userid")String userid);
 public UserInfoBean userinfo(@Param("userid")String userid);
+
 public List<UserBean> employers(@Param("name")String name,@Param("page")int page,@Param("state")int state);
 public int delEmployers(@Param("account")String account,@Param("num")String num);//删除雇主
 public int countEmployers(@Param("name")String name,@Param("state")int state);//雇主总个数
+
+public List<UserBean> countFacilitator();
+public List<UserBean> countFacilitator2();
+public List<UserBean> countFacilitator3(String userName);
+public List<UserBean> countFacilitator4(String userName);
+public List<UserBean> facilitator(@Param("name")String name,@Param("page")int page);
 public List<UserBean> login(String userAccount,String userPwd);
-public void addUser(@Param(value="userAccount")String userAccount ,@Param(value="userPwd")String userPwd ,@Param(value="characterId")Integer characterId ,@Param(value="userName")String userName ,@Param(value="userTel")long userTel ,@Param(value="userIdentity")String userIdentity ,@Param(value="stateId")int stateId);
-public List<UserBean> checkAccount(String userAccount);
 public List<UserBean> getCredit();//得到低信誉用户
 public List<UserBean> userCredit(@Param("end")int end,@Param("start")int start);//分页查询低信誉用户
 public UserInfoBean searchCredit(@Param("username")String username);//查询用户信誉
@@ -43,5 +48,12 @@ public int countStory(@Param("title")String title,@Param("state")int state);//�
 public int delStory(@Param("userAccount")String userAccount);//删除雇主故事
 public List<UserStoryBean> updateOne(@Param("userAccount")String userAccount); //查询单个故事
 public int updateOk(UserStoryBean usb); //确认修改故事
+public void addUser(@Param(value="userAccount")String userAccount ,@Param(value="userPwd")String userPwd ,@Param(value="characterId")Integer characterId ,@Param(value="userName")String userName ,@Param(value="userTel")long userTel ,@Param(value="userIdentity")String userIdentity ,@Param(value="stateId")int stateId,@Param(value="userRegisterTime")String userRegisterTime);
+public List<UserBean> checkAccount(String userAccount);
+public void changeState(int userId);
+public void changeState2(int userId);
+public void changeState3(int userId);
+public void changeInfo(@Param(value="userId")int userId ,@Param(value="userName")String userName ,@Param(value="userTel")Long userTel ,@Param(value="userAccount")String userAccount ,@Param(value="userSex")String userSex ,@Param(value="userMail")String userMail ,@Param(value="userIdentity")String userIdentity,@Param(value="userCredit")int userCredit,@Param(value="userMoney")int userMoney,@Param(value="userRegisterTime")String userRegisterTime);
+
 
 }

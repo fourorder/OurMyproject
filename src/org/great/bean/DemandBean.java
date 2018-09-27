@@ -17,6 +17,8 @@ public class DemandBean {
 	private String auctionTime;//拍卖时间
 	private String stateId;//拍卖状态
 	private String demandHead;//需求头像
+	private String parameterName;
+	private String demandDetailInformation;//陈毅需求详情
 	public DemandBean() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -117,7 +119,18 @@ public class DemandBean {
 	public void setDemandHead(String demandHead) {
 		this.demandHead = demandHead;
 	}
+	public String getParameterName() {
+		return parameterName;
+	}
+	public void setParameterName(String parameterName) {
+		this.parameterName = parameterName;
+	}
+	public String getDemandDetailInformation() {
+		return demandDetailInformation;
+	}
+	public void setDemandDetailInformation(String demandDetailInformation) {
+		this.demandDetailInformation = demandDetailInformation;
+	}
 	
-	
-	
+   
 }

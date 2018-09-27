@@ -1,5 +1,4 @@
 package org.great.biz;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,4 +36,17 @@ public interface DemandBiz {
 
 	// 我要投标
 	public int addBid(String userid,String demandid);
+	public List<DemandBean> countDemand();
+	public List<DemandBean> countDemand2(String demandTitle);
+	public List<DemandBean> demand(String demandTitle,int page);
+	public List<DemandBean> findInfo(int demandId);
+	public String findFromUserName(int demandId);
+	public String findToUserName(int demandId);
+	public String findParameterName(int demandId);
+	public String findStateName(int demandId);
+	public void changeInfo(int demandId2,String demandDetailInformation2,int securityMoney2,int dealMoney2,String completeTime2,String auctionTime2,String demandHead2);
+	public void changeState(int demandId,int stateId);
+	public void changeState2(int demandId,int stateId);
+	public void changeState3(int demandId,int stateId);
+
 }

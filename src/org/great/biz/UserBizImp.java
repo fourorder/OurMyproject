@@ -212,12 +212,67 @@ public List<List<Object>> userCredit(String page,String state){
 	objects.add(list);
 	return objects;
 }
+@Override
+public List<UserBean> countFacilitator() {
+	// TODO Auto-generated method stub
+	return userMapper.countFacilitator( );
+}
+@Override
+public List<UserBean> countFacilitator2() {
+	// TODO Auto-generated method stub
+	return userMapper.countFacilitator2( );
+}
+@Override
+public List<UserBean> countFacilitator3(String userName) {
+	// TODO Auto-generated method stub
+	 userName="%"+userName+"%";
+	return userMapper.countFacilitator3(userName);
+}
+@Override
+public List<UserBean> countFacilitator4(String userName) {
+	// TODO Auto-generated method stub
+	userName="%"+userName+"%";
+	return userMapper.countFacilitator4(userName );
+}
 
 
+@Override
+public List<UserBean> facilitator(String name, int page) {
+	// TODO Auto-generated method stub
+	if (name!=null) {
+		name="%"+name+"%";
+	}
+	return userMapper.facilitator(name,page);
+}
+
+
+
+@Override
+public void changeState(int userId,int stateId) {
+	// TODO Auto-generated method stub
+	if(stateId==1) {
+		userMapper.changeState(userId);
+	}else if(stateId==2) {
+		userMapper.changeState2(userId);
+	}else if(stateId==3) {
+		userMapper.changeState3(userId);
+	}
+	
+}
+
+
+@Override
+public void changeInfo(int userid, String userName, Long userTel, String userAccount, String userSex, String userMail,
+		String userIdentity, int userCredit, int userMoney, String userRegisterTime) {
+	// TODO Auto-generated method stub
+	userMapper.changeInfo(userid, userName, userTel, userAccount, userSex, userMail, userIdentity, userCredit, userMoney, userRegisterTime);
+
+}
 @Override
 public UserInfoBean searchCredit(String username) {
 	// TODO Auto-generated method stub
 	return userMapper.searchCredit(username);
+	
 }
 @Override
 public List<UserBean> updateInfo(String userAccount) {
@@ -258,10 +313,6 @@ public String upLoadFile(HttpServletRequest request, MultipartFile file) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-
 	return uploadDocName;
 }
 
@@ -356,9 +407,6 @@ public int delEmployers(String account) {
 	// TODO Auto-generated method stub
 	return 0;
 }
-
-
-
 
 
 

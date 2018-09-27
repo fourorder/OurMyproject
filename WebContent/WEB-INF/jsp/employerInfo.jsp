@@ -171,7 +171,7 @@
 									
 									<div class="ydc-reg-form-group clearfix" style="margin-top:40px;">
 										<div class="ydc-reg-form-button" style="margin-left:255px;">
-											<a class="btn fl" href="<%=path%>user/returnHome.action">返回</a>
+											<a class="btn fl" href="<%=path%>user/home.action">返回</a>
 										</div>
 									</div>
 									<div class="ydc-reg-form-group clearfix" style="margin-top:40px;">

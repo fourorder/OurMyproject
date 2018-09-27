@@ -145,6 +145,7 @@ function selectFund(state){
 		 dataType:"json",
 		 type:"post",
 		 success:function(redata){
+		
 			   		page=redata[0];
 			   	 var list=redata[1];
 		         var len = list.length;

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.great.mapper.RuleMapper">
+<select id="countRule" resultType="org.great.bean.RuleBean">
+select * from ruleTbl where stateId！=7
+</select>
+<select id="countRule2" parameterType="String" resultType="org.great.bean.RuleBean">
+select * from ruleTbl where ruleName like #{ruleName} and stateId！=7
+</select>
+<select id="rule" resultType="org.great.bean.RuleBean">
+select * from(
+select rownum rn,r.* from (select ruleTbl.*,tbParameter.parameterName from ruleTbl,tbParameter where ruleTbl.stateId=tbParameter.parameterId and ruleTbl.stateId！=7
+<if test="ruleName != null">
+and ruleName like #{ruleName} order by ruleId 
+</if>
+)r
+ where rownum &lt;= (#{page}*2))
+ where rn &gt;= ((#{page}-1)*2+1)
+</select>
+<select id="findInfo" parameterType="int" resultType="org.great.bean.RuleBean">
+select ruleTbl.*,tbParameter.parameterName from ruleTbl,tbParameter where ruleId=#{ruleId} and ruleTbl.stateId=tbParameter.parameterId
+</select>
+<update id="changeInfo" >
+UPDATE ruleTbl set ruleName=#{ruleName2},securityMoney=#{securityMoney2},dealMoney=#{dealMoney2},auctionTime=#{auctionTime2},completeTime=#{completeTime2} WHERE ruleId=#{ruleId2}
+</update>
+<update id="changeState" parameterType="int">
+UPDATE ruleTbl set stateId=7 where ruleId=#{ruleId}
+</update>
+<update id="changeState2" parameterType="int">
+UPDATE ruleTbl set stateId=6 where ruleId=#{ruleId}
+</update>
+<update id="changeState3" parameterType="int">
+UPDATE ruleTbl set stateId=5 where ruleId=#{ruleId}
+</update>
+<insert id="addRule" >
+  insert into ruleTbl(ruleId, ruleName,securityMoney,dealMoney,auctionTime,completeTime,stateId) values(SEQID.nextval,#{ruleName3}, #{securityMoney3},#{dealMoney3},#{auctionTime3},#{completeTime3},5)
+</insert>
+	 
+</mapper>

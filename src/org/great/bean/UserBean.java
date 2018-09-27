@@ -21,6 +21,24 @@ public int stateId;//状态id
 public int characterId;//角色id
 public String userRegisterTime;//注册时间
 public String userProfile;//用户简介
+public String characterName;
+public String stateName;
+
+public String getStateName() {
+	return stateName;
+}
+
+public void setStateName(String stateName) {
+	this.stateName = stateName;
+}
+
+public String getCharacterName() {
+	return characterName;
+}
+
+public void setCharacterName(String characterName) {
+	this.characterName = characterName;
+}
 
 public UserBean() {
 	super();

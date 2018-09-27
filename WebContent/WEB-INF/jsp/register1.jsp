@@ -167,7 +167,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
 	<script type="text/javascript">
 	 function checkAccount(){
-
+           var flag;
 	        var  userAccount  = document.getElementById("userAccount").value;
 
 	       var account = /^[a-z0-9]\w+@[a-z0-9]{2,3}(\.[a-z]{2,3}){1,2}$/i;  // .com .com.cn
@@ -179,30 +179,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 data:{"userAccount":$("#userAccount").val()},
 				 dataType:"json",
 				 type:"post",
+				 async: false,
 				 success:function(data){
 					 
-					 $("#accountspan").html(data[0]);			 
+					 $("#accountspan").html(data[0]);
+					 
+					 if(data[0]==2){
+						 if(account.test(userAccount)){
+
+					           //符合规则 
+
+					           accountspan.innerHTML="邮箱可以使用".fontcolor("green");
+
+					          
+				               flag=true;
+					           
+
+					       } else{
+
+					           //不符合规则
+
+					           accountspan.innerHTML="邮箱格式输入错误".fontcolor("red");
+
+					           flag =false;
+
+					       }  
+					 }else{
+						 accountspan.innerHTML="邮箱已被占用".fontcolor("red");
+						 flag= false;
+					 }
 				 }
 			 });
-	       if(account.test(userAccount)){
-
-	           //符合规则 
-
-	           accountspan.innerHTML="邮箱可以使用".fontcolor("green");
-
-	          
-
-	           return true;
-
-	       }else{
-
-	           //不符合规则
-
-	           accountspan.innerHTML="邮箱格式输入错误".fontcolor("red");
-
-	           return false;
-
-	       }  
+	      
+	       return flag;
+	      
 	 	  
 
 	    }
