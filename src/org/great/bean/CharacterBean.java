@@ -1,5 +1,8 @@
 package org.great.bean;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CharacterBean {
 	private int characterId;
 	private String characterName;

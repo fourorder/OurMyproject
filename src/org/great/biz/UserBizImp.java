@@ -3,10 +3,13 @@ import java.util.ArrayList;
 import java.util.List;
 import org.great.bean.UserInfoBean;
 import javax.annotation.Resource;
+
+import org.great.bean.ProductionBean;
 import org.great.bean.UserBean;
 import org.great.mapper.FundMapper;
 import org.great.mapper.ProductionMapper;
 import org.great.mapper.UserMapper;
+import org.great.tools.Worm;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,8 @@ private ProductionMapper productionMapper;
 public List<Object> search(String name,String page,String state,int falg){
 	List<Object> list=new ArrayList<Object>();
 	List<Object> objects=new ArrayList<Object>();
+	List<ProductionBean> worm=new ArrayList<ProductionBean>();
+	List<ProductionBean> temp=new ArrayList<ProductionBean>();
 	int page1=Integer.parseInt(page);
 	int count1=0;
 	if (falg==1) {
@@ -27,6 +32,9 @@ public List<Object> search(String name,String page,String state,int falg){
 		count1=userMapper.businessNumber("%"+name+"%").size();
 	}else if(falg==3){
 		count1=productionMapper.productionNumber("%"+name+"%").size();
+	}else if(falg==4){
+		worm=Worm.getInfo(name);
+		count1=worm.size();
 	}
 	int countpage1=(int) Math.ceil(((float)count1)/6);
 	if(state==null){
@@ -52,6 +60,14 @@ public List<Object> search(String name,String page,String state,int falg){
 		list.add(userMapper.serachBusiness("%"+name+"%", end, start));
 	}else if (falg==3) {
 		list.add(productionMapper.selectProduction("%"+name+"%", end, start));//作品列表		
+	}else if (falg==4) {
+		if (end>worm.size()) {
+			end=worm.size();
+		}		
+		for (int i = start-1; i < end; i++) {
+			temp.add(worm.get(i));
+		}
+		list.add(temp);
 	}	
 	list.add(page1);//当前页数
 	list.add(countpage1);//总页数
@@ -65,13 +81,19 @@ public List<Object> getAllList(String name){
 	List<Object> list=new ArrayList<Object>();
 	List<Object> list1=new ArrayList<Object>();
 	List<Object> list2=new ArrayList<Object>();
+	List<Object> list3=new ArrayList<Object>();
 	List<Object> objects=new ArrayList<Object>();
+	List<ProductionBean> worm=new ArrayList<ProductionBean>();
+	List<ProductionBean> temp=new ArrayList<ProductionBean>();
+	worm=Worm.getInfo(name);
 	int count1=userMapper.employerNumber("%"+name+"%").size();
 	int count2=userMapper.businessNumber("%"+name+"%").size();
 	int count3=productionMapper.productionNumber("%"+name+"%").size();
+	int count4=worm.size();
 	int countpage1=(int) Math.ceil(((float)count1)/6);
 	int countpage2=(int) Math.ceil(((float)count2)/6);
 	int countpage3=(int) Math.ceil(((float)count3)/6);
+	int countpage4=(int) Math.ceil(((float)count4)/6);
 	list.add(userMapper.serachEmployer("%"+name+"%",6,1));
 	list.add(1);
 	list.add(countpage1);
@@ -84,9 +106,22 @@ public List<Object> getAllList(String name){
 	list2.add(1);
 	list2.add(countpage3);
 	list2.add(count3);
+	int len=6;
+	if (worm.size()<6) {
+		len=worm.size();
+	}
+	for (int i = 0; i < len; i++) {
+		temp.add(worm.get(i));
+	}	
+	list3.add(temp);
+	list3.add(1);
+	list3.add(countpage4);
+	list3.add(count4);
 	objects.add(list);
 	objects.add(list1);
 	objects.add(list2);
+	objects.add(list3);
+//	objects.add(Worm.getInfo(name));
 	return objects;
 }
 @Override

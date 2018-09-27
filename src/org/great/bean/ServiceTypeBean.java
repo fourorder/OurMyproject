@@ -1,5 +1,8 @@
 package org.great.bean;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ServiceTypeBean {
 	private int parameterId;//服务类型
 	private String parameterName;

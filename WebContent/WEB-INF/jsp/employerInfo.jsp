@@ -156,7 +156,7 @@
 									<div class="ydc-reg-form-group clearfix">
 										<label>用户状态</label>
 										<div class="ydc-reg-form-input">
-											<label>${user.characteBean.characterName}</label>
+											<label>${user.characterBean.characterName}</label>
 										</div>
 									</div>
 									

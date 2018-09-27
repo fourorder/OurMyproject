@@ -53,6 +53,12 @@ public List<Object> selectBpage(String name,String bpage,String state){
 public List<Object> selectPpage(String name,String ppage,String state){
 	return userBizImp.search(name, ppage, state, 3);
 }
+@RequestMapping("/selectopage.action")
+//外部网站分页ajax
+@ResponseBody
+public List<Object> selectOpage(String name,String opage,String state){
+	return userBizImp.search(name, opage, state, 4);
+}
 @RequestMapping("/EmployerInformation.action")//用户详细信息
 public ModelAndView EmployerInformation(HttpServletRequest request,String userid){
 	ModelAndView modelAndView=new ModelAndView();

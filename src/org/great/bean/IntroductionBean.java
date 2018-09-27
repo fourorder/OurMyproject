@@ -1,5 +1,8 @@
 package org.great.bean;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class IntroductionBean {
 private int inductionId;
 private String content;

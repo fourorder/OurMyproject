@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Component;
 
- 
+@Component
 public class ConditionBean {// 条件bean
 
 	private float currentPage;// 当前页

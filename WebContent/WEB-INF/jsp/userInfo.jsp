@@ -172,7 +172,7 @@
 									<div class="ydc-reg-form-group clearfix">
 										<label>帐号类别</label>
 										<div class="ydc-reg-form-input">
-											<label>${userInfo.characteBean.characterName}</label>
+											<label>${userInfo.characterBean.characterName}</label>
 										</div>
 									</div>
 									

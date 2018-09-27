@@ -2,6 +2,8 @@ package org.great.bean;
 
 import java.util.ArrayList;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Component;
 
 @Component

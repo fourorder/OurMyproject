@@ -171,7 +171,7 @@
 										</div>
 									<div class="ydc-reg-form-class ydc-reg-form-reg" style="margin-top:40px;">
 										<div class="ydc-reg-form-group clearfix">
-											<label>帐号类型:${userInfo.characteBean.characterName}</label>
+											<label>帐号类型:${userInfo.characterBean.characterName}</label>
 											
 									</div>
 					

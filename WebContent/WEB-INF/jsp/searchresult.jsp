@@ -31,11 +31,11 @@ ul,ul li{ list-style:none;}
 .tab ul.menu{height:34px;background:#04B6E9;}
 .tab ul.menu li{float:left;text-align:center;width:120px;height:32px;background:#f6f6f6;line-height:32px;list-style:none;font-size:12px;cursor:pointer;}
 .tab ul.menu li.active{background:#04B6E9;color:#fff;}
-.con1,.con2,.con3{height:190px;border-top:2px solid #04B6E9;margin-top:-2px;}
-.con2,.con3{display:none;}
-.con1 ul,.con2 ul,.con3 ul{padding:5px;}
-.con1 ul li,.con2 ul li,.con3 ul li{background:url(images/point.png) no-repeat left center;padding:0 0 0 10px;font-size:14px;line-height:180%;color:#252525;}
-.con1 ul li:hover,.con2 ul li:hover,.con3 ul li:hover{color:#04B6E9;cursor:pointer;text-decoration:underline;}
+.con1,.con2,.con3,.con4{height:190px;border-top:2px solid #04B6E9;margin-top:-2px;}
+.con2,.con3,.con4{display:none;}
+.con1 ul,.con2 ul,.con3 ul,.con4 ul{padding:5px;}
+.con1 ul li,.con2 ul li,.con3 ul li,.con4 ul li{background:url(images/point.png) no-repeat left center;padding:0 0 0 10px;font-size:14px;line-height:180%;color:#252525;}
+.con1 ul li:hover,.con2 ul li:hover,.con3 ul li,.con4 ul li:hover{color:#04B6E9;cursor:pointer;text-decoration:underline;}
 
 /*图片框样式-------------------------------*/
 
@@ -44,7 +44,7 @@ body{font:12px/180% "宋体",Arial, Helvetica, sans-serif;}
 .clear{clear:both;}
 .demopage{width:600px;margin:0 auto;}
 /* item */
-.item{width:150px;height:150px;border:2px solid #00BFFF;margin:5px 5px 5px 0;overflow:hidden;position:relative;float:left;}
+.item{width:150px;height:220px;border:2px solid #00BFFF;margin:5px 5px 5px 0;overflow:hidden;position:relative;float:left;}
 .item .caption{width:150px;height:150px;background:url(images/dianbg.png);_background:#000000;color:#8A2BE2;font-weight:bold;position:absolute;left:0;display:none;/*background:#000000;filter:alpha(opacity=70);-moz-opacity:0.7;-khtml-opacity:0.7;opacity:0.7;*/}
 .item .caption a{text-decoration:none;color:#0cc7dd;font-size:14px;padding:5px;display:block;}
 .item .caption p a{padding:5px;margin:0;font-size:12px;color:#fff;font-weight:normal;}
@@ -52,28 +52,28 @@ body{font:12px/180% "宋体",Arial, Helvetica, sans-serif;}
 
 /*六个图片框的位置*/
 #img1{position:absolute;
-top:60px;
-left:120px;
+top:40px;
+left:170px;
 }
 #img2{position:absolute;
-top:60px;
-left:370px;
+top:40px;
+left:420px;
 }
 #img3{position:absolute;
-top:60px;
-left:620px;
+top:40px;
+left:670px;
 }
 #img4{position:absolute;
-top:240px;
-left:120px;
+top:270px;
+left:170px;
 }
 #img5{position:absolute;
-top:240px;
-left:370px;
+top:270px;
+left:420px;
 }
 #img6{position:absolute;
-top:240px;
-left:620px;
+top:270px;
+left:670px;
 }
 
 .mybtn{
@@ -149,16 +149,17 @@ $(function () {
 
 
 </script> 
-<div class="o-search" style="position:absolute;left:500px;top:80px;">
+<div class="o-search" style="position:absolute;left:540px;top:80px;">
 <form action="<%=path%>user/search.action?page=1" method="post">
 <input type="text" class="search-text"  placeholder="请输入您搜索的关键词" name="name" value="${requestScope.searchName}" id="name"><button class="search-bnt" type="submit"><img src="<%=path%>images/search-i.png">  搜索</button>
 </form>
 </div>
-<div class="tab" style="height:500px;width:900px;position:absolute;top:10px;left:300px;">
+<div class="tab" style="height:550px;width:1000px;position:absolute;top:10px;left:300px;">
 	<ul class="menu">
-		<li class="active" style="width:300px;">雇主</li>
-		<li style="width:300px;">服务商</li>
-		<li style="width:300px;">商品</li>
+		<li class="active" style="width:250px;">雇主</li>
+		<li style="width:250px;">服务商</li>
+		<li style="width:250px;">商品</li>
+		<li style="width:250px;">外站搜索</li>
 
 	</ul>
 	<div class="con1" id="con1">
@@ -170,11 +171,11 @@ $(function () {
 			<p>昵称:${obj.userName}</p>
 			<p>注册时间:${obj.userRegisterTime}</p>
 		</div>
-		<div style="position:absolute;top:120px;"><font color="red" size="4px">${obj.userName}</font></div>
+		<font color="red" size="5px" style="position:absolute;bottom:0px;">${obj.userName}</font>
 	</div >	
 	</a>								
 	</c:forEach>
-<div style="position:absolute;top:460px;left:240px;" id="div1">
+<div style="position:absolute;top:510px;left:260px;" id="div1">
 <button class="mybtn" onclick="selectepage('home')">首页</button>
 共${requestScope.objList[0][3]}条
 当前页数：[${requestScope.objList[0][1]}/${requestScope.objList[0][2]}]
@@ -200,11 +201,11 @@ $(function () {
 			<p>昵称:${obj.userName}</p>
 			<p>注册时间:${obj.userRegisterTime}</p>
 		</div>
-		<div style="position:absolute;top:120px;"><font color="red" size="4px">${obj.userName}</font></div>
+		<font color="red" size="5px" style="position:absolute;bottom:0px;">${obj.userName}</font>
 	</div >	
 	</a>								
 	</c:forEach>
-<div style="position:absolute;top:460px;left:240px;" id="div1">
+<div style="position:absolute;top:510px;left:260px;" id="div1">
 <button class="mybtn" onclick="selectbpage('home')">首页</button>
 共${requestScope.objList[1][3]}条
 当前页数：[${requestScope.objList[1][1]}/${requestScope.objList[1][2]}]
@@ -230,11 +231,11 @@ $(function () {
 			<p>购买次数:${obj.buyCount}</p>
 			<p>上架时间:${obj.productionPublishTime}</p>
 		</div>
-		<div style="position:absolute;top:120px;"><font color="red" size="4px">${obj.productionName}</font></div>
+		<font color="red" size="5px" style="position:absolute;bottom:0px;">${obj.productionName}</font>
 	</div >	
 	</a>								
 	</c:forEach>
-<div style="position:absolute;top:460px;left:240px;" id="div1">
+<div style="position:absolute;top:510px;left:260px;" id="div1">
 <button class="mybtn" onclick="selectppage('home')">首页</button>
 共${requestScope.objList[2][3]}条
 当前页数：[${requestScope.objList[2][1]}/${requestScope.objList[2][2]}]
@@ -250,6 +251,36 @@ $(function () {
 <button class="mybtn" onclick="selectppage('jump')">跳转</button>
 </div> 		
 	</div>
+	
+	
+	<div class="con4" id="con4">
+<c:forEach items="${objList[3][0]}"  var="obj" varStatus="status">	
+	 <a href="${obj.productionFile}" target="_blank"><div class="item" id="img${status.count}" > 
+
+		<img width="150" height="150" alt="" src="${obj.productionImage}" />
+		 <div class="caption" style="text-align:center;" >
+		</div> 
+		   <font color="red" size="1px" style="position:absolute;top:150px;">${obj.productionDetal}</font>
+	</div >	
+	
+	</a>	 						
+	</c:forEach>
+ <div style="position:absolute;top:510px;left:260px;" id="div1">
+<button class="mybtn" onclick="selectopage('home')">首页</button>
+共${requestScope.objList[3][3]}条
+当前页数：[${requestScope.objList[3][1]}/${requestScope.objList[3][2]}]
+<button class="mybtn" onclick="selectopage('end')">末页</button>
+<button class="mybtn" onclick="selectopage('last')" id="olast" disabled="disabled">上一页</button>
+<c:if test="${requestScope.objList[3][2]=='1'}">
+<button class="mybtn" onclick="selectopage('next')" id="onext" disabled="disabled">下一页</button>
+</c:if>
+<c:if test="${requestScope.objList[3][2]!='1'}">
+<button class="mybtn" onclick="selectopage('next')" id="onext">下一页</button>
+</c:if>
+到第<input type="text" style="width:25px;" id="opageNum" value="">页
+<button class="mybtn" onclick="selectopage('jump')">跳转</button>
+</div>  		
+	</div>
 </div>
 
 
@@ -259,6 +290,7 @@ $(function () {
 var epage="${requestScope.page}";
 var bpage="${requestScope.page}";
 var ppage="${requestScope.page}";
+var opage="${requestScope.page}";
 function selectepage(state){
 	var num=$("#epageNum").val();
 	$("#con1").empty();
@@ -279,7 +311,7 @@ function selectepage(state){
 		         var count=objList[3];
 		         for(var i=1;i<len;i++){    			        	 
 		             var e = list[i-1];
-		             $("#con1").append("<a href='#'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.userName+"' src='<%=path%>images/banner-touxiang.png' /><div class='caption' style='text-align:center;' ><p>账户:"+e.userAccount+"</p><p>昵称:"+e.userName+"</p><p>注册时间:"+e.userRegisterTime+"</p></div><div style='position:absolute;top:120px;'><font color='red' size='4px'>"+e.userName+"</font></div></div></a>"); 
+		             $("#con1").append("<a href='#'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.userName+"' src='<%=path%>images/banner-touxiang.png' /><div class='caption' style='text-align:center;' ><p>账户:"+e.userAccount+"</p><p>昵称:"+e.userName+"</p><p>注册时间:"+e.userRegisterTime+"</p></div><font color='red' size='5px'style='position:absolute;bottom:0px;'>"+e.userName+"</font></div></a>"); 
 		         }
 		         
 		         epage=nowPage;
@@ -302,7 +334,7 @@ function selectepage(state){
 		     		//隐藏标题
 		     		$(this).find('div.caption').stop(false,true).fadeOut(200);
 		     	});		     	
-		     	$("#con1").append("<div  style='position:absolute;top:460px;left:240px;' id='div1'><button class='mybtn' onclick=\"selectepage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectepage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectepage('last')\" id='elast'> 上一页 </button> <button class='mybtn' onclick=\"selectepage('next')\" id='enext'> 下一页 </button> 到第<input type='text' style='width:25px;' id='epageNum' value=''>页 <button class='mybtn' onclick=\"selectepage('jump')\"> 跳转 </button></div>");
+		     	$("#con1").append("<div  style='position:absolute;top:510px;left:260px;' id='div1'><button class='mybtn' onclick=\"selectepage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectepage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectepage('last')\" id='elast'> 上一页 </button> <button class='mybtn' onclick=\"selectepage('next')\" id='enext'> 下一页 </button> 到第<input type='text' style='width:25px;' id='epageNum' value=''>页 <button class='mybtn' onclick=\"selectepage('jump')\"> 跳转 </button></div>");
 		     	if(epage==1){
 		        	 $("#elast").attr("disabled",true);
 		         }else{
@@ -340,7 +372,7 @@ function selectbpage(state){
 		         var count=objList[3];
 		         for(var i=1;i<len;i++){    			        	 
 		             var e = list[i-1];
-		             $("#con2").append("<a href='#'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.userName+"' src='<%=path%>images/banner-touxiang.png' /><div class='caption' style='text-align:center;' ><p>账户:"+e.userAccount+"</p><p>昵称:"+e.userName+"</p><p>注册时间:"+e.userRegisterTime+"</p></div><div style='position:absolute;top:120px;'><font color='red' size='4px'>"+e.userName+"</font></div></div></a>"); 
+		             $("#con2").append("<a href='#'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.userName+"' src='<%=path%>images/banner-touxiang.png' /><div class='caption' style='text-align:center;' ><p>账户:"+e.userAccount+"</p><p>昵称:"+e.userName+"</p><p>注册时间:"+e.userRegisterTime+"</p></div><font color='red' size='5px'style='position:absolute;bottom:0px;'>"+e.userName+"</font></div></a>"); 
 		         } 	
 		         bpage=nowPage;
 		       //移动像素的图像
@@ -362,7 +394,7 @@ function selectbpage(state){
 		     		//隐藏标题
 		     		$(this).find('div.caption').stop(false,true).fadeOut(200);
 		     	});		     	
-		     	$("#con2").append("<div  style='position:absolute;top:460px;left:240px;' ><button class='mybtn' onclick=\"selectbpage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectbpage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectbpage('last')\"  id='blast'> 上一页 </button> <button class='mybtn' onclick=\"selectbpage('next')\" id='bnext'> 下一页 </button> 到第<input type='text' style='width:25px;' id='bpageNum' value=''>页 <button class='mybtn' onclick=\"selectbpage('jump')\"> 跳转 </button></div>");
+		     	$("#con2").append("<div  style='position:absolute;top:510px;left:260px;' ><button class='mybtn' onclick=\"selectbpage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectbpage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectbpage('last')\"  id='blast'> 上一页 </button> <button class='mybtn' onclick=\"selectbpage('next')\" id='bnext'> 下一页 </button> 到第<input type='text' style='width:25px;' id='bpageNum' value=''>页 <button class='mybtn' onclick=\"selectbpage('jump')\"> 跳转 </button></div>");
 		     	if(bpage==1){
 		        	 $("#blast").attr("disabled",true);
 		         }else{
@@ -398,7 +430,7 @@ function selectppage(state){
 		         var count=objList[3];
 		         for(var i=1;i<len;i++){    			        	 
 		             var e = list[i-1];
-		             $("#con3").append("<a href='#'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.productionName+"' src='<%=path%>picture/findPicture.action?url="+e.productionImage+"' /><div class='caption' style='text-align:center;' ><p>价格:"+e.productionMoney+"</p><p>购买次数:"+e.buyCount+"</p><p>上架时间:"+e.productionPublishTime+"</p></div><div style='position:absolute;top:120px;'><font color='red' size='4px'>"+e.productionName+"</font></div></div></a>"); 
+		             $("#con3").append("<a href='#'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.productionName+"' src='<%=path%>picture/findPicture.action?url="+e.productionImage+"' /><div class='caption' style='text-align:center;' ><p>价格:"+e.productionMoney+"</p><p>购买次数:"+e.buyCount+"</p><p>上架时间:"+e.productionPublishTime+"</p></div><font color='red' size='5px' style='position:absolute;bottom:0px;'>"+e.productionName+"</font></div></a>"); 
 		         } 	
 		         ppage=nowPage;
 		       //移动像素的图像
@@ -420,7 +452,7 @@ function selectppage(state){
 		     		//隐藏标题
 		     		$(this).find('div.caption').stop(false,true).fadeOut(200);
 		     	});		     	
-		     	$("#con3").append("<div  style='position:absolute;top:460px;left:240px;' ><button class='mybtn' onclick=\"selectppage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectppage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectppage('last')\" id='plast'> 上一页 </button> <button class='mybtn' onclick=\"selectppage('next')\" id='pnext'> 下一页 </button> 到第<input type='text' style='width:25px;' id='ppageNum' value=''>页 <button class='mybtn' onclick=\"selectppage('jump')\"> 跳转 </button></div>");
+		     	$("#con3").append("<div  style='position:absolute;top:510px;left:260px;' ><button class='mybtn' onclick=\"selectppage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectppage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectppage('last')\" id='plast'> 上一页 </button> <button class='mybtn' onclick=\"selectppage('next')\" id='pnext'> 下一页 </button> 到第<input type='text' style='width:25px;' id='ppageNum' value=''>页 <button class='mybtn' onclick=\"selectppage('jump')\"> 跳转 </button></div>");
 		     	if(ppage==1){
 		        	 $("#plast").attr("disabled",true);
 		         }else{
@@ -431,6 +463,66 @@ function selectppage(state){
 		         }else{
 		        	 $("#pnext").attr("disabled",false);
 		         }
+		 }
+	 }); 
+    	
+}
+
+function selectopage(state){
+	var num=$("#opageNum").val();
+	$("#con4").empty();
+	if(num!=""){
+		opage=num;		
+	} 
+	$.ajax({	
+		 url:"<%=path%>user/selectopage.action",
+		 data:"state="+state+"&opage="+opage+"&name="+$('#name').val(),
+		 dataType:"json",
+		 type:"post",
+		 success:function(redata){	 		
+			 var objList=redata[0];
+		   	 var list=objList[0];
+	         var len = list.length+1;
+	         var nowPage=objList[1];
+	         var countPage=objList[2];		         
+	         var count=objList[3];
+	         for(var i=1;i<len;i++){    			        	 
+	             var e = list[i-1];		            
+	             $("#con4").append("<a href='"+e.productionFile+"' target='_blank'><div class='item' id='img"+i+"' ><img width='150' height='150' alt='' src='"+e.productionImage+"' /><div class='caption' style='text-align:center;' ></div><font color='red' size='1px' style='position:absolute;top:150px;'>"+e.productionDetal+"</font></div ></a>");
+	         } 
+	         opage=nowPage;
+	       //移动像素的图像
+	     	/* var move = -15;
+	     	//缩放比例，1.2 =120％
+	     	var zoom = 1.2;
+	     	//在对这些缩略图的鼠标滑过事件 */
+	     	$('.item').hover(function(){
+	     		//根据缩放百分比设置宽度和高度
+	     		/* width = $('.item').width() * zoom;
+	     		height = $('.item').height() * zoom;
+	     		//移动和缩放图像
+	     		$(this).find('img').stop(false,true).animate({'width':width, 'height':height, 'top':move, 'left':move}, {duration:200}); */
+	     		//显示标题
+	     		$(this).find('div.caption').stop(false,true).fadeIn(200);
+	     	},function(){
+	     		/* //复位图像
+	     		$(this).find('img').stop(false,true).animate({'width':$('.item').width(), 'height':$('.item').height(), 'top':'0', 'left':'0'}, {duration:100});	 */
+	     		//隐藏标题
+	     		$(this).find('div.caption').stop(false,true).fadeOut(200);
+	     	});		     	
+	     	$("#con4").append("<div  style='position:absolute;top:510px;left:260px;' ><button class='mybtn' onclick=\"selectopage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectopage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectopage('last')\" id='olast'> 上一页 </button> <button class='mybtn' onclick=\"selectopage('next')\" id='onext'> 下一页 </button> 到第<input type='text' style='width:25px;' id='opageNum' value=''>页 <button class='mybtn' onclick=\"selectopage('jump')\"> 跳转 </button></div>");
+	     	if(opage==1){
+	        	 $("#olast").attr("disabled",true);
+	         }else{
+	        	 $("#olast").attr("disabled",false);
+	         }
+	         if(opage==countPage){
+	        	 $("#onext").attr("disabled",true);
+	         }else{
+	        	 $("#onext").attr("disabled",false);
+	         }
+	            	 
+	 
 		 }
 	 }); 
     	
