@@ -16,7 +16,7 @@ public class ProductionBean {
    private String productionPublishTime;
    private String productionFile;
    private String productionImage;
-private String productionDetal;
+   private String productionDetal;
    
    
    

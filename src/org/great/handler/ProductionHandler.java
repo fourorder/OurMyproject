@@ -60,7 +60,7 @@ public class ProductionHandler {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsp/issueProduction");
-	//	System.out.println("管理");
+		System.out.println("管理");
 		ArrayList<ParameterBean> list=new ArrayList<ParameterBean>();
 		list=parameterMapper.findProductionClass();
 		request.setAttribute("list", list);
@@ -80,6 +80,7 @@ public class ProductionHandler {
 		System.out.println("进入发布ID写死了"+"neirRong="+area2);
 		System.out.println("biaoti="+title+"jiage="+price+"fenlei="+className);
 		   String filename =productionFile.getOriginalFilename();
+		   System.out.println("filename="+filename);
 		   userId=2;
 		productionBizImp.toIssueProduction(request, title, price, className, area2,file,userId,productionFile);
 		

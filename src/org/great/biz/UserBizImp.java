@@ -1,12 +1,17 @@
 package org.great.biz;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.great.bean.UserInfoBean;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
 import org.great.bean.UserBean;
 import org.great.mapper.FundMapper;
 import org.great.mapper.UserMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UserBizImp implements UserBiz{
@@ -112,4 +117,49 @@ public boolean checkAccount(String userAccount) {
 	}
 	
 }
+
+
+@Override
+public boolean userInfoEdit(HttpServletRequest request,String userId, String userProfile, String userName, String userIdentity, String userTel,
+		String userMail,MultipartFile file) {
+		String userHead = "";
+		System.out.println(file);
+		userHead = upLoadFile(request, file);
+		System.out.println("userHead="+userHead);
+	userMapper.updateUserInfo(userId, userProfile, userName, userIdentity, userTel, userMail,userHead);
+	return true;
+}
+public String upLoadFile(HttpServletRequest request, MultipartFile file) {
+
+	String path = request.getServletContext().getRealPath("/images/");
+	
+	String filename = file.getOriginalFilename();
+
+	File filepath = new File(path, filename);
+	
+	if (!filepath.getParentFile().exists()) {
+		filepath.getParentFile().mkdirs();
+	}
+	String uploadDocName ="";
+	if(filename!=null && filename!=""){
+		uploadDocName = System.currentTimeMillis() + "@" + filename;
+		try {
+			file.transferTo(new File(path + File.separator + uploadDocName));
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+
+	return uploadDocName;
+}
+
+
+
 }

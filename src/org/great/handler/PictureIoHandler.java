@@ -42,11 +42,9 @@ public class PictureIoHandler {
 		FileInputStream fis = null;
 		 OutputStream os = null;
 		try {
-			//fis = new FileInputStream("C:\\Users\\Darren\\git\\Myproject\\WebContent\\images\\production1.png");
-	 
 			
 			String path = request.getServletContext().getRealPath("/images/");
-	 
+		
 			
 			fis = new FileInputStream(path+url);
 			os = response.getOutputStream();

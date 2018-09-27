@@ -125,19 +125,7 @@
 										</li>
 									</ol>
 								</div>
-								<!-- <div class="ydc-right-banner">
-									<div class="slideshow-container">
-										<a href="https://xihazahuopu.taobao.com/" target="_blank" class="mySlides fade" style="display: none;">
-											<img src="admin/images/ad/ad1.jpg" style="width:100%">
-										</a>
-										<a href="https://weibo.com/525135676" target="_blank" class="mySlides fade" style="display: block;">
-											<img src="admin/images/ad/ad2.jpg" style="width:100%">
-										</a>
-										<a href="http://www.a-ui.cn/" target="_blank" class="mySlides fade" style="display: none;">
-											<img src="admin/images/ad/ad3.jpg" style="width:100%">
-										</a>
-									</div>
-								</div> -->
+								
 							</div>
 						</div>
 					</div>
@@ -150,22 +138,7 @@
 <!-- content YDC end -->
 
 	<script type="text/javascript" src="<%=path %>admin/js/jquery.min.js"></script>
-	<!-- <script type="text/javascript">
-	    var slideIndex = 0;
-	    showSlides();
-
-	    function showSlides() {
-	        var i;
-	        var slides = document.getElementsByClassName("mySlides");
-	        for (i = 0; i < slides.length; i++) {
-	            slides[i].style.display = "none";
-	        }
-	        slideIndex++;
-	        if (slideIndex> slides.length) {slideIndex = 1}
-	        slides[slideIndex-1].style.display = "block";
-	        setTimeout(showSlides, 3000); // 滚动时间
-	    }
-	</script> -->
+	
 
 	<script type="text/javascript">
 	    $(function(){

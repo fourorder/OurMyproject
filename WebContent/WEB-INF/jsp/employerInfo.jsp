@@ -59,24 +59,13 @@
 											<label>${user.userName}</label>
 										</div>
 									</div>
-									<!-- <div class="ydc-reg-form-group clearfix">
-										<label>帐号类别</label>
-										<div class="ydc-reg-form-input">
-											<label>自媒体</label>
-										</div>
-									</div> -->
-									<!-- <div class="ydc-reg-form-group clearfix">
-										<label>分类</label>
-										<div class="ydc-reg-form-input">
-											<label>汽车</label>
-										</div>
-									</div> -->
+									
 									<div class="ydc-reg-form-group clearfix">
 										<label>雇主头像</label>
 										<div class="ydc-reg-form-input">
 											<label></label>
 											<div class="ydc-reg-form-text ydc-reg-form-user-logo">
-												<img src="admin/images/icon/user-logo.png" alt="">
+												<img src="<%=path%>picture/findPicture.action?url=${user.userHead}" alt="">
 											</div>
 										</div>
 									</div>

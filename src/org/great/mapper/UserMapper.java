@@ -5,22 +5,37 @@ import org.apache.ibatis.annotations.Param;
 import org.great.bean.UserBean;
 import org.great.bean.UserInfoBean;
 import org.springframework.stereotype.Repository;
+
 @Repository
 public interface UserMapper {
-public List<UserBean> serachEmployer(@Param("name")String name,
-		@Param("end")int end,@Param("start")int start);
-public List<UserBean> employerNumber(@Param("name")String name);
+	public List<UserBean> serachEmployer(@Param("name") String name, @Param("end") int end, @Param("start") int start);
 
-public List<UserBean> serachBusiness(@Param("name")String name,
-		@Param("end")int end,@Param("start")int start);
-public List<UserBean> businessNumber(@Param("name")String name);
-public UserBean employer(@Param("userid")String userid);
-public UserInfoBean userinfo(@Param("userid")String userid);
-public List<UserBean> employers(@Param("name")String name,@Param("page")int page);
-public int delEmployers(@Param("account")String account);//删除雇主
-public int countEmployers();//雇主总个数
-public List<UserBean> login(String userAccount,String userPwd);
-public void addUser(@Param(value="userAccount")String userAccount ,@Param(value="userPwd")String userPwd ,@Param(value="characterId")Integer characterId ,@Param(value="userName")String userName ,@Param(value="userTel")long userTel ,@Param(value="userIdentity")String userIdentity ,@Param(value="stateId")int stateId);
-public List<UserBean> checkAccount(String userAccount);
+	public List<UserBean> employerNumber(@Param("name") String name);
 
+	public List<UserBean> serachBusiness(@Param("name") String name, @Param("end") int end, @Param("start") int start);
+
+	public List<UserBean> businessNumber(@Param("name") String name);
+
+	public UserBean employer(@Param("userid") String userid);
+
+	public UserInfoBean userinfo(@Param("userid") String userid);
+
+	public List<UserBean> employers(@Param("name") String name, @Param("page") int page);
+
+	public int delEmployers(@Param("account") String account);// 删除雇主
+
+	public int countEmployers();// 雇主总个数
+
+	public List<UserBean> login(String userAccount, String userPwd);
+
+	public void addUser(@Param(value = "userAccount") String userAccount, @Param(value = "userPwd") String userPwd,
+			@Param(value = "characterId") Integer characterId, @Param(value = "userName") String userName,
+			@Param(value = "userTel") long userTel, @Param(value = "userIdentity") String userIdentity,
+			@Param(value = "stateId") int stateId);
+
+	public List<UserBean> checkAccount(String userAccount);
+
+	public void updateUserInfo(@Param("userId") String userId, @Param("userProfile") String userProfile,
+			@Param("userName") String userName, @Param("userIdentity") String userIdentity,
+			@Param("userTel") String userTel, @Param("userMail") String userMail, @Param("userHead")String userHead);//修改用户资料
 }

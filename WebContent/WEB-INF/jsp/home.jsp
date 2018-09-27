@@ -50,7 +50,7 @@
 						<div class="fenlei-nav fl">用户操作</div>
 						<ul class="fl">
 							<li><a href="index.html" title="首页" class="on">首页</a></li>
-							<li><a href="#" title="最新需求">最新需求<img src="<%=path%>images/hot.gif"></a></li>
+							<li><a href="<%=path%>demand/toDemand.action" title="最新需求">最新需求<img src="<%=path%>images/hot.gif"></a></li>
 							<li><a href="#" title="最新作品">最新作品<img src="<%=path%>images/hot.gif"></a></li>
 							<li><a href="#" title="曝光台">曝光台</a></li>
 							<li><a href="#" title="信用查询">信用查询</a></li>
@@ -69,7 +69,7 @@
 				<div class="banner-menu">
 					<ul>
 						<li>
-						<p><a href="#" title="发布需求" ><i class="o-index1"></i>发布需求<b>&gt;</b></a></p>
+						<p><a href="<%=path%>demand/fromDemand.action" title="发布需求" ><i class="o-index1"></i>发布需求<b>&gt;</b></a></p>
 							<!-- <div class="lihover-box ">
 								<dl>
 									<dt class="fl">品牌设计</dt>
@@ -388,7 +388,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 						<div class="user-box">
 							<img src="<%=path%>images/banner-touxiang.png">
 							<p>hi,您好！</p>
-							<a href="<%=path%>user/UserInformation.action?userid=203" title="" class="b-login">个人中心</a><a href="#" title="" class="b-regist">注册</a>
+							<a href="<%=path%>user/UserInformation.action?userid=3" title="" class="b-login">个人中心</a><a href="#" title="" class="b-regist">注册</a>
 							
 							<!--登录之后-->
 							<!--<p>邓丽群，<a href="#" title="" target="_blank" class="colorfa3508">去易知猴威客</a></p>

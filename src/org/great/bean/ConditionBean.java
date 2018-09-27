@@ -36,7 +36,7 @@ public class ConditionBean {// 条件bean
 	private String tableName;
 	
 	 
-	 private ArrayList<ProductionBean> proList;
+	private ArrayList<ProductionBean> proList;
 
 
 	 

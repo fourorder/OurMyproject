@@ -181,7 +181,7 @@
 										<div class="ydc-reg-form-input">
 											<label></label>
 											<div class="ydc-reg-form-text ydc-reg-form-user-logo">
-												<img src="<%=path%>admin/images/icon/user-logo.png" alt="">
+												<img src="<%=path%>picture/findPicture.action?url=${userInfo.userHead}" alt="">
 											</div>
 										</div>
 									</div>
@@ -232,7 +232,7 @@
 									<div class="ydc-reg-form-group clearfix">
 										<label>联系手机</label>
 										<div class="ydc-reg-form-input">
-											<label>${userInfo.userTel}已验证</label>
+											<label>${userInfo.userTel}</label>
 										</div>
 									</div>
 									<div class="ydc-reg-form-group clearfix">
@@ -262,7 +262,7 @@
 									</div>
 									<div class="ydc-reg-form-group clearfix" style="margin-top:40px;">
 										<div class="ydc-reg-form-button" style="margin-left:255px;">
-											<a class="btn fl" href="info-edit.html">修改</a>
+											<a class="btn fl" href="<%=path%>user/UserInforEdit.action?userid=${userInfo.userId}">修改</a>
 										</div>
 									</div>
 								</div>

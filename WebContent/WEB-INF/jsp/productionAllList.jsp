@@ -33,11 +33,11 @@ ul { list-style-type: none;}
 
 	
 	
-	  <c:forEach items="${list}"  var="list" >	              
+	  <c:forEach items="${demandBeans}"  var="demandBeans" >	              
 	           <div class="filtr-item" data-category="2">
 	              <a href="<%=path%>production/toProductionDetal.action?proId=${list.productionId}">
-			<img src="<%=path%>picture/findPicture.action?url=${list.productionImage}"  alt="">
-			<span class="ss">${list.productionName }</span>
+			<img src="<%=path%>picture/findPicture.action?url=${demandBeans.demandHead}"  alt="">
+			<span class="ss">${demandBeans.demandTitle}</span>
 		</a>
 	</div>
 </c:forEach>	
