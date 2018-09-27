@@ -1,5 +1,8 @@
 package org.great.bean;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class StateBean {
 	private int stateId;//状态id
 	private String stateName;//状态名

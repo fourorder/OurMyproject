@@ -262,7 +262,7 @@
 
 										</div>
 										
-										<input type="hidden" name="userid" value="301">
+										<input type="hidden" name="userid" value="${user.userId}">
 										
 										
 										

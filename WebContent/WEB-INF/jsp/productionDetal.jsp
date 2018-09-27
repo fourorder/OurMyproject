@@ -35,6 +35,7 @@
 </script>
 </head>
 <body>
+
  <div class="showall">
 	                <!--left -->
 	                <div class="showbot">
@@ -85,7 +86,7 @@
                          
                         	<div class="nobdr-btns">
                         		
-                        	<a href="<%=path%>production/ProductionPay.action?proId=${productionBean.productionId }" >	<button class="addcart yh"><img src="<%=path%>images/ht.png" width="25" height="25"/>立即购买</button></a>
+                        	<a href="<%=path%>production/ProductionPay.action?proId=${productionBean.productionId }">	<button class="addcart yh"><img src="<%=path%>images/ht.png" width="25" height="25"/>立即购买</button></a>
                         	</div>
                         	
                         </div>

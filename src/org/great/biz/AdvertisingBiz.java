@@ -4,4 +4,5 @@ import org.great.bean.AdvertisingBean;
 
 public interface AdvertisingBiz {
 	public int setAdvertising(AdvertisingBean ab);
+	public AdvertisingBean goToAdver(int num);
 }

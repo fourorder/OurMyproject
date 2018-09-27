@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.great.mapper.PowerMapper">
+<!--查询所以角色 -->	
+ <select id="findCharacter"  
+	resultType="org.great.bean.CharacterBean" 
+	
+	 >
+	
+	select * from CHARACTERTBL order by to_number(CHARACTERID) asc
+
+	</select>
+	
+ <insert id="toAddRole">
+ 
+  insert into CHARACTERTBL (CHARACTERID,CHARACTERNAME,CHARACTERTIME,CHARACTERINTRO) values(seqid.nextval,#{roleName},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{roleIntro})
+ 
+ 
+ </insert>
+
+  <select id="findRoleExist"  
+	resultType="org.great.bean.CharacterBean" 
+	
+	 >
+	
+	select * from CHARACTERTBL where CHARACTERNAME=#{roleName}
+
+	</select>
+ 
+ 
+ <delete id="delRole">
+ 
+ delete from CHARACTERTBL  where CHARACTERID=#{id}
+ 
+ </delete>
+ 
+   <select id="confirmRoleUsing1"  
+	resultType="org.great.bean.UserBean" 
+	
+	 >
+	
+	select * from USERTBL where CHARACTERID=#{id}
+
+	</select>
+ 
+    
+ 
+</mapper>

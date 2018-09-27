@@ -1,5 +1,8 @@
 package org.great.bean;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class BusinessBean {
 private int businessId;
 private String businessName;

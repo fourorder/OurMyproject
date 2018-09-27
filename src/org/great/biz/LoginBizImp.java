@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.great.bean.UserBean;
+import org.great.mapper.ProductionMapper;
 import org.great.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,8 @@ public class LoginBizImp implements LoginBiz {
 	private LoginBiz loginBizImp;
 	@Resource
 	private UserMapper userMapper;
+	@Resource
+	private ProductionMapper productionMapper;
 	public int stateId;
 	public int flag;
 	public int login(String userAccount, String userPwd,HttpServletRequest request) {
@@ -26,21 +29,12 @@ public class LoginBizImp implements LoginBiz {
 		if(user.size()==1){
 			for(int i=0;i<user.size();i++) {
 				stateId=user.get(i).getStateId();
-				String userName=user.get(i).getUserName();
-				request.setAttribute("userName", userName);
-				int userId=user.get(i).getUserId();
-				request.setAttribute("userId", userId);
-				int userCharacter=user.get(i).getCharacterId();
-				request.setAttribute("userCharacter", userCharacter);
-				request.setAttribute("fundList", fundBizImp.getFundList("1"));
-				request.setAttribute("page", 1);
-			}
-			
+				
+			}			
 			if(stateId==1){
 				flag=1;
-				
+				request.getSession().setAttribute("user",user.get(0));//将用户对象存到session里
 			}else {
-				System.out.println("该用户被锁定");
 				flag=2;
 			}
 		

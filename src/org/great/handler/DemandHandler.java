@@ -11,6 +11,7 @@ import org.great.bean.DemandBean;
 import org.great.bean.DemandInfoBean;
 import org.great.bean.ParameterBean;
 import org.great.bean.QueryBean;
+import org.great.bean.UserBean;
 import org.great.biz.DemandBiz;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -81,9 +82,11 @@ public class DemandHandler {
 	//ajax我要投标
 	@RequestMapping("/addBid.action")//ajax分页跳转
 	@ResponseBody
-	public ArrayList<BidBean> addBid(String demandid){	
+	public ArrayList<BidBean> addBid(HttpServletRequest request,String demandid){	
 		System.out.println(demandid);
-		demandBizImp.addBid("405", demandid);
+		UserBean userBean=(UserBean) request.getSession().getAttribute("user");
+		System.out.println(userBean.getUserId());
+		demandBizImp.addBid(userBean.getUserId()+"", demandid);
 		return demandBizImp.getBidList(demandid);
 	}
 	//进入需求列表
