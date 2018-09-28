@@ -21,7 +21,6 @@ public class Worm {
 
 		String path="https://search.zbj.com/s/?kw=";
 		path=path+name;
-		System.out.println(path);
 		try {
 			String code=Jsoup.connect(path).execute().body();
 			Document document=Jsoup.parse(code);
@@ -32,7 +31,6 @@ public class Worm {
 			for (int i = 0; i < len; i++) {
 				ProductionBean productionBean=new ProductionBean();
 				productionBean.setProductionImage(elements.get(i).attr("data-original"));
-				System.out.println(elements.get(i).attr("data-original"));
 				productionBean.setProductionDetal(elements1.get(i).text());
 				productionBean.setProductionFile(elements2.get(i).attr("href"));
 				list.add(productionBean);

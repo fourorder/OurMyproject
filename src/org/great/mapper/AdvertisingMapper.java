@@ -17,4 +17,5 @@ public interface AdvertisingMapper {
 	public List<AdvertisingBean> selectOne(@Param("title")String title,@Param("time")String time);//查询单个广告
 	public int affirm(AdvertisingBean ab);//确认修改
 	public int updateSerial(@Param("num")int num); //更改广告序号
+	public List<AdvertisingBean> getAllAdver();//查询广告
 }

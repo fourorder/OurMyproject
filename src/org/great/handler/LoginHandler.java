@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.great.biz.AdvertisingBiz;
 import org.great.biz.FundBiz;
 import org.great.biz.InformationBiz;
 import org.great.biz.LineBiz;
@@ -42,6 +43,8 @@ private InformationBiz informationBizImp;
 private LineBiz lineBizImp;
 @Resource
 private UserStoryBiz userStoryBizImp;
+@Resource
+private AdvertisingBiz advertisingBizImp;
 private String msg;
 private int a;
 @RequestMapping("/login.action")
@@ -88,6 +91,7 @@ request.setAttribute("informationList3", informationBizImp.getInformation(303));
 request.setAttribute("informationList4", informationBizImp.getInformation(304));
 request.setAttribute("lineList",lineBizImp.getLine());
 request.setAttribute("story", userStoryBizImp.getStory());
+request.setAttribute("adverList", advertisingBizImp.getAllAdver());
 request.getSession().setAttribute("productionList",productionBizImp.getProductionList());//将热卖作品信息放入request
 	return modelAndView;
 	

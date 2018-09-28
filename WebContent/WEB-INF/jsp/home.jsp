@@ -106,13 +106,13 @@
 					<div class="qianhong-b">
 				    	<ul class="qianhongpic" style="position: relative; width: 1920px; height: 460px;">
 				            <li style="position: absolute; width: 708px; left: 0px; top: 0px; display: list-item;"><a href="#" title="">
-								<a href="<%=path%>adver/gotoadver.action?flag=1"><img src="<%=path%>images/oindex-banner.png"></a>
+								<a href="<%=path%>adver/gotoadver.action?flag=${adverList[0].advertisementNum}"><img src="<%=path%>picture/findPicture.action?url=${adverList[0].advertisementImage}" width="708px" height="330px"></a>
 				            </a></li>
 				            <li style="position: absolute; width: 708px; left: 0px; top: 0px; display: list-item;"><a href="#" title="">
-								<a href="<%=path%>adver/gotoadver.action?flag=2"><img src="<%=path%>images/oindex-banner2.png"></a>
+								<a href="<%=path%>adver/gotoadver.action?flag=${adverList[1].advertisementNum}"><img src="<%=path%>picture/findPicture.action?url=${adverList[1].advertisementImage}" width="708px" height="330px"></a>
 				            </a></li>
 				            <li style="position: absolute; width: 708px; left: 0px; top: 0px; display: list-item;"><a href="#" title="">
-								<a href="<%=path%>adver/gotoadver.action?flag=3"><img src="<%=path%>images/oindex-banner3.png"></a>
+								<a href="<%=path%>adver/gotoadver.action?flag=${adverList[2].advertisementNum}"><img src="<%=path%>picture/findPicture.action?url=${adverList[2].advertisementImage}" width="708px" height="330px"></a>
 				            </a></li>
 				        </ul>
 				        <a class="prev" href="javascript:void(0)" style="opacity: 0.07474937499999999; display: none;"></a>

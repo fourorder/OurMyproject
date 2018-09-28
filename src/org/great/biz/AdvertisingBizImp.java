@@ -77,6 +77,11 @@ public class AdvertisingBizImp implements AdvertisingBiz {
 		// TODO Auto-generated method stub
 		return advertisingMapper.updateSerial(num);
 	}
+	@Override
+	public List<AdvertisingBean> getAllAdver() {
+		// TODO Auto-generated method stub
+		return advertisingMapper.getAllAdver();
+	}
 
 	
 }

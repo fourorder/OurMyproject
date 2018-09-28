@@ -14,4 +14,5 @@ public interface AdvertisingBiz {
 	public List<AdvertisingBean> selectOne(String title,String time);//查询单个广告
 	public int affirm(AdvertisingBean ab);//确认修改
 	public int updateSerial(int num); //更改广告序号
+	public List<AdvertisingBean> getAllAdver();
 }
