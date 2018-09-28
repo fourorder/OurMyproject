@@ -33,6 +33,8 @@
 <th>账号</th>
 <th>内容</th>
 <th>费用</th>
+<th>图片</th>
+<th>顾问类型</th>
 <th>状态</th>
 <th>操作</th>
 </tr>
@@ -43,6 +45,8 @@
 <td>${fund.userAccount}</td>
 <td>${fund.counselorIntroduction}</td>
 <td>${fund.counselorMoney}</td>
+<td>${fund.counselorImg}</td>
+<td>${fund.serviceType}</td>
 <c:if test="${fund.auditState  eq 0}">
        <td>待审核</td>
        <td><a onclick="return firm()" href="<%=path %>counselor/applicationOk.action?account=${fund.userAccount}">点击通过</a></td>
@@ -90,16 +94,19 @@ function page(page) {
 									"<tr><td>"+e.userAccount+"</td>"+
 									"<td>"+e.counselorIntroduction+"</td>"+
 									"<td>"+e.counselorMoney+"</td>"+
+									"<td>"+e.counselorImg+"</td>"+
+									"<td>"+e.serviceType+"</td>"+
 									"<td>待审核</td>"+
 									"<td><a onclick='return firm()' href='<%=path %>counselor/applicationOk.action?account="+e.userAccount+"'>点击通过</a></td>"+
 									"</tr>"
-							 
 							 ); 
 					 }else if(e.auditState==1){
 						 $("#ccc").append(
 									"<tr><td>"+e.userAccount+"</td>"+
 									"<td>"+e.counselorIntroduction+"</td>"+
 									"<td>"+e.counselorMoney+"</td>"+
+									"<td>"+e.counselorImg+"</td>"+
+									"<td>"+e.serviceType+"</td>"+
 									"<td>已审核</td>"+
 									"<td><a>审核通过</a></td>"+
 									"</tr>"
@@ -150,6 +157,8 @@ function sstate() {
 													"<tr><td>"+e.userAccount+"</td>"+
 													"<td>"+e.counselorIntroduction+"</td>"+
 													"<td>"+e.counselorMoney+"</td>"+
+													"<td>"+e.counselorImg+"</td>"+
+													"<td>"+e.serviceType+"</td>"+
 													"<td>待审核</td>"+
 													"<td><a onclick='return firm()' href='<%=path %>counselor/applicationOk.action?account="+e.userAccount+"'>点击通过</a></td>"+
 													"</tr>"
@@ -160,6 +169,8 @@ function sstate() {
 													"<tr><td>"+e.userAccount+"</td>"+
 													"<td>"+e.counselorIntroduction+"</td>"+
 													"<td>"+e.counselorMoney+"</td>"+
+													"<td>"+e.counselorImg+"</td>"+
+													"<td>"+e.serviceType+"</td>"+
 													"<td>已审核</td>"+
 													"<td><input type='button' value='查看' style='width:70px;height:30px'></td>"+
 													"</tr>"

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.great.mapper.DemandMapper">
+<select id="countDemand" resultType="org.great.bean.DemandBean">
+select * from demandInfomationTbl where stateId！=7
+</select>
+<select id="countDemand2" parameterType="String" resultType="org.great.bean.DemandBean">
+select * from demandInfomationTbl where demandTitle like #{demandTitle} and stateId！=7
+</select>
+<select id="demand" resultType="org.great.bean.DemandBean">
+select * from(
+select rownum rn,m.* from (select demandInfomationTbl.*,tbParameter.parameterName from demandInfomationTbl,tbParameter where demandInfomationTbl.stateId=tbParameter.parameterId and stateId！=7
+<if test="demandTitle != null">
+and demandTitle like #{demandTitle} order by demandId 
+</if>
+)m
+ where rownum &lt;= (#{page}*2))
+ where rn &gt;= ((#{page}-1)*2+1)
+</select>
+<select id="findInfo" parameterType="int" resultType="org.great.bean.DemandBean">
+select demandInfomationTbl.* from demandInfomationTbl where demandId=#{demandId} 
+</select>
+<select id="findFromUserName" parameterType="int" resultType="String">
+select userTbl.userName from demandInfomationTbl,userTbl where demandId=#{demandId} and demandInfomationTbl.fromUserId=userTbl.userId
+</select>
+<select id="findToUserName" parameterType="int" resultType="String">
+select userTbl.userName from demandInfomationTbl,userTbl where demandId=#{demandId} and demandInfomationTbl.toUserId=userTbl.userId
+</select>
+<select id="findParameterName" parameterType="int" resultType="String">
+select tbParameter.parameterName from demandInfomationTbl,tbParameter where demandId=#{demandId} and demandInfomationTbl.parameterId=tbParameter.parameterId
+</select>
+<select id="findStateName" parameterType="int" resultType="String">
+select tbParameter.parameterName from demandInfomationTbl,tbParameter where demandId=#{demandId} and demandInfomationTbl.stateId=tbParameter.parameterId
+</select>
+<update id="changeInfo" >
+UPDATE demandInfomationTbl set demandDetailInformation=#{demandDetailInformation2},securityMoney=#{securityMoney2},dealMoney=#{dealMoney2},completeTime=#{completeTime2},auctionTime=#{auctionTime2},demandHead=#{demandHead2} WHERE demandId=#{demandId2}
+</update>
+<update id="changeState" parameterType="int">
+UPDATE demandInfomationTbl set stateId=7 where demandId=#{demandId}
+</update>
+<update id="changeState2" parameterType="int">
+UPDATE demandInfomationTbl set stateId=22 where demandId=#{demandId}
+</update>
+<update id="changeState3" parameterType="int">
+UPDATE demandInfomationTbl set stateId=23 where demandId=#{demandId}
+</update>
+
+
+
+	 
+</mapper>

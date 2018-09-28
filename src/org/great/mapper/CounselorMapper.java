@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CounselorMapper {
-
+	 public List<String>   type();//顾问类型
 	public List<CounselorBean>  select(@Param("account")String account);//查询用户是否申请
 	 public int applyFor(CounselorBean cb);//提交申请
 	 public List<CounselorBean> conditionQuery(@Param("state")int state,@Param("page")int page);//条件查询

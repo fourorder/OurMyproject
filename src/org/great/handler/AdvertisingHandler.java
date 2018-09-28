@@ -10,12 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.great.bean.AdvertisingBean;
 import org.great.biz.AdvertisingBiz;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -76,8 +73,6 @@ public class AdvertisingHandler {
 	public ModelAndView test1(HttpServletRequest request,AdvertisingBean ab,MultipartFile file){
 		System.out.println("--------"+file);
 		String productionImage=upLoadFile(request, file);
-		
-		ModelAndView modelAndView=new ModelAndView();
 		List<AdvertisingBean> list=new ArrayList<AdvertisingBean>();
 		int num=ab.getAdvertisementNum();
 		list=advertisingBizImp.selectAdvertising(num);
@@ -98,8 +93,8 @@ public class AdvertisingHandler {
 				System.out.println("配置成功");
 			}
 		}
-		modelAndView.setViewName("jsp/advertisingSet");
-		return modelAndView;
+		
+		return new ModelAndView("redirect:list.action?page=tpage&number=1");
 	}
 	
 public String upLoadFile(HttpServletRequest request,MultipartFile file) {

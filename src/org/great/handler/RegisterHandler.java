@@ -2,12 +2,15 @@ package org.great.handler;
 
 
 
+import java.util.Calendar;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.great.biz.RegisterBiz;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -58,8 +61,11 @@ public class RegisterHandler  {
 		ModelAndView modelAndView=new ModelAndView();
 	    String userAccount=request.getParameter("userAccount");
 	    System.out.println(userAccount);
-        String userPwd=request.getParameter("userPwd");
+        String userPwd2=request.getParameter("userPwd");
+        System.out.println(userPwd2);
+        String userPwd=DigestUtils.md5DigestAsHex(userPwd2.getBytes());
         System.out.println(userPwd);
+        
         String characterId=request.getParameter("characterId");
         System.out.println(characterId);
         String userName=request.getParameter("userName");
@@ -70,9 +76,28 @@ public class RegisterHandler  {
         System.out.println(userIdentity);
         String stateId=request.getParameter("stateId");
         System.out.println(stateId);
-		registerBizImp.register(userAccount, userPwd, Integer.valueOf(characterId), userName, Long.valueOf(userTel), userIdentity, Integer.valueOf(stateId), request);
+        Calendar c = Calendar.getInstance();//可以对每个时间域单独修改   
+
+        int year = c.get(Calendar.YEAR);  
+
+         int month = c.get(Calendar.MONTH);   
+
+        int date = c.get(Calendar.DATE);    
+
+        int hour = c.get(Calendar.HOUR_OF_DAY);   
+
+        int minute = c.get(Calendar.MINUTE);   
+
+        int second = c.get(Calendar.SECOND);    
+
+        String userRegisterTime=year + "/" + month + "/" + date + " " +hour + ":" +minute + ":" + second;
+
+       
+
+        
+		registerBizImp.register(userAccount, userPwd, Integer.valueOf(characterId), userName, Long.valueOf(userTel), userIdentity, Integer.valueOf(stateId), request,userRegisterTime);
 		
-		modelAndView.setViewName("jsp/login");
+		modelAndView.setViewName("redirect:/user/show.action");
 				
 		return modelAndView;
 	}

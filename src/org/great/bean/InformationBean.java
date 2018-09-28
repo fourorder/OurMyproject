@@ -1,25 +1,65 @@
 package org.great.bean;
 
 public class InformationBean {
-
+    private int informationId;
 	private String informationTitle;
 	private String informationContent;
 	private String informationPublishTime;
 	private String informationAddress;
-	
+	private int parameterId;
+	private String informationImg;
+	private int stateId;
 	public InformationBean() {
 		super();
 	}
 	
-	public InformationBean(String informationTitle, String informationContent, String informationPublishTime,
-			String informationAddress) {
+	
+
+
+
+  
+
+
+
+public InformationBean(int informationId, String informationTitle, String informationContent,
+			String informationPublishTime, String informationAddress, int parameterId, String informationImg,
+			int stateId) {
 		super();
+		this.informationId = informationId;
 		this.informationTitle = informationTitle;
 		this.informationContent = informationContent;
 		this.informationPublishTime = informationPublishTime;
 		this.informationAddress = informationAddress;
+		this.parameterId = parameterId;
+		this.informationImg = informationImg;
+		this.stateId = stateId;
 	}
-	public String getInformationTitle() {
+
+
+
+
+
+
+
+
+
+public int getInformationId() {
+	return informationId;
+}
+
+
+
+
+
+public void setInformationId(int informationId) {
+	this.informationId = informationId;
+}
+
+
+
+
+
+public String getInformationTitle() {
 		return informationTitle;
 	}
 	public void setInformationTitle(String informationTitle) {
@@ -42,6 +82,46 @@ public class InformationBean {
 	}
 	public void setInformationAddress(String informationAddress) {
 		this.informationAddress = informationAddress;
+	}
+	public int getParameterId() {
+		return parameterId;
+	}
+
+
+
+
+
+	public void setParameterId(int parameterId) {
+		this.parameterId = parameterId;
+	}
+
+
+
+
+
+	public String getInformationImg() {
+		return informationImg;
+	}
+
+
+	public void setInformationImg(String informationImg) {
+		this.informationImg = informationImg;
+	}
+
+
+
+
+
+	public int getStateId() {
+		return stateId;
+	}
+
+
+
+
+
+	public void setStateId(int stateId) {
+		this.stateId = stateId;
 	}
 	
 }

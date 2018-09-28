@@ -6,8 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% 
-	String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";	
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 <html>
@@ -22,9 +23,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
 
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="css/global.css" media="all">
+    <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+    <link rel="stylesheet" href="<%=basePath%>plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="<%=basePath%>css/global.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
 
 
@@ -75,7 +76,7 @@
 
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="admin-header-user">
-                        <img src="images/0.jpg" />
+                        <img src="<%=basePath%>images/0.jpg" />
                         <span>用户名</span>
                     </a>
                     <dl class="layui-nav-child">
@@ -111,22 +112,16 @@
                     <a href="javascript:;" style="font-size: 15px;">账号管理</a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="employers/page.action?page=tpage&number=1" target="menuFrame" id="aa">雇主管理</a>
+                            <a href="<%=basePath%>employers/page.action?page=tpage&number=1" target="menuFrame" id="aa" onclick="anr()">雇主管理</a>
                         </dd>
                         <dd>
-                            <a href="" target="menuFrame">服务商管理</a>
+                            <a href="<%=basePath%>facilitator/page.action?page=tpage&number=1" target="menuFrame" >服务商管理</a>
                         </dd>
                         <dd>
-                            <a href="<%=path %>counselor/application.action?account=aaa" target="menuFrame">测试申请顾问</a>
-                        </dd>
-                        <dd>
-                            <a href="<%=path %>counselor/list.action?number=1" target="menuFrame">顾问管理</a>
+                            <a href="" target="menuFrame">顾问管理</a>
                         </dd>
                         <dd>
                             <a href="" target="menuFrame">管理员管理</a>
-                        </dd>
-                        <dd>
-                            <a href="<%=path%>powder/toFindCharacter.action"  target="menuFrame">权限管理</a>
                         </dd>
                     </dl>
                 </li>
@@ -135,7 +130,7 @@
                     <a href="javascript:;" style="font-size: 15px;">业务管理</a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="" target="menuFrame">需求管理</a>
+                            <a href="<%=basePath%>demand/page.action?page=tpage&number=1" target="menuFrame">需求管理</a>
                         </dd>
                         <dd>
                             <a href="">作品管理</a>
@@ -158,22 +153,22 @@
                             <a href="">服务类型管理</a>
                         </dd>
                         <dd>
-                            <a href="<%=path %>employers/list.action?page=tpage&number=1" target="menuFrame">雇主故事列表</a>
+                            <a href="">服务商故事配置</a>
                         </dd>
                         <dd>
                             <a href="">曝光台配置</a>
                         </dd>
                         <dd>
-                            <a href="">规则中心配置</a>
+                            <a href="<%=basePath%>rule/page.action?page=tpage&number=1" target="menuFrame">规则中心配置</a>
                         </dd>
                         <dd>
                             <a href="">行业动态配置</a>
                         </dd>
                         <dd>
-                        <a href="infor/inforPage.action?page=tpage&number=1" target="menuFrame">最新资讯配置</a>
+                        <a href="<%=basePath%>infor/page.action" target="menuFrame">最新资讯配置</a>
                     </dd>
                         <dd>
-                            <a href="adver/list.action?page=tpage&number=1" target="menuFrame">广告设置</a>
+                            <a href="<%=basePath%>adver/page.action" target="menuFrame">广告设置</a>
                         </dd>
                     </dl>
                 </li>
@@ -193,7 +188,7 @@
             <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
                 <div class="layui-tab-item layui-show">
                     <!--欢迎页 -->
-                    <iframe id="menuFrame" name="menuFrame" src="welcome.jsp" style="overflow:visible;"
+                    <iframe id="menuFrame" name="menuFrame" src="<%=basePath%>welcome.jsp" style="overflow:visible;"
                             scrolling="yes" frameborder="no" width="100%" height="100%"></iframe>
                 </div>
             </div>
@@ -201,7 +196,7 @@
     </div>
     <div class="layui-footer footer footer-demo" id="admin-footer">
         <div class="layui-main">
-            <p>2018 &copy;
+            <p>2016 &copy;
                 <a href="#">一站式服务平台</a> LGPL license
             </p>
         </div>
@@ -216,7 +211,7 @@
     <div id="bg"></div>
     <div id="show" style="text-align: center">
         <!--头像-->
-        <img src="images/0.jpg"/>
+        <img src="<%=basePath%>images/0.jpg"/>
         <p>显示用户名</p>
         <input type="text" class="admin-header-lock-input" value="输入密码解锁.." name="lockPwd" id="lockPwd" /><br /><br />
         <input id="btnclose" type="button" value="解锁" onclick="hidediv();" style="width: 70px;height: 30px;background-color: #ff9d33;border: none;"/>
@@ -228,8 +223,10 @@
 
 
 <!--script -->
-    <script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/layui/layui.js"></script>
+
     <script>
+    
         layui.use('element', function() {
             var element = layui.element(); //导航的hover效果、二级菜单等功能，需要依赖element模块
 
@@ -263,18 +260,6 @@
             document.getElementById("show").style.display = 'none';
             $('body').css("overflow", "auto")
         }
-      function update() {
-        	layer.open({
-        		  title: '修改',
-        		  content: '可以填写任意的layer代码',
-        		area:  ['500px', '300px'],
-        		btn: ['yes', 'no'],
-        		yes: function(index, layero){
-        			layer.alert('酷毙了', {icon: 1});
-        		  }
-        		});  
-        }
-        
     </script>
 </div>
 </body>

@@ -32,7 +32,7 @@
 </head>
 <body>
 <div align="center" style="height: 90%;width: 50%;margin:0 auto;background-color: #eff4d8; text-align: left"  >
-    <form class="layui-form" action="<%=path %>employers/updateStory.action" method="post">
+    <form class="layui-form" action="<%=path %>employers/updateStory.action" method="post" enctype="multipart/form-data">
       <div class="layui-form-item">
             <label class="layui-form-label">请选择雇主</label>
             <div class="layui-input-block">
@@ -66,6 +66,10 @@
                 <input type="text" name="userStoryUrl" onblur="CheckUrl()" required  lay-verify="required" placeholder="请输入地址" autocomplete="off" class="layui-input">
             </div>
         </div>
+        <label class="layui-form-label">图片</label>
+     <div class="layui-upload">
+ <input type="file" name="file"   id="1" class="file_photo aui-file-new-up" style="margin:0;"/>                                                    
+</div>
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <input type="submit" class="layui-btn" lay-submit lay-filter="formDemo"  value="立即提交">

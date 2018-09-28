@@ -8,13 +8,16 @@ public class UserStoryBean {
 	private String userAccount;
 	private int stateId;
 	private String  userStoryUrl;
+	private String storyImg;
 	public UserStoryBean () {
 		super();
 	}
 	
 
+	
+
 	public UserStoryBean(String userStoryTitle, String userStoryContent, String userStoryTime, String userAccount,
-			int stateId, String userStoryUrl) {
+			int stateId, String userStoryUrl, String storyImg) {
 		super();
 		this.userStoryTitle = userStoryTitle;
 		this.userStoryContent = userStoryContent;
@@ -22,7 +25,10 @@ public class UserStoryBean {
 		this.userAccount = userAccount;
 		this.stateId = stateId;
 		this.userStoryUrl = userStoryUrl;
+		this.storyImg = storyImg;
 	}
+
+
 
 
 	public String getUserStoryTitle() {
@@ -62,6 +68,16 @@ public class UserStoryBean {
 
 	public void setUserStoryUrl(String userStoryUrl) {
 		this.userStoryUrl = userStoryUrl;
+	}
+
+
+	public String getStoryImg() {
+		return storyImg;
+	}
+
+
+	public void setStoryImg(String storyImg) {
+		this.storyImg = storyImg;
 	}
 	
 }

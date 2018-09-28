@@ -319,7 +319,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	
      	    	
      	        if($("#agreement").prop("checked")==true){
-     	            alert("11111");
      	            return true;
      	        } else{
      	           alert("请勾选按钮!");

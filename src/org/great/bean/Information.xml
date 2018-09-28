@@ -3,9 +3,66 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="org.great.mapper.InformationMapper">
 	
-	 <insert id="setInformation" parameterType="org.great.bean.InformationBean">
 	
-		insert into informationTbl values(SEQID.nextval,#{informationTitle},#{informationContent},#{informationPublishTime},#{informationAddress})
+	<!-- 查询资讯类型 -->
+	<select id="informationType" resultType="java.lang.String">
+	 select parametername from tbparameter where pid=300
+	</select>
+	<!-- 查询类型id -->
+	<select id="selectPid" resultType="java.lang.String">
+	 select parameterid from tbparameter where pid=300 and parametername=#{parameter}
+	</select>
+		<!-- 插入资讯 -->
+	 <insert id="setInformation" parameterType="org.great.bean.InformationBean">
+		insert into informationTbl values(SEQID.nextval,#{informationTitle},#{informationContent},#{informationPublishTime},#{informationAddress},#{parameterId},#{informationImg})
 	</insert>  
+	 <!-- 查询总条数-->
+	 <select  id="countInfor"  resultType="java.lang.Integer">
+	 select count(*) from informationTbl where informationid=informationid
+	  <if test="state !=7">
+	  and stateid=#{state}
+	 </if>
+	 </select>
+	 <!-- 条件查找-->
+	 <select id="conditionQuery" resultType="org.great.bean.InformationBean">
+	 select * from (
+select c.*,rownum rn from (
+	 select * from informationTbl where informationid=informationid
+	 <if test="state !=7">
+	 and stateid=#{state}
+	 </if>
+	 ) c 
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= (#{page}*5-4)
+	 </select>
+	 <!-- 删除资讯--> 
+	 <update id="delInfor" parameterType="java.lang.Integer">
+	 UPDATE informationTbl set stateid=1 WHERE informationid=#{inforId}
+	 </update>
+	  <!-- 查询修改资讯--> 
+	  <select id="selectOne" resultType="org.great.bean.InformationBean">
+	  select * from informationTbl where informationid=#{inforId}
+	  </select>
+	 <!-- 修改资讯--> 
+	 <update id="updateInfor" parameterType="org.great.bean.InformationBean">
+	  UPDATE informationTbl set informationid=#{informationId} 
+	  <if test="informationTitle != null and informationTitle !=''">
+	  ,informationTitle=#{informationTitle}
+	  </if>
+	   <if test="informationContent != null and informationContent !=''">
+	   ,informationContent=#{informationContent}
+	  </if>
+	   <if test="informationPublishTime != null and informationPublishTime !=''">
+	   ,informationPublishTime=#{informationPublishTime}
+	  </if>
+	   <if test="informationAddress != null and informationAddress !=''">
+	   ,informationAddress=#{informationAddress}
+	  </if>
+	   <if test="informationImg != null and informationImg !=''">
+	   ,informationImg=#{informationImg}
+	  </if>
+	  WHERE informationid=#{informationId}
+	 
+	 </update>
 	 
 </mapper>

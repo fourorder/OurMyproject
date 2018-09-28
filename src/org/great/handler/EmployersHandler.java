@@ -1,5 +1,6 @@
 package org.great.handler;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -144,16 +146,23 @@ public class EmployersHandler {
 		return modelAndView ;
 	}
 	@RequestMapping("/updateStory.action")//配置雇主故事
-	public ModelAndView test6(HttpServletRequest request,UserStoryBean usb){
+	public ModelAndView test6(HttpServletRequest request,UserStoryBean usb,MultipartFile file){
+		String productionImage=upLoadFile(request, file);
+		usb.setStoryImg(productionImage);
 		List<UserStoryBean> list=new ArrayList<UserStoryBean>();
 		list=userBizImp.selectStory(usb.getUserAccount());
 		if(list.size()>0) {
+			int state =list.get(0).getStateId();
+			usb.setStateId(state);
 			int a=userBizImp.updateStory(usb);
 			if(a>0) {
 				System.out.println("覆盖成功！");
+				ModelAndView modelAndView=new ModelAndView();
+				modelAndView.setViewName("jsp/storyList");
+				return modelAndView ;
 			}
 		}else {
-			
+			usb.setStateId(0);
 		int a=userBizImp.insertStory(usb);
 		if(a>0) {
 			ModelAndView modelAndView=new ModelAndView();
@@ -161,8 +170,45 @@ public class EmployersHandler {
 			return modelAndView ;
 		}
 		}
-		return null;
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("jsp/storyList");
+		return modelAndView ;
 	}
+public String upLoadFile(HttpServletRequest request,MultipartFile file) {
+		
+		//上传图片--------------------
+			
+			//上传文件路径
+			 String path = request.getServletContext().getRealPath("/images/");
+			// System.out.println(path);
+	        //上传文件名
+	        String filename = file.getOriginalFilename();
+	        
+	        File filepath = new File(path,filename);
+	        //判断路径是否存在，如果不存在就创建一个
+	        if (!filepath.getParentFile().exists()) { 
+	            filepath.getParentFile().mkdirs();
+	        }
+	        //将上传文件保存到一个目标文件当中
+	        String uploadDocName=System.currentTimeMillis()+"@"+filename;
+	        try {
+				file.transferTo(new File(path + File.separator + uploadDocName));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        System.out.println("Biz"+path+"-->"+uploadDocName);
+	        
+	        //-----------------------
+			
+			return uploadDocName;
+		}
+
+
+	
 	@RequestMapping("/list.action")//雇主故事列表
 	public ModelAndView test6(HttpServletRequest request,String page,String title,String state,String number ){
 		if(state==null) {
@@ -238,37 +284,6 @@ public class EmployersHandler {
 		
 	}
 	
-	
-	//ajax 测试
-	@RequestMapping("/list1.action")//雇主故事列表
-	@ResponseBody
-	public List<UserStoryBean> list1(HttpServletRequest request,String page,String number){
-		int num=Integer.parseInt(number);
-		int countPage=userBizImp.countStory("测", 1);
-		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
-		if(page.equals("tpage")) {
-			System.out.println("上一页");
-			num--;
-			if(num<=0) {
-				num=1;
-			}
-		}else if(page.equals("npage")) {
-			System.out.println("下一页");
-			num++;
-			if (totalPages<num) {
-				num=totalPages;
-			}
-		}
-		List<UserStoryBean> list=new ArrayList<UserStoryBean>();
-		list=userBizImp.conditionQuery("测",num,1);
-		 request.setAttribute("list", list);
-		return list ;
-	}
-	@RequestMapping("/test.action")
-	public ModelAndView test8(){
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("jsp/Test");
-		return modelAndView ;
-	}
+
 	
 }
