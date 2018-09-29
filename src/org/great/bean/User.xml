@@ -308,7 +308,13 @@ UPDATE userStorytbl set enableDisableId=4 where userAccount=#{account}
 <update id="startStory" parameterType="java.lang.String">
 UPDATE userStorytbl set enableDisableId=3 where userAccount=#{account}
 </update>
+<select id="user"
+  resultType="org.great.bean.UserBean" 
+>
+ 
+      select * from USERTBL where USERID=#{userid}
 
+</select>
 
 </mapper>
 

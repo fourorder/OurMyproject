@@ -18,6 +18,9 @@ public class ProductionBean {
    private String productionImage;
    private String productionDetal;
    private int buyCount;
+   private int auditState   ;
+   private String auditName;
+   private String className;
    
    
    
@@ -157,6 +160,30 @@ public int getBuyCount() {
 
 public void setBuyCount(int buyCount) {
 	this.buyCount = buyCount;
+}
+
+public int getAuditState() {
+	return auditState;
+}
+
+public void setAuditState(int auditState) {
+	this.auditState = auditState;
+}
+
+public String getAuditName() {
+	return auditName;
+}
+
+public void setAuditName(String auditName) {
+	this.auditName = auditName;
+}
+
+public String getClassName() {
+	return className;
+}
+
+public void setClassName(String className) {
+	this.className = className;
 }
 	 
   
