@@ -27,13 +27,26 @@
         <meta name="author" content="AUI, a-ui.com">
         <meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
         <title>素材中心--  媒体开放平台 一点车 -  让您多懂一点车</title>
-        <link rel="stylesheet" href="<%=path%>css/oindex.css">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
         <link type="text/css" rel="stylesheet" href="<%=path%>css/core.css">
         <link type="text/css" rel="stylesheet" href="<%=path%>css/icon.css">
         <link type="text/css" rel="stylesheet" href="<%=path%>css/home.css">
         <script type="text/javascript" src="<%=path%>js/jquery-1.5.2.min.js"></script>
+         <script type="text/javascript" src="<%=path%>js/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=path%>plugins/layui/layui.js"></script>
+    <link rel="stylesheet" href="<%=path%>css/oindex.css">
+    <link rel="stylesheet" href="<%=path%>plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="<%=path%>css/global.css" media="all">
+    <link rel="stylesheet" href="<%=path%>laydate/theme/default/laydate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+        
+        
+        
         <script type="text/javascript">
         function del(){
         	
@@ -55,7 +68,7 @@
     </head>
     <body>
         <!-- head YDC begin -->
-       <div class="o-top">
+        <div class="o-top">
 				<div class="width1180">
 					
 					<span class="fr">
@@ -104,113 +117,158 @@
                     </div>
                     <!-- left end -->
                     <!-- right begin -->
-                    <div class="ydc-column ydc-column-8">
-                        <div class="ydc-release-content">
-                            <div class="ydc-tabPanel ydc-tabPanel-release">
-                                <div class="ydc-release-tab-head">
-                                    <ul>
-                                        <li class="hit">作品中心</li>
-                                       
-                                    </ul>
-                                </div>
-                                <div class="ydc-panes">
-                                    <div class="ydc-pane" style="display:block;">
-                                        <div class="ydc-release-form-group ">
-                                            <div class="ydc-warning-default">
-                                                <p>搜索作品名称</p>
-                                            </div>
-                                            <div class="ydc-group-input clearfix" style="width:100%; margin-bottom:20px;">
-                                                 <form  method="post" action="<%=path%>production/productionToManage.action" >
-                                                <input type="text"  name="fieldName" id="fieldName"  placeholder="请输入关键词进行搜索"  style="width:91.333%"  value=${fieldName }>
-                                                <button  type="submit"  class="ydc-group-button">搜 索</button>
-                                          </form>
-                                            </div>
-                                        </div>
-                                        <div class="ydc-assetStyle">
-                                           
-                                          
-                                        </div>
-                                        <div class="ydc-asset-img clearfix">
-                                      
-                                            
-                                          
-                       
-   
-                                        <div class="ydc-asset-img clearfix"   id="proList">                 
-             								<c:forEach items="${list}"  var="list" >	  
-                         									<div class="ydc-asset-img-list"  >
-                                                <div class="ydc-asset-img-list-img"  ><img src="<%=path%>picture/findPicture.action?url=${list.productionImage}"  alt=""></div>
-                                               <br>
-                                                <div class="ydc-asset-img-list-til">${list.productionName }&nbsp&nbsp&nbsp&nbsp&nbsp<span style="color:#ff0000">${list.auditName}</span></div>
-                                                <div class="ydc-asset-img-list-del">
-                                                   <form   style="margin:0px; padding:0px;"  method="post" action="<%=path%>production/toEditProduction.action?proId=${list.productionId }"   enctype="multipart/form-data" >         
-                                                    <button  style="height:38px;" <%-- onclick="toEditProduction( ${list.productionId })" --%>  type="submit" >编辑</button>
-                                                  </form>
-                                                      <form style="margin:0px; padding:0px;"   method="post" action="<%=path%>production/toDelProduction.action?proId=${list.productionId }"   enctype="multipart/form-data"  onsubmit="return del()">
-                                                    <button style="height:38px;"       type="submit" >删除</button>
-                                               </form>
-                                                </div>
-                                            </div> 
-              
-											</c:forEach>                               
-              </div>                               
+                      <div class="ydc-column ydc-column-8">
+                    <form  method="post" action="<%=path%>production/findBuyProduction.action">
+                                                <input type="text" name="fieldName" id="fieldName" placeholder="请输入作品名字进行搜索" style="width:30.333%" value="${fieldName }">
+                                                <input type="text" name="conditionName" id="conditionName" placeholder="请输入服务商名字进行搜索" style="width:30.333%"   value="${conditionName }">
+                                               <input type="submit"  value="搜索"  class="layui-btn layui-btn-normal" style="width:10.333%" />
+        							    </form>
+
+<!-- 作品标题：<input type="text" id="query" /><button onclick="query()"><span class="layui-btn layui-btn-normal">查询</span></button> -->
+<!-- </form> -->
+<table class="layui-table"   >
+  <colgroup>
+    <col width="150">
+    <col width="200">
+    <col>
+  </colgroup>
+  <thead>
+    <tr>
+    
+      <th>作品ID</th>
+      <th>作品名称</th>
+      <th>作品分类</th>
+      
+      <th>操作</th>
+             
+    </tr> 
+  </thead>
+ 
+  <tr> 
+  <tbody id="ddd">
+   <c:forEach items="${list}"  var="list"> 
+     
+      
+   <tr>
+
+  <td>${list.productionId}</td>
+  <td>${list.productionName}</td>
+  
+
+       <td> 
+
+      <!--  <a class="layui-btn layui-btn-sm layui-btn-danger" data-toggle="modal" data-target="#editVoince" data-id="edit">查看详情</a></td> -->
+      <%-- <input type="text"  id="demandDetailInformation2" value="${demand.demandDetailInformation}"/> --%>
+     <%--  <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert" onClick="Values(${demand.demandId})" value="查看详情"/> --%>
+      ${list.className} 
+         
+     <td >
+     <a class="btn btn-info" id="yyy" href="<%=path%>production/adminProductionDetal.action?proId=${list.productionId}" target="_blank"  >查看详情</a> 
+  <a href="<%=path %>download.action?upUrl=${list.productionImage }"   class=" btn btn-success   passBtn rightSize"  type="button"  data-id=${list.productionId } id="pass">下载封面</a>
+ <a href="<%=path %>download.action?upUrl=${list.productionFile }"   class=" btn btn-warning illegalBtn rightSize"  type="button"  data-id=${list.productionId } id="illegal">下载文件</a>
+  
+       
+       </td>
+       
+        </tr>
+        </c:forEach>
+  </tbody>
         
-                                           
-                                          
-                                        </div>
-                                      
-                                    </div>
-                                    <div class="ydc-pane">
-                                      
-                                       
-                                       
-                                            
-                                            
-                                            
-                                             
-                                            
-                                            
-                                            
-                                           
-                                            
-                                           
-                                           
-                                            
-                                            
-                                             
-                                        </div>
-                                        <div class="ydc-pagination">
-                                 
-                                            <ol>
-                                            <li>
-                                             当前页<span id="currentPage" >${currentPage}</span>  
-											总页数<span id="totalPages"  >${totalPages } </span>        
-                                        
-                                            </li>
-                                            
-                                                <li class="ydc-previous-item">
-                                                    <button class="ydc-previous-item-btn-medium "  onclick="addPages('last')">
+         <tr>
+   <%-- <td colspan="2"><a class="layui-btn layui-btn-sm" href="#" onclick="lastPage();return false;" id="last">上一页</a></td>
+   <td >
+   
+   
+   
+   当前页：<a id="aaa">${num}</a><br>
+          总页数：<a id="eee">${countPage}</a><br>
+     第<input type="text" id="btn" size=2/>页<button onclick="selectPage()"><span class="layui-btn layui-btn-normal">跳转</span></button>
+   
+   
+   </td>
+   <td colspan="2"><a class="layui-btn layui-btn-sm" href="#"  onclick="nextPage();return false;" id="next">下一页</a></td>
+   </tr> --%>
+   <!-- ----------------------------------------- -->
+  
+    
+   
+  <!-- ------------------------------------     -->
+<!-- 下架作品 -->
+ 
+   
+<!-- ------------------------------------     -->
+      <!-- 审核作品 -->
+  
+<!-- ---------------------------------- -->
+</table>
+当前页<span id="currentPage" >${currentPage}</span>  
+											总页数<span id="totalPages"  >${totalPages } </span>  
+                                                    <button class="ydc-previous-item-btn-medium" onclick="addPages('last')"  >
                                                         <span>上一页</span>
                                                     </button>
-                                                </li>
                                                 
-                                                <li class="ydc-previous-item">
-                                                    <button class="ydc-previous-item-btn-medium" onclick="addPages('next')" >
+                                                    <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  >
                                                         <span>下一页</span>
                                                     </button>
-                                                </li>
-                                                <li class="ydc-item-quick">
-                                                    第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""></div>页
-                                                    <button style="margin-left:5px;" class="ydc-previous-item-btn-medium">
-                                                        <span>跳转</span>
-                                                    </button>
-                                                </li>
-                                            </ol>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+</div>
+  
+ <script type="text/javascript">
+    
+    function addPages(state){
+   	 
+
+    	$("#ddd").empty();
+    	//alert("currentPage="+$("#currentPage").text());
+    	$.ajax({	
+    		 url:"<%=path %>production/buyProductionAddPages.action",
+    		 data:"currentPage="+$("#currentPage").text()+"&state="+state+"&totalPages="+$("#totalPages").text()+"&conditionName="+$("#conditionName").val()+"&fieldName="+$("#fieldName").val(),
+    		 dataType:"json",
+    		 type:"post",
+    		 success:function(redata){
+    			 $("#currentPage").empty();
+    			 $("#totalPages").empty();
+    			 $("#currentPage").html(redata.currentPage);
+    			 $("#totalPages").html(redata.totalPages);
+    			 
+    			 var list=redata.proList;
+    			 var len = list.length;
+    			
+    			 for(var i=0;i<len;i++){    			        	 
+    	             var e = list[i];
+    	           
+    	             $("#ddd").append("<tr><td>"+e.productionId+"</td>"
+	            			 +"<td>"+e.productionName+"</td>"
+	            			 +"<td>"
+	            			 +e.className
+	            			  
+	            			
+	            			 +"<td>"
+	            			 +"<a class='btn btn-info btn btn-primary  ' id='yyy' href='<%=path%>production/adminProductionDetal.action?proId="+e.productionId+"'  target='_blank'>查看详情</a>"
+	            		 
+	             			 +" <a href='<%=path %>download.action?upUrl="+e.productionImage+" '  class='btn btn-success   passBtn rightSize'  type='button'  data-id='"+e.productionId+"' id='pass'>下载封面</a>"
+	             			
+	             			 +" <a href='<%=path %>download.action?upUrl="+e.productionFile+" '  class='btn btn-warning illegalBtn rightSize'  type='button'  data-id='"+e.productionId+"' id='illegal'>下载文件</a>"
+	             	 
+	            			 
+ 
+	            			 +"</td>"
+	            			 +"</tr>");
+    	     //------------
+ 
+  
+    	     //----------
+    			 
+    			 } 	 
+    			
+    		 }
+    	})
+    	
+    }
+    
+    
+    
+    </script>
+                     </div>
                     </div>
                     <!-- right end -->
                 </div>

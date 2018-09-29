@@ -59,5 +59,4 @@ public void changeState2(int userId);
 public void changeState3(int userId);
 public void changeInfo(@Param(value="userId")int userId ,@Param(value="userName")String userName ,@Param(value="userTel")Long userTel ,@Param(value="userAccount")String userAccount ,@Param(value="userSex")String userSex ,@Param(value="userMail")String userMail ,@Param(value="userIdentity")String userIdentity,@Param(value="userCredit")int userCredit,@Param(value="userMoney")int userMoney,@Param(value="userRegisterTime")String userRegisterTime);
 public UserBean user(Integer userid);
-
 }

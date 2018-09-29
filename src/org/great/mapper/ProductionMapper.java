@@ -44,4 +44,41 @@ public interface ProductionMapper {
 	
 	//
 	public List<ProductionBean> productionNumber(@Param("name")String name);
+	
+	//查找服务商作品  翻页   进入服务商 作品管理中心
+	public ArrayList<ProductionBean> toManageProductionList(ConditionBean conditionBean);
+	
+	//查找服务商作品  全部，计算页数   进入服务商 作品管理中心
+		public ArrayList<ProductionBean> toManageAllProductionList(ConditionBean conditionBean);
+		
+	//查询作品购买次数
+		public int  findProductionBuyCount(int id);
+		
+		//更次作品的购买次数
+		public void setProductionBuyCount(@Param("proId")int proId,@Param("buyCount")int buyCount);
+
+		 //查询作品审核状态
+		  public String toFindProductionAuditName(int auditState);
+
+		  	//编辑作品 更新语句
+			public void editProduction(ProductionBean productionBean);
+
+			//删除作品 id
+			public void delProduction(int proId);
+			
+			//查找分类  
+			public String findClassName(int classId);
+			
+			//下架作品
+			public void adminToIllegalProduction(int proId);
+			
+			//通过审核
+			
+			public void adminToPsaaProduction(int proId);
+			
+			//已购买的作品   id 翻页
+			public ArrayList<ProductionBean> findBuyProduction(ConditionBean conditionBean);
+			
+			//已购买的作品   id  所以的
+			public ArrayList<ProductionBean> findAllBuyProduction(ConditionBean conditionBean);
 }

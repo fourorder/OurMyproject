@@ -50,7 +50,7 @@ public class CounselorHandler {
 			if(list.get(0).getAuditState()==0) {
 				System.out.println("该用户正在审核");
 			
-				return new ModelAndView("redirect:list.action?page=tpage&number=1");
+				return new ModelAndView("redirect:/user/home.action");
 			}else if(list.get(0).getAuditState()==1) {
 				System.out.println("该用户已是顾问");
 				

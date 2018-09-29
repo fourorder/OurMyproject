@@ -11,7 +11,8 @@ public class AuthorityBean {
 	private int pId;
 	private String pathName;
 	private int state;
-	
+	private String divClass;
+	private int rank;
 	
 	
 	
@@ -28,6 +29,29 @@ public class AuthorityBean {
 		this.pId = pId;
 		this.pathName = pathName;
 		this.state = state;
+	}
+	public AuthorityBean(int authorityId, String authorityName, int pId, String pathName, int state, String divClass,
+			int rank) {
+		super();
+		this.authorityId = authorityId;
+		this.authorityName = authorityName;
+		this.pId = pId;
+		this.pathName = pathName;
+		this.state = state;
+		this.divClass = divClass;
+		this.rank = rank;
+	}
+	public String getDivClass() {
+		return divClass;
+	}
+	public void setDivClass(String divClass) {
+		this.divClass = divClass;
+	}
+	public int getRank() {
+		return rank;
+	}
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 	public int getAuthorityId() {
 		return authorityId;

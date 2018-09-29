@@ -133,7 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="<%=basePath%>demand/page.action?page=tpage&number=1" target="menuFrame">需求管理</a>
                         </dd>
                         <dd>
-                            <a href="">作品管理</a>
+                            <a href="<%=basePath%>production/toAdminProductionManage.action" target="menuFrame">作品管理</a>
                         </dd>
                     </dl>
                 </li>
@@ -141,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <a href="javascript:;" style="font-size: 15px;">参数配置</a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="">参数配置</a>
+                            <a href="<%=basePath%>powder/toFindCharacter.action" target="menuFrame">权限管理</a>
                         </dd>
                         <dd>
                             <a href="">需求类型配置</a>

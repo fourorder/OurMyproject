@@ -28,5 +28,4 @@ public interface PowerMapper {
 		/*//查找顾问表  是否正在使用
 		public ArrayList<CharacterBean> confirmRoleUsing2(int id);*/
 		
-		
 }

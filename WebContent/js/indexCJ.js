@@ -98,7 +98,7 @@ $(function () {
               $("#authorityBody").empty().append(html);
               $("#authorifyselect").treeMultiselect({ searchable: true, hideSidePanel: true });
               $("#AuthorityTitle").text("给 " + username + " 分配权限");
-              $("#grantAuthorityModal").modal('show');
+              $("#grantAuthorityModal").modal("show");
             }
         });
        // html.append('</select>');
@@ -132,7 +132,7 @@ $(function () {
     $("#treeSelectBody").on('click', '.deleteBtn', function () {
     	  delRoleId= $(this).parents('tr').find('button').eq(1).data("id");
     	// alert("确认删除该角色吗？");
-    	 $("#delmymodal").modal();
+    	 $("#delmymodal").modal("show");
     }); 
    //------------------------------------
  
@@ -161,10 +161,10 @@ $(function () {
 			 type:"post",
 	         success: function (redata) {
 	        	 
-	        	 
+	         
 	         			}
 	        
-	         });
+	         });	 $("#grantAuthorityModal").modal("hide"); 
 	//-----------------------------	
 	
 })
@@ -237,11 +237,11 @@ $.ajax({
     			    	//-------------
     			    			}
     			   
-    			    });
+    			    }); $("#myModal").modal("hide"); 
     	 }
     	 
-    }
-});
+    }  
+}); 
 	//alert(roleIntro+"==="+roleName);
 //---------------------------
 
@@ -258,7 +258,7 @@ $.ajax({
 
   $('#confirmDelRole').click(function(){
 
-	 alert("要删除的角色id"+delRoleId);
+	// alert("要删除的角色id"+delRoleId);
 	  //先确认该角色有没有人正在使用
 		$.ajax({
 		    url: "../powder/confirmRoleUsing.action",
@@ -304,7 +304,7 @@ $.ajax({
 				    			             );
 		    			            }
 		    			         
-		    					 } 	 
+		    					 } 	 $("#delmymodal").modal('hide');
 		    			    }
 		    			}) ; 
 		    	}

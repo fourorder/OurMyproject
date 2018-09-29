@@ -29,11 +29,12 @@ public interface AuthoriyMapper {
 		// 将所有菜单id 和角色id 写入数据库 
 		public void setRoleAndMenu( @Param(value="roleId")Integer roleId, @Param(value="menuId")Integer menuId);
 
+
 		//查找该用户 角色所有的子菜单  没有父类菜单
-		public ArrayList<AuthorityBean> findOwnSubclassMenu(int id);		
-	 
+		public ArrayList<AuthorityBean> findOwnSubclassMenu(int id);			
 
 
 	
+
 
 }

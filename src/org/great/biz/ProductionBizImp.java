@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.great.bean.ConditionBean;
 import org.great.bean.ProductionBean;
+import org.great.bean.UserBean;
 import org.great.mapper.ParameterMapper;
 import org.great.mapper.ProductionMapper;
 import org.springframework.stereotype.Service;
@@ -33,15 +34,36 @@ public class ProductionBizImp implements ProductionBiz{
 	//	System.out.println("biaoti="+title+"jiage="+price+"fenlei="+className);
 		productionBean.setProductionName(title);
 		productionBean.setProductionMoney(price);
-		productionBean.setUserId(2);
+		
+		  UserBean userBean= (UserBean) request.getSession().getAttribute("user");//从session取出userbean对象
+		productionBean.setUserId(userBean.getUserId());
+	
 		productionBean.setParameterId(className);
 		productionBean.setBuyCount(0);//初始化购买次数
 		//productionBean.setClassId(className);
-		String productionImage=upLoadFile(request, file);
-		productionBean.setProductionImage(productionImage);
+		System.out.println("上传封面图片名字="+file.getOriginalFilename());
+		if(file.getOriginalFilename()=="") {
+			System.out.println("没有封面上传");
+		}else {
+			String productionImage=upLoadFile(request, file);
+			productionBean.setProductionImage(productionImage);
+		}
+	
 		productionBean.setProductionDetal(area2);
-		String  productionFile2=upLoadFile(request, productionFile);
-		productionBean.setProductionFile(productionFile2);
+		/*System.out.println("上传文件的名字="+productionFile.getOriginalFilename());
+		*/
+		if(productionFile.getOriginalFilename()=="") {
+			System.out.println("没有文件上传");
+		}else {
+			String  productionFile2=upLoadFile(request, productionFile);
+			productionBean.setProductionFile(productionFile2);
+		}
+		
+		/*if(productionFile.getOriginalFilename()==null) {
+			System.out.println("没有文件上传2");
+		}*/
+		
+		
 		
 		productionMapper.addProduction(productionBean);
 	 
@@ -75,7 +97,7 @@ public class ProductionBizImp implements ProductionBiz{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        System.out.println("Biz"+path+"-->"+uploadDocName);
+        System.out.println("Biz"+path+"---->"+uploadDocName);
         
         //-----------------------
 		
@@ -94,10 +116,12 @@ public class ProductionBizImp implements ProductionBiz{
 			state="";
 		}
 		if(state.equals("next")) {
+			//System.out.println("进行下一页操作，增加页数前，当前页="+currentPage+"总页数="+totalPages);
 			if(currentPage<totalPages) {
 				
 				currentPage++;
 			}
+		//	System.out.println("进行下一页操作，增加页数后，当前页="+currentPage+"总页数="+totalPages);
 		}
 		if(state.equals("last")) {
 			if(currentPage>1) {
@@ -105,15 +129,36 @@ public class ProductionBizImp implements ProductionBiz{
 				currentPage--;
 			}
 		}
+	//	System.out.println("要去查找的页数="+currentPage);
 		conditionBean.setCurrentPage(currentPage);
-		list=productionMapper.findProductionList(conditionBean);
+	//	System.out.println("查找条件="+conditionBean.getConditionName());
 		listSize=productionMapper.findAllProductionList(conditionBean);
+	
+		int a = listSize.size();
+		int b = (int) conditionBean.getEachPageCum();
+		int c=a%b==0?a/b:a/b+1;
+	//	System.out.println("原来要去查找的页数="+conditionBean.getCurrentPage());
+		if(conditionBean.getCurrentPage()>c) {
+			int newCurrentPage=(int) (conditionBean.getCurrentPage()-1);
+			conditionBean.setCurrentPage(newCurrentPage);
+	//		System.out.println("要去查找的页数="+newCurrentPage);
+		}
+	//	System.out.println("要去查找的页数="+conditionBean.getCurrentPage());
+		list=productionMapper.findProductionList(conditionBean);
+		for(int i=0;i<list.size();i++) {
+			
+			String auditName=	productionMapper.toFindProductionAuditName(list.get(i).getAuditState());
+			list.get(i).setAuditName(auditName);
+			String className=	productionMapper.findClassName(list.get(i).getParameterId());
+			list.get(i).setClassName(className);
+				
+			}
+	//	System.out.println("list长度8="+list.size());
 		conditionBean.setProList(list);
 		
-		int a = listSize.size();
-		int b = (int) conditionBean.getEachPageCum();;
-		int c=a%b==0?a/b:a/b+1;
-		request.setAttribute("currentPage", conditionBean.getCurrentPage());
+	
+	//	System.out.println("设置当前页数！！！！！！！！！！！！！！！！="+conditionBean.getCurrentPage());
+		request.setAttribute("currentPage",  currentPage);
 		request.setAttribute("totalPages", c);
 		conditionBean.setTotalPages(c);
 		
@@ -203,11 +248,187 @@ public class ProductionBizImp implements ProductionBiz{
              //更新余额
              productionMapper.setNewUserMoney(4, newCommissionMoney);
              
+             
+             //4购买作品后 作品的购买次数加1
+                         //查询该作品的购买次数
+           int buyCount=  productionMapper.findProductionBuyCount(proId)+1;
+             //设置新的购买次数
+           productionMapper.setProductionBuyCount(proId, buyCount);
+             
 	}
+	
+	
 	//得到热卖作品列表
 	public List<ProductionBean> getProductionList(){
 				
 		return productionMapper.getProductionList();	
+	}
+
+
+	@Override
+	public ConditionBean toManageProductionList(ConditionBean conditionBean, HttpServletRequest request, String state) {
+		// TODO Auto-generated method stub
+		ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
+		ArrayList<ProductionBean> listSize=new ArrayList<ProductionBean>();
+		int currentPage=(int) conditionBean.getCurrentPage();
+		int totalPages=(int) conditionBean.getTotalPages();
+		if(state==null) {
+			state="";
+		}
+		if(state.equals("next")) {
+			if(currentPage<totalPages) {
+				
+				currentPage++;
+			}
+		}
+		if(state.equals("last")) {
+			if(currentPage>1) {
+				
+				currentPage--;
+			}
+		}
+		
+		//System.out.println("查找条件="+conditionBean.getFieldName());
+		//System.out.println("查找条件="+conditionBean.getConditionName());
+		conditionBean.setCurrentPage(currentPage);
+		list=productionMapper.toManageProductionList(conditionBean);
+		
+		//把 审核状态  中文名称   放进去
+		for(int i=0;i<list.size();i++) {
+			
+			
+		String auditName=	productionMapper.toFindProductionAuditName(list.get(i).getAuditState());
+		list.get(i).setAuditName(auditName);
+			
+		}
+		
+		
+		
+		listSize=productionMapper.toManageAllProductionList(conditionBean);
+		conditionBean.setProList(list);
+		
+		int a = listSize.size();
+		int b = (int) conditionBean.getEachPageCum();;
+		int c=a%b==0?a/b:a/b+1;
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("totalPages", c);
+		conditionBean.setTotalPages(c);
+		
+		return conditionBean;
+	}
+
+
+	@Override
+	public void editProduction(HttpServletRequest request, Integer proId, String title, Float price,
+			Integer className, String area2, MultipartFile file, MultipartFile productionFile) {
+		ProductionBean productionBean=new ProductionBean();
+		
+		//	System.out.println("biaoti="+title+"jiage="+price+"fenlei="+className);
+		System.out.println("更新的作品id=+"+proId+"新的作品名字="+title);
+		productionBean.setProductionId(proId);
+		productionBean.setProductionName(title);
+			productionBean.setProductionMoney(price);
+			
+			/*  UserBean userBean= (UserBean) request.getSession().getAttribute("user");//从session取出userbean对象
+			productionBean.setUserId(userBean.getUserId());*/
+		
+			productionBean.setParameterId(className);
+			productionBean.setBuyCount(0);//初始化购买次数
+			//productionBean.setClassId(className);
+			System.out.println("上传封面图片名字="+file.getOriginalFilename());
+			if(file.getOriginalFilename()=="") {
+				System.out.println("没有封面上传");
+			}else {
+				System.out.println("有上传封面图片，进行上传操作");
+				String productionImage=upLoadFile(request, file);
+				productionBean.setProductionImage(productionImage);
+			}
+		
+			productionBean.setProductionDetal(area2);
+			/*System.out.println("上传文件的名字="+productionFile.getOriginalFilename());
+			*/
+			if(productionFile.getOriginalFilename()=="") {
+				System.out.println("没有文件上传");
+			}else {
+				System.out.println("有上传文件，进行上传操作");
+				String  productionFile2=upLoadFile(request, productionFile);
+				productionBean.setProductionFile(productionFile2);
+			}
+			
+			/*if(productionFile.getOriginalFilename()==null) {
+				System.out.println("没有文件上传2");
+			}*/
+			
+			productionMapper.editProduction(productionBean);
+			
+		//	productionMapper.addProduction(productionBean);
+		 
+		
+	}
+
+
+	@Override
+	public ConditionBean findBuyProduction(ConditionBean conditionBean, HttpServletRequest request, String state) {
+		// TODO Auto-generated method stub
+		ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
+		ArrayList<ProductionBean> listSize=new ArrayList<ProductionBean>();
+		int currentPage=(int) conditionBean.getCurrentPage();
+		int totalPages=(int) conditionBean.getTotalPages();
+		if(state==null) {
+			state="";
+		}
+		if(state.equals("next")) {
+		//	System.out.println("进行下一页操作，增加页数前，当前页="+currentPage+"总页数="+totalPages);
+			if(currentPage<totalPages) {
+				
+				currentPage++;
+			}
+		//	System.out.println("进行下一页操作，增加页数后，当前页="+currentPage+"总页数="+totalPages);
+		}
+		if(state.equals("last")) {
+			if(currentPage>1) {
+				
+				currentPage--;
+			}
+		}
+	//	System.out.println("要去查找的页数="+currentPage);
+		conditionBean.setCurrentPage(currentPage);
+	//	System.out.println("查找条件="+conditionBean.getConditionName()+"条件2 ="+conditionBean.getFieldName());
+		
+		
+		//listSize=productionMapper.findAllProductionList(conditionBean);
+		listSize=productionMapper.findAllBuyProduction(conditionBean);
+		int a = listSize.size();
+		int b = (int) conditionBean.getEachPageCum();
+		int c=a%b==0?a/b:a/b+1;
+	//	System.out.println("总页数="+c+"数组长度为="+a);
+	//	System.out.println("原来要去查找的页数="+conditionBean.getCurrentPage());
+		if(conditionBean.getCurrentPage()>c) {
+			int newCurrentPage=(int) (conditionBean.getCurrentPage()-1);
+			conditionBean.setCurrentPage(newCurrentPage);
+	//		System.out.println("要去查找的页数="+newCurrentPage);
+		}
+	//	System.out.println("要去查找的页数="+conditionBean.getCurrentPage());
+		list=productionMapper.findProductionList(conditionBean);
+		list=productionMapper.findBuyProduction(conditionBean);
+		for(int i=0;i<list.size();i++) {
+			
+			String auditName=	productionMapper.toFindProductionAuditName(list.get(i).getAuditState());
+			list.get(i).setAuditName(auditName);
+			String className=	productionMapper.findClassName(list.get(i).getParameterId());
+			list.get(i).setClassName(className);
+				
+			}
+	//	System.out.println("list长度8="+list.size());
+		conditionBean.setProList(list);
+		
+	
+	//	System.out.println("设置当前页数！！！！！！！！！！！！！！！！="+conditionBean.getCurrentPage());
+		request.setAttribute("currentPage",  currentPage);
+		request.setAttribute("totalPages", c);
+		conditionBean.setTotalPages(c);
+		
+		return conditionBean;
 	}
 	
 }

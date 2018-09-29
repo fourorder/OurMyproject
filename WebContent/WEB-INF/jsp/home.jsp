@@ -96,7 +96,7 @@
 						
 						</li>
 						<li class="clearfix">
-						<p><a href="#"  title="成为顾问"><i class="o-index2"></i>成为顾问<b></b></a></p>
+						<p><a href="<%=path%>counselor/application.action?account=${user.userAccount}&userId=${user.userId}"  title="成为顾问"><i class="o-index2"></i>成为顾问<b></b></a></p>
 						
 						</li>
 					</ul>		

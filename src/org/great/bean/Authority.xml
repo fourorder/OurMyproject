@@ -67,8 +67,18 @@
  
  
  </insert>
- 
- 
+
+<select id="findOwnSubclassMenu"
+resultType="org.great.bean.AuthorityBean" 
+>
+
+
+select * from AUTHORITYTBL where AUTHORITYID in(select AUTHORITYID  from CHARACTERAUTHORITYRELATIONTBL where CHARACTERID in(select CHARACTERID from USERTBL where USERID=#{id})) and pid !=0  order by rank asc
+
+
+
+</select>
+
  
 
 </mapper>

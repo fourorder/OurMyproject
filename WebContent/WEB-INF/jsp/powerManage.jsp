@@ -45,7 +45,7 @@
 		
         <div id="statisipArea" class="">
             <h3>角色管理</h3>
-			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">添加角色</button>
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"    >添加角色</button>
           <!-- ---------------------- -->
           <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -136,7 +136,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">确实删除</h4>
+                <h4 class="modal-title">确认删除</h4>
             </div>
             <div class="modal-body">
                 <p>确认删除该角色吗？</p>
@@ -148,7 +148,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-复制代码
+
 
 <!-- ------------------------ -->
    <%--  <script id="treeSelect-template" type="text/x-dot-template">

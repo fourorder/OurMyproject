@@ -317,5 +317,3 @@ UPDATE userStorytbl set enableDisableId=3 where userAccount=#{account}
 </select>
 
 </mapper>
-
-

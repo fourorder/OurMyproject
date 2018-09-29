@@ -15,6 +15,7 @@
     <title>顾问申请页</title>
     <script type="text/javascript" src="<%=path %>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=path %>/plugins/layui/layui.js"></script>
+    <link rel="stylesheet" href="<%=path%>css/oindex.css">
     <link rel="stylesheet" href="<%=path %>/plugins/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="<%=path %>/css/global.css" media="all">
     <link rel="stylesheet" href="<%=path %>/laydate/theme/default/laydate.css" media="all">
@@ -29,6 +30,21 @@
 
 </head>
 <body>
+<div class="o-top">
+				<div class="width1180">
+					
+					<span class="fr">
+						<!-- <a href="#" title="登录">登录</a>
+						<a href="#" title="注册">注册</a> -->
+						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
+						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
+						<!--登录后
+						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
+						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
+						-->
+					</span>
+				</div>
+</div>
 <div align="center" style="height: 90%;width: 50%;margin:0 auto;background-color: #eff4d8; text-align: left"  >
     <form class="layui-form" action="<%=path %>counselor/affirm.action" method="post" onsubmit="return CheckPost()" enctype="multipart/form-data" >
    

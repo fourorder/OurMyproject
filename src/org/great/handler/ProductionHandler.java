@@ -10,13 +10,18 @@ import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.great.bean.AuthorityBean;
 import org.great.bean.ConditionBean;
 import org.great.bean.ParameterBean;
 import org.great.bean.ProductionBean;
+import org.great.bean.SessionBean;
 import org.great.bean.UserBean;
 import org.great.biz.ProductionBiz;
+import org.great.mapper.AuthoriyMapper;
 import org.great.mapper.ParameterMapper;
 import org.great.mapper.ProductionMapper;
+import org.great.mapper.SessionMapper;
+import org.great.mapper.UserMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,7 +43,13 @@ public class ProductionHandler {
 	@Resource
 	private ProductionMapper productionMapper;
 	@Resource
+	private AuthoriyMapper authoriyMapper;
+	@Resource
 	private ProductionBiz productionBizImp;
+	@Resource
+	private SessionMapper sessionMapper;
+	@Resource
+	private UserMapper userMapper;
 	
 	
 	@RequestMapping("/toProduction.action")
@@ -47,12 +58,14 @@ public class ProductionHandler {
 		
 		ConditionBean conditionBean=new ConditionBean();
 		conditionBean.setCurrentPage(1);
-		if(conditionName!=null) {
+		if(conditionName!=null && conditionName!="" ) {
 			conditionBean.setConditionName("%"+conditionName+"%");
+			request.setAttribute("conditionName", conditionName);
 		}
-		if(fieldName!=null) {
+		if(fieldName!=null && fieldName!="") {
 		 
 			conditionBean.setFieldName("%"+fieldName+"%");
+			request.setAttribute("fieldName", fieldName);
 		}
 	
 		 list=productionBizImp.findProductionList(conditionBean,request,null).getProList();
@@ -77,6 +90,13 @@ public class ProductionHandler {
 		ArrayList<ParameterBean> list=new ArrayList<ParameterBean>();
 		list=parameterMapper.findProductionClass();
 		request.setAttribute("list", list);
+		
+		//------------菜单------
+		UserBean userBean=(UserBean) request.getSession().getAttribute("user");
+		ArrayList<AuthorityBean> menuList=new ArrayList<AuthorityBean>();
+		menuList=authoriyMapper.findOwnMune(userBean.getUserId());
+		request.setAttribute("menuList", menuList);
+		//---------------------
 		return mav;
 	}
 	
@@ -88,15 +108,15 @@ public class ProductionHandler {
 			,MultipartFile  productionFile
 			) {
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("jsp/productionAllList");
-		   String filename =productionFile.getOriginalFilename();
+	/*	ModelAndView mav = new ModelAndView();
+	mav.setViewName("jsp/productionAllList");*/
+	   String filename =productionFile.getOriginalFilename();
 		  UserBean userBean= (UserBean) request.getSession().getAttribute("user");//从session取出userbean对象
 		productionBizImp.toIssueProduction(request, title, price, className, area2,file,
 				userBean.getUserId(),productionFile);
 		
 		
-		return mav;
+		return new ModelAndView("redirect:/production/productionToManage.action");
 	}
 	
 	
@@ -105,20 +125,23 @@ public class ProductionHandler {
 	public ConditionBean AddPages(HttpServletRequest request, Integer currentPage, Integer totalPages
 			,String conditionName,String fieldName ,String state
 			) {
-		//System.out.println("下一页"+currentPage+"总页数"+totalPages);
+	//	System.out.println("下一页"+currentPage+"总页数"+totalPages);
+	//	System.out.println("handler 条件="+conditionName+"-->"+fieldName);
 		//System.out.println("条件"+conditionName+fieldName);
 		
 		
 		ConditionBean conditionBean=new ConditionBean();
 		conditionBean.setCurrentPage(currentPage);
-		conditionBean.setCurrentPage(currentPage);
+		//conditionBean.setCurrentPage(currentPage);
 		conditionBean.setTotalPages(totalPages);
-		if(conditionName!=null) {
+		if(conditionName!=null && conditionName!="" ) {
 			conditionBean.setConditionName("%"+conditionName+"%");
+			request.setAttribute("conditionName", conditionName);
 		}
-		if(fieldName!=null) {
+		if(fieldName!=null && fieldName!="") {
 		 
 			conditionBean.setFieldName("%"+fieldName+"%");
+			request.setAttribute("fieldName", fieldName);
 		}
 	//	System.out.println(conditionBean.getConditionName()+"---->"+conditionBean.getFieldName());
 		ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
@@ -130,6 +153,47 @@ public class ProductionHandler {
 			conditionBean.setProList(list);
 		return conditionBean;
 	}
+	
+	
+	@RequestMapping("/ManageAddPages.action")
+	@ResponseBody
+	public ConditionBean ManageAddPages(HttpServletRequest request, Integer currentPage, Integer totalPages,String conditionName,String fieldName
+			,String state
+			) {
+		//System.out.println("下一页"+currentPage+"总页数"+totalPages);
+		//System.out.println("条件"+conditionName+fieldName);
+		 UserBean userBean= (UserBean) request.getSession().getAttribute("user");//从session取出userbean对象
+		
+		ConditionBean conditionBean=new ConditionBean();
+		conditionBean.setCurrentPage(currentPage);
+		//conditionBean.setCurrentPage(currentPage);
+		conditionBean.setTotalPages(totalPages);
+		conditionBean.setUserName(userBean.getUserId());
+		if(conditionName!=null && conditionName!="" ) {
+			conditionBean.setConditionName("%"+conditionName+"%");
+			request.setAttribute("conditionName", conditionName);
+		}
+		if(fieldName!=null && fieldName!="") {
+		 
+			conditionBean.setFieldName("%"+fieldName+"%");
+			request.setAttribute("fieldName", fieldName);
+		}
+	//	System.out.println(conditionBean.getConditionName()+"---->"+conditionBean.getFieldName());
+		ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
+	 list=productionBizImp.toManageProductionList(conditionBean, request, state).getProList();
+		// list=productionBizImp.findProductionList(conditionBean,request,state).getProList();
+		
+		 request.setAttribute("list", list);
+ 
+			conditionBean.setProList(list);
+		return conditionBean;
+	}
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/toProductionDetal.action")
 	public ModelAndView toProductionDetal(HttpServletRequest request,Integer  proId) {
 		
@@ -190,6 +254,31 @@ public class ProductionHandler {
 //		String proId2=session.getAttribute("buyProductionId").toString();
 //		Integer  proId3=Integer.valueOf(proId2);
 //		System.out.println("购买作品的ID="+proId3);
+		
+		//session丢失   session数据存数据库
+		
+		long time=System.currentTimeMillis();
+		UserBean userBean=(UserBean) request.getSession().getAttribute("user");
+		System.out.println("购买者，存数据库Session表，id="+userBean.getUserId());
+		productionBean.getProductionId();
+		
+		SessionBean sessionBean=new SessionBean();
+		sessionBean.setTime(time);
+		sessionBean.setUserId(userBean.getUserId());
+		sessionBean.setProductionId(productionBean.getProductionId());
+		sessionMapper.setSession(sessionBean);
+		request.setAttribute("time", time);
+		
+		 request.getSession().setAttribute("time", time);
+		 
+		// String notify_url = "http://127.0.0.1:8080/Myproject/production/productionPayFinish.action?time="+time;
+		 AlipayConfig.notify_url="http://127.0.0.1:8080/Myproject/production/productionPayFinish.action?time="+time;
+			// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+			//public static String return_url = "http://127.0.0.1:8080/alipay.trade.page.pay-JAVA-UTF-8/return_url.jsp";
+			//String return_url = "http://127.0.0.1:8080/Myproject/production/productionPayFinish.action?time="+time;
+		 AlipayConfig.return_url= "http://127.0.0.1:8080/Myproject/production/productionPayFinish.action?time="+time;
+		//--------------
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsp/alipay.trade.page.pay");
 		
@@ -198,87 +287,32 @@ public class ProductionHandler {
 	}
 	
 	@RequestMapping("/productionPayFinish.action")
-	public void productionPayFinish(HttpServletRequest request,Integer  proId,
-			Integer userId,Integer  proUserId,Double price) throws UnsupportedEncodingException, AlipayApiException
+	public ModelAndView productionPayFinish(HttpServletRequest request,Integer  proId,
+			Integer userId,Integer  proUserId,Double price,Long time) throws UnsupportedEncodingException, AlipayApiException
 	  {//ModelAndView
 		ServletContext application = request.getSession().getServletContext();
 //		HttpSession session = request.getSession();
 //		System.out.println("1111111111111111111111111");
 //		System.out.println(session);
-		String proId2=application.getAttribute("buyProductionId").toString();
+		System.out.println("接收到的time="+time);
+		SessionBean sessionBean=new SessionBean();
+		sessionBean=sessionMapper.findSession(time);
+		UserBean userBean=userMapper.user(sessionBean.getUserId());
+		request.getSession().setAttribute("user", userBean);
+		Integer  proId3=sessionBean.getProductionId();
+		userId=sessionBean.getUserId();
+				 
+//-------------------------------		
+	/*	String proId2=application.getAttribute("buyProductionId").toString();
 		Integer  proId3=Integer.valueOf(proId2);
-		System.out.println("ooppppp"+proId3);
+		System.out.println("ooppppp"+proId3);*/
 		
 		//---------------------------------------
 		
 
-			//获取支付宝POST过来反馈信息
-			Map<String,String> params = new HashMap<String,String>();
-			Map<String,String[]> requestParams = request.getParameterMap();
-			for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
-				String name = (String) iter.next();
-				String[] values = (String[]) requestParams.get(name);
-				String valueStr = "";
-				for (int i = 0; i < values.length; i++) {
-					valueStr = (i == values.length - 1) ? valueStr + values[i]
-							: valueStr + values[i] + ",";
-				}
-				//乱码解决，这段代码在出现乱码时使用
-				valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
-				System.out.println("参数条那件="+name+"==--->"+valueStr);
-				params.put(name, valueStr);
-			}
-			
-			boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.alipay_public_key, AlipayConfig.charset, AlipayConfig.sign_type); //调用SDK验证签名
-
-			//——请在这里编写您的程序（以下代码仅作参考）——
-			
-			/* 实际验证过程建议商户务必添加以下校验：
-			1、需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号，
-			2、判断total_amount是否确实为该订单的实际金额（即商户订单创建时的金额），
-			3、校验通知中的seller_id（或者seller_email) 是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email）
-			4、验证app_id是否为该商户本身。
-			*/
-			if(signVerified) {//验证成功
-				//商户订单号
-				String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
-			
-				//支付宝交易号
-				String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
-			
-				//交易状态
-		//		String trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"),"UTF-8");
-				
-				 String passback_params = java.net.URLEncoder.encode(params.get("passback_params"),"UTF-8");
-				 System.out.println("自定义参数="+passback_params);
-				
-			/*	if(trade_status.equals("TRADE_FINISHED")){
-					//判断该笔订单是否在商户网站中已经做过处理
-					//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-					//如果有做过处理，不执行商户的业务程序
-						
-					//注意：
-					//退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
-				}else if (trade_status.equals("TRADE_SUCCESS")){
-					//判断该笔订单是否在商户网站中已经做过处理
-					//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-					//如果有做过处理，不执行商户的业务程序
-					
-					//注意：
-					//付款完成后，支付宝系统发送该交易状态通知
-				}*/
-				
-				System.out.println("success");
-				
-			}else {//验证失败
-				System.out.println("fail");
-			
-				//调试用，写文本函数记录程序运行情况是否正常
-				//String sWord = AlipaySignature.getSignCheckContentV1(params);
-				//AlipayConfig.logResult(sWord);
-			}
-		//——请在这里编写您的程序（以上代码仅作参考）——
 		
+		//——请在这里编写您的程序（以上代码仅作参考）——
+		 
 		
 		//--------------------------------------
 		
@@ -302,13 +336,14 @@ public class ProductionHandler {
 		// System.out.println(userId3);
 		System.out.println("生成交易记录，作品的作者ID="+proUserId+"作品的价格，交易金额平台抽成10%="+price);
 		productionBizImp.productionPayFinish(request, proId3, userId, proUserId, price);
-		
+		return new ModelAndView("redirect:/production/toProduction.action");
+		 
 		//return null;
 	}
 	
 	
 	@RequestMapping("/productionToManage.action")
-	public ModelAndView productionToManage(HttpServletRequest request) {
+	public ModelAndView productionToManage(HttpServletRequest request,String conditionName,String fieldName) {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsp/ProductionManage");
@@ -317,20 +352,348 @@ ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
 		
 		ConditionBean conditionBean=new ConditionBean();
 		conditionBean.setCurrentPage(1);
-		/*if(conditionName!=null) {
+		if(conditionName!=null && conditionName!="" ) {
 			conditionBean.setConditionName("%"+conditionName+"%");
+			request.setAttribute("conditionName", conditionName);
 		}
-		if(fieldName!=null) {
+		if(fieldName!=null && fieldName!="") {
 		 
 			conditionBean.setFieldName("%"+fieldName+"%");
-		}*/
-		conditionBean.setConditionName("%"+"陈键"+"%");
-		System.out.println("写死，查找服务商的作品。传session userName");
+			request.setAttribute("fieldName", fieldName);
+		}
+		UserBean userBean=(UserBean) request.getSession().getAttribute("user");
+		System.out.println("当前的服务商id="+userBean.getUserId());
+		conditionBean.setUserName(userBean.getUserId());
+	//	System.out.println("要去查询该商家的作品，商家");
+	//	conditionBean.setConditionName("%"+"陈键"+"%");
+	//	System.out.println("写死，查找服务商的作品。传session userName");
+		list=productionBizImp.toManageProductionList(conditionBean, request, null).getProList();
+	//	list=productionBizImp.findProductionList(conditionBean,request,null).getProList();
+		//list=productionMapper.findProductionList(conditionBean);
+		request.setAttribute("list", list);
+		
+		//------------菜单------
+		ArrayList<AuthorityBean> menuList=new ArrayList<AuthorityBean>();
+		menuList=authoriyMapper.findOwnMune(userBean.getUserId());
+		request.setAttribute("menuList", menuList);
+		//---------------------
+		
+		
+		
+		return mav;
+	}
+	
+	@RequestMapping("/toEditProduction.action")
+	public ModelAndView toEditProduction(HttpServletRequest request,Integer proId) {
+		//System.out.println("进入编辑作品的handler，编辑作品的id="+proId);
+	
+		ProductionBean productionBean=new ProductionBean();
+		productionBean=productionBizImp.findProductionDetal(proId);
+		request.setAttribute("production", productionBean);
+		
+		
+		ArrayList<ParameterBean> list=new ArrayList<ParameterBean>();
+		list=parameterMapper.findProductionClass();
+		request.setAttribute("list", list);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsp/toEditProduction");
+	 
+		return mav;
+	}
+	
+	@RequestMapping("/editProduction.action")
+	public ModelAndView editProduction(HttpServletRequest request
+			,String title,Float  price,Integer className,String area2,MultipartFile file		
+			,MultipartFile  productionFile,Integer proId
+			) {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsp/productionAllList");
+		 //  String filename =productionFile.getOriginalFilename();
+		//  UserBean userBean= (UserBean) request.getSession().getAttribute("user");//从session取出userbean对象
+	System.out.println("要编辑的作品ID="+proId);
+	/*	productionBizImp.toIssueProduction(request, title, price, className, area2,file,
+				userBean.getUserId(),productionFile);*/
+	productionBizImp.editProduction(request, proId, title, price, className, area2, file, productionFile);
+		
+		return new ModelAndView("redirect:/production/productionToManage.action");
+	}
+	
+	@RequestMapping("/toDelProduction.action")
+	public ModelAndView toDelProduction(HttpServletRequest request,Integer proId) {
+		
+		System.out.println("要删除的作品ID="+proId); 
+		
+		
+		productionMapper.delProduction(proId);
+		return new ModelAndView("redirect:/production/productionToManage.action");
+	}
+	
+	
+	@RequestMapping("/toAdminProductionManage.action")
+	public ModelAndView toAdminProductionManage(HttpServletRequest request,String conditionName,String fieldName) {
+		ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
+		
+		ConditionBean conditionBean=new ConditionBean();
+		conditionBean.setCurrentPage(1);
+		//System.out.println("handler 条件="+conditionName+"-->"+fieldName);
+		if(conditionName!=null && conditionName!="" ) {
+			conditionBean.setConditionName("%"+conditionName+"%");
+			request.setAttribute("conditionName", conditionName);
+		}
+		if(fieldName!=null && fieldName!="") {
+		 
+			conditionBean.setFieldName("%"+fieldName+"%");
+			request.setAttribute("fieldName", fieldName);
+		}
+	
 		 list=productionBizImp.findProductionList(conditionBean,request,null).getProList();
 		//list=productionMapper.findProductionList(conditionBean);
 		request.setAttribute("list", list);
+		
+	
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsp/adminProductionManager");
+		
+		
+		//----------------菜单-------
+		
+		
+		
+		//----------------------
+		
+		
+		
 		return mav;
 	}
 	
 	
+	@RequestMapping("/adminProductionDetal.action")
+	public ModelAndView adminProductionDetal(HttpServletRequest request,Integer  proId) {
+		
+		
+		ProductionBean productionBean=new ProductionBean();
+		productionBean=productionBizImp.findProductionDetal(proId);
+		
+		request.setAttribute("productionBean", productionBean);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsp/adminManageProductionDetal");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/adminToDelProduction.action")
+	@ResponseBody
+	public ConditionBean adminToDelProduction(HttpServletRequest request,Integer delProId,String conditionName,String fieldName,Integer currentPage) {
+		
+		System.out.println("要删除的作品ID="+delProId); 
+		
+		
+		productionMapper.delProduction(delProId);
+		
+		
+ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
+		
+		ConditionBean conditionBean=new ConditionBean();
+		conditionBean.setCurrentPage(currentPage);
+		//System.out.println("handler 条件="+conditionName+"-->"+fieldName);
+		if(conditionName!=null && conditionName!="" ) {
+			conditionBean.setConditionName("%"+conditionName+"%");
+			request.setAttribute("conditionName", conditionName);
+		}
+		if(fieldName!=null && fieldName!="") {
+		 
+			conditionBean.setFieldName("%"+fieldName+"%");
+			request.setAttribute("fieldName", fieldName);
+		}
+	
+		 list=productionBizImp.findProductionList(conditionBean,request,null).getProList();
+		//list=productionMapper.findProductionList(conditionBean);
+		request.setAttribute("list", list);
+		conditionBean.setProList(list);
+		
+		return conditionBean;
+	}
+	
+	@RequestMapping("/adminToIllegalProduction.action")
+	@ResponseBody
+	public ConditionBean adminToIllegalProduction(HttpServletRequest request,Integer delProId,String conditionName,String fieldName,Integer currentPage) {
+		
+		System.out.println("要下架的作品ID="+delProId); 
+		
+		
+		productionMapper.adminToIllegalProduction(delProId);
+		
+		
+ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
+		
+		ConditionBean conditionBean=new ConditionBean();
+		conditionBean.setCurrentPage(currentPage);
+		//System.out.println("handler 条件="+conditionName+"-->"+fieldName);
+		if(conditionName!=null && conditionName!="" ) {
+			conditionBean.setConditionName("%"+conditionName+"%");
+			request.setAttribute("conditionName", conditionName);
+		}
+		if(fieldName!=null && fieldName!="") {
+		 
+			conditionBean.setFieldName("%"+fieldName+"%");
+			request.setAttribute("fieldName", fieldName);
+		}
+	
+		 list=productionBizImp.findProductionList(conditionBean,request,null).getProList();
+		//list=productionMapper.findProductionList(conditionBean);
+		request.setAttribute("list", list);
+		conditionBean.setProList(list);
+		
+		return conditionBean;
+	}
+	
+	@RequestMapping("/adminToPsaaProduction.action")
+	@ResponseBody
+	public ConditionBean adminToPsaaProduction(HttpServletRequest request,Integer delProId,String conditionName,String fieldName,Integer currentPage) {
+		
+		System.out.println("通过审核的作品ID="+delProId); 
+		
+		
+		productionMapper.adminToPsaaProduction(delProId);
+		
+		
+ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
+		
+		ConditionBean conditionBean=new ConditionBean();
+		conditionBean.setCurrentPage(currentPage);
+		//System.out.println("handler 条件="+conditionName+"-->"+fieldName);
+		if(conditionName!=null && conditionName!="" ) {
+			conditionBean.setConditionName("%"+conditionName+"%");
+			request.setAttribute("conditionName", conditionName);
+		}
+		if(fieldName!=null && fieldName!="") {
+		 
+			conditionBean.setFieldName("%"+fieldName+"%");
+			request.setAttribute("fieldName", fieldName);
+		}
+	
+		 list=productionBizImp.findProductionList(conditionBean,request,null).getProList();
+		//list=productionMapper.findProductionList(conditionBean);
+		request.setAttribute("list", list);
+		conditionBean.setProList(list);
+		
+		return conditionBean;
+	}
+	
+	@RequestMapping("/toProductionManage.action")
+	public ModelAndView toProductionManage(HttpServletRequest request,String conditionName,String fieldName) {
+		System.out.println("进入作品中心的搜索");
+		ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
+		
+		ConditionBean conditionBean=new ConditionBean();
+		conditionBean.setCurrentPage(1);
+		if(conditionName!=null && conditionName!="" ) {
+			conditionBean.setConditionName("%"+conditionName+"%");
+			request.setAttribute("conditionName", conditionName);
+		}
+		if(fieldName!=null && fieldName!="") {
+		 
+			conditionBean.setFieldName("%"+fieldName+"%");
+			request.setAttribute("fieldName", fieldName);
+		}
+	
+		 list=productionBizImp.findProductionList(conditionBean,request,null).getProList();
+		//list=productionMapper.findProductionList(conditionBean);
+		request.setAttribute("list", list);
+		
+	
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsp/ProductionManage");
+		System.out.println("进入作品中心的搜索");
+		return mav;
+	}
+	
+	@RequestMapping("/findBuyProduction.action")
+	public ModelAndView findBuyProduction(HttpServletRequest request,String conditionName,String fieldName) {
+		ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
+		
+		ConditionBean conditionBean=new ConditionBean();
+		conditionBean.setCurrentPage(1);
+		// System.out.println("handler 条件="+conditionName+"-->"+fieldName);
+			if(conditionName!=null && conditionName!="" ) {
+				conditionBean.setConditionName("%"+conditionName+"%");
+				request.setAttribute("conditionName", conditionName);
+			}
+			if(fieldName!=null && fieldName!="") {
+			 
+				conditionBean.setFieldName("%"+fieldName+"%");
+				request.setAttribute("fieldName", fieldName);
+			}
+		UserBean userBean=(UserBean) request.getSession().getAttribute("user");
+	//	System.out.println("当前的服务商id="+userBean.getUserId());
+		conditionBean.setUserName(userBean.getUserId());
+		list=productionBizImp.findBuyProduction(conditionBean, request, null).getProList();
+		//list=productionBizImp.findProductionList(conditionBean,request,null).getProList();
+		//list=productionMapper.findProductionList(conditionBean);
+		request.setAttribute("list", list);
+		
+	
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsp/buyProduction2");
+		
+		
+		//----------------菜单-------
+		//------------菜单------
+		ArrayList<AuthorityBean> menuList=new ArrayList<AuthorityBean>();
+		menuList=authoriyMapper.findOwnMune(userBean.getUserId());
+		request.setAttribute("menuList", menuList);
+		//---------------------
+		
+		
+		//----------------------
+		
+		
+		
+		return mav;
+	}
+	@RequestMapping("/buyProductionAddPages.action")
+	@ResponseBody
+	public ConditionBean buyProductionAddPages(HttpServletRequest request, Integer currentPage, Integer totalPages
+			,String conditionName,String fieldName ,String state
+			) {
+	//	System.out.println("下一页"+currentPage+"总页数"+totalPages);
+	 	//System.out.println("handler 条件="+conditionName+"-->"+fieldName);
+		//System.out.println("条件"+conditionName+fieldName);
+		
+		
+		ConditionBean conditionBean=new ConditionBean();
+		conditionBean.setCurrentPage(currentPage);
+		//conditionBean.setCurrentPage(currentPage);
+		conditionBean.setTotalPages(totalPages);
+		if(conditionName!=null && conditionName!="" ) {
+			conditionBean.setConditionName("%"+conditionName+"%");
+			request.setAttribute("conditionName", conditionName);
+		}
+		if(fieldName!=null && fieldName!="") {
+		 
+			conditionBean.setFieldName("%"+fieldName+"%");
+			request.setAttribute("fieldName", fieldName);
+		}
+	//	System.out.println(conditionBean.getConditionName()+"---->"+conditionBean.getFieldName());
+		ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
+		UserBean userBean=(UserBean) request.getSession().getAttribute("user");
+	//	System.out.println("当前的服务商id="+userBean.getUserId());
+		conditionBean.setUserName(userBean.getUserId());
+	//	 list=productionBizImp.findProductionList(conditionBean,request,state).getProList();
+		 list=productionBizImp.findBuyProduction(conditionBean, request, state).getProList();
+			
+		 request.setAttribute("list", list);
+ 
+			conditionBean.setProList(list);
+		return conditionBean;
+	}
 }
