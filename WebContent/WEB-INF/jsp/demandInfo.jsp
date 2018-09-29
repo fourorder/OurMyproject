@@ -98,7 +98,7 @@
 		<div class="extInfo">
 			<div class="brand-logo">
 				<a href="" title="商家头像"> <img
-					src="<%=path%>picture/findPicture.action?url=${demandInfo.fromUserBean.userHead}" />
+					src="<%=path%>picture/findPicture.action?url=${demandInfo.fromUserBean.userHead}" width="150px" height="150px" />
 				</a>
 			</div>
 			<br>
@@ -106,8 +106,7 @@
 			<br>
 			<br>
 			<br>
-			<br>
-			<br>
+			
 			<div class="seller-pop-box">
 				<span class="tr">雇主名称：${demandInfo.fromUserBean.userName}</span> <span
 					class="tr">雇主信用分：${demandInfo.fromUserBean.userCredit}</span> <span
@@ -194,9 +193,8 @@
 
 						<li>需求名称：${demandInfo.demandTitle}</li>
 						<li>商品编号：${demandInfo.demandId}</li>
-
+						<li>商品状态：${demandInfo.stateParameterBean.parameterName}</li>	
 						<li>发布时间：${demandInfo.publishTime}</li>
-
 						<li>需求详情：${demandInfo.demandDetaIlinformation}</li>
 					</ul>
 				</div>

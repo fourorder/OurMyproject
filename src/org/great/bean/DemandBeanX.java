@@ -3,7 +3,7 @@ package org.great.bean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DemandInfoBean {
+public class DemandBeanX {
 	private int demandId;//需求id
 	private String demandTitle;//需求标题
 	private String demandDetaIlinformation;//需求信息
@@ -19,21 +19,14 @@ public class DemandInfoBean {
 	private String demandHead;//需求头像
 	private String adviserId;//顾问id
 	private String filePath;//文件下载路径
-	
-	private UserBean fromUserBean;//雇主信息
-	private UserBean toUserBean;//供应商信息
-	private UserBean adviserUserBean;//雇主信息信息
-	private ParameterBean parameterBean;//需求类型
-	private ParameterBean stateParameterBean;//拍卖状态
-	public DemandInfoBean() {
+	public DemandBeanX() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public DemandInfoBean(int demandId, String demandTitle, String demandDetaIlinformation, String parameterId,
+	public DemandBeanX(int demandId, String demandTitle, String demandDetaIlinformation, String parameterId,
 			String fromUserId, String toUserId, String publishTime, String securityMoney, String dealMoney,
 			String completeTime, String auctionTime, String stateId, String demandHead, String adviserId,
-			String filePath, UserBean fromUserBean, UserBean toUserBean, UserBean adviserUserBean,
-			ParameterBean parameterBean, ParameterBean stateParameterBean) {
+			String filePath) {
 		super();
 		this.demandId = demandId;
 		this.demandTitle = demandTitle;
@@ -50,11 +43,6 @@ public class DemandInfoBean {
 		this.demandHead = demandHead;
 		this.adviserId = adviserId;
 		this.filePath = filePath;
-		this.fromUserBean = fromUserBean;
-		this.toUserBean = toUserBean;
-		this.adviserUserBean = adviserUserBean;
-		this.parameterBean = parameterBean;
-		this.stateParameterBean = stateParameterBean;
 	}
 	public int getDemandId() {
 		return demandId;
@@ -146,38 +134,6 @@ public class DemandInfoBean {
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-	public UserBean getFromUserBean() {
-		return fromUserBean;
-	}
-	public void setFromUserBean(UserBean fromUserBean) {
-		this.fromUserBean = fromUserBean;
-	}
-	public UserBean getToUserBean() {
-		return toUserBean;
-	}
-	public void setToUserBean(UserBean toUserBean) {
-		this.toUserBean = toUserBean;
-	}
-	public UserBean getAdviserUserBean() {
-		return adviserUserBean;
-	}
-	public void setAdviserUserBean(UserBean adviserUserBean) {
-		this.adviserUserBean = adviserUserBean;
-	}
-	public ParameterBean getParameterBean() {
-		return parameterBean;
-	}
-	public void setParameterBean(ParameterBean parameterBean) {
-		this.parameterBean = parameterBean;
-	}
-	public ParameterBean getStateParameterBean() {
-		return stateParameterBean;
-	}
-	public void setStateParameterBean(ParameterBean stateParameterBean) {
-		this.stateParameterBean = stateParameterBean;
-	}
-	
-	
 	
 	
 	

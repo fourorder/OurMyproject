@@ -8,13 +8,13 @@ public class BidBean {
 	private int userId;
 	private int demandId;
 	private String bidTime;
-	private DemandBean demandBean;
+	private DemandBeanX demandBean;
 	private UserBean userBean;
 	public BidBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public BidBean(int bidId, int userId, int demandId, String bidTime, DemandBean demandBean, UserBean userBean) {
+	public BidBean(int bidId, int userId, int demandId, String bidTime, DemandBeanX demandBean, UserBean userBean) {
 		super();
 		this.bidId = bidId;
 		this.userId = userId;
@@ -47,10 +47,10 @@ public class BidBean {
 	public void setBidTime(String bidTime) {
 		this.bidTime = bidTime;
 	}
-	public DemandBean getDemandBean() {
+	public DemandBeanX getDemandBean() {
 		return demandBean;
 	}
-	public void setDemandBean(DemandBean demandBean) {
+	public void setDemandBean(DemandBeanX demandBean) {
 		this.demandBean = demandBean;
 	}
 	public UserBean getUserBean() {

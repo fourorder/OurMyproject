@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>最新需求</title>
+
  <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
@@ -78,7 +79,7 @@
 		            		
 		            " <div class='ydc-asset-img-list'>"
 		          	+"<a href='<%=path%>demand/queryDemand.action?demandid="+e.demandId+"'>"
-		            +"<img src='<%=path%>picture/findPicture.action?url="+e.demandHead+"' width='217' height='217'>"
+		            +"<img src='<%=path%>picture/findPicture.action?url="+e.demandHead+"' width='200' height='200'>"
 		            		
 		            + "<div class='ydc-asset-img-list-til'>"+e.demandTitle+"</div>"
 		            
@@ -155,9 +156,7 @@
                                 <div class="ydc-panes">
                                     <div class="ydc-pane" style="display:block;">
                                         <div class="ydc-release-form-group ">
-                                            <div class="ydc-warning-default">
-                                                <p>搜索标题以及描述</p>
-                                            </div>
+                                            
                                             <div class="ydc-group-input clearfix" style="width:100%; margin-bottom:20px;">
                                                 <input type="text" name="searchName" id="searchName" placeholder="请输入关键词进行搜索" value="${requestScope.searchName}" style="width:91.333%">
                                                 <button class="ydc-group-button" onclick="selectDemand('query')">搜 索</button>
@@ -169,11 +168,12 @@
                                           
                                             <div class="ydc-asset-img-list">
                                              <a href="<%=path%>demand/queryDemand.action?demandid=${demandBeans.demandId}">
-                                                <div class="ydc-asset-img-list-img">
+                                                <div >
                                                 
-                                                <img src="<%=path%>picture/findPicture.action?url=${demandBeans.demandHead}"></div>
+                                                <img src="<%=path%>picture/findPicture.action?url=${demandBeans.demandHead}" width='200px' height='200px'>
+                                                </div> </a>
                                                 <div class="ydc-asset-img-list-til">${demandBeans.demandTitle}</div>
-                                                 </a>
+                                                
                                                 </div>
                                           
                                         	</c:forEach>	

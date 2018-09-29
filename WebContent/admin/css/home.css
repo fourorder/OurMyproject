@@ -883,6 +883,7 @@
     height: 95px;
     width: 133px;
     margin: 20px;
+    background:#FFFFFF;
 }
 
 .ydc-group-table-item-img img{
@@ -989,7 +990,7 @@
     text-align: center;
 }
 .ydc-asset-img-list-img{
-    width: 100%;
+    width: 200px;
     height: 217px;
     vertical-align: middle;
     line-height: 217px;

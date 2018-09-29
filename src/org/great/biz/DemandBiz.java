@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.annotations.Param;
 import org.great.bean.BidBean;
 import org.great.bean.DemandBean;
+import org.great.bean.BidBean;
+import org.great.bean.DemandBeanX;
 import org.great.bean.DemandInfoBean;
 import org.great.bean.ParameterBean;
+import org.great.bean.UpdateDemandBean;
 import org.springframework.web.multipart.MultipartFile;
 import org.apache.ibatis.annotations.Param;
 public interface DemandBiz {
@@ -21,11 +24,21 @@ public interface DemandBiz {
 	// 获取参数列表
 	public ArrayList<ParameterBean> getParmater();
 
-	// 获取需求列表
-	public ArrayList<DemandBean> getDemandList(int page, String name);
+	// 获取需求状态 9/27
+	public ArrayList<ParameterBean> getParmaterState();
+
+	// 获取需求列表 9/27 22:00
+	public ArrayList<DemandBeanX> getDemandList(int page, String name);
+
+	// 获取需求列表 9/27 22：30
+	public ArrayList<DemandInfoBean> getDemandInfoList(int page, String name, String userid, String parameterid,
+			String stateid);
 
 	// 获取搜索页码
 	public int demandCount(String name);
+	
+	//雇主搜索总页数 9/28加
+		public int demandCountEmployer(String name, String userid, String parameterid,String stateid);
 
 	// ajax 分页查询
 	public List<Object> queayDemandList(String state, String page, String searchName);
@@ -37,7 +50,7 @@ public interface DemandBiz {
 	public ArrayList<BidBean> getBidList(String demandid);
 
 	// 我要投标
-	public int addBid(String userid,String demandid);
+
 //	public List<DemandBean> countDemand();
 //	public List<DemandBean> countDemand2(String demandTitle);
 	public List<DemandBean> countDemand(@Param("demandTitle")String demandTitle);
@@ -52,5 +65,10 @@ public interface DemandBiz {
 	public void changeState(int demandId,int stateId);
 	public void changeState2(int demandId,int stateId);
 	public void changeState3(int demandId,int stateId);
+	public int addBid(String userid, String demandid);
+	//修改
+	public int updateDemand(UpdateDemandBean updateDemandBean);
+	//ajax 雇主分页查询
+	public List<Object>queayDemandEmployerList(String userid,String state, String page, String searchName,String parameterid,String stateid);
 
 }
