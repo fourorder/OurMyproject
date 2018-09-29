@@ -55,27 +55,30 @@ select * from charactertbl where characterid = #{characterid}
 select * from (
 select c.*,rownum rn from (
 select u.*,c.charactername from usertbl u,characterTbl c where  u.CharacterId=c.CharacterId 
-<if test="name != null">
+<if test="name != null and name==''">
 and u.username like #{name}
-</if>
+</if> 
 
  ) c 
  where rownum &lt;= (#{page}*5))
- where rn &gt;= ((#{page}-1)*5)
+ where rn &gt;= ((#{page}-1)*5) order by rn 
 </select>
 
 <select id="facilitator" resultType="org.great.bean.UserBean">
 select * from (
 select c.*,rownum rn from (
 select u.*,c.charactername,s.stateName from usertbl u,characterTbl c,stateTbl s where  u.CharacterId=c.CharacterId and u.CharacterId=2 and u.stateId=s.stateId and u.stateId!=3
-<if test="name != null">
+<if test="name!= null ">
 and u.username like #{name}
 </if>
-
  ) c 
- where rownum &lt;= (#{page}*2))
- where rn &gt;= ((#{page}-1)*2+1)
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= ((#{page}-1)*5+1) 
 </select>
+
+
+
+
 
 
 <!-- 删除雇主 -->

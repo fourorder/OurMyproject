@@ -31,9 +31,6 @@
 </head>
 <body>
 <div style="height: 50%;width: 95%; margin:0 auto;">
-<%-- <form action="<%=path%>employers/page.action?page=tpage&number=1" method="post"> --%>
-<!-- 姓名：<input type="text" name="name"  placeholder="请输入内容"  >  
-<input type="submit" value="查询" id="query"	class="layui-btn layui-btn-normal" />  --> 
   需求标题：<input type="text" id="query" /><button onclick="query()"><span class="layui-btn layui-btn-normal">查询</span></button>
 <!-- </form> -->
 <table class="layui-table">
@@ -56,41 +53,27 @@
  
   <tr> 
   <tbody id="ddd">
-   <c:forEach items="${Flist}"  var="demand"> 
-     
-      
+   <c:forEach items="${Flist}"  var="demand">      
    <tr>
-
   <td>${demand.demandId}</td>
   <td>${demand.demandTitle}</td>
-  
-
        <td> 
-
-      <!--  <a class="layui-btn layui-btn-sm layui-btn-danger" data-toggle="modal" data-target="#editVoince" data-id="edit">查看详情</a></td> -->
-      <%-- <input type="text"  id="demandDetailInformation2" value="${demand.demandDetailInformation}"/> --%>
       <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert" onClick="Values(${demand.demandId})" value="查看详情"/>
-      <td>${demand.parameterName}</td>
-       
-     <td >
-     <a class="layui-btn layui-btn-sm layui-btn-danger" id="yyy" href="#"  onclick="changeState(${demand.demandId},2,${num});return false;" >审核通过</a>
-     <a class="layui-btn layui-btn-sm layui-btn-danger" id="yyy" href="#"  onclick="changeState(${demand.demandId},1,${num});return false;" >违规下架</a>
-     <a class="layui-btn layui-btn-sm layui-btn-danger" id="yyy" href="#"  onclick="changeState(${demand.demandId},3,${num});return false;" >删除需求</a>
-      <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert2" onClick="Values2(${demand.demandId})" value="编辑需求"/>	
-       
-       </td>
-       
+      <td>${demand.parameterName}</td>  
+     <td>
+      <a class="layui-btn layui-btn-sm layui-btn-danger" id="success" href="#"  onclick="changeState(${demand.demandId},1,${num});return false;" >审核通过</a>
+       <a class="layui-btn layui-btn-sm layui-btn-danger" id="fail" href="#"  onclick="changeState(${demand.demandId},2,${num});return false;" >违规下架</a>    
+     <a class="layui-btn layui-btn-sm layui-btn-danger" id="delete" href="#"  onclick="changeState(${demand.demandId},3,${num});return false;" >删除需求</a>
+      <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert2" onClick="Values2(${demand.demandId})" value="编辑需求"/>	      
+       </td>      
         </tr>
         </c:forEach>
-  </tbody>
-        
-         <tr>
+  </tbody>  
+   <tr>
    <td colspan="2"><a class="layui-btn layui-btn-sm" href="#" onclick="lastPage();return false;" id="last">上一页</a></td>
    <td >当前页：<a id="aaa">${num}</a><br>
           总页数：<a id="eee">${countPage}</a><br>
      第<input type="text" id="btn" size=2/>页<button onclick="selectPage()"><span class="layui-btn layui-btn-normal">跳转</span></button>
-   
-   
    </td>
    <td colspan="2"><a class="layui-btn layui-btn-sm" href="#"  onclick="nextPage();return false;" id="next">下一页</a></td>
    </tr>
@@ -211,10 +194,12 @@ $(document).ready(
 			}
 		});
 function changeState(demandId,stateId,number){
+	var page="page";
+	var demandTitle=document.getElementById("query").value;
 	number = $("#aaa").html();
-	$.ajax({
+	 $.ajax({
 		url:"<%=path%>demand/changeState.action",
-		 data:"demandId="+demandId+"&stateId="+stateId+"&number="+number,
+		 data:"demandId="+demandId+"&stateId="+stateId+"&number="+number+"&demandTitle="+demandTitle+"&page="+page,
 		 dataType:"json",
 		 type:"post",
 		 success:function(data){ 
@@ -241,9 +226,9 @@ function changeState(demandId,stateId,number){
             			 +"</td>"
             			 +"<td>"+e.parameterName+"</td>"
             			 +"<td>"
-            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
+            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='success' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
              			+"审核通过"+"</a>"
-             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
+             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='fail' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
              			+"违规下架"+"</a>"
             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
             			+"删除需求"+"</a>"
@@ -259,10 +244,12 @@ function changeState(demandId,stateId,number){
 			 
 		 }
 	 
-	})
+	}) 
 }	
 
 function nextPage(){
+	$("#next").attr("onclick","nextPage();return false;");
+	$("#last").attr("onclick","lastPage();return false;");
 	var demandTitle=document.getElementById("query").value;
 	
 	number = $("#aaa").html();
@@ -293,9 +280,9 @@ function nextPage(){
         			 +"</td>"
         			 +"<td>"+e.parameterName+"</td>"
         			 +"<td>"
-        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
+        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
          			+"审核通过"+"</a>"
-         			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
+         			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
          			+"违规下架"+"</a>"
         			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
         			+"删除需求"+"</a>"
@@ -303,19 +290,22 @@ function nextPage(){
         			 +"</td>"
         			 +"</tr>");
              
-             
+             if(number==allPage){
+            	 $("#next").removeAttr("onclick");	
+        	    }else if(number==1){
+        	    	$("#last").removeAttr("onclick");
+        	    }
          } 	
 		 }
 	 });
+	   
+	 
 	
-		$("#last").attr("onclick","lastPage();return false;");
-		if(number==allPage-1){
-			
-			$("#next").removeAttr("onclick");
-		}
 	
 }
 	function lastPage(){
+		$("#next").attr("onclick","nextPage();return false;");
+		$("#last").attr("onclick","lastPage();return false;");
 		var demandTitle=document.getElementById("query").value;
 		number = $("#aaa").html();
 		
@@ -347,9 +337,9 @@ function nextPage(){
             			 +"</td>"
             			 +"<td>"+e.parameterName+"</td>"
             			 +"<td>"
-            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
+            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
              			+"审核通过"+"</a>"
-             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
+             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
              			+"违规下架"+"</a>"
             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
             			+"删除需求"+"</a>"
@@ -360,30 +350,28 @@ function nextPage(){
 	             
 	         } 	
 			
-			
+	         if(number==allPage){
+            	 $("#next").removeAttr("onclick");	
+        	    }else if(number==1){
+        	    	$("#last").removeAttr("onclick");
+        	    }
 			
 			
 			 }
 		 });
-		if(number==2){
-			
-			
-			$("#last").removeAttr("onclick");
-
-
-	   	 
-	    }
-		$("#next").attr("onclick","nextPage();return false;");
+		
 	    	
 	    	
 	    
 	}
 	function selectPage() {
-	
+		$("#next").attr("onclick","nextPage();return false;");
+		$("#last").attr("onclick","lastPage();return false;");
+		
 		var demandTitle=document.getElementById("query").value;
-		alert(demandTitle);
+		
 		 number=$("#btn").val();
-		 alert(number);
+		 
 		 var page="page";
 		 $("#ddd").empty();
 		 $.ajax({	
@@ -411,9 +399,9 @@ function nextPage(){
 		            			 +"</td>"
 		            			 +"<td>"+e.parameterName+"</td>"
 		            			 +"<td>"
-		            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
+		            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
 		             			+"审核通过"+"</a>"
-		             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
+		             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
 		             			+"违规下架"+"</a>"
 		            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
 		            			+"删除需求"+"</a>"
@@ -421,20 +409,27 @@ function nextPage(){
 		            			 +"</td>"
 		            			 +"</tr>");
 			             
-			             
+			            
 			             
 			             
 			         } 	
 					
-					
-					
+			     
 					
 					 }
+		
 				 }); 
+		  
+     if(number>=allPage){
+    	 $("#next").removeAttr("onclick");	
+	    }else if(number==1){
+	    	$("#last").removeAttr("onclick");
+	    }
 	}
 
 function query(){
-	
+	$("#next").attr("onclick","nextPage();return false;");
+	$("#last").attr("onclick","lastPage();return false;");
 	  var demandTitle=$("#query").val();
 	 number=1;
 	 var page="page";
@@ -464,9 +459,9 @@ function query(){
 	            			 +"</td>"
 	            			 +"<td>"+e.parameterName+"</td>"
 	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
+	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
 	             			+"审核通过"+"</a>"
-	             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
+	             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
 	             			+"违规下架"+"</a>"
 	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
 	            			+"删除需求"+"</a>"
@@ -475,7 +470,11 @@ function query(){
 	            			 +"</tr>");
 		             
 		             
-		             
+		             if(number>=allPage){
+		            	 $("#next").removeAttr("onclick");	
+		        	    }else if(number==1){
+		        	    	$("#last").removeAttr("onclick");
+		        	    }
 		         } 	
 				
 				

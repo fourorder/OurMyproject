@@ -61,7 +61,7 @@
   </thead>
   <tbody id="ccc">
    <c:forEach items="${Flist}"  var="facilitator"> 
-  <c:if test="${facilitator.stateId==1}">
+
       
   <tr> 
   
@@ -75,9 +75,8 @@
     <td >${facilitator.userCredit}</td>
      <td >${facilitator.userMoney}</td>
       <td>
-<%--       <input type="hidden" value="${facilitator.userId}" id="userId"/>
-       
-       <input type="hidden" value="${facilitator.stateId}" id="stateId"/> --%>
+
+     
        <a class="layui-btn layui-btn-sm layui-btn-danger" id="zzz" href="#"  onclick="changeState(${facilitator.userId},${facilitator.stateId},${num});return false;">${facilitator.stateName}</a></td>
       <td >${facilitator.characterName}</td>
        <td >${facilitator.userRegisterTime}</td>
@@ -94,48 +93,14 @@
        
       
   </tr>
-  </c:if> 
+
   </c:forEach>
   </tbody>
   <tr> 
-  <tbody id="ddd">
-   <c:forEach items="${Flist}"  var="facilitator"> 
-     <c:if test="${facilitator.stateId==2}">
-      
-   <tr>
 
-  <td >${facilitator.userName}</td>
-  <td >${facilitator.userTel}</td>
-  <td >${facilitator.userAccount}</td>
-  <td >${facilitator.userSex}</td>
-  <td >${facilitator.userAccount}</td>
-  <td >${facilitator.userIdentity}</td>
-   <td >${facilitator.userAddress}</td>
-    <td>${facilitator.userCredit}</td>
-     <td >${facilitator.userMoney}</td>
-      <%-- <td><a class="layui-btn layui-btn-sm layui-btn-danger" id="stateName" href="<%=path%>facilitator/changeState.action?userId=${facilitator.userId}&stateId=${facilitator.stateId}">${facilitator.stateName}</a></td> --%>
-       <td> 
-<%--        <input type="hidden" value="${facilitator.userId}" id="userId"/>
-       
-       <input type="hidden" value="${facilitator.stateId}" id="stateId"/> --%>
-       <a class="layui-btn layui-btn-sm layui-btn-danger" id="zzz" href="#"  onclick="changeState(${facilitator.userId},${facilitator.stateId},${num});return false;">${facilitator.stateName}</a></td>
-      <td >${facilitator.characterName}</td>
-       <td >${facilitator.userRegisterTime}</td>
-       
-     <td >
-     <a class="layui-btn layui-btn-sm layui-btn-danger" id="yyy" href="#"  onclick="changeState(${facilitator.userId},3,${num});return false;" >删除</a>
-       <a class="layui-btn layui-btn-sm layui-btn-danger" data-toggle="modal" data-target="#editVoince" data-id="edit">编辑</a>	
-       </td>
-       <td >${facilitator.userId}</td>
-        </tr>
-       </c:if> 
-
-  
-  </c:forEach>
-  </tbody>
    <tr>
    <td colspan="5"><a class="layui-btn layui-btn-sm" href="#" onclick="lastPage();return false;" id="last">上一页</a></td>
-   <td >当前页：<a id="aaa">${num}</a><br>
+   <td>当前页：<a id="aaa">${num}</a><br>
           总页数：<a id="eee">${countPage}</a><br>
      第<input type="text" id="btn" size=2/>页<button onclick="selectPage()"><span class="layui-btn layui-btn-normal">跳转</span></button>
    
@@ -190,28 +155,29 @@
 
 </div>
 <script type="text/javascript">
-var number=1; 
+var number="${requestScope.num}"; 
 var allPage="${requestScope.countPage}";
-$(document).ready(
-		function() 
-		{
-			$("#last").removeAttr("onclick");   //在这里写代码
+
+		$(window).load(function() {
+			$("#last").removeAttr("onclick");   
 			if(allPage==1){
 				$("#next").removeAttr("onclick"); 
-			}
-		});
+			}//等所有的js和图片加载完毕，才执行的方法
+			});
 function changeState(userId,stateId,number){
+	var userName=document.getElementById("query").value;
+	var page="page";
 	number = $("#aaa").html();
 	$.ajax({
 		url:"<%=path%>facilitator/changeState.action",
-		 data:"userId="+userId+"&stateId="+stateId+"&number="+number,
+		 data:"userId="+userId+"&stateId="+stateId+"&number="+number+"&userName="+userName+"&page="+page,
 		 dataType:"json",
 		 type:"post",
 		 success:function(data){ 
 			
 			 allPage=data[2];
 			 $("#ccc").empty();
-			 $("#ddd").empty(); 
+
 			 $("#eee").html(allPage);
 			 var list=data[0];
 			 var num=data[1];
@@ -224,31 +190,8 @@ function changeState(userId,stateId,number){
 	         for(var i=0;i<len;i++){  
 
 	             var e = list[i];
-	             if(e.stateId==1){
+
 	            	 $("#ccc").append("<tr><td>"+e.userName+"</td>"
-	            			 +"<td>"+e.userTel+"</td>"
-	            			 +"<td>"+e.userAccount+"</td>"
-	            			 +"<td>"+e.userSex+"</td>"
-	            			 +"<td>"+e.userAccount+"</td>"
-	            			 +"<td>"+e.userIdentity+"</td>"
-	            			 +"<td>"+e.userAddress+"</td>"
-	            			 +"<td>"+e.userCredit+"</td>"
-	            			 +"<td>"+e.userMoney+"</td>"
-	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+num+");return false;'>"                                              
-	            			 +e.stateName+"</a>"
-	            			 +"</td>"
-	            			 +"<td>"+e.characterName+"</td>"
-	            			 +"<td>"+e.userRegisterTime+"</td>"
-	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+num+");return false;'>"
-	            			+"删除"+"</a>"
-	            			+"<a class='layui-btn layui-btn-sm layui-btn-danger' data-toggle='modal' data-target='#editVoince' data-id='edit'>编辑</a>"
-	            			 +"</td>"
-	            			 +"<td>"+e.userId+"</td>"
-	            			 +"</tr>");
-	             }else if(e.stateId==2){
-	            	 $("#ddd").append("<tr><td>"+e.userName+"</td>"
 	            			 +"<td>"+e.userTel+"</td>"
 	            			 +"<td>"+e.userAccount+"</td>"
 	            			 +"<td>"+e.userSex+"</td>"
@@ -270,7 +213,7 @@ function changeState(userId,stateId,number){
 	            			 +"</td>"
 	            			 +"<td>"+e.userId+"</td>"
 	            			 +"</tr>");
-	             }
+	
 	             
 	             
 	         }
@@ -286,8 +229,11 @@ function nextPage(){
 	var userName=document.getElementById("query").value;
 	
 	number = $("#aaa").html();
+	if(number>=allPage-1){
+		$("#next").removeAttr("onclick");
+	}
 	$("#ccc").empty();
-	$("#ddd").empty();
+
 	var page="npage";
 	$.ajax({	
 		
@@ -306,7 +252,7 @@ function nextPage(){
          for(var i=0;i<len;i++){  
         	
              var e = list[i];
-             if(e.stateId==1){
+          /*    if(e.stateId==1){ */
             	 $("#ccc").append("<tr><td>"+e.userName+"</td>"
             			 +"<td>"+e.userTel+"</td>"
             			 +"<td>"+e.userAccount+"</td>"
@@ -329,48 +275,30 @@ function nextPage(){
             			 +"</td>"
             			 +"<td>"+e.userId+"</td>"
             			 +"</tr>");
-             }else if(e.stateId==2){
-            	 $("#ddd").append("<tr><td>"+e.userName+"</td>"
-            			 +"<td>"+e.userTel+"</td>"
-            			 +"<td>"+e.userAccount+"</td>"
-            			 +"<td>"+e.userSex+"</td>"
-            			 +"<td>"+e.userAccount+"</td>"
-            			 +"<td>"+e.userIdentity+"</td>"
-            			 +"<td>"+e.userAddress+"</td>"
-            			 +"<td>"+e.userCredit+"</td>"
-            			 +"<td>"+e.userMoney+"</td>"
-            			 +"<td>"
-            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+number+");return false;'>"
-            			 +e.stateName+"</a>"
-            			 +"</td>"
-            			 +"<td>"+e.characterName+"</td>"
-            			 +"<td>"+e.userRegisterTime+"</td>"
-            			 +"<td>"
-            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+number+");return false;'>"
-            			+"删除"+"</a>"
-            			+"<a class='layui-btn layui-btn-sm layui-btn-danger' data-toggle='modal' data-target='#editVoince' data-id='edit'>编辑</a>"
-            			 +"</td>"
-            			 +"<td>"+e.userId+"</td>"
-            			 +"</tr>");
-             }
-             
+
              
          } 	
 		 }
 	 });
 	
 		$("#last").attr("onclick","lastPage();return false;");
-		if(number==allPage-1){
-			
-			$("#next").removeAttr("onclick");
-		}
+		
 	
 }
 	function lastPage(){
 		var userName=document.getElementById("query").value;
 		number = $("#aaa").html();
+		$("#next").attr("onclick","nextPage();return false;");  
+        if(number<=2){
+			
+			
+			$("#last").removeAttr("onclick");
+
+
+	   	 
+	    }
 		$("#ccc").empty();
-		$("#ddd").empty();
+
 		var page="tpage";
 		$.ajax({	
 			
@@ -390,7 +318,7 @@ function nextPage(){
 	         for(var i=0;i<len;i++){  
 	        
 	             var e = list[i];
-	             if(e.stateId==1){
+
 	            	 $("#ccc").append("<tr><td>"+e.userName+"</td>"
 	            			 +"<td>"+e.userTel+"</td>"
 	            			 +"<td>"+e.userAccount+"</td>"
@@ -412,29 +340,7 @@ function nextPage(){
 	            			 +"<td>"+e.userId+"</td>"
 	            			 +"</td>"
 	            			 +"</tr>");
-	             }else if(e.stateId==2){
-	            	 $("#ddd").append("<tr><td>"+e.userName+"</td>"
-	            			 +"<td>"+e.userTel+"</td>"
-	            			 +"<td>"+e.userAccount+"</td>"
-	            			 +"<td>"+e.userSex+"</td>"
-	            			 +"<td>"+e.userAccount+"</td>"
-	            			 +"<td>"+e.userIdentity+"</td>"
-	            			 +"<td>"+e.userAddress+"</td>"
-	            			 +"<td>"+e.userCredit+"</td>"
-	            			 +"<td>"+e.userMoney+"</td>"
-	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+number+");return false;'>"
-	            			 +e.stateName+"</a>"
-	            			 +"</td>"
-	            			 +"<td>"+e.characterName+"</td>"
-	            			 +"<td>"+e.userRegisterTime+"</td>"
-	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+number+");return false;'>"
-	            			+"删除"+"</a>"
-	            			 +"<td>"+e.userId+"</td>"
-	            			 +"</td>"
-	            			 +"</tr>");
-	             }
+
 	             
 	             
 	         } 	
@@ -444,25 +350,21 @@ function nextPage(){
 			
 			 }
 		 });
-		if(number==2){
-			
-			
-			$("#last").removeAttr("onclick");
+		
 
-
-	   	 
-	    }
-		$("#next").attr("onclick","nextPage();return false;");
+	  
+		
 	    	
 	    	
 	    
 	}
 	function selectPage() {
+	 	$("#next").attr("onclick","nextPage();return false;"); 
 		var userName=document.getElementById("query").value;
 		 number=$("#btn").val();
 		 var page="page";
 		 $("#ccc").empty();
-		 $("#ddd").empty();
+
 		 $.ajax({	
 			 url:"<%=path%>facilitator/selectPage.action",
 			 data:"number="+number+"&page="+page+"&userName="+userName,
@@ -472,6 +374,9 @@ function nextPage(){
 				 number=data[1];
 					
 					allPage=data[2];
+					 if(number==allPage){
+						$("#next").removeAttr("onclick");
+					} 
 					$("#aaa").html(number);
 					$("#eee").html(allPage);
 					 var list=data[0];
@@ -480,7 +385,7 @@ function nextPage(){
 			         for(var i=0;i<len;i++){  
 			        
 			             var e = list[i];
-			             if(e.stateId==1){
+			     /*         if(e.stateId==1){ */
 			            	 $("#ccc").append("<tr><td>"+e.userName+"</td>"
 			            			 +"<td>"+e.userTel+"</td>"
 			            			 +"<td>"+e.userAccount+"</td>"
@@ -502,29 +407,7 @@ function nextPage(){
 			            			+"<td>"+e.userId+"</td>"
 			            			 +"</td>"
 			            			 +"</tr>");
-			             }else if(e.stateId==2){
-			            	 $("#ddd").append("<tr><td>"+e.userName+"</td>"
-			            			 +"<td>"+e.userTel+"</td>"
-			            			 +"<td>"+e.userAccount+"</td>"
-			            			 +"<td>"+e.userSex+"</td>"
-			            			 +"<td>"+e.userAccount+"</td>"
-			            			 +"<td>"+e.userIdentity+"</td>"
-			            			 +"<td>"+e.userAddress+"</td>"
-			            			 +"<td>"+e.userCredit+"</td>"
-			            			 +"<td>"+e.userMoney+"</td>"
-			            			 +"<td>"
-			            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+number+");return false;'>"
-			            			 +e.stateName+"</a>"
-			            			 +"</td>"
-			            			 +"<td>"+e.characterName+"</td>"
-			            			 +"<td>"+e.userRegisterTime+"</td>"
-			            			 +"<td>"
-			            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+number+");return false;'>"
-			            			+"删除"+"</a>"
-			            			+"<td>"+e.userId+"</td>"
-			            			 +"</td>"
-			            			 +"</tr>");
-			             }
+
 			             
 			             
 			         } 	
@@ -538,29 +421,34 @@ function nextPage(){
 
 function query(){
 	
+	 $("#last").removeAttr("onclick"); 
 	  var userName=$("#query").val();
 	 number=1;
 	 var page="page";
 	 $("#ccc").empty();
-	 $("#ddd").empty();
 	 $.ajax({	
 		 url:"<%=path%>facilitator/selectPage.action",
 		 data:"number="+number+"&page="+page+"&userName="+userName,
 		 dataType:"json",
 		 type:"post",
 		 success:function(data){
+			
 			 number=data[1];
-				
 				allPage=data[2];
 				$("#aaa").html(number);
 				$("#eee").html(allPage);
-				 var list=data[0];
+				if(number==allPage){
+					 $("#next").removeAttr("onclick"); 
+				}
+			 	 var list=data[0];
 		         var len = list.length;
 		         
 		         for(var i=0;i<len;i++){  
 		        
 		             var e = list[i];
-		             if(e.stateId==1){
+		 	        
+		            
+		  
 		            	 $("#ccc").append("<tr><td>"+e.userName+"</td>"
 		            			 +"<td>"+e.userTel+"</td>"
 		            			 +"<td>"+e.userAccount+"</td>"
@@ -579,35 +467,13 @@ function query(){
 		            			 +"<td>"
 		            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+number+");return false;'>"
 		            			+"删除"+"</a>"
-		            			+"<td>"+e.userId+"</td>"
+		            			 +"<td>"+e.userId+"</td>"
 		            			 +"</td>"
 		            			 +"</tr>");
-		             }else if(e.stateId==2){
-		            	 $("#ddd").append("<tr><td>"+e.userName+"</td>"
-		            			 +"<td>"+e.userTel+"</td>"
-		            			 +"<td>"+e.userAccount+"</td>"
-		            			 +"<td>"+e.userSex+"</td>"
-		            			 +"<td>"+e.userAccount+"</td>"
-		            			 +"<td>"+e.userIdentity+"</td>"
-		            			 +"<td>"+e.userAddress+"</td>"
-		            			 +"<td>"+e.userCredit+"</td>"
-		            			 +"<td>"+e.userMoney+"</td>"
-		            			 +"<td>"
-		            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+number+");return false;'>"
-		            			 +e.stateName+"</a>"
-		            			 +"</td>"
-		            			 +"<td>"+e.characterName+"</td>"
-		            			 +"<td>"+e.userRegisterTime+"</td>"
-		            			 +"<td>"
-		            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+number+");return false;'>"
-		            			+"删除"+"</a>"
-		            			+"<td>"+e.userId+"</td>"
-		            			 +"</td>"
-		            			 +"</tr>");
-		             }
+		     
 		             
 		             
-		         } 	
+		         } 	  
 				
 				
 				

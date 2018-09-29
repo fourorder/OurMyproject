@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DemandMapper {
-	public List<DemandBean> countDemand();
-	public List<DemandBean> countDemand2(String demandTitle);
+	public List<DemandBean> countDemand(@Param(value="demandTitle")String demandTitle);
+	/*public List<DemandBean> countDemand2(String demandTitle);*/
 	public List<DemandBean> demand(@Param("demandTitle")String demandTitle,@Param("page")int page);
 	public List<DemandBean> findInfo(int demandId);
 	public String findFromUserName(int demandId);

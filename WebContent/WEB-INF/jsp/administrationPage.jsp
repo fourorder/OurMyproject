@@ -162,6 +162,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="<%=basePath%>rule/page.action?page=tpage&number=1" target="menuFrame">规则中心配置</a>
                         </dd>
                         <dd>
+                            <a href="<%=basePath%>line/page.action?page=tpage&number=1" target="menuFrame">友情链接配置</a>
+                        </dd>
+                        <dd>
                             <a href="">行业动态配置</a>
                         </dd>
                         <dd>

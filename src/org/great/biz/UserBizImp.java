@@ -8,6 +8,8 @@ import org.great.mapper.FundMapper;
 import org.great.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
+import com.sun.org.apache.xpath.internal.operations.And;
+
 @Service
 public class UserBizImp implements UserBiz{
 @Resource
@@ -142,8 +144,9 @@ public List<UserBean> countFacilitator4(String userName) {
 public List<UserBean> facilitator(String name, int page) {
 	// TODO Auto-generated method stub
 	if (name!=null) {
-		name="%"+name+"%";
+		 name="%"+name+"%";
 	}
+	System.out.println("name="+name);
 	return userMapper.facilitator(name,page);
 }
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.great.mapper.LineMapper">
+<select id="countLine" resultType="org.great.bean.LineBean">
+select * from tblLine where lineState !=7
+<if test="lineName != null">
+and lineName like #{lineName} 
+</if>
+order by lineId 
+</select>
+
+<select id="line" resultType="org.great.bean.LineBean">
+select * from(
+select rownum rn,r.* from (select tblLine.*,tbParameter.parameterName from tblLine,tbParameter where tblLine.lineState=tbParameter.parameterId and tblLine.lineState !=7
+<if test="lineName != null">
+and lineName like #{lineName}  
+</if>
+order by lineId)r
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= ((#{page}-1)*5+1)
+</select>
+<select id="findInfo" parameterType="int" resultType="org.great.bean.LineBean">
+select tblLine.*,tbParameter.parameterName from tblLine,tbParameter where tblLine.lineId=#{lineId} and tblLine.lineState=tbParameter.parameterId
+</select>
+<update id="changeInfo" >
+UPDATE tblLine set lineName=#{lineName2},lineState=#{state},lineAddress=#{lineAddress2} where lineId=#{lineId2}
+</update>
+<update id="changeState" parameterType="int">
+UPDATE tblLine set lineState=7 where lineId=#{lineId}
+</update>
+<update id="changeState2" parameterType="int">
+UPDATE tblLine set lineState=6 where lineId=#{lineId}
+</update>
+<update id="changeState3" parameterType="int">
+UPDATE tblLine set lineState=5 where lineId=#{lineId}
+</update>
+<insert id="addRule" >
+  insert into tblLine(lineId, lineName,lineAddress,lineState) values(SEQID.nextval,#{lineName3},#{lineAddress3},5)
+</insert>
+	 
+</mapper>

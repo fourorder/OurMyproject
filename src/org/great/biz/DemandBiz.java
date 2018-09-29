@@ -2,11 +2,12 @@ package org.great.biz;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.great.bean.DemandBean;
 
 public interface DemandBiz {
-public List<DemandBean> countDemand();
-public List<DemandBean> countDemand2(String demandTitle);
+public List<DemandBean> countDemand(@Param("demandTitle")String demandTitle);
+/*public List<DemandBean> countDemand2(String demandTitle);*/
 public List<DemandBean> demand(String demandTitle,int page);
 public List<DemandBean> findInfo(int demandId);
 public String findFromUserName(int demandId);

@@ -3,38 +3,40 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="org.great.mapper.RuleMapper">
 <select id="countRule" resultType="org.great.bean.RuleBean">
-select * from ruleTbl where stateId！=7
+select * from tblIntroduction where upflag !=7
+<if test="content != null">
+and content like #{content} 
+</if>
+order by introductionId 
 </select>
-<select id="countRule2" parameterType="String" resultType="org.great.bean.RuleBean">
-select * from ruleTbl where ruleName like #{ruleName} and stateId！=7
-</select>
+
 <select id="rule" resultType="org.great.bean.RuleBean">
 select * from(
-select rownum rn,r.* from (select ruleTbl.*,tbParameter.parameterName from ruleTbl,tbParameter where ruleTbl.stateId=tbParameter.parameterId and ruleTbl.stateId！=7
-<if test="ruleName != null">
-and ruleName like #{ruleName} order by ruleId 
+select rownum rn,r.* from (select tblIntroduction.*,tbParameter.parameterName from tblIntroduction,tbParameter where tblIntroduction.upflag=tbParameter.parameterId and tblIntroduction.upflag !=7
+<if test="content != null">
+and content like #{content}  
 </if>
-)r
- where rownum &lt;= (#{page}*2))
- where rn &gt;= ((#{page}-1)*2+1)
+order by introductionId)r
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= ((#{page}-1)*5+1)
 </select>
 <select id="findInfo" parameterType="int" resultType="org.great.bean.RuleBean">
-select ruleTbl.*,tbParameter.parameterName from ruleTbl,tbParameter where ruleId=#{ruleId} and ruleTbl.stateId=tbParameter.parameterId
+select tblIntroduction.*,tbParameter.parameterName from tblIntroduction,tbParameter where tblIntroduction.introductionId=#{introductionId} and tblIntroduction.upflag=tbParameter.parameterId
 </select>
 <update id="changeInfo" >
-UPDATE ruleTbl set ruleName=#{ruleName2},securityMoney=#{securityMoney2},dealMoney=#{dealMoney2},auctionTime=#{auctionTime2},completeTime=#{completeTime2} WHERE ruleId=#{ruleId2}
+UPDATE tblIntroduction set content=#{content2},upFlag=#{state} where introductionId=#{introductionId2}
 </update>
 <update id="changeState" parameterType="int">
-UPDATE ruleTbl set stateId=7 where ruleId=#{ruleId}
+UPDATE tblIntroduction set upFlag=7 where introductionId=#{introductionId}
 </update>
 <update id="changeState2" parameterType="int">
-UPDATE ruleTbl set stateId=6 where ruleId=#{ruleId}
+UPDATE tblIntroduction set upFlag=6 where introductionId=#{introductionId}
 </update>
 <update id="changeState3" parameterType="int">
-UPDATE ruleTbl set stateId=5 where ruleId=#{ruleId}
+UPDATE tblIntroduction set upFlag=5 where introductionId=#{introductionId}
 </update>
 <insert id="addRule" >
-  insert into ruleTbl(ruleId, ruleName,securityMoney,dealMoney,auctionTime,completeTime,stateId) values(SEQID.nextval,#{ruleName3}, #{securityMoney3},#{dealMoney3},#{auctionTime3},#{completeTime3},5)
+  insert into tblIntroduction(introductionId, content,upFlag) values(SEQID.nextval,#{content3},5)
 </insert>
 	 
 </mapper>

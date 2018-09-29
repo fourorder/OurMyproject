@@ -4,6 +4,28 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RuleBean {
+	private int introductionId;
+	private String content;
+	private int upflag;
+	
+public int getIntroductionId() {
+		return introductionId;
+	}
+	public void setIntroductionId(int introductionId) {
+		this.introductionId = introductionId;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public int getUpflag() {
+		return upflag;
+	}
+	public void setUpflag(int upflag) {
+		this.upflag = upflag;
+	}
 private int ruleId;
 private String ruleName;
 private int dealMoney;
