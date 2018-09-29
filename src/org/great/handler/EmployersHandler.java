@@ -275,7 +275,9 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 		
 	}
 	@RequestMapping("/updateOk.action")//确认修改
-	public ModelAndView test7(HttpServletRequest request,UserStoryBean usb){
+	public ModelAndView test7(HttpServletRequest request,UserStoryBean usb,MultipartFile file){
+		String productionImage=upLoadFile(request, file);
+		usb.setStoryImg(productionImage);
 		int a= userBizImp.updateOk(usb);
 		if(a>0) {
 			return new ModelAndView("redirect:list.action?page=tpage&number=1");
@@ -283,7 +285,24 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 		return new ModelAndView("redirect:list.action?page=tpage&number=1");
 		
 	}
-	
+	@RequestMapping("/storyOperation.action")//故事的启用禁用
+	public ModelAndView test8(HttpServletRequest request,String operation,String account){
+		
+		if(operation.equals("forbidden")) {
+			int a =userBizImp.forbiddenStory(account);
+			if(a>0) {
+				System.out.println("禁用成功");
+			}
+		}else if(operation.equals("start")){
+			int a =userBizImp.startStory(account);
+			if(a>0) {
+				System.out.println("启用成功");
+			}
+		}
+		
+		return new ModelAndView("redirect:list.action?page=tpage&number=1");
+		
+	}
 
 	
 }

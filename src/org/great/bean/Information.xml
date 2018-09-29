@@ -10,7 +10,7 @@
 	</select>
 	<!-- 查询类型id -->
 	<select id="selectPid" resultType="java.lang.String">
-	 select parameterid from tbparameter where pid=300 and parametername=#{parameter}
+	 select parameterid from tbparameter where pid=300 and parametername=#{paramenter}
 	</select>
 		<!-- 插入资讯 -->
 	 <insert id="setInformation" parameterType="org.great.bean.InformationBean">

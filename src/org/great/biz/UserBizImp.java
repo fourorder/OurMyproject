@@ -286,5 +286,19 @@ public int countEmployers() {
 }
 
 
+@Override
+public int forbiddenStory(String account) {
+	// TODO Auto-generated method stub
+	return userMapper.forbiddenStory(account);
+}
+
+
+@Override
+public int startStory(String account) {
+	// TODO Auto-generated method stub
+	return userMapper.startStory(account);
+}
+
+
 
 }

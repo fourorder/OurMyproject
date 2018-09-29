@@ -43,7 +43,7 @@ public class InformationHandler {
 		request.setAttribute("num", num);
 		request.setAttribute("state",state);
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("jsp/informationList");
+		modelAndView.setViewName("jsp/inforList");
 		return modelAndView;
 	}
 	@RequestMapping("/Alist.action")//跳到列表页面

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>咨询列表</title>
+<title>资讯列表</title>
  <link rel="stylesheet" href="<%=path %>plugins/layui/css/layui.css" media="all" />
   <script type="text/javascript" src="<%=path %>js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=path %>js/jquery-1.9.1.min.js"></script>
@@ -139,10 +139,11 @@
     
     function sstate() {
     	var nn=$("#num").text();
-    	var state1=$("#state1").val();
+    	var state2=$("#state1").val();
+    	state1=state2+"";
     		$.ajax({	
     			 url:"<%=path %>infor/Alist.action",
-    			data:"page="+page+"&number="+nn+"&state1="+state1,
+    			data:"page=tpage"+"&number=1&state1="+state1,
     			dataType:"json",
     			type:"post",
     		   success:function(redata){

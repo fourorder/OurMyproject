@@ -70,7 +70,7 @@ $(document).ready(function () {
         </div>
         <label class="layui-form-label">日期</label>
         <div class="layui-input-block">
-       <input type="text" class="layui-input" onblur="check()" required id="test1" name="advertisementPublishTime">
+       <input type="text" class="layui-input" onchange="check()" required id="test1" name="advertisementPublishTime">
         </div><br />
         <label class="layui-form-label">地址</label>
         <div class="layui-input-block">

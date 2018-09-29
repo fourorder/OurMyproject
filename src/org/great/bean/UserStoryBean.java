@@ -9,15 +9,14 @@ public class UserStoryBean {
 	private int stateId;
 	private String  userStoryUrl;
 	private String storyImg;
+	private int enableDisableId;
 	public UserStoryBean () {
 		super();
 	}
 	
 
-	
-
 	public UserStoryBean(String userStoryTitle, String userStoryContent, String userStoryTime, String userAccount,
-			int stateId, String userStoryUrl, String storyImg) {
+			int stateId, String userStoryUrl, String storyImg, int enableDisableId) {
 		super();
 		this.userStoryTitle = userStoryTitle;
 		this.userStoryContent = userStoryContent;
@@ -26,9 +25,8 @@ public class UserStoryBean {
 		this.stateId = stateId;
 		this.userStoryUrl = userStoryUrl;
 		this.storyImg = storyImg;
+		this.enableDisableId = enableDisableId;
 	}
-
-
 
 
 	public String getUserStoryTitle() {
@@ -78,6 +76,20 @@ public class UserStoryBean {
 
 	public void setStoryImg(String storyImg) {
 		this.storyImg = storyImg;
+	}
+
+
+
+
+	public int getEnableDisableId() {
+		return enableDisableId;
+	}
+
+
+
+
+	public void setEnableDisableId(int enableDisableId) {
+		this.enableDisableId = enableDisableId;
 	}
 	
 }

@@ -79,6 +79,7 @@ UPDATE usertbl set stateid=1 WHERE useraccount=#{account}
 
 </update>
 
+
 <!-- 查询雇主总个数 -->
 <select id="countEmployers" resultType="java.lang.Integer">
 select count(*) from usertbl  where characterid=1
@@ -172,6 +173,14 @@ and STATEID =#{state}
 <update id="delStory" parameterType="java.lang.String">
 UPDATE userStorytbl set stateid=1 where userAccount=#{userAccount}
 </update>
+<!--禁用雇主故事 -->
+<update id="forbiddenStory" parameterType="java.lang.String">
+UPDATE userStorytbl set enableDisableId=4 where userAccount=#{account}
+</update>
+<!--启用雇主故事 -->
+<update id="startStory" parameterType="java.lang.String">
+UPDATE userStorytbl set enableDisableId=3 where userAccount=#{account}
+</update>
 <!--查询单个雇主故事 -->
 <select id="updateOne" resultType="org.great.bean.UserStoryBean">
  select * from userStorytbl where  userAccount=#{userAccount}
@@ -189,6 +198,9 @@ UPDATE userStorytbl set userAccount=#{userAccount}
   ,userStoryTime=#{userStoryTime}
 </if>
 <if test="stateId != null and stateId !=''">
+  ,stateId=#{stateId}
+</if>
+<if test="storyImg != null and storyImg !=''">
   ,stateId=#{stateId}
 </if>
 where userAccount=#{userAccount}

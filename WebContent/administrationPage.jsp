@@ -117,7 +117,7 @@
                             <a href="" target="menuFrame">服务商管理</a>
                         </dd>
                         <dd>
-                            <a href="<%=path %>counselor/application.action?account=aaa" target="menuFrame">测试申请顾问</a>
+                            <a href="<%=path %>counselor/application.action?account=aaa&userId=3" target="menuFrame">测试申请顾问</a>
                         </dd>
                         <dd>
                             <a href="<%=path %>counselor/list.action?number=1" target="menuFrame">顾问管理</a>

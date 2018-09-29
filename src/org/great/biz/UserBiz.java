@@ -32,7 +32,8 @@ public interface UserBiz {
 	public int updateOk(UserStoryBean usb); //确认修改故事
 	public List<UserBean> employers(String name,int page);//分页模糊查找
 	public List<UserBean> facilitator(String name,int page);
-
+    public int forbiddenStory(String account);//禁用故事
+    public int startStory(String account);//启用故事
 	public int delEmployers(String account); //删除雇主
 	public int countEmployers();//查询雇主的总个数；
 	public List<UserBean> countFacilitator();

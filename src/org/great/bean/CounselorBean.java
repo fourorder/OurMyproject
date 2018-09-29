@@ -1,19 +1,26 @@
 package org.great.bean;
 
 public class CounselorBean {
-
+  
 	private String userAccount;
 	private String counselorIntroduction;
 	private int counselorMoney;
 	private int auditState;
 	private String counselorImg;
 	private String serviceType;
+	private int enableDisableId;
+	  private int userId;
 	public CounselorBean () {
 		super();
 	}
 
+	
+
+	
+
+
 	public CounselorBean(String userAccount, String counselorIntroduction, int counselorMoney, int auditState,
-			String counselorImg, String serviceType) {
+			String counselorImg, String serviceType, int enableDisableId, int userId) {
 		super();
 		this.userAccount = userAccount;
 		this.counselorIntroduction = counselorIntroduction;
@@ -21,7 +28,24 @@ public class CounselorBean {
 		this.auditState = auditState;
 		this.counselorImg = counselorImg;
 		this.serviceType = serviceType;
+		this.enableDisableId = enableDisableId;
+		this.userId = userId;
 	}
+
+
+
+
+
+
+	public int getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 
 	public String getUserAccount() {
 		return userAccount;
@@ -77,6 +101,14 @@ public class CounselorBean {
 
 	public void setServiceType(String serviceType) {
 		this.serviceType = serviceType;
+	}
+
+	public int getEnableDisableId() {
+		return enableDisableId;
+	}
+
+	public void setEnableDisableId(int enableDisableId) {
+		this.enableDisableId = enableDisableId;
 	}
 	
 }
