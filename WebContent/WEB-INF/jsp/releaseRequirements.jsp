@@ -9,30 +9,6 @@
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
-<meta name='TTUNION_verify' content='b846c3c2b85efabc496d2a2b8399cd62'>
-<meta name="sogou_site_verification" content="gI1bINaJcL" />
-<meta name="360-site-verification"
-	content="37ae9186443cc6e270d8a52943cd3c5a" />
-<meta name="baidu_union_verify"
-	content="99203948fbfbb64534dbe0f030cbe817">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="apple-touch-fullscreen" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta http-equiv="X-UA-Compatible"
-	content="IE=9; IE=8; IE=7; IE=EDGE;chrome=1">
-<meta name="format-detection" content="telephone=no">
-<meta name="keywords"
-	content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。">
-<meta name="description"
-	content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。。">
-<meta name="author" content="AUI, a-ui.com">
-<meta name="baidu-site-verification" content="ZVPGgtpUfW" />
-
-
 <title>发布需求</title>
 
 
@@ -133,7 +109,7 @@
 								<i class="ydc-icon ydc-icon-file fl"></i> 管理
 						</span>
 							<ul>
-								<li><a href="content.html">内容管理</a></li>
+								<li><a href="<%=path%>demand/goDemandControl.action">需求管理</a></li>
 								<li><a href="related.html">内容同步</a></li>
 								<li><a href="asset.html">素材中心</a></li>
 							</ul></li>

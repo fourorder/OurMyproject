@@ -2,52 +2,84 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="org.great.mapper.DemandMapper">
-	<!-- 查找需求类型 -->
+<!-- 佳诚 -->
+	<!-- 查找需求类型x -->
 	<select id="getParameter" resultType="org.great.bean.ParameterBean">
 	select * from TBPARAMETER where pid = 17
+	</select >
+	<!-- 查看需求状态x 9/27-->
+	<select id="getParameterState" resultType="org.great.bean.ParameterBean">
+	select * from TBPARAMETER where pid = 8
 	</select>
-	<!-- 发布需求 --> 
+	<!-- 发布需求x --> 
 	<insert id="addDemand" parameterType="java.lang.String">
 	insert into DEMANDINFOMATIONTBL(DEMANDID,DEMANDTITLE,DEMANDDETAILINFORMATION,PARAMETERID,FROMUSERID,PUBLISHTIME,SECURITYMONEY,DEALMONEY,STATEID,DEMANDHEAD)
         values(SEQID.nextval,#{demandTitle},#{demandInformation},#{parameterId},#{userId},#{publishTime},#{securityMoney},#{dealMoney},21,#{demandHead})
 	</insert>
-	<!-- 最新需求。分页搜索 -->
-	<select id="getDemandList" parameterType="org.great.bean.QueryBean" resultType="org.great.bean.DemandBean">
-
-		select u.*from (
- 	select rownum as num, DEMANDINFOMATIONTBL.* from DEMANDINFOMATIONTBL where STATEID = 9
- 	<where>
+	<!-- 最新需求。分页搜索x -->
+	<select id="getDemandList" parameterType="org.great.bean.QueryBean" resultType="org.great.bean.DemandBeanX">
+		select u.*from ( select rownum as num, DEMANDINFOMATIONTBL.* from DEMANDINFOMATIONTBL where STATEID = 9
+ 	
  		<if test="name!=null and name!=''">
- 		and DEMANDTITLE like '%${name}%'
- 		
+ 		 and DEMANDTITLE like '%${name}%'
  		</if>
- 	</where> 
- 	)u where u.num  between #{star}and#{end}  
+ 	
+ 	) u where u.num  between #{star} and #{end} 
 	</select>
-	<!-- 查询总页数 -->
+	
+	<!-- 查询总页数 9/27改x -->
 	<select id="demandCount" parameterType="java.lang.String" resultType="java.lang.Integer">
  	 select count(1) from DEMANDINFOMATIONTBL where STATEID = 9
- 	 <if test="name!=null  and name!=''">
+ 	 <if test="name!=null and name!=''">
  		and DEMANDTITLE like '%${name}%'
  	</if>	
  	</select>
-	<!-- 查看需求详情 -->
+ 	
+ 	<!-- 需求方查询总页数 9/28加 x-->
+	<select id="demandCountEmployer" parameterType="java.lang.String" resultType="java.lang.Integer">
+ 	 select count(1) from DEMANDINFOMATIONTBL where STATEID != 7 
+ 	 <if test="userid!=null and userid!=''">
+ 		and fromUserId = #{userid}
+ 		</if>
+ 		<if test="parameterid !=0">
+ 		and PARAMETERID = #{parameterid}
+ 		</if>
+ 		<if test="stateid !=0">
+ 		and STATEID = #{stateid}
+ 		</if>
+ 		<if test="name!=null and name!=''">
+ 		and DEMANDTITLE like '%${name}%
+ 		</if>
+ 	</select>
+ 	
+	<!-- 查看需求详情x -->
 	<select id="getDemandInfoBean" resultMap="getDemandInfo">
 	select * from DEMANDINFOMATIONTBL where demandid = #{demandid}
 	</select>
+	<!-- 雇主信息 -->
 	<select id="getFromUserBean" parameterType="org.great.bean.DemandInfoBean"
 		resultType="org.great.bean.UserBean">
 		select * from usertbl where userid = #{fromuserid}
 	</select>
-	
+	<!-- 供应商信息 -->
 	<select id="getToUserBean"  parameterType="org.great.bean.DemandInfoBean"
 		resultType="org.great.bean.UserBean">
 		select * from usertbl where userid = #{touserid}
 	</select>
-	
+	<!-- 顾问信息 -->
+	<select id="getConselor"  parameterType="org.great.bean.DemandInfoBean"
+		resultType="org.great.bean.UserBean">
+		select * from usertbl where userid = #{adviserid}
+		</select>
+	<!-- 需求类型 -->
 	<select id="getParameterBean"  parameterType="org.great.bean.DemandInfoBean"
 		resultType="org.great.bean.ParameterBean">
 		select * from TBPARAMETER where parameterid = #{parameterid}
+	</select>
+	<!-- 需求状态 -->
+	<select id="getStateid" parameterType="org.great.bean.DemandInfoBean"
+		resultType="org.great.bean.ParameterBean">
+		select * from TBPARAMETER where parameterid = #{stateid}
 	</select>
 	
 	<resultMap type="org.great.bean.DemandInfoBean" id="getDemandInfo">
@@ -64,14 +96,22 @@
 			javaType="org.great.bean.ParameterBean" select="getParameterBean">
 	</association>
 	
+	<association property="stateParameterBean" column="stateId"
+			javaType="org.great.bean.ParameterBean" select="getStateid">
+	</association>
+	
+	<association property="adviserUserBean" column="adviserId"
+			javaType="org.great.bean.ParameterBean" select="getConselor">	
+	</association>
+	
 	</resultMap>
 	
-	<!-- 投标记录 -->
+	<!-- 投标记录x -->
 	<select id="getBidList" resultMap="getBid">
 		select * from bidtbl where demandid = #{demandid}
 	</select>
 	<select id="getDemandBean" parameterType="org.great.bean.BidBean"
-		resultType="org.great.bean.DemandBean">
+		resultType="org.great.bean.DemandBeanX">
 		select * from DEMANDINFOMATIONTBL where demandid = #{demandid}
 	</select>
 	
@@ -82,7 +122,7 @@
 	<resultMap type="org.great.bean.BidBean" id="getBid">
 	
 	<association property="demandBean" column="demandid"
-			javaType="org.great.bean.DemandBean" select="getDemandBean">
+			javaType="org.great.bean.DemandBeanX" select="getDemandBean">
 	</association>
 	
 	<association property="userBean" column="userid"
@@ -90,32 +130,101 @@
 	</association>
 	
 	</resultMap>
-	<!-- 我要投标 -->
+	<!-- 我要投标 x-->
 	<insert id="addBid">
 	insert into bidtbl (bidid,userid,demandid,bidtime) values(SEQID.nextval,#{userid},#{demandid},#{bidtime})
 	</insert>
+	<!-- 雇主需求类型搜索x -->
+	<select id="getDemandInfoList" resultMap="getDemandInfoList">
+	select u.*from ( select rownum as num, DEMANDINFOMATIONTBL.* from DEMANDINFOMATIONTBL where STATEID != 7 
+ 	
+ 		<if test="userid!=null and userid!=''">
+ 		and fromUserId = #{userid}
+ 		</if>
+ 		<if test="parameterid !=0">
+ 		and PARAMETERID = #{parameterid}
+ 		</if>
+ 		<if test="stateid !=0">
+ 		and STATEID = #{stateid}
+ 		</if>
+ 		<if test="name!=null and name!=''">
+ 		and DEMANDTITLE like '%${name}%
+ 		</if>
+ 	
+ 	) u where u.num  between #{star} and #{end}  
 	
+	</select>
+	
+	<resultMap type="org.great.bean.DemandInfoBean" id="getDemandInfoList">
+	
+	<association property="fromUserBean" column="fromuserid"
+			javaType="org.great.bean.UserBean" select="getFromUserBean">
+	</association>
+	
+	<association property="toUserBean" column="touserid"
+			javaType="org.great.bean.UserBean" select="getFromUserBean">
+	</association>
+	
+	<association property="parameterBean" column="parameterId"
+			javaType="org.great.bean.ParameterBean" select="getParameterBean">
+	</association>
+	<association property="stateParameterBean" column="stateId"
+			javaType="org.great.bean.ParameterBean" select="getStateid">
+	</association>
+	<association property="adviserUserBean" column="adviserId"
+			javaType="org.great.bean.ParameterBean" select="getConselor">	
+	</association>
+	</resultMap>
+	
+	<!-- 修改需求 x-->
+	<update id="updateDemand" parameterType="org.great.bean.UpdateDemandBean">
+	UPDATE DEMANDINFOMATIONTBL <set>
+		<if test="demandTitle!=null and demandTitle!=''">
+		demandTitle=#{demandTitle},
+		</if>
+		<if test="demandDetaIlinformation!=null and demandDetaIlinformation!=''">
+		demandDetaIlinformation=#{demandDetaIlinformation},
+		</if>
+		<if test="parameterId!=null and parameterId!=''">
+		parameterId=#{parameterId},
+		</if>
+		<if test="fromUserId!=null and fromUserId!=''">
+		fromUserId=#{fromUserId},
+		</if>
+		<if test="toUserId!=null and toUserId!=''">
+		toUserId=#{toUserId},
+		</if>
+		<if test="publishTime!=null and publishTime!=''">
+		publishTime=#{publishTime},
+		</if>
+		<if test="securityMoney!=null and securityMoney!=''">
+		securityMoney=#{securityMoney},
+		</if>
+		<if test="dealMoney!=null and dealMoney!=''">
+		dealMoney=#{dealMoney},
+		</if>
+		<if test="completeTime!=null and completeTime!=''">
+		completeTime=#{completeTime},
+		</if>
+		<if test="auctionTime!=null and auctionTime!=''">
+		auctionTime=#{auctionTime},
+		</if>
+		<if test="stateId!=null and stateId!=''">
+		stateId=#{stateId},
+		</if>
+		<if test="demandHead!=null and demandHead!=''">
+		demandHead=#{demandHead},
+		</if>
+		<if test="adviserId!=null and adviserId!=''">
+		adviserId=#{adviserId},
+		</if>
+		<if test="filePath!=null and filePath!=''">
+		filePath=#{filePath},
+		</if>
+		</set>
+		where demandId = #{demandId}
+	</update>
+	<!-- 佳诚 -->
 	
 </mapper>
 
-<!-- 修改需求 -->
-	<!-- <update id="updateDemand">
-	UPDATE DEMANDINFOMATIONTBL <set>
-		<if test="demandTitle!=null">
-		username=#{userName},
-		</if>
-		<if test="userProfile!=null">
-		userProfile=#{userProfile},
-		</if>
-		<if test="userIdentity!=null">
-		userIdentity=#{userIdentity},
-		</if>
-		<if test="userTel!=null">
-		userTel=#{userTel},
-		</if>
-		<if test="userMail!=null">
-		userMail=#{userMail}
-		</if>
-		</set>
-		where DEMANDID = #{demandId}
-	</update> -->

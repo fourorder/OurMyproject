@@ -194,9 +194,8 @@
 
 						<li>需求名称：${demandInfo.demandTitle}</li>
 						<li>商品编号：${demandInfo.demandId}</li>
-
+						<li>商品状态：${demandInfo.stateParameterBean.parameterName}</li>	
 						<li>发布时间：${demandInfo.publishTime}</li>
-
 						<li>需求详情：${demandInfo.demandDetaIlinformation}</li>
 					</ul>
 				</div>

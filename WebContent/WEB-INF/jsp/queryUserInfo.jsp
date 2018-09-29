@@ -48,104 +48,66 @@
 						<div class="ydc-tabPanel ydc-tabPanel-release">
 							<div class="ydc-release-tab-head">
 								<ul>
-									<li class="hit">雇主信息</li>
+									<li class="hit">用户信息</li>
 								</ul>
 							</div>
 							<div class="ydc-panes">
 								<div class="ydc-pane ydc-pane-clear" style="display:block;">
 									<div class="ydc-reg-form-group clearfix">
-										<label>雇主名称</label>
+										<label>用户名称</label>
 										<div class="ydc-reg-form-input">
-											<label>${user.userName}</label>
+											<label>${userInfo.userName}</label>
 										</div>
 									</div>
 									
 									<div class="ydc-reg-form-group clearfix">
-										<label>雇主头像</label>
+										<label>用户头像</label>
 										<div class="ydc-reg-form-input">
 											<label></label>
 											<div class="ydc-reg-form-text ydc-reg-form-user-logo">
-												<img src="<%=path%>picture/findPicture.action?url=${user.userHead}" alt="">
+												<img src="<%=path%>picture/findPicture.action?url=${userInfo.userHead}" alt="">
 											</div>
 										</div>
 									</div>
 									<div class="ydc-reg-form-group clearfix">
-										<label>雇主简介</label>
+										<label>用户简介</label>
 										<div class="ydc-reg-form-input">
-											<label>${user.userProfile}</label>
+											<label>${userInfo.userProfile}</label>
 										</div>
 									</div>
-									<!-- <div class="ydc-reg-form-group clearfix">
-										<label>帐号详情</label>
-										<div class="ydc-reg-form-input">
-											<label>一点车，让您多懂一点车的常识，在这里，<br>您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。</label>
-										</div>
-									</div>
-									<div class="ydc-reg-form-group clearfix">
-										<label>帐号背景图</label>
-										<div class="ydc-reg-form-input">
-											<label>默认</label>
-										</div>
-									</div> -->
-								<!-- 	<div class="ydc-reg-form-group clearfix">
-										<label>类型</label>
-										<div class="ydc-reg-form-input">
-											<label>个人</label>
-										</div>
-									</div> -->
-									<!-- <div class="ydc-reg-form-group clearfix">
-										<label>姓名</label>
-										<div class="ydc-reg-form-input">
-											<label>李嘉桦</label>
-										</div>
-									</div> -->
+									
 									<div class="ydc-reg-form-group clearfix">
 										<label>地址</label>
 										<div class="ydc-reg-form-input">
-											<label>${user.userAddress}</label>
+											<label>${userInfo.userAddress}</label>
 										</div>
 									</div>
-									<!-- <div class="ydc-reg-form-group clearfix">
-										<label>身份证号</label>
-										<div class="ydc-reg-form-input">
-											<label>411424**********31</label>
-										</div>
-									</div> -->
-									<!-- <div class="ydc-reg-form-group clearfix">
-										<label>身份证照片</label>
-										<div class="ydc-reg-form-input">
-											<label>已提交</label>
-										</div>
-									</div> -->
+									
+									
 									<div class="ydc-reg-form-group clearfix">
 										<label>联系手机</label>
 										<div class="ydc-reg-form-input">
-											<label>${user.userTel}</label>
+											<label>${userInfo.userTel}</label>
 										</div>
 									</div>
 									<div class="ydc-reg-form-group clearfix">
 										<label>邮箱</label>
 										<div class="ydc-reg-form-input">
-											<label>${user.userMail}</label>
+											<label>${userInfo.userMail}</label>
 										</div>
 									</div>
-									<!-- <div class="ydc-reg-form-group clearfix">
-										<label>QQ/微信</label>
-										<div class="ydc-reg-form-input">
-											<label>lizy_1025</label>
-										</div>
-									</div> -->
+									
 									
 									<div class="ydc-reg-form-group clearfix">
 										<label>用户角色</label>
 										<div class="ydc-reg-form-input">
-											<label>${user.stateBean.stateName}</label>
+											<label>${userInfo.stateBean.stateName}</label>
 										</div>
 									</div>
 									<div class="ydc-reg-form-group clearfix">
 										<label>用户状态</label>
 										<div class="ydc-reg-form-input">
-											<label>${user.characterBean.characterName}</label>
+											<label>${userInfo.characterBean.characterName}</label>
 										</div>
 									</div>
 									

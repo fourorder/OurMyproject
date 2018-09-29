@@ -3,7 +3,7 @@ package org.great.bean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DemandBean {
+public class DemandBeanX {
 	private int demandId;//需求id
 	private String demandTitle;//需求标题
 	private String demandDetaIlinformation;//需求信息
@@ -17,13 +17,16 @@ public class DemandBean {
 	private String auctionTime;//拍卖时间
 	private String stateId;//拍卖状态
 	private String demandHead;//需求头像
-	public DemandBean() {
+	private String adviserId;//顾问id
+	private String filePath;//文件下载路径
+	public DemandBeanX() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public DemandBean(int demandId, String demandTitle, String demandDetaIlinformation, String parameterId,
+	public DemandBeanX(int demandId, String demandTitle, String demandDetaIlinformation, String parameterId,
 			String fromUserId, String toUserId, String publishTime, String securityMoney, String dealMoney,
-			String completeTime, String auctionTime, String stateId, String demandHead) {
+			String completeTime, String auctionTime, String stateId, String demandHead, String adviserId,
+			String filePath) {
 		super();
 		this.demandId = demandId;
 		this.demandTitle = demandTitle;
@@ -38,6 +41,8 @@ public class DemandBean {
 		this.auctionTime = auctionTime;
 		this.stateId = stateId;
 		this.demandHead = demandHead;
+		this.adviserId = adviserId;
+		this.filePath = filePath;
 	}
 	public int getDemandId() {
 		return demandId;
@@ -117,6 +122,19 @@ public class DemandBean {
 	public void setDemandHead(String demandHead) {
 		this.demandHead = demandHead;
 	}
+	public String getAdviserId() {
+		return adviserId;
+	}
+	public void setAdviserId(String adviserId) {
+		this.adviserId = adviserId;
+	}
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	
 	
 	
 	

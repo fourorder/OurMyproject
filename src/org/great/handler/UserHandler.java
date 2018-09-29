@@ -66,8 +66,8 @@ public List<Object> selectOpage(String name,String opage,String state){
 public ModelAndView EmployerInformation(HttpServletRequest request,String userid){
 	ModelAndView modelAndView=new ModelAndView();
 	
-	request.setAttribute("user", userBizImp.userinfo(userid));
-	modelAndView.setViewName("jsp/employerInfo");
+	request.setAttribute("userInfo", userBizImp.userinfo(userid));
+	modelAndView.setViewName("jsp/queryUserInfo");
 	return modelAndView;
 	
 }
@@ -89,7 +89,7 @@ ModelAndView UserInformation(HttpServletRequest request,String userid){
 
 	@RequestMapping("/UserInforEdit.action")//进入修改页面
 	public ModelAndView UserInforEdit(HttpServletRequest request, String userid) {
-		System.out.println("进入");
+
 		ModelAndView modelAndView = new ModelAndView();
 		request.setAttribute("userInfo", userBizImp.userinfo(userid));
 		modelAndView.setViewName("jsp/userInfoEdit");
