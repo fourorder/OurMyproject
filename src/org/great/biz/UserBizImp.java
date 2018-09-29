@@ -18,6 +18,8 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sun.org.apache.xpath.internal.operations.And;
+
 @Service
 public class UserBizImp implements UserBiz{
 @Resource
@@ -364,8 +366,9 @@ public List<UserBean> countFacilitator4(String userName) {
 public List<UserBean> facilitator(String name, int page) {
 	// TODO Auto-generated method stub
 	if (name!=null) {
-		name="%"+name+"%";
+		 name="%"+name+"%";
 	}
+	System.out.println("name="+name);
 	return userMapper.facilitator(name,page);
 }
 

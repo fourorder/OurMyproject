@@ -27,7 +27,7 @@ public ModelAndView test(HttpServletRequest request,String name,String page,Stri
 	List<UserBean> user1=userBizImp.countFacilitator();
 	List<UserBean> user2=userBizImp.countFacilitator2();
 	int countPage=user1.size()+user2.size();//总用户数
-	int totalPages = countPage / 2 + ((countPage % 2) > 0 ? 1 : 0);//定义总页数
+	int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
 	int num=Integer.parseInt(number);
 	if(page.equals("tpage")) {
 		num--;
@@ -60,17 +60,47 @@ public ModelAndView test(HttpServletRequest request,String name,String page,Stri
 }
 @RequestMapping("/changeState.action")
 @ResponseBody
-public List<Object> test(String userName,String userId,String stateId,String number) {
+public List<Object> test(String userName,String userId,String stateId,String number,String page) {
 	int num=Integer.valueOf(number);
-			
+	int countPage=0;	
 	userBizImp.changeState(Integer.valueOf(userId),Integer.valueOf(stateId));
-	List<UserBean> user1=userBizImp.countFacilitator();
-	List<UserBean> user2=userBizImp.countFacilitator2();
-	int countPage=user1.size()+user2.size();//总用户数
-	int totalPages = countPage / 2 + ((countPage % 2) > 0 ? 1 : 0);//定义总页数
-	if(num>totalPages) {
-		num=totalPages;
+	if(userName=="") {
+		System.out.println("我来了");
+		System.out.println("page="+page);
+		
+		List<UserBean> user1=userBizImp.countFacilitator();
+		List<UserBean> user2=userBizImp.countFacilitator2();
+		countPage=user1.size()+user2.size();//总用户数
+		System.out.println("总用户数为："+countPage);
+	}else {
+		System.out.println("名字模糊查询");
+		System.out.println("page="+page);
+		
+		List<UserBean> user1=userBizImp.countFacilitator3(userName);
+		List<UserBean> user2=userBizImp.countFacilitator4(userName);
+		 countPage=user1.size()+user2.size();//总用户数
+		System.out.println("总用户数为："+countPage);
 	}
+	int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
+	if(page.equals("tpage")) {
+		num--;
+		if(num<=0) {
+			num=1;
+		}
+	}else if(page.equals("npage")) {
+		num++;
+		if (totalPages<num) {
+			num=totalPages;
+		}
+		
+	}else if(page.equals("page")) {
+		if(num>totalPages) {
+			num=totalPages;
+		}else if(num<0) {
+			num=1;
+		}
+	}
+	
 	List<UserBean> list=new ArrayList<UserBean>();
 	list=userBizImp.facilitator(userName, num);
 	
@@ -98,7 +128,7 @@ public List<Object> selectPage(String userName,String page,String number) {
 		countPage=user1.size()+user2.size();//总用户数
 		System.out.println("总用户数为："+countPage);
 	}else {
-		System.out.println("我来了");
+		System.out.println("名字模糊查询");
 		System.out.println("page="+page);
 		
 		List<UserBean> user1=userBizImp.countFacilitator3(userName);
@@ -107,7 +137,7 @@ public List<Object> selectPage(String userName,String page,String number) {
 		System.out.println("总用户数为："+countPage);
 	}
 	
-	int totalPages = countPage / 2 + ((countPage % 2) > 0 ? 1 : 0);//定义总页数
+	int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
 	int num=Integer.parseInt(number);
 	if(page.equals("tpage")) {
 		num--;
@@ -131,6 +161,7 @@ public List<Object> selectPage(String userName,String page,String number) {
 	System.out.println("总共页数："+totalPages);
 	List<UserBean> list=new ArrayList<UserBean>();
 	list=userBizImp.facilitator(userName, num);
+	System.out.println("list.size()="+list.size());
 	list1.add(list);
 	list1.add(num);
 	list1.add(totalPages);
@@ -138,7 +169,7 @@ public List<Object> selectPage(String userName,String page,String number) {
 	
 	
 }
-@RequestMapping("/selectPage2.action")
+/*@RequestMapping("/selectPage2.action")
 @ResponseBody
 public List<Object> selectPage2(String userName,String page,String number) {
 	int countPage=0;
@@ -190,7 +221,7 @@ public List<Object> selectPage2(String userName,String page,String number) {
 	return list1;
 	
 	
-}
+}*/
 @RequestMapping("changeInfo.action")
 public ModelAndView test(HttpServletRequest request) {
 	String userId=request.getParameter("userId");

@@ -6,13 +6,12 @@ import org.great.bean.DemandBean;
 import org.great.bean.RuleBean;
 
 public interface RuleBiz {
-	public List<RuleBean> countRule();
-	public List<RuleBean> countRule2(String ruleName);
-	public List<RuleBean> rule(String ruleName,int page);
-	public List<RuleBean> findInfo(int ruleId);
-	public void changeInfo(int ruleId2,String ruleName2,int securityMoney2,int dealMoney2,String auctionTime2,String completeTime2);
-	public void addRule(String ruleName3,int securityMoney3,int dealMoney3,String auctionTime3,String completeTime3);
-	public void changeState(int ruleId,int stateId);
-	public void changeState2(int ruleId,int stateId);
-	public void changeState3(int ruleId,int stateId);
+	public List<RuleBean> countRule(String content);
+	public List<RuleBean> rule(String content,int page);
+	public List<RuleBean> findInfo(int introductionId);
+	public void changeInfo(int introductionId2,String content2,int state);
+	public void addRule(String content3);
+	public void changeState(int ruleId);
+	public void changeState2(int ruleId);
+	public void changeState3(int ruleId);
 }

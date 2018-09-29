@@ -6,9 +6,10 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.great.bean.DemandBean;
-import org.great.bean.RuleBean;
-import org.great.biz.RuleBiz;
+import org.great.bean.LineBean;
+
+import org.great.biz.LineBiz;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,14 +18,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @Scope("prototype")
-@RequestMapping("/rule")
-public class RuleHandler {
+@RequestMapping("/line")
+public class LineHandler {
 @Resource
-private RuleBiz ruleBizImp;
+private LineBiz lineBizImp;
 @RequestMapping("/page.action")
-public ModelAndView test(HttpServletRequest request,String content,String page,String number) {
-	List<RuleBean> rule=ruleBizImp.countRule(content);
-	int countPage=rule.size();
+public ModelAndView test(HttpServletRequest request,String lineName,String page,String number) {
+	List<LineBean> line=lineBizImp.countLine(lineName);
+	int countPage=line.size();
 	int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
 	int num=Integer.parseInt(number);
 	if(page.equals("tpage")) {
@@ -43,38 +44,38 @@ public ModelAndView test(HttpServletRequest request,String content,String page,S
 	System.out.println("当前页为："+num);
 	System.out.println("总共页数："+totalPages);
 	
-	List<RuleBean> list=new ArrayList<RuleBean>();
-	list=ruleBizImp.rule(content, num);
+	List<LineBean> list=new ArrayList<LineBean>();
+	list=lineBizImp.line(lineName, num);
 	System.out.println("需求有："+list.size());
 	request.setAttribute("Flist", list);
 	request.setAttribute("countPage", totalPages);
 	request.setAttribute("num", num);
 	ModelAndView modelAndView=new ModelAndView();
-	modelAndView.setViewName("jsp/ruleManage");
+	modelAndView.setViewName("jsp/lineManage");
 	return modelAndView;
 }
 @RequestMapping("/findById.action")
 @ResponseBody
-public List<Object> test(int introductionId){
+public List<Object> test(int lineId){
 	List<Object> list=new ArrayList<>();
-	List<RuleBean> list1=ruleBizImp.findInfo(introductionId);
+	List<LineBean> list1=lineBizImp.findInfo(lineId);
 	list.add(list1);
 	
 	return list;
 	
 }
-@RequestMapping("/changeInfo.action")
+
+@RequestMapping("changeInfo.action")
 public ModelAndView test(HttpServletRequest request) {
-	String introductionId2=request.getParameter("introductionId2");
-	String content2=request.getParameter("content2");
+	String lineId2=request.getParameter("lineId2");
+	String lineName2=request.getParameter("lineName2");
+	String lineAddress2=request.getParameter("lineAddress2");
 	String state=request.getParameter("state2");
-	System.out.println(introductionId2);
-	System.out.println(content2);
-	System.out.println(state);
 	
-	ruleBizImp.changeInfo(Integer.valueOf(introductionId2),content2,Integer.valueOf(state));
 	
-	ModelAndView modelAndView=new ModelAndView("redirect:/rule/page.action?page=tpage&number=1");
+	lineBizImp.changeInfo(Integer.valueOf(lineId2),lineName2,lineAddress2,Integer.valueOf(state));
+	
+	ModelAndView modelAndView=new ModelAndView("redirect:/line/page.action?page=tpage&number=1");
 	
 	
 	
@@ -88,16 +89,16 @@ public ModelAndView test(HttpServletRequest request) {
 
 @RequestMapping("/changeState.action")
 @ResponseBody
-public List<Object> test(String content,String introductionId,String upFlag,String number,String page) {
+public List<Object> test(String lineName,String lineId,String lineState,String number,String page) {
 	
 	int num=Integer.valueOf(number);
-	 int stateId2=Integer.valueOf(upFlag);
+	 int stateId2=Integer.valueOf(lineState);
 if(stateId2==3) {
-	ruleBizImp.changeState(Integer.valueOf(introductionId));//删除
+	lineBizImp.changeState(Integer.valueOf(lineId));//删除
 }else if(stateId2==5) {
-	ruleBizImp.changeState2(Integer.valueOf(introductionId));//禁用
+	lineBizImp.changeState2(Integer.valueOf(lineId));//禁用
 }else if(stateId2==6) {
-	ruleBizImp.changeState3(Integer.valueOf(introductionId));//启用
+	lineBizImp.changeState3(Integer.valueOf(lineId));//启用
 }
 		
 	
@@ -110,8 +111,8 @@ List<Object> list1=new ArrayList<>();
 	System.out.println("我来了");
 	System.out.println("page="+page);
 	
-	List<RuleBean> rule=ruleBizImp.countRule(content);
-	countPage=rule.size();//总用户数
+	List<LineBean> line=lineBizImp.countLine(lineName);
+	countPage=line.size();//总用户数
 	
 
 
@@ -137,17 +138,18 @@ if(page.equals("tpage")) {
 }
 System.out.println("当前页为："+num);
 System.out.println("总共页数："+totalPages);
-List<RuleBean> list=new ArrayList<RuleBean>();
-list=ruleBizImp.rule(content, num);
+List<LineBean> list=new ArrayList<LineBean>();
+list=lineBizImp.line(lineName, num);
 list1.add(list);
 list1.add(num);
 list1.add(totalPages);
 return list1;
 }
 
+
 @RequestMapping("/selectPage.action")
 @ResponseBody
-public List<Object> selectPage(String content,String page,String number) {
+public List<Object> selectPage(String lineName,String page,String number) {
 	if(number=="") {
 		number="1";
 	}
@@ -156,8 +158,8 @@ public List<Object> selectPage(String content,String page,String number) {
 		System.out.println("我来了");
 		System.out.println("page="+page);
 		
-		List<RuleBean> demand=ruleBizImp.countRule(content);
-		countPage=demand.size();//总用户数
+		List<LineBean> line=lineBizImp.countLine(lineName);
+		countPage=line.size();//总用户数
 		
 
 	
@@ -183,8 +185,8 @@ public List<Object> selectPage(String content,String page,String number) {
 	}
 	System.out.println("当前页为："+num);
 	System.out.println("总共页数："+totalPages);
-	List<RuleBean> list=new ArrayList<RuleBean>();
-	list=ruleBizImp.rule(content, num);
+	List<LineBean> list=new ArrayList<LineBean>();
+	list=lineBizImp.line(lineName, num);
 	list1.add(list);
 	list1.add(num);
 	list1.add(totalPages);
@@ -196,11 +198,12 @@ public List<Object> selectPage(String content,String page,String number) {
 
 @RequestMapping("/addRule.action")
 public ModelAndView test2(HttpServletRequest request) {
-	String content3=request.getParameter("content3");
+	String lineName3=request.getParameter("lineName3");
+	String lineAddress3=request.getParameter("lineAddress3");
 	
-	ruleBizImp.addRule(content3);
+	lineBizImp.addRule(lineName3,lineAddress3);
 	
-	ModelAndView modelAndView=new ModelAndView("redirect:/rule/page.action?page=tpage&number=1");
+	ModelAndView modelAndView=new ModelAndView("redirect:/line/page.action?page=tpage&number=1");
 	
 	
 	

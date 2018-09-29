@@ -2,6 +2,7 @@ package org.great.biz;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
@@ -10,8 +11,9 @@ import org.great.bean.DemandBean;
 import org.great.bean.DemandInfoBean;
 import org.great.bean.ParameterBean;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.apache.ibatis.annotations.Param;
 public interface DemandBiz {
+
 	// 增加
 	public int addDemand(HttpServletRequest request, String userid, String demandTitle, String demandInformation,
 			String parameterId, MultipartFile file, String dealMoney, String securityMoney);
@@ -36,8 +38,10 @@ public interface DemandBiz {
 
 	// 我要投标
 	public int addBid(String userid,String demandid);
-	public List<DemandBean> countDemand();
-	public List<DemandBean> countDemand2(String demandTitle);
+//	public List<DemandBean> countDemand();
+//	public List<DemandBean> countDemand2(String demandTitle);
+	public List<DemandBean> countDemand(@Param("demandTitle")String demandTitle);
+		/*public List<DemandBean> countDemand2(String demandTitle);*/
 	public List<DemandBean> demand(String demandTitle,int page);
 	public List<DemandBean> findInfo(int demandId);
 	public String findFromUserName(int demandId);

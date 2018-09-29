@@ -96,9 +96,9 @@ public class DemandHandler {
 	}
 	@RequestMapping("/page.action")
 	public ModelAndView test(HttpServletRequest request,String demandTitle,String page,String number) {
-		List<DemandBean> demand=demandBizImp.countDemand();
+		List<DemandBean> demand=demandBizImp.countDemand(demandTitle);
 		int countPage=demand.size();
-		int totalPages = countPage / 2 + ((countPage % 2) > 0 ? 1 : 0);//定义总页数
+		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
 		int num=Integer.parseInt(number);
 		if(page.equals("tpage")) {
 			num--;
@@ -136,24 +136,15 @@ public class DemandHandler {
 		}
 		int countPage=0;
 		List<Object> list1=new ArrayList<>();
-		if(demandTitle=="") {
 			System.out.println("我来了");
 			System.out.println("page="+page);
 			
-			List<DemandBean> demand=demandBizImp.countDemand();
+			List<DemandBean> demand=demandBizImp.countDemand(demandTitle);
 			countPage=demand.size();//总用户数
 			
-		}else {
-			System.out.println("我来了");
-			System.out.println("page="+page);
-			
-			List<DemandBean> demand=demandBizImp.countDemand2(demandTitle);
-			
-			 countPage=demand.size();//总用户数
-			System.out.println("总用户数为："+countPage);
-		}
+	
 		
-		int totalPages = countPage / 2 + ((countPage % 2) > 0 ? 1 : 0);//定义总页数
+		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
 		int num=Integer.parseInt(number);
 		if(page.equals("tpage")) {
 			num--;
@@ -226,23 +217,23 @@ public class DemandHandler {
 	}
 	@RequestMapping("/changeState.action")
 	@ResponseBody
-	public List<Object> test(String demandTitle,String demandId,String stateId,String number) {
+	public List<Object> test(String demandTitle,String demandId,String stateId,String number,String page) {
 		int num=Integer.valueOf(number);
 		 int stateId2=Integer.valueOf(stateId);
 	if(stateId2==3) {
 		demandBizImp.changeState(Integer.valueOf(demandId),Integer.valueOf(stateId));//删除
-	}else if(stateId2==2) {
-		demandBizImp.changeState2(Integer.valueOf(demandId),Integer.valueOf(stateId));//审核通过
 	}else if(stateId2==1) {
+		demandBizImp.changeState2(Integer.valueOf(demandId),Integer.valueOf(stateId));//审核通过
+	}else if(stateId2==2) {
 		demandBizImp.changeState3(Integer.valueOf(demandId),Integer.valueOf(stateId));//违规下架
 	}
 			
 		
 		
-		List<DemandBean> demand=demandBizImp.countDemand();
+	/*	List<DemandBean> demand=demandBizImp.countDemand(demandTitle);
 		
 		int countPage=demand.size();//总用户数
-		int totalPages = countPage / 2 + ((countPage % 2) > 0 ? 1 : 0);//定义总页数
+		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
 		if(num>totalPages) {
 			num=totalPages;
 		}
@@ -254,6 +245,51 @@ public class DemandHandler {
 		list2.add(list);
 		list2.add(num);
 		list2.add(totalPages);
+<<<<<<< HEAD
 		return list2 ;	
+=======
+		return list2 ;	*/
+	
+	if(number=="") {
+		number="1";
+	}
+	int countPage=0;
+	List<Object> list1=new ArrayList<>();
+		System.out.println("我来了");
+		System.out.println("page="+page);
+		
+		List<DemandBean> demand=demandBizImp.countDemand(demandTitle);
+		countPage=demand.size();//总用户数
+		
+
+	
+	int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
+	
+	if(page.equals("tpage")) {
+		num--;
+		if(num<=0) {
+			num=1;
+		}
+	}else if(page.equals("npage")) {
+		num++;
+		if (totalPages<num) {
+			num=totalPages;
+		}
+		
+	}else if(page.equals("page")) {
+		if(num>totalPages) {
+			num=totalPages;
+		}else if(num<0) {
+			num=1;
+		}
+	}
+	System.out.println("当前页为："+num);
+	System.out.println("总共页数："+totalPages);
+	List<DemandBean> list=new ArrayList<DemandBean>();
+	list=demandBizImp.demand(demandTitle, num);
+	list1.add(list);
+	list1.add(num);
+	list1.add(totalPages);
+	return list1;
 	}
 }

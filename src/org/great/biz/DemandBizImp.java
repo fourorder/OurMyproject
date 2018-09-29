@@ -158,10 +158,12 @@ public class DemandBizImp implements DemandBiz {
 		return demandMapper.addBid(userid, demandid, time);
 	}
 	@Override
-	public List<DemandBean> countDemand() {
+	public List<DemandBean> countDemand(String demandTitle) {
 		// TODO Auto-generated method stub
-		
-		return demandMapper.countDemand();
+		if (demandTitle!=null) {
+			demandTitle="%"+demandTitle+"%";
+		}
+		return demandMapper.countDemand(demandTitle);
 	}
 	@Override
 	public List<DemandBean> demand(String demandTitle,int page) {
@@ -171,12 +173,12 @@ public class DemandBizImp implements DemandBiz {
 		}
 		return demandMapper.demand(demandTitle,page);
 	}
-	@Override
+/*	@Override
 	public List<DemandBean> countDemand2(String demandTitle) {
 		// TODO Auto-generated method stub
 		demandTitle="%"+demandTitle+"%";
 		return demandMapper.countDemand2(demandTitle);
-	}
+	}*/
 	@Override
 	public List<DemandBean> findInfo(int demandId) {
 		// TODO Auto-generated method stub

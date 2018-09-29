@@ -147,6 +147,7 @@ and u.STATEID =#{state}
  where rn &gt;= (#{page}*5-4)
 </select>
 
+
 <!-- 查询雇主总个数 -->
 <select id="countEmployers" resultType="java.lang.Integer">
 select count(*) from usertbl  where characterid=1
@@ -292,14 +293,14 @@ UPDATE usertbl set userName=#{userName},userTel=#{userTel},userAccount=#{userAcc
 select * from (
 select c.*,rownum rn from (
 select u.*,c.charactername,s.stateName from usertbl u,characterTbl c,stateTbl s where  u.CharacterId=c.CharacterId and u.CharacterId=2 and u.stateId=s.stateId and u.stateId!=3
-<if test="name != null">
+<if test="name!= null ">
 and u.username like #{name}
 </if>
-
  ) c 
- where rownum &lt;= (#{page}*2))
- where rn &gt;= ((#{page}-1)*2+1)
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= (#{page}*5-4)
 </select>
+
 </mapper>
 
 

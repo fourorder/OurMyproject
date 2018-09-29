@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class DemandBean {
 	private int demandId;//需求id
 	private String demandTitle;//需求标题
-	private String demandDetaIlinformation;//需求信息
+	private String demandDetailInformation;//需求信息
 	private String parameterId;//需求类型
 	private String fromUserId;//雇主id
 	private String toUserId;//供应商id
@@ -18,18 +18,31 @@ public class DemandBean {
 	private String stateId;//拍卖状态
 	private String demandHead;//需求头像
 	private String parameterName;
-	private String demandDetailInformation;//陈毅需求详情
+	private String userName;
+	private String userName2;
 	public DemandBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public DemandBean(int demandId, String demandTitle, String demandDetaIlinformation, String parameterId,
+	public String getUserName2() {
+		return userName2;
+	}
+	public void setUserName2(String userName2) {
+		this.userName2 = userName2;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public DemandBean(int demandId, String demandTitle, String demandDetailInformation, String parameterId,
 			String fromUserId, String toUserId, String publishTime, String securityMoney, String dealMoney,
 			String completeTime, String auctionTime, String stateId, String demandHead) {
 		super();
 		this.demandId = demandId;
 		this.demandTitle = demandTitle;
-		this.demandDetaIlinformation = demandDetaIlinformation;
+		this.demandDetailInformation = demandDetailInformation;
 		this.parameterId = parameterId;
 		this.fromUserId = fromUserId;
 		this.toUserId = toUserId;
@@ -52,12 +65,6 @@ public class DemandBean {
 	}
 	public void setDemandTitle(String demandTitle) {
 		this.demandTitle = demandTitle;
-	}
-	public String getDemandDetaIlinformation() {
-		return demandDetaIlinformation;
-	}
-	public void setDemandDetaIlinformation(String demandDetaIlinformation) {
-		this.demandDetaIlinformation = demandDetaIlinformation;
 	}
 	public String getParameterId() {
 		return parameterId;

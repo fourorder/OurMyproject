@@ -13,8 +13,7 @@
 	</insert>
 	<!-- 最新需求。分页搜索 -->
 	<select id="getDemandList" parameterType="org.great.bean.QueryBean" resultType="org.great.bean.DemandBean">
-
-		select u.*from (
+	select u.*from (
  	select rownum as num, DEMANDINFOMATIONTBL.* from DEMANDINFOMATIONTBL where STATEID = 9
  	<where>
  		<if test="name!=null and name!=''">
@@ -24,6 +23,60 @@
  	</where> 
  	)u where u.num  between #{star}and#{end}  
 	</select>
+
+<select id="countDemand"  resultType="org.great.bean.DemandBean">
+select * from demandInfomationTbl where stateId !=7 
+<if test="demandTitle != null">
+and demandTitle like #{demandTitle}  
+</if>
+order by demandInfomationTbl.demandId
+</select>
+<select id="countDemand2" parameterType="String" resultType="org.great.bean.DemandBean">
+select * from demandInfomationTbl where demandTitle like #{demandTitle} and stateId !=7 
+</select>
+<select id="demand" resultType="org.great.bean.DemandBean">
+select * from(
+select rownum rn,m.* from (select demandInfomationTbl.*,tbParameter.parameterName from demandInfomationTbl,tbParameter where demandInfomationTbl.stateId=tbParameter.parameterId and stateId !=7 
+<if test="demandTitle != null">
+and demandTitle like #{demandTitle} 
+</if>
+order by demandInfomationTbl.demandId)m 
+ where rownum &lt;= (#{page}*5)) 
+ where rn &gt;= ((#{page}-1)*5+1) 
+</select>
+<select id="findInfo" parameterType="int" resultType="org.great.bean.DemandBean">
+select demandInfomationTbl.* from demandInfomationTbl where demandId=#{demandId} 
+</select>
+<select id="findFromUserName" parameterType="int" resultType="String">
+select userTbl.userName from demandInfomationTbl,userTbl where demandId=#{demandId} and demandInfomationTbl.fromUserId=userTbl.userId
+</select>
+<select id="findToUserName" parameterType="int" resultType="String">
+select userTbl.userName from demandInfomationTbl,userTbl where demandId=#{demandId} and demandInfomationTbl.toUserId=userTbl.userId
+</select>
+<select id="findParameterName" parameterType="int" resultType="String">
+select tbParameter.parameterName from demandInfomationTbl,tbParameter where demandId=#{demandId} and demandInfomationTbl.parameterId=tbParameter.parameterId
+</select>
+<select id="findStateName" parameterType="int" resultType="String">
+select tbParameter.parameterName from demandInfomationTbl,tbParameter where demandId=#{demandId} and demandInfomationTbl.stateId=tbParameter.parameterId
+</select>
+<update id="changeInfo" >
+UPDATE demandInfomationTbl set demandDetailInformation=#{demandDetailInformation2},securityMoney=#{securityMoney2},dealMoney=#{dealMoney2},completeTime=#{completeTime2},auctionTime=#{auctionTime2},demandHead=#{demandHead2} WHERE demandId=#{demandId2}
+</update>
+<!-- 删除需求 -->
+<update id="changeState" parameterType="int">
+UPDATE demandInfomationTbl set stateId=7 where demandId=#{demandId}
+</update>
+<!-- 审核通过 -->
+<update id="changeState2" parameterType="int">
+UPDATE demandInfomationTbl set stateId=9 where demandId=#{demandId}
+</update>
+<!-- 审核不通过 -->
+<update id="changeState3" parameterType="int">
+UPDATE demandInfomationTbl set stateId=23 where demandId=#{demandId}
+</update>
+
+
+		
 	<!-- 查询总页数 -->
 	<select id="demandCount" parameterType="java.lang.String" resultType="java.lang.Integer">
  	 select count(1) from DEMANDINFOMATIONTBL where STATEID = 9
@@ -94,70 +147,8 @@
 	<insert id="addBid">
 	insert into bidtbl (bidid,userid,demandid,bidtime) values(SEQID.nextval,#{userid},#{demandid},#{bidtime})
 	</insert>
-	<!-- 修改需求 -->
-	<!-- <update id="updateDemand">
-	UPDATE DEMANDINFOMATIONTBL <set>
-		<if test="demandTitle!=null">
-		username=#{userName},
-		</if>
-		<if test="userProfile!=null">
-		userProfile=#{userProfile},
-		</if>
-		<if test="userIdentity!=null">
-		userIdentity=#{userIdentity},
-		</if>
-		<if test="userTel!=null">
-		userTel=#{userTel},
-		</if>
-		<if test="userMail!=null">
-		userMail=#{userMail}
-		</if>
-		</set>
-		where DEMANDID = #{demandId}
-	</update> -->
-<select id="countDemand" resultType="org.great.bean.DemandBean">
-select * from demandInfomationTbl where stateId！=7
-</select>
-<select id="countDemand2" parameterType="String" resultType="org.great.bean.DemandBean">
-select * from demandInfomationTbl where demandTitle like #{demandTitle} and stateId！=7
-</select>
-<select id="demand" resultType="org.great.bean.DemandBean">
-select * from(
-select rownum rn,m.* from (select demandInfomationTbl.*,tbParameter.parameterName from demandInfomationTbl,tbParameter where demandInfomationTbl.stateId=tbParameter.parameterId and stateId！=7
-<if test="demandTitle != null">
-and demandTitle like #{demandTitle} order by demandId 
-</if>
-)m
- where rownum &lt;= (#{page}*2))
- where rn &gt;= ((#{page}-1)*2+1)
-</select>
-<select id="findInfo" parameterType="int" resultType="org.great.bean.DemandBean">
-select demandInfomationTbl.* from demandInfomationTbl where demandId=#{demandId} 
-</select>
-<select id="findFromUserName" parameterType="int" resultType="String">
-select userTbl.userName from demandInfomationTbl,userTbl where demandId=#{demandId} and demandInfomationTbl.fromUserId=userTbl.userId
-</select>
-<select id="findToUserName" parameterType="int" resultType="String">
-select userTbl.userName from demandInfomationTbl,userTbl where demandId=#{demandId} and demandInfomationTbl.toUserId=userTbl.userId
-</select>
-<select id="findParameterName" parameterType="int" resultType="String">
-select tbParameter.parameterName from demandInfomationTbl,tbParameter where demandId=#{demandId} and demandInfomationTbl.parameterId=tbParameter.parameterId
-</select>
-<select id="findStateName" parameterType="int" resultType="String">
-select tbParameter.parameterName from demandInfomationTbl,tbParameter where demandId=#{demandId} and demandInfomationTbl.stateId=tbParameter.parameterId
-</select>
-<update id="changeInfo" >
-UPDATE demandInfomationTbl set demandDetailInformation=#{demandDetailInformation2},securityMoney=#{securityMoney2},dealMoney=#{dealMoney2},completeTime=#{completeTime2},auctionTime=#{auctionTime2},demandHead=#{demandHead2} WHERE demandId=#{demandId2}
-</update>
-<update id="changeState" parameterType="int">
-UPDATE demandInfomationTbl set stateId=7 where demandId=#{demandId}
-</update>
-<update id="changeState2" parameterType="int">
-UPDATE demandInfomationTbl set stateId=22 where demandId=#{demandId}
-</update>
-<update id="changeState3" parameterType="int">
-UPDATE demandInfomationTbl set stateId=23 where demandId=#{demandId}
-</update>	
+
+	
 </mapper>
 
 
