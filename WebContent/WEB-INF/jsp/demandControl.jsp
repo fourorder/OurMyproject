@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>需求管理</title>
+<link rel="stylesheet" href="<%=path%>css/oindex.css">
 <style type="text/css">
 
 .grouptable{
@@ -105,36 +106,20 @@
 </head>
 <body>
 <!-- head YDC begin -->
-	<header class="ydc-header">
-		<div class="ydc-entered">
-			<div class="ydc-header-content ydc-flex">
-				<div class="ydc-column">
-					<a href="index.html" class="ydc-column-ydc-logo">
-						<img src="admin/images/icon/ydc-logo.png" title="" about="" alt="">
-					</a>
-				</div>
-				<div class="ydc-column">
-					<div class="ydc-column-user">
-						<div class="ydc-user-photo">
-							<a href="javascript:;">
-								<img src="admin/images/icon/photo.png" title="" about="" alt="">
-							</a>
-						</div>
-						<div class="ydc-user-info">
-							<div class="ydc-user-info-name">
-								<a href="javascript:;">一点车</a>
-							</div>
-							<div class="ydc-user-info-func ydc-flex">
-								<span class="ydc-tag">新手期</span>
-								<span class="ydc-mal"><i class="ydc-icon ydc-icon-mail fl"></i><em>12</em></span>
-								<a href="javascript:;">退出</a>
-							</div>
-						</div>
-					</div>
+	<div class="o-top">
+				<div class="width1180">
+					<span class="fr">
+						<!-- <a href="#" title="登录">登录</a>
+						<a href="#" title="注册">注册</a> -->
+						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
+						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
+						<!--登录后
+						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
+						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
+						-->
+					</span>
 				</div>
 			</div>
-		</div>
-	</header>
 <!-- head YDC end -->
 
 <!-- content YDC begin -->

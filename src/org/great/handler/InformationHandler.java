@@ -106,7 +106,7 @@ public class InformationHandler {
 		if(a>0) {
 			System.out.println();
 		}
-		return null;
+	return new ModelAndView("redirect:inforPage.action?page=tpage&number=1");
 		
 		
 	}

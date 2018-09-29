@@ -48,6 +48,7 @@
       <th>时间</th>
        <th>账号</th>
          <th>状态</th>
+          <th>启用/禁用</th>
          <th>操作</th>
     </tr> 
   </thead>
@@ -58,7 +59,18 @@
   <td>${fund.userStoryContent}</td>
    <td>${fund.userStoryTime}</td>
     <td>${fund.userAccount}</td>
-    <td>${fund.stateId}</td>
+     <c:if test="${fund.stateId  eq 0}">
+       <td><a >未删除</a></td>
+       </c:if>
+       <c:if test="${fund.stateId  eq 1}">
+       <td><a>已删除</a></td>
+       </c:if>
+     <c:if test="${fund.enableDisableId  eq 3}">
+       <td><a class="layui-btn layui-btn-sm layui-btn-radius " href="<%=path %>employers/storyOperation.action?operation=forbidden&account=${fund.userAccount}&number=1">禁用</a></td>
+       </c:if>
+       <c:if test="${fund.enableDisableId  eq 4}">
+       <td><a class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" href="<%=path %>employers/storyOperation.action?operation=start&account=${fund.userAccount}&number=1" >启用</a></td>
+       </c:if>
        <td><a class="layui-btn layui-btn-sm layui-btn-danger" href="<%=path %>employers/delUpdate.action?operation=del&userAccount=${fund.userAccount}"  onclick="return firm()">删除</a>
        <a class="layui-btn layui-btn-sm" href="<%=path %>employers/delUpdate.action?operation=update&userAccount=${fund.userAccount}" >修改</a>
       </td>
@@ -68,10 +80,9 @@
 
    <td colspan="3"><a class="layui-btn layui-btn-sm" href="<%=path %>employers/list.action?page=tpage&number=${num}&title=${title}&state=${state}">上一页</a></td>
    <td >当前页：<span id="currentPage">${num}</span>&nbsp;&nbsp;&nbsp;总页数：<span id="totalPages">${countPage}</span></td>
-    <td> <input type="text" name="skip" id="skip" style="width: 30px"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();">&nbsp;&nbsp;<a onclick="skip()"  class="layui-btn layui-btn-xs">转</a></td>
+  <td> <input type="text" name="skip" id="skip" style="width: 30px"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();">&nbsp;&nbsp;<a onclick="skip()"  class="layui-btn layui-btn-xs">转</a></td>
   <td colspan="2"><a class="layui-btn layui-btn-sm" href="<%=path %>employers/list.action?page=npage&number=${num}&title=${title}&state=${state}">下一页</a></td>
- <td colspan="5">
-</td>
+
    </tr>
 </tbody>
 </table>

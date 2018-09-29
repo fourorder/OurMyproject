@@ -56,4 +56,18 @@ public class CounselorImp implements CounselorBiz {
 		return coounselor.type();
 	}
 
+
+	@Override
+	public int forbidden(String account) {
+		// TODO Auto-generated method stub
+		return coounselor.forbidden(account);
+	}
+
+
+	@Override
+	public int start(String account) {
+		// TODO Auto-generated method stub
+		return coounselor.start(account);
+	}
+
 }

@@ -41,19 +41,19 @@
 <div class="layui-form-item">
             <label class="layui-form-label">密码：</label>
             <div class="layui-input-block">
-                <input type="text" name="userPwd" required  lay-verify="required" value="${fund.userPwd}" autocomplete="off" class="layui-input">
+                <input type="text" name="userPwd"  required  lay-verify="required" value="${fund.userPwd}" autocomplete="off" class="layui-input">
             </div>
         </div>
 <div class="layui-form-item">
             <label class="layui-form-label">手机号：</label>
             <div class="layui-input-block">
-                <input type="text" name="userTel" required  lay-verify="required" value="${fund.userTel}" autocomplete="off" class="layui-input">
+                <input type="text" name="userTel"  required lay-verify="required" value="${fund.userTel}" autocomplete="off" class="layui-input">
             </div>
         </div>
 <div class="layui-form-item">
             <label class="layui-form-label">账号：</label>
             <div class="layui-input-block">
-                <input type="text" name="userAccount" disabled="disabled" required  lay-verify="required" value="${fund.userAccount}" autocomplete="off" class="layui-input">
+                <input type="text" name="userAccount" disabled="disabled"   lay-verify="required" value="${fund.userAccount}" autocomplete="off" class="layui-input">
             </div>
         </div>
 <input type="hidden" name="sex" value="${fund.userSex}" id="sex">

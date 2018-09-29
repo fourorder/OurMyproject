@@ -27,45 +27,46 @@ public class CounselorHandler {
 	private CounselorBiz counselorImp;
 	
 	@RequestMapping("/application.action")//跳到申请页面
-	public ModelAndView test(HttpServletRequest request,String account){
+	public ModelAndView test(HttpServletRequest request,String account,int userId){
 		ModelAndView modelAndView=new ModelAndView();
 		List<String> list=new ArrayList<String>();
 		list=counselorImp.type();
 		request.setAttribute("list", list);
 		request.setAttribute("account", account);
+		request.setAttribute("userId", userId);
 		modelAndView.setViewName("jsp/ApplicationConsultants");
 		return modelAndView;	
 	}
-	@RequestMapping("/affirm.action")//跳到申请页面
-	@ResponseBody
-	public Integer test1(HttpServletRequest request,CounselorBean cb,MultipartFile file){
+	@RequestMapping("/affirm.action")//跳到列表
+	public ModelAndView test1(HttpServletRequest request,CounselorBean cb,MultipartFile file){
 		String productionImage=upLoadFile(request, file);
-		int state=7;
-		
+		cb.setCounselorImg(productionImage);
+		cb.setAuditState(0);
+		cb.setEnableDisableId(3);
 		List <CounselorBean> list=new ArrayList<CounselorBean>();
 		list=counselorImp.select(cb.getUserAccount());
 		if(list.size()>0) {
 			System.out.println("该用户已申请");
 			if(list.get(0).getAuditState()==0) {
 				System.out.println("该用户正在审核");
-				state=0;
-				return state;
+			
+				return new ModelAndView("redirect:list.action?page=tpage&number=1");
 			}else if(list.get(0).getAuditState()==1) {
 				System.out.println("该用户已是顾问");
-				state=1;
-				return state;
+				
+				return new ModelAndView("redirect:list.action?page=tpage&number=1");
 			}
 		}else {
 			cb.setAuditState(0);
 			cb.setCounselorImg(productionImage);
 			int a =counselorImp.applyFor(cb);
 			if(a>0) {
-				state=2;
-				return state;
+				
+				return new ModelAndView("redirect:list.action?page=tpage&number=1");
 			}
 		}
 
-		return state;	
+		return new ModelAndView("redirect:list.action?page=tpage&number=1");	
 	}
 	
 public String upLoadFile(HttpServletRequest request,MultipartFile file) {
@@ -121,47 +122,27 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 		modelAndView.setViewName("jsp/counselorList");
 		return modelAndView;	
 	}
-	@RequestMapping("/Alist.action")//跳到列表页面
-	@ResponseBody
-	public List<Object> test4(HttpServletRequest request,String state1,String page,String number){
-		if(state1==null) {
-			state1="4";
-		}
-		System.out.println("进入Handler");
-		int state=Integer.parseInt(state1);
-		int countPage=counselorImp.countCounserlor(state);//总条数
-		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
-		int num=Integer.parseInt(number);
-		System.out.println("num="+num+"page="+page);
-		if(page.equals("tpage")) {
-			num--;
-			if(num<=0) {
-				num=1;
-			}
-		}else if(page.equals("npage")) {
-			num++;
-			if(num>totalPages) {
-				num=totalPages;
-			}
-		}
-        List<Object> obj=new ArrayList<Object>();
-		List<CounselorBean> list=new ArrayList<CounselorBean>();
-		list=counselorImp.conditionQuery(state, num);
-		System.out.println("list="+list.get(0).getUserAccount());
-		System.out.println("总页="+totalPages+"当前页："+num);
-		request.setAttribute("totalPages", totalPages);
-		request.setAttribute("num", num);
-		request.setAttribute("state",state);
-           obj.add(num);
-           obj.add(totalPages);
-           obj.add(list);
-		return obj;	
-	}
 	@RequestMapping("/applicationOk.action")//确认通过审核
 	public ModelAndView test5(HttpServletRequest request,String account){
 		int a =counselorImp.applyForOk(account);
 		if(a>0) {
 			System.out.println("成功");
+		}
+		
+		return new ModelAndView("redirect:list.action?page=tpage&number=1");	
+	}
+	@RequestMapping("/storyOperation.action")//启用禁用
+	public ModelAndView test6(HttpServletRequest  request,String operation,String account){
+		if(operation.equals("forbidden")) {
+			int a=counselorImp.forbidden(account);
+			if(a>0) {
+				System.out.println("禁用");
+			}
+		}else if(operation.equals("start")){
+			int a=counselorImp.start(account);
+			if(a>0) {
+				System.out.println("启用");
+			}
 		}
 		
 		return new ModelAndView("redirect:list.action?page=tpage&number=1");	

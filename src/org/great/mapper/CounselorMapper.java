@@ -14,4 +14,6 @@ public interface CounselorMapper {
 	 public List<CounselorBean> conditionQuery(@Param("state")int state,@Param("page")int page);//条件查询
 	 public int countCounserlor(@Param("state")int state);//总数
 	 public int applyForOk(@Param("account")String account);//审核通过
+	  public int forbidden(@Param("account")String account);//禁用
+	     public int start(@Param("account")String account);//启用
 }

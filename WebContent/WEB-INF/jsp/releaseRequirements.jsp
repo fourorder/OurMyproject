@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>发布需求</title>
 
-
+<link rel="stylesheet" href="<%=path%>css/oindex.css">
  <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
@@ -59,36 +59,20 @@
 </head>
 <body>
 	<!-- head YDC begin -->
-	<header class="ydc-header">
-	<div class="ydc-entered">
-		<div class="ydc-header-content ydc-flex">
-			<div class="ydc-column">
-				<a href="index.html" class="ydc-column-ydc-logo"> <img
-					src="admin/images/icon/ydc-logo.png" title="" about="" alt="">
-				</a>
-			</div>
-			<div class="ydc-column">
-				<div class="ydc-column-user">
-					<div class="ydc-user-photo">
-						<a href="javascript:;"> <img src="admin/images/icon/photo.png"
-							title="" about="" alt="">
-						</a>
-					</div>
-					<div class="ydc-user-info">
-						<div class="ydc-user-info-name">
-							<a href="javascript:;">一点车</a>
-						</div>
-						<div class="ydc-user-info-func ydc-flex">
-							<span class="ydc-tag">新手期</span> <span class="ydc-mal"> <i
-								class="ydc-icon ydc-icon-mail fl"></i> <em>12</em>
-							</span> <a href="javascript:;">退出</a>
-						</div>
-					</div>
+	 <div class="o-top">
+				<div class="width1180">
+					<span class="fr">
+						<!-- <a href="#" title="登录">登录</a>
+						<a href="#" title="注册">注册</a> -->
+						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
+						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
+						<!--登录后
+						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
+						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
+						-->
+					</span>
 				</div>
 			</div>
-		</div>
-	</div>
-	</header>
 	<!-- head YDC end -->
 	<!-- content YDC begin -->
 	<section>
@@ -212,35 +196,33 @@
                                                     </div>
                                                 </div>
                                             </div>
-										</div>
 										
-										<div class="ydc-reg-form-group clearfix">
-											<label>佣金:</label>
-											<div class="ydc-reg-form-input clearfix">
+										<div class="aui-card-form-item">
+											<label class="aui-card-form-label">佣金：</label>
+											<div class="ydc-reg-form-input">
 												<input type="text" id="dealMoney" name="dealMoney" class="ydc-form-control"  autocomplete="off" value="${userInfo.userIdentity}">
-												<div class="ydc-reg-form-text">
-													<p>需求费用</p>
+											 <div class="aui-remarks">
+												<p>需求费用</p>
 												</div>
-												
 											</div>
-
 										</div>
 										
-										<div class="ydc-reg-form-group clearfix">
-											<label>押金:</label>
-											<div class="ydc-reg-form-input clearfix">
+										<div class="aui-card-form-item">
+											<label class="aui-card-form-label">佣金：</label>
+											<div class="ydc-reg-form-input">
 												<input type="text" id="securityMoney" name="securityMoney" class="ydc-form-control"  autocomplete="off" value="${userInfo.userIdentity}">
-												<div class="ydc-reg-form-text">
-													<p>供应商上缴的押金，在需求后返还给供应商。一般设为需求的10%</p>
+											 <div class="aui-remarks">
+												<p>供应商上缴的押金，在需求后返还给供应商。一般设为需求的10%</p>
 												</div>
-												
 											</div>
-
 										</div>
-										
 										<input type="hidden" name="userid" value="${user.userId}">
 										
-										
+										<br>
+										<br>
+										<br>
+										<br>
+										<br>
 										
 										
 										
@@ -249,17 +231,17 @@
 											<button class="btn">发布</button>
 											
 										</div>
+										</div>
+										</div>
 									</form>
-								</div>
+								
 							</div>
 
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- right end -->
+			
 		</div>
-	</div>
 	</section>
 	<!-- content YDC end -->
 	

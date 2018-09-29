@@ -300,6 +300,15 @@ and u.username like #{name}
  where rownum &lt;= (#{page}*5))
  where rn &gt;= (#{page}*5-4)
 </select>
+<!--禁用雇主故事 -->
+<update id="forbiddenStory" parameterType="java.lang.String">
+UPDATE userStorytbl set enableDisableId=4 where userAccount=#{account}
+</update>
+<!--启用雇主故事 -->
+<update id="startStory" parameterType="java.lang.String">
+UPDATE userStorytbl set enableDisableId=3 where userAccount=#{account}
+</update>
+
 
 </mapper>
 

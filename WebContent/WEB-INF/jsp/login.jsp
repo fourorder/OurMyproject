@@ -36,11 +36,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div class="ydc-body-content">
 	<div class="ydc-body-bj">
-		<div class="ydc-body-logo">
-			<a href="login.html">
-				<img src="<%=basePath%>admin/images/icon/ydc-logo.png" alt="">
-			</a>
-		</div>
+		<%-- <div class="ydc-body-logo" >
+			 <a href="login.html">
+				 <img src="<%=basePath%>images/logo1.png" alt="" width="800px" height="20px"> 
+			</a> 
+		</div> --%>
 		<div class="ydc-body-login">
 			<h2>登录</h2>
 			<div class="ydc-body-login-content">

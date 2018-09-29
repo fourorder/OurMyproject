@@ -50,6 +50,8 @@ public int countStory(@Param("title")String title,@Param("state")int state);//�
 public int delStory(@Param("userAccount")String userAccount);//删除雇主故事
 public List<UserStoryBean> updateOne(@Param("userAccount")String userAccount); //查询单个故事
 public int updateOk(UserStoryBean usb); //确认修改故事
+public int forbiddenStory(@Param("account")String account);//禁用故事
+public int startStory(@Param("account")String account);//启用故事
 public void addUser(@Param(value="userAccount")String userAccount ,@Param(value="userPwd")String userPwd ,@Param(value="characterId")Integer characterId ,@Param(value="userName")String userName ,@Param(value="userTel")long userTel ,@Param(value="userIdentity")String userIdentity ,@Param(value="stateId")int stateId,@Param(value="userRegisterTime")String userRegisterTime);
 public List<UserBean> checkAccount(String userAccount);
 public void changeState(int userId);

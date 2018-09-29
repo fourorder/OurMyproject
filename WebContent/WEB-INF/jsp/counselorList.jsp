@@ -11,6 +11,7 @@
 <title>顾问列表</title>
 <script type="text/javascript" src="<%=path %>js/jquery.min.js"></script>
  <link rel="stylesheet" href="<%=path %>plugins/layui/css/layui.css" media="all" />
+  <script type="text/javascript" src="<%=path %>js/jquery-1.9.1.min.js"></script>
 <style type="text/css">
 
         body{TEXT-ALIGN: center;}
@@ -20,13 +21,14 @@
 </head>
 <body>
 <div align="center" style="height: 90%;width: 50%;margin:0 auto;background-color: #eff4d8; text-align: center"  id="table">
-<select id="state1">
+<form action="<%=path %>counselor/list.action?page=tpage&number=1" method="post" >
+<select name="state1" >
 <option value="4">请选择</option>
 <option value="0">待审核</option>
 <option value="1">已审核</option>
 </select>
-<button  style="width:70px;height: 30px" onclick="sstate()">查询</button>
-
+<input type="submit" value="查询" style="width:70px;height: 30px" >
+</form>
 <table class="layui-table" >
 <thead>
  <tr>
@@ -36,11 +38,12 @@
 <th>图片</th>
 <th>顾问类型</th>
 <th>状态</th>
+<th>启用/禁用</th>
 <th>操作</th>
 </tr>
 </thead>
-<tbody id="ccc">
 <c:forEach items="${Clist}"  var="fund">
+<tbody id="ccc">
 <tr>
 <td>${fund.userAccount}</td>
 <td>${fund.counselorIntroduction}</td>
@@ -55,13 +58,20 @@
        <td>已审核</td>
        <td><a>审核通过</a></td>
 </c:if>
-</tr>
-</c:forEach>
+ <c:if test="${fund.enableDisableId  eq 3}">
+       <td><a class="layui-btn layui-btn-sm layui-btn-radius " href="<%=path %>counselor/storyOperation.action?operation=forbidden&account=${fund.userAccount}&number=1">禁用</a></td>
+       </c:if>
+       <c:if test="${fund.enableDisableId  eq 4}">
+       <td><a class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" href="<%=path %>counselor/storyOperation.action?operation=start&account=${fund.userAccount}&number=1" >启用</a></td>
+       </c:if>
+       </tr>
+
 </tbody>
+</c:forEach>
 <tr>
-<td colspan="5">当前页<span id="num">${num}</span>总页数<span id="totalPages">${totalPages}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="button" value="上一页" onclick="page('tpage')">&nbsp;&nbsp;
-<input type="button" value="下一页" onclick="page('npage')">
+<td colspan="8">当前页<span id="num">${num}</span>总页数<span id="totalPages">${totalPages}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a class="layui-btn layui-btn-sm" href="<%=path %>counselor/list.action?page=tpage&number=${num}&state=${state}">上一页</a>&nbsp;&nbsp;
+<a class="layui-btn layui-btn-sm" href="<%=path %>counselor/list.action?page=npage&number=${num}&state=${state}">下一页</a>
 </td>
 </tr>
 
@@ -69,138 +79,7 @@
 
 </div>
 <script>
-function page(page) {
-	var nn=$("#num").text();
-	var state1=$("#state1").val();
-		$.ajax({	
-			 url:"<%=path %>counselor/Alist.action",
-			data:"page="+page+"&number="+nn+"&state1="+state1,
-			dataType:"json",
-			type:"post",
-		   success:function(redata){
-				$("#ccc").empty();
-				$("#num").empty();
-				 $("#totalPages").empty();
-				var num=redata[0]
-				var totalPages=redata[1]
-				 $("#num").html(num);
-				 $("#totalPages").html(totalPages);
-				var list=redata[2]
-				 var len = list.length;
-				 for(var i=0;i<len;i++){ 
-					 var e = list[i];
-					 if(e.auditState==0){
-						 $("#ccc").append(
-									"<tr><td>"+e.userAccount+"</td>"+
-									"<td>"+e.counselorIntroduction+"</td>"+
-									"<td>"+e.counselorMoney+"</td>"+
-									"<td>"+e.counselorImg+"</td>"+
-									"<td>"+e.serviceType+"</td>"+
-									"<td>待审核</td>"+
-									"<td><a onclick='return firm()' href='<%=path %>counselor/applicationOk.action?account="+e.userAccount+"'>点击通过</a></td>"+
-									"</tr>"
-							 ); 
-					 }else if(e.auditState==1){
-						 $("#ccc").append(
-									"<tr><td>"+e.userAccount+"</td>"+
-									"<td>"+e.counselorIntroduction+"</td>"+
-									"<td>"+e.counselorMoney+"</td>"+
-									"<td>"+e.counselorImg+"</td>"+
-									"<td>"+e.serviceType+"</td>"+
-									"<td>已审核</td>"+
-									"<td><a>审核通过</a></td>"+
-									"</tr>"
-							 
-							 );  
-					 }
-					 
-				 }
-					
-				}
-			
-		})
-}
-function sstate() {
-	
-	var state1=$("#state1").val();
-	alert(state1)
-	$.ajax({	
-			 url:"<%=path %>counselor/Alist.action",
-			data:"page="+page+"&number="+nn+"&state1="+state1,
-			dataType:"json",
-			type:"post",
-		   success:function(redata){
-				$("#ccc").empty();
-				 var len = redata.length;
-				 for(var i=0;i<len;i++){ 
-					 var e = redata[i];
-					 if(e.auditState==0){
-						 $.ajax({	
-							 url:"<%=path %>counselor/Alist.action",
-							data:"page="+page+"&number="+nn+"&state1="+state1,
-							dataType:"json",
-							type:"post",
-						   success:function(redata){
-								$("#ccc").empty();
-								$("#num").empty();
-								 $("#totalPages").empty();
-								var num=redata[0]
-								var totalPages=redata[1]
-								 $("#num").html(num);
-								 $("#totalPages").html(totalPages);
-								var list=redata[2]
-								 var len = list.length;
-								 for(var i=0;i<len;i++){ 
-									 var e = list[i];
-									 if(e.auditState==0){
-										 $("#ccc").append(
-													"<tr><td>"+e.userAccount+"</td>"+
-													"<td>"+e.counselorIntroduction+"</td>"+
-													"<td>"+e.counselorMoney+"</td>"+
-													"<td>"+e.counselorImg+"</td>"+
-													"<td>"+e.serviceType+"</td>"+
-													"<td>待审核</td>"+
-													"<td><a onclick='return firm()' href='<%=path %>counselor/applicationOk.action?account="+e.userAccount+"'>点击通过</a></td>"+
-													"</tr>"
-											 
-											 ); 
-									 }else if(e.auditState==1){
-										 $("#ccc").append(
-													"<tr><td>"+e.userAccount+"</td>"+
-													"<td>"+e.counselorIntroduction+"</td>"+
-													"<td>"+e.counselorMoney+"</td>"+
-													"<td>"+e.counselorImg+"</td>"+
-													"<td>"+e.serviceType+"</td>"+
-													"<td>已审核</td>"+
-													"<td><input type='button' value='查看' style='width:70px;height:30px'></td>"+
-													"</tr>"
-											 
-											 );  
-									 }
-									 
-								 }
-									
-								}
-							
-						})
-					 }else if(e.auditState==1){
-						 $("#ccc").append(
-									"<tr><td>"+e.userAccount+"</td>"+
-									"<td>"+e.counselorIntroduction+"</td>"+
-									"<td>"+e.counselorMoney+"</td>"+
-									"<td>已审核</td>"+
-									"<td><input type='button' value='查看' style='width:70px;height:30px'></td>"+
-									"</tr>"
-							 
-							 );  
-					 }
-					 
-				 }
-					
-				}
-			
-		})
-}
+
 function firm() {
     //利用对话框返回的值 （true 或者 false）
     if (confirm("是否通过审核")) {

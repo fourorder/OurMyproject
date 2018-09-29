@@ -30,7 +30,7 @@
             <div class="layui-input-block">
             <select name="parameterName">
           <c:forEach items="${list}"  var="fund">
-     <option value="${fund} ">${fund}</option>
+     <option value="${fund}">${fund}</option>
      <c:out value="${fund}" />
      </c:forEach>
      </select>

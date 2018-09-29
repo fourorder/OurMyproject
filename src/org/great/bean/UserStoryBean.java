@@ -13,6 +13,7 @@ public class UserStoryBean {
 	private int stateId;
 	private String userStoryUrl;
 	private String storyImg;
+	private int enableDisableId;
 	public UserStoryBean() {
 		
 	}
@@ -52,6 +53,12 @@ public class UserStoryBean {
 	public void setStateId(int stateId) {
 		this.stateId = stateId;
 	}
+	public int getEnableDisableId() {
+		return enableDisableId;
+	}
+	public void setEnableDisableId(int enableDisableId) {
+		this.enableDisableId = enableDisableId;
+	}
 	public String getUserStoryUrl() {
 		return userStoryUrl;
 	}
@@ -67,6 +74,7 @@ public class UserStoryBean {
 
 	public void setStoryImg(String storyImg) {
 		this.storyImg = storyImg;
+
 	}			
 	
 	

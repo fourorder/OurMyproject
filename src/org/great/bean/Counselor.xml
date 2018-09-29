@@ -13,8 +13,7 @@
  </select>
 	 <!-- 增加顾问 -->
 <insert id="applyFor" parameterType="org.great.bean.CounselorBean">
-
-insert into counselorTbl values(SEQID.nextval,#{userAccount},#{counselorIntroduction},#{counselorMoney},#{auditState},#{counselorImg},#{serviceType})
+insert into counselorTbl values(SEQID.nextval,#{userAccount},#{counselorIntroduction},#{counselorMoney},#{auditState},#{counselorImg},#{serviceType},#{enableDisableId},#{userId})
 </insert>
 <!-- 查询顾问总数 -->
 <select id="countCounserlor" resultType="java.lang.Integer">
@@ -37,5 +36,13 @@ select * from counselorTbl where userAccount=userAccount
 </select>
 <update id="applyForOk"  parameterType="java.lang.String">
 UPDATE counselorTbl set auditState=1 WHERE userAccount=#{account}
+</update>
+<!-- 禁用-->
+<update id="forbidden"  parameterType="java.lang.String">
+UPDATE counselorTbl set enableDisableId=4 WHERE userAccount=#{account}
+</update>
+<!-- 启用-->
+<update id="start"  parameterType="java.lang.String">
+UPDATE counselorTbl set enableDisableId=3 WHERE userAccount=#{account}
 </update>
 </mapper>

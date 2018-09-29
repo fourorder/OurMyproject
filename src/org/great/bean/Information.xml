@@ -8,12 +8,12 @@
 	 select parametername from tbparameter where pid=300
 	</select>
 	<!-- 查询类型id -->
-	<select id="selectPid" resultType="java.lang.String">
-	 select parameterid from tbparameter where pid=300 and parametername=#{parameter}
+	<select id="selectPid" resultType="java.lang.Integer">
+	 select parameterid from tbparameter where pid=300 and parametername=#{paramenter}
 	</select>
 		<!-- 插入资讯 -->
 	 <insert id="setInformation" parameterType="org.great.bean.InformationBean">
-		insert into informationTbl values(SEQID.nextval,#{informationTitle},#{informationContent},#{informationPublishTime},#{informationAddress},#{parameterId},#{informationImg})
+		insert into informationTbl values(SEQID.nextval,#{informationTitle},#{informationContent},#{informationPublishTime},#{informationAddress},#{parameterId},#{informationImg},#{stateId})
 	</insert>  
 <select id="getInformation" resultType="org.great.bean.InformationBean">
 select * from informationTbl where parameterid = #{parameterid}

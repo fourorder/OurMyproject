@@ -11,4 +11,7 @@ public interface CounselorBiz {
      public List<CounselorBean> conditionQuery(int state,int page);//条件查询
      public int countCounserlor(int state);//总数
      public int applyForOk(String account);//审核通过
+     public int forbidden(String account);//禁用
+     public int start(String account);//启用
+    
 }

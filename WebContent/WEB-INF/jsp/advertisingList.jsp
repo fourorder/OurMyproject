@@ -25,7 +25,7 @@
 <div style="height: 45%;width: 60%; margin:0 auto;">
 <form action="<%=path %>adver/list.action?page=tpage&number=1" method="post" >
 用户名：<input type="text" name="title"  placeholder="请输入内容" value="<%= request.getAttribute("title")==null?"":request.getAttribute("title")%>" style="width: 100px;height: 20px" >  
- 日期： <input type="text"  id="test1" onblur="check()" name="time" value="<%= request.getAttribute("time")==null?"":request.getAttribute("time")%>" style="width: 100px;height: 20px">
+ 日期： <input type="text"  id="test1" onchange="check()" name="time" value="<%= request.getAttribute("time")==null?"":request.getAttribute("time")%>" style="width: 100px;height: 20px">
 <input type="submit" value="查询" 	class="layui-btn layui-btn-normal" /> 
 <input type="button" value="配置广告" 	class="layui-btn layui-btn-normal" onclick="deploy()" /> 
 </form>
