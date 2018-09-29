@@ -170,10 +170,10 @@
                             <a href="">行业动态配置</a>
                         </dd>
                         <dd>
-                        <a href="infor/page.action" target="menuFrame">最新资讯配置</a>
+                        <a href="<%=path %>infor/inforPage.action?page=tpage&number=1" target="menuFrame">最新资讯配置</a>
                     </dd>
                         <dd>
-                            <a href="adver/list.action?page=tpage&number=1" target="menuFrame">广告设置</a>
+                            <a href="<%=path %>adver/list.action?page=tpage&number=1" target="menuFrame">广告设置</a>
                         </dd>
                     </dl>
                 </li>
@@ -201,7 +201,7 @@
     </div>
     <div class="layui-footer footer footer-demo" id="admin-footer">
         <div class="layui-main">
-            <p>2016 &copy;
+            <p>2018 &copy;
                 <a href="#">一站式服务平台</a> LGPL license
             </p>
         </div>

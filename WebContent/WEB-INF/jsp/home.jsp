@@ -21,7 +21,7 @@
 				<div class="width1180">
 					<span class="fl">您好，欢迎访问众包一站式服务平台
 					</span>
-					<span class="fr">
+					<span class="fr" id="fr1">
 						<!-- <a href="#" title="登录">登录</a>
 						<a href="#" title="注册">注册</a> -->
 						<a href="#" title="众包首页"><i class="o-home"></i>众包首页</a>
@@ -55,8 +55,9 @@
 							<li><a href="<%=path %>lighthouse/gotolighthouse.action?page=1" title="曝光台">曝光台<img src="<%=path%>images/hot.gif"></a></li>
 							<li><a href="<%=path %>skippage/gotosearchcredit.action" title="信用查询">信用查询<img src="<%=path%>images/hot.gif"></a></li>
 							<li><a href="<%=path %>introduction/getrule.action" title="规则介绍">规则介绍</a></li>
+							<li><a href="<%=path%>chat/gotochat.action?account=&msg=" title="聊天" target="_blank">聊天</a></li>
 							<!-- <li><a href="#" title="关于我们">关于我们</a></li> -->
-							<span class="fr"><img src="<%=path%>images/o-tel.gif"></span>
+							<span class="fr"><img src="<%=path%>images/o-tel.gif"></span>							
 						</ul>
 					</nav>
 				</div>
@@ -682,4 +683,58 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 	<!--尾部-->
 	
 </body>
+<script type="text/javascript">
+
+var websocket = null;  
+var username = '${user.userAccount}'; 
+/*   var username = "user"; */
+  
+/*       function online(){ */
+  //判断当前浏览器是否支持WebSocket  
+  if ('WebSocket' in window) { 
+  	
+     /*  websocket = new WebSocket("ws://" + document.location.host + "/WebChat/websocket/" + username + "/"+ _img);  */ 
+  	  websocket = new WebSocket("ws://" + document.location.host + "/Myproject/websocket/" + username); 
+  	/*  websocket = new WebSocket("ws://localhost:8080/Myproject/websocket"); */
+  } else {  
+      alert('当前浏览器 Not support websocket')  
+  }  
+  
+//接收到消息的回调方法  
+  websocket.onmessage = function(event) {  
+	/* var arr=event.data.split("|");
+	var text=arr[1];
+	touser=arr[0];
+	$("#touser").html(touser);
+	var leftContent = document.getElementById("leftContent");
+	var len = text.length;
+		var option1 = document.createElement("option");
+		option1.innerHTML = text;
+		option1.style.backgroundColor = "white";
+		option1.style.marginLeft = "10px";
+		option1.style.width = len * 15 + len*2 + "px";
+		leftContent.appendChild(option1); */
+		if(event.data!=null){
+			var arr=event.data.split("|");
+			var text=arr[1];
+			var touser=arr[0];
+			$("#fr1").append("<a href='<%=path%>chat/gotochat.action?account="+touser+"&msg="+text+"' title='有新消息'  target='_blank'><i class='o-contract'></i>有新消息</a>");
+		}
+		
+      
+  }  
+   
+//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。  
+  window.onbeforeunload = function() {  
+      closeWebSocket();  
+  }   
+
+//关闭WebSocket连接  
+function closeWebSocket() {  
+   websocket.close();  
+}  
+
+</script>
+
+
 </html>

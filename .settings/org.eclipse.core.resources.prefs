@@ -1,10 +1,8 @@
-=\=\=\=\=\=\=
-<<<<<<<=HEAD
->>>>>>>=branch 'master' of https\://github.com/fourorder/OurMyproject.git
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/jsp/informationList.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/lighthouse.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/rule.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/searchcredit.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/searchresult.jsp=UTF-8
+encoding//WebContent/onlinechat.jsp=UTF-8
 encoding/<project>=UTF-8

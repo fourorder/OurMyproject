@@ -130,7 +130,7 @@ UPDATE usertbl set stateid=2 WHERE useraccount=#{account}
 <if test='num == "1"'>
 UPDATE usertbl set stateid=1 WHERE useraccount=#{account}
 </if>
-</update> 
+</update>  
 <!-- 模糊分页所有雇主 -->
 <select id="employers" resultType="org.great.bean.UserBean">
 select * from (
@@ -146,6 +146,7 @@ and u.STATEID =#{state}
  where rownum &lt;= (#{page}*5))
  where rn &gt;= (#{page}*5-4)
 </select>
+
 <!-- 查询雇主总个数 -->
 <select id="countEmployers" resultType="java.lang.Integer">
 select count(*) from usertbl  where characterid=1
@@ -198,7 +199,7 @@ WHERE useraccount=#{userAccount}
 
 <!-- 插入故事 -->
 <insert id="insertStory" parameterType="org.great.bean.UserStoryBean">
-insert into userStorytbl values(SEQID.nextval,#{userStoryTitle},#{userStoryContent},#{userStoryTime},#{userAccount})
+insert into userStorytbl values(SEQID.nextval,#{userStoryTitle},#{userStoryContent},#{userStoryTime},#{userAccount},#{stateId},#{userStoryUrl},#{storyImg})
 </insert>
 
 <!--查询当前雇主是否故事 -->
@@ -208,7 +209,7 @@ select * from userStorytbl where useraccount=#{userAccount}
 
 <!--当前雇主存在故事 -->
 <update id="updateStory" parameterType="org.great.bean.UserStoryBean">
-UPDATE userStorytbl set userStoryTitle=#{userStoryTitle},userStoryContent=#{userStoryContent},userStoryTime=#{userStoryTime} where userAccount=#{userAccount}
+UPDATE userStorytbl set userStoryTitle=#{userStoryTitle},userStoryContent=#{userStoryContent},userStoryTime=#{userStoryTime},STORYIMG=#{storyImg} where userAccount=#{userAccount}
 </update>
 <!--雇主故事模糊分页 -->
 <select id="conditionQuery" resultType="org.great.bean.UserStoryBean">
@@ -260,7 +261,6 @@ UPDATE userStorytbl set userAccount=#{userAccount}
 </if>
 where userAccount=#{userAccount}
 </update>
-
 <select id="countFacilitator" resultType="org.great.bean.UserBean">
 select * from usertbl where characterId=2 and stateId=1
 
@@ -275,7 +275,6 @@ select * from usertbl where characterId=2 and stateId=1 and userName like #{user
 </select>
 <select id="countFacilitator4" parameterType="String" resultType="org.great.bean.UserBean">
 select * from usertbl where characterId=2 and stateId=2 and userName like #{userName}
-
 </select> 
 <update id="changeState" parameterType="java.lang.Integer">
 UPDATE usertbl set stateid=2 WHERE userId=#{userId}

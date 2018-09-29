@@ -49,4 +49,11 @@ public class CounselorImp implements CounselorBiz {
 		return coounselor.applyForOk(account);
 	}
 
+
+	@Override
+	public List<String> type() {
+		// TODO Auto-generated method stub
+		return coounselor.type();
+	}
+
 }

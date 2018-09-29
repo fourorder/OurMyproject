@@ -1,4 +1,3 @@
-
 package org.great.bean;
 
 import org.springframework.stereotype.Component;
@@ -59,13 +58,17 @@ public class UserStoryBean {
 	public void setUserStoryUrl(String userStoryUrl) {
 		this.userStoryUrl = userStoryUrl;
 	}
+
 	public String getStoryImg() {
 		return storyImg;
+	
+	
 	}
+
 	public void setStoryImg(String storyImg) {
 		this.storyImg = storyImg;
 	}			
 	
+	
 }
-
 

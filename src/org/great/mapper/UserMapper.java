@@ -23,11 +23,12 @@ public List<UserBean> serachBusiness(@Param("name")String name,
 public List<UserBean> businessNumber(@Param("name")String name);
 public UserBean employer(@Param("userid")String userid);
 public UserInfoBean userinfo(@Param("userid")String userid);
-
 public List<UserBean> employers(@Param("name")String name,@Param("page")int page,@Param("state")int state);
 public int delEmployers(@Param("account")String account,@Param("num")String num);//删除雇主
 public int countEmployers(@Param("name")String name,@Param("state")int state);//雇主总个数
-
+public List<UserBean> employers(@Param("name")String name,@Param("page")int page);
+public int delEmployers(@Param("account")String account);//删除雇主
+public int countEmployers();//雇主总个数
 public List<UserBean> countFacilitator();
 public List<UserBean> countFacilitator2();
 public List<UserBean> countFacilitator3(String userName);
@@ -37,6 +38,7 @@ public List<UserBean> login(String userAccount,String userPwd);
 public List<UserBean> getCredit();//得到低信誉用户
 public List<UserBean> userCredit(@Param("end")int end,@Param("start")int start);//分页查询低信誉用户
 public UserInfoBean searchCredit(@Param("username")String username);//查询用户信誉
+public void addUser(@Param(value="userAccount")String userAccount ,@Param(value="userPwd")String userPwd ,@Param(value="characterId")Integer characterId ,@Param(value="userName")String userName ,@Param(value="userTel")long userTel ,@Param(value="userIdentity")String userIdentity ,@Param(value="stateId")int stateId);
 public List<UserBean> updateInfo(String userAccount); //查询修改单个用户信息
 public int updateUser(UserBean userBean); //修改雇主用户
 public List<UserBean> selectAll();//查询总雇主

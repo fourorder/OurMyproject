@@ -9,51 +9,60 @@
         <script type="text/javascript" >
 
         var websocket = null;  
-        /* var username = localStorage.getItem("name"); */  
-        var username = "user";
+         
+      /*   var username = "user"; */
           
-        //判断当前浏览器是否支持WebSocket  
-        if ('WebSocket' in window) { 
-           /*  websocket = new WebSocket("ws://" + document.location.host + "/WebChat/websocket/" + username + "/"+ _img);  */ 
-        	/*  websocket = new WebSocket("ws://" + document.location.host + "/WebChat/websocket/" + username); */
-        	 websocket = new WebSocket("ws://localhost:8080/Myproject/websocket");
-        } else {  
-            alert('当前浏览器 Not support websocket')  
-        }  
+      function online(){
+    	  //判断当前浏览器是否支持WebSocket  
+          if ('WebSocket' in window) { 
+          	 var username = $("#fromuser").val() 
+             /*  websocket = new WebSocket("ws://" + document.location.host + "/WebChat/websocket/" + username + "/"+ _img);  */ 
+          	  websocket = new WebSocket("ws://" + document.location.host + "/Myproject/websocket/" + username); 
+          	/*  websocket = new WebSocket("ws://localhost:8080/Myproject/websocket"); */
+          } else {  
+              alert('当前浏览器 Not support websocket')  
+          }  
+    	  
+        //接收到消息的回调方法  
+          websocket.onmessage = function(event) {  
+              /* setMessageInnerHTML(event.data);  */
+              alert(event.data);
+          }  
+                   
+    	  
+      }
+        
           
-        //连接发生错误的回调方法  
+       /*  //连接发生错误的回调方法  
         websocket.onerror = function() {  
             setMessageInnerHTML("WebSocket连接发生错误");  
-        };  
+        }; */  
           
-        //连接成功建立的回调方法  
+       /*  //连接成功建立的回调方法  
         websocket.onopen = function() {  
             setMessageInnerHTML("WebSocket连接成功");  
         }  
-          
-        //接收到消息的回调方法  
-        websocket.onmessage = function(event) {  
-            setMessageInnerHTML(event.data); 
-            alert(event.data);
-        }  
-          
-        //连接关闭的回调方法  
-        websocket.onclose = function() {  
-            setMessageInnerHTML("WebSocket连接关闭");  
-        }  
-          
-        //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。  
-        window.onbeforeunload = function() {  
-            closeWebSocket();  
-        }  
-          
+           */
+           
+         
+           /* //连接关闭的回调方法  
+           websocket.onclose = function() {  
+               setMessageInnerHTML("WebSocket连接关闭");  
+           }  
+             
+           //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。  
+           window.onbeforeunload = function() {  
+               closeWebSocket();  
+           }   */
+      
         //关闭WebSocket连接  
         function closeWebSocket() {  
             websocket.close();  
         }  
 
         function send(){
-        	 websocket.send("{To:'"+$("#content").val()+"'}");        	
+        	 /* websocket.send("{To:'"+$("#content").val()+"'}"); */
+        	 websocket.send($("#fromuser").val()+"|"+$("#content").val()+"|"+$("#touser").val()); 
         	
         }
         
@@ -63,10 +72,10 @@
        <div class="container">
            <div calss="item">
            <span>ID:</span>
-           <input type="text" class="identity">
-           <button class="start-conn-btn" >链接</button>
+           <input type="text" class="identity" id="fromuser">
+           <button class="start-conn-btn" onclick="online()">链接</button>
            <span>toUser:</span>
-           <input type="text" class="to-user">
+           <input type="text" class="to-user" id="touser">
            </div>
            <div class="show-message">
            

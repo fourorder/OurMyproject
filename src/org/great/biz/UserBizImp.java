@@ -174,11 +174,6 @@ public boolean checkAccount(String userAccount) {
 	}
 
 }
-////得到低信誉用户
-//public List<UserBean> getCredit() {
-//	
-//	return userMapper.getCredit();
-//}
 //得到低信誉用户
 public List<List<Object>> userCredit(String page,String state){
 	List<Object> list=new ArrayList<Object>();
@@ -213,67 +208,15 @@ public List<List<Object>> userCredit(String page,String state){
 	return objects;
 }
 @Override
-public List<UserBean> countFacilitator() {
-	// TODO Auto-generated method stub
-	return userMapper.countFacilitator( );
-}
-@Override
-public List<UserBean> countFacilitator2() {
-	// TODO Auto-generated method stub
-	return userMapper.countFacilitator2( );
-}
-@Override
-public List<UserBean> countFacilitator3(String userName) {
-	// TODO Auto-generated method stub
-	 userName="%"+userName+"%";
-	return userMapper.countFacilitator3(userName);
-}
-@Override
-public List<UserBean> countFacilitator4(String userName) {
-	// TODO Auto-generated method stub
-	userName="%"+userName+"%";
-	return userMapper.countFacilitator4(userName );
-}
-
-
-@Override
-public List<UserBean> facilitator(String name, int page) {
-	// TODO Auto-generated method stub
-	if (name!=null) {
-		name="%"+name+"%";
-	}
-	return userMapper.facilitator(name,page);
-}
-
-
-
-@Override
-public void changeState(int userId,int stateId) {
-	// TODO Auto-generated method stub
-	if(stateId==1) {
-		userMapper.changeState(userId);
-	}else if(stateId==2) {
-		userMapper.changeState2(userId);
-	}else if(stateId==3) {
-		userMapper.changeState3(userId);
-	}
-	
-}
-
-
-@Override
-public void changeInfo(int userid, String userName, Long userTel, String userAccount, String userSex, String userMail,
-		String userIdentity, int userCredit, int userMoney, String userRegisterTime) {
-	// TODO Auto-generated method stub
-	userMapper.changeInfo(userid, userName, userTel, userAccount, userSex, userMail, userIdentity, userCredit, userMoney, userRegisterTime);
-
-}
-@Override
 public UserInfoBean searchCredit(String username) {
 	// TODO Auto-generated method stub
 	return userMapper.searchCredit(username);
 	
 }
+
+
+
+
 @Override
 public List<UserBean> updateInfo(String userAccount) {
 	// TODO Auto-generated method stub
@@ -395,6 +338,61 @@ public int updateOk(UserStoryBean usb) {
 }
 
 
+public List<UserBean> countFacilitator() {
+	// TODO Auto-generated method stub
+	return userMapper.countFacilitator( );
+}
+@Override
+public List<UserBean> countFacilitator2() {
+	// TODO Auto-generated method stub
+	return userMapper.countFacilitator2( );
+}
+@Override
+public List<UserBean> countFacilitator3(String userName) {
+	// TODO Auto-generated method stub
+	 userName="%"+userName+"%";
+	return userMapper.countFacilitator3(userName);
+}
+@Override
+public List<UserBean> countFacilitator4(String userName) {
+	// TODO Auto-generated method stub
+	userName="%"+userName+"%";
+	return userMapper.countFacilitator4(userName );
+}
+
+@Override
+public List<UserBean> facilitator(String name, int page) {
+	// TODO Auto-generated method stub
+	if (name!=null) {
+		name="%"+name+"%";
+	}
+	return userMapper.facilitator(name,page);
+}
+
+
+
+@Override
+public void changeState(int userId,int stateId) {
+	// TODO Auto-generated method stub
+	if(stateId==1) {
+		userMapper.changeState(userId);
+	}else if(stateId==2) {
+		userMapper.changeState2(userId);
+	}else if(stateId==3) {
+		userMapper.changeState3(userId);
+	}
+	
+}
+
+
+@Override
+public void changeInfo(int userid, String userName, Long userTel, String userAccount, String userSex, String userMail,
+		String userIdentity, int userCredit, int userMoney, String userRegisterTime) {
+	// TODO Auto-generated method stub
+	userMapper.changeInfo(userid, userName, userTel, userAccount, userSex, userMail, userIdentity, userCredit, userMoney, userRegisterTime);
+}
+
+
 @Override
 public List<UserBean> employers(String name, int page) {
 	// TODO Auto-generated method stub
@@ -404,6 +402,13 @@ public List<UserBean> employers(String name, int page) {
 
 @Override
 public int delEmployers(String account) {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+
+@Override
+public int countEmployers() {
 	// TODO Auto-generated method stub
 	return 0;
 }

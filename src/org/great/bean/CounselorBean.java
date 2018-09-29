@@ -6,21 +6,22 @@ public class CounselorBean {
 	private String counselorIntroduction;
 	private int counselorMoney;
 	private int auditState;
+	private String counselorImg;
+	private String serviceType;
 	public CounselorBean () {
 		super();
 	}
-	
-	
 
-	public CounselorBean(String userAccount, String counselorIntroduction, int counselorMoney, int auditState) {
+	public CounselorBean(String userAccount, String counselorIntroduction, int counselorMoney, int auditState,
+			String counselorImg, String serviceType) {
 		super();
 		this.userAccount = userAccount;
 		this.counselorIntroduction = counselorIntroduction;
 		this.counselorMoney = counselorMoney;
 		this.auditState = auditState;
+		this.counselorImg = counselorImg;
+		this.serviceType = serviceType;
 	}
-
-
 
 	public String getUserAccount() {
 		return userAccount;
@@ -56,6 +57,26 @@ public class CounselorBean {
 
 	public void setCounselorMoney(int counselorMoney) {
 		this.counselorMoney = counselorMoney;
+	}
+
+
+
+	public String getCounselorImg() {
+		return counselorImg;
+	}
+
+
+
+	public void setCounselorImg(String counselorImg) {
+		this.counselorImg = counselorImg;
+	}
+
+	public String getServiceType() {
+		return serviceType;
+	}
+
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
 	}
 	
 }
