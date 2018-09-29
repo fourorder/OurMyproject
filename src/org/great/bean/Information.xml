@@ -9,7 +9,7 @@
 	 select parametername from tbparameter where pid=300
 	</select>
 	<!-- 查询类型id -->
-	<select id="selectPid" resultType="java.lang.String">
+	<select id="selectPid" resultType="java.lang.Integer">
 	 select parameterid from tbparameter where pid=300 and parametername=#{paramenter}
 	</select>
 		<!-- 插入资讯 -->

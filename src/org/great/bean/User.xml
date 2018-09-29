@@ -173,6 +173,7 @@ and STATEID =#{state}
 <update id="delStory" parameterType="java.lang.String">
 UPDATE userStorytbl set stateid=1 where userAccount=#{userAccount}
 </update>
+
 <!--禁用雇主故事 -->
 <update id="forbiddenStory" parameterType="java.lang.String">
 UPDATE userStorytbl set enableDisableId=4 where userAccount=#{account}
@@ -181,6 +182,7 @@ UPDATE userStorytbl set enableDisableId=4 where userAccount=#{account}
 <update id="startStory" parameterType="java.lang.String">
 UPDATE userStorytbl set enableDisableId=3 where userAccount=#{account}
 </update>
+
 <!--查询单个雇主故事 -->
 <select id="updateOne" resultType="org.great.bean.UserStoryBean">
  select * from userStorytbl where  userAccount=#{userAccount}
