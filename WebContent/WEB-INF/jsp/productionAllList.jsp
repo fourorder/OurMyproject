@@ -65,8 +65,8 @@
                                             </div>
                                             <div class="ydc-group-input clearfix" style="width:100%; margin-bottom:20px;">
                                            <form  method="post" action="<%=path%>production/toProduction.action">
-                                                <input type="text" name="fieldName" id="fieldName" placeholder="请输入作品名字进行搜索" style="width:30.333%">
-                                                <input type="text" name="conditionName" id="conditionName" placeholder="请输入服务商名字进行搜索" style="width:30.333%">
+                                               <input type="text" name="fieldName" id="fieldName" placeholder="请输入作品名字进行搜索" style="width:25.333%" value=${fieldName }>
+                                               <input type="text" name="conditionName" id="conditionName" placeholder="请输入服务商名字进行搜索" style="width:25.333%"  value=${conditionName }>
                                                <input type="submit"  value="搜索"  class="ydc-group-button" style="width:10.333%" />
         							    </form>
         							       <!--   <button class="ydc-group-button">搜 索</button> -->
@@ -74,7 +74,9 @@
                                         </div>
                                        <%-- <a href="<%=path%>production/toManageProduction.action" >路径！！临时跳转，后期删掉，跳转进入服务商后台管理</a> --%>
 <h3><a href="<%=path%>powder/toFindCharacter.action"  >h临时跳转进入权限管理，后期删掉，路径！！</a></h3>
-                                
+<h3><a href="<%=path%>production/toAdminProductionManage.action"  >h临时跳转进入作品审核管理，后期删掉，路径！！</a></h3>
+<%--    <h3><a href="<%=path%>production/findBuyProduction.action"  >h临时跳转进入作品审核管理，后期删掉，路径！！</a></h3>
+        --%>                                 
                                         <div class="ydc-asset-img clearfix"   id="proList">
                                            <c:forEach items="${list}"  var="list" >
                                               <div class="ydc-asset-img-list">
@@ -96,7 +98,7 @@
                                         </div>
                                         <div class="ydc-pagination"  style="position:absolute; left:170px;">
                                            当前页<span id="currentPage" >${currentPage}</span>  
-总页数<span id="totalPages"  >${totalPages } </span>  
+											总页数<span id="totalPages"  >${totalPages } </span>  
                                                     <button class="ydc-previous-item-btn-medium" onclick="addPages('last')"  >
                                                         <span>上一页</span>
                                                     </button>
@@ -191,10 +193,10 @@
    	 
 
     	$("#proList").empty();
-    	
+    	//alert("currentPage="+$("#currentPage").text());
     	$.ajax({	
     		 url:"<%=path %>production/AddPages.action",
-    		 data:"currentPage="+${currentPage}+"&state="+state+"&totalPages="+${totalPages}+"&conditionName="+$("#conditionName").val()+"&fieldName="+$("#fieldName").val(),
+    		 data:"currentPage="+$("#currentPage").text()+"&state="+state+"&totalPages="+$("#totalPages").text()+"&conditionName="+$("#conditionName").val()+"&fieldName="+$("#fieldName").val(),
     		 dataType:"json",
     		 type:"post",
     		 success:function(redata){

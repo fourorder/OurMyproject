@@ -31,6 +31,9 @@ select * from usertbl where characterid='2' and username like #{name}
  </select>
 
 <!-- 个人中心 -->
+
+
+
 <select id="userinfo" resultMap="getUserInfo">
 select * from usertbl where userid = #{userid}
 </select>
@@ -93,6 +96,17 @@ select * from usertbl where useraccount = #{username}
 </association>
 
 </resultMap>
+
+
+<select id="user"
+  resultType="org.great.bean.UserBean" 
+>
+ 
+      select * from USERTBL where USERID=#{userid}
+
+</select>
+
+
 </mapper>
 
 

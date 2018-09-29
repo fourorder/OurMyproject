@@ -15,6 +15,7 @@ public interface ProductionBiz {
 	public void toIssueProduction(HttpServletRequest request
 			,String title,Integer  price,Integer className,String area2,MultipartFile file,int userId,MultipartFile productionFile);
 
+	// 模糊查询作品
   public ConditionBean findProductionList(ConditionBean conditionBean,HttpServletRequest request,String state);
 
 
@@ -27,4 +28,15 @@ public interface ProductionBiz {
 	
 	public List<ProductionBean> getProductionList();
 
+	// 作品管理 翻页 
+	 public ConditionBean toManageProductionList(ConditionBean conditionBean,HttpServletRequest request,String state);
+
+	 //查询作品审核状态
+	// public String toFindProductionAuditName(int auditState);
+	
+	 //编辑作品BIZ
+	  public void editProduction(HttpServletRequest request,Integer  proId,String title,Float  price,Integer className,String area2,MultipartFile file,MultipartFile productionFile);
+	 
+	 //已购买商品 
+	  public    ConditionBean     findBuyProduction(ConditionBean conditionBean,HttpServletRequest request,String state);
 }

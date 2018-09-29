@@ -6,8 +6,8 @@
  
 	<insert id="addProduction"  parameterType="org.great.bean.ProductionBean">
 	 
-insert into PRODUCTIONTBL (PRODUCTIONID,PRODUCTIONNAME,PARAMETERID,USERID,PRODUCTIONMONEY,PRODUCTIONPUBLISHTIME,PRODUCTIONIMAGE,PRODUCTIONFILE,PRODUCTIONDETAL) 
-values (seqid.nextval,#{productionName},#{parameterId},#{userId},#{productionMoney},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{productionImage},#{productionFile},#{productionDetal})
+insert into PRODUCTIONTBL (PRODUCTIONID,PRODUCTIONNAME,PARAMETERID,USERID,PRODUCTIONMONEY,PRODUCTIONPUBLISHTIME,PRODUCTIONIMAGE,PRODUCTIONFILE,PRODUCTIONDETAL,BUYCOUNT,AUDITSTATE) 
+values (seqid.nextval,#{productionName},#{parameterId},#{userId},#{productionMoney},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{productionImage},#{productionFile},#{productionDetal},0,902)
 	
 	
 </insert>
@@ -21,6 +21,7 @@ values (seqid.nextval,#{productionName},#{parameterId},#{userId},#{productionMon
 	 	
 	 	<if test="fieldName!=null"> and productionName like #{fieldName}</if>
 			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
+  order by PRODUCTIONID asc
   ) A WHERE ROWNUM &lt;=(#{currentPage}*#{eachPageCum}))  WHERE RN &gt;=(1+(#{currentPage}-1)*#{eachPageCum}) 
 	 
 	
@@ -76,4 +77,127 @@ select * from(select t.*,rownum rn from(select * from PRODUCTIONTBL where produc
 <select id="productionNumber" resultType="org.great.bean.ProductionBean" >
 select * from PRODUCTIONTBL where productionname like #{name}
 </select>
+
+<!-- 服务商作品管理  翻页 -->
+<select id="toManageProductionList" 
+	 resultType="org.great.bean.ProductionBean" 
+	 parameterType="org.great.bean.ConditionBean">
+ 
+	  SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (	
+	 	select * from PRODUCTIONTBL  where 1=1  and   userid  =#{userName}
+	 	
+	 	<if test="fieldName!=null"> and productionName like #{fieldName}</if>
+			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
+  ) A WHERE ROWNUM &lt;=(#{currentPage}*#{eachPageCum}))  WHERE RN &gt;=(1+(#{currentPage}-1)*#{eachPageCum}) 
+	 
+	
+		 </select>
+<!-- 服务商作品管理 计算分页 -->
+<select id="toManageAllProductionList" 
+	 resultType="org.great.bean.ProductionBean" 
+	 parameterType="org.great.bean.ConditionBean">
+ 
+	 
+	 	select * from PRODUCTIONTBL  where 1=1   and   userid  =#{userName}
+	 	
+	  <if test="fieldName!=null"> and productionName like #{fieldName}</if>
+			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
+	 
+	
+		 </select> 
+
+<!-- 查询作品的购买次数 -->
+<select id="findProductionBuyCount"
+ resultType="java.lang.Integer" 
+
+>
+
+select BUYCOUNT from PRODUCTIONTBL where PRODUCTIONID=#{id}
+
+</select>
+
+<!-- 设置购买作品次数 -->
+<update id="setProductionBuyCount">
+UPDATE PRODUCTIONTBL SET BUYCOUNT =#{buyCount} WHERE PRODUCTIONID =#{proId}
+
+</update>
+
+<!-- 查询作品审核状态 -->
+
+<select id="toFindProductionAuditName"
+ resultType="java.lang.String" 
+>
+
+select PARAMETERNAME from TBPARAMETER  where  PARAMETERID=#{auditState}
+</select>
+
+
+<!-- 编辑作品，更新语句 -->
+
+<update id="editProduction"
+ parameterType="org.great.bean.ProductionBean"
+>
+UPDATE PRODUCTIONTBL SET productionName =#{productionName} 
+	,parameterId=#{parameterId},productionMoney=#{productionMoney}
+	,auditState=902,productionDetal=#{productionDetal}
+	<if test="productionFile!=null"> , productionFile = #{productionFile}</if>
+	<if test="productionImage!=null"> , productionImage = #{productionImage}</if>
+WHERE PRODUCTIONID =#{productionId}
+
+</update>
+
+
+<delete id="delProduction">
+
+ delete from PRODUCTIONTBL  where PRODUCTIONID=#{proId}
+</delete>
+
+<!-- 查找分类名字 通过id -->
+<select id="findClassName"
+ resultType="java.lang.String" >
+
+  select  PARAMETERNAME from TBPARAMETER where PARAMETERID=#{classId}
+
+</select>
+
+<!-- 下架作品 -->
+
+<update id="adminToIllegalProduction">
+UPDATE PRODUCTIONTBL SET AUDITSTATE =904 WHERE PRODUCTIONID =#{proId}
+
+</update>
+
+<!-- 通过审核 -->
+<update id="adminToPsaaProduction">
+UPDATE PRODUCTIONTBL SET AUDITSTATE =903 WHERE PRODUCTIONID =#{proId}
+
+</update>
+
+<select id="findBuyProduction"
+	 resultType="org.great.bean.ProductionBean" 
+	  parameterType="org.great.bean.ConditionBean"
+	 >
+	 
+	   SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (	
+select * from PRODUCTIONTBL where PRODUCTIONID in (select PRODUCTIONID from PROANDUSER where USERID =#{userName})
+<if test="fieldName!=null"> and productionName like #{fieldName}</if>
+			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
+  order by PRODUCTIONID asc
+  ) A WHERE ROWNUM &lt;=(#{currentPage}*#{eachPageCum}))  WHERE RN &gt;=(1+(#{currentPage}-1)*#{eachPageCum}) 
+	 
+</select>
+
+<select id="findAllBuyProduction"
+	 resultType="org.great.bean.ProductionBean" 
+	  parameterType="org.great.bean.ConditionBean"
+	 >
+	 
+	   
+select * from PRODUCTIONTBL where PRODUCTIONID in (select PRODUCTIONID from PROANDUSER where USERID =#{userName})
+<if test="fieldName!=null"> and productionName like #{fieldName}</if>
+			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
+  order by PRODUCTIONID asc
+   
+</select>
+
 </mapper>

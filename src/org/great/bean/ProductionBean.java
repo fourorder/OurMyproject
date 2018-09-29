@@ -18,9 +18,9 @@ public class ProductionBean {
    private String productionImage;
 private String productionDetal;
 private int buyCount;
-   
-   
-   
+   private int auditState   ;
+   private String auditName;
+   private String className;
    
    
    
@@ -73,6 +73,44 @@ public ProductionBean(int productionId, String productionName, int parameterId, 
 	this.productionFile = productionFile;
 	this.productionImage = productionImage;
 }*/
+
+ 
+
+public int getAuditState() {
+	return auditState;
+}
+
+public ProductionBean(int productionId, String productionName, int parameterId, int userId, int classId, int stateId,
+		double productionMoney, String productionPublishTime, String productionFile, String productionImage,
+		String productionDetal, int buyCount, int auditState, String auditName) {
+	super();
+	this.productionId = productionId;
+	this.productionName = productionName;
+	this.parameterId = parameterId;
+	this.userId = userId;
+	this.classId = classId;
+	this.stateId = stateId;
+	this.productionMoney = productionMoney;
+	this.productionPublishTime = productionPublishTime;
+	this.productionFile = productionFile;
+	this.productionImage = productionImage;
+	this.productionDetal = productionDetal;
+	this.buyCount = buyCount;
+	this.auditState = auditState;
+	this.auditName = auditName;
+}
+
+public String getAuditName() {
+	return auditName;
+}
+
+public void setAuditName(String auditName) {
+	this.auditName = auditName;
+}
+
+public void setAuditState(int auditState) {
+	this.auditState = auditState;
+}
 
 public int getProductionId() {
 	return productionId;
@@ -157,6 +195,35 @@ public int getBuyCount() {
 
 public void setBuyCount(int buyCount) {
 	this.buyCount = buyCount;
+}
+
+public String getClassName() {
+	return className;
+}
+
+public void setClassName(String className) {
+	this.className = className;
+}
+
+public ProductionBean(int productionId, String productionName, int parameterId, int userId, int classId, int stateId,
+		double productionMoney, String productionPublishTime, String productionFile, String productionImage,
+		String productionDetal, int buyCount, int auditState, String auditName, String className) {
+	super();
+	this.productionId = productionId;
+	this.productionName = productionName;
+	this.parameterId = parameterId;
+	this.userId = userId;
+	this.classId = classId;
+	this.stateId = stateId;
+	this.productionMoney = productionMoney;
+	this.productionPublishTime = productionPublishTime;
+	this.productionFile = productionFile;
+	this.productionImage = productionImage;
+	this.productionDetal = productionDetal;
+	this.buyCount = buyCount;
+	this.auditState = auditState;
+	this.auditName = auditName;
+	this.className = className;
 }
 	 
   

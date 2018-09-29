@@ -3,6 +3,9 @@
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /* *
  *类名：AlipayConfig
  *功能：基础配置类
@@ -14,6 +17,8 @@ import java.io.IOException;
  */
 
 public class AlipayConfig {
+	/*HttpServletRequest request=new HttpServletRequest();
+	HttpSession session = request.getSession();*/
 	
 //↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
@@ -26,13 +31,18 @@ public class AlipayConfig {
   public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmnFVK4CZwzfICGlV2MXd8I3Pa/L8gD31N/sl80LJsg2u8EYUUFBprNeFqjJVKgTGAM/7fdFuH6QuGoDjIhcNqeg6oO/o8jPaPcdYgVTWBj5Brc1fxaEull3i90xINC+LpN257QCMzvCfpeHRFTLOJssKs1S8HDXVBJ6OD3Xl7QSvxt9bgUWdf4dZZsk/kvJilBELnzLFCKQJAKBNGsVTLEaPkAURlGbx+tiYNEkEyUmBLlGnaV7AzkHkHSnTm9TLKZwr9O1Qq9iynX3P8grEpx2vDLyehiLKggv5lp+5iAqNQLLMlqEA5EMzwmq2/bjg6Zq8tSD+2SYm+qaZp3wE6wIDAQAB";
   // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
 	//public static String notify_url = "http://127.0.0.1:8080/alipay.trade.page.pay-JAVA-UTF-8/notify_url.jsp";
-	public static String notify_url = "http://127.0.0.1:8080/Myproject/production/productionPayFinish.action";
+	/*public static String notify_url = "http://127.0.0.1:8080/Myproject/production/productionPayFinish.action";
 
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
 	//public static String return_url = "http://127.0.0.1:8080/alipay.trade.page.pay-JAVA-UTF-8/return_url.jsp";
 	public static String return_url = "http://127.0.0.1:8080/Myproject/production/productionPayFinish.action";
+*/
+  public static String notify_url = null;
 
-	
+	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+	//public static String return_url = "http://127.0.0.1:8080/alipay.trade.page.pay-JAVA-UTF-8/return_url.jsp";
+	public static String return_url =null;
+
 	// 签名方式
 	public static String sign_type = "RSA2";
 	

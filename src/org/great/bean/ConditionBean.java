@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  
 public class ConditionBean {// 条件bean
 
-	private float currentPage;// 当前页
+	private Integer currentPage;// 当前页
 	private float totalPages;// 总页数
 	private float recordCum;// 总数据条数
 	private float eachPageCum = 8;// 每页显示的数据条数
@@ -58,7 +58,7 @@ public class ConditionBean {// 条件bean
 
 
 
-	public ConditionBean(float currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
+	public ConditionBean(Integer currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
 			String conditionUable, String conditionIdentify, String conditionFile, String allField, int fieldId,
 			String fieldName, String timeStart, String timeEnd, int userName, int psyName, String uName, String pName,
 			String tableName, ArrayList<ProductionBean> proList) {
@@ -98,7 +98,7 @@ public class ConditionBean {// 条件bean
 
 
 
-	public ConditionBean(float currentPage, float eachPageCum, String conditionUable, String timeStart,
+	public ConditionBean(Integer currentPage, float eachPageCum, String conditionUable, String timeStart,
 			String timeEnd) {
 		super();
 		this.currentPage = currentPage;
@@ -118,7 +118,7 @@ public class ConditionBean {// 条件bean
 
 
 
-	public ConditionBean(float currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
+	public ConditionBean(Integer currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
 			String conditionUable, String conditionIdentify, String conditionFile, String allField, int fieldId,
 			String fieldName, String timeStart, String timeEnd) {
 		super();
@@ -166,7 +166,7 @@ public class ConditionBean {// 条件bean
 		this.conditionFile = conditionFile;
 	}
 
-	public ConditionBean(float currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
+	public ConditionBean(Integer currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
 			String conditionUable, String conditionIdentify, String conditionFile, String allField, int fieldId,
 			String fieldName, String timeStart, String timeEnd, int userName, int psyName) {
 		super();
@@ -189,7 +189,7 @@ public class ConditionBean {// 条件bean
 
 
 
-	public ConditionBean(float currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
+	public ConditionBean(Integer currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
 			String conditionUable, String conditionIdentify, String conditionFile) {
 		super();
 		this.currentPage = currentPage;
@@ -204,7 +204,7 @@ public class ConditionBean {// 条件bean
 
 	
 
-	public ConditionBean(float currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
+	public ConditionBean(Integer currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
 			String conditionUable, String conditionIdentify, String conditionFile, String allField) {
 		super();
 		this.currentPage = currentPage;
@@ -224,7 +224,7 @@ public class ConditionBean {// 条件bean
 		this.fieldName = fieldName;
 	}
 
-	public ConditionBean(float currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
+	public ConditionBean(Integer currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
 			String conditionUable, String conditionIdentify, String conditionFile, String allField, int fieldId,
 			String fieldName) {
 		super();
@@ -241,7 +241,7 @@ public class ConditionBean {// 条件bean
 		this.fieldName = fieldName;
 	}
 
-	public ConditionBean(float currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
+	public ConditionBean(Integer currentPage, float totalPages, float recordCum, float eachPageCum, String conditionName,
 			String conditionUable, String conditionIdentify, String conditionFile, String allField, int fieldId,
 			String fieldName, String timeStart, String timeEnd, int userName, int psyName, String uName, String pName,
 			String tableName) {
@@ -312,7 +312,7 @@ public class ConditionBean {// 条件bean
 		return currentPage;
 	}
 
-	public void setCurrentPage(float currentPage) {
+	public void setCurrentPage(Integer currentPage) {
 		this.currentPage = currentPage;
 	}
 

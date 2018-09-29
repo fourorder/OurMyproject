@@ -30,4 +30,5 @@ public interface PowerMapper {
 		public ArrayList<CharacterBean> confirmRoleUsing2(int id);*/
 		
 		
+		
 }

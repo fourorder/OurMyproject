@@ -25,5 +25,6 @@ public List<UserBean> checkAccount(String userAccount);
 public List<UserBean> getCredit();//得到低信誉用户
 public List<UserBean> userCredit(@Param("end")int end,@Param("start")int start);//分页查询低信誉用户
 public UserInfoBean searchCredit(@Param("username")String username);//查询用户信誉
-
+ 
+public UserBean user(Integer userid);
 }
