@@ -2,52 +2,135 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="org.great.mapper.UserMapper">
+	<!-- 炜炜 -->
+	<!-- 查询雇主信息 -->
+	<select id="employer" resultType="org.great.bean.UserBean">
+		select * from usertbl where
+		userid = #{userid}
+	</select>
+
+	<select id="serachEmployer" resultType="org.great.bean.UserBean">
+		select * from(select
+		t.*,rownum rn from(select * from usertbl where
+		characterid='1' and
+		username like #{name})t where rownum &lt;= #{end})
+		where rn &gt;=
+		#{start}
+	</select>
+	<select id="employerNumber" resultType="org.great.bean.UserBean">
+		select * from usertbl
+		where characterid='1' and username like #{name}
+	</select>
+	<select id="serachBusiness" resultType="org.great.bean.UserBean">
+		select * from(select
+		t.*,rownum rn from(select * from usertbl where
+		characterid='2' and
+		username like #{name})t where rownum &lt;= #{end})
+		where rn &gt;=
+		#{start}
+	</select>
+	<select id="businessNumber" resultType="org.great.bean.UserBean">
+		select * from usertbl
+		where characterid='2' and username like #{name}
+	</select>
+	<select id="login" parameterType="String" resultType="org.great.bean.UserBean">
+		select
+		characterTbl.characterName,stateTbl.stateName,userTbl.* from
+		userTbl,characterTbl,stateTbl where userAccount=#{0} and userPwd=#{1}
+		and userTbl.stateId=stateTbl.stateId and
+		userTbl.characterId=characterTbl.characterId
+	</select>
+	<insert id="addUser">
+		insert into
+		userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId,userRegisterTime,userMoney)
+		values
+		(SEQID.nextval,#{userAccount},#{userPwd},#{characterId},#{userName},#{userTel},#{userIdentity},#{stateId},#{userRegisterTime},0)
+	</insert>
+	<select id="checkAccount" parameterType="String"
+		resultType="org.great.bean.UserBean">
+		select * from userTbl where userAccount=#{userAccount}
+	</select>
+	<!-- 查询低信誉用户数 -->
+	<select id="getCredit" resultType="org.great.bean.UserBean">
+		select * from usertbl where
+		usercredit &lt; 60 and CHARACTERID != 3
+	</select>
+	<!-- 查询用户信誉 -->
+	<select id="searchCredit" resultMap="userInfo">
+		select * from usertbl where
+		useraccount = #{username}
+	</select>
+	<resultMap type="org.great.bean.UserInfoBean" id="userInfo">
+
+		<association property="characterBean" column="characterid"
+			javaType="org.great.bean.CharacterBean" select="getCharacter">
+		</association>
+
+	</resultMap>
+	<!-- 佳诚 -->
+	<!-- 个人中心 -->
+	<select id="userinfo" resultMap="getUserInfo">
+		select * from usertbl where
+		userid = #{userid}
+	</select>
+	<select id="getStateName" parameterType="org.great.bean.UserInfoBean"
+		resultType="org.great.bean.StateBean">
+		select * from statetbl where stateid=#{stateid}
+	</select>
+	<select id="getCharacter" parameterType="org.great.bean.UserInfoBean"
+		resultType="org.great.bean.CharacterBean">
+		select * from charactertbl where characterid =
+		#{characterid}
+	</select>
+	<resultMap type="org.great.bean.UserInfoBean" id="getUserInfo">
+
+		<association property="stateBean" column="stateid"
+			javaType="org.great.bean.StateBean" select="getStateName">
+		</association>
+
+		<association property="characterBean" column="characterid"
+			javaType="org.great.bean.CharacterBean" select="getCharacter">
+		</association>
+	</resultMap>
+	<!-- 修改用户资料 -->
+	<update id="updateUserInfo" parameterType="java.lang.String">
+		UPDATE usertbl
+		<set>
+			<if test="userName!=null">
+				username=#{userName},
+			</if>
+			<if test="userProfile!=null">
+				userProfile=#{userProfile},
+			</if>
+			<if test="userIdentity!=null">
+				userIdentity=#{userIdentity},
+			</if>
+			<if test="userTel!=null">
+				userTel=#{userTel},
+			</if>
+			<if test="userMail!=null">
+				userMail=#{userMail},
+			</if>
+			<if test="userHead!=null and userHead!=''">
+				userHead=#{userHead}
+			</if>
+		</set>
+		where userid = #{userId}
+	</update>
 	
-<!-- 查询雇主信息 -->
-<select id="employer" resultType="org.great.bean.UserBean">
-select * from usertbl where userid = #{userid}
-</select>
-<select id="serachEmployer" resultType="org.great.bean.UserBean">
-select * from(select t.*,rownum rn from(select * from usertbl where characterid='1' and username like #{name})t where rownum &lt;= #{end}) where rn &gt;= #{start}
-</select>
-<select id="employerNumber" resultType="org.great.bean.UserBean">
-select * from usertbl where characterid='1' and username like #{name}
-</select>
-<select id="serachBusiness" resultType="org.great.bean.UserBean" >
-select * from(select t.*,rownum rn from(select * from usertbl where characterid='2' and username like #{name})t where rownum &lt;= #{end}) where rn &gt;= #{start}
-</select>
-<select id="businessNumber" resultType="org.great.bean.UserBean">
-select * from usertbl where characterid='2' and username like #{name}
-</select>
-<select id="login"  parameterType="String" resultType="org.great.bean.UserBean" >
-	 	select characterTbl.characterName,stateTbl.stateName,userTbl.* from userTbl,characterTbl,stateTbl where userAccount=#{0} and userPwd=#{1} and userTbl.stateId=stateTbl.stateId and userTbl.characterId=characterTbl.characterId  
- </select>
-
- <select id="checkAccount" parameterType="String" resultType="org.great.bean.UserBean">
-         select * from userTbl where userAccount=#{userAccount}
- </select>
-
-<!-- 个人中心 -->
-<select id="userinfo" resultMap="getUserInfo">
-select * from usertbl where userid = #{userid}
-</select>
-<select id="getStateName" parameterType="org.great.bean.UserInfoBean" resultType="org.great.bean.StateBean">
-select * from statetbl where stateid=#{stateid}
-</select>
-<select id="getCharacter" parameterType="org.great.bean.UserInfoBean" resultType="org.great.bean.CharacteBean">
-select * from charactertbl where characterid = #{characterid}
-</select>
-
-<resultMap type="org.great.bean.UserInfoBean" id="getUserInfo">
-
-<association property="stateBean" column="stateid" javaType="org.great.bean.StateBean" select="getStateName">
-</association>
-
-	 <association property="characteBean" column="characterid" javaType="org.great.bean.CharacteBean" select="getCharacter">
-</association>
-</resultMap>
-	
- 
+	<!-- 俱锋 -->
+<!-- 删除雇主 -->
+<update id="delEmployers" parameterType="java.lang.String">
+<if test='num == "3"'>
+UPDATE usertbl set stateid=3 WHERE useraccount=#{account}
+</if>
+<if test='num == "2"'>
+UPDATE usertbl set stateid=2 WHERE useraccount=#{account}
+</if>
+<if test='num == "1"'>
+UPDATE usertbl set stateid=1 WHERE useraccount=#{account}
+</if>
+</update>  
 <!-- 模糊分页所有雇主 -->
 <select id="employers" resultType="org.great.bean.UserBean">
 select * from (
@@ -63,21 +146,6 @@ and u.STATEID =#{state}
  where rownum &lt;= (#{page}*5))
  where rn &gt;= (#{page}*5-4)
 </select>
-
-
-<!-- 删除雇主 -->
-<update id="delEmployers" parameterType="java.lang.String">
-<if test='num == "3"'>
-UPDATE usertbl set stateid=3 WHERE useraccount=#{account}
-</if>
-<if test='num == "2"'>
-UPDATE usertbl set stateid=2 WHERE useraccount=#{account}
-</if>
-<if test='num == "1"'>
-UPDATE usertbl set stateid=1 WHERE useraccount=#{account}
-</if>
-
-</update>
 
 
 <!-- 查询雇主总个数 -->
@@ -173,16 +241,6 @@ and STATEID =#{state}
 <update id="delStory" parameterType="java.lang.String">
 UPDATE userStorytbl set stateid=1 where userAccount=#{userAccount}
 </update>
-
-<!--禁用雇主故事 -->
-<update id="forbiddenStory" parameterType="java.lang.String">
-UPDATE userStorytbl set enableDisableId=4 where userAccount=#{account}
-</update>
-<!--启用雇主故事 -->
-<update id="startStory" parameterType="java.lang.String">
-UPDATE userStorytbl set enableDisableId=3 where userAccount=#{account}
-</update>
-
 <!--查询单个雇主故事 -->
 <select id="updateOne" resultType="org.great.bean.UserStoryBean">
  select * from userStorytbl where  userAccount=#{userAccount}
@@ -202,11 +260,60 @@ UPDATE userStorytbl set userAccount=#{userAccount}
 <if test="stateId != null and stateId !=''">
   ,stateId=#{stateId}
 </if>
-<if test="storyImg != null and storyImg !=''">
-  ,stateId=#{stateId}
-</if>
 where userAccount=#{userAccount}
 </update>
+<select id="countFacilitator" resultType="org.great.bean.UserBean">
+select * from usertbl where characterId=2 and stateId=1
+
+</select>
+<select id="countFacilitator2"  resultType="org.great.bean.UserBean">
+select * from usertbl where characterId=2 and stateId=2
+
+</select>  
+<select id="countFacilitator3" parameterType="String" resultType="org.great.bean.UserBean">
+select * from usertbl where characterId=2 and stateId=1 and userName like #{userName}
+
+</select>
+<select id="countFacilitator4" parameterType="String" resultType="org.great.bean.UserBean">
+select * from usertbl where characterId=2 and stateId=2 and userName like #{userName}
+</select> 
+<update id="changeState" parameterType="java.lang.Integer">
+UPDATE usertbl set stateid=2 WHERE userId=#{userId}
+</update>
+<update id="changeState2" parameterType="java.lang.Integer">
+UPDATE usertbl set stateid=1 WHERE userId=#{userId}
+</update>
+<update id="changeState3" parameterType="java.lang.Integer">
+UPDATE usertbl set stateid=3 WHERE userId=#{userId}
+</update>
+<update id="changeInfo" >
+UPDATE usertbl set userName=#{userName},userTel=#{userTel},userAccount=#{userAccount},userSex=#{userSex},userMail=#{userMail},userIdentity=#{userIdentity},userCredit=#{userCredit},userMoney=#{userMoney},userRegisterTime=#{userRegisterTime} WHERE userId=#{userId}
+</update>
+<select id="facilitator" resultType="org.great.bean.UserBean">
+select * from (
+select c.*,rownum rn from (
+select u.*,c.charactername,s.stateName from usertbl u,characterTbl c,stateTbl s where  u.CharacterId=c.CharacterId and u.CharacterId=2 and u.stateId=s.stateId and u.stateId!=3
+<if test="name!= null ">
+and u.username like #{name}
+</if>
+ ) c 
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= (#{page}*5-4)
+</select>
+<!--禁用雇主故事 -->
+<update id="forbiddenStory" parameterType="java.lang.String">
+UPDATE userStorytbl set enableDisableId=4 where userAccount=#{account}
+</update>
+<!--启用雇主故事 -->
+<update id="startStory" parameterType="java.lang.String">
+UPDATE userStorytbl set enableDisableId=3 where userAccount=#{account}
+</update>
+<select id="user"
+  resultType="org.great.bean.UserBean" 
+>
+ 
+      select * from USERTBL where USERID=#{userid}
+
+</select>
 
 </mapper>
-

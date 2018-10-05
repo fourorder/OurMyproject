@@ -22,7 +22,7 @@
 
 </head>
 <body>
-<div style="height: 45%;width: 60%; margin:0 auto;">
+<div style="height: 45%;width: 85%; margin:0 auto;">
 <form action="<%=path %>adver/list.action?page=tpage&number=1" method="post" >
 用户名：<input type="text" name="title"  placeholder="请输入内容" value="<%= request.getAttribute("title")==null?"":request.getAttribute("title")%>" style="width: 100px;height: 20px" >  
  日期： <input type="text"  id="test1" onchange="check()" name="time" value="<%= request.getAttribute("time")==null?"":request.getAttribute("time")%>" style="width: 100px;height: 20px">
@@ -30,11 +30,7 @@
 <input type="button" value="配置广告" 	class="layui-btn layui-btn-normal" onclick="deploy()" /> 
 </form>
 <table class="layui-table">
-  <colgroup>
-    <col width="150">
-    <col width="200">
-    <col>
-  </colgroup>
+ 
   <thead>
     <tr>
       <th>标题</th>
@@ -42,8 +38,8 @@
       <th>时间</th>
        <th>地址</th>
         <th>图片</th>
-         <th>序号</th>
-         <th>操作</th>
+         <th width="50">序号</th>
+         <th width="150">操作</th>
     </tr> 
   </thead>
   <tbody>
@@ -61,10 +57,11 @@
  </tr>
  </c:forEach>
 <tr>
-   <td colspan="3"><a class="layui-btn layui-btn-sm" href="<%=path %>adver/list.action?page=tpage&number=${num}&title=${title}&time=${time}">上一页</a></td>
-   <td ><a>当前页：${num}&nbsp;&nbsp;&nbsp;总页数：${countPage}</a></td>
-   <td> <input type="text" name="skip" id="skip" style="width: 30px"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();">&nbsp;&nbsp;<a onclick="skip()"  class="layui-btn layui-btn-xs">转</a></td>
-    <td colspan="2"><a class="layui-btn layui-btn-sm" href="<%=path %>adver/list.action?page=npage&number=${num}&title=${title}&time=${time}">下一页</a></td>
+ 
+   <td colspan="7"><a>当前页：${num}&nbsp;&nbsp;&nbsp;总页数：${countPage}</a>
+   <input type="text" name="skip" id="skip" style="width: 30px"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();">&nbsp;&nbsp;<a onclick="skip()"  class="layui-btn layui-btn-xs">转</a>
+     <a class="layui-btn layui-btn-sm" href="<%=path %>adver/list.action?page=tpage&number=${num}&title=${title}&time=${time}">上一页</a>
+    <a class="layui-btn layui-btn-sm" href="<%=path %>adver/list.action?page=npage&number=${num}&title=${title}&time=${time}">下一页</a></td>
    </tr>
 </tbody>
 </table>

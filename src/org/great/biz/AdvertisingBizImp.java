@@ -23,6 +23,9 @@ public class AdvertisingBizImp implements AdvertisingBiz {
 		// TODO Auto-generated method stub
 		return advertisingMapper.selectAdvertising(num);
 	}
+	public AdvertisingBean goToAdver(int num) {
+		return advertisingMapper.getAdver(num);
+	}
 
 	@Override
 	public int insertAdvertising(AdvertisingBean ab) {
@@ -73,6 +76,11 @@ public class AdvertisingBizImp implements AdvertisingBiz {
 	public int updateSerial(int num) {
 		// TODO Auto-generated method stub
 		return advertisingMapper.updateSerial(num);
+	}
+	@Override
+	public List<AdvertisingBean> getAllAdver() {
+		// TODO Auto-generated method stub
+		return advertisingMapper.getAllAdver();
 	}
 
 	

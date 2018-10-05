@@ -1,5 +1,8 @@
 package org.great.bean;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class InformationBean {
     private int informationId;
 	private String informationTitle;
@@ -12,15 +15,6 @@ public class InformationBean {
 	public InformationBean() {
 		super();
 	}
-	
-	
-
-
-
-  
-
-
-
 public InformationBean(int informationId, String informationTitle, String informationContent,
 			String informationPublishTime, String informationAddress, int parameterId, String informationImg,
 			int stateId) {
@@ -35,29 +29,13 @@ public InformationBean(int informationId, String informationTitle, String inform
 		this.stateId = stateId;
 	}
 
-
-
-
-
-
-
-
-
 public int getInformationId() {
 	return informationId;
 }
 
-
-
-
-
 public void setInformationId(int informationId) {
 	this.informationId = informationId;
 }
-
-
-
-
 
 public String getInformationTitle() {
 		return informationTitle;
@@ -83,45 +61,28 @@ public String getInformationTitle() {
 	public void setInformationAddress(String informationAddress) {
 		this.informationAddress = informationAddress;
 	}
+
 	public int getParameterId() {
 		return parameterId;
 	}
-
-
-
-
 
 	public void setParameterId(int parameterId) {
 		this.parameterId = parameterId;
 	}
 
-
-
-
-
 	public String getInformationImg() {
 		return informationImg;
 	}
 
-
 	public void setInformationImg(String informationImg) {
 		this.informationImg = informationImg;
 	}
+		public int getStateId() {
+			return stateId;
+		}
+		public void setStateId(int stateId) {
+			this.stateId = stateId;
 
-
-
-
-
-	public int getStateId() {
-		return stateId;
-	}
-
-
-
-
-
-	public void setStateId(int stateId) {
-		this.stateId = stateId;
 	}
 	
 }

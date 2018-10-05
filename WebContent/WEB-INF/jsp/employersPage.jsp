@@ -55,8 +55,6 @@
           <th>地址</th>
            <th>信用分</th>
             <th>余额</th>
-             <th>状态</th>
-            <th>角色Id</th>
             <th>注册时间</th>
              <th>启用/禁用</th>
              <th>操作</th>
@@ -74,21 +72,27 @@
    <td>${fund.userAddress}</td>
     <td>${fund.userCredit}</td>
      <td>${fund.userMoney}</td>
-      <td>${fund.stateId}</td>
-      <td>${fund.characterId}</td>
        <td>${fund.userRegisterTime}</td>
        <c:if test="${fund.stateId  eq 1}">
+      
        <td><a class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" href="<%=path %>employers/operation.action?operation=forbidden&account=${fund.userAccount}&number=1">禁用</a></td>
+       <td> <a class="layui-btn layui-btn-sm layui-btn-danger " onclick="firm()">删除</a>
+       <a class="layui-btn layui-btn-sm "  href="<%=path %>employers/update.action?account=${fund.userAccount}" >修改</a>
+       </td>
        </c:if>
        <c:if test="${fund.stateId  eq 2}">
        <td><a class="layui-btn layui-btn-sm layui-btn-radius " href="<%=path %>employers/operation.action?operation=start&account=${fund.userAccount}&number=1" >启用</a></td>
+      <td><a class="layui-btn layui-btn-sm layui-btn-danger "  id="test">删除</a>
+       <a class="layui-btn layui-btn-sm "  href="<%=path %>employers/update.action?account=${fund.userAccount}" >修改</a>
+       </td>
        </c:if>
         <c:if test="${fund.stateId  eq 3}">
        <td><a class="layui-btn layui-btn-sm layui-btn-radius  layui-btn-disabled" name="state">已删除</a></td>
-       </c:if>
-       <td><a class="layui-btn layui-btn-sm layui-btn-danger"  href="<%=path %>employers/operation.action?operation=del&account=${fund.userAccount}&number=1" onclick="return firm()">删除</a>
-       <a class="layui-btn layui-btn-sm"  href="<%=path %>employers/update.action?account=${fund.userAccount}" >修改</a>
+        <td><a class="layui-btn layui-btn-sm layui-btn-danger layui-btn-disabled"  id="test">删除</a>
+       <a class="layui-btn layui-btn-sm layui-btn-disabled"  href="<%=path %>employers/update.action?account=${fund.userAccount}" >修改</a>
        </td>
+       </c:if>
+      
   </tr>
   </c:forEach>
    <tr>
@@ -96,7 +100,6 @@
    <td ><a>当前页：${num}&nbsp;&nbsp;&nbsp;总页数：${countPage}</a></td>
   <td> <input type="text" name="skip" id="skip" style="width: 30px"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();">&nbsp;&nbsp;<a onclick="skip()"  class="layui-btn layui-btn-xs">转</a></td>
     <td colspan="6"><a class="layui-btn layui-btn-sm" href="<%=path %>employers/page.action?page=npage&number=${num}&name=${username}&ordinal=${state}"  id="npage">下一页</a></td>
-
    </tr>
   </tbody>
 </table>
@@ -110,6 +113,28 @@ layui.use(['form','layer','laydte'], function(){
 	  var layer=layui.layer;
 	  var laydate=layui.laydate;
 	  
+	  layer.open({     
+		  type:1,     
+		  content:$("#test"),    
+		  btn:['确定','取消'],    
+		  yes:function(index,layero)      
+		  {         
+			  //index为当前层索引           
+			  //layero 为 弹出层对象      
+			  //在回调函数末尾添加 “return false”可以禁止点击该按钮关闭弹出层         
+			  return false;     
+			  },         
+			  btn2:function(index,layero){
+				  //按钮二回到          
+				  return false;    
+				  },       
+				 
+					  cancel:function(){
+						  //右上角关闭毁回调       
+						  //return false;   
+						  }   
+					  })
+
 	});
 function skip() {
     var number=$("#skip").val();
@@ -125,7 +150,9 @@ function firm() {
     	 return false;
     }
 
+    
 }
+
 </script>
 
 </body>

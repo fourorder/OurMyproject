@@ -26,8 +26,8 @@
 <option value="0">未删除</option>
 <option value="1">已删除</option>
 </select>
-<button  style="width:70px;height: 30px" onclick="sstate()">查询</button>
-<input type="button" value="配置咨询" 	class="layui-btn layui-btn-normal" onclick="deploy()" /> 
+<button  style="width:70px;height: 30px" onClick="sstate()">查询</button>
+<input type="button" value="配置咨询" 	class="layui-btn layui-btn-normal" onClick="deploy()" /> 
 <table class="layui-table" >
 <thead>
  <tr>
@@ -53,7 +53,7 @@
 <c:if test="${fund.stateId  eq 0}">
        <td>未删除</td>
        <td>
-<a onclick="return firm()" class="layui-btn layui-btn-sm layui-btn-danger" href="<%=path%>infor/delInfor.action?inforId=${fund.informationId}">删除</a>&nbsp;&nbsp;
+<a onClick="return firm()" class="layui-btn layui-btn-sm layui-btn-danger" href="<%=path%>infor/delInfor.action?inforId=${fund.informationId}">删除</a>&nbsp;&nbsp;
 <a class="layui-btn layui-btn-sm" href="<%=path%>infor/updateInfor.action?inforId=${fund.informationId}">修改</a>
 </td>
       </c:if>
@@ -67,8 +67,8 @@
 </tbody>
 <tr>
 <td colspan="6">当前页<span id="num">${num}</span>总页数<span id="totalPages">${totalPages}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="button" value="上一页" onclick="page('tpage')">&nbsp;&nbsp;
-<input type="button" value="下一页" onclick="page('npage')">
+<input type="button" value="上一页" onClick="page('tpage')">&nbsp;&nbsp;
+<input type="button" value="下一页" onClick="page('npage')">
 </td>
 </tr>
 

@@ -451,6 +451,14 @@
     background: -moz-linear-gradient(top, #e1e1e1, #fff);
     font-size: 16px;
 }
+.ydc-tabPanel-release .hit1 {
+    border-bottom: 2px solid #04B6E9;
+    cursor: pointer;
+    color: #04B6E9;
+    background: none;
+    background: -moz-linear-gradient(top, #e1e1e1, #fff);
+    font-size: 16px;
+}
 
 .ydc-tabPanel-release ul li {
     font-size: 16px;
@@ -875,6 +883,7 @@
     height: 95px;
     width: 133px;
     margin: 20px;
+    background:#FFFFFF;
 }
 
 .ydc-group-table-item-img img{
@@ -981,7 +990,7 @@
     text-align: center;
 }
 .ydc-asset-img-list-img{
-    width: 100%;
+    width: 200px;
     height: 217px;
     vertical-align: middle;
     line-height: 217px;

@@ -2,12 +2,16 @@ package org.great.biz;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
 import org.great.bean.AdvertisingBean;
 import org.great.bean.UserBean;
 import org.great.bean.UserInfoBean;
+import org.springframework.web.multipart.MultipartFile;
+
 import org.great.bean.UserStoryBean;
+
 
 
 public interface UserBiz {
@@ -32,15 +36,21 @@ public interface UserBiz {
 	public int updateOk(UserStoryBean usb); //确认修改故事
 	public List<UserBean> employers(String name,int page);//分页模糊查找
 	public List<UserBean> facilitator(String name,int page);
+
     public int forbiddenStory(String account);//禁用故事
     public int startStory(String account);//启用故事
+
 	public int delEmployers(String account); //删除雇主
+	public boolean checkAccount(String userAccount);
+	public List<List<Object>> userCredit(String page,String state);
+	public UserInfoBean searchCredit(String username);
+	//修改用户资料
+	public boolean userInfoEdit (HttpServletRequest request,String userId,String userProfile,String userName,String userIdentity,String userTel,String userMail,MultipartFile file);	
 	public int countEmployers();//查询雇主的总个数；
 	public List<UserBean> countFacilitator();
 	public List<UserBean> countFacilitator2();
 	public List<UserBean> countFacilitator3(String userName);
 	public List<UserBean> countFacilitator4(String userName);
-	public boolean checkAccount(String userAccount);
 	public void changeState(int userId,int stateId);
 	public void changeInfo(@Param("userid")int userid,@Param("userName")String userName, @Param("userTel")Long userTel,@Param("userAccount")String userAccount,@Param("userSex")String userSex,@Param("userMail")String userMail,@Param("userIdentity")String userIdentity,@Param("userCredit")int userCredit,@Param("userMoney")int userMoney,@Param("userRegisterTime")String userRegisterTime);
 

@@ -44,7 +44,9 @@ $(document).ready(function () {
 </head>
 <body>
 <div align="center" style="height: 90%;width: 50%;margin:0 auto;background-color: #eff4d8; text-align: left"  >
+
     <form class="layui-form" action="<%=path %>adver/advertising.action" method="post" onsubmit="return CheckPost()" enctype="multipart/form-data" >
+
      <div class="layui-form-item">
             <label class="layui-form-label">请选择位置</label>
             <div class="layui-input-block">

@@ -3,7 +3,6 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="org.great.mapper.InformationMapper">
 	
-	
 	<!-- 查询资讯类型 -->
 	<select id="informationType" resultType="java.lang.String">
 	 select parametername from tbparameter where pid=300
@@ -14,9 +13,17 @@
 	</select>
 		<!-- 插入资讯 -->
 	 <insert id="setInformation" parameterType="org.great.bean.InformationBean">
-		insert into informationTbl values(SEQID.nextval,#{informationTitle},#{informationContent},#{informationPublishTime},#{informationAddress},#{parameterId},#{informationImg})
+		insert into informationTbl values(SEQID.nextval,#{informationTitle},#{informationContent},#{informationPublishTime},#{informationAddress},#{parameterId},#{informationImg},#{stateId})
 	</insert>  
-	 <!-- 查询总条数-->
+<select id="getInformation" resultType="org.great.bean.InformationBean">
+select * from informationTbl where parameterid = #{parameterid}
+
+</select>	
+
+<select id="getInforList" resultType="org.great.bean.InformationBean">
+select * from(select t.*,rownum rn from(select * from informationTbl where parameterid = #{parameterid})t where rownum &lt;= #{end}) where rn &gt;= #{start}
+</select>
+<!-- 查询总条数-->
 	 <select  id="countInfor"  resultType="java.lang.Integer">
 	 select count(*) from informationTbl where informationid=informationid
 	  <if test="state !=7">

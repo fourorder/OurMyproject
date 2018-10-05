@@ -1,26 +1,22 @@
 package org.great.bean;
 
-public class CharacterBean {
 
+import org.springframework.stereotype.Component;
+
+@Component
+public class CharacterBean {
 	private int characterId;
 	private String characterName;
 	private String characterTime;
 	private String characterIntro;
-	
-	
-	
-	
-	
-	
 	public CharacterBean() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	public CharacterBean(int characterId, String characterName, String characterTime, String characterIntro) {
+	public CharacterBean(int characterId, String characterName) {
 		super();
 		this.characterId = characterId;
 		this.characterName = characterName;
-		this.characterTime = characterTime;
-		this.characterIntro = characterIntro;
 	}
 	public int getCharacterId() {
 		return characterId;
@@ -46,8 +42,6 @@ public class CharacterBean {
 	public void setCharacterIntro(String characterIntro) {
 		this.characterIntro = characterIntro;
 	}
-	
-	 
-	
+
 	
 }

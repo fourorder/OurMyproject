@@ -7,12 +7,17 @@ import org.great.bean.UserBean;
 import org.great.bean.UserInfoBean;
 import org.great.bean.UserStoryBean;
 import org.springframework.stereotype.Repository;
+
 @Repository
+
 public interface UserMapper {
+			
+public void updateUserInfo(@Param("userId") String userId, @Param("userProfile") String userProfile,
+		@Param("userName") String userName, @Param("userIdentity") String userIdentity,
+		@Param("userTel") String userTel, @Param("userMail") String userMail, @Param("userHead")String userHead);//修改用户资料
 public List<UserBean> serachEmployer(@Param("name")String name,
 		@Param("end")int end,@Param("start")int start);
 public List<UserBean> employerNumber(@Param("name")String name);
-
 public List<UserBean> serachBusiness(@Param("name")String name,
 		@Param("end")int end,@Param("start")int start);
 public List<UserBean> businessNumber(@Param("name")String name);
@@ -29,11 +34,12 @@ public List<UserBean> countFacilitator2();
 public List<UserBean> countFacilitator3(String userName);
 public List<UserBean> countFacilitator4(String userName);
 public List<UserBean> facilitator(@Param("name")String name,@Param("page")int page);
-
 public List<UserBean> login(String userAccount,String userPwd);
+public List<UserBean> getCredit();//得到低信誉用户
+public List<UserBean> userCredit(@Param("end")int end,@Param("start")int start);//分页查询低信誉用户
+public UserInfoBean searchCredit(@Param("username")String username);//查询用户信誉
 public void addUser(@Param(value="userAccount")String userAccount ,@Param(value="userPwd")String userPwd ,@Param(value="characterId")Integer characterId ,@Param(value="userName")String userName ,@Param(value="userTel")long userTel ,@Param(value="userIdentity")String userIdentity ,@Param(value="stateId")int stateId);
 public List<UserBean> updateInfo(String userAccount); //查询修改单个用户信息
-
 public int updateUser(UserBean userBean); //修改雇主用户
 public List<UserBean> selectAll();//查询总雇主
 public int insertStory(UserStoryBean usb);//插入故事
@@ -52,4 +58,5 @@ public void changeState(int userId);
 public void changeState2(int userId);
 public void changeState3(int userId);
 public void changeInfo(@Param(value="userId")int userId ,@Param(value="userName")String userName ,@Param(value="userTel")Long userTel ,@Param(value="userAccount")String userAccount ,@Param(value="userSex")String userSex ,@Param(value="userMail")String userMail ,@Param(value="userIdentity")String userIdentity,@Param(value="userCredit")int userCredit,@Param(value="userMoney")int userMoney,@Param(value="userRegisterTime")String userRegisterTime);
+public UserBean user(Integer userid);
 }

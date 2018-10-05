@@ -101,7 +101,7 @@ public class CounselorBean {
 
 	public void setServiceType(String serviceType) {
 		this.serviceType = serviceType;
-	}
+	}	
 
 	public int getEnableDisableId() {
 		return enableDisableId;
@@ -110,5 +110,6 @@ public class CounselorBean {
 	public void setEnableDisableId(int enableDisableId) {
 		this.enableDisableId = enableDisableId;
 	}
+
 	
 }

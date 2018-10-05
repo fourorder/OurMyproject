@@ -28,4 +28,57 @@
 	
 	</select>
  
+
+<!--  查找该角色拥有的所有菜单，不区分父类子类 -->
+ <select id="findOwnMune"  
+	resultType="org.great.bean.AuthorityBean" 
+	
+	 >
+
+	select * from AUTHORITYTBL where AUTHORITYID in(select AUTHORITYID from CHARACTERAUTHORITYRELATIONTBL where CHARACTERID=#{id})
+
+	</select>
+ 
+ 
+ 
+<!--  清空菜单 传角色id -->
+ <delete id="delMune">
+ 
+ delete from CHARACTERAUTHORITYRELATIONTBL  where CHARACTERID=#{id}
+ 
+ </delete>
+ 
+<!--  根据子类菜单 查找父类菜单 -->
+ <select id="findParentMune"  
+	resultType="java.lang.Integer" 
+	
+	 >
+
+	select PID from AUTHORITYTBL where AUTHORITYID=#{subclassMuneId}
+
+	</select>
+<!--  写入数据库  绑定角色和菜单 -->
+ 
+ 
+ <insert id="setRoleAndMenu">
+ 
+ 
+ INSERT INTO CHARACTERAUTHORITYRELATIONTBL (CHARACTERID, AUTHORITYID) VALUES (#{roleId}, #{menuId})
+ 
+ 
+ </insert>
+
+<select id="findOwnSubclassMenu"
+resultType="org.great.bean.AuthorityBean" 
+>
+
+
+select * from AUTHORITYTBL where AUTHORITYID in(select AUTHORITYID  from CHARACTERAUTHORITYRELATIONTBL where CHARACTERID in(select CHARACTERID from USERTBL where USERID=#{id})) and pid !=0  order by rank asc
+
+
+
+</select>
+
+ 
+
 </mapper>

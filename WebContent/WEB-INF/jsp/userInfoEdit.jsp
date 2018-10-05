@@ -8,7 +8,7 @@
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>个人信息修改</title>
 <meta name='TTUNION_verify' content='b846c3c2b85efabc496d2a2b8399cd62'>
 	<meta name="sogou_site_verification" content="gI1bINaJcL"/>
 	<meta name="360-site-verification" content="37ae9186443cc6e270d8a52943cd3c5a"/>
@@ -26,11 +26,39 @@
 	<meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
 	
 	<title>修改资料</title>
-	<link rel="icon" type="image/x-icon" href="favicon.ico">
 	<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
-	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
-	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">
-	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/home.css">
+        <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
+        <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">
+        <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/home.css">
+        <script type="text/javascript" src="<%=path%>admin/js/jquery-1.5.2.min.js"></script>
+        <script type="text/javascript">
+        var currentShowCity=0;
+        $(document).ready(function(){
+            $("#province").change(function(){
+                $("#province option").each(function(i,o){
+                    if($(this).attr("selected"))
+                    {
+                        $(".city").hide();
+                        $(".city").eq(i).show();
+                        currentShowCity=i;
+                    }
+                });
+            });
+
+            $("#province").change();
+        });
+
+        function getSelectValue(){
+            alert("1级="+$("#province").val());
+            $(".city").each(function(i,o){
+                if(i == currentShowCity){
+
+                    alert("2级="+$(".city").eq(i).val());
+                }
+            });
+        }
+	
+        </script>
 	
 </head>
 <body>
@@ -163,49 +191,81 @@
 								</ul>
 							</div>
 							<div class="ydc-panes">
-								<form action="">
+								<form  method="post" action="<%=path%>user/ToUserInforEdit.action" enctype="multipart/form-data">
 									<div class="ydc-reg-form-class ydc-reg-form-reg" style="margin-top:40px;">
 										<div class="ydc-reg-form-group clearfix">
 											<label>帐号名称:${userInfo.userAccount}</label>
 											
+											<input type="hidden" name="userId" value="${userInfo.userId}">
 										</div>
-									<div class="ydc-reg-form-class ydc-reg-form-reg" style="margin-top:40px;">
+									<div class="ydc-reg-form-class ydc-reg-form-reg"
+										style="margin-top: 40px;">
 										<div class="ydc-reg-form-group clearfix">
-											<label>帐号类型:${userInfo.characteBean.characterName}</label>
+								
+
+											<label>帐号类型:${userInfo.characterBean.characterName}</label>
 											
 									</div>
 					
+
 										</div>
-										<!-- <div class="ydc-reg-form-group clearfix">
-											<label>帐号图标:</label>
+
+									</div>
+									<div class="aui-card-form-item preview  aui-news" style="margin-top:20px;">
+                                                <label class="aui-card-form-label">封面:</label>
+                                                <div class="aui-file-up-img" id="preview_0">
+                                                    <img class="" id="imghead_0" border="0" src="<%=path%>picture/findPicture.action?url=${userInfo.userHead}">
+                                                </div>
+                                                <div class="aui-file-up-btn clearfix ">
+                                                    <div class="idPicFile aui-btn aui-file-new">
+                                                        <input type="file" name="file" id="1" class="file_photo aui-file-new-up" style="margin:0;">
+                                                        <a>上传图片</a>
+                                                    </div>
+                                                    <div class="aui-remarks">
+                                                        <p>图片尺寸建议：800*400 图片大小不超过1MB</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+									<!-- <div class="ydc-reg-form-group clearfix">
+											<label>帐号头像:</label>
 											<div class="ydc-reg-form-input">
-												<input type="file" id="" name="username" class="" autocomplete="off" placeholder="">
+												<input type="file" id="" name="userHeadfile" class="" autocomplete="off" placeholder="">
 												<div class="ydc-reg-form-text">
 													<p>选取至少160*160尺寸的图片。请勿上传二维码或其他推广性质图片作为图标。</p>
 												</div>
 											</div>
-										</div> -->
-										<div class="ydc-reg-form-group clearfix">
+									</div> -->
+									<div class="ydc-reg-form-group clearfix">
 											<label>用户概述:</label>
 											<div class="ydc-reg-form-input ydc-reg-form-input-width">
-												<textarea>${userInfo.userProfile}</textarea>
+												<textarea id="userProfile" name="userProfile">${userInfo.userProfile}</textarea>
 												<div class="ydc-reg-form-text">
 													<p>请输入账户简述</p>
 												</div>
 											</div>
-										</div>
+									</div>
+                                          
+										<%-- <div class="ydc-reg-form-group clearfix">
+											<label>用户概述:</label>
+											<div class="ydc-reg-form-input ydc-reg-form-input-width">
+												<textarea id="userProfile" name="userProfile" style="width: 100%,height="30px";">${userInfo.userProfile}</textarea>
+												<div class="ydc-reg-form-text">
+													<p>请输入账户简述</p>
+												</div>
+											</div>
+										</div> --%>
 										
 										
 										<div class="ydc-reg-form-group clearfix">
 											<label>姓名:</label>
 											<div class="ydc-reg-form-input">
-												<input type="text" id="user1" name="username" class="ydc-form-control" autocomplete="off" placeholder="李嘉桦">
+												<input type="text" id="userName" name="userName" class="ydc-form-control" autocomplete="off" value="${userInfo.userName}">
 											</div>
 										</div>
 										<div class="ydc-reg-form-group clearfix">
 											<label>身份证号:</label>
 											<div class="ydc-reg-form-input clearfix">
-												<input type="text" id="user2" name="username" class="ydc-form-control" readonly="true" autocomplete="off" placeholder="${userInfo.userIdentity}">
+												<input type="text" id="userIdentity" name="userIdentity" class="ydc-form-control" readonly="true" autocomplete="off" value="${userInfo.userIdentity}">
 												<div class="ydc-reg-form-text">
 													<p>帐号信息填写需真实有效，如发现虚假以及非个人真实信息导致帐号收益无法提取，责任由帐号个人承担</p>
 												</div>
@@ -218,54 +278,28 @@
 										<div class="ydc-reg-form-group clearfix">
 											<label>联系手机:</label>
 											<div class="ydc-reg-form-input">
-												<input type="text" id="user4" name="username" class="ydc-form-control" autocomplete="off" placeholder="18519232899">
-												<div class="ydc-reg-form-text">
-													<p>请输入手机号并验证</p>
-												</div>
+												<input type="text" id="userTel" name="userTel" class="ydc-form-control" autocomplete="off" value="${userInfo.userTel}">
+												
 											</div>
-											<div class="ydc-reg-yzm">
-												<button>获取验证码</button>
-											</div>
+											
 
 										</div>
 										<div class="ydc-reg-form-group clearfix">
 											<label>邮箱:</label>
 											<div class="ydc-reg-form-input">
-												<input type="text" id="user5" name="username" class="ydc-form-control" autocomplete="off" placeholder="aui_cn@163.com">
+												<input type="text" id="userMail" name="userMail" class="ydc-form-control" autocomplete="off" value="${userInfo.userMail}">
 											</div>
 											<div class="ydc-reg-form-text">
 												<p>请使用自己日常使用邮箱便于接受相关信息</p>
 											</div>
 										</div>
-										<div class="ydc-reg-form-group clearfix">
-											<label>QQ/微信号:</label>
-											<div class="ydc-reg-form-input">
-												<input type="text" id="user6" name="username" class="ydc-form-control" autocomplete="off" placeholder="li_3104">
-											</div>
-											<div class="ydc-reg-form-text">
-												<p>请输入常用QQ/微信号方便联系沟通</p>
-											</div>
-										</div>
-										<div class="ydc-reg-form-group clearfix">
-											<label>推荐人:</label>
-											<div class="ydc-reg-form-input">
-												<input type="text" id="user7" name="username" class="ydc-form-control" autocomplete="off" placeholder="李晨">
-											</div>
-											<div class="ydc-reg-form-text">
-												<p>选填，若有网易员工推荐您入驻，请填写相应推荐码。</p>
-											</div>
-										</div>
-										<div class="ydc-reg-form-group clearfix">
-											<label></label>
-											<div class="ydc-reg-form-input ydc-reg-form-input-agreement">
-												<label><input type="checkbox" value="yes" id="agreement" checked=""> 我已经阅读并同意 <a href="agreement.html" target="_blank">《车讯号媒体开放平台注册协议》</a>。</label>
-											</div>
-										</div>
+										
+										
 									</div>
-									<div class="ydc-reg-form-group">
-										<div class="ydc-reg-form-button" style="margin-left:255px;">
-											<a class="btn fl" href="info.html">保存</a>
-										</div>
+									  <div class="ydc-btn" style="margin-top:20px;">
+                                                <button class="btn">修改</button>
+                                            
+                                       </div>
 									</div>
 								</form>
 							</div>
@@ -279,7 +313,10 @@
 	</section>
 <!-- content YDC end -->
 
-	<script type="text/javascript" src="admin/js/jquery.min.js"></script>
+	 <!-- content YDC end -->
+       <script type="text/javascript" src="<%=path%>admin/js/jquery.min.js"></script>
+       <script type="text/javascript" src="<%=path%>admin/js/nicEdit.js"></script>
+        <script type="text/javascript" src="<%=path%>admin/js/upImg.js"></script>
 	<script type="text/javascript">
 	    var slideIndex = 0;
 	    showSlides();
@@ -304,7 +341,22 @@
 	            $('.ydc-panes>div:eq('+$(this).index()+')').show().siblings().hide();
 	        })
 	    })
-	</script>
+	</script> 
+	<script>
+    jQuery(function(){
+	        upload_start();
+	    });
+	    //tab切换
+	    $(function(){
+	        $('.aui-ad-tab-title ul li').click(function(){
+	            $(this).addClass('aui-current').siblings().removeClass('aui-current');
+	            $('.aui-ad-tab-body>div:eq('+$(this).index()+')').show().siblings().hide();
+	        })
+	    });
+	
+        </script>
+     
+    
 
 </body>
 </html>

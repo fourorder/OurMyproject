@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="<%=basePath%>facilitator/page.action?page=tpage&number=1" target="menuFrame" >服务商管理</a>
                         </dd>
                         <dd>
-                            <a href="" target="menuFrame">顾问管理</a>
+                            <a href="<%=basePath%>counselor/list.action?number=1" target="menuFrame">顾问管理</a>
                         </dd>
                         <dd>
                             <a href="" target="menuFrame">管理员管理</a>
@@ -133,7 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="<%=basePath%>demand/page.action?page=tpage&number=1" target="menuFrame">需求管理</a>
                         </dd>
                         <dd>
-                            <a href="">作品管理</a>
+                            <a href="<%=basePath%>production/toAdminProductionManage.action" target="menuFrame">作品管理</a>
                         </dd>
                     </dl>
                 </li>
@@ -141,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <a href="javascript:;" style="font-size: 15px;">参数配置</a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="">参数配置</a>
+                            <a href="<%=basePath%>powder/toFindCharacter.action" target="menuFrame">权限管理</a>
                         </dd>
                         <dd>
                             <a href="">需求类型配置</a>
@@ -153,7 +153,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="">服务类型管理</a>
                         </dd>
                         <dd>
-                            <a href="">服务商故事配置</a>
+                            <a href="<%=basePath%>employers/list.action?page=tpage&number=1" target="menuFrame">雇主故事列表</a>
                         </dd>
                         <dd>
                             <a href="">曝光台配置</a>
@@ -162,13 +162,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="<%=basePath%>rule/page.action?page=tpage&number=1" target="menuFrame">规则中心配置</a>
                         </dd>
                         <dd>
+                            <a href="<%=basePath%>line/page.action?page=tpage&number=1" target="menuFrame">友情链接配置</a>
+                        </dd>
+                        <dd>
                             <a href="">行业动态配置</a>
                         </dd>
                         <dd>
-                        <a href="<%=basePath%>infor/page.action" target="menuFrame">最新资讯配置</a>
+                        <a href="<%=basePath %>infor/inforPage.action?page=tpage&number=1" target="menuFrame">最新资讯配置</a>
                     </dd>
                         <dd>
-                            <a href="<%=basePath%>adver/page.action" target="menuFrame">广告设置</a>
+                            <a href="<%=basePath %>adver/list.action?page=tpage&number=1" target="menuFrame">广告设置</a>
                         </dd>
                     </dl>
                 </li>

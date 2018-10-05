@@ -1,5 +1,6 @@
 package org.great.handler;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +16,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -105,9 +108,24 @@ public class InformationHandler {
 		if(a>0) {
 			System.out.println();
 		}
-		return new ModelAndView("redirect:inforPage.action?page=tpage&number=1");
+
+		return new ModelAndView("redirect:inforPage.action?page=tpage&number=1");	
 		
-		
+	}
+	@RequestMapping("/infolist.action")
+	public ModelAndView infolist(HttpServletRequest request,String typeid){
+		ModelAndView modelAndView=new ModelAndView();
+		request.setAttribute("informationList", informationBizImp.getInforList(Integer.parseInt(typeid), 5, 1));
+		request.setAttribute("typeid", typeid);
+		request.setAttribute("page", 1);
+		request.setAttribute("countPage",informationBizImp.getcountPage(Integer.parseInt(typeid)));
+		modelAndView.setViewName("jsp/informationList");
+		return modelAndView;
+	}
+	@RequestMapping("/selectInfo.action")
+	@ResponseBody
+	public List<Object> selectInfo(String page,String state,String parameterid){
+		return informationBizImp.selectInfo(page, state, parameterid);
 	}
 	
 public String upLoadFile(HttpServletRequest request,MultipartFile file) {

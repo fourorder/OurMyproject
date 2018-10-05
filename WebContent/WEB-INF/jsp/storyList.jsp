@@ -82,8 +82,7 @@
    <td >当前页：<span id="currentPage">${num}</span>&nbsp;&nbsp;&nbsp;总页数：<span id="totalPages">${countPage}</span></td>
   <td> <input type="text" name="skip" id="skip" style="width: 30px"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();">&nbsp;&nbsp;<a onclick="skip()"  class="layui-btn layui-btn-xs">转</a></td>
   <td colspan="2"><a class="layui-btn layui-btn-sm" href="<%=path %>employers/list.action?page=npage&number=${num}&title=${title}&state=${state}">下一页</a></td>
- <td colspan="5">
-</td>
+
    </tr>
 </tbody>
 </table>

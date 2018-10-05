@@ -1,35 +1,74 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ivc
-  Date: 2018/9/19
-  Time: 0:55
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <% 
 	String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";	
 %>
-<html>
 <head>
-    <title>顾问申请页</title>
-    <script type="text/javascript" src="<%=path %>/js/jquery.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	
+	<title>内容同步-- 一点车 -  让您多懂一点车</title>
+		<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
+        <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
+        <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">
+        <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/home.css">
+        <script type="text/javascript" src="<%=path%>admin/js/jquery-1.5.2.min.js"></script>
+  <script type="text/javascript" src="<%=path %>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=path %>/plugins/layui/layui.js"></script>
+    <link rel="stylesheet" href="<%=path%>css/oindex.css">
     <link rel="stylesheet" href="<%=path %>/plugins/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="<%=path %>/css/global.css" media="all">
     <link rel="stylesheet" href="<%=path %>/laydate/theme/default/laydate.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+<style type="text/css">
+#footer {
+    text-align: center;
+}
+#footer ul {
+    display: inline-block;
+    overflow: auto;
+}
 
-    <style type="text/css">
-
-        body{TEXT-ALIGN: center;}
-
-        .demo-input{padding-left: 10px; height: 38px; min-width: 262px; line-height: 38px; border: 1px solid #e6e6e6;  background-color: #fff;  border-radius: 2px;}
-    </style>
-
+#footer ul li {
+    display: inline;
+    float: left;
+}
+</style>
 </head>
 <body>
-<div align="center" style="height: 90%;width: 50%;margin:0 auto;background-color: #eff4d8; text-align: left"  >
+<div class="o-top">
+				<div class="width1180">
+					
+					<span class="fr">
+						<!-- <a href="#" title="登录">登录</a>
+						<a href="#" title="注册">注册</a> -->
+						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
+						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
+						<!--登录后
+						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
+						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
+						-->
+					</span>
+				</div>
+</div>
+
+
+				<!-- right begin -->
+				<div class="ydc-column ydc-column-10">
+					<div class="ydc-release-content">
+						<div class="ydc-tabPanel ydc-tabPanel-release">
+							<div class="ydc-release-tab-head"  id="footer">
+								<a  style="width: 100%;font-size: 20px;color: red;"  >
+									申请成为顾问
+								</a>
+								<hr class="layui-bg-blue">
+							</div>
+							<div class="ydc-panes">
+								<div class="ydc-pane"  style="display:block;">
+									<div class="clearfix">
+	<div align="center" style="height: 70%;width: 50%;margin:0 auto;background-color: #eff4d8; text-align: left"  >
     <form class="layui-form" action="<%=path %>counselor/affirm.action" method="post" onsubmit="return CheckPost()" enctype="multipart/form-data" >
    
         <div class="layui-form-item">
@@ -67,16 +106,27 @@
         <br />
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <input type="submit" class="layui-btn" id="test9" lay-submit lay-filter="formDemo"  value="立即提交">
+                <input type="submit" class="layui-btn  layui-btn-danger" id="test9" lay-submit lay-filter="formDemo"  value="立即提交">
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 
             </div>
         </div>
     </form>
  <button  class="layui-btn layui-btn-primary" style="margin-left: 80%" onclick="deploy()">返回</button>
-</div>
+</div>	
+							
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- right end -->
+			</div>
+		</div>
 
- <script  src="<%=path %>layui/layui.js"></script>
+	</section>
+<!-- content YDC end -->
+
+<script  src="<%=path %>layui/layui.js"></script>
 <script >
 layui.use(['form','layer','laydte'], function(){
 	  var form = layui.form;

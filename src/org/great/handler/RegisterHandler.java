@@ -84,13 +84,13 @@ public class RegisterHandler  {
 
         int date = c.get(Calendar.DATE);    
 
-        int hour = c.get(Calendar.HOUR_OF_DAY);   
+//        int hour = c.get(Calendar.HOUR_OF_DAY);   
+//
+//        int minute = c.get(Calendar.MINUTE);   
+//
+//        int second = c.get(Calendar.SECOND);    
 
-        int minute = c.get(Calendar.MINUTE);   
-
-        int second = c.get(Calendar.SECOND);    
-
-        String userRegisterTime=year + "/" + month + "/" + date + " " +hour + ":" +minute + ":" + second;
+        String userRegisterTime=year + "-" + month + "-" + date ;
 
        
 

@@ -59,24 +59,13 @@
 											<label>${user.userName}</label>
 										</div>
 									</div>
-									<!-- <div class="ydc-reg-form-group clearfix">
-										<label>帐号类别</label>
-										<div class="ydc-reg-form-input">
-											<label>自媒体</label>
-										</div>
-									</div> -->
-									<!-- <div class="ydc-reg-form-group clearfix">
-										<label>分类</label>
-										<div class="ydc-reg-form-input">
-											<label>汽车</label>
-										</div>
-									</div> -->
+									
 									<div class="ydc-reg-form-group clearfix">
 										<label>雇主头像</label>
 										<div class="ydc-reg-form-input">
 											<label></label>
 											<div class="ydc-reg-form-text ydc-reg-form-user-logo">
-												<img src="admin/images/icon/user-logo.png" alt="">
+												<img src="<%=path%>picture/findPicture.action?url=${user.userHead}" alt="">
 											</div>
 										</div>
 									</div>
@@ -156,7 +145,7 @@
 									<div class="ydc-reg-form-group clearfix">
 										<label>用户状态</label>
 										<div class="ydc-reg-form-input">
-											<label>${user.characteBean.characterName}</label>
+											<label>${user.characterBean.characterName}</label>
 										</div>
 									</div>
 									
@@ -182,7 +171,7 @@
 									
 									<div class="ydc-reg-form-group clearfix" style="margin-top:40px;">
 										<div class="ydc-reg-form-button" style="margin-left:255px;">
-											<a class="btn fl" href="<%=path%>user/returnHome.action">返回</a>
+											<a class="btn fl" href="<%=path%>user/home.action">返回</a>
 										</div>
 									</div>
 									<div class="ydc-reg-form-group clearfix" style="margin-top:40px;">

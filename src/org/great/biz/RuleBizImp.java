@@ -14,59 +14,54 @@ public class RuleBizImp implements RuleBiz{
 private RuleMapper ruleMapper;
 
 @Override
-public List<RuleBean> countRule() {
+public List<RuleBean> countRule(String content) {
 	// TODO Auto-generated method stub
-	return ruleMapper.countRule();
-}
-@Override
-public List<RuleBean> countRule2(String ruleName) {
-	// TODO Auto-generated method stub
-		ruleName="%"+ruleName+"%";
-	
-	return ruleMapper.countRule2(ruleName);
-}
-
-@Override
-public List<RuleBean> rule(String ruleName, int page) {
-	// TODO Auto-generated method stub
-	if(ruleName!=null) {
-		ruleName="%"+ruleName+"%";
+	if(content!=null) {
+		content="%"+content+"%";
 	}
-	return ruleMapper.rule(ruleName, page);
+	return ruleMapper.countRule(content);
+}
+
+
+@Override
+public List<RuleBean> rule(String content, int page) {
+	// TODO Auto-generated method stub
+	if(content!=null) {
+		content="%"+content+"%";
+	}
+	return ruleMapper.rule(content, page);
 }
 
 @Override
-public List<RuleBean> findInfo(int ruleId) {
+public List<RuleBean> findInfo(int introductionId) {
 	// TODO Auto-generated method stub
-	return ruleMapper.findInfo(ruleId);
+	return ruleMapper.findInfo(introductionId);
 }
 
 @Override
-public void changeInfo(int ruleId2, String ruleName2, int securityMoney2, int dealMoney2, String auctionTime2,
-		String completeTime2) {
+public void changeInfo(int introductionId2,String content2,int state) {
 	// TODO Auto-generated method stub
-	ruleMapper.changeInfo(ruleId2, ruleName2, securityMoney2, dealMoney2, auctionTime2, completeTime2);
+	ruleMapper.changeInfo(introductionId2, content2, state);
 }
 @Override
-public void addRule( String ruleName3, int securityMoney3, int dealMoney3, String auctionTime3,
-		String completeTime3) {
+public void addRule( String ruleName3) {
 	// TODO Auto-generated method stub
-	ruleMapper.addRule(ruleName3, securityMoney3, dealMoney3, auctionTime3, completeTime3);
+	ruleMapper.addRule(ruleName3);
 }
 
 @Override
-public void changeState(int ruleId, int stateId) {
+public void changeState(int introductionId) {
 	// TODO Auto-generated method stub
-	ruleMapper.changeState(ruleId);
+	ruleMapper.changeState(introductionId);
 }
 @Override
-public void changeState2(int ruleId, int stateId) {
+public void changeState2(int introductionId) {
 	// TODO Auto-generated method stub
-	ruleMapper.changeState2(ruleId);
+	ruleMapper.changeState2(introductionId);
 }
 @Override
-public void changeState3(int ruleId, int stateId) {
+public void changeState3(int introductionId) {
 	// TODO Auto-generated method stub
-	ruleMapper.changeState3(ruleId);
+	ruleMapper.changeState3(introductionId);
 }
 }

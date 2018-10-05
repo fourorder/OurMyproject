@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.great.bean.CounselorBean;
+import org.great.bean.DemandBean;
+import org.great.bean.DemandBeanX;
 import org.great.mapper.CounselorMapper;
 import org.springframework.stereotype.Service;
 
@@ -68,6 +70,20 @@ public class CounselorImp implements CounselorBiz {
 	public int start(String account) {
 		// TODO Auto-generated method stub
 		return coounselor.start(account);
+	}
+
+
+	@Override
+	public List<DemandBeanX> selectApplyFor(int state, int page) {
+		// TODO Auto-generated method stub
+		return coounselor.selectApplyFor(state, page);
+	}
+
+
+	@Override
+	public int countApplyFor(int userId) {
+		// TODO Auto-generated method stub
+		return coounselor.countApplyFor(userId);
 	}
 
 }

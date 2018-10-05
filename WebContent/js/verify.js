@@ -660,7 +660,7 @@
        		}
      	},
 		
-		//洗牌数组
+		/*//洗牌数组
        	shuffle : function(arr) {
 			var m = arr.length, i;
 			while (m) {
@@ -668,7 +668,7 @@
 				[arr[m], arr[i]] = [arr[i], arr[m]]
 			}
 			return arr;
-		},
+		},*/
        	
        	//创建坐标点
        	createPoint : function (pos) {

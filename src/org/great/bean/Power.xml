@@ -8,11 +8,43 @@
 	
 	 >
 	
-	select * from CHARACTERTBL
-	
-	
-	
+	select * from CHARACTERTBL order by to_number(CHARACTERID) asc
+
 	</select>
+	
+ <insert id="toAddRole">
+ 
+  insert into CHARACTERTBL (CHARACTERID,CHARACTERNAME,CHARACTERTIME,CHARACTERINTRO) values(seqid.nextval,#{roleName},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{roleIntro})
+ 
+ 
+ </insert>
+
+  <select id="findRoleExist"  
+	resultType="org.great.bean.CharacterBean" 
+	
+	 >
+	
+	select * from CHARACTERTBL where CHARACTERNAME=#{roleName}
+
+	</select>
+ 
+ 
+ <delete id="delRole">
+ 
+ delete from CHARACTERTBL  where CHARACTERID=#{id}
+ 
+ </delete>
+ 
+   <select id="confirmRoleUsing1"  
+	resultType="org.great.bean.UserBean" 
+	
+	 >
+	
+	select * from USERTBL where CHARACTERID=#{id}
+
+	</select>
+ 
+    
 	
 	<!-- 查询所有父类菜单 -->
   <select id="findAllParentMune"  
@@ -37,5 +69,6 @@
 	
 	
 	</select>
+
  
 </mapper>
