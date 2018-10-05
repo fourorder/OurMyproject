@@ -67,6 +67,7 @@ public class InformationBizImp implements InformationBiz{
 	@Override
 	public int selectPid(String paramenter) {
 		// TODO Auto-generated method stub
+		System.out.println("Imp:"+paramenter);
 		return informationMapper.selectPid(paramenter);
 	}
 

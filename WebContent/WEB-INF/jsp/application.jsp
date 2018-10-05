@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <% 
@@ -54,8 +54,40 @@
 				</div>
 </div>
 
-
-				<!-- right begin -->
+<!-- content YDC begin -->
+	<section>
+		<div class="ydc-content-slide ydc-body">
+			<div class="ydc-flex">
+				<!-- left begin -->
+				<div class="ydc-column ydc-column-2">
+					<div class="ydc-menu">
+						<ul>
+							<li class="ydc-menu-item">
+								<a href=""  ><i class="ydc-icon ydc-icon-home fl"></i>首页</a>
+								<a href="" class="active"><i class="ydc-icon ydc-icon-find fl"></i>申请成为顾问</a>
+							</li>
+							
+							<li class="ydc-menu-item">
+								<span class="ydc-menu-sub-title">
+									<i class="ydc-icon ydc-icon-file fl"></i>管理
+								</span>
+								<ul>
+									<li>
+										<a href="<%=path%>counselor/applicationList.action?account=${user.userAccount}&userId=${user.userId}">咨询管理</a>
+									</li>
+									<li>
+										<a href="related.html">内容同步</a>
+									</li>
+									<li>
+										<a href="asset.html">素材中心</a>
+									</li>
+								</ul>
+							</li>
+							
+					</div>
+				</div>
+				<!-- left end -->
+			<!-- right begin -->
 				<div class="ydc-column ydc-column-10">
 					<div class="ydc-release-content">
 						<div class="ydc-tabPanel ydc-tabPanel-release">

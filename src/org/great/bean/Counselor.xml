@@ -4,7 +4,7 @@
 <mapper namespace="org.great.mapper.CounselorMapper">
  <!-- 查询顾问类型 -->
  <select id="type" resultType="java.lang.String">
- select parametername from tbparameter where pid=41
+ select parametername from tbparameter where pid=17
  </select>
  
  <!-- 查询用户是否申请顾问 -->
@@ -45,4 +45,23 @@ UPDATE counselorTbl set enableDisableId=4 WHERE userAccount=#{account}
 <update id="start"  parameterType="java.lang.String">
 UPDATE counselorTbl set enableDisableId=3 WHERE userAccount=#{account}
 </update>
+
+<!-- 查询总条数 -->		
+<select id="countApplyFor" parameterType="int">
+select count(*) from demandInfomationTbl where adviserid=#{userId}
+</select>
+<!-- 条件查询 -->	
+<select id="selectApplyFor" parameterType="int" resultType="org.great.bean.DemandBeanX">
+select * from (
+select c.*,rownum rn from (
+select * from demandInfomationTbl where adviserid=adviserid
+<if test="state !=0">
+ and Stateid=#{state}
+</if>
+) c 
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= (#{page}*5-4)
+</select>
+	
+	
 </mapper>

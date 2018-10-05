@@ -6,7 +6,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
+import org.great.bean.ApplicationBean;
 import org.great.bean.BidBean;
+import org.great.bean.CounselorBean;
+import org.great.bean.DailyBean;
 import org.great.bean.DemandBean;
 import org.great.bean.BidBean;
 import org.great.bean.DemandBeanX;
@@ -70,5 +73,36 @@ public interface DemandBiz {
 	public int updateDemand(UpdateDemandBean updateDemandBean);
 	//ajax 雇主分页查询
 	public List<Object>queayDemandEmployerList(String userid,String state, String page, String searchName,String parameterid,String stateid);
+	//服务商查看投标任务
+		public ArrayList<DemandInfoBean> getsupplierBidList(String userid);
+
+
+	 public List<String>   type();//顾问类型
+		public List<CounselorBean>  select(String account);//查询用户是否申请
+	     public int applyFor(CounselorBean cb);//提交申请
+	     public List<CounselorBean> conditionQuery(int state,int page);//条件查询
+	     public int countCounserlor(int state);//总数
+	     public int applyForOk(String account);//审核通过
+	     public int forbidden(String account);//禁用
+	     public int start(String account);//启用
+	     public List<ApplicationBean> selectApplyFor(int state,int page,int userId);//查询申请找顾问的条数
+	     public int countApplyFor(int userId,int state);//查询申请找顾问的总条数
+	     public int applyFprPass(int id);//确认通过雇主审核--需求表
+	     public int applyFprPass2(int id);//确认通过雇主审核 --申请表
+	     public int applyFprreFuse(int id);//拒绝通过雇主审核
+	     public int applyFprreFuse2(int id);//拒绝通过雇主审核 --申请表
+	     public  String daily(String dailyDate);//查询当天日报是否提交过
+	     public  int sumbit(String content,int processId);//提交日报
+	     public List<DemandBeanX> particulars(int demandId);//详细信息
+	     public int selectId(String account);//查找Id
+	     public String selectType(int parameterid);//查询类型
+	     public List<Integer>  serialNum(String account);//查询顾问所接项目编号
+	     public List<DailyBean>  selectDaily(int parameterId,String state,int page);//查询详细项目内容
+	     public int  countDaily(int parameterId,String evaluation);//查询项目日报总数
+	     public int sEvaluation(int userId,String evaluation,String notation,String time);//提交评价
+
+	
+	
+
 
 }

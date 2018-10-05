@@ -1,6 +1,8 @@
 package org.great.handler;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.great.bean.AuthorityBean;
 import org.great.bean.BidBean;
+import org.great.bean.DailyBean;
 import org.great.bean.DemandBean;
 import org.great.bean.DemandBeanX;
 import org.great.bean.DemandInfoBean;
@@ -34,6 +37,9 @@ public class DemandHandler {
 	private int  count;//总条数
 	@Resource
 	private DemandBiz demandBizImp;
+	@Resource
+	private AuthoriyMapper authoriyMapper;
+
 	@Resource
 	private UserBean userBean;
 	@Resource
@@ -376,4 +382,57 @@ public class DemandHandler {
 				
 				return demandBizImp.queayDemandEmployerList(userid, state, page, searchName, parameterid, stateid);
 			}
+			//服务商投标成功后获取的任务 supplierBid
+			@RequestMapping("/goSupplierBid.action")
+			public ModelAndView goSupplierBid(HttpServletRequest request){
+				ModelAndView modelAndView = new ModelAndView();
+				userBean = (UserBean) request.getSession().getAttribute("user");
+				//------------菜单------
+						
+				ArrayList<AuthorityBean> menuList=new ArrayList<AuthorityBean>();
+				menuList=authoriyMapper.findOwnMune(userBean.getUserId());
+				request.setAttribute("menuList", menuList);
+				//---------------------
+				
+				
+				
+				modelAndView.setViewName("jsp/supplierBid");
+				ArrayList<DemandInfoBean>list =demandBizImp.getsupplierBidList(userBean.getUserId() + "");
+				count = list.size();
+				request.setAttribute("count", count);
+				request.setAttribute("demandInfo",list);
+				return modelAndView;
+			}
+			@RequestMapping("/daily.action") //查重日报
+			public ModelAndView daily(HttpServletRequest request, String userid,String demandid) {
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+		        String time=df.format(new Date());// new Date()为获取当前系统时间
+		        String a=demandBizImp.daily(time);
+				if(a!=null) {
+					System.out.println("今日已提交");
+					ModelAndView modelAndView = new ModelAndView();
+					modelAndView.setViewName("jsp/repetitionPage");
+					return modelAndView;
+				}else {
+					ModelAndView modelAndView = new ModelAndView();
+					request.setAttribute("demandid", demandid);
+					modelAndView.setViewName("jsp/dailyPage");
+					return modelAndView;
+				}
+				
+			
+			}
+		
+			@RequestMapping("/submit.action") //提交日报
+			public ModelAndView submit(HttpServletRequest request,String demandid,String content) {
+				int demandId=Integer.parseInt(demandid);
+				int a =demandBizImp.sumbit(content,demandId);
+				if(a>0) {
+					System.out.println("提交成功！");
+				}
+					ModelAndView modelAndView = new ModelAndView();
+					modelAndView.setViewName("jsp/dailyPage");
+					return modelAndView;
+			}
+			
 }

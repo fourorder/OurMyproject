@@ -20,7 +20,7 @@
 
 </head>
 <body>
-<div align="center" style="height: 90%;width: 50%;margin:0 auto;background-color: #eff4d8; text-align: center"  id="table">
+<div align="center" style="height: 50%;width: 80%;margin:0 auto;background-color: #eff4d8; text-align: center"  id="table">
 <form action="<%=path %>counselor/list.action?page=tpage&number=1" method="post" >
 <select name="state1" >
 <option value="4">请选择</option>

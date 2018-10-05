@@ -11,7 +11,10 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.great.bean.ApplicationBean;
 import org.great.bean.BidBean;
+import org.great.bean.CounselorBean;
+import org.great.bean.DailyBean;
 import org.great.bean.DemandBean;
 import org.great.bean.DemandBeanX;
 import org.great.bean.DemandInfoBean;
@@ -294,6 +297,168 @@ public class DemandBizImp implements DemandBiz {
 		list.add(demandMapper.getDemandInfoList(star+"", end+"", searchName, userid, parameterid, stateid));
 		return list;
 	}
+	
+	@Override
+	public ArrayList<DemandInfoBean> getsupplierBidList(String userid) {
+		// TODO Auto-generated method stub
+		return demandMapper.getsupplierBidList(userid);
+	}
+
+
+	@Override
+	public List<String> type() {
+		// TODO Auto-generated method stub
+		return demandMapper.type();
+	}
+
+	@Override
+	public List<CounselorBean> select(String account) {
+		// TODO Auto-generated method stub
+		return demandMapper.select(account);
+	}
+
+	@Override
+	public int applyFor(CounselorBean cb) {
+		// TODO Auto-generated method stub
+		return demandMapper.applyFor(cb);
+	}
+
+	@Override
+	public List<CounselorBean> conditionQuery(int state, int page) {
+		// TODO Auto-generated method stub
+		return demandMapper.conditionQuery(state, page);
+	}
+
+	@Override
+	public int countCounserlor(int state) {
+		// TODO Auto-generated method stub
+		return demandMapper.countCounserlor(state);
+	}
+
+	@Override
+	public int applyForOk(String account) {
+		// TODO Auto-generated method stub
+		return demandMapper.applyForOk(account);
+	}
+
+	@Override
+	public int forbidden(String account) {
+		// TODO Auto-generated method stub
+		return demandMapper.forbidden(account);
+	}
+
+	@Override
+	public int start(String account) {
+		// TODO Auto-generated method stub
+		return demandMapper.start(account);
+	}
+
+	@Override
+	public List<ApplicationBean> selectApplyFor(int state, int page,int userId) {
+		// TODO Auto-generated method stub
+		return demandMapper.selectApplyFor(state, page,userId);
+	}
+
+	@Override
+	public int countApplyFor(int userId,int state) {
+		// TODO Auto-generated method stub
+		return demandMapper.countApplyFor(userId, state);
+	}
+
+	@Override
+	public int applyFprPass(int id) {
+		// TODO Auto-generated method stub
+		return demandMapper.applyFprPass(id);
+	}
+
+	@Override
+	public int applyFprreFuse(int id) {
+		// TODO Auto-generated method stub
+		return demandMapper.applyFprreFuse(id);
+	}
+
+	@Override
+	public int applyFprPass2(int id) {
+		// TODO Auto-generated method stub
+		return demandMapper.applyFprPass2(id);
+	}
+
+	@Override
+	public int applyFprreFuse2(int id) {
+		// TODO Auto-generated method stub
+		return demandMapper.applyFprreFuse2(id);
+	}
+
+	@Override
+	public String  daily(String dailyDate) {
+		// TODO Auto-generated method stub
+		if(dailyDate !=null ) {
+			dailyDate="%"+dailyDate+"%";
+		}
+		return demandMapper.daily(dailyDate);
+	}
+
+	@Override
+	public int sumbit(String content, int processId) {
+		// TODO Auto-generated method stub
+		System.out.println("content="+content+"processId="+processId);
+		return demandMapper.sumbit(content, processId);
+	}
+
+	@Override
+	public List<DemandBeanX> particulars(int demandId) {
+		// TODO Auto-generated method stub
+		return demandMapper.particulars(demandId);
+	}
+
+	@Override
+	public String selectType(int parameterid) {
+		// TODO Auto-generated method stub
+		return demandMapper.selectType(parameterid);
+	}
+
+	@Override
+	public List<Integer> serialNum(String account) {
+		// TODO Auto-generated method stub
+		return demandMapper.serialNum(account);
+	}
+
+
+
+	@Override
+	public int countDaily(int parameterId, String evaluation) {
+		// TODO Auto-generated method stub
+		if(evaluation !=null && ""!=evaluation) {
+			evaluation="%"+evaluation+"%";
+		}
+		return demandMapper.countDaily(parameterId, evaluation);
+	}
+
+	@Override
+	public List<DailyBean> selectDaily(int parameterId, String state, int page) {
+		// TODO Auto-generated method stub
+		if(state !=null && ""!=state) {
+			state="%"+state+"%";
+		}
+		return demandMapper.selectDaily(parameterId, state, page);
+	}
+
+	@Override
+	public int selectId(String account) {
+		// TODO Auto-generated method stub
+		return demandMapper.selectId(account);
+	}
+
+	@Override
+	public int sEvaluation(int userId, String evaluation, String notation,String time) {
+		// TODO Auto-generated method stub
+		if(time !=null && ""!=time) {
+			time="%"+time+"%";
+		}
+		return demandMapper.sEvaluation(userId, evaluation, notation,time);
+	}
+
+	
 
 	
 	

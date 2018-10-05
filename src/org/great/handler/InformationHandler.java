@@ -98,16 +98,18 @@ public class InformationHandler {
 	
 	@RequestMapping("/mation.action")//跳到提交页
 	public ModelAndView test2(HttpServletRequest request,InformationBean ib,MultipartFile file,String parameterName){
+		System.out.println(parameterName);
 		String productionImage=upLoadFile(request, file);
 		int Parid=informationBizImp.selectPid(parameterName);
+		System.out.println(Parid);
 		ib.setInformationImg(productionImage);
 		ib.setParameterId(Parid);
 		int a=informationBizImp.setInformation(ib);
 		if(a>0) {
 			System.out.println();
 		}
-	return new ModelAndView("redirect:inforPage.action?page=tpage&number=1");
-		
+
+		return new ModelAndView("redirect:inforPage.action?page=tpage&number=1");	
 		
 	}
 	@RequestMapping("/infolist.action")

@@ -224,6 +224,11 @@
 		</set>
 		where demandId = #{demandId}
 	</update>
+	<!-- 供应商查看任务 -->
+	<select id="getsupplierBidList" resultMap="getDemandInfoList">
+	select * from DEMANDINFOMATIONTBL where touserid = #{userid}
+	</select>
+	
 	<!-- 佳诚 -->
 	
 	<!-- 陈毅 -->
@@ -278,4 +283,130 @@ UPDATE demandInfomationTbl set stateId=9 where demandId=#{demandId}
 UPDATE demandInfomationTbl set stateId=23 where demandId=#{demandId}
 </update>
 	<!-- 陈毅 -->
+	
+<!-- 俱锋 -->	
+<!-- 查询顾问类型 -->
+ <select id="type" resultType="java.lang.String">
+ select parametername from tbparameter where pid=17
+ </select>
+ 
+ <!-- 查询用户是否申请顾问 -->
+ <select id="select" resultType="org.great.bean.CounselorBean">
+ select * from counselorTbl where userAccount=#{account}
+ </select>
+	 <!-- 增加顾问 -->
+<insert id="applyFor" parameterType="org.great.bean.CounselorBean">
+insert into counselorTbl values(SEQID.nextval,#{userAccount},#{counselorIntroduction},#{counselorMoney},#{auditState},#{counselorImg},#{serviceType},#{enableDisableId},#{userId})
+</insert>
+<!-- 查询顾问总数 -->
+<select id="countCounserlor" resultType="java.lang.Integer">
+select count(*) from counselorTbl where userAccount=userAccount
+<if test="state !=4">
+ and auditState=#{state}
+</if>
+</select>
+<!-- 条件查找 -->
+<select id="conditionQuery" resultType="org.great.bean.CounselorBean">
+select * from (
+select c.*,rownum rn from (
+select * from counselorTbl where userAccount=userAccount
+<if test="state !=4">
+ and auditState=#{state}
+</if>
+) c 
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= (#{page}*5-4)
+</select>
+<update id="applyForOk"  parameterType="java.lang.String">
+UPDATE counselorTbl set auditState=1 WHERE userAccount=#{account}
+</update>
+<!-- 禁用-->
+<update id="forbidden"  parameterType="java.lang.String">
+UPDATE counselorTbl set enableDisableId=4 WHERE userAccount=#{account}
+</update>
+<!-- 启用-->
+<update id="start"  parameterType="java.lang.String">
+UPDATE counselorTbl set enableDisableId=3 WHERE userAccount=#{account}
+</update>
+
+<!-- 查询总条数 -->		
+<select id="countApplyFor" parameterType="int" resultType="java.lang.Integer">
+select count(*) from consultantsandneedstbl where consultantid=#{userId}
+<if test="state !=0">
+ and Stateid=#{state}
+</if>
+</select>
+<!-- 条件查询 -->	
+<select id="selectApplyFor" parameterType="int" resultType="org.great.bean.ApplicationBean">
+select * from (
+select e.*,rownum rn from (
+select d.demandtitle,d.demanddetailinformation,u.useraccount,c.demandid,c.stateid from consultantsandneedstbl c,usertbl u,demandinfomationtbl d where c.employerid=u.userid  and c.demandid=d.demandid   and c.consultantid=#{userId}
+
+<if test="state !=0">
+ and c.Stateid=#{state}
+</if>
+) e
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= (#{page}*5-4)
+</select>
+<!-- 审核通过雇主申请 -->		
+	<update id="applyFprPass">
+UPDATE demandInfomationTbl set Stateid=22 WHERE demandid=#{id}
+</update>
+<update id="applyFprPass2">
+UPDATE consultantsandneedstbl set Stateid=903 WHERE demandid=#{id}
+</update>
+<!-- 拒绝通过雇主申请 -->		
+	<update id="applyFprreFuse">
+UPDATE demandInfomationTbl set Stateid=23 WHERE demandid=#{id}
+</update>	
+<!-- 查看需求详情 -->
+<select id="particulars" parameterType="java.lang.Integer"  resultType="org.great.bean.DemandBeanX">
+ select * from demandInfomationTbl where demandId=#{demandId}
+</select>
+<!-- 查询类型 -->
+<select id="selectType" parameterType="java.lang.Integer" resultType="java.lang.String">
+select parametername from tbparameter where parameterid=#{parameterid}
+</select>
+<!-- 查ID-->
+<select id="selectId" parameterType="java.lang.String" resultType="java.lang.Integer">
+select userId from usertbl where useraccount=#{account}
+</select>
+<!-- 查询日报是否提交 -->			
+<select id="daily"  parameterType="java.lang.String"  resultType="java.lang.String">
+select * from dailytbl where publishdate like #{dailyDate}
+</select>
+<!-- 提交日报 -->		
+<insert id="sumbit"  >
+insert into dailytbl values(SEQID.nextval,(select to_char(sysdate,'yyyy-mm-dd ') from dual),#{content},#{processId},'未评价','未评价')
+</insert>
+
+<!-- 查询顾问所接项目的编号 -->	
+<select id="serialNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+ select c.demandid from consultantsandneedstbl c,usertbl u where c.consultantid=u.userid and u.useraccount=#{account} and c.stateid =903
+</select>
+<!-- 查询项目详细信息 -->
+<select id="selectDaily" parameterType="java.lang.Integer" resultType="org.great.bean.DailyBean">
+select * from (
+select e.*,rownum rn from (
+select * from dailytbl where processid=#{parameterId}
+<if test="state !=null and state != ''">
+ and DAILYREVIEW like #{state}
+</if>
+) e
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= (#{page}*5-4)
+</select>	
+
+<!-- 查询项目日报总数 -->
+<select id="countDaily"  resultType="java.lang.Integer">
+select count(*) from  dailytbl where processid=#{parameterId}
+<if test="evaluation !=null and evaluation != ''"> 
+ and DAILYREVIEW like #{evaluation}
+</if>
+</select>
+<!-- 提交日报 -->
+<update id="sEvaluation" >
+UPDATE dailytbl set DAILYREVIEW=#{evaluation},POSTIL=#{notation} WHERE PUBLISHDATE like #{time} and PROCESSID=#{userId}
+</update>
 </mapper>
