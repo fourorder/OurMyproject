@@ -42,8 +42,6 @@ public class DemandHandler {
 
 	@Resource
 	private UserBean userBean;
-	@Resource
-	private AuthoriyMapper authoriyMapper;
 	@RequestMapping("/fromDemand.action") // 进入发布页面
 	public ModelAndView fromDemand(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();

@@ -268,7 +268,6 @@ function applyFor(){
 		 dataType:"json",
 		 type:"post",
 		 success:function(redata){
-			 alert(redata)
 			 if(redata==2){
 				 $('#aaa').empty();
 				 $("#aaa").append("<a>您已经是顾问！</a>")
