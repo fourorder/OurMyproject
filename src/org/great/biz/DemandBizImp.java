@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.great.bean.BidBean;
+import org.great.bean.CounselorInfoBean;
 import org.great.bean.DemandBean;
 import org.great.bean.DemandBeanX;
 import org.great.bean.DemandInfoBean;
@@ -36,12 +37,8 @@ public class DemandBizImp implements DemandBiz {
 			String parameterId, MultipartFile file, String dealMoney, String securityMoney) {
 		String demandHead = upLoadFile(request, file);
 
-		Date date = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String publishTime = format.format(date);
-
-		return demandMapper.addDemand(demandTitle, demandInformation, parameterId, userId, publishTime, demandHead,
-				dealMoney, securityMoney);
+		return demandMapper.addDemand(demandTitle, demandInformation, parameterId, userId, demandHead, dealMoney,
+				securityMoney);
 	}
 
 	public String upLoadFile(HttpServletRequest request, MultipartFile file) {
@@ -155,81 +152,91 @@ public class DemandBizImp implements DemandBiz {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String time = format.format(date);
 
-		
 		return demandMapper.addBid(userid, demandid, time);
 	}
+
 	@Override
 	public List<DemandBean> countDemand(String demandTitle) {
 		// TODO Auto-generated method stub
-		if (demandTitle!=null) {
-			demandTitle="%"+demandTitle+"%";
+		if (demandTitle != null) {
+			demandTitle = "%" + demandTitle + "%";
 		}
 		return demandMapper.countDemand(demandTitle);
 	}
+
 	@Override
-	public List<DemandBean> demand(String demandTitle,int page) {
+	public List<DemandBean> demand(String demandTitle, int page) {
 		// TODO Auto-generated method stub
-		if (demandTitle!=null) {
-			demandTitle="%"+demandTitle+"%";
+		if (demandTitle != null) {
+			demandTitle = "%" + demandTitle + "%";
 		}
-		return demandMapper.demand(demandTitle,page);
+		return demandMapper.demand(demandTitle, page);
 	}
-/*	@Override
-	public List<DemandBean> countDemand2(String demandTitle) {
-		// TODO Auto-generated method stub
-		demandTitle="%"+demandTitle+"%";
-		return demandMapper.countDemand2(demandTitle);
-	}*/
+
+	/*
+	 * @Override public List<DemandBean> countDemand2(String demandTitle) { //
+	 * TODO Auto-generated method stub demandTitle="%"+demandTitle+"%"; return
+	 * demandMapper.countDemand2(demandTitle); }
+	 */
 	@Override
 	public List<DemandBean> findInfo(int demandId) {
 		// TODO Auto-generated method stub
 		return demandMapper.findInfo(demandId);
 	}
+
 	@Override
 	public String findFromUserName(int demandId) {
 		// TODO Auto-generated method stub
 		return demandMapper.findFromUserName(demandId);
 	}
+
 	@Override
 	public String findToUserName(int demandId) {
 		// TODO Auto-generated method stub
 		return demandMapper.findToUserName(demandId);
 	}
+
 	@Override
 	public String findParameterName(int demandId) {
 		// TODO Auto-generated method stub
 		return demandMapper.findParameterName(demandId);
 	}
+
 	@Override
 	public String findStateName(int demandId) {
 		// TODO Auto-generated method stub
 		return demandMapper.findStateName(demandId);
 	}
+
 	@Override
 	public void changeInfo(int demandId2, String demandDetailInformation2, int securityMoney2, int dealMoney2,
 			String completeTime2, String auctionTime2, String demandHead2) {
-		 demandMapper.changeInfo(demandId2, demandDetailInformation2, securityMoney2, dealMoney2, completeTime2, auctionTime2, demandHead2);
-		
+		demandMapper.changeInfo(demandId2, demandDetailInformation2, securityMoney2, dealMoney2, completeTime2,
+				auctionTime2, demandHead2);
+
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	public void changeState(int demandId, int stateId) {
 		demandMapper.changeState(demandId);
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	public void changeState2(int demandId, int stateId) {
 		demandMapper.changeState2(demandId);
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	public void changeState3(int demandId, int stateId) {
 		demandMapper.changeState3(demandId);
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -241,11 +248,11 @@ public class DemandBizImp implements DemandBiz {
 	@Override
 	public ArrayList<DemandInfoBean> getDemandInfoList(int page, String name, String userid, String parameterid,
 			String stateid) {
-		// 9/27 新版搜索    显示6条数据
+		// 9/27 新版搜索 显示6条数据
 		end = page * 6;
 		star = end - 5;
-		
-		return demandMapper.getDemandInfoList(star+"", end+"", name, userid, parameterid, stateid);
+
+		return demandMapper.getDemandInfoList(star + "", end + "", name, userid, parameterid, stateid);
 	}
 
 	@Override
@@ -265,7 +272,7 @@ public class DemandBizImp implements DemandBiz {
 			String parameterid, String stateid) {
 		// 雇主ajax
 		List<Object> list = new ArrayList<Object>();
-		
+
 		int getPage = Integer.parseInt(page);
 
 		int count = demandMapper.demandCountEmployer(searchName, userid, parameterid, stateid);
@@ -285,34 +292,53 @@ public class DemandBizImp implements DemandBiz {
 		} else if (state.equals("query")) {
 			getPage = 1;
 		}
-		
+
 		end = getPage * 6;
 		star = end - 5;
 		list.add(getPage);
 		list.add(countPage);
 		list.add(count);
-		list.add(demandMapper.getDemandInfoList(star+"", end+"", searchName, userid, parameterid, stateid));
+		list.add(demandMapper.getDemandInfoList(star + "", end + "", searchName, userid, parameterid, stateid));
 		return list;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Override
+	public ArrayList<CounselorInfoBean> getCounselorInfoList() {
+		// TODO Auto-generated method stub
+		return demandMapper.getCounselorInfoList();
+	}
+
+	@Override
+	public int addConsultantRecords(String employerId, String consultantId, String demandId) {
+		// TODO Auto-generated method stub
+		return demandMapper.addCons(employerId, consultantId, demandId, "902");
+	}
+
+	@Override
+	public ArrayList<DemandInfoBean> getsupplierBidList(String userid) {
+		// TODO Auto-generated method stub
+		return demandMapper.getsupplierBidList(userid);
+	}
+
+	@Override
+	public int addContrac(HttpServletRequest request, String demandid, MultipartFile file) {
+		String demandHead = upLoadFile(request, file);
+		
+		DemandInfoBean bean = demandMapper.getDemandInfoBean(demandid);
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String fromtime = format.format(date);
+		//合同表插入数据
+		demandMapper.addContrac(demandid, bean.getFromUserBean().getUserId() + "", fromtime,
+				bean.getToUserBean().getUserId() + "", demandHead);
+		//改需求表状态
+		UpdateDemandBean updateDemandBean = new UpdateDemandBean();
+		updateDemandBean.setStateId("2061");
+		updateDemandBean.setDemandId(demandid);
+		demandMapper.updateDemand(updateDemandBean);
+		//插入
+		demandMapper.addDemandDeal(demandid,bean.getCompleteTime(),"2082");
+		return 0;
+	}
+
 }

@@ -248,42 +248,31 @@
 			
 			<div class="ydc-group-altogether">共<span> ${count}</span>人	投标</div>
 			
-			
-
-
-			
-			
-									
-									
+								
 									
 									
 									<div class="ydc-group-table">
 									<!-- 这个是主标签 -->
-									<c:forEach items="${bidList}" var="bidList">
+									<c:forEach items="${consList}" var="consList">
 
-
-
-
-										<!-- 审核中，查看详情，可编辑 -->
 
 										<div class="ydc-group-table-item">
 											<div class="ydc-group-table-item-img">
 												<img
-													src="<%=path%>picture/findPicture.action?url=${bidList.userBean.userHead}">
+													src="<%=path%>picture/findPicture.action?url=${consList.userBean.userHead}">
 											</div>
 											<div class="ydc-actions">
 												<div>
 													<button class="ydc-actions-trigger">查看详情</button>
-													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/determineBid.action?userid=${bidList.userBean.userId} &demandid=${demandInfo.demandId}'">确定招标</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/applicationConsultant.action?userid=${consList.userBean.userId} &demandid=${demandInfo.demandId}'">申请</button>
 												</div>
 											</div>
 											<div class="ydc-group-table-item-text">
-												<span> <a href="#">供应商：${bidList.userBean.userName}</a>
-												</span> <span class="ydc-group-table-item-tag">信用分：${bidList.userBean.userCredit}</span>
+												<span> <a href="#">顾问：${consList.userBean.userName}</a>
+												</span> <span class="ydc-group-table-item-tag">价格：￥   ${consList.counselorMoney}</span>
 											</div>
 											<div class="ydc-group-table-item-info">
-												<span>注册时间：${bidList.userBean.userRegisterTime}</span> <span>|
-													投标时间：${bidList.bidTime} | 手机：${bidList.userBean.userTel} </span>
+												<span>注册时间：${consList.userBean.userRegisterTime}</span> <span>| 手机：${consList.userBean.userTel} </span>
 													
 											</div>
 										</div>
@@ -291,13 +280,6 @@
 
 									</c:forEach>
 
-									
-										
-										
-										
-										
-									
-										
 										
 									</div>
 								</div>
@@ -322,7 +304,7 @@
 
 
 							<div class="ydc-pagination">
-								<ol>
+								<%-- <ol>
 									<li class="ydc-previous-item">
 										<button class="ydc-previous-item-btn-medium"
 											onclick="selectDemand('last')" id="last">
@@ -348,7 +330,7 @@
 											<span>跳转</span>
 										</button>
 									</li>
-								</ol>
+								</ol> --%>
 
 							</div>
 

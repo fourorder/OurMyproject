@@ -1,10 +1,14 @@
 package org.great.handler;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import org.great.bean.AuthorityBean;
 import org.great.bean.BidBean;
 import org.great.bean.DemandBean;
 import org.great.bean.DemandBeanX;
@@ -14,6 +18,7 @@ import org.great.bean.QueryBean;
 import org.great.bean.UpdateDemandBean;
 import org.great.bean.UserBean;
 import org.great.biz.DemandBiz;
+import org.great.mapper.AuthoriyMapper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +33,14 @@ public class DemandHandler {
 	private int page;// 当前也
 	private int countpage;// 总页
 	private String searchName;
-	private int  count;//总条数
+	private int count;// 总条数
 	@Resource
 	private DemandBiz demandBizImp;
 	@Resource
 	private UserBean userBean;
+	@Resource
+	private AuthoriyMapper authoriyMapper;
+	
 	@RequestMapping("/fromDemand.action") // 进入发布页面
 	public ModelAndView fromDemand(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -82,9 +90,9 @@ public class DemandHandler {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("jsp/demandInfo");
 		request.setAttribute("demandInfo", demandBizImp.getDemandInfoBean(demandid));
-		
+
 		request.setAttribute("bidList", demandBizImp.getBidList(demandid));
-		
+
 		return modelAndView;
 	}
 
@@ -114,9 +122,9 @@ public class DemandHandler {
 		// 获取需求列表
 		request.setAttribute("demandInfo",
 				demandBizImp.getDemandInfoList(page, null, userBean.getUserId() + "", "0", "0"));
-		
+
 		request.setAttribute("page", page);
-		
+
 		count = demandBizImp.demandCountEmployer(null, userBean.getUserId() + "", "0", "0");
 		int size = 6;
 		int countpage = 0;
@@ -125,240 +133,316 @@ public class DemandHandler {
 		} else {
 			countpage = count / size;
 		}
-		
+
 		request.setAttribute("countpage", countpage);
 		request.setAttribute("count", count);
-		
+
 		return modelAndView;
 	}
 
 	@RequestMapping("/page.action")
-	public ModelAndView test(HttpServletRequest request,String demandTitle,String page,String number) {
-		List<DemandBean> demand=demandBizImp.countDemand(demandTitle);
-		int countPage=demand.size();
-		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
-		int num=Integer.parseInt(number);
-		if(page.equals("tpage")) {
+	public ModelAndView test(HttpServletRequest request, String demandTitle, String page, String number) {
+		List<DemandBean> demand = demandBizImp.countDemand(demandTitle);
+		int countPage = demand.size();
+		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);// 定义总页数
+		int num = Integer.parseInt(number);
+		if (page.equals("tpage")) {
 			num--;
-			if(num<=0) {
-				num=1;
+			if (num <= 0) {
+				num = 1;
 			}
-		}else if(page.equals("npage")) {
+		} else if (page.equals("npage")) {
 			num++;
-			if (totalPages<num) {
-				num=totalPages;
+			if (totalPages < num) {
+				num = totalPages;
 			}
-			
+
 		}
-		System.out.println("总用户数为："+countPage);
-		System.out.println("当前页为："+num);
-		System.out.println("总共页数："+totalPages);
-		
-		List<DemandBean> list=new ArrayList<DemandBean>();
-		list=demandBizImp.demand(demandTitle, num);
-		System.out.println("需求有："+list.size());
+		System.out.println("总用户数为：" + countPage);
+		System.out.println("当前页为：" + num);
+		System.out.println("总共页数：" + totalPages);
+
+		List<DemandBean> list = new ArrayList<DemandBean>();
+		list = demandBizImp.demand(demandTitle, num);
+		System.out.println("需求有：" + list.size());
 		request.setAttribute("Flist", list);
 		request.setAttribute("countPage", totalPages);
 		request.setAttribute("num", num);
-		ModelAndView modelAndView=new ModelAndView();
+		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("jsp/demandManager");
 		return modelAndView;
 
-		
 	}
+
 	@RequestMapping("/selectPage.action")
 	@ResponseBody
-	public List<Object> selectPage(String demandTitle,String page,String number) {
-		if(number=="") {
-			number="1";
+	public List<Object> selectPage(String demandTitle, String page, String number) {
+		if (number == "") {
+			number = "1";
 		}
-		int countPage=0;
-		List<Object> list1=new ArrayList<>();
-			System.out.println("我来了");
-			System.out.println("page="+page);
-			
-			List<DemandBean> demand=demandBizImp.countDemand(demandTitle);
-			countPage=demand.size();//总用户数
-			
-	
-		
-		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
-		int num=Integer.parseInt(number);
-		if(page.equals("tpage")) {
+		int countPage = 0;
+		List<Object> list1 = new ArrayList<>();
+		System.out.println("我来了");
+		System.out.println("page=" + page);
+
+		List<DemandBean> demand = demandBizImp.countDemand(demandTitle);
+		countPage = demand.size();// 总用户数
+
+		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);// 定义总页数
+		int num = Integer.parseInt(number);
+		if (page.equals("tpage")) {
 			num--;
-			if(num<=0) {
-				num=1;
+			if (num <= 0) {
+				num = 1;
 			}
-		}else if(page.equals("npage")) {
+		} else if (page.equals("npage")) {
 			num++;
-			if (totalPages<num) {
-				num=totalPages;
+			if (totalPages < num) {
+				num = totalPages;
 			}
-			
-		}else if(page.equals("page")) {
-			if(num>totalPages) {
-				num=totalPages;
-			}else if(num<0) {
-				num=1;
+
+		} else if (page.equals("page")) {
+			if (num > totalPages) {
+				num = totalPages;
+			} else if (num < 0) {
+				num = 1;
 			}
 		}
-		System.out.println("当前页为："+num);
-		System.out.println("总共页数："+totalPages);
-		List<DemandBean> list=new ArrayList<DemandBean>();
-		list=demandBizImp.demand(demandTitle, num);
+		System.out.println("当前页为：" + num);
+		System.out.println("总共页数：" + totalPages);
+		List<DemandBean> list = new ArrayList<DemandBean>();
+		list = demandBizImp.demand(demandTitle, num);
 		list1.add(list);
 		list1.add(num);
 		list1.add(totalPages);
 		return list1;
-		
-		
+
 	}
+
 	@RequestMapping("/findById.action")
 	@ResponseBody
-	public List<Object> test(int demandId){
-		List<Object> list=new ArrayList<>();
-		List<DemandBean> list1=demandBizImp.findInfo(demandId);
-		String fromUserName=demandBizImp.findFromUserName(demandId);
-		String toUserName=demandBizImp.findToUserName(demandId);
-		String parameterName=demandBizImp.findParameterName(demandId);
-		String stateName=demandBizImp.findStateName(demandId);
+	public List<Object> test(int demandId) {
+		List<Object> list = new ArrayList<>();
+		List<DemandBean> list1 = demandBizImp.findInfo(demandId);
+		String fromUserName = demandBizImp.findFromUserName(demandId);
+		String toUserName = demandBizImp.findToUserName(demandId);
+		String parameterName = demandBizImp.findParameterName(demandId);
+		String stateName = demandBizImp.findStateName(demandId);
 		list.add(fromUserName);
 		list.add(toUserName);
 		list.add(parameterName);
 		list.add(stateName);
 		list.add(list1);
-		
+
 		return list;
-		
+
 	}
+
 	@RequestMapping("changeInfo.action")
 	public ModelAndView test(HttpServletRequest request) {
-		String demandId2=request.getParameter("demandId2");
-		String demandDetailInformation2=request.getParameter("demandDetailInformation2");
-		String securityMoney2=request.getParameter("securityMoney2");
-		String dealMoney2=request.getParameter("dealMoney2");
-		String completeTime2=request.getParameter("completeTime2");
-		String auctionTime2=request.getParameter("auctionTime2");
-		String demandHead2=request.getParameter("demandHead2");
-		demandBizImp.changeInfo(Integer.valueOf(demandId2),demandDetailInformation2,Integer.valueOf(securityMoney2),Integer.valueOf(dealMoney2),completeTime2,auctionTime2,demandHead2);
-		
-		ModelAndView modelAndView=new ModelAndView("redirect:/demand/page.action?page=tpage&number=1");
-		
-		
-		
-		
-		
-		
-		
+		String demandId2 = request.getParameter("demandId2");
+		String demandDetailInformation2 = request.getParameter("demandDetailInformation2");
+		String securityMoney2 = request.getParameter("securityMoney2");
+		String dealMoney2 = request.getParameter("dealMoney2");
+		String completeTime2 = request.getParameter("completeTime2");
+		String auctionTime2 = request.getParameter("auctionTime2");
+		String demandHead2 = request.getParameter("demandHead2");
+		demandBizImp.changeInfo(Integer.valueOf(demandId2), demandDetailInformation2, Integer.valueOf(securityMoney2),
+				Integer.valueOf(dealMoney2), completeTime2, auctionTime2, demandHead2);
+
+		ModelAndView modelAndView = new ModelAndView("redirect:/demand/page.action?page=tpage&number=1");
+
 		return modelAndView;
-		
+
 	}
+
 	@RequestMapping("/changeState.action")
 	@ResponseBody
-	public List<Object> test(String demandTitle,String demandId,String stateId,String number,String page) {
-		int num=Integer.valueOf(number);
-		 int stateId2=Integer.valueOf(stateId);
-	if(stateId2==3) {
-		demandBizImp.changeState(Integer.valueOf(demandId),Integer.valueOf(stateId));//删除
-	}else if(stateId2==1) {
-		demandBizImp.changeState2(Integer.valueOf(demandId),Integer.valueOf(stateId));//审核通过
-	}else if(stateId2==2) {
-		demandBizImp.changeState3(Integer.valueOf(demandId),Integer.valueOf(stateId));//违规下架
-	}
-			
-		
-		
-	/*	List<DemandBean> demand=demandBizImp.countDemand(demandTitle);
-		
-		int countPage=demand.size();//总用户数
-		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
-		if(num>totalPages) {
-			num=totalPages;
+	public List<Object> test(String demandTitle, String demandId, String stateId, String number, String page) {
+		int num = Integer.valueOf(number);
+		int stateId2 = Integer.valueOf(stateId);
+		if (stateId2 == 3) {
+			demandBizImp.changeState(Integer.valueOf(demandId), Integer.valueOf(stateId));// 删除
+		} else if (stateId2 == 1) {
+			demandBizImp.changeState2(Integer.valueOf(demandId), Integer.valueOf(stateId));// 审核通过
+		} else if (stateId2 == 2) {
+			demandBizImp.changeState3(Integer.valueOf(demandId), Integer.valueOf(stateId));// 违规下架
 		}
-		List<DemandBean> list=new ArrayList<DemandBean>();
-		list=demandBizImp.demand(demandTitle, num);
-		
-		List<Object> list2=new ArrayList<>();
-		
-		list2.add(list);
-		list2.add(num);
-		list2.add(totalPages);
-<<<<<<< HEAD
-		return list2 ;	
-=======
-		return list2 ;	*/
-	
-	if(number=="") {
-		number="1";
-	}
-	int countPage=0;
-	List<Object> list1=new ArrayList<>();
-		System.out.println("我来了");
-		System.out.println("page="+page);
-		
-		List<DemandBean> demand=demandBizImp.countDemand(demandTitle);
-		countPage=demand.size();//总用户数
-		
 
-	
-	int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
-	
-	if(page.equals("tpage")) {
-		num--;
-		if(num<=0) {
-			num=1;
+		/*
+		 * List<DemandBean> demand=demandBizImp.countDemand(demandTitle);
+		 * 
+		 * int countPage=demand.size();//总用户数 int totalPages = countPage / 5 +
+		 * ((countPage % 5) > 0 ? 1 : 0);//定义总页数 if(num>totalPages) {
+		 * num=totalPages; } List<DemandBean> list=new ArrayList<DemandBean>();
+		 * list=demandBizImp.demand(demandTitle, num);
+		 * 
+		 * List<Object> list2=new ArrayList<>();
+		 * 
+		 * list2.add(list); list2.add(num); list2.add(totalPages); <<<<<<< HEAD
+		 * return list2 ; ======= return list2 ;
+		 */
+
+		if (number == "") {
+			number = "1";
 		}
-	}else if(page.equals("npage")) {
-		num++;
-		if (totalPages<num) {
-			num=totalPages;
-		}
-		
-	}else if(page.equals("page")) {
-		if(num>totalPages) {
-			num=totalPages;
-		}else if(num<0) {
-			num=1;
-		}
-	}
-	System.out.println("当前页为："+num);
-	System.out.println("总共页数："+totalPages);
-	List<DemandBean> list=new ArrayList<DemandBean>();
-	list=demandBizImp.demand(demandTitle, num);
-	list1.add(list);
-	list1.add(num);
-	list1.add(totalPages);
-	return list1;
-	}
-	// 雇主进入查看投标详情 bidControl 9/27
-		@RequestMapping("/gobidControl.action")
-		public ModelAndView gobidControl(HttpServletRequest request, String demandid) {
-			ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("jsp/bidControl");
-			count = demandBizImp.getBidList(demandid).size();
-			request.setAttribute("demandInfo", demandBizImp.getDemandInfoBean(demandid));
-			request.setAttribute("bidList", demandBizImp.getBidList(demandid));
-			request.setAttribute("count", count);
-			return modelAndView;
-		}
-		//确定投标人
-		@RequestMapping("/determineBid.action")
-		public ModelAndView determineBid(HttpServletRequest request, String userid,String demandid) {
-			ModelAndView modelAndView = new ModelAndView();
-			UpdateDemandBean demandBean = new UpdateDemandBean();
-			demandBean.setToUserId(userid);
-			demandBean.setStateId("10");
-			demandBean.setDemandId(demandid);
-			demandBizImp.updateDemand(demandBean);
-			modelAndView.setViewName("redirect:/demand/goDemandControl.action");
-			return modelAndView;
-		}
-		//ajax 返回供应商查看
-		// ajax分页查询
-			@RequestMapping("/selectDemandEmployer.action") // ajax分页跳转
-			@ResponseBody
-			public List<Object> selectDemandEmployer(String userid,String state, String page, String searchName,String parameterid,String stateid ) {
-				
-				return demandBizImp.queayDemandEmployerList(userid, state, page, searchName, parameterid, stateid);
+		int countPage = 0;
+		List<Object> list1 = new ArrayList<>();
+		System.out.println("我来了");
+		System.out.println("page=" + page);
+
+		List<DemandBean> demand = demandBizImp.countDemand(demandTitle);
+		countPage = demand.size();// 总用户数
+
+		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);// 定义总页数
+
+		if (page.equals("tpage")) {
+			num--;
+			if (num <= 0) {
+				num = 1;
 			}
+		} else if (page.equals("npage")) {
+			num++;
+			if (totalPages < num) {
+				num = totalPages;
+			}
+
+		} else if (page.equals("page")) {
+			if (num > totalPages) {
+				num = totalPages;
+			} else if (num < 0) {
+				num = 1;
+			}
+		}
+		System.out.println("当前页为：" + num);
+		System.out.println("总共页数：" + totalPages);
+		List<DemandBean> list = new ArrayList<DemandBean>();
+		list = demandBizImp.demand(demandTitle, num);
+		list1.add(list);
+		list1.add(num);
+		list1.add(totalPages);
+		return list1;
+	}
+
+	// 雇主进入查看投标详情 bidControl 9/27
+	@RequestMapping("/gobidControl.action")
+	public ModelAndView gobidControl(HttpServletRequest request, String demandid) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("jsp/bidControl");
+		count = demandBizImp.getBidList(demandid).size();
+		request.setAttribute("demandInfo", demandBizImp.getDemandInfoBean(demandid));
+		request.setAttribute("bidList", demandBizImp.getBidList(demandid));
+		request.setAttribute("count", count);
+		return modelAndView;
+	}
+
+	// 确定投标人
+	@RequestMapping("/determineBid.action")
+	public ModelAndView determineBid(HttpServletRequest request, String userid, String demandid) {
+		ModelAndView modelAndView = new ModelAndView();
+		UpdateDemandBean demandBean = new UpdateDemandBean();
+		demandBean.setToUserId(userid);
+		demandBean.setStateId("10");
+		demandBean.setDemandId(demandid);
+		demandBizImp.updateDemand(demandBean);
+		modelAndView.setViewName("redirect:/demand/goDemandControl.action");
+		return modelAndView;
+	}
+
+	// ajax 返回供应商查看
+	// ajax分页查询
+	@RequestMapping("/selectDemandEmployer.action") // ajax分页跳转
+	@ResponseBody
+	public List<Object> selectDemandEmployer(String userid, String state, String page, String searchName,
+			String parameterid, String stateid) {
+
+		return demandBizImp.queayDemandEmployerList(userid, state, page, searchName, parameterid, stateid);
+	}
+	// 跳转到找顾问页面
+	@RequestMapping("/LookingForConsultant.action")
+	public ModelAndView LookingForConsultant(HttpServletRequest request,String demandid){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("jsp/LookingForConsultant");
+		//LookingForConsultant   getCounselorInfoList
+		count = demandBizImp.getCounselorInfoList().size();//顾问人数
+		request.setAttribute("demandInfo", demandBizImp.getDemandInfoBean(demandid));//产品信息
+		request.setAttribute("consList", demandBizImp.getCounselorInfoList());//顾问列表
+		request.setAttribute("count", count);
+		return modelAndView;
+	}
+	//申请顾问帮助
+	@RequestMapping("/applicationConsultant.action")
+	public ModelAndView applicationConsultant(HttpServletRequest request, String userid, String demandid){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/demand/goDemandControl.action");
+		//add申请  1862
+		UpdateDemandBean demandBean = new UpdateDemandBean();
+		demandBean.setStateId("1862");
+		demandBean.setDemandId(demandid);
+		demandBizImp.updateDemand(demandBean);
+		userBean = (UserBean) request.getSession().getAttribute("user");
+		demandBizImp.addConsultantRecords(userBean.getUserId() + "", userid, demandid);
+		return modelAndView;
+	}
+	//服务商投标成功后获取的任务 supplierBid
+	@RequestMapping("/goSupplierBid.action")
+	public ModelAndView goSupplierBid(HttpServletRequest request){
+		ModelAndView modelAndView = new ModelAndView();
+		userBean = (UserBean) request.getSession().getAttribute("user");
+		//------------菜单------
+				
+		ArrayList<AuthorityBean> menuList=new ArrayList<AuthorityBean>();
+		menuList=authoriyMapper.findOwnMune(userBean.getUserId());
+		request.setAttribute("menuList", menuList);
+		//---------------------
+		
+		
+		
+		modelAndView.setViewName("jsp/supplierBid");
+		ArrayList<DemandInfoBean>list =demandBizImp.getsupplierBidList(userBean.getUserId() + "");
+		count = list.size();
+		request.setAttribute("count", count);
+		request.setAttribute("demandInfo",list);
+		return modelAndView;
+	}
+	//开始投标，进入投标页
+	@RequestMapping("/goDemandBid.action")
+	public ModelAndView goDemandBid(HttpServletRequest request,String demandid){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("jsp/demandBid");
+		request.setAttribute("demandInfo", demandBizImp.getDemandInfoBean(demandid));
+		return modelAndView;
+	}
+	//修改需求信息，加工期，加开始时间，改状态，返回需求列表
+	@RequestMapping("/stateDemandBid.action")
+	public ModelAndView stateDemandBid(HttpServletRequest request,String completeTime,String demandid){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/demand/goDemandControl.action");
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String publishTime = format.format(date);
+		UpdateDemandBean demandBean = new UpdateDemandBean();
+		demandBean.setDemandId(demandid);
+		demandBean.setStateId("9");
+		demandBean.setCompleteTime(completeTime);
+		demandBean.setPublishTime(publishTime);
+		demandBizImp.updateDemand(demandBean);
+		return modelAndView;
+	}
+	//雇主上传合同，先进入合同页面 fromContract
+	@RequestMapping("/goFromContract.action")
+	public ModelAndView goFromContract(HttpServletRequest request,String demandid){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("jsp/fromContract");
+		request.setAttribute("demandInfo", demandBizImp.getDemandInfoBean(demandid));
+		return modelAndView;
+	}
+	//提交合同
+	@RequestMapping("/addContrac.action")
+	public ModelAndView addContrac(HttpServletRequest request,String demandid,MultipartFile file){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/demand/goDemandControl.action");
+		demandBizImp.addContrac(request, demandid, file);
+		return modelAndView;
+	}
 }

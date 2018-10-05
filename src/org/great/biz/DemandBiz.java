@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
 import org.great.bean.BidBean;
+import org.great.bean.CounselorInfoBean;
 import org.great.bean.DemandBean;
 import org.great.bean.BidBean;
 import org.great.bean.DemandBeanX;
@@ -70,5 +71,12 @@ public interface DemandBiz {
 	public int updateDemand(UpdateDemandBean updateDemandBean);
 	//ajax 雇主分页查询
 	public List<Object>queayDemandEmployerList(String userid,String state, String page, String searchName,String parameterid,String stateid);
-
+	//找顾问
+	public ArrayList<CounselorInfoBean>getCounselorInfoList();
+	//增加找顾问记录
+	public int addConsultantRecords(String employerId,String consultantId,String demandId);
+	//服务商查看投标任务
+	public ArrayList<DemandInfoBean> getsupplierBidList(String userid);
+	//雇主上传合同
+	public int addContrac(HttpServletRequest request,String demandid,MultipartFile file); 
 }

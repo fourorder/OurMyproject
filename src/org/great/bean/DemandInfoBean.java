@@ -13,7 +13,7 @@ public class DemandInfoBean {
 	private String publishTime;//发布时间
 	private String securityMoney;//押金
 	private String dealMoney;//佣金
-	private String completeTime;//完成时间
+	private String completeTime;//工期
 	private String auctionTime;//拍卖时间
 	private String stateId;//拍卖状态
 	private String demandHead;//需求头像
