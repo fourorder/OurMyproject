@@ -31,7 +31,7 @@ public interface AuthoriyMapper {
 
 
 		//查找该用户 角色所有的子菜单  没有父类菜单
-		public ArrayList<AuthorityBean> findOwnSubclassMenu(int id);			
+		public ArrayList<AuthorityBean> findOwnSubclassMenu(@Param("id")int id);			
 
 
 	

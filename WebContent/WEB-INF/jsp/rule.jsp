@@ -40,7 +40,7 @@
 <div class="o-top">
 				<div class="width1180">
 					
-					<span class="fr">
+					<span class="fr" id="fr1">
 						<!-- <a href="#" title="登录">登录</a>
 						<a href="#" title="注册">注册</a> -->
 						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
@@ -71,7 +71,47 @@
 <!-- content YDC end -->
 
 	<script type="text/javascript" src="<%=path%>admin/js/jquery.min.js"></script>
+<script type="text/javascript">
 
+var websocket = null;  
+var username = '${user.userAccount}'; 
+/*   var username = "user"; */
+  
+/*       function online(){ */
+  //判断当前浏览器是否支持WebSocket  
+  if ('WebSocket' in window) { 
+  	
+     /*  websocket = new WebSocket("ws://" + document.location.host + "/WebChat/websocket/" + username + "/"+ _img);  */ 
+  	  websocket = new WebSocket("ws://" + document.location.host + "/Myproject/websocket/" + username); 
+  	/*  websocket = new WebSocket("ws://localhost:8080/Myproject/websocket"); */
+  } else {  
+      alert('当前浏览器 Not support websocket')  
+  }  
+  
+//接收到消息的回调方法  
+  websocket.onmessage = function(event) {  
+	
+		if(event.data!=null){
+			var arr=event.data.split("|");
+			var text=arr[1];
+			var touser=arr[0];
+			$("#fr1").append("<a href='<%=path%>chat/gotochat.action?account="+touser+"&msg="+text+"' title='有新消息'  target='_blank'><i class='o-contract'></i>有新消息</a>");
+		}
+		
+      
+  }  
+   
+//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。  
+  window.onbeforeunload = function() {  
+      closeWebSocket();  
+  }   
+
+//关闭WebSocket连接  
+function closeWebSocket() {  
+   websocket.close();  
+}  
+
+</script>
 
 </body>
 </html>

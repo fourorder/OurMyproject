@@ -94,7 +94,7 @@ public class ProductionHandler {
 		//------------菜单------
 		UserBean userBean=(UserBean) request.getSession().getAttribute("user");
 		ArrayList<AuthorityBean> menuList=new ArrayList<AuthorityBean>();
-		menuList=authoriyMapper.findOwnMune(userBean.getUserId());
+		menuList=authoriyMapper.findOwnSubclassMenu(userBean.getUserId());
 		request.setAttribute("menuList", menuList);
 		//---------------------
 		return mav;
@@ -372,11 +372,13 @@ ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
 		//list=productionMapper.findProductionList(conditionBean);
 		request.setAttribute("list", list);
 		
+		
 		//------------菜单------
 		ArrayList<AuthorityBean> menuList=new ArrayList<AuthorityBean>();
-		menuList=authoriyMapper.findOwnMune(userBean.getUserId());
+		menuList=authoriyMapper.findOwnSubclassMenu(userBean.getUserId());
 		request.setAttribute("menuList", menuList);
 		//---------------------
+		
 		
 		
 		
@@ -649,9 +651,9 @@ ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
 		//----------------菜单-------
 		//------------菜单------
 		ArrayList<AuthorityBean> menuList=new ArrayList<AuthorityBean>();
-		menuList=authoriyMapper.findOwnMune(userBean.getUserId());
+		menuList=authoriyMapper.findOwnSubclassMenu(userBean.getUserId());
 		request.setAttribute("menuList", menuList);
-		//---------------------
+	//---------------------
 		
 		
 		//----------------------

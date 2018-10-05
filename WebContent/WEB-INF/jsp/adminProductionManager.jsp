@@ -169,11 +169,11 @@
 </table>
 当前页<span id="currentPage" >${currentPage}</span>  
 											总页数<span id="totalPages"  >${totalPages } </span>  
-                                                    <button class="ydc-previous-item-btn-medium" onclick="addPages('last')"  >
+                                                    <button class="btn btn-primary" onclick="addPages('last')"  >
                                                         <span>上一页</span>
                                                     </button>
                                                 
-                                                    <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  >
+                                                    <button class="btn btn-primary"  onclick="addPages('next')"  >
                                                         <span>下一页</span>
                                                     </button>
 </div>

@@ -23,7 +23,7 @@ public String userRegisterTime;//注册时间
 public String userProfile;//用户简介
 public String characterName;
 public String stateName;
-
+public int count;
 public String getStateName() {
 	return stateName;
 }
@@ -155,4 +155,13 @@ public UserBean(String userAccount,String userPwd) {
 	this.userAccount = userAccount;
 	this.userPwd = userPwd;
 }
+
+public int getCount() {
+	return count;
+}
+
+public void setCount(int count) {
+	this.count = count;
+}
+
 }

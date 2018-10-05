@@ -1,13 +1,18 @@
 package org.great.handler;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import org.great.bean.AuthorityBean;
+import org.great.bean.UserBean;
 import org.great.bean.UserInfoBean;
 import org.great.biz.ProductionBiz;
 import org.great.biz.UserBiz;
+import org.great.mapper.AuthoriyMapper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +29,8 @@ public class UserHandler {
 private UserBiz userBizImp;
 @Resource
 private ProductionBiz productionBizImp;
+@Resource 
+private AuthoriyMapper authoriyMapper;
 
 
 @RequestMapping("/search.action")
@@ -81,9 +88,13 @@ public ModelAndView returnHome(){
 
 ModelAndView UserInformation(HttpServletRequest request,String userid){
 	ModelAndView modelAndView=new ModelAndView();
-	
-	request.setAttribute("userInfo", userBizImp.userinfo(userid));
+	UserBean userBean=(UserBean) request.getSession().getAttribute("user");
+	request.setAttribute("userInfo", userBizImp.userinfo(userBean.getUserId()+""));
 	modelAndView.setViewName("jsp/userInfo");
+	
+	ArrayList<AuthorityBean> menuList=new ArrayList<AuthorityBean>();
+	menuList=authoriyMapper.findOwnSubclassMenu(userBean.getUserId());
+	request.setAttribute("menuList", menuList);
 	return modelAndView;
 
 }		
@@ -104,6 +115,9 @@ ModelAndView UserInformation(HttpServletRequest request,String userid){
 		
 		userBizImp.userInfoEdit(request,userId, userProfile, userName, userIdentity, userTel, userMail,file);
 		request.setAttribute("userInfo", userBizImp.userinfo(userId));
+		UserBean userBean = (UserBean) request.getSession().getAttribute("user");
+		userBean.setUserHead(userBizImp.userinfo(userId).getUserHead());
+		request.getSession().setAttribute("user", userBean);
 		modelAndView.setViewName("jsp/userInfo");
 		return modelAndView;
 

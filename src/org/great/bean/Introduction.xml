@@ -4,6 +4,6 @@
 <mapper namespace="org.great.mapper.IntroductionMapper">
 <!-- 查询规则内容 -->
 <select id="getIntroduction" resultType="org.great.bean.IntroductionBean">
-select * from tblintroduction where upflag = 1
+select * from tblintroduction where upflag = 5
 </select> 
 </mapper>

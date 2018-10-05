@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import org.great.bean.AuthorityBean;
 import org.great.bean.BidBean;
 import org.great.bean.DemandBean;
 import org.great.bean.DemandBeanX;
@@ -14,6 +16,7 @@ import org.great.bean.QueryBean;
 import org.great.bean.UpdateDemandBean;
 import org.great.bean.UserBean;
 import org.great.biz.DemandBiz;
+import org.great.mapper.AuthoriyMapper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +36,8 @@ public class DemandHandler {
 	private DemandBiz demandBizImp;
 	@Resource
 	private UserBean userBean;
+	@Resource
+	private AuthoriyMapper authoriyMapper;
 	@RequestMapping("/fromDemand.action") // 进入发布页面
 	public ModelAndView fromDemand(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -40,6 +45,12 @@ public class DemandHandler {
 		ArrayList<ParameterBean> parameterBeans = new ArrayList<>();
 		parameterBeans = demandBizImp.getParmater();
 		request.setAttribute("parameterBeans", parameterBeans);
+		UserBean ub=(UserBean) request.getSession().getAttribute("user");
+		//------------菜单------
+		ArrayList<AuthorityBean> menuList=new ArrayList<AuthorityBean>();
+		menuList=authoriyMapper.findOwnSubclassMenu(ub.getUserId());
+		request.setAttribute("menuList", menuList);
+		//---------------------
 		return modelAndView;
 	}
 
@@ -128,7 +139,11 @@ public class DemandHandler {
 		
 		request.setAttribute("countpage", countpage);
 		request.setAttribute("count", count);
-		
+		//------------菜单------
+		ArrayList<AuthorityBean> menuList=new ArrayList<AuthorityBean>();
+		menuList=authoriyMapper.findOwnSubclassMenu(userBean.getUserId());
+		request.setAttribute("menuList", menuList);
+		//---------------------
 		return modelAndView;
 	}
 

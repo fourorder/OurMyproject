@@ -130,13 +130,16 @@
 				<div class="ydc-column ydc-column-2">
 					<div class="ydc-menu">
 						<ul>
+						<c:forEach items="${menuList}"  var="menuList">
 							<li class="ydc-menu-item">
-								<a href="index.html" class="">
-									<i class="ydc-icon ydc-icon-home fl"></i>
-									首页
+								<a href="<%=path %>${menuList.pathName}" class="">
+									<i class="${menuList.divClass}"></i>
+									${menuList.authorityName}
 								</a>
 							</li>
-							<li class="ydc-menu-item">
+						</c:forEach>
+							
+							<!-- <li class="ydc-menu-item">
 								<a href="release.html" class="">
 									<i class="ydc-icon ydc-icon-find fl"></i>
 									发布
@@ -149,7 +152,7 @@
                                     </span>
 								<ul>
 									<li>
-										<a href="content.html" class="active">内容管理</a>
+										<a href="content.html">内容管理</a>
 									</li>
 									<li>
 										<a href="related.html">内容同步</a>
@@ -185,7 +188,7 @@
                                     </span>
 								<ul>
 									<li>
-										<a href="info.html">账号信息</a>
+										<a href="info.html" class="active">账号信息</a>
 									</li>
 									<li>
 										<a href="account.html">账号状态</a>
@@ -200,10 +203,10 @@
                                     </span>
 								<ul>
 									<li>
-										<a href="#">在线咨询</a>
+										<a href="customer.html">在线咨询</a>
 									</li>
 								</ul>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 				</div>

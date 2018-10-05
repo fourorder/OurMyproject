@@ -189,13 +189,13 @@
                                             </li>
                                             
                                                 <li class="ydc-previous-item">
-                                                    <button class="ydc-previous-item-btn-medium "  onclick="addPages('last')">
+                                                    <button class="btn btn-primary "  onclick="addPages('last')">
                                                         <span>上一页</span>
                                                     </button>
                                                 </li>
                                                 
                                                 <li class="ydc-previous-item">
-                                                    <button class="ydc-previous-item-btn-medium" onclick="addPages('next')" >
+                                                    <button class="btn btn-primary" onclick="addPages('next')" >
                                                         <span>下一页</span>
                                                     </button>
                                                 </li>
@@ -256,7 +256,7 @@
 	    }
 	
         </script>
-        <script type="text/javascript">
+        <script type="text/javascript"> 
             
 	    $(function(){
 	        $('.ydc-tabPanel ul li').click(function(){

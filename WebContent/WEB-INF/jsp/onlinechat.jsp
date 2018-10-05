@@ -58,29 +58,14 @@
 	</body>
  <script type="text/javascript" src="<%=path %>js/jquery.min.js"></script> 
         <script type="text/javascript" >
-		var msg='${msg}';
         var websocket = null;  
         var touser='${toUser}';
         var username = '${user.userAccount}'; 
-        if(msg!=''){
-        	$("#touser").html(touser);
-        	var leftContent = document.getElementById("leftContent");
-        	var len = msg.length;
-      		var option1 = document.createElement("option");
-      		option1.innerHTML = msg;
-      		option1.style.backgroundColor = "white";
-      		option1.style.marginLeft = "10px";
-      		option1.style.width = len * 15 + len*2 + "px";
-      		leftContent.appendChild(option1);
-        }
-      /*   var username = "user"; */
-          
-/*       function online(){ */
-    	  //判断当前浏览器是否支持WebSocket  
+        var flag='1';
            if ('WebSocket' in window) { 
           	
            
-          	  websocket = new WebSocket("ws://" + document.location.host + "/Myproject/websocket/" + username); 
+          	  websocket = new WebSocket("ws://" + document.location.host + "/Myproject/websocket/"+username+"/"+flag+"/"+touser); 
           	  
              
           }else{
