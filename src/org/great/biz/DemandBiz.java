@@ -10,6 +10,7 @@ import org.great.bean.ApplicationBean;
 import org.great.bean.BidBean;
 import org.great.bean.CounselorBean;
 import org.great.bean.DailyBean;
+import org.great.bean.CounselorInfoBean;
 import org.great.bean.DemandBean;
 import org.great.bean.BidBean;
 import org.great.bean.DemandBeanX;
@@ -73,8 +74,8 @@ public interface DemandBiz {
 	public int updateDemand(UpdateDemandBean updateDemandBean);
 	//ajax 雇主分页查询
 	public List<Object>queayDemandEmployerList(String userid,String state, String page, String searchName,String parameterid,String stateid);
-	//服务商查看投标任务
-		public ArrayList<DemandInfoBean> getsupplierBidList(String userid);
+
+	
 
 
 	 public List<String>   type();//顾问类型
@@ -100,9 +101,12 @@ public interface DemandBiz {
 	     public List<DailyBean>  selectDaily(int parameterId,String state,int page);//查询详细项目内容
 	     public int  countDaily(int parameterId,String evaluation);//查询项目日报总数
 	     public int sEvaluation(int userId,String evaluation,String notation,String time);//提交评价
-
-	
-	
-
-
+	   //找顾问
+	 	public ArrayList<CounselorInfoBean>getCounselorInfoList();
+	 	//增加找顾问记录
+	 	public int addConsultantRecords(String employerId,String consultantId,String demandId);
+	 	//服务商查看投标任务
+	 	public ArrayList<DemandInfoBean> getsupplierBidList(String userid);
+	 	//雇主上传合同
+	 	public int addContrac(HttpServletRequest request,String demandid,MultipartFile file); 
 }

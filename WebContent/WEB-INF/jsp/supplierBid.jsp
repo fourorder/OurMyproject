@@ -200,7 +200,11 @@
 											<div class="ydc-actions">
 												<div>
 													<button class="ydc-actions-trigger">需求详情</button>
+<<<<<<< HEAD
 													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/daily.action?demandid=${demandInfo.demandId}'">日志</button>
+=======
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/####.action?demandid=${demandInfo.demandId}'">日志</button>
+>>>>>>> branch 'master' of https://github.com/fourorder/OurMyproject.git
 													<button class="ydc-actions-trigger">提交项目</button>
 													
 												</div>

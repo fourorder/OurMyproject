@@ -13,19 +13,19 @@
 	</select>
 	<!-- 发布需求x --> 
 	<insert id="addDemand" parameterType="java.lang.String">
-	insert into DEMANDINFOMATIONTBL(DEMANDID,DEMANDTITLE,DEMANDDETAILINFORMATION,PARAMETERID,FROMUSERID,PUBLISHTIME,SECURITYMONEY,DEALMONEY,STATEID,DEMANDHEAD)
-        values(SEQID.nextval,#{demandTitle},#{demandInformation},#{parameterId},#{userId},#{publishTime},#{securityMoney},#{dealMoney},21,#{demandHead})
+	insert into DEMANDINFOMATIONTBL(DEMANDID,DEMANDTITLE,DEMANDDETAILINFORMATION,PARAMETERID,FROMUSERID,SECURITYMONEY,DEALMONEY,STATEID,DEMANDHEAD)
+        values(SEQID.nextval,#{demandTitle},#{demandInformation},#{parameterId},#{userId},#{securityMoney},#{dealMoney},21,#{demandHead})
 	</insert>
 	<!-- 最新需求。分页搜索x -->
-	<select id="getDemandList" parameterType="org.great.bean.QueryBean" resultType="org.great.bean.DemandBeanX">
-		select u.*from ( select rownum as num, DEMANDINFOMATIONTBL.* from DEMANDINFOMATIONTBL where STATEID = 9
- 	
- 		<if test="name!=null and name!=''">
- 		 and DEMANDTITLE like '%${name}%'
- 		</if>
- 	
- 	) u where u.num  between #{star} and #{end} 
-	</select>
+		<select id="getDemandList" parameterType="org.great.bean.QueryBean" resultType="org.great.bean.DemandBeanX">
+			select u.*from ( select rownum as num, DEMANDINFOMATIONTBL.* from DEMANDINFOMATIONTBL where STATEID = 9
+	 	
+	 		<if test="name!=null and name!=''">
+	 		 and DEMANDTITLE like '%${name}%'
+	 		</if>
+	 	
+	 	) u where u.num  between #{star} and #{end} 
+		</select>
 	
 	<!-- 查询总页数 9/27改x -->
 	<select id="demandCount" parameterType="java.lang.String" resultType="java.lang.Integer">
@@ -89,7 +89,7 @@
 	</association>
 	
 	<association property="toUserBean" column="touserid"
-			javaType="org.great.bean.UserBean" select="getFromUserBean">
+			javaType="org.great.bean.UserBean" select="getToUserBean">
 	</association>
 	
 	<association property="parameterBean" column="parameterId"
@@ -224,11 +224,33 @@
 		</set>
 		where demandId = #{demandId}
 	</update>
-	<!-- 供应商查看任务 -->
+	<!-- 找顾问 10/3 -->
+	<select id="getCounselorInfoList" resultMap="getCounselorInfoX">
+	select * from COUNSELORTBL where AUDITSTATE = 1 and ENABLEDISABLEID = 3
+	</select>
+	<resultMap type="org.great.bean.CounselorInfoBean" id="getCounselorInfoX">
+	<association property="userBean" column="userid"
+			javaType="org.great.bean.UserBean" select="getFromUserBean">
+	</association>
+	</resultMap>
+	<!-- 找顾问加入申请 -->
+	<insert id="addCons" parameterType="java.lang.String">
+	insert into CONSULTANTSANDNEEDSTBL(CONSID,EMPLOYERID,CONSULTANTID,DEMANDID,STATEID)
+        values(SEQID.nextval,#{employerId},#{consultantId},#{demandId},#{stateId})
+	</insert>
+	<!-- 供应商查看任务,这个要改 -->
 	<select id="getsupplierBidList" resultMap="getDemandInfoList">
 	select * from DEMANDINFOMATIONTBL where touserid = #{userid}
 	</select>
-	
+	<!-- 添加合同 -->
+	<insert id="addContrac" parameterType="java.lang.String">
+	insert into TBCONTRACT (demandid,FROMUSERID,FROMTIME,TOTIME,CONTRACTPATH,STATEID) values(#{demandid},#{fromuserid},#{fromtime},#{touserid},#{contractpath},2043)
+	</insert>
+	<!-- 插入交易任务 -->
+	<insert id="addDemandDeal" parameterType="java.lang.String">
+	insert into DEMANDDEALTBL (dealid,demandid,PROJECTSCHEDULE,AUDITSTATE)
+	values(SEQID.nextval,#{demandId},#{projectSchedule},#{auditState})
+	</insert>
 	<!-- 佳诚 -->
 	
 	<!-- 陈毅 -->

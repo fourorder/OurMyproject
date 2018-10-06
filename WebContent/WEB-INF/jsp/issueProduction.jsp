@@ -97,7 +97,7 @@
                     <div class="ydc-column ydc-column-2">
                         <div class="ydc-menu">
                             <ul>
-                                 <c:forEach items="${menuList}"  var="menuList" >	          
+                                <c:forEach items="${menuList}"  var="menuList" >	          
                                
                                <li class="ydc-menu-item">
                                     <a href="<%=path%>${menuList.pathName }" class="">

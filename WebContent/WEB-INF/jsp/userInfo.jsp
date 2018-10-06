@@ -7,23 +7,7 @@
 	String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";	
 %>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-	<meta name='TTUNION_verify' content='b846c3c2b85efabc496d2a2b8399cd62'>
-	<meta name="sogou_site_verification" content="gI1bINaJcL"/>
-	<meta name="360-site-verification" content="37ae9186443cc6e270d8a52943cd3c5a"/>
-	<meta name="baidu_union_verify" content="99203948fbfbb64534dbe0f030cbe817">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="apple-touch-fullscreen" content="yes">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE;chrome=1">
-	<meta name="format-detection" content="telephone=no">
-	<meta name="keywords" content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。">
-	<meta name="description" content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。。">
-	<meta name="author" content="AUI, a-ui.com">
-	<meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
 	<title>个人中心</title>
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
 	<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
