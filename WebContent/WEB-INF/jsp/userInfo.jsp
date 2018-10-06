@@ -101,6 +101,9 @@
 									<li>
 										<a href="asset.html">素材中心</a>
 									</li>
+									<li>
+										<a href="<%=path%>user/accountManage.action?page=1&userid=${userInfo.userId}">账号管理</a>
+									</li>
 								</ul>
 							</li>
 							<li class="ydc-menu-item">

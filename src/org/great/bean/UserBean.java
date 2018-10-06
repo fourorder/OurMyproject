@@ -23,6 +23,15 @@ public String userRegisterTime;//注册时间
 public String userProfile;//用户简介
 public String characterName;
 public String stateName;
+public String parameterName;//服务商名字
+
+public String getParameterName() {
+	return parameterName;
+}
+
+public void setParameterName(String parameterName) {
+	this.parameterName = parameterName;
+}
 
 public String getStateName() {
 	return stateName;

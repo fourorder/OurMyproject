@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.great.mapper.ServiceProviderTypeMapper">
+<select id="countServiceProviderType" resultType="org.great.bean.ServiceProviderTypeBean">
+select * from tbParameter where pId =41
+<if test="parameterName != null">
+and parameterName like #{parameterName} 
+</if>
+order by parameterId 
+</select>
+
+<select id="serviceProviderType" resultType="org.great.bean.ServiceProviderTypeBean">
+select * from(
+select rownum rn,r.* from (select tbParameter.* from tbParameter where  tbParameter.pId =41
+<if test="parameterName != null">
+and parameterName like #{parameterName}  
+</if>
+order by parameterId)r
+ where rownum &lt;= (#{page}*5))
+ where rn &gt;= ((#{page}-1)*5+1)
+</select>
+<insert id="addServiceProviderType">
+insert into tbParameter values(SEQID.nextval,#{parameterName3},41)
+</insert>
+<delete id="changeState">
+delete from tbParameter where parameterId=#{parameterId}
+</delete>
+	 
+</mapper>
