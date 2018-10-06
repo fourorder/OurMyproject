@@ -413,7 +413,6 @@ function nextPage(){
 		    	$("#last").removeAttr("onclick");
 		    }
 	}
-
 function query(){
 	$("#next").attr("onclick","nextPage();return false;");
 	$("#last").attr("onclick","lastPage();return false;");

@@ -23,9 +23,37 @@ select * from businesstbl where businessId = #{businessid}
 <association property="businessBean" column="businessid"  javaType="org.great.bean.BusinessBean" select="getBusinessInfo">
 </association>
 </resultMap>
+<!--嵌套查询得到fundlist (陈毅用) -->	
+<select id="getFundList2" resultMap="fundList2">
+select * from(select t.*,rownum rn from(select * from fundtbl where userid=#{userid} order by dealdate desc)t where rownum &lt;= #{end}) where rn &gt;= #{start}
+</select>
+<select id="getUserInfo2" parameterType="org.great.bean.FundBean" resultType="org.great.bean.UserBean">
+select * from usertbl where userid = #{userid}
+</select>
+<select id="getToUserInfo2" parameterType="org.great.bean.FundBean" resultType="org.great.bean.UserBean">
+select * from usertbl where userid = #{touserid}
+</select>
+<select id="getBusinessInfo2" parameterType="org.great.bean.FundBean" resultType="org.great.bean.BusinessBean">
+select * from businesstbl where businessId = #{businessid}
+</select>	
+<resultMap type="org.great.bean.FundBean" id="fundList2">
+<association property="userBean" column="userid"  javaType="org.great.bean.UserBean" select="getUserInfo2">
+</association>
+<association property="toUserBean" column="touserid"  javaType="org.great.bean.UserBean" select="getToUserInfo2">
+</association>
+<association property="businessBean" column="businessid"  javaType="org.great.bean.BusinessBean" select="getBusinessInfo2">
+</association>
+</resultMap>
 <!--得到fundlist总数  -->
 <select id="getFundNumber" resultType="org.great.bean.FundBean">
 select * from fundtbl 
+</select>
+<!--得到fundlist总数(陈毅用)  -->
+<select id="getFundNumber2" resultType="org.great.bean.FundBean">
+select * from fundtbl where userid=#{userid}
+</select>
+<select id="findUserMoney" resultType="String">
+select userMoney from userTbl where userid=#{userid}
 </select>
 
 	 

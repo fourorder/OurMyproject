@@ -24,6 +24,16 @@ public String userProfile;//用户简介
 public String characterName;
 public String stateName;
 public int count;
+public String parameterName;//服务商名字
+
+public String getParameterName() {
+	return parameterName;
+}
+
+public void setParameterName(String parameterName) {
+	this.parameterName = parameterName;
+}
+
 public String getStateName() {
 	return stateName;
 }
