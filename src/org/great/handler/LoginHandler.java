@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+
 import org.great.biz.AdvertisingBiz;
 import org.great.biz.FundBiz;
 import org.great.biz.InformationBiz;
@@ -48,6 +49,7 @@ private AdvertisingBiz advertisingBizImp;
 private String msg;
 private int a;
 @RequestMapping("/login.action")
+//@Log(operationType = "登入", operationName = "用户登入")
 public ModelAndView login(String userAccount,String userPwd,HttpServletRequest request) {
 	ModelAndView modelAndView=new ModelAndView();
 String userPwd2=DigestUtils.md5DigestAsHex(userPwd.getBytes());
@@ -55,6 +57,7 @@ int flag=loginBizImp.login(userAccount, userPwd2, request);
 
 if(flag==1) {
 	modelAndView.setViewName("redirect:/user/home.action");
+	
 }else if(flag==2){
     String message="用户已被锁定";
 	request.setAttribute("message", message);

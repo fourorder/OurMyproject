@@ -27,17 +27,17 @@
 	//商品描述，可空
 	String body = new String(request.getAttribute("WIDbody").toString());
 	
-	String proId = new String(request.getAttribute("proId").toString());
+	/* String proId = new String(request.getAttribute("proId").toString());
 	String userId = new String(request.getAttribute("userId").toString());
 	String proUserId = new String(request.getAttribute("proUserId").toString());
-	String price = new String(request.getAttribute("price").toString());
+	String price = new String(request.getAttribute("price").toString()); */
 	 
 	
-	 //设置自定义参数
+	/*  //设置自定义参数
     String passback_params = "proId="+proId+";userId="+userId+";proUserId="+proUserId+";price="+price;
     //将参数encode
     String passback_params2 =java.net.URLEncoder.encode(passback_params,"UTF-8");
-    
+     */
 	
 	
 	alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\"," 
@@ -48,7 +48,7 @@
 			+ "\"userId\":\""+ userId +"\"," 
 			+ "\"proUserId\":\""+ proUserId +"\"," 
 			+ "\"price\":\""+ price +"\","  */ 
-			 + "\"passback_params\":\""+ passback_params2 +"\","
+			/*  + "\"passback_params\":\""+ passback_params2 +"\"," */
 			+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
 	
 	//若想给BizContent增加其他可选请求参数，以增加自定义超时时间参数timeout_express来举例说明

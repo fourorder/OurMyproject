@@ -94,7 +94,7 @@
 									
 								</ul>
 							</div>
-							<button type="button" style="position:absolute;left:900px;" class="btn1">充值</button>
+							<a href="<%=path%>production/addMoney.action"><button type="button" style="position:absolute;left:900px;" class="btn1">充值</button></a>
 							余额：${userMoney}
 							<div class="ydc-panes">
 								<div class="ydc-panes-account">

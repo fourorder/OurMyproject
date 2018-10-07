@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.great.bean.ConditionBean;
 import org.great.bean.ProductionBean;
+import org.great.bean.SessionBean;
 import org.great.bean.UserBean;
 import org.great.mapper.ParameterMapper;
 import org.great.mapper.ProductionMapper;
@@ -106,7 +107,7 @@ public class ProductionBizImp implements ProductionBiz{
 
 
 	@Override
-	public ConditionBean findProductionList(ConditionBean conditionBean,HttpServletRequest request,String state) {
+	public ConditionBean findProductionList(ConditionBean conditionBean,HttpServletRequest request,String state,Integer  toNumber) {
 		// TODO Auto-generated method stub
 		ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
 		ArrayList<ProductionBean> listSize=new ArrayList<ProductionBean>();
@@ -129,9 +130,14 @@ public class ProductionBizImp implements ProductionBiz{
 				currentPage--;
 			}
 		}
+		System.out.println("state="+state);
+		 if(state.equals("toNumber")) {
+			 System.out.println("进入页面跳转");
+			 currentPage=toNumber;
+		} 
 	//	System.out.println("要去查找的页数="+currentPage);
 		conditionBean.setCurrentPage(currentPage);
-	//	System.out.println("查找条件="+conditionBean.getConditionName());
+	 	System.out.println("查找条件="+conditionBean.getConditionName()+"条件2"+conditionBean.getFieldName());
 		listSize=productionMapper.findAllProductionList(conditionBean);
 	
 		int a = listSize.size();
@@ -266,12 +272,14 @@ public class ProductionBizImp implements ProductionBiz{
 
 
 	@Override
-	public ConditionBean toManageProductionList(ConditionBean conditionBean, HttpServletRequest request, String state) {
+	public ConditionBean toManageProductionList(ConditionBean conditionBean, HttpServletRequest request, String state,Integer toNumber) {
 		// TODO Auto-generated method stub
 		ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
 		ArrayList<ProductionBean> listSize=new ArrayList<ProductionBean>();
 		int currentPage=(int) conditionBean.getCurrentPage();
 		int totalPages=(int) conditionBean.getTotalPages();
+		//System.out.println("当前页码="+currentPage);
+		//System.out.println("总页码="+totalPages);
 		if(state==null) {
 			state="";
 		}
@@ -287,12 +295,18 @@ public class ProductionBizImp implements ProductionBiz{
 				currentPage--;
 			}
 		}
-		
-		//System.out.println("查找条件="+conditionBean.getFieldName());
-		//System.out.println("查找条件="+conditionBean.getConditionName());
+		//System.out.println("state="+state);
+		 if(state.equals("toNumber")) {
+			// System.out.println("进入页面跳转");
+			 currentPage=toNumber;
+		} 
+		//System.out.println("翻页后当前页码="+currentPage);
+//		System.out.println("翻页后总页码="+totalPages);
+		// System.out.println("查找条件getFieldName="+conditionBean.getFieldName());
+	//	 System.out.println("查找条件getConditionName="+conditionBean.getConditionName());
 		conditionBean.setCurrentPage(currentPage);
 		list=productionMapper.toManageProductionList(conditionBean);
-		
+	//	System.out.println("翻页后的list长度="+list.size());
 		//把 审核状态  中文名称   放进去
 		for(int i=0;i<list.size();i++) {
 			
@@ -313,6 +327,10 @@ public class ProductionBizImp implements ProductionBiz{
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPages", c);
 		conditionBean.setTotalPages(c);
+		
+		
+		 
+		
 		
 		return conditionBean;
 	}
@@ -368,7 +386,7 @@ public class ProductionBizImp implements ProductionBiz{
 
 
 	@Override
-	public ConditionBean findBuyProduction(ConditionBean conditionBean, HttpServletRequest request, String state) {
+	public ConditionBean findBuyProduction(ConditionBean conditionBean, HttpServletRequest request, String state,Integer toNumber) {
 		// TODO Auto-generated method stub
 		ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
 		ArrayList<ProductionBean> listSize=new ArrayList<ProductionBean>();
@@ -377,11 +395,13 @@ public class ProductionBizImp implements ProductionBiz{
 		if(state==null) {
 			state="";
 		}
+		System.out.println("当前页="+currentPage+"总页数="+totalPages);
 		if(state.equals("next")) {
 		//	System.out.println("进行下一页操作，增加页数前，当前页="+currentPage+"总页数="+totalPages);
 			if(currentPage<totalPages) {
 				
 				currentPage++;
+				System.out.println("加一页");
 			}
 		//	System.out.println("进行下一页操作，增加页数后，当前页="+currentPage+"总页数="+totalPages);
 		}
@@ -389,8 +409,13 @@ public class ProductionBizImp implements ProductionBiz{
 			if(currentPage>1) {
 				
 				currentPage--;
+				System.out.println("减一页");
 			}
 		}
+		 if(state.equals("toNumber")) {
+			 System.out.println("进入页面跳转");
+			 currentPage=toNumber;
+		} 
 	//	System.out.println("要去查找的页数="+currentPage);
 		conditionBean.setCurrentPage(currentPage);
 	//	System.out.println("查找条件="+conditionBean.getConditionName()+"条件2 ="+conditionBean.getFieldName());
@@ -429,6 +454,124 @@ public class ProductionBizImp implements ProductionBiz{
 		conditionBean.setTotalPages(c);
 		
 		return conditionBean;
+	}
+
+
+	@Override
+	public ConditionBean findProductionListPass(ConditionBean conditionBean, HttpServletRequest request, String state,Integer toNumber) {
+		// TODO Auto-generated method stub
+		ArrayList<ProductionBean> list=new ArrayList<ProductionBean>();
+		ArrayList<ProductionBean> listSize=new ArrayList<ProductionBean>();
+		int currentPage=(int) conditionBean.getCurrentPage();
+		int totalPages=(int) conditionBean.getTotalPages();
+		if(state==null) {
+			state="";
+		}
+		if(state.equals("next")) {
+			//System.out.println("进行下一页操作，增加页数前，当前页="+currentPage+"总页数="+totalPages);
+			if(currentPage<totalPages) {
+				
+				currentPage++;
+			}
+		//	System.out.println("进行下一页操作，增加页数后，当前页="+currentPage+"总页数="+totalPages);
+		}
+		if(state.equals("last")) {
+			if(currentPage>1) {
+				
+				currentPage--;
+			}
+		}
+		System.out.println("state="+state);
+		 if(state.equals("toNumber")) {
+			 System.out.println("进入页面跳转");
+			 currentPage=toNumber;
+		} 
+	//	System.out.println("要去查找的页数="+currentPage);
+		conditionBean.setCurrentPage(currentPage);
+	 //	System.out.println("查找条件="+conditionBean.getConditionName()+"条件2"+conditionBean.getFieldName());
+		listSize=productionMapper.findAllProductionListPass(conditionBean);
+	
+		int a = listSize.size();
+		int b = (int) conditionBean.getEachPageCum();
+		int c=a%b==0?a/b:a/b+1;
+	//	System.out.println("原来要去查找的页数="+conditionBean.getCurrentPage());
+		if(conditionBean.getCurrentPage()>c) {
+			int newCurrentPage=(int) (conditionBean.getCurrentPage()-1);
+			conditionBean.setCurrentPage(newCurrentPage);
+	//		System.out.println("要去查找的页数="+newCurrentPage);
+		}
+	//	System.out.println("要去查找的页数="+conditionBean.getCurrentPage());
+		list=productionMapper.findProductionListPass(conditionBean);
+		for(int i=0;i<list.size();i++) {
+			
+			String auditName=	productionMapper.toFindProductionAuditName(list.get(i).getAuditState());
+			list.get(i).setAuditName(auditName);
+			String className=	productionMapper.findClassName(list.get(i).getParameterId());
+			list.get(i).setClassName(className);
+				
+			}
+	//	System.out.println("list长度8="+list.size());
+		conditionBean.setProList(list);
+		
+	
+	//	System.out.println("设置当前页数！！！！！！！！！！！！！！！！="+conditionBean.getCurrentPage());
+		request.setAttribute("currentPage",  currentPage);
+		request.setAttribute("totalPages", c);
+		conditionBean.setTotalPages(c);
+		
+		return conditionBean;
+	}
+
+
+	@Override
+	public void addMoneyPayFinish(HttpServletRequest request, SessionBean sessionBean) {
+		// TODO Auto-generated method stub
+		
+		double money=sessionBean.getAddMoney();
+		int userId=sessionBean.getUserId();
+		//3.资金表增加数据 3条   两条是 加钱，扣钱  一条是平台加钱  平台ID4
+		
+     /*   //主动方  买家        被动方卖家      买家扣钱
+       productionMapper.addTradRecord(userId, money, userId,7);*/
+       
+     //主动方:卖家            被动方:买家      卖家加钱
+       productionMapper.addTradRecord(userId, money, userId,11);
+   /* //主动方: 买家           被动方:平台        平台加钱   平台ID4
+       productionMapper.addTradRecord(userId, money, 4,9);*/
+       
+       //4.账户余额 加钱 扣钱
+       		/*//买家扣钱
+       							//查询买家余额   扣钱
+       double clientMoney=productionMapper.findUserMoney(userId);
+       double newClientMoney=clientMoney-price;
+       System.out.println("买家id="+userId+"余额="+clientMoney+"买的作品价格="+price+"新余额="+newClientMoney);
+       							//更新余额
+       productionMapper.setNewUserMoney(userId, newClientMoney);*/
+              //卖家加钱
+       							//查询卖家余额    加钱
+       double proUserMoney=productionMapper.findUserMoney(userId);
+       double newProUserMoney=proUserMoney+money;
+       System.out.println("充值者id="+userId+"余额="+proUserMoney+"充值者新余额="+newProUserMoney);
+       
+       //更新余额
+       productionMapper.setNewUserMoney(userId, newProUserMoney); 
+       
+      /* //平台加钱    
+       									//查询平台余额    平台ID=4
+       double commissionMoney=productionMapper.findUserMoney(4);
+       double newCommissionMoney=commissionMoney+price2;
+       System.out.println("平台id=4"+"余额="+commissionMoney+"平台赚到的钱="+price2+"新余额="+newCommissionMoney);
+       
+       //更新余额
+       productionMapper.setNewUserMoney(4, newCommissionMoney);
+       
+       
+       //4购买作品后 作品的购买次数加1
+                   //查询该作品的购买次数
+     int buyCount=  productionMapper.findProductionBuyCount(proId)+1;
+       //设置新的购买次数
+     productionMapper.setProductionBuyCount(proId, buyCount);*/
+       
 	}
 	
 }

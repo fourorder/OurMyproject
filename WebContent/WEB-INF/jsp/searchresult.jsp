@@ -17,7 +17,7 @@
 <script src="<%=path%>js/jquery-1.4.2.min.js" type="text/javascript"></script>
 <style>
 *{ margin:0; padding:0;}
-body{ font-family:'微软雅黑';}
+body{ font-family:'微软雅黑';height:800px;}
 ul,ul li{ list-style:none;}
 /* topmenu */
 #topmenu{width:450px;margin:30px auto 0 auto;height:80px;position:relative;}
@@ -36,7 +36,6 @@ ul,ul li{ list-style:none;}
 .con1 ul,.con2 ul,.con3 ul,.con4 ul{padding:5px;}
 .con1 ul li,.con2 ul li,.con3 ul li,.con4 ul li{background:url(images/point.png) no-repeat left center;padding:0 0 0 10px;font-size:14px;line-height:180%;color:#252525;}
 .con1 ul li:hover,.con2 ul li:hover,.con3 ul li,.con4 ul li:hover{color:#04B6E9;cursor:pointer;text-decoration:underline;}
-
 /*图片框样式-------------------------------*/
 
 *{margin:0;padding:0;list-style-type:none;}
@@ -165,7 +164,7 @@ $(function () {
 	<div class="con1" id="con1">
 	<c:forEach items="${objList[0][0]}"  var="obj" varStatus="status">	
 	<a href="<%=path%>user/EmployerInformation.action?userid=${obj.userId}" target="_blank" ><div class="item" id="img${status.count}" >
-		<img width="150" height="150" alt="${obj.userName}" src="<%=path%>images/banner-touxiang.png" />
+		<img width="150" height="150" alt="${obj.userName}" src="<%=path%>picture/findPicture.action?url=${obj.userHead}" />
 		<div class="caption" style="text-align:center;" >
 			<p>账户:${obj.userAccount}</p>
 			<p>昵称:${obj.userName}</p>
@@ -193,9 +192,10 @@ $(function () {
 	</div>
 	<div class="con2" id="con2">
 <c:forEach items="${objList[1][0]}"  var="obj" varStatus="status">	
-	<a href="<%=path%>user/EmployerInformation.action?userid=${obj.userId}"><div class="item" id="img${status.count}" >
+	
+<a href="<%=path%>user/EmployerInformation.action?userid=${obj.userId}" target="_blank" ><div class="item" id="img${status.count}" >
 
-		<img width="150" height="150" alt="${obj.userName}" src="<%=path%>images/banner-touxiang.png" />
+		<img width="150" height="150" alt="${obj.userName}" src="<%=path%>picture/findPicture.action?url=${obj.userHead}" />
 		<div class="caption" style="text-align:center;" >
 			<p>账户:${obj.userAccount}</p>
 			<p>昵称:${obj.userName}</p>
@@ -223,7 +223,7 @@ $(function () {
 	</div>
 	<div class="con3" id="con3">
 <c:forEach items="${objList[2][0]}"  var="obj" varStatus="status">	
-	<a href="#"><div class="item" id="img${status.count}" >
+	<a href="<%=path%>production/toProductionDetal.action?proId=${obj.productionId}" target="_blank "><div class="item" id="img${status.count}" >
 
 		<img width="150" height="150" alt="${obj.productionName}" src="<%=path%>picture/findPicture.action?url=${obj.productionImage}" />
 		<div class="caption" style="text-align:center;" >
@@ -311,7 +311,7 @@ function selectepage(state){
 		         var count=objList[3];
 		         for(var i=1;i<len;i++){    			        	 
 		             var e = list[i-1];
-		             $("#con1").append("<a href='#'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.userName+"' src='<%=path%>images/banner-touxiang.png' /><div class='caption' style='text-align:center;' ><p>账户:"+e.userAccount+"</p><p>昵称:"+e.userName+"</p><p>注册时间:"+e.userRegisterTime+"</p></div><font color='red' size='5px'style='position:absolute;bottom:0px;'>"+e.userName+"</font></div></a>"); 
+		             $("#con1").append("<a href='<%=path%>user/EmployerInformation.action?userid="+e.userId+"' target='_blank'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.userName+"' src='<%=path%>picture/findPicture.action?url="+e.userHead+"' /><div class='caption' style='text-align:center;' ><p>账户:"+e.userAccount+"</p><p>昵称:"+e.userName+"</p><p>注册时间:"+e.userRegisterTime+"</p></div><font color='red' size='5px'style='position:absolute;bottom:0px;'>"+e.userName+"</font></div></a>"); 
 		         }
 		         
 		         epage=nowPage;
@@ -372,7 +372,7 @@ function selectbpage(state){
 		         var count=objList[3];
 		         for(var i=1;i<len;i++){    			        	 
 		             var e = list[i-1];
-		             $("#con2").append("<a href='#'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.userName+"' src='<%=path%>images/banner-touxiang.png' /><div class='caption' style='text-align:center;' ><p>账户:"+e.userAccount+"</p><p>昵称:"+e.userName+"</p><p>注册时间:"+e.userRegisterTime+"</p></div><font color='red' size='5px'style='position:absolute;bottom:0px;'>"+e.userName+"</font></div></a>"); 
+		             $("#con2").append("<a href='<%=path%>user/EmployerInformation.action?userid="+e.userId+"' target='_blank'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.userName+"' src='<%=path%>picture/findPicture.action?url="+e.userHead+"' /><div class='caption' style='text-align:center;' ><p>账户:"+e.userAccount+"</p><p>昵称:"+e.userName+"</p><p>注册时间:"+e.userRegisterTime+"</p></div><font color='red' size='5px'style='position:absolute;bottom:0px;'>"+e.userName+"</font></div></a>"); 
 		         } 	
 		         bpage=nowPage;
 		       //移动像素的图像
@@ -430,7 +430,7 @@ function selectppage(state){
 		         var count=objList[3];
 		         for(var i=1;i<len;i++){    			        	 
 		             var e = list[i-1];
-		             $("#con3").append("<a href='#'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.productionName+"' src='<%=path%>picture/findPicture.action?url="+e.productionImage+"' /><div class='caption' style='text-align:center;' ><p>价格:"+e.productionMoney+"</p><p>购买次数:"+e.buyCount+"</p><p>上架时间:"+e.productionPublishTime+"</p></div><font color='red' size='5px' style='position:absolute;bottom:0px;'>"+e.productionName+"</font></div></a>"); 
+		             $("#con3").append("<a href='<%=path%>product/toProductionDetal.action?proId="+e.productionId+"' target='_blank ''><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.productionName+"' src='<%=path%>picture/findPicture.action?url="+e.productionImage+"' /><div class='caption' style='text-align:center;' ><p>价格:"+e.productionMoney+"</p><p>购买次数:"+e.buyCount+"</p><p>上架时间:"+e.productionPublishTime+"</p></div><font color='red' size='5px' style='position:absolute;bottom:0px;'>"+e.productionName+"</font></div></a>"); 
 		         } 	
 		         ppage=nowPage;
 		       //移动像素的图像

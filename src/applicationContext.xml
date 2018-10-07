@@ -53,4 +53,5 @@
 	
 	<bean id="ChatBizImp" class="org.great.biz.ChatBizImp"></bean>
 	<bean id="UserBizImp" class="org.great.biz.UserBizImp"></bean>
+
 </beans>

@@ -25,7 +25,7 @@ public ModelAndView test(HttpServletRequest request,String page){
 	request.setAttribute("fundList", fundBizImp.getFundList(page));
 	request.setAttribute("page", 1);
 	request.setAttribute("countPage", fundBizImp.getcountPage());
-	modelAndView.setViewName("jsp/accountManage");
+	modelAndView.setViewName("jsp/fundlist");
 	return modelAndView;
 }
 @RequestMapping("/selectFund.action")//ajax分页跳转

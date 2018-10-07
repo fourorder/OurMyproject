@@ -43,7 +43,7 @@
 				
 				<!-- left end -->
 				<!-- right begin -->
-				<div class="ydc-column ydc-column-8">
+				<div class="ydc-column ydc-column-8" style="margin:auto;">
 					<div class="ydc-release-content">
 						<div class="ydc-tabPanel ydc-tabPanel-release">
 							<div class="ydc-release-tab-head">

@@ -120,7 +120,7 @@
                                                 <p>搜索作品名称</p>
                                             </div>
                                             <div class="ydc-group-input clearfix" style="width:100%; margin-bottom:20px;">
-                                                 <form  method="post" action="<%=path%>production/productionToManage.action" >
+                                                 <form  method="post" action="<%=path%>production/productionToManage.action?currentPage=1" >
                                                 <input type="text"  name="fieldName" id="fieldName"  placeholder="请输入关键词进行搜索"  style="width:91.333%"  value=${fieldName }>
                                                 <button  type="submit"  class="ydc-group-button">搜 索</button>
                                           </form>
@@ -200,8 +200,8 @@
                                                     </button>
                                                 </li>
                                                 <li class="ydc-item-quick">
-                                                    第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""></div>页
-                                                    <button style="margin-left:5px;" class="ydc-previous-item-btn-medium">
+                                                    第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class="" name="toNumber"   id="toNumber"  ></div>页
+                                                    <button style="margin-left:5px;" class="ydc-previous-item-btn-medium"  onclick="addPages('toNumber')" >
                                                         <span>跳转</span>
                                                     </button>
                                                 </li>
@@ -282,12 +282,26 @@
         <script type="text/javascript">
         function addPages(state){
           	 
-
+        	var toNumber=$("#toNumber").val();
+        	//alert("跳转页数="+toNumber);
+        	 
+        		//alert("toNumber="+toNumber);
+        		if(state=="toNumber"){
+        		if(toNumber<=0){
+            		alert("页数过小");
+            		return false;
+            	}
+            	if(toNumber>$("#totalPages").text()){
+            		alert("页数过大");
+            		return false;
+            	}
+        		}  	 
+        	
         	$("#proList").empty();
         	//alert("currentPage="+$("#currentPage").text());
         	$.ajax({	
         		 url:"<%=path %>production/ManageAddPages.action",
-        		 data:"currentPage="+$("#currentPage").text()+"&state="+state+"&totalPages="+$("#totalPages").text()+"&fieldName="+$("#fieldName").val(),
+        		 data:"currentPage="+$("#currentPage").text()+"&state="+state+"&totalPages="+$("#totalPages").text()+"&fieldName="+$("#fieldName").val()+"&toNumber="+toNumber,
         		 dataType:"json",
         		 type:"post",
         		 success:function(redata){

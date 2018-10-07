@@ -400,7 +400,7 @@ public class DemandHandler {
 		// ------------菜单------
 		userBean = (UserBean) request.getSession().getAttribute("user");
 		ArrayList<AuthorityBean> menuList = new ArrayList<AuthorityBean>();
-		menuList = authoriyMapper.findOwnMune(userBean.getUserId());
+		menuList = authoriyMapper.findOwnSubclassMenu(userBean.getUserId());
 		request.setAttribute("menuList", menuList);
 		// ---------------------
 		modelAndView.setViewName("jsp/supplierBid");

@@ -71,7 +71,7 @@
 							
 						</li>
 						<li class="clearfix">
-							<p><a href="<%=path%>production/toProduction.action"  title="购买作品"><i class="o-index2"></i>购买作品<b></b></a></p>
+							<p><a href="<%=path%>production/toProductionPass.action?currentPage=1"   title="购买作品"><i class="o-index2"></i>购买作品<b></b></a></p>
 						
 
 						</li>
@@ -92,7 +92,7 @@
 						
 						</li>
 						<li class="clearfix">
-						<p><a href="<%=path%>counselor/application.action?account=${user.userAccount}&userId=${user.userId}"  title="成为顾问"><i class="o-index2"></i>成为顾问<b></b></a></p>
+						<p><a href="<%=path%>counselor/application.action?account=${user.userAccount}&userId=${user.userId}"  title="成为顾问"><i class="o-index2"></i>顾问管理<b></b></a></p>
 						
 						</li>
 					</ul>		

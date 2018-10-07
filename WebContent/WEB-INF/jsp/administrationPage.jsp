@@ -136,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="<%=basePath%>demand/page.action?page=tpage&number=1" target="menuFrame">需求管理</a>
                         </dd>
                         <dd>
-                            <a href="<%=basePath%>production/toAdminProductionManage.action" target="menuFrame">作品管理</a>
+                            <a href="<%=basePath%>production/toAdminProductionManage.action?currentPage=1"  target="menuFrame">作品管理</a>
                         </dd>
                     </dl>
                 </li>

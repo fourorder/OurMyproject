@@ -54,7 +54,7 @@
 		<div class="ydc-content-slide ydc-body">
 			<div class="ydc-flex">
 				<!-- right begin -->
-				<div class="ydc-column ydc-column-8">
+				<div class="ydc-column ydc-column-8" style="margin:auto;">
 					<div class="ydc-release-content">
 						<div class="ydc-tabPanel ydc-tabPanel-release">
 							<div class="ydc-release-tab-head">
@@ -96,9 +96,16 @@
 										</li>
 										<li id="l1">${requestScope.page}/${requestScope.countPage}</li>
 										<li class="ydc-previous-item">
-											<button class="ydc-previous-item-btn-medium" onclick="selectFund('next')" id="next">
+										<c:if test="${requestScope.countPage=='1'}">
+										<button class="ydc-previous-item-btn-medium ydc-disabled" onclick="selectFund('next')" id="next" disabled="disabled">
 												<span>下一页</span>
-											</button>
+										</button>
+										</c:if>
+										<c:if test="${requestScope.countPage!='1'}">
+										<button class="ydc-previous-item-btn-medium" onclick="selectFund('next')" id="next">
+												<span>下一页</span>
+										</button>
+										</c:if>	
 										</li>
 										<li class="ydc-item-quick">
 											第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class="" id="btn1"></div>页
