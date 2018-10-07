@@ -43,16 +43,16 @@
 	<!-- 雇主注册 -->
 	<insert id="addUser">
 		insert into
-		userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId,userRegisterTime,userMoney)
+		userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId,userRegisterTime,userMoney,userHead)
 		values
-		(SEQID.nextval,#{userAccount},#{userPwd},#{characterId},#{userName},#{userTel},#{userIdentity},#{stateId},#{userRegisterTime},0)
+		(SEQID.nextval,#{userAccount},#{userPwd},#{characterId},#{userName},#{userTel},#{userIdentity},#{stateId},#{userRegisterTime},0,'banner-touxiang.png')
 	</insert>
 	<!-- 服务商注册 -->
 	<insert id="addUser2">
 		insert into
-		userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId,userRegisterTime,userMoney,businessTypeId)
+		userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId,userRegisterTime,userMoney,businessTypeId,userHead)
 		values
-		(SEQID.nextval,#{userAccount},#{userPwd},#{characterId},#{userName},#{userTel},#{userIdentity},#{stateId},#{userRegisterTime},0,#{businessTypeId})
+		(SEQID.nextval,#{userAccount},#{userPwd},#{characterId},#{userName},#{userTel},#{userIdentity},#{stateId},#{userRegisterTime},0,#{businessTypeId},'banner-touxiang.png')
 	</insert>
 	<select id="checkAccount" parameterType="String"
 		resultType="org.great.bean.UserBean">
