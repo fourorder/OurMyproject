@@ -179,6 +179,7 @@
 <table class="layui-table" style="width: 100%;" >
 <thead>
  <tr>
+ <th>序号</th>
 <th>日期</th>
 <th>内容</th>
 <th>评价</th>
@@ -268,7 +269,7 @@ function applyFor(){
 		 dataType:"json",
 		 type:"post",
 		 success:function(redata){
-			 alert(redata)
+		
 			 if(redata==2){
 				 $('#aaa').empty();
 				 $("#aaa").append("<a>您已经是顾问！</a>")
@@ -455,6 +456,7 @@ function pid() {
 				 var e = list[i];
 				 if(e.dailyReview=="未评价"){
 				 $("#eee").append(
+						 "<tr><td><span id='dailyId'>"+e.dailyId+"</span></td>"+
 						 "<tr><td><span id='date'>"+e.publishDate+"</span></td>"+	 
 						 "<td>"+e.content+"</td>"+
 						 "<td>未评价</td>"+
@@ -464,6 +466,7 @@ function pid() {
 						 )
 				 }else{
 					 $("#eee").append(
+							 "<tr><td><span id='dailyId'>"+e.dailyId+"</span></td>"+
 							 "<tr><td><span id='date'>"+e.publishDate+"</span></td>"+	 
 							 "<td>"+e.content+"</td>"+
 							 "<td>"+e.dailyReview+"</td>"+
@@ -501,6 +504,7 @@ function sdaily() {
 				 alert(e)
 				 if(e.dailyReview=="未评价"){
 				 $("#eee").append(
+						 "<tr><td><span id='dailyId'>"+e.dailyId+"</span></td>"+
 						 "<tr><td><span id='date'>"+e.publishDate+"</span></td>"+	 
 						 "<td>"+e.content+"</td>"+
 						 "<td>未评价</td>"+
@@ -510,6 +514,7 @@ function sdaily() {
 						 )
 				 }else{
 					 $("#eee").append(
+							 "<tr><td><span id='dailyId'>"+e.dailyId+"</span></td>"+
 							 "<tr><td><span id='date'>"+e.publishDate+"</span></td>"+	 
 							 "<td>"+e.content+"</td>"+
 							 "<td>"+e.dailyReview+"</td>"+
@@ -546,12 +551,9 @@ function firm1() {
 }
 
 function evaluation() {
-	var userI1d=$("input:hidden[name='userId']").val();
-	var userId=$("#ddd").val();
-	var evalu=$('#wrap input[name="radio"]:checked ').val();
-	var notation=$("#notation").val();
-	var time=$("#date").text();
-	window.location.href="<%=path%>counselor/evaluation.action?userId="+userId+"&evaluation="+evalu+"&notation="+notation+"&time="+time;
+
+	var dailyId=$("#dailyId").val();
+	window.location.href="<%=path%>counselor/evaluation.action?dailyId="+dailyId;
 }
 </script>
 </body>

@@ -96,7 +96,7 @@ public interface DemandMapper {
 	     public List<DailyBean>  selectDaily(@Param("parameterId")int parameterId,@Param("state")String state,@Param("page")int page);//查询详细项目内容
 	     public int  countDaily(@Param("parameterId")int parameterId,@Param("evaluation")String evaluation);//查询项目日报总数
 	     public int selectId(@Param("account")String account);//查找Id
-	     public int sEvaluation(@Param("userId")int userId,@Param("evaluation")String evaluation,@Param("notation")String notation,@Param("time")String time);//提交评价
+	     public int sEvaluation(@Param("dailyId")int dailyId);//提交评价
 
 
 

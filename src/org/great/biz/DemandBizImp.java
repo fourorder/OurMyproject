@@ -450,12 +450,10 @@ public class DemandBizImp implements DemandBiz {
 	}
 
 	@Override
-	public int sEvaluation(int userId, String evaluation, String notation,String time) {
+	public int sEvaluation(int dailyId) {
 		// TODO Auto-generated method stub
-		if(time !=null && ""!=time) {
-			time="%"+time+"%";
-		}
-		return demandMapper.sEvaluation(userId, evaluation, notation,time);
+		
+		return demandMapper.sEvaluation(dailyId);
 	}
 
 	

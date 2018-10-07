@@ -405,8 +405,8 @@ select count(*) from  dailytbl where processid=#{parameterId}
  and DAILYREVIEW like #{evaluation}
 </if>
 </select>
-<!-- 提交日报 -->
+<!-- 评价日报 -->
 <update id="sEvaluation" >
-UPDATE dailytbl set DAILYREVIEW=#{evaluation},POSTIL=#{notation} WHERE PUBLISHDATE like #{time} and PROCESSID=#{userId}
+UPDATE dailytbl set DAILYREVIEW=#{evaluation},POSTIL=#{notation} WHERE  id=#{dailyId}
 </update>
 </mapper>

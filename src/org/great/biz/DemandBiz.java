@@ -99,7 +99,7 @@ public interface DemandBiz {
 	     public List<Integer>  serialNum(String account);//查询顾问所接项目编号
 	     public List<DailyBean>  selectDaily(int parameterId,String state,int page);//查询详细项目内容
 	     public int  countDaily(int parameterId,String evaluation);//查询项目日报总数
-	     public int sEvaluation(int userId,String evaluation,String notation,String time);//提交评价
+	     public int sEvaluation(int dailyId);//提交评价
 
 	
 	

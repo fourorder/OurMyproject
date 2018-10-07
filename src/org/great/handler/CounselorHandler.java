@@ -299,10 +299,10 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
            obj.add(list);
 	    return obj;	
 	}
-	@RequestMapping("/evaluation.action")//所接受项目
-	public ModelAndView test12(HttpServletRequest request,int userId,String evaluation,String notation,String time){
-	 System.out.println("userId="+userId+"evaluation="+evaluation+"notation="+notation+"time"+time);
-	int a= demandBizImp.sEvaluation(userId, evaluation, notation, time);
+	@RequestMapping("/evaluation.action")//评价
+	public ModelAndView test12(HttpServletRequest request,int dailyId){
+	 System.out.println("dailyId="+dailyId);
+	int a= demandBizImp.sEvaluation(dailyId);
 	if(a>0) {
 		System.out.println("评价成功");
 	}
