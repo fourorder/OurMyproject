@@ -44,6 +44,31 @@ public UserBean() {
 	super();
 }
 
+public UserBean(int userId, String userName, String userPwd, long userTel, String userAccount, String userSex,
+		String userMail, String userIdentity, String userAddress, String userHead, int userCredit, int userMoney,
+		int stateId, int characterId, String userRegisterTime, String userProfile, String characterName,
+		String stateName) {
+	super();
+	this.userId = userId;
+	this.userName = userName;
+	this.userPwd = userPwd;
+	this.userTel = userTel;
+	this.userAccount = userAccount;
+	this.userSex = userSex;
+	this.userMail = userMail;
+	this.userIdentity = userIdentity;
+	this.userAddress = userAddress;
+	this.userHead = userHead;
+	this.userCredit = userCredit;
+	this.userMoney = userMoney;
+	this.stateId = stateId;
+	this.characterId = characterId;
+	this.userRegisterTime = userRegisterTime;
+	this.userProfile = userProfile;
+	this.characterName = characterName;
+	this.stateName = stateName;
+}
+
 public int getUserId() {
 	return userId;
 }

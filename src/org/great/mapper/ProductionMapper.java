@@ -81,4 +81,16 @@ public interface ProductionMapper {
 			
 			//已购买的作品   id  所以的
 			public ArrayList<ProductionBean> findAllBuyProduction(ConditionBean conditionBean);
+
+			//作品列表 分页 
+			public ArrayList<ProductionBean> findProductionListPass( ConditionBean conditionBean);
+			
+			//作品 总数
+			public ArrayList<ProductionBean> findAllProductionListPass( ConditionBean conditionBean);
+			
+
+			
+
+
+
 }

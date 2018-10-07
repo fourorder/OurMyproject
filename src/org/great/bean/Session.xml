@@ -18,6 +18,12 @@
  
  </insert>
 
+<insert id="setSessionUser"
+ parameterType="org.great.bean.SessionBean" 
+>
+insert into SESSIONTAB (TIME,USERID,addMoney) values (#{time},#{userId},#{addMoney})
+ 
+</insert>
 
  
     

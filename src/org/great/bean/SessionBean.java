@@ -5,7 +5,7 @@ public class SessionBean {
 	private long time;
 	private int userId;
 	private int productionId;
-	
+	private Float  addMoney;
 	
 	
 	
@@ -24,12 +24,19 @@ public class SessionBean {
 	}
 	 
  
-	public SessionBean(long time, int userId, int productionId) {
+	 
+
+
+	public SessionBean(long time, int userId, int productionId, Float addMoney) {
 		super();
 		this.time = time;
 		this.userId = userId;
 		this.productionId = productionId;
+		this.addMoney = addMoney;
 	}
+
+
+
 
 
 	public long getTime() {
@@ -49,6 +56,16 @@ public class SessionBean {
 	}
 	public void setProductionId(int productionId) {
 		this.productionId = productionId;
+	}
+
+
+	public Float getAddMoney() {
+		return addMoney;
+	}
+
+
+	public void setAddMoney(Float addMoney) {
+		this.addMoney = addMoney;
 	}
 	
 	
