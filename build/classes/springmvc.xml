@@ -37,5 +37,7 @@
 		      <value>5242880</value> 
 		  </property>
 		</bean>
+		<!-- PECTJ注解 -->
+   <aop:aspectj-autoproxy proxy-target-class="true" />
 
 </beans>		
