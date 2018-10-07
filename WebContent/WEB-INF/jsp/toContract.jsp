@@ -119,14 +119,14 @@
 							</ul>
 						</div>
 						<div class="ydc-panes">
-							<form method="post" action="<%=path%>demand/addContrac.action"
+							<form method="post" action="<%=path%>demand/updateContrac.action"
 								enctype="multipart/form-data">
 								<div class="ydc-reg-form-class ydc-reg-form-reg"
 									style="margin-top: 40px;">
 									<div class="aui-card-form-item preview  aui-news" style="margin-top:20px;">
                                                 <label class="aui">封面:</label>
                                                 
-                                                <img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
+                                                    <img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
                                                
                                                
                                      </div>
@@ -158,23 +158,33 @@
 									<div class="aui-card-form-item">
 											<label class="aui">需求信息:${demandInfo.demandDetaIlinformation}</label>
 									</div>
-								</div>							
+									<div class="aui-card-form-item">
+											<label class="aui"><a href="<%=path %>download.action?upUrl=${contract.contractPath}"   class=" btn btn-warning illegalBtn rightSize"  type="button"  data-id=${list.productionId } id="illegal">下载合同</a></label>
+									</div>
+								</div>
+								
+								
+								
+															
 								<div class="aui-card-form-item preview  aui-news" style="margin-top: 20px;">
 
 									<div class="aui-card-form-item">
-								<div class="aui-card-form-item">
+									
+										<div class="aui-card-form-item">
 										上传合同:<input type="file"   name="file" />
 										</div>
 										<div class="aui-remarks">
-											<p>合同建议以DOC或PDF格式的文件上传</p>
+											<p>请下载合同，并在盖章后重新上传</p>
 										</div>
 									</div>
 								</div>
 								
+								
+								
 								<div class="ydc-btn" style="margin-top: 20px;">
 								<input type="hidden" id="demandid" name="demandid" value="${demandInfo.demandId}">
 									<button class="btn">提交</button>
-
+									<button class="btn" onClick="location.href='<%=path%>demand/returnContract.action'">返回</button>
 								</div>
 							</form>
 						</div>

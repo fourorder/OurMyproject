@@ -63,7 +63,7 @@
 	 
         </script>
         
-       
+      
        
 
 
@@ -109,7 +109,7 @@
 
 								<div class="ydc-form-city">
 										<div class="aui-card-form-item">
-											<label class="aui-card-form-label">标题：${demandInfo.demandTitle}</label>
+											<label class="aui">标题：${demandInfo.demandTitle}</label>
 										
 										</div>
 										<div class="aui-card-form-item">
@@ -142,6 +142,16 @@
 											<div class="ydc-reg-form-input">
 												<input type="text" id="completeTime" name="completeTime" class="ydc-form-control"  autocomplete="off">天
 												<input type="hidden" id="demandid" name="demandid" value="${demandInfo.demandId}">
+											 <div class="aui-remarks">
+												<p>完成项目天数</p>
+												</div>
+											</div>
+										</div>
+										<div class="aui-card-form-item">
+											<label class="aui">投标天数：</label>
+											<div class="ydc-reg-form-input">
+												<input type="text" id="auctionTime" name="auctionTime" class="ydc-form-control"  autocomplete="off">天
+												
 											 <div class="aui-remarks">
 												<p>完成项目天数</p>
 												</div>

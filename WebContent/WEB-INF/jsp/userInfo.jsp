@@ -53,74 +53,6 @@
 							</li>
 						</c:forEach>
 							
-							<!-- <li class="ydc-menu-item">
-								<a href="release.html" class="">
-									<i class="ydc-icon ydc-icon-find fl"></i>
-									发布
-								</a>
-							</li>
-							<li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-file fl"></i>
-                                        管理
-                                    </span>
-								<ul>
-									<li>
-										<a href="content.html">内容管理</a>
-									</li>
-									<li>
-										<a href="related.html">内容同步</a>
-									</li>
-									<li>
-										<a href="asset.html">素材中心</a>
-									</li>
-								</ul>
-							</li>
-							<li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-record fl"></i>
-                                        数据
-
-                                    </span>
-								<ul>
-									<li>
-										<a href="subscribe.html">订阅数据</a>
-									</li>
-									<li>
-										<a href="content-data.html">内容数据</a>
-									</li>
-									<li>
-										<a href="index-starLevel.html">指数星级</a>
-									</li>
-								</ul>
-							</li>
-							<li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-set fl"></i>
-                                        设置
-
-                                    </span>
-								<ul>
-									<li>
-										<a href="info.html" class="active">账号信息</a>
-									</li>
-									<li>
-										<a href="account.html">账号状态</a>
-									</li>
-								</ul>
-							</li>
-							<li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-customer fl"></i>
-                                        客服
-
-                                    </span>
-								<ul>
-									<li>
-										<a href="customer.html">在线咨询</a>
-									</li>
-								</ul>
-							</li> -->
 						</ul>
 					</div>
 				</div>
@@ -227,12 +159,12 @@
 										</div>
 									</div>
 									
-									<div class="ydc-reg-form-group clearfix">
+									<!-- <div class="ydc-reg-form-group clearfix">
 										<label>已有内容发布渠道</label>
 										<div class="ydc-reg-form-input">
 											<label>https://weibo.com/525135676</label>
 										</div>
-									</div>
+									</div> -->
 									<div class="ydc-reg-form-group clearfix" style="margin-top:40px;">
 										<div class="ydc-reg-form-button" style="margin-left:255px;">
 											<a class="btn fl" href="<%=path%>user/UserInforEdit.action?userid=${userInfo.userId}">修改</a>

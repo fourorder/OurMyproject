@@ -14,9 +14,10 @@
 	<title>修改资料</title>
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
 	<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
-        <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
-        <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">
-        <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/home.css">
+	<link rel="stylesheet" href="<%=path%>css/oindex.css">
+	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
+	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">
+	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/home.css">
         <script type="text/javascript" src="<%=path%>admin/js/jquery-1.5.2.min.js"></script>
         <script type="text/javascript">
         var currentShowCity=0;
@@ -66,14 +67,10 @@
 				<div class="width1180">
 					
 					<span class="fr" id="fr1">
-						<!-- <a href="#" title="登录">登录</a>
-						<a href="#" title="注册">注册</a> -->
+						
 						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
 						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
-						<!--登录后
-						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
-						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
-						-->
+						
 					</span>
 				</div>
 </div>
@@ -106,18 +103,18 @@
 						<div class="ydc-tabPanel ydc-tabPanel-release">
 							<div class="ydc-release-tab-head">
 								<ul>
-									<li class="hit">帐号设置</li>
+									<li class="hit">需求修改</li>
 								</ul>
 							</div>
 							<div class="ydc-panes">
 	
 									
 			
-						<form  method="post" action="<%=path%>user/ToUserInforEdit.action" enctype="multipart/form-data">
+						<form  method="post" action="<%=path%>demand/updateDemandInfo.action" enctype="multipart/form-data">
 								 <div class="aui-card-form-item preview  aui-news" style="margin-top:20px;">
-                                                <label class="aui-card-form-label">头像:</label>
+                                                <label class="aui-card-form-label">图标:</label>
                                                 <div class="aui-file-up-img" id="preview_0">
-                                                   <img class="" id="imghead_0" border="0" src="<%=path%>picture/findPicture.action?url=${userInfo.userHead}">
+                                                   <img class="" id="imghead_0" border="0" src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
                                                 </div>
                                                 <div class="aui-file-up-btn clearfix ">
                                                     <div class="idPicFile aui-btn aui-file-new">
@@ -129,82 +126,69 @@
                                                     </div>
                                                 </div>
                                   </div>
-										
-										
-										<div class="aui-card-form-item">
-											<label class="aui">帐号名称:&emsp;&emsp;&emsp;${userInfo.userAccount}</label>
-											<input type="hidden" name="userId" value="${userInfo.userId}">
-										</div>
-										<div class="aui-card-form-item">
-											<label class="aui">帐号类型:&emsp;&emsp;&emsp;${userInfo.characterBean.characterName}</label>
-										</div>
+                                  
+                                  <div class="aui-card-form-item">
+											<label class="aui-card-form-label">需求名称:</label>
+											<div class="ydc-reg-form-input">
+												<input type="text" id="demandTitle" name="demandTitle" class="ydc-form-control"  autocomplete="off" value="${demandInfo.demandTitle}">							
+											 <div class="aui-remarks">
+												<p>需求的标题</p>
+												</div>
+											</div>
+								</div>
+                                  
+                                  
 									
+								<div class="aui-card-form-item"></div>
+								
+								
 								<div class="aui-card-form-item">
-									<label class="aui-card-form-label">用户概述:</label>
+									<label class="aui-card-form-label">需求详情:</label>
 										<div class="ydc-reg-form-input ydc-reg-form-input-width">
-												<textarea id="userProfile" name="userProfile">${userInfo.userProfile}</textarea>
+												<textarea id="demandDetaIlinformation" name="demandDetaIlinformation">${demandInfo.demandDetaIlinformation}</textarea>
 												
 										</div>	
 								</div>
-								<div class="aui-card-form-item">
+								<div class="aui-card-form-item"></div>
 								
-								</div>
-                                 <div class="aui-card-form-item">
-											<label class="aui-card-form-label">姓名:</label>
-											<div class="ydc-reg-form-input">
-												<input type="text" id="userName" name="userName" class="ydc-form-control" autocomplete="off" value="${userInfo.userName}">
+								<div class="aui-card-form-item">
+											<label class="aui-card-form-label">需求类型:</label>
+											<div class="aui-card-form-input">
+
+												<select id="parameterId" name="parameterId">
+													<c:forEach items="${parameterBeans}" var="Parameter">
+														<option value="${Parameter.parameterId}">${Parameter.parameterName}</option>
+													</c:forEach>
+												</select>
+
 											</div>
-								</div>         
+								</div>
+								<div class="aui-card-form-item"></div>
 								<div class="aui-card-form-item">
-								
-								</div>		
-										
-										
-										
-										 <div class="aui-card-form-item">
-											<label class="aui-card-form-label">身份证号:</label>
-											<div class="ydc-reg-form-input clearfix">
-												<input type="text" id="userIdentity" name="userIdentity" class="ydc-form-control" readonly="true" autocomplete="off" value="${userInfo.userIdentity}">
-												<div class="ydc-reg-form-text">
-													<p>帐号信息填写需真实有效，如发现虚假以及非个人真实信息导致帐号收益无法提取，责任由帐号个人承担</p>
+											<label class="aui-card-form-label">佣金：</label>
+											<div class="ydc-reg-form-input">
+												<input type="text" id="dealMoney" name="dealMoney" class="ydc-form-control"  autocomplete="off" value="${demandInfo.dealMoney}">
+											 <div class="aui-remarks">
+												<p>需求费用</p>
 												</div>
-												
 											</div>
-
-										</div>
-										<div class="aui-card-form-item">
-								
 								</div>
-									
-										<div class="aui-card-form-item">
-											<label class="aui-card-form-label">联系手机:</label>
+									<br><br>	
+								<div class="aui-card-form-item">
+											<label class="aui-card-form-label">押金：</label>
 											<div class="ydc-reg-form-input">
-												<input type="text" id="userTel" name="userTel" class="ydc-form-control" autocomplete="off" value="${userInfo.userTel}">
-												
+												<input type="text" id="securityMoney" name="securityMoney" class="ydc-form-control"  autocomplete="off" value="${demandInfo.securityMoney}">
+											 <div class="aui-remarks">
+												<p>供应商上缴的押金，在需求后返还给供应商。一般设为需求的10%</p>
+												</div>
 											</div>
-											
-
-										</div>
-										<div class="aui-card-form-item">
-								
 								</div>
-										<div class="aui-card-form-item">
-											<label class="aui-card-form-label">邮箱:</label>
-											<div class="ydc-reg-form-input">
-												<input type="text" id="userMail" name="userMail" class="ydc-form-control" autocomplete="off" value="${userInfo.userMail}">
-											</div>
-											<div class="ydc-reg-form-text">
-												<p>请使用自己日常使用邮箱便于接受相关信息</p>
-											</div>
-										</div>
-										
-										<div class="aui-card-form-item">
-								
-								</div>
+								<br><br><br><br>
 									
 									  <div class="ydc-btn" style="margin-top:20px;">
-                                                <button class="btn">修改</button>
-                                            
+									  <input type="hidden" id="demandid" name="demandid" value="${demandInfo.demandId}">
+                                            <button class="btn">修改</button>
+                                            <button class="btn" onClick="location.href='<%=path%>demand/returnDemand.action'">返回</button>
                                        </div>
 									
 								</form>

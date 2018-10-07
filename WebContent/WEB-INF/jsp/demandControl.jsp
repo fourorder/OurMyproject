@@ -109,14 +109,10 @@
 	<div class="o-top">
 				<div class="width1180">
 					<span class="fr">
-						<!-- <a href="#" title="登录">登录</a>
-						<a href="#" title="注册">注册</a> -->
+						
 						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
 						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
-						<!--登录后
-						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
-						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
-						-->
+						
 					</span>
 				</div>
 			</div>
@@ -139,74 +135,7 @@
 							</li>
 						</c:forEach>
 							
-							<!-- <li class="ydc-menu-item">
-								<a href="release.html" class="">
-									<i class="ydc-icon ydc-icon-find fl"></i>
-									发布
-								</a>
-							</li>
-							<li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-file fl"></i>
-                                        管理
-                                    </span>
-								<ul>
-									<li>
-										<a href="content.html">内容管理</a>
-									</li>
-									<li>
-										<a href="related.html">内容同步</a>
-									</li>
-									<li>
-										<a href="asset.html">素材中心</a>
-									</li>
-								</ul>
-							</li>
-							<li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-record fl"></i>
-                                        数据
-
-                                    </span>
-								<ul>
-									<li>
-										<a href="subscribe.html">订阅数据</a>
-									</li>
-									<li>
-										<a href="content-data.html">内容数据</a>
-									</li>
-									<li>
-										<a href="index-starLevel.html">指数星级</a>
-									</li>
-								</ul>
-							</li>
-							<li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-set fl"></i>
-                                        设置
-
-                                    </span>
-								<ul>
-									<li>
-										<a href="info.html" class="active">账号信息</a>
-									</li>
-									<li>
-										<a href="account.html">账号状态</a>
-									</li>
-								</ul>
-							</li>
-							<li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-customer fl"></i>
-                                        客服
-
-                                    </span>
-								<ul>
-									<li>
-										<a href="customer.html">在线咨询</a>
-									</li>
-								</ul>
-							</li> -->
+							
 						</ul>
 					</div>
 				</div>
@@ -264,9 +193,9 @@
 											</div>
 											<div class="ydc-actions">
 												<div>
-													<button class="ydc-actions-trigger">需求详情</button>
-													<button class="ydc-actions-trigger">删除</button>
-													<button class="ydc-actions-trigger">编辑</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/queryDemandInfo.action?demandid=${demandInfo.demandId}'" >需求详情</button>								
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/demandInfoEdit.action?demandid=${demandInfo.demandId}'">编辑</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/delDemand.action?demandid=${demandInfo.demandId}'">删除</button>
 													
 												</div>
 											</div>
@@ -277,7 +206,7 @@
 												<span class="ydc-group-table-item-tag">${demandInfo.stateParameterBean.parameterName}</span>
 											</div>
 											<div class="ydc-group-table-item-info">
-												<span>发布时间：${demandInfo.publishTime}</span>
+												
 												<span>| 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
 											</div>
 										</div>
@@ -291,10 +220,10 @@
 											</div>
 											<div class="ydc-actions">
 												<div>
-													<button class="ydc-actions-trigger">需求详情</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/queryDemandInfo.action?demandid=${demandInfo.demandId}'" >需求详情</button>
 													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/LookingForConsultant.action?demandid=${demandInfo.demandId}'">找顾问</button>
-							
-													<button class="ydc-actions-trigger">下线</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/delDemand.action?demandid=${demandInfo.demandId}'">删除</button>
+													
 												</div>
 											</div>
 											<div class="ydc-group-table-item-text">
@@ -304,7 +233,7 @@
 												<span class="ydc-group-table-item-tag">${demandInfo.stateParameterBean.parameterName}</span>
 											</div>
 											<div class="ydc-group-table-item-info">
-												<span>发布时间：${demandInfo.publishTime}</span>
+												
 												<span>| 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
 											</div>
 										</div>
@@ -318,10 +247,10 @@
 											</div>
 											<div class="ydc-actions">
 												<div>
-													<button class="ydc-actions-trigger">需求详情</button>
-													<button class="ydc-actions-trigger">删除</button>
-													<button class="ydc-actions-trigger">编辑</button>
-													<button class="ydc-actions-trigger">重新申请</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/queryDemandInfo.action?demandid=${demandInfo.demandId}'" >需求详情</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/demandInfoEdit.action?demandid=${demandInfo.demandId}'">编辑</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/delDemand.action?demandid=${demandInfo.demandId}'">删除</button>					
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/demandReapply.action?demandid=${demandInfo.demandId}'">重新申请</button>
 												</div>
 											</div>
 											<div class="ydc-group-table-item-text">
@@ -331,7 +260,7 @@
 												<span class="ydc-group-table-item-tag">${demandInfo.stateParameterBean.parameterName}</span>
 											</div>
 											<div class="ydc-group-table-item-info">
-												<span>发布时间：${demandInfo.publishTime}</span>
+												
 												<span>| 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
 											</div>
 										</div>						 	
@@ -347,9 +276,9 @@
 											</div>
 											<div class="ydc-actions">
 												<div>
-													<button class="ydc-actions-trigger" >需求详情</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/queryDemandInfo.action?demandid=${demandInfo.demandId}'" >需求详情</button>
 													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/gobidControl.action?demandid=${demandInfo.demandId}'">投标详情</button>
-													<button class="ydc-actions-trigger">下线</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/demandDownline.action?demandid=${demandInfo.demandId}'">下线</button>
 												</div>
 											</div>
 											<div class="ydc-group-table-item-text">
@@ -374,7 +303,7 @@
 											</div>
 											<div class="ydc-actions">
 												<div>
-													<button class="ydc-actions-trigger">需求详情</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/queryDemandInfo.action?demandid=${demandInfo.demandId}'" >需求详情</button>
 													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/goFromContract.action?demandid=${demandInfo.demandId}'">签订合同</button>
 												</div>
 											</div>
@@ -399,7 +328,7 @@
 											</div>
 											<div class="ydc-actions">
 												<div>
-													<button class="ydc-actions-trigger" >需求详情</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/queryDemandInfo.action?demandid=${demandInfo.demandId}'" >需求详情</button>
 													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/goDemandBid.action?demandid=${demandInfo.demandId}'">开始投标</button>
 												</div>
 											</div>
@@ -410,7 +339,7 @@
 												<span class="ydc-group-table-item-tag">${demandInfo.stateParameterBean.parameterName}</span>
 											</div>
 											<div class="ydc-group-table-item-info">
-												<span>发布时间：${demandInfo.publishTime}</span>
+												
 												<span>| 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
 											</div>
 										</div>
@@ -424,8 +353,7 @@
 											</div>
 											<div class="ydc-actions">
 												<div>
-													<button class="ydc-actions-trigger">需求详情</button>
-													<button class="ydc-actions-trigger">查看进度</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/queryDemandInfo.action?demandid=${demandInfo.demandId}'" >需求详情</button>
 												</div>
 											</div>
 											<div class="ydc-group-table-item-text">
@@ -441,20 +369,19 @@
 										</div>
 									 	
 									 	</c:if>
-									 	<!-- 项目审核 -->
+									 	
 									 
 									 	
 									 	
 									 	<!-- 项目完成 -->
-									 	<c:if test="${demandInfo.stateParameterBean.parameterId == 1863}">
+									 	<c:if test="${demandInfo.stateParameterBean.parameterId == 1865}">
 									 	<div class="ydc-group-table-item">
 											<div class="ydc-group-table-item-img">
 												<img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
 											</div>
 											<div class="ydc-actions">
 												<div>
-													<button class="ydc-actions-trigger">需求详情</button>
-													<button class="ydc-actions-trigger">下载工程</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/queryDemandInfo.action?demandid=${demandInfo.demandId}'" >需求详情</button>
 												</div>
 											</div>
 											<div class="ydc-group-table-item-text">
@@ -471,14 +398,14 @@
 									 	
 									 	</c:if>
 									 	<!-- 项目失败 -->
-									 	<c:if test="${demandInfo.stateParameterBean.parameterId == 1863}">
+									 	<c:if test="${demandInfo.stateParameterBean.parameterId == 1866}">
 									 	<div class="ydc-group-table-item">
 											<div class="ydc-group-table-item-img">
 												<img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
 											</div>
 											<div class="ydc-actions">
 												<div>
-													<button class="ydc-actions-trigger">需求详情</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/queryDemandInfo.action?demandid=${demandInfo.demandId}'" >需求详情</button>
 													<button class="ydc-actions-trigger">售后</button>
 												</div>
 											</div>
@@ -495,6 +422,7 @@
 										</div>
 									 	
 									 	</c:if>
+									 	<!-- 等待顾问通过 -->
 									 	<c:if test="${demandInfo.stateParameterBean.parameterId == 1862}">
 									 	<div class="ydc-group-table-item">
 											<div class="ydc-group-table-item-img">
@@ -502,8 +430,31 @@
 											</div>
 											<div class="ydc-actions">
 												<div>
-													<button class="ydc-actions-trigger">需求详情</button>
-													
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/queryDemandInfo.action?demandid=${demandInfo.demandId}'" >需求详情</button>
+												</div>
+											</div>
+											<div class="ydc-group-table-item-text">
+												<span>
+													<a href="#">标题：${demandInfo.demandTitle}</a>
+												</span>
+												<span class="ydc-group-table-item-tag">${demandInfo.stateParameterBean.parameterName}</span>
+											</div>
+											<div class="ydc-group-table-item-info">
+												
+												<span>| 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
+											</div>
+										</div>
+									 	
+									 	</c:if>
+									 	
+									 		<c:if test="${demandInfo.stateParameterBean.parameterId == 2061}">
+									 	<div class="ydc-group-table-item">
+											<div class="ydc-group-table-item-img">
+												<img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
+											</div>
+											<div class="ydc-actions">
+												<div>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/queryDemandInfo.action?demandid=${demandInfo.demandId}'" >需求详情</button>
 												</div>
 											</div>
 											<div class="ydc-group-table-item-text">
@@ -519,16 +470,14 @@
 										</div>
 									 	
 									 	</c:if>
-									 	
-									 		<c:if test="${demandInfo.stateParameterBean.parameterId == 2061}">
+									 	<c:if test="${demandInfo.stateParameterBean.parameterId == 2272}">
 									 	<div class="ydc-group-table-item">
 											<div class="ydc-group-table-item-img">
 												<img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
 											</div>
 											<div class="ydc-actions">
 												<div>
-													<button class="ydc-actions-trigger">需求详情</button>
-													
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/queryDemandInfo.action?demandid=${demandInfo.demandId}'" >需求详情</button>
 												</div>
 											</div>
 											<div class="ydc-group-table-item-text">
@@ -671,9 +620,10 @@
 			            		+"</div>"	            		
 				            	+"<div class='ydcactions'>"
 				            	+"<div>"
-				            	+"<button class='actions-trigger'>需求详情</button>"
-				            	+"<button class='actions-trigger'>删除</button>"
-				            	+"<button class='actions-trigger'>编辑</button>"
+				            
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/queryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/demandInfoEdit.action?demandid="+e.demandId+"'\">编辑</button>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/delDemand.action?demandid="+e.demandId+"'\">删除</button>"
 				            	
 								+"</div>"							
 							+"</div>"							
@@ -683,12 +633,12 @@
 							+"</div>"
 							
 							+"<div class='group-table-item-info'>"
-							+"<span>发布时间："+e.publishTime+"</span>"
+						
 							+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
 							+"</div>"			
 							+"</div>"			            	
 		            	);
-		            }else if(e.stateParameterBean.parameterId == 23){
+		            }else if(e.stateParameterBean.parameterId == 22){
 		            	$("#demandDateList").append(
 		            			"<div class='grouptable'>"
 			            		+"<div class='table-item-img'>"
@@ -696,10 +646,37 @@
 			            		+"</div>"	            		
 				            	+"<div class='ydcactions'>"
 				            	+"<div>"
-				            	+"<button class='actions-trigger'>需求详情</button>"
-				            	+"<button class='actions-trigger'>删除</button>"
-				            	+"<button class='actions-trigger'>编辑</button>"
-				            	+"<button class='actions-trigger'>重新申请</button>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/queryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/LookingForConsultant.action?demandid="+e.demandId+"'\">找顾问</button>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/delDemand.action?demandid="+e.demandId+"'\">删除</button>"
+				            
+								+"</div>"							
+								+"</div>"													
+								+"<div class='item-text'>"
+								+"<span><a href='#'>标题："+e.demandTitle+"</a></span>"
+								+"<span class='table-item-tag'>"+e.stateParameterBean.parameterName+"</span>"
+								+"</div>"
+								
+								+"<div class='group-table-item-info'>"
+								
+								+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+								+"</div>"			
+								+"</div>"        	
+		            	); 
+		            	
+		         }else if(e.stateParameterBean.parameterId == 23){
+		            	$("#demandDateList").append(
+		            			"<div class='grouptable'>"
+			            		+"<div class='table-item-img'>"
+			            		+"<img src='<%=path%>picture/findPicture.action?url="+e.demandHead+"' width='133' height='133'>"
+			            		+"</div>"	            		
+				            	+"<div class='ydcactions'>"
+				            	+"<div>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/queryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/demandInfoEdit.action?demandid="+e.demandId+"'\">编辑</button>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/delDemand.action?demandid="+e.demandId+"'\">删除</button>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/demandReapply.action?demandid="+e.demandId+"'\">重新申请</button>"
+				            	
 								+"</div>"							
 							+"</div>"							
 							+"<div class='item-text'>"
@@ -708,7 +685,7 @@
 							+"</div>"
 							
 							+"<div class='group-table-item-info'>"
-							+"<span>发布时间："+e.publishTime+"</span>"
+							
 							+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
 							+"</div>"			
 							+"</div>"		            	
@@ -723,9 +700,9 @@
 			            		+"</div>"	            		
 				            	+"<div class='ydcactions'>"
 				            	+"<div>"
-				            	+"<button class='actions-trigger'>需求详情</button>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/queryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
 				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/gobidControl.action?demandid="+e.demandId+"'\">投标详情</button>"
-								+"<button class='actions-trigger'>下线</button>"							
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/demandDownline.action?demandid="+e.demandId+"'\">下线</button>"					
 							+"</div>"							
 							+"</div>"							
 							+"<div class='item-text'>"
@@ -750,8 +727,8 @@
 			            		+"</div>"	            		
 				            	+"<div class='ydcactions'>"
 				            	+"<div>"
-				            	+"<button class='actions-trigger'>需求详情</button>"
-				    
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/queryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
+		
 				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/goFromContract.action?demandid="+e.demandId+"'\">签订合同</button>"
 								+"</div>"							
 								+"</div>"													
@@ -769,32 +746,6 @@
 		            
 		            
 		            
-		         }else if(e.stateParameterBean.parameterId == 22){
-		            	$("#demandDateList").append(
-		            			"<div class='grouptable'>"
-			            		+"<div class='table-item-img'>"
-			            		+"<img src='<%=path%>picture/findPicture.action?url="+e.demandHead+"' width='133' height='133'>"
-			            		+"</div>"	            		
-				            	+"<div class='ydcactions'>"
-				            	+"<div>"
-				            	+"<button class='actions-trigger'>需求详情</button>"
-				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/LookingForConsultant.action?demandid="+e.demandId+"'\">找顾问</button>"
-				            	+"<button class='actions-trigger'>删除 </button>"
-				            
-								+"</div>"							
-								+"</div>"													
-								+"<div class='item-text'>"
-								+"<span><a href='#'>标题："+e.demandTitle+"</a></span>"
-								+"<span class='table-item-tag'>"+e.stateParameterBean.parameterName+"</span>"
-								+"</div>"
-								
-								+"<div class='group-table-item-info'>"
-								+"<span>发布时间："+e.publishTime+"</span>"
-								+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
-								+"</div>"			
-								+"</div>"        	
-		            	); 
-		            	
 		         }else if(e.stateParameterBean.parameterId == 1861){
 		            		//可竞拍
 			            	$("#demandDateList").append(
@@ -804,7 +755,7 @@
 				            		+"</div>"	            		
 					            	+"<div class='ydcactions'>"
 					            	+"<div>"
-					            	+"<button class='actions-trigger'>需求详情</button>"
+					            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/queryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
 					            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/goDemandBid.action?demandid="+e.demandId+"'\">开始投标</button>"
 					            	
 					            
@@ -816,7 +767,7 @@
 									+"</div>"
 									
 									+"<div class='group-table-item-info'>"
-									+"<span>发布时间："+e.publishTime+"</span>"
+									
 									+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
 									+"</div>"			
 									+"</div>"        	
@@ -825,7 +776,7 @@
 		            
 		            
 		         }else if(e.stateParameterBean.parameterId == 1863){
-	            		//项目完成中
+	            		
 		            	$("#demandDateList").append(
 		            			"<div class='grouptable'>"
 			            		+"<div class='table-item-img'>"
@@ -833,9 +784,8 @@
 			            		+"</div>"	            		
 				            	+"<div class='ydcactions'>"
 				            	+"<div>"
-				            	+"<button class='actions-trigger'>需求详情</button>"
-				            	+"<button class='actions-trigger'>找顾问</button>"
-				            	+"<button class='actions-trigger'>删除 </button>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/queryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
+				            	
 				            
 								+"</div>"							
 								+"</div>"													
@@ -862,9 +812,7 @@
 		            		+"</div>"	            		
 			            	+"<div class='ydcactions'>"
 			            	+"<div>"
-			            	+"<button class='actions-trigger'>需求详情</button>"
-			            	+"<button class='actions-trigger'>找顾问</button>"
-			            	+"<button class='actions-trigger'>删除 </button>"
+			            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/queryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
 			            
 							+"</div>"							
 							+"</div>"													
@@ -891,10 +839,8 @@
             		+"</div>"	            		
 	            	+"<div class='ydcactions'>"
 	            	+"<div>"
-	            	+"<button class='actions-trigger'>需求详情</button>"
-	            	+"<button class='actions-trigger'>找顾问</button>"
-	            	+"<button class='actions-trigger'>删除 </button>"
-	            
+	            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/queryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
+	            	+"<button class='actions-trigger'>售后</button>"
 					+"</div>"							
 					+"</div>"													
 					+"<div class='item-text'>"
@@ -920,7 +866,7 @@
  	            		+"</div>"	            		
  		            	+"<div class='ydcactions'>"
  		            	+"<div>"
- 		            	+"<button class='actions-trigger'>需求详情</button>"
+ 		            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/queryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
  		            	
  		            
  						+"</div>"							
@@ -931,14 +877,14 @@
  						+"</div>"
  						
  						+"<div class='group-table-item-info'>"
- 						+"<span>发布时间："+e.publishTime+"</span>"
+ 						
  						+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
  						+"</div>"			
  						+"</div>"        	
  	        	);
  	    
  	    
- 	    
+ 	        	
  	 			}else if(e.stateParameterBean.parameterId ==2061){
  	 				//合同阶段
  	 				$("#demandDateList").append(
@@ -948,7 +894,30 @@
  	 	            		+"</div>"	            		
  	 		            	+"<div class='ydcactions'>"
  	 		            	+"<div>"
- 	 		            	+"<button class='actions-trigger'>需求详情</button>"
+ 	 		            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/queryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
+ 	 						+"</div>"							
+ 	 						+"</div>"													
+ 	 						+"<div class='item-text'>"
+ 	 						+"<span><a href='#'>标题："+e.demandTitle+"</a></span>"
+ 	 						+"<span class='table-item-tag'>"+e.stateParameterBean.parameterName+"</span>"
+ 	 						+"</div>"
+ 	 						
+ 	 						+"<div class='group-table-item-info'>"
+ 	 						+"<span>发布时间："+e.publishTime+"</span>"
+ 	 						+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+ 	 						+"</div>"			
+ 	 						+"</div>"        	
+ 	 	        	);
+ 	 			}else if(e.stateParameterBean.parameterId ==2272){
+ 	 				//合同阶段
+ 	 				$("#demandDateList").append(
+ 	 	        			"<div class='grouptable'>"
+ 	 	            		+"<div class='table-item-img'>"
+ 	 	            		+"<img src='<%=path%>picture/findPicture.action?url="+e.demandHead+"' width='133' height='133'>"
+ 	 	            		+"</div>"	            		
+ 	 		            	+"<div class='ydcactions'>"
+ 	 		            	+"<div>"
+ 	 		            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/queryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
  	 						+"</div>"							
  	 						+"</div>"													
  	 						+"<div class='item-text'>"
