@@ -13,14 +13,12 @@
 
 
 <title>修改资料</title>
-<link href="iTunesArtwork@2x.png" sizes="114x114"
-	rel="apple-touch-icon-precomposed">
-<link type="text/css" rel="stylesheet"
-	href="<%=path%>admin/css/core.css">
-<link type="text/css" rel="stylesheet"
-	href="<%=path%>admin/css/icon.css">
-<link type="text/css" rel="stylesheet"
-	href="<%=path%>admin/css/home.css">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+	<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
+	<link rel="stylesheet" href="<%=path%>css/oindex.css">
+	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
+	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">
+	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/home.css">
 <script type="text/javascript"
 	src="<%=path%>admin/js/jquery-1.5.2.min.js"></script>
 <script type="text/javascript">
@@ -64,51 +62,44 @@
 </head>
 <body>
 	<!-- head YDC begin -->
-	<header class="ydc-header">
-	<div class="ydc-entered">
-		<div class="ydc-header-content ydc-flex">
-			<div class="ydc-column">
-				<a href="index.html" class="ydc-column-ydc-logo"> <img
-					src="admin/images/icon/ydc-logo.png" title="" about="" alt="">
-				</a>
-			</div>
-			<div class="ydc-column">
-				<div class="ydc-column-user">
-					<div class="ydc-user-photo">
-						<a href="javascript:;"> <img src="admin/images/icon/photo.png"
-							title="" about="" alt="">
-						</a>
-					</div>
-					<div class="ydc-user-info">
-						<div class="ydc-user-info-name">
-							<a href="javascript:;">一点车</a>
-						</div>
-						<div class="ydc-user-info-func ydc-flex">
-							<span class="ydc-tag">账号审核中</span> <span class="ydc-mal"><i
-								class="ydc-icon ydc-icon-mail fl"></i><em>12</em></span> <a
-								href="javascript:;">退出</a>
-						</div>
-					</div>
+		<div class="o-top">
+				<div class="width1180">
+					
+					<span class="fr" id="fr1">
+						<!-- <a href="#" title="登录">登录</a>
+						<a href="#" title="注册">注册</a> -->
+						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
+						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
+						<!--登录后
+						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
+						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
+						-->
+					</span>
 				</div>
-			</div>
-		</div>
-	</div>
-	</header>
+</div>
 	<!-- head YDC end -->
 
 	<!-- content YDC begin -->
 	<section>
-	<div class="ydc-content-slide ydc-body">
-		<div class="ydc-flex">
-			<!-- left begin -->
-			<div class="ydc-column ydc-column-2">
-				<div class="ydc-menu">
-					<ul>
-
-					</ul>
+		<div class="ydc-content-slide ydc-body">
+			<div class="ydc-flex">
+				<!-- left begin -->
+				<div class="ydc-column ydc-column-2">
+					<div class="ydc-menu">
+						<ul>
+						<c:forEach items="${menuList}"  var="menuList">
+							<li class="ydc-menu-item">
+								<a href="<%=path %>${menuList.pathName}" class="">
+									<i class="${menuList.divClass}"></i>
+									${menuList.authorityName}
+								</a>
+							</li>
+						</c:forEach>
+							
+							
+						</ul>
+					</div>
 				</div>
-			</div>
-			<!-- left end -->
 			<!-- right begin -->
 			<div class="ydc-column ydc-column-8">
 				<div class="ydc-release-content">
@@ -119,14 +110,14 @@
 							</ul>
 						</div>
 						<div class="ydc-panes">
-							<form method="post" action="<%=path%>demand/addContrac.action"
+							<form method="post" action="<%=path%>demand/submissionDemand.action"
 								enctype="multipart/form-data">
 								<div class="ydc-reg-form-class ydc-reg-form-reg"
 									style="margin-top: 40px;">
 									<div class="aui-card-form-item preview  aui-news" style="margin-top:20px;">
                                                 <label class="aui">封面:</label>
                                                 
-                                                <img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
+                                                    <img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
                                                
                                                
                                      </div>
@@ -158,25 +149,36 @@
 									<div class="aui-card-form-item">
 											<label class="aui">需求信息:${demandInfo.demandDetaIlinformation}</label>
 									</div>
-								</div>							
-								<div class="aui-card-form-item preview  aui-news" style="margin-top: 20px;">
+									
+								</div>
+								
+								
+								
+															
+								<div class="aui-card-form-item preview  aui-news" style="margin-top: 10px;">
 
 									<div class="aui-card-form-item">
-								<div class="aui-card-form-item">
-										上传合同:<input type="file"   name="file" />
+									
+										<div class="aui-card-form-item">
+										提交工程:<input type="file"   name="file" />
 										</div>
 										<div class="aui-remarks">
-											<p>合同建议以DOC或PDF格式的文件上传</p>
+											<p>提交后将由顾问审核，通过后项目完成</p>
 										</div>
 									</div>
 								</div>
 								
-								<div class="ydc-btn" style="margin-top: 20px;">
+								
+								
+								<div class="ydc-btn" style="margin-top: 5px;">
 								<input type="hidden" id="demandid" name="demandid" value="${demandInfo.demandId}">
 									<button class="btn">提交</button>
-
+									
 								</div>
 							</form>
+							<div class="ydc-btn" style="margin-top: 20px;">
+							<button class="btn" onClick="location.href='<%=path%>demand/returnContract.action'">返回</button>
+							</div>
 						</div>
 
 					</div>

@@ -79,7 +79,7 @@
 				<span class="tex-o">需求类型:</span>
 				<ul class="glist" id="glist"
 					data-monitor="goodsdetails_fenlei_click">
-					<li><a title="红色36g" href="">${demandInfo.parameterBean.parameterName}</a></li>
+					<li><a href="">${demandInfo.parameterBean.parameterName}</a></li>
 
 				</ul>
 			</div>
@@ -133,30 +133,18 @@
 		<!-- left -->
 		<div class="aside">
 			<h3>看了还看</h3>
-			<dl class="ac-mod-list">
+			  <c:forEach items="${demandBeans}"  var="demandBeans" >
+			  <dl class="ac-mod-list">
 				<dt>
-					<a href=""><img src="images/hdy_09.png" /></a>
+					<img src="<%=path%>picture/findPicture.action?url=${demandBeans.demandHead}" width='100px' height='100px'>
 				</dt>
 				<dd>
-					需求2 <span>￥99</span>
+					${demandBeans.demandTitle}<span>￥${demandBeans.dealMoney}</span>
 				</dd>
 			</dl>
-			<dl class="ac-mod-list">
-				<dt>
-					<a href=""><img src="images/hdy_07.png" /></a>
-				</dt>
-				<dd>
-					需求3 <span>￥99</span>
-				</dd>
-			</dl>
-			<dl class="ac-mod-list">
-				<dt>
-					<a href=""><img src="images/hdy_11.jpg" /></a>
-				</dt>
-				<dd>
-					需求1 <span>￥99</span>
-				</dd>
-			</dl>
+ 
+			  </c:forEach>
+			
 		</div>
 		<!-- right -->
 		<script>

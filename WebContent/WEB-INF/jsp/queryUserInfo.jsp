@@ -111,14 +111,18 @@
 										</div>
 									</div>
 									
-									
-									
+									<div class="ydc-reg-form-group clearfix">
+										<label>用户信用分：</label>
+										<div class="ydc-reg-form-input">
+											<label>${userInfo.userCredit}</label>
+										</div>
+									</div>
 									
 									
 									<div class="ydc-reg-form-group clearfix">
-										<label>已有内容发布渠道</label>
+										<label>注册时间：</label>
 										<div class="ydc-reg-form-input">
-											<label>https://weibo.com/525135676</label>
+											<label>${userInfo.userRegisterTime}</label>
 										</div>
 									</div>
 									
@@ -131,16 +135,13 @@
 									
 									
 									
-									<div class="ydc-reg-form-group clearfix" style="margin-top:40px;">
+									
+									<%-- <div class="ydc-reg-form-group clearfix" style="margin-top:40px;">
 										<div class="ydc-reg-form-button" style="margin-left:255px;">
 											<a class="btn fl" href="<%=path%>user/home.action">返回</a>
 										</div>
-									</div>
-									<div class="ydc-reg-form-group clearfix" style="margin-top:40px;">
-										<div class="ydc-reg-form-button" style="margin-left:255px;">
-											
-										</div>
-									</div>
+									</div> --%>
+									
 								</div>
 							</div>
 						</div>

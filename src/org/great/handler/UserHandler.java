@@ -102,10 +102,15 @@ ModelAndView UserInformation(HttpServletRequest request,String userid){
 
 	@RequestMapping("/UserInforEdit.action")//进入修改页面
 	public ModelAndView UserInforEdit(HttpServletRequest request, String userid) {
-
 		ModelAndView modelAndView = new ModelAndView();
 		request.setAttribute("userInfo", userBizImp.userinfo(userid));
 		modelAndView.setViewName("jsp/userInfoEdit");
+		ArrayList<AuthorityBean> menuList=new ArrayList<AuthorityBean>();
+		UserBean userBean=(UserBean) request.getSession().getAttribute("user");
+		menuList=authoriyMapper.findOwnSubclassMenu(userBean.getUserId());
+		request.setAttribute("menuList", menuList);
+		
+		
 		return modelAndView;
 
 	}
@@ -119,7 +124,9 @@ ModelAndView UserInformation(HttpServletRequest request,String userid){
 		UserBean userBean = (UserBean) request.getSession().getAttribute("user");
 		userBean.setUserHead(userBizImp.userinfo(userId).getUserHead());
 		request.getSession().setAttribute("user", userBean);
-		modelAndView.setViewName("jsp/userInfo");
+		
+		modelAndView.setViewName("redirect:/user/UserInformation.action");
+		
 		return modelAndView;
 
 	}	

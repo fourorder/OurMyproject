@@ -164,7 +164,7 @@ $(function () {
 	</ul>
 	<div class="con1" id="con1">
 	<c:forEach items="${objList[0][0]}"  var="obj" varStatus="status">	
-	<a href="<%=path%>user/EmployerInformation.action?userid=${obj.userId}"><div class="item" id="img${status.count}" >
+	<a href="<%=path%>user/EmployerInformation.action?userid=${obj.userId}" target="_blank" ><div class="item" id="img${status.count}" >
 		<img width="150" height="150" alt="${obj.userName}" src="<%=path%>images/banner-touxiang.png" />
 		<div class="caption" style="text-align:center;" >
 			<p>账户:${obj.userAccount}</p>
