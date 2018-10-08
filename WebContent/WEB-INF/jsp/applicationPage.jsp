@@ -78,6 +78,7 @@
    <div class="layui-tab">
    <input type="hidden" name="account" value="${account}" id="account">
    <input type="hidden" name="userId" value="${userId}" id="userId">
+
   <ul class="layui-tab-title">
     <li class="layui-this">首页</li>
     <li><a onclick="applyFor()">申请成为顾问</a></li>
@@ -227,6 +228,12 @@
 					评价
 				</h4>
 			</div>
+			<div class="layui-form-item" id="ppp">
+    <label class="layui-form-label">序号</label>
+    <div class="layui-input-block">
+      <input type="text" name="serialNumber" id="serialNumber"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
 			<div class="modal-body" id="wrap">
 				<label><input type="radio" name="radio" value="进度快">进度快</label>
                 <label> <input type="radio" name="radio" value="进度正常">进度正常</label>
@@ -237,13 +244,84 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 				</button>
-				<button type="button" class="btn btn-primary" onclick="evaluation()">
-					提交
+				<input type="button" class="btn btn-primary" value="提交" onclick="evaluation()" />
+				
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<!-- 模态框2（详情） -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel2">
+					详情
+				</h4>
+			</div>
+			<div class="layui-form-item">
+    <label class="layui-form-label">标题</label>
+    <div class="layui-input-block">
+      <input type="text" name="title" id="title"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+   <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">内容</label>
+    <div class="layui-input-block">
+      <textarea id="desc" disabled class="layui-textarea">未填写</textarea>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">类型</label>
+    <div class="layui-input-block">
+      <input type="text" id="type"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label">雇主id</label>
+    <div class="layui-input-block">
+      <input type="text" id="fromUserId"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label">服务商id</label>
+    <div class="layui-input-block">
+      <input type="text" id="toUserId"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label">发布时间</label>
+    <div class="layui-input-block">
+      <input type="text" id="time"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+    <div class="layui-form-item">
+    <label class="layui-form-label">佣金</label>
+    <div class="layui-input-block">
+      <input type="text" id="money"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label">项目状态</label>
+    <div class="layui-input-block">
+      <input type="text" id="state"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div id="fileDown" style="margin-left: 40%" >
+  </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 				</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
+
+
 
 
 <script  src="<%=path %>layui/layui.js"></script>
@@ -257,9 +335,8 @@ layui.use(['form','layer','laydte'], function(){
 //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
 layui.use('element', function(){
 var element = layui.element;
-
-//…
 });
+
 function applyFor(){	
 	var account=$("#account").val()
 	var userId=$("#userId").val()
@@ -269,7 +346,6 @@ function applyFor(){
 		 dataType:"json",
 		 type:"post",
 		 success:function(redata){
-		
 			 if(redata==2){
 				 $('#aaa').empty();
 				 $("#aaa").append("<a>您已经是顾问！</a>")
@@ -310,9 +386,9 @@ function applyForList(page){
 							"<td>"+e.userAccount+"</td>"+
 							"<td>"+e.demandid+"</td>"+
 							"<td>未处理</td>"+
-							"<td><a class='layui-btn layui-btn-sm layui-btn-danger' onclick='return firm()' href='<%=path%>counselor/applyForOk.action?action=ok&demandid="+e.demandid+"' >确认接受</a>"+
-							"<a class='layui-btn layui-btn-sm layui-btn-warm' onclick='return firm1()' href='<%=path%>counselor/applyForOk.action?action=refuse&demandid="+e.demandid+"'>拒绝接受</a>"+
-							"<a class='layui-btn layui-btn-sm' href='<%=path%>counselor/applyForOk.action?action=particulars&demandid="+e.demandid+"'>查看详情</a></td>"+
+							"<td><a class='layui-btn layui-btn-sm layui-btn-danger' onclick='return firm("+e.demandid+")'>确认接受</a>"+
+							"<a class='layui-btn layui-btn-sm layui-btn-warm' onclick='return firm1("+e.demandid+")'>拒绝接受</a>"+
+							"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
 							"</tr>"
 				 
 				 )
@@ -323,7 +399,7 @@ function applyForList(page){
 								"<td>"+e.userAccount+"</td>"+
 								"<td>"+e.demandid+"</td>"+
 								"<td>已接受</td>"+
-								"<td><a class='layui-btn layui-btn-sm'href='<%=path%>counselor/applyForOk.action?action=particulars&demandid="+e.demandid+"'>查看详情</a></td>"+
+								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
 								"</tr>"
 								)
 				 }else if(e.stateId==904){
@@ -333,7 +409,7 @@ function applyForList(page){
 								"<td>"+e.userAccount+"</td>"+
 								"<td>"+e.demandid+"</td>"+
 								"<td>已拒绝</td>"+
-								"<td><a class='layui-btn layui-btn-sm'href='<%=path%>counselor/applyForOk.action?action=particulars&demandid="+e.demandid+"'>查看详情</a></td>"+
+								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
 								"</tr>"
 								)
 				 }
@@ -371,9 +447,9 @@ function sstate() {
 									"<td>"+e.userAccount+"</td>"+
 									"<td>"+e.demandid+"</td>"+
 									"<td>未处理</td>"+
-									"<td><a class='layui-btn layui-btn-sm layui-btn-danger' onclick='return firm()' href='<%=path%>counselor/applyForOk.action?action=ok&demandid="+e.demandid+"' >确认接受</a>"+
-									"<a class='layui-btn layui-btn-sm layui-btn-warm' onclick='return firm1()' href='<%=path%>counselor/applyForOk.action?action=refuse&demandid="+e.demandid+"'>拒绝接受</a>"+
-									"<a class='layui-btn layui-btn-sm'href='<%=path%>counselor/applyForOk.action?action=particulars&demandid="+e.demandid+"'>查看详情</a></td>"+
+									"<td><a class='layui-btn layui-btn-sm layui-btn-danger' onclick='return firm("+e.demandid+")'>确认接受</a>"+
+									"<a class='layui-btn layui-btn-sm layui-btn-warm' onclick='return firm1("+e.demandid+")'>拒绝接受</a>"+
+									"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
 									"</tr>"
 						 
 						 )
@@ -384,7 +460,7 @@ function sstate() {
 										"<td>"+e.userAccount+"</td>"+
 										"<td>"+e.demandid+"</td>"+
 										"<td>已接受</td>"+
-										"<td><a class='layui-btn layui-btn-sm'href='<%=path%>counselor/applyForOk.action?action=particulars&demandid="+e.demandid+"'>查看详情</a></td>"+
+										"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
 										"</tr>"
 										)
 						 }else if(e.stateId==904){
@@ -394,7 +470,7 @@ function sstate() {
 										"<td>"+e.userAccount+"</td>"+
 										"<td>"+e.demandid+"</td>"+
 										"<td>已拒绝</td>"+
-										"<td><a class='layui-btn layui-btn-sm'href='<%=path%>counselor/applyForOk.action?action=particulars&demandid="+e.demandid+"'>查看详情</a></td>"+
+										"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
 										"</tr>"
 										)
 						 }
@@ -415,14 +491,15 @@ function project() {
 		 type:"post",
 		 success:function(redata){
 			 $("#ddd").empty();
-			 
 			 var list=redata.list;
 			 var len = list.length;
+			 $("#ddd").append(
+						"<option value=''>请选择</option>"
+						
+						 )
 			 for(var i=0;i<len;i++){ 
 				 var e = list[i];
-				 alert(e)
 				 $("#ddd").append(
-						 "<option value='0'>请选择</option>"+
 						"<option value='"+e+"'>"+e+"</option>"
 						
 						 )
@@ -437,7 +514,6 @@ function pid() {
 	var nn=$("#num1").text();
 	var state1=$("#state2").val();
 	var pid=$("#ddd").val()
-	alert(pid);
 	$.ajax({
 		 url:"<%=path%>counselor/parameter.action",
 		 data:"parameterId="+pid+"&state1"+state1+"&number=1&page=tpage",
@@ -456,18 +532,19 @@ function pid() {
 				 var e = list[i];
 				 if(e.dailyReview=="未评价"){
 				 $("#eee").append(
-						 "<tr><td><span id='dailyId'>"+e.dailyId+"</span></td>"+
-						 "<tr><td><span id='date'>"+e.publishDate+"</span></td>"+	 
+						 "<tr><td>"+e.daiId+"</td>"+
+						 "<td>"+e.publishDate+"</td>"+	 
 						 "<td>"+e.content+"</td>"+
 						 "<td>未评价</td>"+
 						 "<td>无批注</td>"+
-						 "<td><a  data-toggle='modal' data-target='#myModal'>点击评价</a></td>"+
+						 "<td><a  data-toggle='modal' data-target='#myModal' onclick='Values("+e.daiId+")'>点击评价</a></td>"+
 						 "</tr>"
 						 )
+					 $("#serialNumber").val(e.daiId);	 
 				 }else{
 					 $("#eee").append(
-							 "<tr><td><span id='dailyId'>"+e.dailyId+"</span></td>"+
-							 "<tr><td><span id='date'>"+e.publishDate+"</span></td>"+	 
+							 "<tr><td>"+e.daiId+"</td>"+
+							 "<td>"+e.publishDate+"</td>"+	 
 							 "<td>"+e.content+"</td>"+
 							 "<td>"+e.dailyReview+"</td>"+
 							 "<td>"+e.postil+"</td>"+
@@ -504,8 +581,8 @@ function sdaily() {
 				 alert(e)
 				 if(e.dailyReview=="未评价"){
 				 $("#eee").append(
-						 "<tr><td><span id='dailyId'>"+e.dailyId+"</span></td>"+
-						 "<tr><td><span id='date'>"+e.publishDate+"</span></td>"+	 
+						 "<tr><td>"+e.daiId+"</td>"+
+						 "<tr><td>"+e.publishDate+"</td>"+	 
 						 "<td>"+e.content+"</td>"+
 						 "<td>未评价</td>"+
 						 "<td>无批注</td>"+
@@ -514,8 +591,8 @@ function sdaily() {
 						 )
 				 }else{
 					 $("#eee").append(
-							 "<tr><td><span id='dailyId'>"+e.dailyId+"</span></td>"+
-							 "<tr><td><span id='date'>"+e.publishDate+"</span></td>"+	 
+							 "<tr><td>"+e.daiId+"</td>"+
+							 "<tr><td>"+e.publishDate+"</td>"+	 
 							 "<td>"+e.content+"</td>"+
 							 "<td>"+e.dailyReview+"</td>"+
 							 "<td>"+e.postil+"</td>"+
@@ -529,9 +606,63 @@ function sdaily() {
 	})
 }
 
-function firm() {
+function firm(demandid) {
     //利用对话框返回的值 （true 或者 false）
-    if (confirm("是否确认通过")) {
+if (confirm("是否确认接受")) {
+    	var userId=$("#userId").val()
+	    var nn=$("#num").text();
+	   var state2=$("#state1").val();
+    	$.ajax({
+   		 url:"<%=path%>counselor/applyForOk.action",
+   		 data:"action=ok&demandid="+demandid+"&state1="+state2+"&number="+nn+"&userId="+userId,
+   		 dataType:"json",
+   		 type:"post",
+   		 success:function(redata){
+   			 $("#ccc").empty();
+			 $("#num").empty();
+			 var num=redata[0]
+			 $("#num").html(num);
+				var list=redata[1]
+			 var len = list.length;
+			 for(var i=0;i<len;i++){ 
+				 var e = list[i];
+				 if(e.stateId==902){
+			
+				 $("#ccc").append(
+						 "<tr><td>"+e.demandTitle+"</td>"+
+							"<td>"+e.demandDetaIlinformation+"</td>"+
+							"<td>"+e.userAccount+"</td>"+
+							"<td>"+e.demandid+"</td>"+
+							"<td>未处理</td>"+
+							"<td><a class='layui-btn layui-btn-sm layui-btn-danger' onclick='return firm("+e.demandid+")'>确认接受</a>"+
+							"<a class='layui-btn layui-btn-sm layui-btn-warm' onclick='return firm1("+e.demandid+")'>拒绝接受</a>"+
+							"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
+							"</tr>"
+				 )
+				 }else if(e.stateId==903){
+					 $("#ccc").append(
+							 "<tr><td>"+e.demandTitle+"</td>"+
+								"<td>"+e.demandDetaIlinformation+"</td>"+
+								"<td>"+e.userAccount+"</td>"+
+								"<td>"+e.demandid+"</td>"+
+								"<td>已接受</td>"+
+								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
+								"</tr>"
+								)
+				 }else if(e.stateId==904){
+					 $("#ccc").append(
+							 "<tr><td>"+e.demandTitle+"</td>"+
+								"<td>"+e.demandDetaIlinformation+"</td>"+
+								"<td>"+e.userAccount+"</td>"+
+								"<td>"+e.demandid+"</td>"+
+								"<td>已拒绝</td>"+
+								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
+								"</tr>"
+								)
+				 }
+			 }
+   		 }
+   	})
        return true;
     }
     else {
@@ -539,21 +670,113 @@ function firm() {
     }
 
 }
-function firm1() {
+function firm1(demandid) {
     //利用对话框返回的值 （true 或者 false）
     if (confirm("是否拒绝接受")) {
+    	var userId=$("#userId").val()
+	    var nn=$("#num").text();
+	   var state2=$("#state1").val();
+    	$.ajax({
+   		 url:"<%=path%>counselor/applyForOk.action",
+   		 data:"action=refuse&demandid="+demandid+"&state1="+state2+"&number="+nn+"&userId="+userId,
+   		 dataType:"json",
+   		 type:"post",
+   		 success:function(redata){
+   			 $("#ccc").empty();
+			 $("#num").empty();
+			 var num=redata[0]
+			 $("#num").html(num);
+				var list=redata[1]
+			 var len = list.length;
+			 for(var i=0;i<len;i++){ 
+				 var e = list[i];
+				 if(e.stateId==902){
+			
+				 $("#ccc").append(
+						 "<tr><td>"+e.demandTitle+"</td>"+
+							"<td>"+e.demandDetaIlinformation+"</td>"+
+							"<td>"+e.userAccount+"</td>"+
+							"<td>"+e.demandid+"</td>"+
+							"<td>未处理</td>"+
+							"<td><a class='layui-btn layui-btn-sm layui-btn-danger' onclick='return firm()'>确认接受</a>"+
+							"<a class='layui-btn layui-btn-sm layui-btn-warm' onclick='return firm1()'>拒绝接受</a>"+
+							"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
+							"</tr>"
+				 )
+				 }else if(e.stateId==903){
+					 $("#ccc").append(
+							 "<tr><td>"+e.demandTitle+"</td>"+
+								"<td>"+e.demandDetaIlinformation+"</td>"+
+								"<td>"+e.userAccount+"</td>"+
+								"<td>"+e.demandid+"</td>"+
+								"<td>已接受</td>"+
+								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
+								"</tr>"
+								)
+				 }else if(e.stateId==904){
+					 $("#ccc").append(
+							 "<tr><td>"+e.demandTitle+"</td>"+
+								"<td>"+e.demandDetaIlinformation+"</td>"+
+								"<td>"+e.userAccount+"</td>"+
+								"<td>"+e.demandid+"</td>"+
+								"<td>已拒绝</td>"+
+								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
+								"</tr>"
+								)
+				 }
+			 }
+   		 }
+   	})
        return true;
     }
     else {
     	 return false;
     }
 
+}
+
+function Values(Id) {
+	$("#serialNumber").val(Id)
 }
 
 function evaluation() {
+  var dailyId=$("#serialNumber").val();
+	var notation=$("#notation").val();
+	var account=$("#account").val();
+	var userId=$("#userId").val();
+	var radio = $('#wrap input[name="radio"]:checked ').val();
+	window.location.href="<%=path%>counselor/evaluation.action?dailyId="+dailyId+"&notation="+notation+"&radio="+radio+"&account="+account+"&userId="+userId;
+}
 
-	var dailyId=$("#dailyId").val();
-	window.location.href="<%=path%>counselor/evaluation.action?dailyId="+dailyId;
+function particulars(demandid) {
+	$.ajax({
+  		 url:"<%=path%>counselor/particulars.action",
+  		 data:"demandid="+demandid,
+  		 dataType:"json",
+  		 type:"post",
+  		 success:function(redata){
+  			 $("#fileDown").empty();
+  			var list=redata[0]
+  			var type=redata[1]
+  			var state=redata[2]
+			 var len = list.length
+  			 for(var i=0;i<len;i++){ 
+				 var e = list[i];
+  			    $("#title").val(e.demandTitle);
+  			  $("#desc").val(e.demandDetaIlinformation);
+  			 $("#type").val(type);
+  			 $("#fromUserId").val(e.fromUserId);
+  			 $("#toUserId").val(e.toUserId);
+  			 $("#money").val(e.securityMoney);
+  			 $("#time").val(e.publishTime);
+  			 $("#state").val(state);
+  			 $("#fileDown").append(	 
+  					"<a href='<%=path%>download.action?upUrl="+e.filePath+"' class='btn btn-warning illegalBtn rightSize' type='button' data-id='"+e.filePath+"' id='illegal' >下载项目</a>"
+  			 )
+  			 }
+  		 }
+	})
+  		 
 }
 </script>
 </body>

@@ -64,7 +64,7 @@
                                                 <p>搜索标题以及描述</p>
                                             </div>
                                             <div class="ydc-group-input clearfix" style="width:100%; margin-bottom:20px;">
-                                           <form  method="post" action="<%=path%>production/toProduction.action">
+                                           <form  method="post" action="<%=path%>production/toProductionPass.action?currentPage=1">
                                                <input type="text" name="fieldName" id="fieldName" placeholder="请输入作品名字进行搜索" style="width:25.333%" value=${fieldName }>
                                                <input type="text" name="conditionName" id="conditionName" placeholder="请输入服务商名字进行搜索" style="width:25.333%"  value=${conditionName }>
                                                <input type="submit"  value="搜索"  class="ydc-group-button" style="width:10.333%" />
@@ -107,8 +107,8 @@
                                                         <span>下一页</span>
                                                     </button>
                                                
-                                                    第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""></div>页
-                                                    <button style="margin-left:5px;" class="ydc-previous-item-btn-medium">
+                                                    第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""  name="toNumber"   id="toNumber"  ></div>页
+                                                    <button style="margin-left:5px;" class="ydc-previous-item-btn-medium"  onclick="addPages('toNumber')" >
                                                         <span>跳转</span>
                                                     </button>
                                                 </li>
@@ -145,16 +145,16 @@
             
 	    bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });//编辑器
 	
-<<<<<<< HEAD
+ 
 	  <c:forEach items="${demandBeans}"  var="demandBeans" >	              
 	           <div class="filtr-item" data-category="2">
 	              <a href="<%=path%>production/toProductionDetal.action?proId=${list.productionId}">
-			<img src="<%=path%>picture/findPicture.action?url=${demandBeans.demandHead}"  alt="">
+			 <img src="<%=path%>picture/findPicture.action?url=${demandBeans.demandHead}"  alt="">
 			<span class="ss">${demandBeans.demandTitle}</span>
 		</a>
 	</div>
 </c:forEach>	
-=======
+ 
         </script>
         <script type="text/javascript">
             
@@ -172,8 +172,7 @@
 	        slides[slideIndex-1].style.display = "block";
 	        setTimeout(showSlides, 3000); // AD滚动时间
 	    }
->>>>>>> branch 'master' of https://github.com/fourorder/OurMyproject.git
-	
+ 
         </script>
         <script type="text/javascript">
             
@@ -202,12 +201,24 @@
     
     function addPages(state){
    	 
-
+    	var toNumber=$("#toNumber").val();
+//alert("跳转页数="+toNumber);
+if(state=="toNumber"){
+    		
+    		if(toNumber<=0){
+        		alert("页数过小");
+        		return false;
+        	}
+        	if(toNumber>$("#totalPages").text()){
+        		alert("页数过大");
+        		return false;
+        	}
+    	}
     	$("#proList").empty();
     	//alert("currentPage="+$("#currentPage").text());
     	$.ajax({	
-    		 url:"<%=path %>production/AddPages.action",
-    		 data:"currentPage="+$("#currentPage").text()+"&state="+state+"&totalPages="+$("#totalPages").text()+"&conditionName="+$("#conditionName").val()+"&fieldName="+$("#fieldName").val(),
+    		 url:"<%=path %>production/AddPagesPass.action",
+    		 data:"currentPage="+$("#currentPage").text()+"&state="+state+"&totalPages="+$("#totalPages").text()+"&conditionName="+$("#conditionName").val()+"&fieldName="+$("#fieldName").val()+"&toNumber="+toNumber,
     		 dataType:"json",
     		 type:"post",
     		 success:function(redata){

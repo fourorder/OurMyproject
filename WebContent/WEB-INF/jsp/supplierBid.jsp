@@ -8,7 +8,7 @@
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>需求管理</title>
+<title>我的任务</title>
 <link rel="stylesheet" href="<%=path%>css/oindex.css">
 <style type="text/css">
 
@@ -109,14 +109,10 @@
 	<div class="o-top">
 				<div class="width1180">
 					<span class="fr">
-						<!-- <a href="#" title="登录">登录</a>
-						<a href="#" title="注册">注册</a> -->
+						
 						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
 						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
-						<!--登录后
-						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
-						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
-						-->
+						
 					</span>
 				</div>
 			</div>
@@ -159,7 +155,7 @@
 							</div>
 							<div class="ydc-panes">
 								<div class="ydc-pane" style="display:block;">
-									<%-- <div class="clearfix">
+									<div class="clearfix">
 										<div class="fl ydc-group-sel">
 											<select name="parameter" id="parameter">
 												<option value="0">全部类型</option>
@@ -171,16 +167,19 @@
 										<div class="fl ydc-group-sel">
 											<select name="parameterState" id="parameterState">
 												<option value="0">全部类型</option>
-												<c:forEach items="${stateParmeter}"  var="stateParmeter" >
-												<option value="${stateParmeter.parameterId}">${stateParmeter.parameterName}</option>
-												</c:forEach>
+												<option value="10">竞拍成功</option>
+												<option value="2061">签署合同</option>
+												<option value="1863">项目开工</option>
+												<option value="2272">审核中</option>
+												<option value="1865">项目完成</option>
+												<option value="1866">项目失败</option>
 											</select>
 										</div>
 										<div class="fl ydc-group-input">
 											<input input type="text" name="searchName" id="searchName" placeholder="请输入关键词进行搜索" value="${requestScope.searchName}">
 											<button class="ydc-group-button" onclick="selectDemand('query')">搜 索</button>
 										</div>
-									</div> --%>
+									</div>
 									<div class="ydc-group-altogether">共<span id="counts">${requestScope.count}</span>个任务</div>
 									
 									
@@ -191,7 +190,8 @@
 									<div class="ydc-group-table" id="demandDateList">    <!-- 这个是主标签 -->
 									 <c:forEach items="${demandInfo}"  var="demandInfo" >
 	 
-									 <!-- 审核中，查看详情，可编辑 -->
+									 <!-- 竞拍成功 -->
+									 	<c:if test="${demandInfo.stateParameterBean.parameterId == 10}">
 									 	
 									 	<div class="ydc-group-table-item">
 											<div class="ydc-group-table-item-img">
@@ -199,9 +199,8 @@
 											</div>
 											<div class="ydc-actions">
 												<div>
-													<button class="ydc-actions-trigger">需求详情</button>
-													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/daily.action?demandid=${demandInfo.demandId}'">日志</button>
-													<button class="ydc-actions-trigger">提交项目</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/facilitatorQueryDemandInfo.action?demandid=${demandInfo.demandId}'">需求详情</button>
+													
 													
 												</div>
 											</div>
@@ -209,14 +208,149 @@
 												<span>
 													<a href="#">标题：${demandInfo.demandTitle}</a>
 												</span>
-												<span class="ydc-group-table-item-tag">工期：</span>
+												<span class="ydc-group-table-item-tag">工期：${demandInfo.completeTime}天</span>
 											</div>
 											<div class="ydc-group-table-item-info">
-												<span>开始时间：${demandInfo.publishTime}</span>
-												<span>留在后期加工</span>
+												<span>竞拍成功（等待雇主上传合同）</span>
+												<span> | 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
 											</div>
 										</div>
+									 	</c:if>
+									 	<!-- 签署合同 -->
+									 	<c:if test="${demandInfo.stateParameterBean.parameterId == 2061}">
 									 	
+									 	<div class="ydc-group-table-item">
+											<div class="ydc-group-table-item-img">
+												<img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
+											</div>
+											<div class="ydc-actions">
+												<div>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/facilitatorQueryDemandInfo.action?demandid=${demandInfo.demandId}'">需求详情</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/goToContract.action?demandid=${demandInfo.demandId}'">合同签署</button>															
+												</div>
+											</div>
+											<div class="ydc-group-table-item-text">
+												<span>
+													<a href="#">标题：${demandInfo.demandTitle}</a>
+												</span>
+												<span class="ydc-group-table-item-tag">工期：${demandInfo.completeTime}天</span>
+											</div>
+											<div class="ydc-group-table-item-info">
+												<span>请下载合同盖章后上传</span>
+												<span> | 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
+											</div>
+										</div>
+									 	</c:if>
+									 	
+									 	<!-- 项目开工 -->
+									 	<c:if test="${demandInfo.stateParameterBean.parameterId == 1863}">
+									 	
+									 	<div class="ydc-group-table-item">
+											<div class="ydc-group-table-item-img">
+												<img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
+											</div>
+											<div class="ydc-actions">
+												<div>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/facilitatorQueryDemandInfo.action?demandid=${demandInfo.demandId}'">需求详情</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/daily.action?demandid=${demandInfo.demandId}'">日志</button>										
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/goSubmissionDemand.action?demandid=${demandInfo.demandId}'">提交项目</button>
+													
+												</div>
+											</div>
+											<div class="ydc-group-table-item-text">
+												<span>
+													<a href="#">标题：${demandInfo.demandTitle}</a>
+												</span>
+												<span class="ydc-group-table-item-tag">工期：${demandInfo.completeTime}天</span>
+											</div>
+											<div class="ydc-group-table-item-info">
+												<span>${demandInfo.stateParameterBean.parameterName}</span>
+												<span> | 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
+											</div>
+										</div>
+									 	</c:if>
+									 	
+									 	<!-- 项目审核-->
+									 	<c:if test="${demandInfo.stateParameterBean.parameterId == 2272}">
+									 	
+									 	<div class="ydc-group-table-item">
+											<div class="ydc-group-table-item-img">
+												<img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
+											</div>
+											<div class="ydc-actions">
+												<div>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/facilitatorQueryDemandInfo.action?demandid=${demandInfo.demandId}'">需求详情</button>
+													
+													
+												</div>
+											</div>
+											<div class="ydc-group-table-item-text">
+												<span>
+													<a href="#">标题：${demandInfo.demandTitle}</a>
+												</span>
+												<span class="ydc-group-table-item-tag">工期：${demandInfo.completeTime}天</span>
+											</div>
+											<div class="ydc-group-table-item-info">
+												<span>项目已交由顾问审核</span>
+												<span> | 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
+											</div>
+										</div>
+									 	</c:if>
+									 	
+									 	
+									 	<!-- 项目成功 -->
+									 	<c:if test="${demandInfo.stateParameterBean.parameterId == 1865}">
+									 	
+									 	<div class="ydc-group-table-item">
+											<div class="ydc-group-table-item-img">
+												<img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
+											</div>
+											<div class="ydc-actions">
+												<div>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/facilitatorQueryDemandInfo.action?demandid=${demandInfo.demandId}'">需求详情</button>
+													
+													
+												</div>
+											</div>
+											<div class="ydc-group-table-item-text">
+												<span>
+													<a href="#">标题：${demandInfo.demandTitle}</a>
+												</span>
+												<span class="ydc-group-table-item-tag">工期：${demandInfo.completeTime}天</span>
+											</div>
+											<div class="ydc-group-table-item-info">
+												<span>${demandInfo.stateParameterBean.parameterName}</span>
+												<span> | 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
+											</div>
+										</div>
+									 	</c:if>
+									 	<!-- 项目项目失败 -->
+									 	<c:if test="${demandInfo.stateParameterBean.parameterId == 1866}">
+									 	
+									 	<div class="ydc-group-table-item">
+											<div class="ydc-group-table-item-img">
+												<img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
+											</div>
+											<div class="ydc-actions">
+												<div>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/facilitatorQueryDemandInfo.action?demandid=${demandInfo.demandId}'">需求详情</button>
+																				
+													
+													
+												</div>
+											</div>
+											<div class="ydc-group-table-item-text">
+												<span>
+													<a href="#">标题：${demandInfo.demandTitle}</a>
+												</span>
+												<span class="ydc-group-table-item-tag">工期：${demandInfo.completeTime}天</span>
+											</div>
+											<div class="ydc-group-table-item-info">
+												<span>${demandInfo.stateParameterBean.parameterName}</span>
+												<span> | 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
+											</div>
+										</div>
+									 	</c:if>
 									 </c:forEach>
 									
 						
@@ -305,7 +439,8 @@
 	    }//标题输入框字数限制
 	
         </script>
-    <%--  <script type="text/javascript">
+   
+    <script type="text/javascript">
       
       
         var page = ${requestScope.page}
@@ -318,7 +453,7 @@
         		page=num;		
         	}
         	$.ajax({
-        	 url:"<%=path%>demand/selectDemandEmployer.action",
+        	 url:"<%=path%>demand/selectDemandFacilitator.action",
        		 data:"userid="+userid+"&state="+state+"&page="+page+"&searchName="+$('#searchName').val()+"&parameterid="+$('#parameter').val()+"&stateid="+$('#parameterState').val(),
        		 dataType:"json",
        		 type:"post",
@@ -328,11 +463,14 @@
        			var count = redata[2];
 			   	var list=redata[3];
 		        var len = list.length;
-	    
+		        
 		        for(var i=0;i<len;i++){    
 		        	
 		            var e = list[i];
-		                   	
+	    
+ 						if(e.stateParameterBean.parameterId == 10){
+	
+		
 		            	$("#demandDateList").append(
 		            			"<div class='grouptable'>"
 			            		+"<div class='table-item-img'>"
@@ -340,23 +478,153 @@
 			            		+"</div>"	            		
 				            	+"<div class='ydcactions'>"
 				            	+"<div>"
-				            	+"<button class='actions-trigger'>需求详情</button>"
-				            	+"<button class='actions-trigger'>日志</button>"
-				            	+"<button class='actions-trigger'>提交项目</button>"
+				            
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/facilitatorQueryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
+				            	
 				            	
 								+"</div>"							
 							+"</div>"							
 							+"<div class='item-text'>"
 							+"<span><a href='#'>标题："+e.demandTitle+"</a></span>"
-							+"<span class='table-item-tag'>"+"先空着"+"</span>"
+							+"<span class='table-item-tag'>工期："+e.completeTime+"天</span>"
 							+"</div>"
 							
 							+"<div class='group-table-item-info'>"
-							+"<span>开始时间："+e.publishTime+"</span>"
-							//+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+							+"<span>发布时间：竞拍成功（等待雇主上传合同）</span>"
+							+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
 							+"</div>"			
 							+"</div>"			            	
 		            	);
+		            }else if(e.stateParameterBean.parameterId == 2061){
+		            	$("#demandDateList").append(
+		            			"<div class='grouptable'>"
+			            		+"<div class='table-item-img'>"
+			            		+"<img src='<%=path%>picture/findPicture.action?url="+e.demandHead+"' width='133' height='133'>"
+			            		+"</div>"	            		
+				            	+"<div class='ydcactions'>"
+				            	+"<div>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/facilitatorQueryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/goToContract.action?demandid="+e.demandId+"'\">合同签署</button>"
+				            	
+				            
+								+"</div>"							
+								+"</div>"													
+								+"<div class='item-text'>"
+								+"<span><a href='#'>标题："+e.demandTitle+"</a></span>"
+								+"<span class='table-item-tag'>工期："+e.completeTime+"天</span>"
+								+"</div>"
+								
+								+"<div class='group-table-item-info'>"
+								+"<span>竞拍成功（等待雇主上传合同）</span>"
+								+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+								+"</div>"			
+								+"</div>"        	
+		            	); 
+		            	
+		         }else if(e.stateParameterBean.parameterId == 1863){
+		            	$("#demandDateList").append(
+		            			"<div class='grouptable'>"
+			            		+"<div class='table-item-img'>"
+			            		+"<img src='<%=path%>picture/findPicture.action?url="+e.demandHead+"' width='133' height='133'>"
+			            		+"</div>"	            		
+				            	+"<div class='ydcactions'>"
+				            	+"<div>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/facilitatorQueryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/daily.action?demandid="+e.demandId+"'\">日志</button>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/goSubmissionDemand.action?demandid="+e.demandId+"'\">提交项目</button>"
+				            
+								+"</div>"							
+								+"</div>"													
+								+"<div class='item-text'>"
+								+"<span><a href='#'>标题："+e.demandTitle+"</a></span>"
+								+"<span class='table-item-tag'>工期："+e.completeTime+"天</span>"
+								+"</div>"
+								
+								+"<div class='group-table-item-info'>"
+								
+								+"<span>："+e.stateParameterBean.parameterName+"</span>"
+								+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+								+"</div>"			
+								+"</div>"        	
+		            	); 
+		            	
+		         }else if(e.stateParameterBean.parameterId == 2272){
+		            	$("#demandDateList").append(
+		            			"<div class='grouptable'>"
+			            		+"<div class='table-item-img'>"
+			            		+"<img src='<%=path%>picture/findPicture.action?url="+e.demandHead+"' width='133' height='133'>"
+			            		+"</div>"	            		
+				            	+"<div class='ydcactions'>"
+				            	+"<div>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/facilitatorQueryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
+								+"</div>"							
+								+"</div>"													
+								+"<div class='item-text'>"
+								+"<span><a href='#'>标题："+e.demandTitle+"</a></span>"
+								+"<span class='table-item-tag'>工期："+e.completeTime+"天</span>"
+								+"</div>"
+								
+								+"<div class='group-table-item-info'>"
+								
+								+"<span>项目已交由顾问审核</span>"
+								+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+								+"</div>"			
+								+"</div>"        	
+		            	); 
+		            	
+		         }else if(e.stateParameterBean.parameterId == 1865){
+		            	$("#demandDateList").append(
+		            			"<div class='grouptable'>"
+			            		+"<div class='table-item-img'>"
+			            		+"<img src='<%=path%>picture/findPicture.action?url="+e.demandHead+"' width='133' height='133'>"
+			            		+"</div>"	            		
+				            	+"<div class='ydcactions'>"
+				            	+"<div>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/facilitatorQueryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
+				            
+								+"</div>"							
+								+"</div>"													
+								+"<div class='item-text'>"
+								+"<span><a href='#'>标题："+e.demandTitle+"</a></span>"
+								+"<span class='table-item-tag'>工期："+e.completeTime+"天</span>"
+								+"</div>"
+								
+								+"<div class='group-table-item-info'>"
+								+"<span>"+e.stateParameterBean.parameterName+"</span>"
+								+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+								+"</div>"			
+								+"</div>"        	
+		            	); 
+		            	
+		         }else if(e.stateParameterBean.parameterId == 1866){
+		            	$("#demandDateList").append(
+		            			"<div class='grouptable'>"
+			            		+"<div class='table-item-img'>"
+			            		+"<img src='<%=path%>picture/findPicture.action?url="+e.demandHead+"' width='133' height='133'>"
+			            		+"</div>"	            		
+				            	+"<div class='ydcactions'>"
+				            	+"<div>"
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/facilitatorQueryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
+				            
+								+"</div>"							
+								+"</div>"													
+								+"<div class='item-text'>"
+								+"<span><a href='#'>标题："+e.demandTitle+"</a></span>"
+								+"<span class='table-item-tag'>工期："+e.completeTime+"天</span>"
+								+"</div>"
+								
+								+"<div class='group-table-item-info'>"
+								+"<span>"+e.stateParameterBean.parameterName+"</span>"
+								+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+								+"</div>"			
+								+"</div>"        	
+		            	); 
+		            	
+		         }
+		        	
+		           
+		       
+		            	
 		            }	 	
 		            
 		        $("#pages").html(page+"/"+countpage);
@@ -373,6 +641,6 @@
         
         
         
-        </script> --%>
+        </script> 
 </body>
 </html>

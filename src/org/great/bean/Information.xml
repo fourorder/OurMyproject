@@ -16,7 +16,7 @@
 		insert into informationTbl values(SEQID.nextval,#{informationTitle},#{informationContent},#{informationPublishTime},#{informationAddress},#{parameterId},#{informationImg},#{stateId})
 	</insert>  
 <select id="getInformation" resultType="org.great.bean.InformationBean">
-select * from informationTbl where parameterid = #{parameterid}
+select * from informationTbl where parameterid = #{parameterid} and stateid=0
 
 </select>	
 

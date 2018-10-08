@@ -13,8 +13,10 @@
     <script type="text/javascript" src="<%=path %>js/jquery-1.9.1.min.js"></script>
     <link rel="stylesheet" href="<%=path %>layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="<%=path %>css/global.css" media="all">
-    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-<style type="text/css">
+     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><style type="text/css">
 
         body{TEXT-ALIGN: center;}
 
@@ -51,8 +53,8 @@
     <td>${fund.advertisementAddress}</td>
      <td>${fund.advertisementImage}</td>
       <td>${fund.advertisementNum}</td>
-       <td><a class="layui-btn layui-btn-sm layui-btn-danger" href="<%=path %>adver/operation.action?operation=del&title=${fund.advertisementTitle}&time=${fund.advertisementPublishTime}&state=${fund.advertisementNum}" onclick="return firm()">删除</a>
-       <a class="layui-btn layui-btn-sm" href="<%=path %>adver/operation.action?operation=update&title=${fund.advertisementTitle}&time=${fund.advertisementPublishTime}&state=${fund.advertisementNum}" >修改</a>
+       <td><a class="btn btn-danger  deleteBtn rightSize" href="<%=path %>adver/operation.action?operation=del&title=${fund.advertisementTitle}&time=${fund.advertisementPublishTime}&state=${fund.advertisementNum}" onclick="return firm()">删除</a>
+       <a class="btn btn-info" href="<%=path %>adver/operation.action?operation=update&title=${fund.advertisementTitle}&time=${fund.advertisementPublishTime}&state=${fund.advertisementNum}" >修改</a>
       </td>
  </tr>
  </c:forEach>

@@ -97,7 +97,7 @@
                     <div class="ydc-column ydc-column-2">
                         <div class="ydc-menu">
                             <ul>
-                                 <c:forEach items="${menuList}"  var="menuList" >	          
+                                <c:forEach items="${menuList}"  var="menuList" >	          
                                
                                <li class="ydc-menu-item">
                                     <a href="<%=path%>${menuList.pathName }" class="">
@@ -132,6 +132,7 @@
                                             <div class="ydc-warning-default">
                                                 <p>标题字数需在11字到30字之间。</p>
                                             </div>
+                                            
                                             <div class="ydc-release-form-group-input">
                                                 <input type="text" class="ydc-form-control"  name="title" title="" placeholder="请输入标题，为了更好的展示效果，建议标题字数在30个汉字以内" onkeyUp="textLimitCheck(this, 30);">
                                                 <div class="ydc-form-group-jl">

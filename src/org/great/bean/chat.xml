@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.great.mapper.ChatMapper">
+<insert id="addChatRecord" parameterType="org.great.bean.ChatBean">
+insert into chattbl values (SEQID.nextval,#{toUserId},#{chatContent},#{chatTime},#{userId},#{receiveFlag})
+</insert>
+<select id="getUserId" resultType="org.great.bean.UserBean" >
+	select * from usertbl where useraccount=#{useraccount}
+</select>
+<select id="getChat" resultType="org.great.bean.ChatBean" >
+	select * from chattbl where receiveflag=#{receiveflag} and touserid=#{touserid} and userid=#{userid} order by chattime 
+</select>
+<update id="updateFlag" >
+	update chattbl set receiveflag=1 where chatid=#{chatid}
+</update>
+<select id="getMsgInfo" resultType="org.great.bean.UserBean">
+select * from(select
+		t.*,rownum rn from(select * from usertbl where userid in (select userid from chattbl where receiveflag=0 and touserid=#{touserid} group by userid))t
+		 where rownum &lt;= #{end}) where rn &gt;=#{start}
+	
+</select>
+<select id="getCount" resultType="java.lang.Integer">
+	select count(*) from chattbl where receiveflag=0 and userid=#{userid} and touserid=#{touserid}
+</select>
+<!-- <resultMap type="org.great.bean.UserBean" id="chatList">
+<association property="count" column="userid"  javaType="org.great.bean.UserBean" select="getCount">
+</association>
+</resultMap> -->
+<select id="getAllMsg" resultType="org.great.bean.UserBean">
+select * from usertbl where userid in (select userid from chattbl where receiveflag=0 and touserid=#{touserid} group by userid)
+</select>
+<select id="chatNum" resultType="org.great.bean.ChatBean" >
+	select * from chattbl where receiveflag=#{receiveflag} and touserid=#{touserid}
+</select>
+</mapper>

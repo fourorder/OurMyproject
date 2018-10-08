@@ -20,7 +20,9 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+     
+      
+        <link type="text/css" rel="stylesheet" href="<%=path%>css/home.css">
 
 
  <style type="text/css">
@@ -35,7 +37,7 @@
 <!-- 姓名：<input type="text" name="name"  placeholder="请输入内容"  >  
 <input type="submit" value="查询" id="query"	class="layui-btn layui-btn-normal" />  --> 
 
- <form  method="post" action="<%=path%>production/toAdminProductionManage.action">
+ <form  method="post" action="<%=path%>production/toAdminProductionManage.action?currentPage=1"">
                                                 <input type="text" name="fieldName" id="fieldName" placeholder="请输入作品名字进行搜索" style="width:30.333%" value="${fieldName }">
                                                 <input type="text" name="conditionName" id="conditionName" placeholder="请输入服务商名字进行搜索" style="width:30.333%"   value="${conditionName }">
                                                <input type="submit"  value="搜索"  class="layui-btn layui-btn-normal" style="width:10.333%" />
@@ -169,25 +171,44 @@
 </table>
 当前页<span id="currentPage" >${currentPage}</span>  
 											总页数<span id="totalPages"  >${totalPages } </span>  
-                                                    <button class="ydc-previous-item-btn-medium" onclick="addPages('last')"  >
+                                                    <button class="btn btn-primary" onclick="addPages('last')"  >
                                                         <span>上一页</span>
                                                     </button>
                                                 
-                                                    <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  >
+                                                    <button class="btn btn-primary"  onclick="addPages('next')"  >
                                                         <span>下一页</span>
                                                     </button>
+                                                    
+                                                       第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""  name="toNumber"   id="toNumber"  ></div>页
+                                                    <button style="margin-left:5px;" class="ydc-previous-item-btn-medium"  onclick="addPages('toNumber')" >
+                                                        <span>跳转</span>
+                                                    </button>  
 </div>
   
  <script type="text/javascript">
     
     function addPages(state){
-   	 
-
+    	var toNumber=$("#toNumber").val();
+    	//alert("跳转页数="+toNumber);
+    //	if(state==toNumber){
+    	//	alert("toNumber="+toNumber);
+    	if(state=="toNumber"){
+    		if(toNumber<=0){
+        		alert("页数过小");
+        		return false;
+        	}
+        	if(toNumber>$("#totalPages").text()){
+        		alert("页数过大");
+        		return false;
+        	}
+   	}
+    	
+//alert("admin翻页");
     	$("#ddd").empty();
     	//alert("currentPage="+$("#currentPage").text());
     	$.ajax({	
     		 url:"<%=path %>production/AddPages.action",
-    		 data:"currentPage="+$("#currentPage").text()+"&state="+state+"&totalPages="+$("#totalPages").text()+"&conditionName="+$("#conditionName").val()+"&fieldName="+$("#fieldName").val(),
+    		 data:"currentPage="+$("#currentPage").text()+"&state="+state+"&totalPages="+$("#totalPages").text()+"&conditionName="+$("#conditionName").val()+"&fieldName="+$("#fieldName").val()+"&toNumber="+toNumber,
     		 dataType:"json",
     		 type:"post",
     		 success:function(redata){

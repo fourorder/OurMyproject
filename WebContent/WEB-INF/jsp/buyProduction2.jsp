@@ -29,8 +29,8 @@
         <title>素材中心--  媒体开放平台 一点车 -  让您多懂一点车</title>
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
-        <link type="text/css" rel="stylesheet" href="<%=path%>css/core.css">
-        <link type="text/css" rel="stylesheet" href="<%=path%>css/icon.css">
+           <link type="text/css" rel="stylesheet" href="<%=path%>css/core.css">  
+        <link type="text/css" rel="stylesheet" href="<%=path%>css/icon.css">  
         <link type="text/css" rel="stylesheet" href="<%=path%>css/home.css">
         <script type="text/javascript" src="<%=path%>js/jquery-1.5.2.min.js"></script>
          <script type="text/javascript" src="<%=path%>js/jquery.min.js"></script>
@@ -38,11 +38,11 @@
     <link rel="stylesheet" href="<%=path%>css/oindex.css">
     <link rel="stylesheet" href="<%=path%>plugins/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="<%=path%>css/global.css" media="all">
-    <link rel="stylesheet" href="<%=path%>laydate/theme/default/laydate.css" media="all">
+   <link rel="stylesheet" href="<%=path%>laydate/theme/default/laydate.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
+<!-- 	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  -->
     
         
         
@@ -96,7 +96,7 @@
                        <c:forEach items="${menuList}"  var="menuList" >	          
                                
                                <li class="ydc-menu-item">
-                                    <a href="<%=path%>${menuList.pathName }" class="">
+                                    <a href="<%=path%>${menuList.pathName}" class="">
                                         <i class="${menuList.divClass }"></i>
                                         ${menuList.authorityName }
                                     </a>
@@ -118,7 +118,7 @@
                     <!-- left end -->
                     <!-- right begin -->
                       <div class="ydc-column ydc-column-8">
-                    <form  method="post" action="<%=path%>production/findBuyProduction.action">
+                    <form  method="post" action="<%=path%>production/findBuyProduction.action?currentPage=1">
                                                 <input type="text" name="fieldName" id="fieldName" placeholder="请输入作品名字进行搜索" style="width:30.333%" value="${fieldName }">
                                                 <input type="text" name="conditionName" id="conditionName" placeholder="请输入服务商名字进行搜索" style="width:30.333%"   value="${conditionName }">
                                                <input type="submit"  value="搜索"  class="layui-btn layui-btn-normal" style="width:10.333%" />
@@ -166,8 +166,8 @@
      <a class="btn btn-info" id="yyy" href="<%=path%>production/adminProductionDetal.action?proId=${list.productionId}" target="_blank"  >查看详情</a> 
   <a href="<%=path %>download.action?upUrl=${list.productionImage }"   class=" btn btn-success   passBtn rightSize"  type="button"  data-id=${list.productionId } id="pass">下载封面</a>
  <a href="<%=path %>download.action?upUrl=${list.productionFile }"   class=" btn btn-warning illegalBtn rightSize"  type="button"  data-id=${list.productionId } id="illegal">下载文件</a>
-  
-       
+  <%--  <button class="btn btn-danger  deleteBtn rightSize" type="button" data-id=${list.productionId } id="example">评价</button> --%>
+        <a class="btn btn-danger" id="yyy" href="<%=path%>production/productionEvaluate.action?proId=${list.productionId}"   >评价</a> 
        </td>
        
         </tr>
@@ -210,18 +210,36 @@
                                                     <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  >
                                                         <span>下一页</span>
                                                     </button>
+                                                     第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""  name="toNumber"   id="toNumber"  ></div>页
+                                                    <button style="margin-left:5px;" class="ydc-previous-item-btn-medium"  onclick="addPages('toNumber')" >
+                                                        <span>跳转</span>
+                                                    </button>  
 </div>
-  
+ 
+
  <script type="text/javascript">
     
     function addPages(state){
    	 
-
+    	var toNumber=$("#toNumber").val();
+    	//alert("跳转页数="+toNumber);
+    //	if(state==toNumber){
+    	//	alert("toNumber="+toNumber);
+    	if(state=="toNumber"){
+    		if(toNumber<=0){
+        		alert("页数过小");
+        		return false;
+        	}
+        	if(toNumber>$("#totalPages").text()){
+        		alert("页数过大");
+        		return false;
+        	}
+   	}
     	$("#ddd").empty();
     	//alert("currentPage="+$("#currentPage").text());
     	$.ajax({	
     		 url:"<%=path %>production/buyProductionAddPages.action",
-    		 data:"currentPage="+$("#currentPage").text()+"&state="+state+"&totalPages="+$("#totalPages").text()+"&conditionName="+$("#conditionName").val()+"&fieldName="+$("#fieldName").val(),
+    		 data:"currentPage="+$("#currentPage").text()+"&state="+state+"&totalPages="+$("#totalPages").text()+"&conditionName="+$("#conditionName").val()+"&fieldName="+$("#fieldName").val()+"&toNumber="+toNumber,
     		 dataType:"json",
     		 type:"post",
     		 success:function(redata){
@@ -268,6 +286,23 @@
     
     
     </script>
+    
+    
+    <script type="text/javascript">
+    var  delProId;
+    
+    $("#ddd").on('click', '.deleteBtn', function () {
+    	delProId= $(this).parents('tr').find('button').eq(0).data("id");
+     	 $("#example").modal();
+    }) 
+   /*  $('#confirmDelRole').click(function(){
+    	
+    	alert("确认评价"+ $("#content3").val);
+    }); */
+    
+    
+    
+    </script>
                      </div>
                     </div>
                     <!-- right end -->
@@ -296,7 +331,7 @@
 	    bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });//编辑器
 	
         </script>
-        <script type="text/javascript">
+       <!--  <script type="text/javascript">
             
 	    var slideIndex = 0;
 	    showSlides();
@@ -313,7 +348,7 @@
 	        setTimeout(showSlides, 3000); // AD滚动时间
 	    }
 	
-        </script>
+        </script> -->
         <script type="text/javascript">
             
 	    $(function(){
@@ -337,58 +372,7 @@
 	    }//标题输入框字数限制
 	
         </script>
-        <script type="text/javascript">
-        function addPages(state){
-          	 
-
-        	$("#proList").empty();
-        	//alert("currentPage="+$("#currentPage").text());
-        	$.ajax({	
-        		 url:"<%=path %>production/ManageAddPages.action",
-        		 data:"currentPage="+$("#currentPage").text()+"&state="+state+"&totalPages="+$("#totalPages").text()+"&fieldName="+$("#fieldName").val(),
-        		 dataType:"json",
-        		 type:"post",
-        		 success:function(redata){
-        			 $("#currentPage").empty();
-        			 $("#totalPages").empty();
-        			 $("#currentPage").html(redata.currentPage);
-        			 $("#totalPages").html(redata.totalPages);
-        			/*  $("#fieldName").html(redata.fieldName); */
-        			 
-        			 var list=redata.proList;
-        			 var len = list.length;
-        			
-        			 for(var i=0;i<len;i++){    			        	 
-        	             var e = list[i];
-        	           
-        	             $("#proList").append( "<div class='ydc-asset-img-list'  ><div class='ydc-asset-img-list-img'>"
-        	            		 
-        	            +"<img src='<%=path%>picture/findPicture.action?url="+e.productionImage+"' alt=''></div> "
-        	            +"<br><div class='ydc-asset-img-list-til'>"+e.productionName +"&nbsp&nbsp&nbsp&nbsp&nbsp<span style='color:#ff0000'>"+e.auditName+"</span></div>"
-        	            +" <div class='ydc-asset-img-list-del'> "
-        	           +"<form   style='margin:0px; padding:0px;'  method='post' action='<%=path%>production/toEditProduction.action?proId="+e.productionId +"'enctype='multipart/form-data' >  "
-        	           +" <button  style='height:38px;' <%-- onclick="toEditProduction( ${list.productionId })" --%>  type='submit' >编辑</button>"
-        	         +" </form>"
-        	         +"<form style='margin:0px; padding:0px;'   method='post' action='<%=path%>production/toDelProduction.action?proId="+e.productionId +"' enctype='multipart/form-data'  onsubmit='return del()'>"
-        	         +"<button style='height:38px;'       type='submit' >删除</button>"
-        	        +"</form>"	 
-        	            +"</div> </div>"
-        	             );
-        	     //-----------------
-        	        
-                                                
-                                               
-        	     //--------------
-        			 
-        			 } 	 
-        			 
-        		 }
-        	})
-        	
-        }
         
-        
-        </script>
         <script type="text/javascript">
         function toEditProduction(proId){
         	
@@ -410,5 +394,6 @@
         
         
         </script>
+        
     </body>
 </html>

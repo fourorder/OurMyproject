@@ -40,11 +40,19 @@
 		and userTbl.stateId=stateTbl.stateId and
 		userTbl.characterId=characterTbl.characterId
 	</select>
+	<!-- 雇主注册 -->
 	<insert id="addUser">
 		insert into
-		userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId,userRegisterTime,userMoney)
+		userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId,userRegisterTime,userMoney,userHead)
 		values
-		(SEQID.nextval,#{userAccount},#{userPwd},#{characterId},#{userName},#{userTel},#{userIdentity},#{stateId},#{userRegisterTime},0)
+		(SEQID.nextval,#{userAccount},#{userPwd},#{characterId},#{userName},#{userTel},#{userIdentity},#{stateId},#{userRegisterTime},0,'banner-touxiang.png')
+	</insert>
+	<!-- 服务商注册 -->
+	<insert id="addUser2">
+		insert into
+		userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId,userRegisterTime,userMoney,businessTypeId,userHead)
+		values
+		(SEQID.nextval,#{userAccount},#{userPwd},#{characterId},#{userName},#{userTel},#{userIdentity},#{stateId},#{userRegisterTime},0,#{businessTypeId},'banner-touxiang.png')
 	</insert>
 	<select id="checkAccount" parameterType="String"
 		resultType="org.great.bean.UserBean">
@@ -314,6 +322,10 @@ UPDATE userStorytbl set enableDisableId=3 where userAccount=#{account}
  
       select * from USERTBL where USERID=#{userid}
 
+</select>
+<!-- 寻找服务商类型 -->
+<select id="findBusinessType" resultType="org.great.bean.ParameterBean">
+select * from tbParameter where pId=41
 </select>
 
 </mapper>

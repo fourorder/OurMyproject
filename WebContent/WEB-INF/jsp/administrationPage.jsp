@@ -109,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item ">
-                    <a href="javascript:;" style="font-size: 15px;">账号管理</a>
+                   <a href="javascript:;" style="font-size: 15px;">账号管理</a>
                     <dl class="layui-nav-child">
                         <dd>
                             <a href="<%=basePath%>employers/page.action?page=tpage&number=1" target="menuFrame" id="aa" onclick="anr()">雇主管理</a>
@@ -118,10 +118,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="<%=basePath%>facilitator/page.action?page=tpage&number=1" target="menuFrame" >服务商管理</a>
                         </dd>
                         <dd>
-                            <a href="<%=basePath%>counselor/list.action?number=1" target="menuFrame">顾问管理</a>
+                            <a href="<%=basePath%>counselor/list.action?number=1&page=tpage" target="menuFrame">顾问管理</a>
                         </dd>
-                        <dd>
+                       <!--  <dd>
                             <a href="" target="menuFrame">管理员管理</a>
+                        </dd> -->
+                         <dd>
+                            <a href="<%=basePath%>user/accountManage2.action?page=1" target="menuFrame">账户管理</a>
                         </dd>
                     </dl>
                 </li>
@@ -133,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="<%=basePath%>demand/page.action?page=tpage&number=1" target="menuFrame">需求管理</a>
                         </dd>
                         <dd>
-                            <a href="<%=basePath%>production/toAdminProductionManage.action" target="menuFrame">作品管理</a>
+                            <a href="<%=basePath%>production/toAdminProductionManage.action?currentPage=1"  target="menuFrame">作品管理</a>
                         </dd>
                     </dl>
                 </li>
@@ -144,29 +147,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="<%=basePath%>powder/toFindCharacter.action" target="menuFrame">权限管理</a>
                         </dd>
                         <dd>
-                            <a href="">需求类型配置</a>
+                            <a href="<%=basePath%>demandType/page.action?page=tpage&number=1" target="menuFrame">需求类型配置</a>
                         </dd>
                         <dd>
-                            <a href="">服务商类型配置</a>
+                            <a href="<%=basePath%>serviceProviderType/page.action?page=tpage&number=1" target="menuFrame">服务商类型配置</a>
                         </dd>
                         <dd>
-                            <a href="">服务类型管理</a>
+                            <a href="<%=basePath%>productType/page.action?page=tpage&number=1" target="menuFrame">作品类型管理</a>
                         </dd>
                         <dd>
                             <a href="<%=basePath%>employers/list.action?page=tpage&number=1" target="menuFrame">雇主故事列表</a>
                         </dd>
-                        <dd>
+                        <!-- <dd>
                             <a href="">曝光台配置</a>
-                        </dd>
+                        </dd> -->
                         <dd>
                             <a href="<%=basePath%>rule/page.action?page=tpage&number=1" target="menuFrame">规则中心配置</a>
                         </dd>
                         <dd>
                             <a href="<%=basePath%>line/page.action?page=tpage&number=1" target="menuFrame">友情链接配置</a>
                         </dd>
-                        <dd>
+                        <!-- <dd>
                             <a href="">行业动态配置</a>
-                        </dd>
+                        </dd> -->
                         <dd>
                         <a href="<%=basePath %>infor/inforPage.action?page=tpage&number=1" target="menuFrame">最新资讯配置</a>
                     </dd>

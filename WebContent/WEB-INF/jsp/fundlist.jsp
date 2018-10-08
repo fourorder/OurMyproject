@@ -54,7 +54,7 @@
 		<div class="ydc-content-slide ydc-body">
 			<div class="ydc-flex">
 				<!-- right begin -->
-				<div class="ydc-column ydc-column-8">
+				<div class="ydc-column ydc-column-8" style="margin:auto;">
 					<div class="ydc-release-content">
 						<div class="ydc-tabPanel ydc-tabPanel-release">
 							<div class="ydc-release-tab-head">
@@ -96,9 +96,16 @@
 										</li>
 										<li id="l1">${requestScope.page}/${requestScope.countPage}</li>
 										<li class="ydc-previous-item">
-											<button class="ydc-previous-item-btn-medium" onclick="selectFund('next')" id="next">
+										<c:if test="${requestScope.countPage=='1'}">
+										<button class="ydc-previous-item-btn-medium ydc-disabled" onclick="selectFund('next')" id="next" disabled="disabled">
 												<span>下一页</span>
-											</button>
+										</button>
+										</c:if>
+										<c:if test="${requestScope.countPage!='1'}">
+										<button class="ydc-previous-item-btn-medium" onclick="selectFund('next')" id="next">
+												<span>下一页</span>
+										</button>
+										</c:if>	
 										</li>
 										<li class="ydc-item-quick">
 											第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class="" id="btn1"></div>页
@@ -124,12 +131,6 @@
 	
 
 	<script type="text/javascript">
-	    /* $(function(){
-	        $('.ydc-tabPanel ul li').click(function(){
-	            $(this).addClass('hit').siblings().removeClass('hit');
-	            $('.ydc-panes>div:eq('+$(this).index()+')').show().siblings().hide();
-	        })
-	    }) */
 	    
 var page="${requestScope.page}";
 function selectFund(state){
@@ -174,6 +175,47 @@ function selectFund(state){
 	 }); 
     	
 }
+</script>
+<script type="text/javascript">
+
+var websocket = null;  
+var username = '${user.userAccount}'; 
+/*   var username = "user"; */
+  
+/*       function online(){ */
+  //判断当前浏览器是否支持WebSocket  
+  if ('WebSocket' in window) { 
+  	
+     /*  websocket = new WebSocket("ws://" + document.location.host + "/WebChat/websocket/" + username + "/"+ _img);  */ 
+  	  websocket = new WebSocket("ws://" + document.location.host + "/Myproject/websocket/" + username); 
+  	/*  websocket = new WebSocket("ws://localhost:8080/Myproject/websocket"); */
+  } else {  
+      alert('当前浏览器 Not support websocket')  
+  }  
+  
+//接收到消息的回调方法  
+  websocket.onmessage = function(event) {  
+	
+		if(event.data!=null){
+			var arr=event.data.split("|");
+			var text=arr[1];
+			var touser=arr[0];
+			$("#fr1").append("<a href='<%=path%>chat/gotochat.action?account="+touser+"&msg="+text+"' title='有新消息'  target='_blank'><i class='o-contract'></i>有新消息</a>");
+		}
+		
+      
+  }  
+   
+//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。  
+  window.onbeforeunload = function() {  
+      closeWebSocket();  
+  }   
+
+//关闭WebSocket连接  
+function closeWebSocket() {  
+   websocket.close();  
+}  
+
 </script>
 
 </body>

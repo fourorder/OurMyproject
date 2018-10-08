@@ -9,23 +9,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>个人信息修改</title>
-<meta name='TTUNION_verify' content='b846c3c2b85efabc496d2a2b8399cd62'>
-	<meta name="sogou_site_verification" content="gI1bINaJcL"/>
-	<meta name="360-site-verification" content="37ae9186443cc6e270d8a52943cd3c5a"/>
-	<meta name="baidu_union_verify" content="99203948fbfbb64534dbe0f030cbe817">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="apple-touch-fullscreen" content="yes">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE;chrome=1">
-	<meta name="format-detection" content="telephone=no">
-	<meta name="keywords" content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。">
-	<meta name="description" content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。。">
-	<meta name="author" content="AUI, a-ui.com">
-	<meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
+
 	
 	<title>修改资料</title>
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
 	<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">
@@ -59,40 +46,37 @@
         }
 	
         </script>
-	
+<style type="text/css">
+.aui {
+    float: left;
+    display: block;
+    padding: 9px 10px;
+    width: 800px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    color: #464545;
+}
+</style>	
+
 </head>
 <body>
 <!-- head YDC begin -->
-	<header class="ydc-header">
-		<div class="ydc-entered">
-			<div class="ydc-header-content ydc-flex">
-				<div class="ydc-column">
-					<a href="index.html" class="ydc-column-ydc-logo">
-						<img src="admin/images/icon/ydc-logo.png" title="" about="" alt="">
-					</a>
+	<div class="o-top">
+				<div class="width1180">
+					
+					<span class="fr" id="fr1">
+						<!-- <a href="#" title="登录">登录</a>
+						<a href="#" title="注册">注册</a> -->
+						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
+						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
+						<!--登录后
+						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
+						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
+						-->
+					</span>
 				</div>
-				<div class="ydc-column">
-					<div class="ydc-column-user">
-						<div class="ydc-user-photo">
-							<a href="javascript:;">
-								<img src="admin/images/icon/photo.png" title="" about="" alt="">
-							</a>
-						</div>
-						<div class="ydc-user-info">
-							<div class="ydc-user-info-name">
-								<a href="javascript:;">一点车</a>
-							</div>
-							<div class="ydc-user-info-func ydc-flex">
-								<span class="ydc-tag">账号审核中</span>
-								<span class="ydc-mal"><i class="ydc-icon ydc-icon-mail fl"></i><em>12</em></span>
-								<a href="javascript:;">退出</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
+</div>
 <!-- head YDC end -->
 
 <!-- content YDC begin -->
@@ -103,80 +87,15 @@
 				<div class="ydc-column ydc-column-2">
 					<div class="ydc-menu">
 						<ul>
+						<c:forEach items="${menuList}"  var="menuList">
 							<li class="ydc-menu-item">
-								<a href="index.html" class="">
-									<i class="ydc-icon ydc-icon-home fl"></i>
-									首页
+								<a href="<%=path %>${menuList.pathName}" class="">
+									<i class="${menuList.divClass}"></i>
+									${menuList.authorityName}
 								</a>
 							</li>
-							<li class="ydc-menu-item">
-								<a href="release.html" class="">
-									<i class="ydc-icon ydc-icon-find fl"></i>
-									发布
-								</a>
-							</li>
-							<li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-file fl"></i>
-                                        管理
-                                    </span>
-								<ul>
-									<li>
-										<a href="content.html">内容管理</a>
-									</li>
-									<li>
-										<a href="related.html">内容同步</a>
-									</li>
-									<li>
-										<a href="asset.html">素材中心</a>
-									</li>
-								</ul>
-							</li>
-							<li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-record fl"></i>
-                                        数据
-
-                                    </span>
-								<ul>
-									<li>
-										<a href="subscribe.html">订阅数据</a>
-									</li>
-									<li>
-										<a href="content-data.html">内容数据</a>
-									</li>
-									<li>
-										<a href="index-starLevel.html">指数星级</a>
-									</li>
-								</ul>
-							</li>
-							<li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-set fl"></i>
-                                        设置
-
-                                    </span>
-								<ul>
-									<li>
-										<a href="info.html" class="active">账号信息</a>
-									</li>
-									<li>
-										<a href="account.html">账号状态</a>
-									</li>
-								</ul>
-							</li>
-							<li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-customer fl"></i>
-                                        客服
-
-                                    </span>
-								<ul>
-									<li>
-										<a href="#">在线咨询</a>
-									</li>
-								</ul>
-							</li>
+						</c:forEach>
+							
 						</ul>
 					</div>
 				</div>
@@ -191,30 +110,14 @@
 								</ul>
 							</div>
 							<div class="ydc-panes">
-								<form  method="post" action="<%=path%>user/ToUserInforEdit.action" enctype="multipart/form-data">
-									<div class="ydc-reg-form-class ydc-reg-form-reg" style="margin-top:40px;">
-										<div class="ydc-reg-form-group clearfix">
-											<label>帐号名称:${userInfo.userAccount}</label>
-											
-											<input type="hidden" name="userId" value="${userInfo.userId}">
-										</div>
-									<div class="ydc-reg-form-class ydc-reg-form-reg"
-										style="margin-top: 40px;">
-										<div class="ydc-reg-form-group clearfix">
-								
-
-											<label>帐号类型:${userInfo.characterBean.characterName}</label>
-											
-									</div>
-					
-
-										</div>
-
-									</div>
-									<div class="aui-card-form-item preview  aui-news" style="margin-top:20px;">
-                                                <label class="aui-card-form-label">封面:</label>
+	
+									
+			
+						<form  method="post" action="<%=path%>user/ToUserInforEdit.action" enctype="multipart/form-data">
+								 <div class="aui-card-form-item preview  aui-news" style="margin-top:20px;">
+                                                <label class="aui-card-form-label">头像:</label>
                                                 <div class="aui-file-up-img" id="preview_0">
-                                                    <img class="" id="imghead_0" border="0" src="<%=path%>picture/findPicture.action?url=${userInfo.userHead}">
+                                                   <img class="" id="imghead_0" border="0" src="<%=path%>picture/findPicture.action?url=${userInfo.userHead}">
                                                 </div>
                                                 <div class="aui-file-up-btn clearfix ">
                                                     <div class="idPicFile aui-btn aui-file-new">
@@ -225,45 +128,41 @@
                                                         <p>图片尺寸建议：800*400 图片大小不超过1MB</p>
                                                     </div>
                                                 </div>
-                                            </div>
-									<!-- <div class="ydc-reg-form-group clearfix">
-											<label>帐号头像:</label>
-											<div class="ydc-reg-form-input">
-												<input type="file" id="" name="userHeadfile" class="" autocomplete="off" placeholder="">
-												<div class="ydc-reg-form-text">
-													<p>选取至少160*160尺寸的图片。请勿上传二维码或其他推广性质图片作为图标。</p>
-												</div>
-											</div>
-									</div> -->
-									<div class="ydc-reg-form-group clearfix">
-											<label>用户概述:</label>
-											<div class="ydc-reg-form-input ydc-reg-form-input-width">
+                                  </div>
+										
+										
+										<div class="aui-card-form-item">
+											<label class="aui">帐号名称:&emsp;&emsp;&emsp;${userInfo.userAccount}</label>
+											<input type="hidden" name="userId" value="${userInfo.userId}">
+										</div>
+										<div class="aui-card-form-item">
+											<label class="aui">帐号类型:&emsp;&emsp;&emsp;${userInfo.characterBean.characterName}</label>
+										</div>
+									
+								<div class="aui-card-form-item">
+									<label class="aui-card-form-label">用户概述:</label>
+										<div class="ydc-reg-form-input ydc-reg-form-input-width">
 												<textarea id="userProfile" name="userProfile">${userInfo.userProfile}</textarea>
-												<div class="ydc-reg-form-text">
-													<p>请输入账户简述</p>
-												</div>
-											</div>
-									</div>
-                                          
-										<%-- <div class="ydc-reg-form-group clearfix">
-											<label>用户概述:</label>
-											<div class="ydc-reg-form-input ydc-reg-form-input-width">
-												<textarea id="userProfile" name="userProfile" style="width: 100%,height="30px";">${userInfo.userProfile}</textarea>
-												<div class="ydc-reg-form-text">
-													<p>请输入账户简述</p>
-												</div>
-											</div>
-										</div> --%>
-										
-										
-										<div class="ydc-reg-form-group clearfix">
-											<label>姓名:</label>
+												
+										</div>	
+								</div>
+								<div class="aui-card-form-item">
+								
+								</div>
+                                 <div class="aui-card-form-item">
+											<label class="aui-card-form-label">姓名:</label>
 											<div class="ydc-reg-form-input">
 												<input type="text" id="userName" name="userName" class="ydc-form-control" autocomplete="off" value="${userInfo.userName}">
 											</div>
-										</div>
-										<div class="ydc-reg-form-group clearfix">
-											<label>身份证号:</label>
+								</div>         
+								<div class="aui-card-form-item">
+								
+								</div>		
+										
+										
+										
+										 <div class="aui-card-form-item">
+											<label class="aui-card-form-label">身份证号:</label>
 											<div class="ydc-reg-form-input clearfix">
 												<input type="text" id="userIdentity" name="userIdentity" class="ydc-form-control" readonly="true" autocomplete="off" value="${userInfo.userIdentity}">
 												<div class="ydc-reg-form-text">
@@ -273,10 +172,12 @@
 											</div>
 
 										</div>
-										
+										<div class="aui-card-form-item">
+								
+								</div>
 									
-										<div class="ydc-reg-form-group clearfix">
-											<label>联系手机:</label>
+										<div class="aui-card-form-item">
+											<label class="aui-card-form-label">联系手机:</label>
 											<div class="ydc-reg-form-input">
 												<input type="text" id="userTel" name="userTel" class="ydc-form-control" autocomplete="off" value="${userInfo.userTel}">
 												
@@ -284,8 +185,11 @@
 											
 
 										</div>
-										<div class="ydc-reg-form-group clearfix">
-											<label>邮箱:</label>
+										<div class="aui-card-form-item">
+								
+								</div>
+										<div class="aui-card-form-item">
+											<label class="aui-card-form-label">邮箱:</label>
 											<div class="ydc-reg-form-input">
 												<input type="text" id="userMail" name="userMail" class="ydc-form-control" autocomplete="off" value="${userInfo.userMail}">
 											</div>
@@ -294,13 +198,15 @@
 											</div>
 										</div>
 										
-										
-									</div>
+										<div class="aui-card-form-item">
+								
+								</div>
+									
 									  <div class="ydc-btn" style="margin-top:20px;">
                                                 <button class="btn">修改</button>
                                             
                                        </div>
-									</div>
+									
 								</form>
 							</div>
 						</div>

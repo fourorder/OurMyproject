@@ -13,29 +13,29 @@
 	</select>
 	<!-- 发布需求x --> 
 	<insert id="addDemand" parameterType="java.lang.String">
-	insert into DEMANDINFOMATIONTBL(DEMANDID,DEMANDTITLE,DEMANDDETAILINFORMATION,PARAMETERID,FROMUSERID,PUBLISHTIME,SECURITYMONEY,DEALMONEY,STATEID,DEMANDHEAD)
-        values(SEQID.nextval,#{demandTitle},#{demandInformation},#{parameterId},#{userId},#{publishTime},#{securityMoney},#{dealMoney},21,#{demandHead})
+	insert into DEMANDINFOMATIONTBL(DEMANDID,DEMANDTITLE,DEMANDDETAILINFORMATION,PARAMETERID,FROMUSERID,SECURITYMONEY,DEALMONEY,STATEID,DEMANDHEAD)
+        values(SEQID.nextval,#{demandTitle},#{demandInformation},#{parameterId},#{userId},#{securityMoney},#{dealMoney},21,#{demandHead})
 	</insert>
 	<!-- 最新需求。分页搜索x -->
-	<select id="getDemandList" parameterType="org.great.bean.QueryBean" resultType="org.great.bean.DemandBeanX">
-		select u.*from ( select rownum as num, DEMANDINFOMATIONTBL.* from DEMANDINFOMATIONTBL where STATEID = 9
- 	
- 		<if test="name!=null and name!=''">
- 		 and DEMANDTITLE like '%${name}%'
- 		</if>
- 	
- 	) u where u.num  between #{star} and #{end} 
-	</select>
+		<select id="getDemandList" parameterType="org.great.bean.QueryBean" resultType="org.great.bean.DemandBeanX">
+			select u.*from ( select rownum as num, DEMANDINFOMATIONTBL.* from DEMANDINFOMATIONTBL where STATEID = 9
+	 	
+	 		<if test="name!=null and name!=''">
+	 		 and DEMANDTITLE like '%${name}%'
+	 		</if>
+	 	
+	 	) u where u.num  between #{star} and #{end} 
+		</select>
 	
 	<!-- 查询总页数 9/27改x -->
 	<select id="demandCount" parameterType="java.lang.String" resultType="java.lang.Integer">
  	 select count(1) from DEMANDINFOMATIONTBL where STATEID = 9
  	 <if test="name!=null and name!=''">
- 		and DEMANDTITLE like '%${name}%'
+ 		and DEMANDTITLE like  '%${name}%'
  	</if>	
  	</select>
  	
- 	<!-- 需求方查询总页数 9/28加 x-->
+ 	<!-- 雇主查询总页数 9/28加 x-->
 	<select id="demandCountEmployer" parameterType="java.lang.String" resultType="java.lang.Integer">
  	 select count(1) from DEMANDINFOMATIONTBL where STATEID != 7 
  	 <if test="userid!=null and userid!=''">
@@ -48,7 +48,24 @@
  		and STATEID = #{stateid}
  		</if>
  		<if test="name!=null and name!=''">
- 		and DEMANDTITLE like '%${name}%
+ 		and DEMANDTITLE like  '%${name}%'
+ 		</if>
+ 	</select>
+ 	
+ 	<!-- 服务商查询总页数 10/7加 x-->
+	<select id="demandCountFacilitator" parameterType="java.lang.String" resultType="java.lang.Integer">
+ 	 select count(1) from DEMANDINFOMATIONTBL where STATEID != 7 
+ 	 <if test="userid!=null and userid!=''">
+ 		and toUserId = #{userid}
+ 		</if>
+ 		<if test="parameterid !=0">
+ 		and PARAMETERID = #{parameterid}
+ 		</if>
+ 		<if test="stateid !=0">
+ 		and STATEID = #{stateid}
+ 		</if>
+ 		<if test="name!=null and name!=''">
+ 		and DEMANDTITLE like  '%${name}%'
  		</if>
  	</select>
  	
@@ -89,7 +106,7 @@
 	</association>
 	
 	<association property="toUserBean" column="touserid"
-			javaType="org.great.bean.UserBean" select="getFromUserBean">
+			javaType="org.great.bean.UserBean" select="getToUserBean">
 	</association>
 	
 	<association property="parameterBean" column="parameterId"
@@ -148,7 +165,28 @@
  		and STATEID = #{stateid}
  		</if>
  		<if test="name!=null and name!=''">
- 		and DEMANDTITLE like '%${name}%
+ 		and DEMANDTITLE like '%${name}%'
+ 		</if>
+ 	
+ 	) u where u.num  between #{star} and #{end}  
+	
+	</select>
+	
+	<!-- 服务商需求类型搜索x -->
+	<select id="getDemandInfoFacilitatorList" resultMap="getDemandInfoList">
+	select u.*from ( select rownum as num, DEMANDINFOMATIONTBL.* from DEMANDINFOMATIONTBL where STATEID != 7 
+ 	
+ 		<if test="userid!=null and userid!=''">
+ 		and toUserId = #{userid}
+ 		</if>
+ 		<if test="parameterid !=0">
+ 		and PARAMETERID = #{parameterid}
+ 		</if>
+ 		<if test="stateid !=0">
+ 		and STATEID = #{stateid}
+ 		</if>
+ 		<if test="name!=null and name!=''">
+ 		and DEMANDTITLE like '%${name}%'
  		</if>
  	
  	) u where u.num  between #{star} and #{end}  
@@ -175,6 +213,29 @@
 			javaType="org.great.bean.ParameterBean" select="getConselor">	
 	</association>
 	</resultMap>
+	
+	<!-- <resultMap type="org.great.bean.DemandInfoBean" id="getDemandInfoFacilitatorList">
+	
+	<association property="fromUserBean" column="fromuserid"
+			javaType="org.great.bean.UserBean" select="getFromUserBean">
+	</association>
+	
+	<association property="toUserBean" column="touserid"
+			javaType="org.great.bean.UserBean" select="getFromUserBean">
+	</association>
+	
+	<association property="parameterBean" column="parameterId"
+			javaType="org.great.bean.ParameterBean" select="getParameterBean">
+	</association>
+	<association property="stateParameterBean" column="stateId"
+			javaType="org.great.bean.ParameterBean" select="getStateid">
+	</association>
+	<association property="adviserUserBean" column="adviserId"
+			javaType="org.great.bean.ParameterBean" select="getConselor">	
+	</association>
+	</resultMap> -->
+	
+	
 	
 	<!-- 修改需求 x-->
 	<update id="updateDemand" parameterType="org.great.bean.UpdateDemandBean">
@@ -224,11 +285,69 @@
 		</set>
 		where demandId = #{demandId}
 	</update>
-	<!-- 供应商查看任务 -->
+	<!-- 找顾问 10/3 -->
+	<select id="getCounselorInfoList" resultMap="getCounselorInfoX">
+	select * from COUNSELORTBL where AUDITSTATE = 1 and ENABLEDISABLEID = 3
+	</select>
+	<resultMap type="org.great.bean.CounselorInfoBean" id="getCounselorInfoX">
+	<association property="userBean" column="userid"
+			javaType="org.great.bean.UserBean" select="getFromUserBean">
+	</association>
+	</resultMap>
+	<!-- 找顾问加入申请 -->
+	<insert id="addCons" parameterType="java.lang.String">
+	insert into CONSULTANTSANDNEEDSTBL(CONSID,EMPLOYERID,CONSULTANTID,DEMANDID,STATEID)
+        values(SEQID.nextval,#{employerId},#{consultantId},#{demandId},#{stateId})
+	</insert>
+	<!-- 供应商查看任务,这个要改 -->
 	<select id="getsupplierBidList" resultMap="getDemandInfoList">
 	select * from DEMANDINFOMATIONTBL where touserid = #{userid}
 	</select>
-	
+	<!-- 添加合同 -->
+	<insert id="addContrac" parameterType="java.lang.String">
+	insert into TBCONTRACT (demandid,FROMUSERID,FROMTIME,touserid,CONTRACTPATH,STATEID) values(#{demandid},#{fromuserid},#{fromtime},#{touserid},#{contractpath},2043)
+	</insert>
+	<!-- 插入交易任务 -->
+	<insert id="addDemandDeal" parameterType="java.lang.String">
+	insert into DEMANDDEALTBL (dealid,demandid,PROJECTSCHEDULE,AUDITSTATE)
+	values(SEQID.nextval,#{demandId},#{projectSchedule},#{auditState})
+	</insert>
+	<!-- 获取合同信息 -->
+	<select id="getContract" resultMap="getContractBean">
+	select * from TBCONTRACT where demandid = #{demandid}
+	</select>
+	<resultMap type="org.great.bean.ContractBean" id="getContractBean">
+	<association property="parameterBean" column="stateid"
+			javaType="org.great.bean.ParameterBean" select="getParameterBean">
+	</association>
+	</resultMap>
+	<!-- 修改合同信息 -->
+	<update id="updateContract">
+	UPDATE TBCONTRACT <set>
+		<if test="toTime!=null and toTime!=''">
+		toTime=#{toTime},
+		</if>
+		<if test="contractPath!=null and contractPath!=''">
+		contractPath=#{contractPath},
+		</if>
+		<if test="stateId!=null and stateId!=''">
+		stateId=#{stateId},
+		</if>	
+		</set>
+		where demandId = #{demandId}
+	</update>
+	<!-- 修改任务表状态 -->
+	<update id="updateDemandDeal">
+	UPDATE DEMANDDEALTBL <set>
+		<if test="startTime!=null and startTime!=''">
+		startTime=#{startTime},
+		</if>
+		<if test="auditState!=null and auditState!=''">
+		auditState=#{auditState},
+		</if>
+		</set>
+		where demandId = #{demandId}
+	</update>
 	<!-- 佳诚 -->
 	
 	<!-- 陈毅 -->
@@ -340,7 +459,7 @@ select count(*) from consultantsandneedstbl where consultantid=#{userId}
 <select id="selectApplyFor" parameterType="int" resultType="org.great.bean.ApplicationBean">
 select * from (
 select e.*,rownum rn from (
-select d.demandtitle,d.demanddetailinformation,u.useraccount,c.demandid,c.stateid from consultantsandneedstbl c,usertbl u,demandinfomationtbl d where c.employerid=u.userid  and c.demandid=d.demandid   and c.consultantid=#{userId}
+select d.demandtitle,d.demanddetailinformation,u.useraccount,c.demandid,c.stateid,d.filepath from consultantsandneedstbl c,usertbl u,demandinfomationtbl d where c.employerid=u.userid  and c.demandid=d.demandid   and c.consultantid=#{userId}
 
 <if test="state !=0">
  and c.Stateid=#{state}
@@ -351,15 +470,18 @@ select d.demandtitle,d.demanddetailinformation,u.useraccount,c.demandid,c.statei
 </select>
 <!-- 审核通过雇主申请 -->		
 	<update id="applyFprPass">
-UPDATE demandInfomationTbl set Stateid=22 WHERE demandid=#{id}
+UPDATE demandInfomationTbl set Stateid=1861 WHERE demandid=#{id}
 </update>
 <update id="applyFprPass2">
 UPDATE consultantsandneedstbl set Stateid=903 WHERE demandid=#{id}
 </update>
 <!-- 拒绝通过雇主申请 -->		
 	<update id="applyFprreFuse">
-UPDATE demandInfomationTbl set Stateid=23 WHERE demandid=#{id}
+UPDATE demandInfomationTbl set Stateid=22 WHERE demandid=#{id}
 </update>	
+<update id="applyFprreFuse2">
+UPDATE consultantsandneedstbl set Stateid=904 WHERE demandid=#{id}
+</update>
 <!-- 查看需求详情 -->
 <select id="particulars" parameterType="java.lang.Integer"  resultType="org.great.bean.DemandBeanX">
  select * from demandInfomationTbl where demandId=#{demandId}
@@ -367,6 +489,10 @@ UPDATE demandInfomationTbl set Stateid=23 WHERE demandid=#{id}
 <!-- 查询类型 -->
 <select id="selectType" parameterType="java.lang.Integer" resultType="java.lang.String">
 select parametername from tbparameter where parameterid=#{parameterid}
+</select>
+<!-- 查询审核状态 -->
+<select id="detailsState"   resultType="java.lang.String">
+ select parametername from tbparameter where parameterid=(select auditstate from demanddealtbl where demandid=#{demandid})
 </select>
 <!-- 查ID-->
 <select id="selectId" parameterType="java.lang.String" resultType="java.lang.Integer">
@@ -407,6 +533,11 @@ select count(*) from  dailytbl where processid=#{parameterId}
 </select>
 <!-- 评价日报 -->
 <update id="sEvaluation" >
-UPDATE dailytbl set DAILYREVIEW=#{evaluation},POSTIL=#{notation} WHERE  id=#{dailyId}
+UPDATE dailytbl set DAILYREVIEW=#{radio},POSTIL=#{notation} WHERE  daiid=#{dailyId}
+</update>
+
+<!-- 项目评价 -->
+<update id="projectEvaluation"  parameterType="java.lang.String">
+UPDATE demanddealtbl set CONSULTANTEVALUATION=#{content} WHERE  dealid=#{demandId}
 </update>
 </mapper>

@@ -99,13 +99,19 @@
    <div class="layui-form-item">
     <label class="layui-form-label">发布时间</label>
     <div class="layui-input-block">
-      <input type="text" name="title"  disabled  lay-verify="required" value="${fund.publishTime}" autocomplete="off" class="layui-input">
+      <input type="text" name="time"  disabled  lay-verify="required" value="${fund.publishTime}" autocomplete="off" class="layui-input">
     </div>
   </div>
     <div class="layui-form-item">
     <label class="layui-form-label">佣金</label>
     <div class="layui-input-block">
       <input type="text" name="title"  disabled  lay-verify="required" value="${fund.dealMoney}" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label">项目状态</label>
+    <div class="layui-input-block">
+      <input type="text" name="title"  disabled  lay-verify="required" value="${state}" autocomplete="off" class="layui-input">
     </div>
   </div>
       <input type="button" value="返回" onclick="fh()"  class="layui-btn layui-btn-danger" />
@@ -120,7 +126,7 @@
  <script type="text/javascript">
  function fh() {
 	 <!--返回列表 -->
-	 window.location.href="<%=path%>counselor/applyForList.action?account=&userId=&state=0&page=tpage&number=1"; 
+	 window.location.href="<%=path%>counselor/applyForList.action?account=&userId=1022&state=0&page=tpage&number=1"; 
 }
  </script>
 </body>

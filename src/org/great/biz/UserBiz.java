@@ -53,5 +53,5 @@ public interface UserBiz {
 	public List<UserBean> countFacilitator4(String userName);
 	public void changeState(int userId,int stateId);
 	public void changeInfo(@Param("userid")int userid,@Param("userName")String userName, @Param("userTel")Long userTel,@Param("userAccount")String userAccount,@Param("userSex")String userSex,@Param("userMail")String userMail,@Param("userIdentity")String userIdentity,@Param("userCredit")int userCredit,@Param("userMoney")int userMoney,@Param("userRegisterTime")String userRegisterTime);
-
+	public UserBean user(int userid);
 }

@@ -8,10 +8,11 @@
 %>
 <head>
 	<meta charset="UTF-8">
-	<title>众包服务平台</title>
+	<title>众包服务平台</title>	
 	<link rel="stylesheet" href="<%=path%>css/oindex.css">
 	<script type="text/javascript" src="<%=path%>js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript" src="<%=path%>js/jquery.superslide.2.1.1.js"></script>
+
 </head>
 <body>
 
@@ -22,14 +23,9 @@
 					<span class="fl">您好，欢迎访问众包一站式服务平台
 					</span>
 					<span class="fr" id="fr1">
-						<!-- <a href="#" title="登录">登录</a>
-						<a href="#" title="注册">注册</a> -->
 						<a href="#" title="众包首页"><i class="o-home"></i>众包首页</a>
 						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
-						<!--登录后
-						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
-						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
-						-->
+						<a href="<%=path%>chat/chatlist.action?page=1"  id="msg"><i class="o-contract"></i>新消息(0)</a>
 					</span>
 				</div>
 			</div>
@@ -75,7 +71,7 @@
 							
 						</li>
 						<li class="clearfix">
-							<p><a href="<%=path%>production/toProduction.action"  title="购买作品"><i class="o-index2"></i>购买作品<b></b></a></p>
+							<p><a href="<%=path%>production/toProductionPass.action?currentPage=1"   title="购买作品"><i class="o-index2"></i>购买作品<b></b></a></p>
 						
 
 						</li>
@@ -96,7 +92,7 @@
 						
 						</li>
 						<li class="clearfix">
-						<p><a href="<%=path%>counselor/application.action?account=${user.userAccount}&userId=${user.userId}"  title="成为顾问"><i class="o-index2"></i>成为顾问<b></b></a></p>
+						<p><a href="<%=path%>counselor/application.action?account=${user.userAccount}&userId=${user.userId}"  title="成为顾问"><i class="o-index2"></i>顾问管理<b></b></a></p>
 						
 						</li>
 					</ul>		
@@ -147,7 +143,12 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 <!--右边-->
 					<div class="banner-right">
 						<div class="user-box">
-							<img src="<%=path%>images/banner-touxiang.png">
+							<c:if test="${user==null}">
+							<img src="<%=path%>picture/findPicture.action?url=banner-touxiang.png" width="70" height="70">
+							</c:if>
+							<c:if test="${user!=null}">
+							<img src="<%=path%>picture/findPicture.action?url=${user.userHead}" width="70" height="70">
+							</c:if>							
 							<c:if test="${user==null}">
 							<p>hi,您好！</p>
 							</c:if>
@@ -230,84 +231,6 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 			</li>
 		</ul>
 	</div>
-	<!--推荐服务-->
-	<!--工商服务-->
-	<!-- <div class="gongs-fuwu">
-		<div class="width1180">
-			<div class="o-indexttitle">
-				<span class="fl">工商服务</span>
-				<div class="fr">
-					<a href="#" title="公司注册">公司注册</a><a href="#" title="工商变更">工商变更</a><a href="#" title="更多">更多</a>
-				</div>
-			</div>
-			<div class="clearfix"></div>
-			<div class="ofuwu-box width1180">
-				<div class="gongsizc-box fl"><img src="images/oindex-3.png"></div>
-				<ul class="fl">
-					<li>
-						<div class="li-top fuwupic1">
-							
-								<p class="fuwu-title"><a href="#" title="有限责任公司注册"> 有限责任公司注册</a></p>
-								<p class="color666">抢先一步，最快3天拿执照</p>
-								<p class="fuwu-price colorred">￥599.00</p>
-								<a href="#" class="look-detail">查看详情</a>
-						</div>
-						<div class="fuwupic2">
-							
-								<p class="fuwu-title"><a href="#" title="有限责任公司注册"> 有限责任公司注册</a></p>
-								<p class="color666">1张身份证即可当老板</p>
-								<p class="fuwu-price colorred">￥499.00</p>
-								<a href="#" class="look-detail">查看详情</a>
-						</div>
-					</li>
-
-					<li>
-
-						<div class="li-big">
-							
-								<p class="fuwu-title"><a href="#" title="小规模代理记账"> 小规模代理记账</a></p>
-								<p class="color666">高效快捷，0失误，全负责！</p>
-								<p class="fuwu-price colorred">￥3600.00/年</p>
-								<a href="#" class="look-detail">查看详情</a>
-						</div>
-
-
-					</li>
-					
-					<li>
-						<div class="li-top fuwupic3">
-							
-								<p class="fuwu-title"><a href="#" title="一般纳税人代理记账"> 一般纳税人代理记账</a></p>
-								<p class="color666">一般纳税人,尊享专业服务</p>
-								<p class="fuwu-price colorred">￥5000.00/年</p>
-								<a href="#" class="look-detail">查看详情</a>
-						</div>
-						<div class="fuwupic4">
-						
-								<p class="fuwu-title"><a href="#" title="税务筹划"> 税务筹划</a></p>
-								<p class="color666">税务筹划， 一对一专项指导</p>
-								<p class="fuwu-price colorred">￥100.00</p>
-								<a href="#" class="look-detail">查看详情</a>
-						</div>
-					</li>
-
-					<li style="border-right:0px">
-
-						<div class="fuwupic5">
-							
-								<p class="fuwu-title"><a href="#" title="有限责任公司注册">小规模代理记账</a></p>
-								<p class="color666">高效快捷，0失误，全负责！</p>
-								<p class="fuwu-price colorred">￥3600.00/年</p>
-								<a href="#" class="look-detail">查看详情</a>
-							
-						</div>
-
-					</li>
-
-				</ul>
-			</div>
-		</div>
-	</div> -->
 	<!--工商服务-->
 	<div class="fuw-advance width1180"><img src="<%=path%>images/oindex-16.png"></div>
 	<!--知识产权-->
@@ -350,36 +273,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 					</ul>
 				</div>
 				<div class="clearfix"></div>
-				<!-- <div class="zhishicq-bigb">
-					<dl class="width450">
-						<dt class="fl"><img src="images/oindex-24.png"></dt>
-						<dd class="fl width250">
-							<a href="#" title="商标注册">商标注册</a>
-							<a href="#" title="无效宣告">无效宣告</a>
-							<a href="#" title="商标注销">商标注销</a>
-							<a href="#" title="异议答辩">异议答辩</a>
-							<a href="#" title="异议复审">异议复审</a>
-							<a href="#" title="异议复审">异议复审</a>
-						</dd>
-					</dl>
-
-					<dl >
-						<dt class="fl"><img src="images/oindex-25.png"></dt>
-						<dd class="fl">
-							<a href="#" title="发明专利 ">发明专利 </a>
-							<a href="#" title="外观专利">外观专利</a>
-							<a href="#" title="实用新型专利">实用新型专利</a>
-						</dd>
-					</dl>
-
-					<dl >
-						<dt class="fl"><img src="images/oindex-26.png"></dt>
-						<dd class="fl">
-							<a href="#" title="一般作品普通办理 ">一般作品普通办理 </a>
-							<a href="#" title="软件著作权普通办理">软件著作权普通办理</a>
-						</dd>
-					</dl>
-				</div> -->
+				
 	</div>
 	<!--知识产权-->
 	<!--团队-->
@@ -425,60 +319,8 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 			</ul>
 		</div>
 	</div> --%>
-	<!--团队-->
-	<!--知识百科-->
-	<!-- <div class="knowledge width1180">
-		<div class="o-indexttitle">
-				<span class="fl">知识百科</span>
-				<div class="fr">
-					<a href="#" title="公司注册">公司注册</a><a href="#" title="代理记账">代理记账</a><a href="#" title="知识产权">知识产权</a><a href="#" title="更多">更多</a>
-				</div>
-		</div>
-		<div class="clearfix"></div>
-		<div class="knowledge-box fl">
-			<div class="knowledge-title"><span>公司注册流程</span><a href="#" title="更多" class="fr">更多</a></div>
-			<ul>
-				<li><a href="#" title="注册汽车租赁公司需要准备什么材料">注册汽车租赁公司需要准备什么材料</a></li>
-				<li><a href="#" title="100元也能注册一家公司，你们信吗？">100元也能注册一家公司，你们信吗？</a></li>
-				<li><a href="#" title="推动监管改革创新 维护市场繁荣发展 ——国家">推动监管改革创新 维护市场繁荣发展 ——国家</a></li>
-				<li><a href="#" title="100元也能注册一家公司，你们信吗？">长沙公司注册后一般出现以下几种情况，税账！</a></li>
-				<li><a href="#" title="注册汽车租赁公司需要准备什么材料">长沙颁发首张"四十三证合一"执照 "多头跑"</a></li>
-				<li><a href="#" title="100元也能注册一家公司，你们信吗？">网购也是需要发票的！</a></li>
-				<li><a href="#" title="推动监管改革创新 维护市场繁荣发展 ——国家">长沙公司注册后现以下几种情况，税账！</a></li>
-				<li><a href="#" title="100元也能注册一家公司，你们信吗？">长沙颁发首张"四十三证合一"执照 "多头跑"</a></li>
-			</ul>
-		</div>
-
-		<div class="knowledge-box fl">
-			<div class="knowledge-title"><span>公司注册费用</span><a href="#" title="更多" class="fr">更多</a></div>
-			<ul>
-				<li><a href="#" title="注册汽车租赁公司需要准备什么材料">注册汽车租赁公司需要准备什么材料</a></li>
-				<li><a href="#" title="100元也能注册一家公司，你们信吗？">100元也能注册一家公司，你们信吗？</a></li>
-				<li><a href="#" title="推动监管改革创新 维护市场繁荣发展 ——国家">推动监管改革创新 维护市场繁荣发展 ——国家</a></li>
-				<li><a href="#" title="100元也能注册一家公司，你们信吗？">长沙公司注册后一般出现以下几种情况，税账！</a></li>
-				<li><a href="#" title="注册汽车租赁公司需要准备什么材料">长沙颁发首张"四十三证合一"执照 "多头跑"</a></li>
-				<li><a href="#" title="100元也能注册一家公司，你们信吗？">网购也是需要发票的！</a></li>
-				<li><a href="#" title="推动监管改革创新 维护市场繁荣发展 ——国家">长沙公司注册后现以下几种情况，税账！</a></li>
-				<li><a href="#" title="100元也能注册一家公司，你们信吗？">长沙颁发首张"四十三证合一"执照 "多头跑"</a></li>
-			</ul>
-		</div>
-
-		<div class="knowledge-box fr" style="margin-right:0px">
-			<div class="knowledge-title"><span>公司注册常见问题</span><a href="#" title="更多" class="fr">更多</a></div>
-			<ul>
-				<li><a href="#" title="注册汽车租赁公司需要准备什么材料">注册汽车租赁公司需要准备什么材料</a></li>
-				<li><a href="#" title="100元也能注册一家公司，你们信吗？">100元也能注册一家公司，你们信吗？</a></li>
-				<li><a href="#" title="推动监管改革创新 维护市场繁荣发展 ——国家">推动监管改革创新 维护市场繁荣发展 ——国家</a></li>
-				<li><a href="#" title="100元也能注册一家公司，你们信吗？">长沙公司注册后一般出现以下几种情况，税账！</a></li>
-				<li><a href="#" title="注册汽车租赁公司需要准备什么材料">长沙颁发首张"四十三证合一"执照 "多头跑"</a></li>
-				<li><a href="#" title="100元也能注册一家公司，你们信吗？">网购也是需要发票的！</a></li>
-				<li><a href="#" title="推动监管改革创新 维护市场繁荣发展 ——国家">长沙公司注册后现以下几种情况，税账！</a></li>
-				<li><a href="#" title="100元也能注册一家公司，你们信吗？">长沙颁发首张"四十三证合一"执照 "多头跑"</a></li>
-			</ul>
-		</div>
-
-	</div> -->
-	<!--知识百科-->
+	
+	
 	<div class="clearfix"></div>
 	<!--最新资讯-->
 	<div class="knowledge-zixun width1180">
@@ -567,7 +409,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 			</div>
 
 			<div class="data-box">
-				<p class="data-p"><strong>4230</strong>此</p>
+				<p class="data-p"><strong>4230</strong>次</p>
 				<p class="fw-name">咨询顾问</p>
 			</div>
 
@@ -687,6 +529,8 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 
 var websocket = null;  
 var username = '${user.userAccount}'; 
+var touser='cww';
+var flag='0';
 /*   var username = "user"; */
   
 /*       function online(){ */
@@ -694,7 +538,7 @@ var username = '${user.userAccount}';
   if ('WebSocket' in window) { 
   	
      /*  websocket = new WebSocket("ws://" + document.location.host + "/WebChat/websocket/" + username + "/"+ _img);  */ 
-  	  websocket = new WebSocket("ws://" + document.location.host + "/Myproject/websocket/" + username); 
+  	  websocket = new WebSocket("ws://" + document.location.host + "/Myproject/websocket/"+username+"/"+flag+"/"+touser); 
   	/*  websocket = new WebSocket("ws://localhost:8080/Myproject/websocket"); */
   } else {  
       alert('当前浏览器 Not support websocket')  
@@ -702,23 +546,12 @@ var username = '${user.userAccount}';
   
 //接收到消息的回调方法  
   websocket.onmessage = function(event) {  
-	/* var arr=event.data.split("|");
-	var text=arr[1];
-	touser=arr[0];
-	$("#touser").html(touser);
-	var leftContent = document.getElementById("leftContent");
-	var len = text.length;
-		var option1 = document.createElement("option");
-		option1.innerHTML = text;
-		option1.style.backgroundColor = "white";
-		option1.style.marginLeft = "10px";
-		option1.style.width = len * 15 + len*2 + "px";
-		leftContent.appendChild(option1); */
+	
 		if(event.data!=null){
-			var arr=event.data.split("|");
+			/* var arr=event.data.split("|");
 			var text=arr[1];
-			var touser=arr[0];
-			$("#fr1").append("<a href='<%=path%>chat/gotochat.action?account="+touser+"&msg="+text+"' title='有新消息'  target='_blank'><i class='o-contract'></i>有新消息</a>");
+			var touser=arr[0]; */
+			$("#msg").html("<a href='<%=path%>chat/chatlist.action?page=1'><i class='o-contract'></i>新消息("+event.data+")</a>");
 		}
 		
       

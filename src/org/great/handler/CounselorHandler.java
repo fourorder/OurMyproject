@@ -74,8 +74,6 @@ public class CounselorHandler {
 		   if(number==null || "".equals(number)) {
 			   number="1";
 			}
-			  
-			System.out.println("进入Handler");
 			int state1=Integer.parseInt(state);
 			int userid=Integer.parseInt(userId);
 			int countPage=demandBizImp.countApplyFor(userid,state1);//总数
@@ -178,10 +176,22 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 		if(state1==null) {
 			state1="4";
 		}
+		
 		int state=Integer.parseInt(state1);
 		int countPage=demandBizImp.countCounserlor(state);//总条数
 		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
 		int num=Integer.parseInt(number);
+		if(page.equals("tpage")) {
+			num--;
+			if(num<=0) {
+				num=1;
+			}
+		}else if(page.equals("npage")) {
+			num++;
+			if(num>totalPages) {
+				num=totalPages;
+			}
+		}
 		List<CounselorBean> list=new ArrayList<CounselorBean>();
 		list=demandBizImp.conditionQuery(state, num);
 		request.setAttribute("Clist", list);
@@ -201,7 +211,7 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 		
 		return new ModelAndView("redirect:list.action?page=tpage&number=1");	
 	}
-	@RequestMapping("/storyOperation.action")//启用禁用详情
+	@RequestMapping("/storyOperation.action")//启用禁用
 	public ModelAndView test6(HttpServletRequest  request,String operation,String account){
 		if(operation.equals("forbidden")) {
 			int a=demandBizImp.forbidden(account);
@@ -219,44 +229,78 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 	}
 	
 	
-	@RequestMapping("/applyForOk.action")//确认通过雇主审核详情
-	public ModelAndView applyForOk(HttpServletRequest request,String action,String demandid){
+	@RequestMapping("/applyForOk.action")//确认通过雇
+	@ResponseBody
+	public List<Object> applyForOk(HttpServletRequest request,String action,String demandid,String time,String userId,String state1,String number){
 		System.out.println("通过拒绝详情操作");
+		List<Object> obj=new ArrayList<Object>();
 		int demandId=Integer.parseInt(demandid);
+		int userid=Integer.parseInt(userId);
+		int num=Integer.parseInt(number);
+		 if(state1==null) {
+				state1="0";
+			}
+		 int state2=Integer.parseInt(state1);
 		if(action.equals("ok")) {
 		int a=demandBizImp.applyFprPass(demandId);
 		int b =demandBizImp.applyFprPass2(demandId);
 		if(a>0 &&b>0) {
-			//返回还未写
-			return null;	
+			List<ApplicationBean> list=new ArrayList<ApplicationBean>();
+			list=demandBizImp.selectApplyFor(state2, num,userid);
+			System.out.println("list="+list.size());
+			request.setAttribute("num", num);
+			request.setAttribute("state1",state2);
+			  obj.add(num);
+	           obj.add(list);
+			return obj;	
 		}
 	   }else if(action.equals("refuse")) {
 		   int a=demandBizImp.applyFprreFuse(demandId);
 		   int b=demandBizImp.applyFprreFuse2(demandId);
 			if(a>0 && b>0) {
-				//返回还未写
-				return null;	
+				List<ApplicationBean> list=new ArrayList<ApplicationBean>();
+				list=demandBizImp.selectApplyFor(state2, num,userid);
+				System.out.println("list="+list.size());
+				request.setAttribute("num", num);
+				request.setAttribute("state1",state2);
+				  obj.add(num);
+		           obj.add(list);
+				return obj;		
 			}
-			}else if(action.equals("particulars")) {
-				List<DemandBeanX> list=new ArrayList<DemandBeanX>();
-				list=demandBizImp.particulars(demandId);
-				int id=Integer.parseInt(list.get(0).getParameterId());
-				String type=demandBizImp.selectType(id);
-				System.out.println("list="+list);
-				if(list.size()>0) {
-					System.out.println(list.get(0).getDemandTitle());
-					request.setAttribute("list", list);
-					request.setAttribute("type", type);
-					request.setAttribute("demandid", demandId);
-					ModelAndView modelAndView=new ModelAndView();
-					modelAndView.setViewName("jsp/particularsPage");
-					return modelAndView;	
-				}
+			
 	
 }
 		
 		return null;	
 	}
+	
+	
+	@RequestMapping("/particulars.action")//查看详情
+	@ResponseBody
+	public List<Object> test22(HttpServletRequest request,String demandid){
+		List<Object>  obj=new ArrayList<Object>();
+		int demandId=Integer.parseInt(demandid);
+		List<DemandBeanX> list=new ArrayList<DemandBeanX>();
+		list=demandBizImp.particulars(demandId);
+		int id=Integer.parseInt(list.get(0).getParameterId());
+		System.out.println("id="+demandId);
+		String state=demandBizImp.detailsState(demandId);
+		System.out.println("----"+state);
+		String type=demandBizImp.selectType(id);
+		System.out.println("list="+list);
+		if(list.size()>0) {
+			request.setAttribute("list", list);
+			request.setAttribute("type", type);
+			request.setAttribute("state", state);
+		 obj.add(list);
+		 obj.add(type);
+		 obj.add(state);
+			return obj;
+		}
+		return null;
+	}
+	
+	
 	
 	@RequestMapping("/project.action")//所接受项目
 	@ResponseBody
@@ -300,14 +344,12 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 	    return obj;	
 	}
 	@RequestMapping("/evaluation.action")//评价
-	public ModelAndView test12(HttpServletRequest request,int dailyId){
-	 System.out.println("dailyId="+dailyId);
-	int a= demandBizImp.sEvaluation(dailyId);
+	public ModelAndView test12(HttpServletRequest request,int dailyId,String notation,String radio,String account,String userId){
+	int a= demandBizImp.sEvaluation(dailyId,notation,radio);
 	if(a>0) {
 		System.out.println("评价成功");
 	}
-	ModelAndView modelAndView=new ModelAndView();
-	modelAndView.setViewName("jsp/particularsPage");
-	return modelAndView;		
+	
+	return new ModelAndView("redirect:project.action?account="+account+"&userId="+userId);		
 	}
 }

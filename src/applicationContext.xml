@@ -51,5 +51,7 @@
    <!-- PECTJ注解 -->
    <aop:aspectj-autoproxy proxy-target-class="true" />
 	
+	<bean id="ChatBizImp" class="org.great.biz.ChatBizImp"></bean>
+	<bean id="UserBizImp" class="org.great.biz.UserBizImp"></bean>
 
 </beans>

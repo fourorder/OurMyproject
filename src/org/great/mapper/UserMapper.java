@@ -3,6 +3,7 @@ package org.great.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.great.bean.AdvertisingBean;
+import org.great.bean.ParameterBean;
 import org.great.bean.UserBean;
 import org.great.bean.UserInfoBean;
 import org.great.bean.UserStoryBean;
@@ -38,7 +39,6 @@ public List<UserBean> login(String userAccount,String userPwd);
 public List<UserBean> getCredit();//得到低信誉用户
 public List<UserBean> userCredit(@Param("end")int end,@Param("start")int start);//分页查询低信誉用户
 public UserInfoBean searchCredit(@Param("username")String username);//查询用户信誉
-public void addUser(@Param(value="userAccount")String userAccount ,@Param(value="userPwd")String userPwd ,@Param(value="characterId")Integer characterId ,@Param(value="userName")String userName ,@Param(value="userTel")long userTel ,@Param(value="userIdentity")String userIdentity ,@Param(value="stateId")int stateId);
 public List<UserBean> updateInfo(String userAccount); //查询修改单个用户信息
 public int updateUser(UserBean userBean); //修改雇主用户
 public List<UserBean> selectAll();//查询总雇主
@@ -52,11 +52,16 @@ public List<UserStoryBean> updateOne(@Param("userAccount")String userAccount); /
 public int updateOk(UserStoryBean usb); //确认修改故事
 public int forbiddenStory(@Param("account")String account);//禁用故事
 public int startStory(@Param("account")String account);//启用故事
+/*雇主注册*/
 public void addUser(@Param(value="userAccount")String userAccount ,@Param(value="userPwd")String userPwd ,@Param(value="characterId")Integer characterId ,@Param(value="userName")String userName ,@Param(value="userTel")long userTel ,@Param(value="userIdentity")String userIdentity ,@Param(value="stateId")int stateId,@Param(value="userRegisterTime")String userRegisterTime);
+/*服务商注册*/
+public void addUser2(@Param(value="userAccount")String userAccount ,@Param(value="userPwd")String userPwd ,@Param(value="characterId")Integer characterId ,@Param(value="userName")String userName ,@Param(value="userTel")long userTel ,@Param(value="userIdentity")String userIdentity ,@Param(value="stateId")int stateId,@Param(value="userRegisterTime")String userRegisterTime,@Param(value="businessTypeId")int businessTypeId);
 public List<UserBean> checkAccount(String userAccount);
 public void changeState(int userId);
 public void changeState2(int userId);
 public void changeState3(int userId);
 public void changeInfo(@Param(value="userId")int userId ,@Param(value="userName")String userName ,@Param(value="userTel")Long userTel ,@Param(value="userAccount")String userAccount ,@Param(value="userSex")String userSex ,@Param(value="userMail")String userMail ,@Param(value="userIdentity")String userIdentity,@Param(value="userCredit")int userCredit,@Param(value="userMoney")int userMoney,@Param(value="userRegisterTime")String userRegisterTime);
 public UserBean user(Integer userid);
+/*寻找服务商类型*/
+public List<ParameterBean> findBusinessType();
 }

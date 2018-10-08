@@ -11,4 +11,8 @@ public interface SessionMapper {
 	public void setSession(SessionBean sessionBean);
 	//查找
 	public SessionBean findSession (long time);
+	
+	
+	
+	public void setSessionUser(SessionBean sessionBean);
 }

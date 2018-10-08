@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -29,6 +30,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link type="text/css" rel="stylesheet" href="<%=basePath%>admin/css/core.css">
 	<link type="text/css" rel="stylesheet" href="<%=basePath%>admin/css/icon.css">
 	<link type="text/css" rel="stylesheet" href="<%=basePath%>admin/css/home.css">
+	<link rel="stylesheet" href="<%=path%>css/oindex.css">
+	
+	
 
 
 </head>
@@ -87,18 +91,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</li>
 					</ul>
 				</div>
+			
 				<div class="ydc-reg-form clearfix">
 					
 						<div class="ydc-reg-form-class">
 							<div class="ydc-reg-text-center">
 								
 								 <div class="ydc-text-center-item">
-								 <form action="<%=basePath%>register/registerShow3.action"name="myform" method="post">
-								 <a href="javascript:document.myform.submit();">
-								 <input type="hidden" name="userAccount" value="${userAccount}"> 
-								  <input type="hidden" name="userPwd" value="${userPwd}"> 
-								   <input type="hidden" name="characterId" value="1"> 
-								 </form>
+								
 									<div class="ydc-text-item-list">
 										<div class="ydc-text-item-list-title">
 											<div class="ydc-text-ab">
@@ -115,22 +115,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<div class="ydc-text-item-list-text">
 											<h2>雇主</h2>
 											<p>雇主(业主)是指在投标书附录中称为雇主的当事人及其财产所有权的合法维承人，</p>
+											 <form action="<%=basePath%>register/registerShow3.action"name="myform" method="post">
+								 <!-- <a href="javascript:document.myform.submit();"> -->
+								 <input type="hidden" name="userAccount" value="${userAccount}"> 
+								  <input type="hidden" name="userPwd" value="${userPwd}"> 
+								   <input type="hidden" name="characterId" value="1"> 
+								    <input type="submit" class="ydc-previous-item-btn-medium" value="我要成为雇主">
+								 </form>
 										</div>
 									</div>
 									</a>
-									<%-- <div class="ydc-reg-form-group" style="position:absolute; top:530px; left:55px; ">
-							             <div class="ydc-reg-form-button clearfix" >
-								             <a class="btn" href="<%=basePath%>register/registerShow3.action?characterId=1&userAccount=${userAccount}&userPwd=${userPwd}">我要成为雇主</a>	
-							             </div>
-						            </div> --%>
+								
 								</div>
 								<div class="ydc-text-center-item">
-								 <form action="<%=basePath%>register/registerShow3.action"name="myform2" method="post">
-								 <a href="javascript:document.myform2.submit();">
-								 <input type="hidden" name="userAccount" value="${userAccount}"> 
-								  <input type="hidden" name="userPwd" value="${userPwd}"> 
-								   <input type="hidden" name="characterId" value="2"> 
-								 </form>
+								
 								
 									<div class="ydc-text-item-list">
 										<div class="ydc-text-item-list-title">
@@ -148,15 +146,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<div class="ydc-text-item-list-text">
 											<h2>服务商</h2>
 											<p>服务商就是在网络上帮人做事专、兼职的工作人员，服务社会，提供有偿服务的 </p>
+											
+											 <form action="<%=basePath%>register/registerShow3.action" name="myform2" method="post">
+								 <!-- <a href="javascript:document.myform2.submit();"> -->
+								 					
+								 <input type="hidden" id="userAccount" name="userAccount" value="${userAccount}"> 
+								  <input type="hidden" id="userPwd" name="userPwd" value="${userPwd}"> 
+								   <input type="hidden" id="characterId "name="characterId" value="2"> 
+								   <!--新增加的服务商类别选择  -->
+								服务商类型选择：<select id="lunch" name="businessTypeId" class="selectpicker" data-live-search="true"  >
+                                <c:forEach items="${businessType}"  var="data"> 
+                                <option value="${data.parameterId}">${data.parameterName}</option>
+                              </c:forEach>
+                                </select>
+                                </br>
+                                </br>
+                               
+					               <input type="submit" class="ydc-previous-item-btn-medium" value="我要成为服务商">
+								   
+								 </form>
 										</div>
+										
+										
+										
 									</div>
+								
 									</a>
-									<%-- <div class="ydc-reg-form-group" style="position:absolute; top:530px; left:265px; ">
-							           <div class="ydc-reg-form-button clearfix" >
-								          <a class="btn"   href="<%=basePath%>register/registerShow3.action?characterId=2&userAccount=${userAccount}&userPwd=${userPwd}">我要成为服务商</a>
-							           </div>
-						            </div> --%>
 								</div> 
+								
+
 							</div>
 							<div></div>
 							<div></div>
@@ -206,6 +224,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        slides[slideIndex-1].style.display = "block";
 	        setTimeout(showSlides, 3000); // 滚动时间
 	    }
+
 
         $(document).ready(function() {
 

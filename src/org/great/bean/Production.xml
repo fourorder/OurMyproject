@@ -211,4 +211,39 @@ select * from PRODUCTIONTBL where PRODUCTIONID in (select PRODUCTIONID from PROA
   order by PRODUCTIONID asc
    
 </select>
+
+
+
+<select id="findProductionListPass" 
+	 resultType="org.great.bean.ProductionBean" 
+	 parameterType="org.great.bean.ConditionBean">
+ 
+	  SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (	
+	 	select * from PRODUCTIONTBL  where 1=1 and AUDITSTATE=903
+	 	
+	 	<if test="fieldName!=null"> and productionName like #{fieldName}</if>
+			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
+  order by PRODUCTIONID asc
+  ) A WHERE ROWNUM &lt;=(#{currentPage}*#{eachPageCum}))  WHERE RN &gt;=(1+(#{currentPage}-1)*#{eachPageCum}) 
+	 
+	
+		 </select>  
+
+
+<select id="findAllProductionListPass" 
+	 resultType="org.great.bean.ProductionBean" 
+	 parameterType="org.great.bean.ConditionBean">
+ 
+	 
+	 	select * from PRODUCTIONTBL  where 1=1 and AUDITSTATE=903
+	 	
+	 	<if test="fieldName!=null"> and productionName like #{fieldName}</if>
+			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
+  
+	 
+	
+		 </select> 
+		 
+		
+		 
 </mapper>

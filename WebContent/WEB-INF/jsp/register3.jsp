@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</ul>
 				</div>
 				<div class="ydc-reg-form clearfix">
-					<form action="<%=basePath%>register/register.action?userAccount=${userAccount}&userPwd=${userPwd}&stateId=1&characterId=${characterId}"name="myform" id="myform" method="post" >
+					<form action="<%=basePath%>register/register.action?userAccount=${userAccount}&userPwd=${userPwd}&stateId=1&characterId=${characterId}&businessTypeId=${businessTypeId}" name="myform" id="myform" method="post" >
 						<div class="ydc-reg-form-class ydc-reg-form-reg">
 							<div class="ydc-reg-form-group clearfix">
 								<label>姓名:</label>

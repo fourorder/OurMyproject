@@ -40,7 +40,7 @@
 <div class="o-top">
 				<div class="width1180">
 					
-					<span class="fr">
+					<span class="fr" id="fr1">
 						<!-- <a href="#" title="登录">登录</a>
 						<a href="#" title="注册">注册</a> -->
 						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>

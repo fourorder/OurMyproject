@@ -23,6 +23,16 @@ public String userRegisterTime;//注册时间
 public String userProfile;//用户简介
 public String characterName;
 public String stateName;
+public int count;
+public String parameterName;//服务商名字
+
+public String getParameterName() {
+	return parameterName;
+}
+
+public void setParameterName(String parameterName) {
+	this.parameterName = parameterName;
+}
 
 public String getStateName() {
 	return stateName;
@@ -42,6 +52,31 @@ public void setCharacterName(String characterName) {
 
 public UserBean() {
 	super();
+}
+
+public UserBean(int userId, String userName, String userPwd, long userTel, String userAccount, String userSex,
+		String userMail, String userIdentity, String userAddress, String userHead, int userCredit, int userMoney,
+		int stateId, int characterId, String userRegisterTime, String userProfile, String characterName,
+		String stateName) {
+	super();
+	this.userId = userId;
+	this.userName = userName;
+	this.userPwd = userPwd;
+	this.userTel = userTel;
+	this.userAccount = userAccount;
+	this.userSex = userSex;
+	this.userMail = userMail;
+	this.userIdentity = userIdentity;
+	this.userAddress = userAddress;
+	this.userHead = userHead;
+	this.userCredit = userCredit;
+	this.userMoney = userMoney;
+	this.stateId = stateId;
+	this.characterId = characterId;
+	this.userRegisterTime = userRegisterTime;
+	this.userProfile = userProfile;
+	this.characterName = characterName;
+	this.stateName = stateName;
 }
 
 public int getUserId() {
@@ -155,4 +190,13 @@ public UserBean(String userAccount,String userPwd) {
 	this.userAccount = userAccount;
 	this.userPwd = userPwd;
 }
+
+public int getCount() {
+	return count;
+}
+
+public void setCount(int count) {
+	this.count = count;
+}
+
 }
