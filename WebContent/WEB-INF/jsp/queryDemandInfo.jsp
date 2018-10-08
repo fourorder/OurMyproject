@@ -13,7 +13,7 @@
 
 
 <title>需求详情</title>
-<link rel="icon" type="image/x-icon" href="favicon.ico">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
 	<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
 	<link rel="stylesheet" href="<%=path%>css/oindex.css">
 	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
@@ -66,14 +66,10 @@
 				<div class="width1180">
 					
 					<span class="fr" id="fr1">
-						<!-- <a href="#" title="登录">登录</a>
-						<a href="#" title="注册">注册</a> -->
+						
 						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
 						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
-						<!--登录后
-						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
-						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
-						-->
+						
 					</span>
 				</div>
 </div>
@@ -117,7 +113,7 @@
 									<div class="aui-card-form-item preview  aui-news" style="margin-top:20px;">
                                                 <label class="aui">封面:</label>
                                                 
-                                                    <img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}">
+                                                    <img src="<%=path%>picture/findPicture.action?url=${demandInfo.demandHead}" width='400px' height='400px'>
                                                
                                                
                                      </div>

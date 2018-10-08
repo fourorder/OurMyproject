@@ -73,21 +73,12 @@ select * from PRODUCTIONTBL where productionname like #{name}
 <select id="findUserMoney" 
 	 resultType="java.lang.Double" 
 	 parameterType="java.lang.Integer">
- 
-	 
-	 select USERMONEY from USERTBL where USERID=#{userId}
-	 	
-	  
-	 
-	
-		 </select> 
+	 select USERMONEY from USERTBL where USERID=#{userId}	
+</select> 
 
 <!-- 设置用户余额 -->
 <update id="setNewUserMoney">
-
-
 UPDATE USERTBL SET USERMONEY =#{userMoney}  WHERE USERID =#{userId}
-
 </update>
 
 <!-- 服务商作品管理  翻页 -->

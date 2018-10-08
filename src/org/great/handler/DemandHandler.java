@@ -132,8 +132,6 @@ public class DemandHandler {
 		request.setAttribute("demandInfo",
 				demandBizImp.getDemandInfoList(page, null, userBean.getUserId() + "", "0", "0"));
 
-		
-
 		count = demandBizImp.demandCountEmployer(null, userBean.getUserId() + "", "0", "0");
 		int size = 6;
 		int countpage = 0;
@@ -173,13 +171,10 @@ public class DemandHandler {
 			}
 
 		}
-		System.out.println("总用户数为：" + countPage);
-		System.out.println("当前页为：" + num);
-		System.out.println("总共页数：" + totalPages);
 
 		List<DemandBean> list = new ArrayList<DemandBean>();
 		list = demandBizImp.demand(demandTitle, num);
-		System.out.println("需求有：" + list.size());
+
 		request.setAttribute("Flist", list);
 		request.setAttribute("countPage", totalPages);
 		request.setAttribute("num", num);
@@ -197,8 +192,6 @@ public class DemandHandler {
 		}
 		int countPage = 0;
 		List<Object> list1 = new ArrayList<>();
-		System.out.println("我来了");
-		System.out.println("page=" + page);
 
 		List<DemandBean> demand = demandBizImp.countDemand(demandTitle);
 		countPage = demand.size();// 总用户数
@@ -223,8 +216,7 @@ public class DemandHandler {
 				num = 1;
 			}
 		}
-		System.out.println("当前页为：" + num);
-		System.out.println("总共页数：" + totalPages);
+
 		List<DemandBean> list = new ArrayList<DemandBean>();
 		list = demandBizImp.demand(demandTitle, num);
 		list1.add(list);
@@ -289,8 +281,6 @@ public class DemandHandler {
 		}
 		int countPage = 0;
 		List<Object> list1 = new ArrayList<>();
-		System.out.println("我来了");
-		System.out.println("page=" + page);
 
 		List<DemandBean> demand = demandBizImp.countDemand(demandTitle);
 		countPage = demand.size();// 总用户数
@@ -370,7 +360,12 @@ public class DemandHandler {
 	public ModelAndView LookingForConsultant(HttpServletRequest request, String demandid) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("jsp/LookingForConsultant");
-		// LookingForConsultant getCounselorInfoList
+		// ------------菜单------
+		userBean = (UserBean) request.getSession().getAttribute("user");
+		ArrayList<AuthorityBean> menuList = new ArrayList<AuthorityBean>();
+		menuList = authoriyMapper.findOwnSubclassMenu(userBean.getUserId());
+		request.setAttribute("menuList", menuList);
+		// ---------------------
 		count = demandBizImp.getCounselorInfoList().size();// 顾问人数
 		request.setAttribute("demandInfo", demandBizImp.getDemandInfoBean(demandid));// 产品信息
 		request.setAttribute("consList", demandBizImp.getCounselorInfoList());// 顾问列表
@@ -404,15 +399,16 @@ public class DemandHandler {
 		request.setAttribute("menuList", menuList);
 		// ---------------------
 		modelAndView.setViewName("jsp/supplierBid");
-//		ArrayList<DemandInfoBean> list = demandBizImp.getsupplierBidList(userBean.getUserId() + "");
-		//获取总条数
-		count = demandBizImp.demandCountFacilitator("",userBean.getUserId() + "", "", "");
+		// ArrayList<DemandInfoBean> list =
+		// demandBizImp.getsupplierBidList(userBean.getUserId() + "");
+		// 获取总条数
+		count = demandBizImp.demandCountFacilitator("", userBean.getUserId() + "", "", "");
 		// 获取需求类型表
 		request.setAttribute("parameterBeans", demandBizImp.getParmater());
 		request.setAttribute("count", count);
-		request.setAttribute("demandInfo", demandBizImp.getDemandInfoFacilitatorList("1", "6", "", userBean.getUserId() + "", "", ""));
-		
-		
+		request.setAttribute("demandInfo",
+				demandBizImp.getDemandInfoFacilitatorList("1", "6", "", userBean.getUserId() + "", "", ""));
+
 		int size = 6;
 		int countpage = 0;
 		if (count % size != 0) {
@@ -420,11 +416,9 @@ public class DemandHandler {
 		} else {
 			countpage = count / size;
 		}
-		request.setAttribute("page","1");
+		request.setAttribute("page", "1");
 		request.setAttribute("countpage", countpage);
-		
-		
-		
+
 		return modelAndView;
 	}
 
@@ -434,7 +428,7 @@ public class DemandHandler {
 		String time = df.format(new Date());// new Date()为获取当前系统时间
 		String a = demandBizImp.daily(time);
 		if (a != null) {
-			System.out.println("今日已提交");
+
 			ModelAndView modelAndView = new ModelAndView();
 			modelAndView.setViewName("jsp/repetitionPage");
 			return modelAndView;
@@ -452,7 +446,7 @@ public class DemandHandler {
 		int demandId = Integer.parseInt(demandid);
 		int a = demandBizImp.sumbit(content, demandId);
 		if (a > 0) {
-			System.out.println("提交成功！");
+
 		}
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("jsp/dailyPage");
@@ -463,6 +457,12 @@ public class DemandHandler {
 	@RequestMapping("/goDemandBid.action")
 	public ModelAndView goDemandBid(HttpServletRequest request, String demandid) {
 		ModelAndView modelAndView = new ModelAndView();
+		// ------------菜单------
+		userBean = (UserBean) request.getSession().getAttribute("user");
+		ArrayList<AuthorityBean> menuList = new ArrayList<AuthorityBean>();
+		menuList = authoriyMapper.findOwnSubclassMenu(userBean.getUserId());
+		request.setAttribute("menuList", menuList);
+		// ---------------------
 		modelAndView.setViewName("jsp/demandBid");
 		request.setAttribute("demandInfo", demandBizImp.getDemandInfoBean(demandid));
 		return modelAndView;
@@ -493,6 +493,13 @@ public class DemandHandler {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("jsp/fromContract");
 		request.setAttribute("demandInfo", demandBizImp.getDemandInfoBean(demandid));
+
+		// ------------菜单------
+		userBean = (UserBean) request.getSession().getAttribute("user");
+		ArrayList<AuthorityBean> menuList = new ArrayList<AuthorityBean>();
+		menuList = authoriyMapper.findOwnSubclassMenu(userBean.getUserId());
+		request.setAttribute("menuList", menuList);
+		// ---------------------
 		return modelAndView;
 	}
 
@@ -514,6 +521,12 @@ public class DemandHandler {
 		request.setAttribute("demandInfo", demandBizImp.getDemandInfoBean(demandid));
 		// 获取合同信息
 		request.setAttribute("contract", demandBizImp.getContract(demandid));
+		// ------------菜单------
+		UserBean ub = (UserBean) request.getSession().getAttribute("user");
+		ArrayList<AuthorityBean> menuList = new ArrayList<AuthorityBean>();
+		menuList = authoriyMapper.findOwnSubclassMenu(ub.getUserId());
+		request.setAttribute("menuList", menuList);
+		// ---------------------
 		return modelAndView;
 	}
 
@@ -671,12 +684,13 @@ public class DemandHandler {
 		request.setAttribute("contract", demandBizImp.getContract(demandid));
 		return modelAndView;
 	}
-	//服务商ajax分页查询
+
+	// 服务商ajax分页查询
 	@RequestMapping("/selectDemandFacilitator.action") // ajax分页跳转
 	@ResponseBody
 	public List<Object> selectDemandFacilitator(String userid, String state, String page, String searchName,
 			String parameterid, String stateid) {
-		
+
 		return demandBizImp.selectDemandFacilitator(userid, state, page, searchName, parameterid, stateid);
 	}
 }
