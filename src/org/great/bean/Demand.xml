@@ -395,7 +395,7 @@ UPDATE demandInfomationTbl set stateId=7 where demandId=#{demandId}
 </update>
 <!-- 审核通过 -->
 <update id="changeState2" parameterType="int">
-UPDATE demandInfomationTbl set stateId=9 where demandId=#{demandId}
+UPDATE demandInfomationTbl set stateId=22 where demandId=#{demandId}
 </update>
 <!-- 审核不通过 -->
 <update id="changeState3" parameterType="int">

@@ -12,7 +12,7 @@
 
 
 
-<title>修改资料</title>
+<title>提交合同</title>
 <link href="iTunesArtwork@2x.png" sizes="114x114"
 	rel="apple-touch-icon-precomposed">
 <link type="text/css" rel="stylesheet"

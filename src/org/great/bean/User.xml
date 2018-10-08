@@ -25,13 +25,13 @@
 		select * from(select
 		t.*,rownum rn from(select * from usertbl where
 		characterid='2' and
-		username like #{name})t where rownum &lt;= #{end})
+		username like #{name} or businesstypeid = (select businesstypeid from tbparameter where parametername like #{name}))t where rownum &lt;= #{end})
 		where rn &gt;=
 		#{start}
 	</select>
 	<select id="businessNumber" resultType="org.great.bean.UserBean">
 		select * from usertbl
-		where characterid='2' and username like #{name}
+		where characterid='2' and username like #{name} or businesstypeid = (select businesstypeid from tbparameter where parametername like #{name})
 	</select>
 	<select id="login" parameterType="String" resultType="org.great.bean.UserBean">
 		select
