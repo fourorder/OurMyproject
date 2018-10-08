@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="<%=path%>plugins/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="<%=path%>css/global.css" media="all">
     <link rel="stylesheet" href="<%=path%>laydate/theme/default/laydate.css" media="all">
-    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css"><link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <!-- <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
 	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -28,35 +30,34 @@
     </style>
 </head>
 <body>
-<div style="height: 50%;width: 95%; margin:0 auto;">
-<%-- <form action="<%=path%>employers/page.action?page=tpage&number=1" method="post"> --%>
-<!-- 姓名：<input type="text" name="name"  placeholder="请输入内容"  >  
-<input type="submit" value="查询" id="query"	class="layui-btn layui-btn-normal" />  --> 
-  姓名：<input type="text" id="query" /><button onclick="query()"><span class="layui-btn layui-btn-normal">查询</span></button>
-<!-- </form> -->
-<table class="layui-table">
-  <colgroup>
+<div style="height: 100%;width: 100%; margin:0 auto;">
+
+  <input type="text" id="query" placeholder="请输入服务商名字进行搜索" style="width:30.333%" />&nbsp;&nbsp;&nbsp;<button onclick="query()" class="layui-btn layui-btn-normal" style="width:10.333%" ><span class="layui-btn layui-btn-normal">搜索</span></button>
+
+
+<table class="layui-table" style="border-collapse:collapse;table-layout:fixed;"  width="50%" border="1">
+<%--   <colgroup>
     <col width="150">
     <col width="200">
     <col>
-  </colgroup>
+  </colgroup> --%>
   <thead>
     <tr>
-    
-      <th>用户名</th>
-      <th>手机号</th>
-      <th>账号</th>
-       <th>性别</th>
-        <th>邮箱</th>
-         <th>身份证</th>
-          <th>地址</th>
-           <th>信用分</th>
-            <th>余额</th>
-             <th>状态</th>
-            <th>角色名字</th>
-            <th>注册时间</th>
-             <th>操作</th>
-             <th>用户ID</th>
+      <th width="100px">用户ID</th>
+      <th width="100px">用户名</th>
+      <th width="200px">手机号</th>
+      <th width="200px">账号</th>
+      <th width="100px">性别</th>
+      <th width="200px">邮箱</th>
+      <th width="200px">身份证</th>
+      <th width="200px">地址</th>
+      <th width="100px">信用分</th>
+      <th width="100px">余额</th>
+      <th width="100px">状态</th>
+      <th width="100px">角色名字</th>
+      <th width="150px">注册时间</th>
+      <th width="200px">操作</th>
+      
     </tr> 
   </thead>
   <tbody id="ccc">
@@ -64,7 +65,7 @@
 
       
   <tr> 
-  
+  <td>${facilitator.userId}</td>
   <td >${facilitator.userName}</td>
   <td >${facilitator.userTel}</td>
   <td >${facilitator.userAccount}</td>
@@ -77,18 +78,14 @@
       <td>
 
      
-       <a class="layui-btn layui-btn-sm layui-btn-danger" id="zzz" href="#"  onclick="changeState(${facilitator.userId},${facilitator.stateId},${num});return false;">${facilitator.stateName}</a></td>
+       <a class="btn btn-info" id="zzz" href="#"  onclick="changeState(${facilitator.userId},${facilitator.stateId},${num});return false;">${facilitator.stateName}</a></td>
       <td >${facilitator.characterName}</td>
        <td >${facilitator.userRegisterTime}</td>
        <td >
-       <a class="layui-btn layui-btn-sm layui-btn-danger" id="yyy" href="#"  onclick="changeState(${facilitator.userId},3,${num});return false;" >删除</a>
-       <a class="layui-btn layui-btn-sm layui-btn-danger" data-toggle="modal" data-target="#editVoince" data-id="edit">编辑</a>
-       
-
-
-
+       <a class="btn btn-danger  deleteBtn rightSize" id="yyy" href="#"  onclick="changeState(${facilitator.userId},3,${num});return false;" >删除</a>
+       <a class="btn btn-success   passBtn rightSize" data-toggle="modal" data-target="#editVoince" data-id="edit">编辑</a>
        </td>
-       <td >${facilitator.userId}</td>
+       
       
        
       
@@ -96,18 +93,6 @@
 
   </c:forEach>
   </tbody>
-  <tr> 
-
-   <tr>
-   <td colspan="5"><a class="layui-btn layui-btn-sm" href="#" onclick="lastPage();return false;" id="last">上一页</a></td>
-   <td>当前页：<a id="aaa">${num}</a><br>
-          总页数：<a id="eee">${countPage}</a><br>
-     第<input type="text" id="btn" size=2/>页<button onclick="selectPage()"><span class="layui-btn layui-btn-normal">跳转</span></button>
-   
-   
-   </td>
-   <td colspan="5"><a class="layui-btn layui-btn-sm" href="#"  onclick="nextPage();return false;" id="next">下一页</a></td>
-   </tr>
   <!-- model start -->
        <form action="<%=path%>facilitator/changeInfo.action" method="POST">
        <div class="modal fade" id="editVoince" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -119,7 +104,9 @@
             </div>         
             <div class="modal-body">            
                <div class="planel_boxs">           
-                  <div class="row">                              
+                  <div class="row"> 
+                    <label>用户ID：</label>
+                    <input type="text" name="userId" class="form-controls userId" readonly="readonly"><br>                              
                     <label>用户名：</label>                    
                     <input type="text" name="userName" class="form-controls userName"> <br>             
                     <label>手机号：</label>           
@@ -138,8 +125,7 @@
                     <input type="text" name="userMoney" class="form-controls userMoney"><br>
                     <label>注册时间：</label>
                     <input type="text" name="userRegisterTime" class="form-controls userRegisterTime"><br>
-                    <label>用户ID：</label>
-                    <input type="text" name="userId" class="form-controls userId" readonly="readonly"><br>                    
+                                       
         </div>            
           </div>        
           </div>      
@@ -152,6 +138,20 @@
                              </form>
                              <!-- model end -->
 </table>
+ <!--   <tr>
+   <td colspan="5"> -->
+   <a class="btn btn-primary" href="#" onclick="lastPage();return false;" id="last">上一页</a>
+  <!--  </td>
+   <td> -->
+     当前页：<a id="aaa">${num}</a>
+     总页数：<a id="eee">${countPage}</a>
+   <!-- </td>
+   <td colspan="5"> -->
+   <a class="btn btn-primary" href="#"  onclick="nextPage();return false;" id="next">下一页</a>
+      第<input type="text" id="btn" size=2/>页<button onclick="selectPage()"><span class="layui-btn layui-btn-normal">跳转</span></button>
+<!--    </td>
+   </tr> -->
+
 
 </div>
 <script type="text/javascript">
@@ -191,7 +191,8 @@ function changeState(userId,stateId,number){
 
 	             var e = list[i];
 
-	            	 $("#ccc").append("<tr><td>"+e.userName+"</td>"
+	            	 $("#ccc").append("<tr><td>"+e.userId+"</td>"
+	            			 +"<td>"+e.userName+"</td>"
 	            			 +"<td>"+e.userTel+"</td>"
 	            			 +"<td>"+e.userAccount+"</td>"
 	            			 +"<td>"+e.userSex+"</td>"
@@ -201,17 +202,17 @@ function changeState(userId,stateId,number){
 	            			 +"<td>"+e.userCredit+"</td>"
 	            			 +"<td>"+e.userMoney+"</td>"
 	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+num+");return false;'>"
+	            			 +"<a class='btn btn-info'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+num+");return false;'>"
 	            			 +e.stateName+"</a>"
 	            			 +"</td>"
 	            			 +"<td>"+e.characterName+"</td>"
 	            			 +"<td>"+e.userRegisterTime+"</td>"
 	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+num+");return false;'>"
+	            			 +"<a class='btn btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+num+");return false;'>"
 	            			+"删除"+"</a>"
-	            			+"<a class='layui-btn layui-btn-sm layui-btn-danger' data-toggle='modal' data-target='#editVoince' data-id='edit'>编辑</a>"
+	            			+"<a class='btn btn-success' data-toggle='modal' data-target='#editVoince' data-id='edit'>编辑</a>"
 	            			 +"</td>"
-	            			 +"<td>"+e.userId+"</td>"
+	            			 
 	            			 +"</tr>");
 	
 	             
@@ -253,7 +254,8 @@ function nextPage(){
         	
              var e = list[i];
           /*    if(e.stateId==1){ */
-            	 $("#ccc").append("<tr><td>"+e.userName+"</td>"
+            	 $("#ccc").append("<tr><td>"+e.userId+"</td>"
+            			 +"<td>"+e.userName+"</td>"
             			 +"<td>"+e.userTel+"</td>"
             			 +"<td>"+e.userAccount+"</td>"
             			 +"<td>"+e.userSex+"</td>"
@@ -263,17 +265,17 @@ function nextPage(){
             			 +"<td>"+e.userCredit+"</td>"
             			 +"<td>"+e.userMoney+"</td>"
             			 +"<td>"
-            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+number+");return false;'>"
+            			 +"<a class='btn btn-info'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+number+");return false;'>"
             			 +e.stateName+"</a>"
             			 +"</td>"
             			 +"<td>"+e.characterName+"</td>"
             			 +"<td>"+e.userRegisterTime+"</td>"
             			 +"<td>"
-            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+number+");return false;'>"
+            			 +"<a class='btn btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+number+");return false;'>"
             			+"删除"+"</a>"
-            			+"<a class='layui-btn layui-btn-sm layui-btn-danger' data-toggle='modal' data-target='#editVoince' data-id='edit'>编辑</a>"
+            			+"<a class='btn btn-success' data-toggle='modal' data-target='#editVoince' data-id='edit'>编辑</a>"
             			 +"</td>"
-            			 +"<td>"+e.userId+"</td>"
+            		
             			 +"</tr>");
 
              
@@ -319,7 +321,8 @@ function nextPage(){
 	        
 	             var e = list[i];
 
-	            	 $("#ccc").append("<tr><td>"+e.userName+"</td>"
+	            	 $("#ccc").append("<tr><td>"+e.userId+"</td>"
+	            			 +"<td>"+e.userName+"</td>"
 	            			 +"<td>"+e.userTel+"</td>"
 	            			 +"<td>"+e.userAccount+"</td>"
 	            			 +"<td>"+e.userSex+"</td>"
@@ -329,15 +332,15 @@ function nextPage(){
 	            			 +"<td>"+e.userCredit+"</td>"
 	            			 +"<td>"+e.userMoney+"</td>"
 	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+number+");return false;'>"
+	            			 +"<a class='btn btn-info'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+number+");return false;'>"
 	            			 +e.stateName+"</a>"
 	            			 +"</td>"
 	            			 +"<td>"+e.characterName+"</td>"
 	            			 +"<td>"+e.userRegisterTime+"</td>"
 	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+number+");return false;'>"
+	            			 +"<a class='btn btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+number+");return false;'>"
 	            			+"删除"+"</a>"
-	            			 +"<td>"+e.userId+"</td>"
+	            			+"<a class='btn btn-success' data-toggle='modal' data-target='#editVoince' data-id='edit'>编辑</a>"
 	            			 +"</td>"
 	            			 +"</tr>");
 
@@ -386,7 +389,8 @@ function nextPage(){
 			        
 			             var e = list[i];
 			     /*         if(e.stateId==1){ */
-			            	 $("#ccc").append("<tr><td>"+e.userName+"</td>"
+			            	 $("#ccc").append("<tr><td>"+e.userId+"</td>"
+			            			 +"<td>"+e.userName+"</td>"
 			            			 +"<td>"+e.userTel+"</td>"
 			            			 +"<td>"+e.userAccount+"</td>"
 			            			 +"<td>"+e.userSex+"</td>"
@@ -396,15 +400,15 @@ function nextPage(){
 			            			 +"<td>"+e.userCredit+"</td>"
 			            			 +"<td>"+e.userMoney+"</td>"
 			            			 +"<td>"
-			            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+number+");return false;'>"
+			            			 +"<a class='btn btn-info'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+number+");return false;'>"
 			            			 +e.stateName+"</a>"
 			            			 +"</td>"
 			            			 +"<td>"+e.characterName+"</td>"
 			            			 +"<td>"+e.userRegisterTime+"</td>"
 			            			 +"<td>"
-			            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+number+");return false;'>"
+			            			 +"<a class='btn btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+number+");return false;'>"
 			            			+"删除"+"</a>"
-			            			+"<td>"+e.userId+"</td>"
+			            			+"<a class='btn btn-success' data-toggle='modal' data-target='#editVoince' data-id='edit'>编辑</a>"
 			            			 +"</td>"
 			            			 +"</tr>");
 
@@ -449,7 +453,8 @@ function query(){
 		 	        
 		            
 		  
-		            	 $("#ccc").append("<tr><td>"+e.userName+"</td>"
+		            	 $("#ccc").append("<tr><td>"+e.userId+"</td>"
+		            			 +"<td>"+e.userName+"</td>"
 		            			 +"<td>"+e.userTel+"</td>"
 		            			 +"<td>"+e.userAccount+"</td>"
 		            			 +"<td>"+e.userSex+"</td>"
@@ -459,15 +464,15 @@ function query(){
 		            			 +"<td>"+e.userCredit+"</td>"
 		            			 +"<td>"+e.userMoney+"</td>"
 		            			 +"<td>"
-		            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+number+");return false;'>"
+		            			 +"<a class='btn btn-info'id='zzz' href='#' onclick='changeState("+e.userId+","+e.stateId+","+number+");return false;'>"
 		            			 +e.stateName+"</a>"
 		            			 +"</td>"
 		            			 +"<td>"+e.characterName+"</td>"
 		            			 +"<td>"+e.userRegisterTime+"</td>"
 		            			 +"<td>"
-		            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+number+");return false;'>"
+		            			 +"<a class='btn btn-danger'id='zzz' href='#' onclick='changeState("+e.userId+",3,"+number+");return false;'>"
 		            			+"删除"+"</a>"
-		            			 +"<td>"+e.userId+"</td>"
+		            			+"<a class='btn btn-success' data-toggle='modal' data-target='#editVoince' data-id='edit'>编辑</a>"
 		            			 +"</td>"
 		            			 +"</tr>");
 		     
@@ -489,17 +494,18 @@ $('#editVoince').on('show.bs.modal', function (event) {
 	var btnThis = $(event.relatedTarget); //触发事件的按钮     
 	var modal = $(this);  //当前模态框      
 	var modalId = btnThis.data('id');   //解析出data-id的内容     
-	var userName = btnThis.closest('tr').find('td').eq(0).text();
-	var userTel = btnThis.closest('tr').find('td').eq(1).text(); 
-	var userAccount = btnThis.closest('tr').find('td').eq(2).text(); 
-	var userSex = btnThis.closest('tr').find('td').eq(3).text(); 
-	var userMail = btnThis.closest('tr').find('td').eq(4).text(); 
-	var userIdentity = btnThis.closest('tr').find('td').eq(5).text(); 
-	var userAddress = btnThis.closest('tr').find('td').eq(6).text(); 
-	var userCredit = btnThis.closest('tr').find('td').eq(7).text(); 
-	var userMoney = btnThis.closest('tr').find('td').eq(8).text(); 
-	var userRegisterTime = btnThis.closest('tr').find('td').eq(11).text(); 
-	var userId = btnThis.closest('tr').find('td').eq(13).text(); 
+	var userId = btnThis.closest('tr').find('td').eq(0).text(); 
+	var userName = btnThis.closest('tr').find('td').eq(1).text();
+	var userTel = btnThis.closest('tr').find('td').eq(2).text(); 
+	var userAccount = btnThis.closest('tr').find('td').eq(3).text(); 
+	var userSex = btnThis.closest('tr').find('td').eq(4).text(); 
+	var userMail = btnThis.closest('tr').find('td').eq(5).text(); 
+	var userIdentity = btnThis.closest('tr').find('td').eq(6).text(); 
+	var userAddress = btnThis.closest('tr').find('td').eq(7).text(); 
+	var userCredit = btnThis.closest('tr').find('td').eq(8).text(); 
+	var userMoney = btnThis.closest('tr').find('td').eq(9).text(); 
+	var userRegisterTime = btnThis.closest('tr').find('td').eq(12).text(); 
+
 	modal.find('.userName').val(userName); 
 	modal.find('.userTel').val(userTel);
 	modal.find('.userAccount').val(userAccount);

@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="<%=path%>css/global.css" media="all">
     <link rel="stylesheet" href="<%=path%>laydate/theme/default/laydate.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <!--  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+   <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
 	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
@@ -34,22 +35,23 @@
 <%-- <form action="<%=path%>employers/page.action?page=tpage&number=1" method="post"> --%>
 <!-- 姓名：<input type="text" name="name"  placeholder="请输入内容"  >  
 <input type="submit" value="查询" id="query"	class="layui-btn layui-btn-normal" />  --> 
-  规则内容：<input type="text" id="query" /><button onclick="query()"><span class="layui-btn layui-btn-normal">查询</span></button>
+<input type="text" id="query" placeholder="请输入规则内容进行搜索" style="width:30.333%" />&nbsp;&nbsp;&nbsp;<button onclick="query()" class="layui-btn layui-btn-normal" style="width:10.333%" ><span class="layui-btn layui-btn-normal">搜索</span></button>
+  
    <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert3" onClick="Values2(0)" value="添加规则"/>	
 <!-- </form> -->
-<table class="layui-table">
-  <colgroup>
+<table class="layui-table" style="border-collapse:collapse;table-layout:fixed;width:600px;margin:auto;"   border="1">
+  <%-- <colgroup>
     <col width="150">
     <col width="200">
     <col>
-  </colgroup>
+  </colgroup> --%>
   <thead>
     <tr>
     
-      <th>规则ID</th>
-      <th>规则状态</th>
-      <th>规则详情</th>
-      <th>操作</th>
+      <th width="150px">规则ID</th>
+      <th width="150px">规则状态</th>
+      <th width="150px">规则详情</th>
+      <th width="250px">操作</th>
              
     </tr> 
   </thead>
@@ -65,25 +67,17 @@
       
   <tr>
   <td>${rule.introductionId}</td>
-  <td><a class="layui-btn layui-btn-sm layui-btn-danger" id="yyy" href="#"  onclick="changeState(${rule.introductionId},${rule.upflag},${num});return false;" >${rule.parameterName}</a></td>
+  <td><a class="btn btn-info" id="yyy" href="#"  onclick="changeState(${rule.introductionId},${rule.upflag},${num});return false;" >${rule.parameterName}</a></td>
   <td><input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert" onClick="Values(${rule.introductionId})" value="查看详情"/></td>
-  <td><a class="layui-btn layui-btn-sm layui-btn-danger" id="yyy" href="#"  onclick="changeState(${rule.introductionId},3,${num});return false;" >删除规则</a>
+  <td><a class="btn btn-danger" id="yyy" href="#"  onclick="changeState(${rule.introductionId},3,${num});return false;" >删除规则</a>
       <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert2" onClick="Values2(${rule.introductionId})" value="编辑规则"/>	
   </td>     
   </tr>
         </c:forEach>
   </tbody>
         
-         <tr>
-   <td colspan="2"><a class="layui-btn layui-btn-sm" href="#" onclick="lastPage();return false;" id="last">上一页</a></td>
-   <td >当前页：<a id="aaa">${num}</a><br>
-          总页数：<a id="eee">${countPage}</a><br>
-     第<input type="text" id="btn" size=2/>页<button onclick="selectPage()"><span class="layui-btn layui-btn-normal">跳转</span></button>
-   
-   
-   </td>
-   <td colspan="2"><a class="layui-btn layui-btn-sm" href="#"  onclick="nextPage();return false;" id="next">下一页</a></td>
-   </tr>
+  
+  
       
    <div class="modal fade" id="Revert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
                                 <div class="modal-dialog">    
@@ -180,7 +174,11 @@
                           
 
 </table>
-
+<a class="btn btn-primary" href="#" onclick="lastPage();return false;" id="last">上一页</a>
+   当前页：<a id="aaa">${num}</a>
+          总页数：<a id="eee">${countPage}</a>
+     第<input type="text" id="btn" size=2/>页<button onclick="selectPage()"><span class="layui-btn layui-btn-normal">跳转</span></button>
+     <a class="btn btn-primary" href="#"  onclick="nextPage();return false;" id="next">下一页</a></td>
 </div>
 <script type="text/javascript">
 var number=1; 
@@ -223,14 +221,14 @@ function changeState(introductionId,upFlag,number){
 	            	 $("#ccc").append("<tr><td>"+e.introductionId+"</td>"
 	            			 
 	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+","+e.upflag+","+number+");return false;'>"
+	            			 +"<a class='btn btn-info'id='yyy' href='#' onclick='changeState("+e.introductionId+","+e.upflag+","+number+");return false;'>"
 	            			                                                                       
 	              			 +e.parameterName+"</a>"
 	            			 +"<td>"
 	            			 +"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert' onclick='Values("+e.introductionId+")'value='查看详情'>"
 	            			 +"</td>"
 	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+",3,"+number+");return false;'>"
+	            			 +"<a class='btn btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+",3,"+number+");return false;'>"
 	             			+"删除规则"+"</a>"
 	            			+"<input type='button' class='btn btn-primary' data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.introductionId+")'value='编辑规则'>"
 	            			 +"</td>"
@@ -271,14 +269,14 @@ function nextPage(){
              $("#ccc").append("<tr><td>"+e.introductionId+"</td>"
         			 
         			 +"<td>"
-        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+","+e.upflag+","+number+");return false;'>"
+        			 +"<a class='btn btn-info'id='yyy' href='#' onclick='changeState("+e.introductionId+","+e.upflag+","+number+");return false;'>"
         			                                                                       
           			 +e.parameterName+"</a>"
         			 +"<td>"
         			 +"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert' onclick='Values("+e.introductionId+")'value='查看详情'>"
         			 +"</td>"
         			 +"<td>"
-        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+",3,"+number+");return false;'>"
+        			 +"<a class='btn btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+",3,"+number+");return false;'>"
          			+"删除规则"+"</a>"
         			+"<input type='button' class='btn btn-primary' data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.introductionId+")'value='编辑规则'>"
         			 +"</td>"
@@ -327,14 +325,14 @@ function nextPage(){
 	             $("#ccc").append("<tr><td>"+e.introductionId+"</td>"
 	        			 
 	        			 +"<td>"
-	        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+","+e.upflag+","+number+");return false;'>"
+	        			 +"<a class='btn btn-info'id='yyy' href='#' onclick='changeState("+e.introductionId+","+e.upflag+","+number+");return false;'>"
 	        			                                                                       
 	          			 +e.parameterName+"</a>"
 	        			 +"<td>"
 	        			 +"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert' onclick='Values("+e.introductionId+")'value='查看详情'>"
 	        			 +"</td>"
 	        			 +"<td>"
-	        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+",3,"+number+");return false;'>"
+	        			 +"<a class='btn btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+",3,"+number+");return false;'>"
 	         			+"删除规则"+"</a>"
 	        			+"<input type='button' class='btn btn-primary' data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.introductionId+")'value='编辑规则'>"
 	        			 +"</td>"
@@ -385,14 +383,14 @@ function nextPage(){
 			             $("#ccc").append("<tr><td>"+e.introductionId+"</td>"
 			        			 
 			        			 +"<td>"
-			        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+","+e.upflag+","+number+");return false;'>"
+			        			 +"<a class='btn btn-info'id='yyy' href='#' onclick='changeState("+e.introductionId+","+e.upflag+","+number+");return false;'>"
 			        			                                                                       
 			          			 +e.parameterName+"</a>"
 			        			 +"<td>"
 			        			 +"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert' onclick='Values("+e.introductionId+")'value='查看详情'>"
 			        			 +"</td>"
 			        			 +"<td>"
-			        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+",3,"+number+");return false;'>"
+			        			 +"<a class='btn btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+",3,"+number+");return false;'>"
 			         			+"删除规则"+"</a>"
 			        			+"<input type='button' class='btn btn-primary' data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.introductionId+")'value='编辑规则'>"
 			        			 +"</td>"
@@ -442,14 +440,14 @@ function query(){
 		             $("#ccc").append("<tr><td>"+e.introductionId+"</td>"
 		        			 
 		        			 +"<td>"
-		        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+","+e.upflag+","+number+");return false;'>"
+		        			 +"<a class='btn btn-info'id='yyy' href='#' onclick='changeState("+e.introductionId+","+e.upflag+","+number+");return false;'>"
 		        			                                                                       
 		          			 +e.parameterName+"</a>"
 		        			 +"<td>"
 		        			 +"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert' onclick='Values("+e.introductionId+")'value='查看详情'>"
 		        			 +"</td>"
 		        			 +"<td>"
-		        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+",3,"+number+");return false;'>"
+		        			 +"<a class='btn btn-danger'id='yyy' href='#' onclick='changeState("+e.introductionId+",3,"+number+");return false;'>"
 		         			+"删除规则"+"</a>"
 		        			+"<input type='button' class='btn btn-primary' data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.introductionId+")'value='编辑规则'>"
 		        			 +"</td>"

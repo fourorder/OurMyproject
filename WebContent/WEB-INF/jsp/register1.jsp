@@ -173,8 +173,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       var account = /^[a-z0-9]\w+@[a-z0-9]{2,3}(\.[a-z]{2,3}){1,2}$/i;  // .com .com.cn
 
 	       var accountspan = document.getElementById("accountspan");
-	       $.ajax({	
-				
+	       $.ajax({					
 				 url:"<%=basePath%>user/checkAccount.action",
 				 data:{"userAccount":$("#userAccount").val()},
 				 dataType:"json",

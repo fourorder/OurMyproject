@@ -136,8 +136,19 @@
 									<div class="ydc-reg-form-group clearfix">
 										<label>联系手机</label>
 										<div class="ydc-reg-form-input">
-											<label>${userInfo.userTel}</label>
+											<label>
+											${userInfo.userTel}
+											<a href="<%=path%>user/changeTel.action?userTel=${userInfo.userTel}" style="color:pink;">解绑手机</a>
+											
+											
+											
 										</div>
+									<!-- <div class="ydc-reg-yzm" style="position:absolute; left:410px;top:545px;">
+									<button type="button" onclick="changeTel()" >解绑手机</button> 
+									<button type="button" onclick="getPhoneCode()" >修改手机号</button> 
+									
+								    </div> -->
+								    
 									</div>
 									<div class="ydc-reg-form-group clearfix">
 										<label>邮箱</label>

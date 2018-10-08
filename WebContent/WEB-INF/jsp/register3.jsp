@@ -118,16 +118,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<input type="text" id="userTel" name="userTel" onblur="checkTel()" class="ydc-form-control" autocomplete="off" placeholder="">
 								 	<span id="telspan"></span> 
 						
-									<div class="ydc-reg-form-text">
-										<p>请输入手机号并验证</p>
-									</div>
+									
 								</div>
 								
-								<div class="ydc-reg-yzm" style="position:absolute; left:628px;top:473px; ">
-									<button>获取验证码</button> 
+								
+
+							</div>
+							
+							
+							
+							
+							<div class="ydc-reg-form-group clearfix">
+								<label>短信校验码:</label>
+								<div class="ydc-reg-form-input">
+									<input type="text" id="userTelCode" name="userTelCode" onblur="checkTelCode()" class="ydc-form-control" autocomplete="off" placeholder="请先输入正确的手机号" disabled="disabled">
+								 	<span id="telCodespan"></span> 
+						
+									
+								</div>
+								
+								<div class="ydc-reg-yzm" style="position:absolute; left:628px;top:543px; ">
+									<button type="button" onclick="getPhoneCode()" >获取校验码</button> 
 								</div>
 
 							</div>
+							
+							
+							
+							
+							
+							
+							
 							<div class="ydc-reg-form-group clearfix">
 								<label></label>
 								<div class="ydc-reg-form-input ydc-reg-form-input-agreement">
@@ -204,7 +225,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    })
 	</script>
 	<script type="text/javascript">
-	
+	var list=KakutaYuka;
 	function checkTel(){
          
         var  userTel  = document.getElementById("userTel").value;
@@ -212,30 +233,143 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        var tel = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;  // .com .com.cn
     
        var telspan = document.getElementById("telspan");
+       
+       
+       $.ajax({					
+			 url:"<%=basePath%>user/checkTel.action",
+			 data:{"userTel":userTel},
+			 dataType:"json",
+			 type:"post",
+			 async: false,
+			 success:function(data){
+				 if(data[0]==2){
+					 if(tel.test(userTel)){
+
+				           //符合规则 
+
+				           telspan.innerHTML="手机号可以使用".fontcolor("green");
+
+				          
+
+				           return true;
+
+				       } else{
+
+				           //不符合规则
+
+				           telspan.innerHTML="手机号格式输入错误".fontcolor("red");
+
+				           return false;
+
+				       }  
+					 
+				 }else{
+					 telspan.innerHTML="手机号已被注册".fontcolor("red");
+
+			           return false;
+				 }
+				
+				 
+				 
+			 }
+		 });
+       
+       
+       
+       
       
-       if(tel.test(userTel)){
-
-           //符合规则 
-
-           telspan.innerHTML="手机号可以使用".fontcolor("green");
-
-          
-
-           return true;
-
-       }else{
-
-           //不符合规则
-
-           telspan.innerHTML="手机号格式输入错误".fontcolor("red");
-
-           return false;
-
-       }  
+     
  	  
 
     } 
-	
+	function getPhoneCode(){
+		  var  userTel  = document.getElementById("userTel").value;
+		  
+		  
+          
+	       var tel = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;  // .com .com.cn
+	    
+	       var telCodespan = document.getElementById("telCodespan");
+	      
+	       if(tel.test(userTel)){
+
+	           //符合规则 
+               
+	           $.ajax({	
+					
+					 url:"<%=basePath%>user/sendCode.action",
+					 data:{"userTel":userTel},
+					 dataType:"json",
+					 type:"post",
+					 async: false,
+					 success:function(data){
+						 list=data[0];
+				        
+				         
+				          
+				             
+				          
+				             
+				             telCodespan.innerHTML="手机验证码已发送".fontcolor("green");
+				             $("#userTelCode").removeAttr("disabled");
+	 
+					 }
+				 });
+	           
+               return false;
+	          
+
+	          
+
+	       }else{
+
+	           //不符合规则
+
+	           alert("请输入正确的手机号");
+                return false;
+	           
+
+	       } 
+	}
+	 function checkForm(){
+
+         var userIdentity = checkIdentity();
+
+         var userName  = checkName();
+         
+         var userTel= checkTel();
+         
+          
+          
+         
+          var  userTelCode  = document.getElementById("userTelCode").value; 
+         
+         
+         if(userIdentity&&userName&&userTel){
+     	        if($("#agreement").prop("checked")==true){
+     	        	  if(userTelCode==list){
+     		        		
+     		        		return true;
+     		        	}else{
+     		        		alert("短信校验码输入有误，请重新输入！");
+     		        		return false;
+     		        	} 
+     	     	    
+     	            
+     	        } else{
+     	           alert("请勾选按钮!");
+     	           return false;
+     	        }
+     	        
+     	      
+
+         }else{
+
+             return false;
+
+         } 
+         
+	 }
 	</script>
 	<script type="text/javascript">
 	function checkIdentity(){
@@ -304,35 +438,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	 </script >
 	 <script type="text/javascript">
-	 function checkForm(){
-
-         var userIdentity = checkIdentity();
-
-         var userName  = checkName();
-         
-         var userTel= checkTel();
-         
-         
-
-         if(userIdentity&&userName&&userTel){
-        	 
-        	
-     	    	
-     	        if($("#agreement").prop("checked")==true){
-     	            return true;
-     	        } else{
-     	           alert("请勾选按钮!");
-     	           return false;
-     	        }
-     	    
-
-         }else{
-
-             return false;
-
-         }
-         
-	 }
+	
 
 	 </script>
 	

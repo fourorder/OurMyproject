@@ -65,12 +65,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<p>为了您的账号安全，请勿在公共电脑登录</p>
 					</div>
 					<div class="clearfix">
-						<div class="fl">
+						<!-- <div class="fl">
 							<input type="checkbox" checked="checked">
 							<label>十天内免登录</label>
-						</div>
+						</div> -->
 						<div class="fr">
-							<a href="#">忘记密码</a>
+							<a href="<%=basePath%>user/forgetPwd.action">忘记密码</a>
 						</div>
 					</div>
 				
@@ -80,8 +80,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					<div class="ydc-login-box">
 						<a href="<%=basePath%>register/registerShow.action" target="_blank">立即注册</a>
-						<span>|</span>
-						<a href="customer.html" target="_blank">常见问题</a>
+						<!-- <span>|</span>
+						<a href="customer.html" target="_blank">常见问题</a> -->
 
 					</div>
 				</form>
