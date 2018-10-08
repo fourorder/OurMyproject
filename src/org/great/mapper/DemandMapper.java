@@ -173,9 +173,19 @@ public interface DemandMapper {
 	// 服务商总页数 10/7
 	public int demandCountFacilitator(@Param("name") String name, @Param("userid") String userid,
 			@Param("parameterid") String parameterid, @Param("stateid") String stateid);
-	
-	//服务商任务列表  getDemandInfoFacilitatorList
+
+	// 服务商任务列表 getDemandInfoFacilitatorList
 	public ArrayList<DemandInfoBean> getDemandInfoFacilitatorList(@Param("star") String star, @Param("end") String end,
 			@Param("name") String name, @Param("userid") String userid, @Param("parameterid") String parameterid,
 			@Param("stateid") String stateid);
+
+	// 获取用户余额
+	public double getUserMoney(@Param("userId") String userId);
+
+	// 更新用户金额
+	public double updateUserMoney(@Param("userId") String userId, @Param("userMoney") String userMoney);
+
+	// 插入交易记录
+	public int addFund(@Param("userId") String userId, @Param("businessId") String businessId,
+			@Param("toUserId") String toUserId, @Param("dealMoney") String dealMoney);
 }

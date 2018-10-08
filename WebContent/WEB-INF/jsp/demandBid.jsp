@@ -83,16 +83,25 @@
 	<!-- head YDC end -->
 	<!-- content YDC begin -->
 	<section>
-	<div class="ydc-content-slide ydc-body">
-		<div class="ydc-flex">
-			<!-- left begin -->
-			<div class="ydc-column ydc-column-2">
-				<div class="ydc-menu">
-					<ul>
-						
-					</ul>
+		<div class="ydc-content-slide ydc-body">
+			<div class="ydc-flex">
+				<!-- left begin -->
+				<div class="ydc-column ydc-column-2">
+					<div class="ydc-menu">
+						<ul>
+						<c:forEach items="${menuList}"  var="menuList">
+							<li class="ydc-menu-item">
+								<a href="<%=path %>${menuList.pathName}" class="">
+									<i class="${menuList.divClass}"></i>
+									${menuList.authorityName}
+								</a>
+							</li>
+						</c:forEach>
+							
+							
+						</ul>
+					</div>
 				</div>
-			</div>
 			<!-- left end -->
 			<!-- right begin -->
 			<div class="ydc-column ydc-column-8">
@@ -173,7 +182,10 @@
 										</div>
 										</div>
 									</form>
-								
+								<div class="ydc-btn">
+											<button class="btn" onClick="location.href='<%=path%>demand/returnDemand.action'">返回</button>
+											
+										</div>
 							</div>
 
 						</div>
