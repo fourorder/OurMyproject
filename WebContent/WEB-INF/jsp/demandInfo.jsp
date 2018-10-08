@@ -115,9 +115,10 @@
 				</span>
 			</div>
 			<div class="seller-phone">
-				<span class="pop im"> <a href="" data-name="联系卖家"><img
+				<%-- <span class="pop im"> <a href="" data-name="联系卖家"><img
 						src="<%=path%>demand/images/phon.png" />联系卖家</a>
-				</span> <span class="pop in"> <a href="<%=path%>chat/gotochat.action?account=${demandInfo.fromUserBean.userAccount}" target="_blank" data-name="咨询卖家"><img
+				</span>  --%>
+				<span class="pop in"> <a href="<%=path%>chat/gotochat.action?account=${demandInfo.fromUserBean.userAccount}" target="_blank" data-name="咨询卖家"><img
 						src="<%=path%>demand/images/qq.png" />咨询卖家</a>
 				</span>
 

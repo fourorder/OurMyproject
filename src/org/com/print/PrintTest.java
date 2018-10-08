@@ -16,11 +16,12 @@ import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.JFileChooser;
 
 public class PrintTest {
-	 public static void main(String[] args) {
-		          JFileChooser fileChooser = new JFileChooser(); // 创建打印作业
-		          int state = fileChooser.showOpenDialog(null);
-		        if (state == fileChooser.APPROVE_OPTION) {
-		             File file = fileChooser.getSelectedFile(); // 获取选择的文件
+	 public static void print(String url) {
+//		          JFileChooser fileChooser = new JFileChooser(); // 创建打印作业
+//		          int state = fileChooser.showOpenDialog(null);
+//		        if (state == fileChooser.APPROVE_OPTION) {
+//		             File file = fileChooser.getSelectedFile(); // 获取选择的文件
+		          File file = new File(url); // 获取选择的文件
 	           // 构建打印请求属性集
 	             HashPrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
 	              // 设置打印格式，因为未确定类型，所以选择autosense
@@ -44,6 +45,6 @@ public class PrintTest {
 		                      e.printStackTrace();
 		                   }
 		              }
-		          }
+//		          }
 		      }
 }

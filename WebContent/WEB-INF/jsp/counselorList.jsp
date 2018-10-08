@@ -68,14 +68,13 @@
 
 </tbody>
 </c:forEach>
-<tr>
-<td colspan="8">当前页<span id="num">${num}</span>总页数<span id="totalPages">${totalPages}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</table>
+当前页<span id="num">${num}</span>总页数<span id="totalPages">${totalPages}</span>
 <a class="layui-btn layui-btn-sm" href="<%=path %>counselor/list.action?page=tpage&number=${num}&state=${state}">上一页</a>&nbsp;&nbsp;
 <a class="layui-btn layui-btn-sm" href="<%=path %>counselor/list.action?page=npage&number=${num}&state=${state}">下一页</a>
-</td>
-</tr>
 
-</table>
+
+
 
 </div>
 <script>

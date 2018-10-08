@@ -12,6 +12,9 @@
  <link rel="stylesheet" href="<%=path %>plugins/layui/css/layui.css" media="all" />
   <script type="text/javascript" src="<%=path %>js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=path %>js/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
+	<!-- <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <style type="text/css">
 
         body{TEXT-ALIGN: center;}
@@ -37,8 +40,8 @@
 <th>地址</th>
 <th>类型id</th>
 <th>图片</th>
-<th>状态</th>
-<th>操作</th>
+<th width="80">状态</th>
+<th width="160">操作</th>
 </tr>
 </thead>
 <tbody id="ccc">
@@ -53,8 +56,8 @@
 <c:if test="${fund.stateId  eq 0}">
        <td>未删除</td>
        <td>
-<a onClick="return firm()" class="layui-btn layui-btn-sm layui-btn-danger" href="<%=path%>infor/delInfor.action?inforId=${fund.informationId}">删除</a>&nbsp;&nbsp;
-<a class="layui-btn layui-btn-sm" href="<%=path%>infor/updateInfor.action?inforId=${fund.informationId}">修改</a>
+<a onClick="return firm()" class="btn btn-danger  deleteBtn rightSize" href="<%=path%>infor/delInfor.action?inforId=${fund.informationId}">删除</a>&nbsp;&nbsp;
+<a class="btn btn-info" href="<%=path%>infor/updateInfor.action?inforId=${fund.informationId}">修改</a>
 </td>
       </c:if>
 <c:if test="${fund.stateId  eq 1}">
@@ -66,9 +69,9 @@
 </c:forEach>
 </tbody>
 <tr>
-<td colspan="6">当前页<span id="num">${num}</span>总页数<span id="totalPages">${totalPages}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="button" value="上一页" onClick="page('tpage')">&nbsp;&nbsp;
-<input type="button" value="下一页" onClick="page('npage')">
+<td colspan="8">当前页<span id="num">${num}</span>总页数<span id="totalPages">${totalPages}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" value="上一页" onClick="page('tpage')" class="btn btn-primary ">&nbsp;&nbsp;
+<input type="button" value="下一页" onClick="page('npage')" class="btn btn-primary ">
 </td>
 </tr>
 
@@ -109,8 +112,8 @@
     									"<td>"+e.parameterId+"</td>"+
     									"<td>"+e.informationImg+"</td>"+
     									"<td>未删除</td>"+
-    									"<td><a onclick='return firm()' class='layui-btn layui-btn-sm layui-btn-danger'  href='<%=path%>infor/delInfor.action?inforId="+e.informationId+"'>删除</a>"+
-    									"<a class='layui-btn layui-btn-sm' href='<%=path%>infor/updateInfor.action?inforId="+e.informationId+"'>修改</a>"+
+    									"<td><a onclick='return firm()' class='btn btn-danger  deleteBtn rightSize'  href='<%=path%>infor/delInfor.action?inforId="+e.informationId+"'>删除</a>"+
+    									"<a class='btn btn-info' href='<%=path%>infor/updateInfor.action?inforId="+e.informationId+"'>修改</a>"+
     									"</td>"+
     									"</tr>"
     							 ); 
@@ -167,8 +170,8 @@
     									"<td>"+e.parameterId+"</td>"+
     									"<td>"+e.informationImg+"</td>"+
     									"<td>未删除</td>"+
-    									"<td><a onclick='return firm()' class='layui-btn layui-btn-sm layui-btn-danger'  href='<%=path%>infor/delInfor.action?inforId="+e.informationId+"'>删除</a>"+
-    									"<a class='layui-btn layui-btn-sm'  href='<%=path%>infor/updateInfor.action?inforId="+e.informationId+"'>修改</a>"+
+    									"<td><a onclick='return firm()' class='btn btn-danger  deleteBtn rightSize'  href='<%=path%>infor/delInfor.action?inforId="+e.informationId+"'>删除</a>"+
+    									"<a class='btn btn-info'  href='<%=path%>infor/updateInfor.action?inforId="+e.informationId+"'>修改</a>"+
     									"</td>"+
     									"</tr>"
     							 ); 

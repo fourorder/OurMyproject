@@ -39,15 +39,11 @@
 <input type="submit" value="查询" 	class="layui-btn layui-btn-normal" /> 
 </form>
 <table class="layui-table">
-  <colgroup>
-    <col width="150">
-    <col width="200">
-    <col>
-  </colgroup>
+
   <thead>
     <tr>
       <th>用户名</th>
-      <th>手机号</th>
+      <th >手机号</th>
       <th>账号</th>
        <th>性别</th>
         <th>邮箱</th>
@@ -57,7 +53,7 @@
             <th>余额</th>
             <th>注册时间</th>
              <th>启用/禁用</th>
-             <th>操作</th>
+             <th width="150px">操作</th>
     </tr> 
   </thead>
   <tbody>
@@ -95,14 +91,15 @@
       
   </tr>
   </c:forEach>
-   <tr>
-   <td colspan="6"><a class="layui-btn layui-btn-sm" href="<%=path %>employers/page.action?page=tpage&number=${num}&name=${username}&ordinal=${state}">上一页</a></td>
-   <td ><a>当前页：${num}&nbsp;&nbsp;&nbsp;总页数：${countPage}</a></td>
-  <td> <input type="text" name="skip" id="skip" style="width: 30px"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();">&nbsp;&nbsp;<a onclick="skip()"  class="layui-btn layui-btn-xs">转</a></td>
-    <td colspan="6"><a class="layui-btn layui-btn-sm" href="<%=path %>employers/page.action?page=npage&number=${num}&name=${username}&ordinal=${state}"  id="npage">下一页</a></td>
-   </tr>
-  </tbody>
+   </tbody>
 </table>
+  
+   <a class="layui-btn layui-btn-sm" href="<%=path %>employers/page.action?page=tpage&number=${num}&name=${username}&ordinal=${state}">上一页</a>
+   <a>当前页：${num}&nbsp;&nbsp;&nbsp;总页数：${countPage}</a>
+  <input type="text" name="skip" id="skip" style="width: 30px"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();">&nbsp;&nbsp;<a onclick="skip()"  class="layui-btn layui-btn-xs">转</a>
+    <a class="layui-btn layui-btn-sm" href="<%=path %>employers/page.action?page=npage&number=${num}&name=${username}&ordinal=${state}"  id="npage">下一页</a>
+  
+ 
 
 
 </div>

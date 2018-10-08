@@ -2,9 +2,9 @@ package org.great.bean;
 
 public class DailyBean {
  
-	private int dailyId;
+	private int daiId;
 	private String publishDate;
-	private String content;
+	private String daiContent;
 	private int processId;
 	private String dailyReview;
 	private String postil;
@@ -12,24 +12,27 @@ public class DailyBean {
 		super();
 	}
 	
-	public DailyBean(int dailyId, String publishDate, String content, int processId, String dailyReview,
+	public DailyBean(int daiId, String publishDate, String daiContent, int processId, String dailyReview,
 			String postil) {
 		super();
-		this.dailyId = dailyId;
+		this.daiId = daiId;
 		this.publishDate = publishDate;
-		this.content = content;
+		this.daiContent = daiContent;
 		this.processId = processId;
 		this.dailyReview = dailyReview;
 		this.postil = postil;
 	}
 
-	public int getDailyId() {
-		return dailyId;
-	}
-	public void setDailyId(int dailyId) {
-		this.dailyId = dailyId;
-	}
 	
+	
+	public int getDaiId() {
+		return daiId;
+	}
+
+	public void setDaiId(int daiId) {
+		this.daiId = daiId;
+	}
+
 	public String getPublishDate() {
 		return publishDate;
 	}
@@ -38,12 +41,15 @@ public class DailyBean {
 		this.publishDate = publishDate;
 	}
 
-	public String getContent() {
-		return content;
+	
+	public String getDaiContent() {
+		return daiContent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+
+	public void setDaiContent(String daiContent) {
+		this.daiContent = daiContent;
 	}
+
 	public int getProcessId() {
 		return processId;
 	}

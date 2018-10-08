@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="<%=path%>css/global.css" media="all">
     <link rel="stylesheet" href="<%=path%>laydate/theme/default/laydate.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <!--    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+ <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
 	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     

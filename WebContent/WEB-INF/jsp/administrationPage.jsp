@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="<%=basePath%>facilitator/page.action?page=tpage&number=1" target="menuFrame" >服务商管理</a>
                         </dd>
                         <dd>
-                            <a href="<%=basePath%>counselor/list.action?number=1" target="menuFrame">顾问管理</a>
+                            <a href="<%=basePath%>counselor/list.action?number=1&page=tpage" target="menuFrame">顾问管理</a>
                         </dd>
                        <!--  <dd>
                             <a href="" target="menuFrame">管理员管理</a>

@@ -364,11 +364,14 @@
 		where demandId = #{demandId}
 	</update>
 
+
 	<!-- 查找用户余额 -->
 	<select id="getUserMoney" resultType="java.lang.Double"
 		parameterType="java.lang.Integer">
 		select USERMONEY from USERTBL where USERID=#{userId}
 	</select>
+
+
 
 	<!-- 设置用户余额 -->
 	<update id="updateUserMoney">
@@ -534,45 +537,43 @@
 	</select>
 	<!-- 审核通过雇主申请 -->
 	<update id="applyFprPass">
-		UPDATE demandInfomationTbl set Stateid=22 WHERE
-		demandid=#{id}
-	</update>
-	<update id="applyFprPass2">
-		UPDATE consultantsandneedstbl set Stateid=903 WHERE
-		demandid=#{id}
-	</update>
-	<!-- 拒绝通过雇主申请 -->
+UPDATE demandInfomationTbl set Stateid=1861 WHERE demandid=#{id}
+</update>
+<update id="applyFprPass2">
+UPDATE consultantsandneedstbl set Stateid=903 WHERE demandid=#{id}
+</update>
+<!-- 拒绝通过雇主申请 -->		
+
 	<update id="applyFprreFuse">
-		UPDATE demandInfomationTbl set Stateid=23 WHERE
-		demandid=#{id}
-	</update>
-	<!-- 查看需求详情 -->
-	<select id="particulars" parameterType="java.lang.Integer"
-		resultType="org.great.bean.DemandBeanX">
-		select * from demandInfomationTbl where
-		demandId=#{demandId}
-	</select>
-	<!-- 查询类型 -->
-	<select id="selectType" parameterType="java.lang.Integer"
-		resultType="java.lang.String">
-		select parametername from tbparameter where
-		parameterid=#{parameterid}
-	</select>
-	<!-- 查ID -->
-	<select id="selectId" parameterType="java.lang.String"
-		resultType="java.lang.Integer">
-		select userId from usertbl where useraccount=#{account}
-	</select>
-	<!-- 查询日报是否提交 -->
-	<select id="daily" parameterType="java.lang.String" resultType="java.lang.String">
-		select * from dailytbl where publishdate like #{dailyDate}
-	</select>
-	<!-- 提交日报 -->
-	<insert id="sumbit">
-		insert into dailytbl values(SEQID.nextval,(select
-		to_char(sysdate,'yyyy-mm-dd ') from
-		dual),#{content},#{processId},'未评价','未评价')
-	</insert>
+UPDATE demandInfomationTbl set Stateid=22 WHERE demandid=#{id}
+</update>	
+<update id="applyFprreFuse2">
+UPDATE consultantsandneedstbl set Stateid=904 WHERE demandid=#{id}
+</update>
+<!-- 查看需求详情 -->
+<select id="particulars" parameterType="java.lang.Integer"  resultType="org.great.bean.DemandBeanX">
+ select * from demandInfomationTbl where demandId=#{demandId}
+</select>
+<!-- 查询类型 -->
+<select id="selectType" parameterType="java.lang.Integer" resultType="java.lang.String">
+select parametername from tbparameter where parameterid=#{parameterid}
+</select>
+<!-- 查询审核状态 -->
+<select id="detailsState"   resultType="java.lang.String">
+ select parametername from tbparameter where parameterid=(select auditstate from demanddealtbl where demandid=#{demandid})
+</select>
+<!-- 查ID-->
+<select id="selectId" parameterType="java.lang.String" resultType="java.lang.Integer">
+select userId from usertbl where useraccount=#{account}
+</select>
+<!-- 查询日报是否提交 -->			
+<select id="daily"  parameterType="java.lang.String"  resultType="java.lang.String">
+select * from dailytbl where publishdate like #{dailyDate}
+</select>
+<!-- 提交日报 -->		
+<insert id="sumbit"  >
+insert into dailytbl values(SEQID.nextval,(select to_char(sysdate,'yyyy-mm-dd ') from dual),#{content},#{processId},'未评价','未评价')
+</insert>
 
 	<!-- 查询顾问所接项目的编号 -->
 	<select id="serialNum" parameterType="java.lang.String"
@@ -598,18 +599,20 @@
 		where rn &gt;= (#{page}*5-4)
 	</select>
 
-	<!-- 查询项目日报总数 -->
-	<select id="countDaily" resultType="java.lang.Integer">
-		select count(*) from dailytbl where processid=#{parameterId}
-		<if test="evaluation !=null and evaluation != ''">
-			and DAILYREVIEW like #{evaluation}
-		</if>
-	</select>
-	<!-- 提交日报 -->
-	<update id="sEvaluation">
-		UPDATE dailytbl set
-		DAILYREVIEW=#{evaluation},POSTIL=#{notation} WHERE
-		PUBLISHDATE like
-		#{time} and PROCESSID=#{userId}
-	</update>
+<!-- 查询项目日报总数 -->
+<select id="countDaily"  resultType="java.lang.Integer">
+select count(*) from  dailytbl where processid=#{parameterId}
+<if test="evaluation !=null and evaluation != ''"> 
+ and DAILYREVIEW like #{evaluation}
+</if>
+</select>
+<!-- 评价日报 -->
+<update id="sEvaluation" >
+UPDATE dailytbl set DAILYREVIEW=#{radio},POSTIL=#{notation} WHERE  daiid=#{dailyId}
+</update>
+
+<!-- 项目评价 -->
+<update id="projectEvaluation"  parameterType="java.lang.String">
+UPDATE demanddealtbl set CONSULTANTEVALUATION=#{content} WHERE  dealid=#{demandId}
+</update>
 </mapper>

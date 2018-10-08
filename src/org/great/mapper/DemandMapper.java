@@ -135,10 +135,13 @@ public interface DemandMapper {
 
 	public int countDaily(@Param("parameterId") int parameterId, @Param("evaluation") String evaluation);// 查询项目日报总数
 
+	public String detailsState(@Param("demandid")int demandid);// 查询详细项目状态
+	
 	public int selectId(@Param("account") String account);// 查找Id
+	
+	public int projectEvaluation(@Param("demandId")int demandId,@Param("content")String content);// 项目评价
 
-	public int sEvaluation(@Param("userId") int userId, @Param("evaluation") String evaluation,
-			@Param("notation") String notation, @Param("time") String time);// 提交评价
+	public int sEvaluation(@Param("dailyId") int dailyId,@Param("notation")String notation,@Param("radio")String radio);// 提交评价
 	// 获取所有顾问列表
 
 	public ArrayList<CounselorInfoBean> getCounselorInfoList();

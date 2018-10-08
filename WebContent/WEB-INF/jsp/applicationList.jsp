@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	
-	<title>内容同步-- 一点车 -  让您多懂一点车</title>
+	<title>申请成为顾问</title>
 		<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">

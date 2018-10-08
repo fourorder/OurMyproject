@@ -125,6 +125,8 @@ public interface DemandBiz {
 	public int sumbit(String content, int processId);// 提交日报
 
 	public List<DemandBeanX> particulars(int demandId);// 详细信息
+	
+	public int projectEvaluation(int demandId,String content);// 项目评价
 
 	public int selectId(String account);// 查找Id
 
@@ -133,10 +135,13 @@ public interface DemandBiz {
 	public List<Integer> serialNum(String account);// 查询顾问所接项目编号
 
 	public List<DailyBean> selectDaily(int parameterId, String state, int page);// 查询详细项目内容
+	
+	public String detailsState(int demandid);// 查询详细项目状态
 
 	public int countDaily(int parameterId, String evaluation);// 查询项目日报总数
 
-	public int sEvaluation(int userId, String evaluation, String notation, String time);// 提交评价
+	public int sEvaluation(int dailyId,String notation,String radio);// 提交评价
+
 	// 找顾问
 
 	public ArrayList<CounselorInfoBean> getCounselorInfoList();

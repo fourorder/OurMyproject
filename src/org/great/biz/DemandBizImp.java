@@ -453,15 +453,7 @@ public class DemandBizImp implements DemandBiz {
 		return demandMapper.selectId(account);
 	}
 
-	@Override
-	public int sEvaluation(int userId, String evaluation, String notation, String time) {
-		// TODO Auto-generated method stub
-		if (time != null && "" != time) {
-			time = "%" + time + "%";
-		}
-		return demandMapper.sEvaluation(userId, evaluation, notation, time);
-	}
-
+	
 	@Override
 	public ArrayList<CounselorInfoBean> getCounselorInfoList() {
 		// TODO Auto-generated method stub
@@ -601,5 +593,24 @@ public class DemandBizImp implements DemandBiz {
 			String parameterid, String stateid) {
 		// TODO Auto-generated method stub
 		return demandMapper.getDemandInfoFacilitatorList(star, end, name, userid, parameterid, stateid);
+	}
+
+	@Override
+	public String detailsState(int demandid) {
+		// TODO Auto-generated method stub
+		
+		return demandMapper.detailsState(demandid);
+	}
+
+	@Override
+	public int sEvaluation(int dailyId, String notation, String radio) {
+		// TODO Auto-generated method stub
+		return demandMapper.sEvaluation(dailyId, notation, radio);
+	}
+
+	@Override
+	public int projectEvaluation(int demandId, String content) {
+		// TODO Auto-generated method stub
+		return demandMapper.projectEvaluation(demandId, content);
 	}
 }
