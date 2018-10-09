@@ -81,7 +81,7 @@ public class AdvertisingHandler {
 		list=advertisingBizImp.selectAdvertising(num);
 		if(list.size()>0) {
 			System.out.println("存在数据，是否覆盖");
-			int a=advertisingBizImp.updateNum(list.get(0).getAdvertisementTitle(),list.get(0).getAdvertisementPublishTime());
+			int a=advertisingBizImp.updateNum(list.get(0).getAdvertisementId());
 		if(a>0) {
 			ab.setAdvertisementImage(productionImage);
 			int b =advertisingBizImp.insertAdvertising(ab);
@@ -137,19 +137,19 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 	
 	
 	@RequestMapping("/operation.action")//删除/修改
-	public ModelAndView test3(HttpServletRequest request,String operation,String title,String time,int state){
+	public ModelAndView test3(HttpServletRequest request,String operation,int advId,int state){
 		if(operation.equals("del")) {
 			if(state==0) {
 				return new ModelAndView("redirect:list.action?page=tpage&number=1");
 			}
-			int a=advertisingBizImp.updateNum(title, time);
+			int a=advertisingBizImp.updateNum(advId);
 			if(a>0) {
 				System.out.println("删除成功！");
 				return new ModelAndView("redirect:list.action?page=tpage&number=1");
 			}
 		}else if(operation.equals("update")){
 			List<AdvertisingBean> list=new ArrayList<AdvertisingBean>();
-			list=advertisingBizImp.selectOne(title, time);
+			list=advertisingBizImp.selectOne(advId);
 			if(list.size()>0) {
 				request.setAttribute("Alist", list);
 				ModelAndView modelAndView=new ModelAndView();
@@ -164,21 +164,19 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 	
 	@RequestMapping("/affirm.action")//确认修改
 	public ModelAndView test4(HttpServletRequest request,AdvertisingBean ab){
-	
-		System.out.println("标题："+ab.getAdvertisementTitle()+"时间："+ab.getAdvertisementPublishTime());
 		List<AdvertisingBean> list=new ArrayList<AdvertisingBean>();
 		list=advertisingBizImp.selectAdvertising(ab.getAdvertisementNum());
 		int num=ab.getAdvertisementNum();
 		if(list.size()>0) {
 			int a=advertisingBizImp.updateSerial(num);
 		if(a>0) {
-			int b=advertisingBizImp.affirm(ab);
+			int b=advertisingBizImp.affirm(ab.getAdvertisementId(),ab.getAdvertisementNum());
 			if(b>0) {
 				return new ModelAndView("redirect:list.action?page=tpage&number=1");
 			}
 		}
 		}else {
-			int b=advertisingBizImp.affirm(ab);
+			int b=advertisingBizImp.affirm(ab.getAdvertisementId(),ab.getAdvertisementNum());
 			if(b>0) {
 				return new ModelAndView("redirect:list.action?page=tpage&number=1");
 			}

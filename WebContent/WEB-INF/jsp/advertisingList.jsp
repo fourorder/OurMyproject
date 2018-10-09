@@ -14,8 +14,7 @@
     <link rel="stylesheet" href="<%=path %>layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="<%=path %>css/global.css" media="all">
      <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-     <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
-    <!-- <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
 	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js">-->
 	</script><style type="text/css"> 
@@ -55,8 +54,8 @@
     <td>${fund.advertisementAddress}</td>
      <td>${fund.advertisementImage}</td>
       <td>${fund.advertisementNum}</td>
-       <td><a class="btn btn-danger  deleteBtn rightSize" href="<%=path %>adver/operation.action?operation=del&title=${fund.advertisementTitle}&time=${fund.advertisementPublishTime}&state=${fund.advertisementNum}" onclick="return firm()">删除</a>
-       <a class="btn btn-info" href="<%=path %>adver/operation.action?operation=update&title=${fund.advertisementTitle}&time=${fund.advertisementPublishTime}&state=${fund.advertisementNum}" >修改</a>
+       <td><a class="btn btn-danger  deleteBtn rightSize" href="<%=path %>adver/operation.action?operation=del&advId=${fund.advertisementId}&state=${fund.advertisementNum}" onclick="return firm()">删除</a>
+       <a class="btn btn-info" href="<%=path %>adver/operation.action?operation=update&advId=${fund.advertisementId}&state=${fund.advertisementNum}" >修改</a>
       </td>
  </tr>
  </c:forEach>
@@ -93,8 +92,12 @@
     
     function skip() {
      var number=$("#skip").val();
-     window.location.href = "<%=path %>adver/list.action?page=skip&title=${title}&time=${time}&number="+number;	
-	}
+     if(number==""){
+ 		alert("不能为空！");
+ 	}else {
+ 		 window.location.href = "<%=path %>adver/list.action?page=skip&title=${title}&time=${time}&number="+number;			  
+ 	}
+    }
         //日期格式验证 
     function check(){
     	var a = /^(\d{4})-(\d{2})-(\d{2})$/

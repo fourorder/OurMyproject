@@ -372,7 +372,6 @@
 	</select>
 
 
-
 	<!-- 设置用户余额 -->
 	<update id="updateUserMoney">
 		UPDATE USERTBL SET USERMONEY =#{userMoney} WHERE
@@ -523,9 +522,9 @@
 		select * from (
 		select e.*,rownum rn from (
 		select
-		d.demandtitle,d.demanddetailinformation,u.useraccount,c.demandid,c.stateid
-		from consultantsandneedstbl c,usertbl u,demandinfomationtbl d where
-		c.employerid=u.userid and c.demandid=d.demandid and
+		d.demandtitle,d.demanddetailinformation,u.useraccount,c.demandid,c.stateid,d.stateid  as stated,m.CONSULTANTEVALUATION
+		from consultantsandneedstbl c,usertbl u,demandinfomationtbl d,demanddealtbl m where
+		c.employerid=u.userid and c.demandid=d.demandid and d.demandid=m.demandid and
 		c.consultantid=#{userId}
 
 		<if test="state !=0">
@@ -541,10 +540,10 @@ UPDATE demandInfomationTbl set Stateid=1861 WHERE demandid=#{id}
 </update>
 <update id="applyFprPass2">
 UPDATE consultantsandneedstbl set Stateid=903 WHERE demandid=#{id}
-</update>
-<!-- 拒绝通过雇主申请 -->		
 
-	<update id="applyFprreFuse">
+</update>
+	<!-- 拒绝通过雇主申请 -->
+<update id="applyFprreFuse">
 UPDATE demandInfomationTbl set Stateid=22 WHERE demandid=#{id}
 </update>	
 <update id="applyFprreFuse2">
@@ -591,28 +590,37 @@ insert into dailytbl values(SEQID.nextval,(select to_char(sysdate,'yyyy-mm-dd ')
 		select e.*,rownum rn from (
 		select * from dailytbl where
 		processid=#{parameterId}
-		<if test="state !=null and state != ''">
-			and DAILYREVIEW like #{state}
-		</if>
+		
 		) e
 		where rownum &lt;= (#{page}*5))
 		where rn &gt;= (#{page}*5-4)
 	</select>
 
-<!-- 查询项目日报总数 -->
-<select id="countDaily"  resultType="java.lang.Integer">
-select count(*) from  dailytbl where processid=#{parameterId}
-<if test="evaluation !=null and evaluation != ''"> 
- and DAILYREVIEW like #{evaluation}
-</if>
-</select>
+
+
 <!-- 评价日报 -->
 <update id="sEvaluation" >
 UPDATE dailytbl set DAILYREVIEW=#{radio},POSTIL=#{notation} WHERE  daiid=#{dailyId}
 </update>
 
 <!-- 项目评价 -->
-<update id="projectEvaluation"  parameterType="java.lang.String">
-UPDATE demanddealtbl set CONSULTANTEVALUATION=#{content} WHERE  dealid=#{demandId}
+<update id="projectEvaluation"  >
+UPDATE demanddealtbl set CONSULTANTEVALUATION=#{content} WHERE  demandid=#{demandId}
 </update>
+
+<!-- 项目失败 -->
+<update id="failure"  parameterType="java.lang.Integer">
+UPDATE demandinfomationtbl set stateid=1866 WHERE  demandid=#{demandid}
+</update>
+<!-- 项目失败 -->
+<update id="failure1"  parameterType="java.lang.Integer">
+UPDATE demanddealtbl set auditstate=2085 WHERE  demandid=#{demandid}
+</update>
+
+	<!-- 查询项目日报总数 -->
+	<select id="countDaily" resultType="java.lang.Integer">
+		select count(*) from dailytbl where processid=#{parameterId}
+		
+	</select>
+
 </mapper>

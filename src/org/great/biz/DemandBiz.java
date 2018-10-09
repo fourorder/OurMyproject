@@ -134,14 +134,17 @@ public interface DemandBiz {
 
 	public List<Integer> serialNum(String account);// 查询顾问所接项目编号
 
-	public List<DailyBean> selectDaily(int parameterId, String state, int page);// 查询详细项目内容
+	public List<DailyBean> selectDaily(int parameterId, int page);// 查询详细项目内容
 	
 	public String detailsState(int demandid);// 查询详细项目状态
 
-	public int countDaily(int parameterId, String evaluation);// 查询项目日报总数
+	public int countDaily(int parameterId);// 查询项目日报总数
 
 	public int sEvaluation(int dailyId,String notation,String radio);// 提交评价
-
+	
+	public int failure(int demandid);// 项目失败
+	public int failure1(int demandid);// 项目失败
+	
 	// 找顾问
 
 	public ArrayList<CounselorInfoBean> getCounselorInfoList();

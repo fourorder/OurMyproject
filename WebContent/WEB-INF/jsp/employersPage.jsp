@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="<%=path %>layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="<%=path %>css/global.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-
+  <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
  <style type="text/css">
 
@@ -43,49 +45,37 @@
   <thead>
     <tr>
       <th>用户名</th>
-      <th >手机号</th>
       <th>账号</th>
-       <th>性别</th>
-        <th>邮箱</th>
-         <th>身份证</th>
-          <th>地址</th>
-           <th>信用分</th>
-            <th>余额</th>
-            <th>注册时间</th>
-             <th>启用/禁用</th>
-             <th width="150px">操作</th>
+      <th>信用分</th>
+      <th>详细信息</th>
+      <th>启用/禁用</th>
+      <th>操作</th>
     </tr> 
   </thead>
   <tbody>
   <c:forEach items="${Elist}"  var="fund">
   <tr>
   <td>${fund.userName}</td>
-  <td>${fund.userTel}</td>
   <td>${fund.userAccount}</td>
-  <td>${fund.userSex}</td>
-  <td>${fund.userMail}</td>
-  <td>${fund.userIdentity}</td>
-   <td>${fund.userAddress}</td>
     <td>${fund.userCredit}</td>
-     <td>${fund.userMoney}</td>
-       <td>${fund.userRegisterTime}</td>
+     <td><a class="btn btn-info" onclick="details('${fund.userAccount}')" data-toggle='modal' data-target='#myModal'>查看详情</a></td>
        <c:if test="${fund.stateId  eq 1}">
       
        <td><a class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" href="<%=path %>employers/operation.action?operation=forbidden&account=${fund.userAccount}&number=1">禁用</a></td>
-       <td> <a class="layui-btn layui-btn-sm layui-btn-danger " onclick="firm()">删除</a>
-       <a class="layui-btn layui-btn-sm "  href="<%=path %>employers/update.action?account=${fund.userAccount}" >修改</a>
+       <td> <a class="btn btn-danger  deleteBtn rightSize" onclick="firm()">删除</a>
+       <a class="btn btn-info"  href="<%=path %>employers/update.action?account=${fund.userAccount}" >修改</a>
        </td>
        </c:if>
        <c:if test="${fund.stateId  eq 2}">
        <td><a class="layui-btn layui-btn-sm layui-btn-radius " href="<%=path %>employers/operation.action?operation=start&account=${fund.userAccount}&number=1" >启用</a></td>
-      <td><a class="layui-btn layui-btn-sm layui-btn-danger "  id="test">删除</a>
-       <a class="layui-btn layui-btn-sm "  href="<%=path %>employers/update.action?account=${fund.userAccount}" >修改</a>
+      <td><a class="btn btn-danger  deleteBtn rightSize"  id="test">删除</a>
+       <a class="btn btn-info"  href="<%=path %>employers/update.action?account=${fund.userAccount}" >修改</a>
        </td>
        </c:if>
         <c:if test="${fund.stateId  eq 3}">
        <td><a class="layui-btn layui-btn-sm layui-btn-radius  layui-btn-disabled" name="state">已删除</a></td>
-        <td><a class="layui-btn layui-btn-sm layui-btn-danger layui-btn-disabled"  id="test">删除</a>
-       <a class="layui-btn layui-btn-sm layui-btn-disabled"  href="<%=path %>employers/update.action?account=${fund.userAccount}" >修改</a>
+        <td><a class="layui-btn layui-btn-sm layui-btn-disabled "  id="test">删除</a>
+       <a class="layui-btn layui-btn-sm layui-btn-disabled" >修改</a>
        </td>
        </c:if>
       
@@ -93,15 +83,125 @@
   </c:forEach>
    </tbody>
 </table>
-  
-   <a class="layui-btn layui-btn-sm" href="<%=path %>employers/page.action?page=tpage&number=${num}&name=${username}&ordinal=${state}">上一页</a>
-   <a>当前页：${num}&nbsp;&nbsp;&nbsp;总页数：${countPage}</a>
+    
+  <a class="layui-btn layui-btn-sm" href="<%=path %>employers/page.action?page=tpage&number=${num}&name=${username}&ordinal=${state}">上一页</a>
+  <a>当前页：${num}&nbsp;&nbsp;&nbsp;总页数：${countPage}</a>
   <input type="text" name="skip" id="skip" style="width: 30px"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();">&nbsp;&nbsp;<a onclick="skip()"  class="layui-btn layui-btn-xs">转</a>
-    <a class="layui-btn layui-btn-sm" href="<%=path %>employers/page.action?page=npage&number=${num}&name=${username}&ordinal=${state}"  id="npage">下一页</a>
-  
- 
+   <a class="layui-btn layui-btn-sm" href="<%=path %>employers/page.action?page=npage&number=${num}&name=${username}&ordinal=${state}"  id="npage">下一页</a>
+</div>
 
 
+<!-- 模态框（详细信息） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					详细信息
+				</h4>
+			</div>
+			<div class="layui-form-item">
+    <label class="layui-form-label">头像</label>
+    <div class="ydc-reg-form-input">
+	<div class="ydc-reg-form-text ydc-reg-form-user-logo" id="head">
+		</div>
+		</div>
+  </div>
+			<div class="layui-form-item">
+    <label class="layui-form-label">用户名</label>
+    <div class="layui-input-block">
+      <input type="text"  id="userName"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">密码</label>
+    <div class="layui-input-block">
+      <input type="text"  id="userPwd"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">手机号</label>
+    <div class="layui-input-block">
+      <input type="text"  id="userTel"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  	<div class="layui-form-item">
+    <label class="layui-form-label">账户</label>
+    <div class="layui-input-block">
+      <input type="text"  id="userAccount"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  	<div class="layui-form-item">
+    <label class="layui-form-label">性别</label>
+    <div class="layui-input-block">
+      <input type="text"  id="userSex"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  	<div class="layui-form-item">
+    <label class="layui-form-label">邮箱</label>
+    <div class="layui-input-block">
+      <input type="text"  id="userMail"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  	<div class="layui-form-item">
+    <label class="layui-form-label">身份证</label>
+    <div class="layui-input-block">
+      <input type="text"  id="userIdentity"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  	<div class="layui-form-item">
+    <label class="layui-form-label">地址</label>
+    <div class="layui-input-block">
+      <input type="text"  id="userAddress"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  	
+  	<div class="layui-form-item">
+    <label class="layui-form-label">信用分</label>
+    <div class="layui-input-block">
+      <input type="text"  id="userCredit"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  	<div class="layui-form-item">
+    <label class="layui-form-label">余额</label>
+    <div class="layui-input-block">
+      <input type="text"  id="userMoney"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  	<div class="layui-form-item">
+    <label class="layui-form-label">状态</label>
+    <div class="layui-input-block">
+      <input type="text"  id="stateId"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  	<div class="layui-form-item">
+    <label class="layui-form-label">角色</label>
+    <div class="layui-input-block">
+      <input type="text"  id="characterId"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  	<div class="layui-form-item">
+    <label class="layui-form-label">注册时间</label>
+    <div class="layui-input-block">
+      <input type="text"  id="userRegisterTime"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  	<div class="layui-form-item">
+    <label class="layui-form-label">简介</label>
+    <div class="layui-input-block">
+      <input type="text"  id="userProfile"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
 </div>
  <script  src="<%=path %>layui/layui.js"></script>
 <script >
@@ -135,8 +235,13 @@ layui.use(['form','layer','laydte'], function(){
 	});
 function skip() {
     var number=$("#skip").val();
-    window.location.href = "<%=path %>employers/page.action?page=skip&name=${username}&ordinal=${state}&number="+number;	
+    if(number==""){
+		alert("不能为空！");
+	}else {
+		 window.location.href = "<%=path %>employers/page.action?page=skip&name=${username}&ordinal=${state}&number="+number;	
+			  
 	}
+   }
 	
 function firm() {
     //利用对话框返回的值 （true 或者 false）
@@ -149,6 +254,47 @@ function firm() {
 
     
 }
+
+function details(account) {
+	$.ajax({
+		 url:"<%=path%>employers/details.action",
+		 data:"account="+account,
+		 dataType:"json",
+		 type:"post",
+		 success:function(redata){
+			
+			 var len = redata.length
+  			 for(var i=0;i<len;i++){ 
+				 var e = redata[i];
+				 $("#userName").val(e.userName);
+				 $("#userPwd").val(e.userPwd);
+				 $("#userTel").val(e.userTel);
+				 $("#userAccount").val(e.userAccount);
+				 $("#userSex").val(e.userSex);
+				 $("#userMail").val(e.userMail);
+				 $("#userIdentity").val(e.userIdentity);
+				 $("#userAddress").val(e.userAddress);
+				 $("#head").html(
+						 "<img src='<%=path%>picture/findPicture.action?url="+e.userHead+"' alt=''>"	 
+				 );
+				 
+				 $("#userCredit").val(e.userCredit);
+				 if(e.stateId==1){
+					 $("#stateId").val("启用");
+				 }else if(e.stateId==2){
+					 $("#stateId").val("禁用");
+				 }else if(e.stateId==3){
+					 $("#stateId").val("已删除");
+				 }
+				 $("#characterId").val("雇主");
+				 $("#userRegisterTime").val(e.userRegisterTime);
+				 $("#userProfile").val(e.userProfile);
+  			 }
+			 
+			 }
+	})
+		 }
+	
 
 </script>
 

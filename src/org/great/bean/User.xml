@@ -168,9 +168,10 @@ and STATEID =#{state}
 </select>
 
 <!-- 查询单个用户信息 -->
-<select id="updateInfo" resultType="org.great.bean.UserBean" >
+<select id="updateInfo" resultType="org.great.bean.UserBean" parameterType="java.lang.String">
  select * from userTbl where userAccount=#{userAccount}
 </select>
+
 <!-- 查询总雇主 -->
 <select id="selectAll" resultType="org.great.bean.UserBean" >
  select * from usertbl  where characterid=1

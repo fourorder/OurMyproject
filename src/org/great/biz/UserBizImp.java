@@ -435,6 +435,7 @@ public int startStory(String account) {
 public UserBean user(int userid) {
 	// TODO Auto-generated method stub
 	return userMapper.user(userid);
+
 }
 
 
@@ -481,6 +482,7 @@ public void changePwd(String userAccount) {
 	// TODO Auto-generated method stub
 	
 }
+
 
 
 

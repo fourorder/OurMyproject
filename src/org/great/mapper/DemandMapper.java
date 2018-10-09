@@ -130,14 +130,18 @@ public interface DemandMapper {
 
 	public List<Integer> serialNum(@Param("account") String account);// 查询顾问所接项目编号
 
-	public List<DailyBean> selectDaily(@Param("parameterId") int parameterId, @Param("state") String state,
+	public List<DailyBean> selectDaily(@Param("parameterId") int parameterId,
 			@Param("page") int page);// 查询详细项目内容
 
-	public int countDaily(@Param("parameterId") int parameterId, @Param("evaluation") String evaluation);// 查询项目日报总数
+	public int countDaily(@Param("parameterId") int parameterId);// 查询项目日报总数
 
 	public String detailsState(@Param("demandid")int demandid);// 查询详细项目状态
 	
 	public int selectId(@Param("account") String account);// 查找Id
+	
+	public int failure(@Param("demandid")int demandid);// 项目失败
+	
+	public int failure1(@Param("demandid")int demandid);// 项目失败
 	
 	public int projectEvaluation(@Param("demandId")int demandId,@Param("content")String content);// 项目评价
 

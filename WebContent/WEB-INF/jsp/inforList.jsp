@@ -29,7 +29,7 @@
 <option value="0">未删除</option>
 <option value="1">已删除</option>
 </select>
-<button  style="width:70px;height: 30px" onClick="sstate()">查询</button>
+<button  style="width:70px;height: 40px" onClick="sstate()" class="layui-btn layui-btn-normal">查询</button>
 <input type="button" value="配置咨询" 	class="layui-btn layui-btn-normal" onClick="deploy()" /> 
 <table class="layui-table" >
 <thead>
@@ -69,9 +69,9 @@
 </c:forEach>
 </tbody>
 <tr>
-<td colspan="8">当前页<span id="num">${num}</span>总页数<span id="totalPages">${totalPages}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="button" value="上一页" onClick="page('tpage')" class="btn btn-primary ">&nbsp;&nbsp;
-<input type="button" value="下一页" onClick="page('npage')" class="btn btn-primary ">
+<td colspan="6">当前页<span id="num">${num}</span>总页数<span id="totalPages">${totalPages}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" value="上一页" onClick="page('tpage')" class="btn btn-primary">&nbsp;&nbsp;
+<input type="button" value="下一页" onClick="page('npage')" class="btn btn-primary">
 </td>
 </tr>
 
