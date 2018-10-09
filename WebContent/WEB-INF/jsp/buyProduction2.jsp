@@ -40,11 +40,11 @@
     <link rel="stylesheet" href="<%=path%>css/global.css" media="all">
    <link rel="stylesheet" href="<%=path%>laydate/theme/default/laydate.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-    <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
+ <%--    <link rel="stylesheet" href="<%=path%>css/bootstrap.css"> --%>
 <!-- 	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  -->
-    
-        
+  <%--   <script type="text/javascript" src="<%=path%>js/jquery.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap.min.css">   --%>
         
         
         <script type="text/javascript">
@@ -60,7 +60,136 @@
        }
         </script>
         <style type="text/css">
-        
+ .btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+.btn-info {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+.btn-success .badge {
+  color: #5cb85c;
+  background-color: #fff;
+}
+.btn-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+} 
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning.focus,
+.btn-warning:active,
+.btn-warning.active,
+.open > .dropdown-toggle.btn-warning {
+  color: #fff;
+  background-color: #ec971f;
+  border-color: #d58512;
+}
+.btn-warning:active,
+.btn-warning.active,
+.open > .dropdown-toggle.btn-warning {
+  background-image: none;
+}
+.btn-warning.disabled,
+.btn-warning[disabled],
+fieldset[disabled] .btn-warning,
+.btn-warning.disabled:hover,
+.btn-warning[disabled]:hover,
+fieldset[disabled] .btn-warning:hover,
+.btn-warning.disabled:focus,
+.btn-warning[disabled]:focus,
+fieldset[disabled] .btn-warning:focus,
+.btn-warning.disabled.focus,
+.btn-warning[disabled].focus,
+fieldset[disabled] .btn-warning.focus,
+.btn-warning.disabled:active,
+.btn-warning[disabled]:active,
+fieldset[disabled] .btn-warning:active,
+.btn-warning.disabled.active,
+.btn-warning[disabled].active,
+fieldset[disabled] .btn-warning.active {
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+.btn-warning .badge {
+  color: #f0ad4e;
+  background-color: #fff;
+}
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger.focus,
+.btn-danger:active,
+.btn-danger.active,
+.open > .dropdown-toggle.btn-danger {
+  color: #fff;
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+.btn-danger:active,
+.btn-danger.active,
+.open > .dropdown-toggle.btn-danger {
+  background-image: none;
+}
+.btn-danger.disabled,
+.btn-danger[disabled],
+fieldset[disabled] .btn-danger,
+.btn-danger.disabled:hover,
+.btn-danger[disabled]:hover,
+fieldset[disabled] .btn-danger:hover,
+.btn-danger.disabled:focus,
+.btn-danger[disabled]:focus,
+fieldset[disabled] .btn-danger:focus,
+.btn-danger.disabled.focus,
+.btn-danger[disabled].focus,
+fieldset[disabled] .btn-danger.focus,
+.btn-danger.disabled:active,
+.btn-danger[disabled]:active,
+fieldset[disabled] .btn-danger:active,
+.btn-danger.disabled.active,
+.btn-danger[disabled].active,
+fieldset[disabled] .btn-danger.active {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+.btn-danger .badge {
+  color: #d9534f;
+  background-color: #fff;
+}    
+.btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+} 
  .ydc-asset-img-list-img img { width: 100%; height: 240px;}       
   .ydc-asset-img-list img { width: 100%; height: 240px;}   
         </style>
@@ -163,7 +292,7 @@
       ${list.className} 
          
      <td >
-     <a class="btn btn-info" id="yyy" href="<%=path%>production/adminProductionDetal.action?proId=${list.productionId}" target="_blank"  >查看详情</a> 
+     <a class="btn btn-info" id="yyy"  href="<%=path%>production/adminProductionDetal.action?proId=${list.productionId}" target="_blank"  >查看详情</a> 
   <a href="<%=path %>download.action?upUrl=${list.productionImage }"   class=" btn btn-success   passBtn rightSize"  type="button"  data-id=${list.productionId } id="pass">下载封面</a>
  <a href="<%=path %>download.action?upUrl=${list.productionFile }"   class=" btn btn-warning illegalBtn rightSize"  type="button"  data-id=${list.productionId } id="illegal">下载文件</a>
   <%--  <button class="btn btn-danger  deleteBtn rightSize" type="button" data-id=${list.productionId } id="example">评价</button> --%>
@@ -203,13 +332,29 @@
 </table>
 当前页<span id="currentPage" >${currentPage}</span>  
 											总页数<span id="totalPages"  >${totalPages } </span>  
-                                                    <button class="ydc-previous-item-btn-medium" onclick="addPages('last')"  >
+                                                  <c:if test="${currentPage=='1'}">
+										<button class="ydc-previous-item-btn-medium" onclick="addPages('last')"  disabled="disabled"  id="last" >
                                                         <span>上一页</span>
                                                     </button>
-                                                
-                                                    <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  >
+										</c:if>
+											<c:if test="${currentPage!='1'}">
+										<button class="ydc-previous-item-btn-medium" onclick="addPages('last')"   id="last">
+                                                        <span>上一页</span>
+                                                    </button>
+										</c:if>  
+                                                      <!--  <button class="ydc-previous-item-btn-medium" onclick="addPages('last')"  >
+                                                        <span>上一页</span>
+                                                    </button> -->  
+                                                <c:if test="${totalPages=='1'}">
+                                                <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  disabled="disabled"  id="next">
                                                         <span>下一页</span>
                                                     </button>
+                                                </c:if>
+                                                  <c:if test="${totalPages!='1'}">
+                                                <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  id="next"  >
+                                                        <span>下一页</span>
+                                                    </button>
+                                                </c:if>
                                                      第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""  name="toNumber"   id="toNumber"  ></div>页
                                                     <button style="margin-left:5px;" class="ydc-previous-item-btn-medium"  onclick="addPages('toNumber')" >
                                                         <span>跳转</span>
@@ -277,7 +422,20 @@
     	     //----------
     			 
     			 } 	 
-    			
+    			 if(redata.currentPage==1){
+		        	 $("#last").attr("class","ydc-previous-item-btn-medium"); 
+		        	 $("#last").attr("disabled",true);
+		         }else{
+		        	 $("#last").attr("class","ydc-previous-item-btn-medium");
+		        	 $("#last").attr("disabled",false);
+		         }
+		         if(redata.currentPage==redata.totalPages){
+		        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+		        	 $("#next").attr("disabled",true);
+		         }else{
+		        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+		        	 $("#next").attr("disabled",false);
+		         }	 	
     		 }
     	})
     	

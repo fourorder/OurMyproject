@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +19,9 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.great.bean.LogBean;
 import org.great.bean.UserBean;
+import org.great.mapper.LogMapper;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -30,10 +33,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Component
 public class SystemLogAspect {
 
-
+	@Resource LogMapper logMapper;
 	private static Logger logger = Logger.getLogger("zxtest");  
     
-    @Pointcut("execution (* org.great.handler..*.login(..))")  
+    @Pointcut("execution (* org.great.handler..*.*(..)) && !execution (* org.great.handler..*.home(..)) && !execution (* org.great.handler..*.gotoregister(..)) && !execution (* org.great.handler..*.show(..)) && !execution (* org.great.handler..*.findPicture(..))")  
     public  void controllerAspect() {  
     }  
     
@@ -101,12 +104,23 @@ public class SystemLogAspect {
                     }  
                 }  
             }*/
-          
-            System.out.println("=====controller后置通知开始=====");  
+            String mothod= (joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()")+"."+operationType;
+           /* System.out.println("=====controller后置通知开始=====");  
+           
             System.out.println("请求方法:" + (joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()")+"."+operationType);  
-            System.out.println("方法描述:" + operationName);  
-            System.out.println("请求人:" + ub.getUserAccount());  
-//            System.out.println("请求IP:" + ip);  
+            System.out.println("方法描述:" + operationName);  */
+            if( ub==null ) {
+            	ub=new UserBean();
+            	ub.setUserAccount("游客");
+            	ub.setUserId(0);
+            }
+            System.out.println("请求人:" + ub.getUserAccount()); 
+           System.out.println("请求人:" + ub.getUserId()); 
+            LogBean logBean=new LogBean();
+            logBean.setUserId(ub.getUserId());
+            logBean.setRequestip(mothod);
+            logMapper.setLog(logBean);
+            //            System.out.println("请求IP:" + ip);  
 //       
 //            SystemLog log = new SystemLog();  
 //            log.setId(UUID.randomUUID().toString());
@@ -120,7 +134,7 @@ public class SystemLogAspect {
 //            log.setCreateBy(user.getName());  
 //            log.setCreateDate(new Date());  
 
-            System.out.println("=====controller后置通知结束=====");  
+          //  System.out.println("=====controller后置通知结束=====");  
         }  catch (Exception e) {  
  
             e.printStackTrace();

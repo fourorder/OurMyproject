@@ -17,13 +17,13 @@
     <link rel="stylesheet" href="<%=path%>css/global.css" media="all">
     <link rel="stylesheet" href="<%=path%>laydate/theme/default/laydate.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-     
-      
+  <!--   <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<!-- <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script> -->
+	<!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+     <link type="text/javascript"   href="<%=path%>js/bootstrap.min.js">
+          <script type="text/javascript" src="<%=path%>js/jquery.min.js"></script>
         <link type="text/css" rel="stylesheet" href="<%=path%>css/home.css">
-
+<link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap.min.css">  
 
  <style type="text/css">
 
@@ -171,13 +171,29 @@
 </table>
 当前页<span id="currentPage" >${currentPage}</span>  
 											总页数<span id="totalPages"  >${totalPages } </span>  
-                                                    <button class="btn btn-primary" onclick="addPages('last')"  >
+                                                  	<c:if test="${currentPage=='1'}">
+										<button class="ydc-previous-item-btn-medium" onclick="addPages('last')"  disabled="disabled"  id="last" >
                                                         <span>上一页</span>
                                                     </button>
-                                                
-                                                    <button class="btn btn-primary"  onclick="addPages('next')"  >
+										</c:if>
+											<c:if test="${currentPage!='1'}">
+										<button class="ydc-previous-item-btn-medium" onclick="addPages('last')"   id="last">
+                                                        <span>上一页</span>
+                                                    </button>
+										</c:if>  
+                                                      <!--  <button class="ydc-previous-item-btn-medium" onclick="addPages('last')"  >
+                                                        <span>上一页</span>
+                                                    </button> -->  
+                                                <c:if test="${totalPages=='1'}">
+                                                <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  disabled="disabled"  id="next">
                                                         <span>下一页</span>
                                                     </button>
+                                                </c:if>
+                                                  <c:if test="${totalPages!='1'}">
+                                                <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  id="next"  >
+                                                        <span>下一页</span>
+                                                    </button>
+                                                </c:if>
                                                     
                                                        第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""  name="toNumber"   id="toNumber"  ></div>页
                                                     <button style="margin-left:5px;" class="ydc-previous-item-btn-medium"  onclick="addPages('toNumber')" >
@@ -245,7 +261,20 @@
     	     //----------
     			 
     			 } 	 
-    			
+    			 if(redata.currentPage==1){
+		        	 $("#last").attr("class","ydc-previous-item-btn-medium"); 
+		        	 $("#last").attr("disabled",true);
+		         }else{
+		        	 $("#last").attr("class","ydc-previous-item-btn-medium");
+		        	 $("#last").attr("disabled",false);
+		         }
+		         if(redata.currentPage==redata.totalPages){
+		        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+		        	 $("#next").attr("disabled",true);
+		         }else{
+		        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+		        	 $("#next").attr("disabled",false);
+		         }	 
     		 }
     	})
     	
@@ -303,6 +332,20 @@ $.ajax({
 		    			    		 
 		    			    	 }
 		    			    	 $("#delmymodal").modal('hide');
+		    			    	 if(redata.currentPage==1){
+		    			        	 $("#last").attr("class","ydc-previous-item-btn-medium"); 
+		    			        	 $("#last").attr("disabled",true);
+		    			         }else{
+		    			        	 $("#last").attr("class","ydc-previous-item-btn-medium");
+		    			        	 $("#last").attr("disabled",false);
+		    			         }
+		    			         if(redata.currentPage==redata.totalPages){
+		    			        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+		    			        	 $("#next").attr("disabled",true);
+		    			         }else{
+		    			        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+		    			        	 $("#next").attr("disabled",false);
+		    			         }
     	//----------
     }
 });
@@ -358,7 +401,22 @@ $.ajax({
 		    			    		 
 		    			    	 }
     	//----
-    			     $("#illegal").modal('hide');			            			 
+    			     $("#illegal").modal('hide');			
+    				
+    	if(redata.currentPage==1){
+    		        	 $("#last").attr("class","ydc-previous-item-btn-medium"); 
+    		        	 $("#last").attr("disabled",true);
+    		         }else{
+    		        	 $("#last").attr("class","ydc-previous-item-btn-medium");
+    		        	 $("#last").attr("disabled",false);
+    		         }
+    		         if(redata.currentPage==redata.totalPages){
+    		        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+    		        	 $("#next").attr("disabled",true);
+    		         }else{
+    		        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+    		        	 $("#next").attr("disabled",false);
+    		         }
     	//----------
     }
 });
@@ -414,6 +472,20 @@ $.ajax({
 		    			    		 
 		    			    	 }
 		    			    	 $("#pass").modal('hide');
+		    			    	 if(redata.currentPage==1){
+		    			        	 $("#last").attr("class","ydc-previous-item-btn-medium"); 
+		    			        	 $("#last").attr("disabled",true);
+		    			         }else{
+		    			        	 $("#last").attr("class","ydc-previous-item-btn-medium");
+		    			        	 $("#last").attr("disabled",false);
+		    			         }
+		    			         if(redata.currentPage==redata.totalPages){
+		    			        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+		    			        	 $("#next").attr("disabled",true);
+		    			         }else{
+		    			        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+		    			        	 $("#next").attr("disabled",false);
+		    			         }
     	//----------
     }
 });

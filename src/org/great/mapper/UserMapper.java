@@ -64,4 +64,11 @@ public void changeInfo(@Param(value="userId")int userId ,@Param(value="userName"
 public UserBean user(Integer userid);
 /*寻找服务商类型*/
 public List<ParameterBean> findBusinessType();
+
+//更新服务商 信用分
+
+public void updateCreditPoint(@Param(value="creditPoint")double creditPoint,@Param(value="userId")int userId);
+
+
+
 }

@@ -86,7 +86,7 @@
                          
                         	<div class="nobdr-btns">
                         		
- 	<button class="addcart yh"><img src="<%=path%>images/ht.png" width="25" height="25"/>立即购买</button>
+<%--  	<button class="addcart yh"><img src="<%=path%>images/ht.png" width="25" height="25"/>立即购买</button> --%>
  	<%-- <button class="addcart yh"  name="Submit"  onclick="javascript:history.go(-1)" ><img src="<%=path%>images/ht.png" width="25" height="25"/>返回</button>  --%> 
                          	<!-- <input type="button" name="Submit" value="返回" onclick="javascript:history.go(-1)" />  -->
                         	</div>
@@ -122,8 +122,8 @@
 													<div id="ui-a" class="ui-a">
 												        <ul style="display:block;">
 												        <li>商品名称：${productionBean.productionName }</li>
-												        <li>商品作者：${productionBean.userId }</li>
-												        <li>作品类别：${productionBean.parameterId }</li>
+												        <li>商品作者：${productionBean.userName }</li>
+												        <li>作品类别：${productionBean.className }</li>
 												        <li>作品介绍： ${productionBean.productionDetal } </li>
 												        <li>上架时间：${productionBean.productionPublishTime }</li>
 												       <li><img src="<%=path%>picture/findPicture.action?url=${productionBean.productionImage }"/></li>

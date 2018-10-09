@@ -139,7 +139,7 @@
                                         <div class="ydc-asset-img clearfix"   id="proList">                 
              								<c:forEach items="${list}"  var="list" >	  
                          									<div class="ydc-asset-img-list"  >
-                                                <div class="ydc-asset-img-list-img"  ><img src="<%=path%>picture/findPicture.action?url=${list.productionImage}"  alt=""></div>
+                                                <div class="ydc-asset-img-list-img"  ><a   href="<%=path%>production/adminProductionDetal.action?proId=${list.productionId}" target="_blank"  ><img src="<%=path%>picture/findPicture.action?url=${list.productionImage}"  alt=""></a></div>
                                                <br>
                                                 <div class="ydc-asset-img-list-til">${list.productionName }&nbsp&nbsp&nbsp&nbsp&nbsp<span style="color:#ff0000">${list.auditName}</span></div>
                                                 <div class="ydc-asset-img-list-del">
@@ -189,15 +189,37 @@
                                             </li>
                                             
                                                 <li class="ydc-previous-item">
-                                                    <button class="btn btn-primary "  onclick="addPages('last')">
+                                               
+                                                
+                                                <c:if test="${currentPage=='1'}">
+										<button class="btn btn-primary " onclick="addPages('last')"  disabled="disabled"  id="last" >
                                                         <span>上一页</span>
                                                     </button>
+										</c:if>
+											<c:if test="${currentPage!='1'}">
+										<button class="btn btn-primary " onclick="addPages('last')"   id="last">
+                                                        <span>上一页</span>
+                                                    </button>
+										</c:if>  
+                                                
                                                 </li>
                                                 
                                                 <li class="ydc-previous-item">
-                                                    <button class="btn btn-primary" onclick="addPages('next')" >
+                                                
+                                                 
+                                                <c:if test="${totalPages=='1'}">
+                                                <button class="btn btn-primary"  onclick="addPages('next')"  disabled="disabled"  id="next">
                                                         <span>下一页</span>
                                                     </button>
+                                                </c:if>
+                                                  <c:if test="${totalPages!='1'}">
+                                                <button class="btn btn-primary"  onclick="addPages('next')"  id="next"  >
+                                                        <span>下一页</span>
+                                                    </button>
+                                                </c:if>
+                                                
+                                                
+                                                     
                                                 </li>
                                                 <li class="ydc-item-quick">
                                                     第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class="" name="toNumber"   id="toNumber"  ></div>页
@@ -318,8 +340,8 @@
         	             var e = list[i];
         	           
         	             $("#proList").append( "<div class='ydc-asset-img-list'  ><div class='ydc-asset-img-list-img'>"
-        	            		 
-        	            +"<img src='<%=path%>picture/findPicture.action?url="+e.productionImage+"' alt=''></div> "
+        	            +"<a   href='<%=path%>production/adminProductionDetal.action?proId="+e.productionId+"' target='_blank'  >"		 
+        	            +"<img src='<%=path%>picture/findPicture.action?url="+e.productionImage+"' alt=''></a></div> "
         	            +"<br><div class='ydc-asset-img-list-til'>"+e.productionName +"&nbsp&nbsp&nbsp&nbsp&nbsp<span style='color:#ff0000'>"+e.auditName+"</span></div>"
         	            +" <div class='ydc-asset-img-list-del'> "
         	           +"<form   style='margin:0px; padding:0px;'  method='post' action='<%=path%>production/toEditProduction.action?proId="+e.productionId +"'enctype='multipart/form-data' >  "
@@ -337,6 +359,23 @@
         	     //--------------
         			 
         			 } 	 
+        			 
+        			 if(redata.currentPage==1){
+    		        	 $("#last").attr("class","ydc-previous-item-btn-medium"); 
+    		        	 $("#last").attr("disabled",true);
+    		         }else{
+    		        	 $("#last").attr("class","ydc-previous-item-btn-medium");
+    		        	 $("#last").attr("disabled",false);
+    		         }
+    		         if(redata.currentPage==redata.totalPages){
+    		        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+    		        	 $("#next").attr("disabled",true);
+    		         }else{
+    		        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+    		        	 $("#next").attr("disabled",false);
+    		         }	 
+        			 
+        			 
         			 
         		 }
         	})

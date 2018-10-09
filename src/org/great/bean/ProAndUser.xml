@@ -9,17 +9,50 @@
 	
 	>
 	
-	 select * from PROANDUSER where PRODUCTIONID=#{proId}
+	 select * from PROANDUSER where PRODUCTIONID=#{proId} and USERID=#{userId}
 	
 	</select> 
+		 
+		 
+		 <select id="findProAndUserDetal"
+	 resultType="org.great.bean.ProAndUserBean" 
+	
+	>
+	
+	 select * from PROANDUSER where PROANDUSERID=#{proAndUserId}
+	
+	</select> 
+		 
 		 
 <update id="setProductionEvaluate"
 
 >
 
 
-UPDATE PROANDUSER SET PRODUCTIONEVALUATE = #{evaluate},point=#{point} WHERE PROANDUSERID = #{proAndUserId}
+UPDATE PROANDUSER SET PRODUCTIONEVALUATE = #{evaluate},point=#{point},state=1 WHERE PROANDUSERID = #{proAndUserId}
 
 </update>
+	 
+	 
+	 
+	 <select id="findProUserPoint"
+	  resultType="java.lang.Integer"
+	 >
+	 
+	 select POINT from PROANDUSER where PROUSERID in(select PROUSERID from PROANDUSER where  PROANDUSERID=#{proAndUserId}) and STATE=1
+	 
+	 </select>
+	 
+	 
+	 <select id="findHasBeenBuy"
+	  resultType="org.great.bean.ProAndUserBean" 
+	 
+	 >
+	 
+	 select* from PROANDUSER where USERID=#{buyUserId} and PRODUCTIONID=#{proId}
+	 
+	 
+	 </select>
+	 
 	 
 </mapper>

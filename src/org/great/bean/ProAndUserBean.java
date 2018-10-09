@@ -11,8 +11,8 @@ public class ProAndUserBean {
 	private String payTime;
 	private String productionEvaluate;
 			private int point;			 
-	
-	
+	private int state;//评价状态
+	private int proUserId;
 	
 	
 	
@@ -23,8 +23,15 @@ public class ProAndUserBean {
 	}
  
  
+	 
+
+	 
+
+
+
+
 	public ProAndUserBean(int proAndUserId, int userId, int productionId, String payTime, String productionEvaluate,
-			int point) {
+			int point, int state, int proUserId) {
 		super();
 		this.proAndUserId = proAndUserId;
 		this.userId = userId;
@@ -32,7 +39,16 @@ public class ProAndUserBean {
 		this.payTime = payTime;
 		this.productionEvaluate = productionEvaluate;
 		this.point = point;
+		this.state = state;
+		this.proUserId = proUserId;
 	}
+
+
+
+
+
+
+
 
 
 	public int getProAndUserId() {
@@ -74,6 +90,30 @@ public class ProAndUserBean {
 
 	public void setPoint(int point) {
 		this.point = point;
+	}
+
+
+	public int getState() {
+		return state;
+	}
+
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+
+
+
+	public int getProUserId() {
+		return proUserId;
+	}
+
+
+
+
+	public void setProUserId(int proUserId) {
+		this.proUserId = proUserId;
 	}
 	 
 	 

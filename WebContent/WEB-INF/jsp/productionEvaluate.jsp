@@ -9,7 +9,7 @@
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+ <link rel="stylesheet" href="<%=path%>css/oindex.css">
 
 
 <title>修改资料</title>
@@ -64,35 +64,21 @@
 </head>
 <body>
 	<!-- head YDC begin -->
-	<header class="ydc-header">
-	<div class="ydc-entered">
-		<div class="ydc-header-content ydc-flex">
-			<div class="ydc-column">
-				<a href="index.html" class="ydc-column-ydc-logo"> <img
-					src="admin/images/icon/ydc-logo.png" title="" about="" alt="">
-				</a>
-			</div>
-			<div class="ydc-column">
-				<div class="ydc-column-user">
-					<div class="ydc-user-photo">
-						<a href="javascript:;"> <img src="admin/images/icon/photo.png"
-							title="" about="" alt="">
-						</a>
-					</div>
-					<div class="ydc-user-info">
-						<div class="ydc-user-info-name">
-							<a href="javascript:;">一点车</a>
-						</div>
-						<div class="ydc-user-info-func ydc-flex">
-							<span class="ydc-tag">账号审核中</span> <span class="ydc-mal"><i
-								class="ydc-icon ydc-icon-mail fl"></i><em>12</em></span> <a
-								href="javascript:;">退出</a>
-						</div>
-					</div>
+	 <div class="o-top">
+				<div class="width1180">
+					
+					<span class="fr">
+						<!-- <a href="#" title="登录">登录</a>
+						<a href="#" title="注册">注册</a> -->
+						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
+						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
+						<!--登录后
+						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
+						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
+						-->
+					</span>
 				</div>
-			</div>
-		</div>
-	</div>
+</div>
 	</header>
 	<!-- head YDC end -->
 
@@ -104,7 +90,18 @@
 			<div class="ydc-column ydc-column-2">
 				<div class="ydc-menu">
 					<ul>
-
+<c:forEach items="${menuList}"  var="menuList" >	          
+                               
+                               <li class="ydc-menu-item">
+                                    <a href="<%=path%>${menuList.pathName}" class="">
+                                        <i class="${menuList.divClass }"></i>
+                                        ${menuList.authorityName }
+                                    </a>
+                                </li>
+                               
+                               
+                               
+                               	</c:forEach>    
 					</ul>
 				</div>
 			</div>
@@ -135,10 +132,10 @@
 									</div>
 									
 									<div class="aui-card-form-item">
-											<label class="aui">作品类型:${productionBean.parameterId}</label>
+											<label class="aui">作品类型:${productionBean.className}</label>
 									</div>
 									<div class="aui-card-form-item">
-											<label class="aui">服务商:${productionBean.userId}</label>
+											<label class="aui">服务商:${productionBean.userName}</label>
 									</div>
 									<div class="aui-card-form-item">
 											<label class="aui">价格:${productionBean.productionMoney}</label>
@@ -148,10 +145,10 @@
 									</div>
 									<div class="aui-card-form-item">
 									<c:if test="${empty proAndUserList.productionEvaluate}">
-<label class="aui">作品评分:<input type="text"   name="point"   > </label>
+<label class="aui">作品评分:<input  type="text"   name="point"   > </label>
 </c:if>
 <c:if test="${not empty proAndUserList.productionEvaluate}">
-  <label class="aui">作品评分:<input type="text"   name="point"  value="${proAndUserList.point}" > </label>
+  <label class="aui">作品评分:<input type="text" readonly  name="point"  value="${proAndUserList.point}" > </label>
 </c:if> 
 											
 									</div>
@@ -159,7 +156,15 @@
 											<label class="aui">评价: </label>
 									</div>
 									  <div class="aui-card-form-item">
-											<label class="aui"><textarea name="evaluate" id="evaluate" value="${proAndUserList.productionEvaluate}"  >${proAndUserList.productionEvaluate}</textarea></label>
+									  
+									  
+									  <c:if test="${empty proAndUserList.productionEvaluate}">
+	<label class="aui"><textarea   style="resize:none" name="evaluate" id="evaluate" value="${proAndUserList.productionEvaluate}"  >${proAndUserList.productionEvaluate}</textarea></label>
+</c:if>
+<c:if test="${not empty proAndUserList.productionEvaluate}">
+ 	<label class="aui"><textarea  readonly  style="resize:none"  name="evaluate" id="evaluate" value="${proAndUserList.productionEvaluate}"  >${proAndUserList.productionEvaluate}</textarea></label>
+</c:if> 
+										
 									</div>
 								</div>							
 								<div class="aui-card-form-item preview  aui-news" style="margin-top: 20px;">
