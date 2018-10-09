@@ -13,6 +13,7 @@
     <script type="text/javascript" src="<%=path %>js/jquery-1.9.1.min.js"></script>
     <link rel="stylesheet" href="<%=path %>layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="<%=path %>css/global.css" media="all">
+    <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
 <style type="text/css">
 
@@ -76,16 +77,17 @@
       </td>
  </tr>
  </c:forEach>
-<tr>
-
-   <td colspan="3"><a class="layui-btn layui-btn-sm" href="<%=path %>employers/list.action?page=tpage&number=${num}&title=${title}&state=${state}">上一页</a></td>
-   <td >当前页：<span id="currentPage">${num}</span>&nbsp;&nbsp;&nbsp;总页数：<span id="totalPages">${countPage}</span></td>
-  <td> <input type="text" name="skip" id="skip" style="width: 30px"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();">&nbsp;&nbsp;<a onclick="skip()"  class="layui-btn layui-btn-xs">转</a></td>
-  <td colspan="2"><a class="layui-btn layui-btn-sm" href="<%=path %>employers/list.action?page=npage&number=${num}&title=${title}&state=${state}">下一页</a></td>
-
-   </tr>
-</tbody>
+ </tbody>
 </table>
+
+
+  <a class="btn btn-primary" href="<%=path %>employers/list.action?page=tpage&number=${num}&title=${title}&state=${state}">上一页</a>
+   当前页：<span id="currentPage">${num}</span>&nbsp;&nbsp;&nbsp;总页数：<span id="totalPages">${countPage}</span>
+  <input type="text" name="skip" id="skip" style="width: 30px"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();">&nbsp;&nbsp;<a onclick="skip()"  class="layui-btn layui-btn-xs" style="height: 25px;width: 30px">转</a>
+ <a class="btn btn-primary" href="<%=path %>employers/list.action?page=npage&number=${num}&title=${title}&state=${state}">下一页</a>
+
+ 
+
 </div>
 <script type="text/javascript" src="<%=path %>layui/layui.js"></script>
 <script>
@@ -109,8 +111,13 @@
 	}
     function skip() {
     	var number=$("#skip").val();
-        window.location.href = "<%=path %>employers/list.action?page=skip&title=${title}&state=${state}&number="+number;	
-   	}
+    	if(number==""){
+    		alert("不能为空！");
+    	}else {
+    		window.location.href = "<%=path %>employers/list.action?page=skip&title=${title}&state=${state}&number="+number;	
+    		  
+    	}
+         	}
     
     function firm(accton) {
         //利用对话框返回的值 （true 或者 false）

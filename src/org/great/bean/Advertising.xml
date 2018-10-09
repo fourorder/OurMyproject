@@ -7,7 +7,6 @@
 <select id="selectAll" resultType="org.great.bean.AdvertisingBean"  >
 select * from (
 select c.*,rownum rn from (
-
  select * from advertisementTbl where advertisementId=advertisementId
 <if test="title != null and title !=''">
  and advertisementTitle like #{title}
@@ -43,8 +42,8 @@ select count(*) from advertisementTbl
  select * from advertisementTbl  where ADVERTISEMENTNUM=#{num}
 </select>
 <!-- 更改配置广告序号 -->
-<update id="updateNum" parameterType="java.lang.String">
-UPDATE advertisementTbl set ADVERTISEMENTNUM=0 WHERE ADVERTISEMENTTITLE=#{title} and ADVERTISEMENTPUBLISHTIME=#{time}
+<update id="updateNum" parameterType="java.lang.Integer">
+UPDATE advertisementTbl set ADVERTISEMENTNUM=0 WHERE ADVERTISEMENTID=#{advId}
 </update>
 <!-- 配置广告 -->
 <insert id="insertAdvertising" parameterType="org.great.bean.AdvertisingBean">
@@ -53,15 +52,15 @@ insert into advertisementTbl values(SEQID.nextval,#{advertisementTitle},#{advert
 
 <!-- 查询单个广告 -->
 <select id="selectOne" resultType="org.great.bean.AdvertisingBean" >
- select * from advertisementTbl  where ADVERTISEMENTTITLE=#{title} and ADVERTISEMENTPUBLISHTIME=#{time}
+ select * from advertisementTbl  where ADVERTISEMENTID=#{advId}
 </select>
 	<!-- 修改广告序号 -->
 <update id="updateSerial" parameterType="java.lang.Integer">
 UPDATE advertisementTbl set ADVERTISEMENTNUM=0 where ADVERTISEMENTNUM=#{num}
 </update> 
 	<!-- 确认修改广告 -->
-<update id="affirm" parameterType="org.great.bean.AdvertisingBean">
-UPDATE advertisementTbl set ADVERTISEMENTNUM=#{advertisementNum} where ADVERTISEMENTTITLE=#{advertisementTitle} and ADVERTISEMENTPUBLISHTIME=#{advertisementPublishTime}
+<update id="affirm" >
+UPDATE advertisementTbl set ADVERTISEMENTNUM=#{advNum} where ADVERTISEMENTID=#{advId} 
 </update> 
 <insert id="setAdvertising" parameterType="org.great.bean.AdvertisingBean">
 	

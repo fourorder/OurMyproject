@@ -69,6 +69,14 @@ public class EmployersHandler {
 	
 	}
 	
+	@RequestMapping("/details.action")//查询详细信息
+	@ResponseBody
+	public List<UserBean> test12(HttpServletRequest request,String account){
+		List<UserBean> list =new ArrayList<UserBean>();
+		list=userBizImp.updateInfo(account);
+		
+		return list;
+	}
 	
 	@RequestMapping("/operation.action")//对雇主操作
 	public ModelAndView test1(HttpServletResponse response,HttpServletRequest request,String operation,String account)  throws IOException{
@@ -213,6 +221,9 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 	public ModelAndView test6(HttpServletRequest request,String page,String title,String state,String number ){
 		if(state==null) {
 			state="3";
+		}
+		if(number==null || "".equals(number)) {
+			number="1";
 		}
 		int ordinal=Integer.parseInt(state);
 		int countPage=userBizImp.countStory(title, ordinal);

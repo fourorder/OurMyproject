@@ -430,21 +430,17 @@ public class DemandBizImp implements DemandBiz {
 	}
 
 	@Override
-	public int countDaily(int parameterId, String evaluation) {
+	public int countDaily(int parameterId) {
 		// TODO Auto-generated method stub
-		if (evaluation != null && "" != evaluation) {
-			evaluation = "%" + evaluation + "%";
-		}
-		return demandMapper.countDaily(parameterId, evaluation);
+		
+		return demandMapper.countDaily(parameterId);
 	}
 
 	@Override
-	public List<DailyBean> selectDaily(int parameterId, String state, int page) {
+	public List<DailyBean> selectDaily(int parameterId, int page) {
 		// TODO Auto-generated method stub
-		if (state != null && "" != state) {
-			state = "%" + state + "%";
-		}
-		return demandMapper.selectDaily(parameterId, state, page);
+		
+		return demandMapper.selectDaily(parameterId, page);
 	}
 
 	@Override
@@ -612,5 +608,17 @@ public class DemandBizImp implements DemandBiz {
 	public int projectEvaluation(int demandId, String content) {
 		// TODO Auto-generated method stub
 		return demandMapper.projectEvaluation(demandId, content);
+	}
+
+	@Override
+	public int failure(int demandid) {
+		// TODO Auto-generated method stub
+		return demandMapper.failure(demandid);
+	}
+
+	@Override
+	public int failure1(int demandid) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

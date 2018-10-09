@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.great.bean.AdvertisingBean;
 import org.great.mapper.AdvertisingMapper;
 import org.springframework.stereotype.Service;
@@ -36,9 +37,9 @@ public class AdvertisingBizImp implements AdvertisingBiz {
 	
 	
 	@Override
-	public int updateNum(String title,String time) {
+	public int updateNum(int avdId) {
 		// TODO Auto-generated method stub
-		return advertisingMapper.updateNum(title,time);
+		return advertisingMapper.updateNum(avdId);
 	}
 
 	@Override
@@ -61,15 +62,15 @@ public class AdvertisingBizImp implements AdvertisingBiz {
 	}
 
 	@Override
-	public List<AdvertisingBean> selectOne(String title, String time) {
+	public List<AdvertisingBean> selectOne(int avdId) {
 		// TODO Auto-generated method stub
-		return advertisingMapper.selectOne(title, time);
+		return advertisingMapper.selectOne(avdId);
 	}
 
 	@Override
-	public int affirm(AdvertisingBean ab) {
+	public int affirm(int advId,int advNum) {
 		// TODO Auto-generated method stub
-		return advertisingMapper.affirm(ab);
+		return advertisingMapper.affirm(advId,advNum);
 	}
 
 	@Override

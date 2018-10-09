@@ -33,7 +33,7 @@ public class SystemLogAspect {
 
 	private static Logger logger = Logger.getLogger("zxtest");  
     
-    @Pointcut("execution (* org.great.handler..*.login(..))")  
+    @Pointcut("execution (* org.great.handler..*.*(..)) && !execution (* org.great.handler..*.home(..)) && !execution (* org.great.handler..*.gotoregister(..)) && !execution (* org.great.handler..*.show(..)) && !execution (* org.great.handler..*.findPicture(..)) && !execution (* org.great.handler..*.logout(..))")  
     public  void controllerAspect() {  
     }  
     

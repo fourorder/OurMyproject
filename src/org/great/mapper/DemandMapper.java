@@ -130,14 +130,18 @@ public interface DemandMapper {
 
 	public List<Integer> serialNum(@Param("account") String account);// 查询顾问所接项目编号
 
-	public List<DailyBean> selectDaily(@Param("parameterId") int parameterId, @Param("state") String state,
+	public List<DailyBean> selectDaily(@Param("parameterId") int parameterId,
 			@Param("page") int page);// 查询详细项目内容
 
-	public int countDaily(@Param("parameterId") int parameterId, @Param("evaluation") String evaluation);// 查询项目日报总数
+	public int countDaily(@Param("parameterId") int parameterId);// 查询项目日报总数
 
 	public String detailsState(@Param("demandid")int demandid);// 查询详细项目状态
 	
 	public int selectId(@Param("account") String account);// 查找Id
+	
+	public int failure(@Param("demandid")int demandid);// 项目失败
+	
+	public int failure1(@Param("demandid")int demandid);// 项目失败
 	
 	public int projectEvaluation(@Param("demandId")int demandId,@Param("content")String content);// 项目评价
 
@@ -176,9 +180,19 @@ public interface DemandMapper {
 	// 服务商总页数 10/7
 	public int demandCountFacilitator(@Param("name") String name, @Param("userid") String userid,
 			@Param("parameterid") String parameterid, @Param("stateid") String stateid);
-	
-	//服务商任务列表  getDemandInfoFacilitatorList
+
+	// 服务商任务列表 getDemandInfoFacilitatorList
 	public ArrayList<DemandInfoBean> getDemandInfoFacilitatorList(@Param("star") String star, @Param("end") String end,
 			@Param("name") String name, @Param("userid") String userid, @Param("parameterid") String parameterid,
 			@Param("stateid") String stateid);
+
+	// 获取用户余额
+	public double getUserMoney(@Param("userId") String userId);
+
+	// 更新用户金额
+	public double updateUserMoney(@Param("userId") String userId, @Param("userMoney") String userMoney);
+
+	// 插入交易记录
+	public int addFund(@Param("userId") String userId, @Param("businessId") String businessId,
+			@Param("toUserId") String toUserId, @Param("dealMoney") String dealMoney);
 }

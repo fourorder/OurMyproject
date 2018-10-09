@@ -31,10 +31,11 @@
 <div align="center" style="height: 90%;width: 40%;margin:0 auto;background-color: #eff4d8; text-align: left" >
 <form  class="layui-form layui-form-pane" action="<%=path %>adver/affirm.action" method="post" >
 <c:forEach items="${Alist}"  var="fund">
+<input type="hidden" name="advertisementId" value="${fund.advertisementId}">
 <div class="layui-form-item">
             <label class="layui-form-label">标题：</label>
             <div class="layui-input-block">
-                <input type="text"  name="advertisementTitle" required  lay-verify="required" value="${fund.advertisementTitle}" autocomplete="off" class="layui-input">
+                <input type="text"  name="advertisementTitle" disabled="disabled" required  lay-verify="required" value="${fund.advertisementTitle}" autocomplete="off" class="layui-input">
             </div>
         </div>
 <div class="layui-form-item">
@@ -46,7 +47,7 @@
 <div class="layui-form-item">
             <label class="layui-form-label">时间：</label>
             <div class="layui-input-block">
-                <input type="text"  id="test1"  name="advertisementPublishTime" required  lay-verify="required" value="${fund.advertisementPublishTime}" autocomplete="off" class="layui-input">
+                <input type="text"  id="test1" disabled="disabled" name="advertisementPublishTime" required  lay-verify="required" value="${fund.advertisementPublishTime}" autocomplete="off" class="layui-input">
             </div>
         </div>
 <div class="layui-form-item">

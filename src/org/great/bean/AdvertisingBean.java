@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AdvertisingBean {
+ private int  advertisementId;
  private String advertisementTitle;
  private String advertisementContent;
  private String advertisementPublishTime;
@@ -15,9 +16,11 @@ public class AdvertisingBean {
 		super();
 	}
 
-public AdvertisingBean(String advertisementTitle, String advertisementContent, String advertisementPublishTime,
-		String advertisementAddress, String advertisementImage, int advertisementNum) {
+
+public AdvertisingBean(int advertisementId, String advertisementTitle, String advertisementContent,
+		String advertisementPublishTime, String advertisementAddress, String advertisementImage, int advertisementNum) {
 	super();
+	this.advertisementId = advertisementId;
 	this.advertisementTitle = advertisementTitle;
 	this.advertisementContent = advertisementContent;
 	this.advertisementPublishTime = advertisementPublishTime;
@@ -25,6 +28,17 @@ public AdvertisingBean(String advertisementTitle, String advertisementContent, S
 	this.advertisementImage = advertisementImage;
 	this.advertisementNum = advertisementNum;
 }
+
+
+public int getAdvertisementId() {
+	return advertisementId;
+}
+
+
+public void setAdvertisementId(int advertisementId) {
+	this.advertisementId = advertisementId;
+}
+
 
 public String getAdvertisementTitle() {
 	return advertisementTitle;

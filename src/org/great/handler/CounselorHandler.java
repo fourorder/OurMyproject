@@ -130,7 +130,7 @@ public class CounselorHandler {
 			int a =demandBizImp.applyFor(cb);
 			if(a>0) {
 				
-				return new ModelAndView("redirect:list.action?page=tpage&number=1");
+				return new ModelAndView("redirect:application.action?userId="+cb.getUserId()+"&account="+cb.getUserAccount());
 			}
 		}
 
@@ -315,9 +315,9 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 	}
 	@RequestMapping("/parameter.action")//查询项目详细信息
 	@ResponseBody
-	public List<Object> test11(HttpServletRequest request,int parameterId,String state1,String page,String number){
-		System.out.println("state1="+state1);
-		int countPage=demandBizImp.countDaily(parameterId, state1);//总条数
+	public List<Object> test11(HttpServletRequest request,int parameterId,String page,String number){
+	
+		int countPage=demandBizImp.countDaily(parameterId);//总条数
 		int totalPages = countPage / 5 + ((countPage % 5) > 0 ? 1 : 0);//定义总页数
 		int num=Integer.parseInt(number);
 		if(page.equals("tpage")) {
@@ -334,22 +334,79 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 		   List<Object> obj=new ArrayList<Object>();
 		List<DailyBean> list=new ArrayList<DailyBean>();
 		
-	    list= demandBizImp.selectDaily(parameterId,state1,num);
+	    list= demandBizImp.selectDaily(parameterId,num);
 	    request.setAttribute("totalPages", totalPages);
 		request.setAttribute("num", num);
-		request.setAttribute("state1",state1);
 		 obj.add(num);
            obj.add(totalPages);
            obj.add(list);
 	    return obj;	
 	}
-	@RequestMapping("/evaluation.action")//评价
-	public ModelAndView test12(HttpServletRequest request,int dailyId,String notation,String radio,String account,String userId){
-	int a= demandBizImp.sEvaluation(dailyId,notation,radio);
+	
+	
+	@RequestMapping("/appraise.action")//评价
+	@ResponseBody
+	public List<DailyBean> test12(HttpServletRequest request,int dailyId,String notation,String radio,String account,String userId,int num,String page){
+	 List<DailyBean> list=new ArrayList<DailyBean>();
+	 int page1=Integer.parseInt(page);
+	 System.out.println(page1);
+	 System.out.println("dailyId="+dailyId+"notation="+notation+"radio="+radio+"account="+account+"userId="+userId+"num="+num);
+		int a= demandBizImp.sEvaluation(dailyId,notation,radio);
 	if(a>0) {
 		System.out.println("评价成功");
+		list=demandBizImp.selectDaily(num,page1);
+	}
+
+	return list;		
 	}
 	
-	return new ModelAndView("redirect:project.action?account="+account+"&userId="+userId);		
+	@RequestMapping("/failure.action")//项目失败
+	@ResponseBody
+	public List<Object> test13(HttpServletRequest request,int demandid,String userId,String state1,String number){
+	int a=	demandBizImp.failure(demandid);
+	     demandBizImp.failure1(demandid);
+	     if(a>0) {
+	    	 List<Object> obj=new ArrayList<Object>();
+	    	 int userid=Integer.parseInt(userId);
+	 		int num=Integer.parseInt(number);
+	 		 if(state1==null) {
+	 				state1="0";
+	 			}
+	 		 int state2=Integer.parseInt(state1);
+	    	 List<ApplicationBean> list=new ArrayList<ApplicationBean>();
+				list=demandBizImp.selectApplyFor(state2, num,userid);
+				System.out.println("list="+list.size());
+				request.setAttribute("num", num);
+				request.setAttribute("state1",state2);
+				  obj.add(num);
+		           obj.add(list);
+				return obj;	 
+	     }
+	
+	return null;		
+	}
+	
+	@RequestMapping("/overallMerit.action")//项目总体评价
+	@ResponseBody
+	public List<Object> test13(HttpServletRequest request,int demandid,String content,String number,String userId,String state){
+	 List<Object> obj=new ArrayList<Object>();
+	 System.out.println("能不能进来"+demandid+"----"+content);
+	 int state1=Integer.parseInt(state);
+		int userid=Integer.parseInt(userId);
+		int num=Integer.parseInt(number);
+	int a = demandBizImp.projectEvaluation(demandid, content);
+	 System.out.println("能不能进来"+a);
+	if(a>0) {
+		System.out.println("修改成功");
+		List<ApplicationBean> list=new ArrayList<ApplicationBean>();
+		list=demandBizImp.selectApplyFor(state1, num,userid);
+		System.out.println("list="+list.size());
+		request.setAttribute("num", num);
+		request.setAttribute("state1",state1);
+		 obj.add(num);
+           obj.add(list);
+	return obj;	
+	}
+	return null;		
 	}
 }

@@ -435,8 +435,7 @@ public int startStory(String account) {
 public UserBean user(int userid) {
 	// TODO Auto-generated method stub
 	return userMapper.user(userid);
+
 }
-
-
 
 }

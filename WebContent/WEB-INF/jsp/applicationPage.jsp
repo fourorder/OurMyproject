@@ -150,6 +150,7 @@
 <th>雇主</th>
 <th>需求编号</th>
 <th>状态</th>
+<th>完成状态</th>
 <th width="400">操作</th>
 </tr>
 </thead>
@@ -157,8 +158,8 @@
 </tbody>
 <tr>
 <td colspan="7">当前页<span id="num">${num}</span>总页数<span id="totalPages">${totalPages}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="button" value="上一页" onClick="applyForList('tpage')">&nbsp;&nbsp;
-<input type="button" value="下一页" onClick="applyForList('npage')">
+<input type="button" class="btn btn-primary" value="上一页" onClick="applyForList('tpage')">&nbsp;&nbsp;
+<input type="button" class="btn btn-primary" value="下一页" onClick="applyForList('npage')">
 </td>
 </tr>
 
@@ -171,12 +172,6 @@
     <select id="ddd" onchange="pid()">
     <option value="0">请选择</option>
     </select>
-    <select id="state2">
-<option value="">请选择</option>
-<option value="未评价">未评价</option>
-<option value="未评价">已评价</option>
-</select>
-<button  style="width:70px;height: 30px" onclick="sdaily()" >查询</button>
 <table class="layui-table" style="width: 100%;" >
 <thead>
  <tr>
@@ -192,8 +187,8 @@
 </tbody>
 <tr>
 <td colspan="7">当前页<span id="num1">${num1}</span>总页数<span id="totalPages1">${totalPages1}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="button" value="上一页" onClick="daily('tpage')">&nbsp;&nbsp;
-<input type="button" value="下一页" onClick="daily('npage')">
+<input type="button" class="btn btn-primary" value="上一页" onClick="daily('tpage')">&nbsp;&nbsp;
+<input type="button" class="btn btn-primary" value="下一页" onClick="daily('npage')">
 </td>
 </tr>
 
@@ -241,10 +236,11 @@
                   <label>批注</label>
                   <textarea  class="layui-textarea" id="notation"></textarea>
 			</div>
+			
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 				</button>
-				<input type="button" class="btn btn-primary" value="提交" onclick="evaluation()" />
+				<a  class="btn btn-primary"  onclick="evaluation()" >提交</a>
 				
 			</div>
 		</div><!-- /.modal-content -->
@@ -321,6 +317,31 @@
 	</div><!-- /.modal -->
 </div>
 
+<!-- 模态框3（项目总体评价） -->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel3">
+					项目总体评价
+				</h4>
+			</div>
+			  <label>评价</label>
+			  <input type="text" name="serialNumber1" id="serialNumber1"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+                  <textarea  class="layui-textarea" id="notation1"></textarea>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<a  class="btn btn-primary"  onclick="present()" >提交</a>
+				
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
 
 
 
@@ -380,28 +401,93 @@ function applyForList(page){
 			 for(var i=0;i<len;i++){ 
 				 var e = list[i];
 				 if(e.stateId==902){
+					
 				 $("#ccc").append(
 						 "<tr><td>"+e.demandTitle+"</td>"+
 							"<td>"+e.demandDetaIlinformation+"</td>"+
 							"<td>"+e.userAccount+"</td>"+
 							"<td>"+e.demandid+"</td>"+
 							"<td>未处理</td>"+
-							"<td><a class='layui-btn layui-btn-sm layui-btn-danger' onclick='return firm("+e.demandid+")'>确认接受</a>"+
-							"<a class='layui-btn layui-btn-sm layui-btn-warm' onclick='return firm1("+e.demandid+")'>拒绝接受</a>"+
-							"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
+							"<td>暂无操作</td>"+
+							"<td><a class='btn btn-success   passBtn rightSize' onclick='return firm("+e.demandid+")'>确认接受</a>&nbsp;"+
+							"<a class='btn btn-danger  deleteBtn rightSize' onclick='return firm1("+e.demandid+")'>拒绝接受</a>&nbsp;"+
+							"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>"+
 							"</tr>"
-				 
 				 )
 				 }else if(e.stateId==903){
-					 $("#ccc").append(
-							 "<tr><td>"+e.demandTitle+"</td>"+
-								"<td>"+e.demandDetaIlinformation+"</td>"+
-								"<td>"+e.userAccount+"</td>"+
-								"<td>"+e.demandid+"</td>"+
-								"<td>已接受</td>"+
-								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
-								"</tr>"
-								)
+					 if(e.stated==1865){
+						 if(e.consultantEvaluation==null){
+							 $("#ccc").append(
+									 "<tr><td>"+e.demandTitle+"</td>"+
+										"<td>"+e.demandDetaIlinformation+"</td>"+
+										"<td>"+e.userAccount+"</td>"+
+										"<td>"+e.demandid+"</td>"+
+										"<td>已接受</td>"+
+										"<td>项目完成</td>"+
+										"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+										"<a onclick='Values1("+e.demandid+")'  data-toggle='modal' data-target='#myModal3' class='btn btn-success   passBtn rightSize'>确认通过</a>&nbsp;"+
+										"<a  onclick='Failure("+e.demandid+")'  data-toggle='modal' data-target='#myModal3' class='btn btn-danger  deleteBtn rightSize'>不通过</a>&nbsp;"+
+										
+										"</td></tr>"
+										)  
+						 }else{
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>已接受</td>"+
+									"<td>项目完成</td>"+
+									"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+									"</td></tr>"
+									) 
+						 }
+					 }else if(e.stated==1863){
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>已接受</td>"+
+									"<td>项目中</td>"+
+									"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+									"</td></tr>"
+									) 
+					 }else if (e.stated==1864){
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>已接受</td>"+
+									"<td>项目审核中</td>"+
+									"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+									"</td></tr>"
+									) 
+					 }else if(e.stated==1861){
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>已接受</td>"+
+									"<td>项目招标中</td>"+
+									"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+									"</td></tr>"
+									) 
+					 }else{
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>已接受</td>"+
+									"<td>项目失败</td>"+
+									"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+									"</td></tr>"
+									)
+					 }
+					
 				 }else if(e.stateId==904){
 					 $("#ccc").append(
 							 "<tr><td>"+e.demandTitle+"</td>"+
@@ -409,7 +495,8 @@ function applyForList(page){
 								"<td>"+e.userAccount+"</td>"+
 								"<td>"+e.demandid+"</td>"+
 								"<td>已拒绝</td>"+
-								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
+								"<td>无操作</td>"+
+								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>&nbsp;"+
 								"</tr>"
 								)
 				 }
@@ -441,28 +528,80 @@ function sstate() {
 				 for(var i=0;i<len;i++){ 
 					 var e = list[i];
 					 if(e.stateId==902){
+							
 						 $("#ccc").append(
 								 "<tr><td>"+e.demandTitle+"</td>"+
 									"<td>"+e.demandDetaIlinformation+"</td>"+
 									"<td>"+e.userAccount+"</td>"+
 									"<td>"+e.demandid+"</td>"+
 									"<td>未处理</td>"+
-									"<td><a class='layui-btn layui-btn-sm layui-btn-danger' onclick='return firm("+e.demandid+")'>确认接受</a>"+
-									"<a class='layui-btn layui-btn-sm layui-btn-warm' onclick='return firm1("+e.demandid+")'>拒绝接受</a>"+
-									"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
+									"<td>暂无操作</td>"+
+									"<td><a class='btn btn-success   passBtn rightSize' onclick='return firm("+e.demandid+")'>确认接受</a>&nbsp;"+
+									"<a class='btn btn-danger  deleteBtn rightSize' onclick='return firm1("+e.demandid+")'>拒绝接受</a>&nbsp;"+
+									"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>"+
 									"</tr>"
-						 
 						 )
 						 }else if(e.stateId==903){
-							 $("#ccc").append(
-									 "<tr><td>"+e.demandTitle+"</td>"+
-										"<td>"+e.demandDetaIlinformation+"</td>"+
-										"<td>"+e.userAccount+"</td>"+
-										"<td>"+e.demandid+"</td>"+
-										"<td>已接受</td>"+
-										"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
-										"</tr>"
-										)
+							 if(e.stated==1865){
+								 $("#ccc").append(
+										 "<tr><td>"+e.demandTitle+"</td>"+
+											"<td>"+e.demandDetaIlinformation+"</td>"+
+											"<td>"+e.userAccount+"</td>"+
+											"<td>"+e.demandid+"</td>"+
+											"<td>已接受</td>"+
+											"<td>项目完成</td>"+
+											"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+											"<a onclick='Values1("+e.demandid+")'  data-toggle='modal' data-target='#myModal3' class='btn btn-success   passBtn rightSize'>确认通过</a>&nbsp;"+
+											"<a  onclick='Failure("+e.demandid+")'  data-toggle='modal' data-target='#myModal3' class='btn btn-danger  deleteBtn rightSize'>不通过</a>&nbsp;"+
+											
+											"</td></tr>"
+											) 
+							 }else if(e.stated==1863){
+								 $("#ccc").append(
+										 "<tr><td>"+e.demandTitle+"</td>"+
+											"<td>"+e.demandDetaIlinformation+"</td>"+
+											"<td>"+e.userAccount+"</td>"+
+											"<td>"+e.demandid+"</td>"+
+											"<td>已接受</td>"+
+											"<td>项目中</td>"+
+											"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+											"</td></tr>"
+											) 
+							 }else if(e.stated==1861){
+								 $("#ccc").append(
+										 "<tr><td>"+e.demandTitle+"</td>"+
+											"<td>"+e.demandDetaIlinformation+"</td>"+
+											"<td>"+e.userAccount+"</td>"+
+											"<td>"+e.demandid+"</td>"+
+											"<td>已接受</td>"+
+											"<td>项目招标中</td>"+
+											"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+											"</td></tr>"
+											) 
+							 }else if (e.stated==1864){
+								 $("#ccc").append(
+										 "<tr><td>"+e.demandTitle+"</td>"+
+											"<td>"+e.demandDetaIlinformation+"</td>"+
+											"<td>"+e.userAccount+"</td>"+
+											"<td>"+e.demandid+"</td>"+
+											"<td>已接受</td>"+
+											"<td>项目审核中</td>"+
+											"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+											"</td></tr>"
+											) 
+							 }else{
+								 $("#ccc").append(
+										 "<tr><td>"+e.demandTitle+"</td>"+
+											"<td>"+e.demandDetaIlinformation+"</td>"+
+											"<td>"+e.userAccount+"</td>"+
+											"<td>"+e.demandid+"</td>"+
+											"<td>已接受</td>"+
+											"<td>项目失败</td>"+
+											"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+											"</td></tr>"
+											)
+							 }
+							
 						 }else if(e.stateId==904){
 							 $("#ccc").append(
 									 "<tr><td>"+e.demandTitle+"</td>"+
@@ -470,7 +609,8 @@ function sstate() {
 										"<td>"+e.userAccount+"</td>"+
 										"<td>"+e.demandid+"</td>"+
 										"<td>已拒绝</td>"+
-										"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
+										"<td>无操作</td>"+
+										"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>&nbsp;"+
 										"</tr>"
 										)
 						 }
@@ -521,6 +661,7 @@ function pid() {
 		 type:"post",
 		 success:function(redata){
 			 $("#num1").empty();
+			 $("#eee").empty();
 			 $("#totalPages1").empty();
 			var num=redata[0]
 			var totalPages=redata[1]
@@ -537,7 +678,7 @@ function pid() {
 						 "<td>"+e.content+"</td>"+
 						 "<td>未评价</td>"+
 						 "<td>无批注</td>"+
-						 "<td><a  data-toggle='modal' data-target='#myModal' onclick='Values("+e.daiId+")'>点击评价</a></td>"+
+						 "<td><a  data-toggle='modal' data-target='#myModal' onclick='Values("+e.daiId+")' class='btn btn-info'>点击评价</a></td>"+
 						 "</tr>"
 						 )
 					 $("#serialNumber").val(e.daiId);	 
@@ -559,16 +700,14 @@ function pid() {
 }
 
 function sdaily() {
-	var nn=$("#num1").text();
-	var state1=$("#state2").val();
-	alert(state1)
 	$.ajax({
 		 url:"<%=path%>counselor/parameter.action",
-		 data:"parameterId="+pid+"&state1="+state1+"&number=1&page=tpage",
+		 data:"parameterId="+pid+"&number=1&page=tpage",
 		 dataType:"json",
 		 type:"post",
 		 success:function(redata){
 			 $("#num1").empty();
+			 $("#eee").empty();
 			 $("#totalPages1").empty();
 			var num=redata[0]
 			var totalPages=redata[1]
@@ -578,7 +717,6 @@ function sdaily() {
 			 var len = list.length;
 			 for(var i=0;i<len;i++){ 
 				 var e = list[i];
-				 alert(e)
 				 if(e.dailyReview=="未评价"){
 				 $("#eee").append(
 						 "<tr><td>"+e.daiId+"</td>"+
@@ -586,7 +724,7 @@ function sdaily() {
 						 "<td>"+e.content+"</td>"+
 						 "<td>未评价</td>"+
 						 "<td>无批注</td>"+
-						 "<td><a data-toggle='modal' data-target='#myModal'>点击评价</a></td>"+
+						 "<td><a data-toggle='modal' data-target='#myModal' class='btn btn-info'>点击评价</a></td>"+
 						 "</tr>"
 						 )
 				 }else{
@@ -627,39 +765,92 @@ if (confirm("是否确认接受")) {
 			 for(var i=0;i<len;i++){ 
 				 var e = list[i];
 				 if(e.stateId==902){
-			
-				 $("#ccc").append(
-						 "<tr><td>"+e.demandTitle+"</td>"+
-							"<td>"+e.demandDetaIlinformation+"</td>"+
-							"<td>"+e.userAccount+"</td>"+
-							"<td>"+e.demandid+"</td>"+
-							"<td>未处理</td>"+
-							"<td><a class='layui-btn layui-btn-sm layui-btn-danger' onclick='return firm("+e.demandid+")'>确认接受</a>"+
-							"<a class='layui-btn layui-btn-sm layui-btn-warm' onclick='return firm1("+e.demandid+")'>拒绝接受</a>"+
-							"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
-							"</tr>"
-				 )
-				 }else if(e.stateId==903){
+						
 					 $("#ccc").append(
 							 "<tr><td>"+e.demandTitle+"</td>"+
 								"<td>"+e.demandDetaIlinformation+"</td>"+
 								"<td>"+e.userAccount+"</td>"+
 								"<td>"+e.demandid+"</td>"+
-								"<td>已接受</td>"+
-								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
+								"<td>未处理</td>"+
+								"<td>暂无操作</td>"+
+								"<td><a class='btn btn-success   passBtn rightSize' onclick='return firm("+e.demandid+")'>确认接受</a>&nbsp;"+
+								"<a class='btn btn-danger  deleteBtn rightSize' onclick='return firm1("+e.demandid+")'>拒绝接受</a>&nbsp;"+
+								"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>"+
 								"</tr>"
-								)
-				 }else if(e.stateId==904){
-					 $("#ccc").append(
-							 "<tr><td>"+e.demandTitle+"</td>"+
-								"<td>"+e.demandDetaIlinformation+"</td>"+
-								"<td>"+e.userAccount+"</td>"+
-								"<td>"+e.demandid+"</td>"+
-								"<td>已拒绝</td>"+
-								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
-								"</tr>"
-								)
-				 }
+					 )
+					 }else if(e.stateId==903){
+						 if(e.stated==1865){
+							 $("#ccc").append(
+									 "<tr><td>"+e.demandTitle+"</td>"+
+										"<td>"+e.demandDetaIlinformation+"</td>"+
+										"<td>"+e.userAccount+"</td>"+
+										"<td>"+e.demandid+"</td>"+
+										"<td>已接受</td>"+
+										"<td>项目完成</td>"+
+										"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+										"<a onclick='Values1("+e.demandid+")'  data-toggle='modal' data-target='#myModal3' class='btn btn-success   passBtn rightSize'>确认通过</a>&nbsp;"+
+										"<a  onclick='Failure("+e.demandid+")'  data-toggle='modal' data-target='#myModal3' class='btn btn-danger  deleteBtn rightSize'>不通过</a>&nbsp;"+
+										
+										"</td></tr>"
+										) 
+						 }else if(e.stated==1863){
+							 $("#ccc").append(
+									 "<tr><td>"+e.demandTitle+"</td>"+
+										"<td>"+e.demandDetaIlinformation+"</td>"+
+										"<td>"+e.userAccount+"</td>"+
+										"<td>"+e.demandid+"</td>"+
+										"<td>已接受</td>"+
+										"<td>项目中</td>"+
+										"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+										"</td></tr>"
+										) 
+						 }else if (e.stated==1864){
+							 $("#ccc").append(
+									 "<tr><td>"+e.demandTitle+"</td>"+
+										"<td>"+e.demandDetaIlinformation+"</td>"+
+										"<td>"+e.userAccount+"</td>"+
+										"<td>"+e.demandid+"</td>"+
+										"<td>已接受</td>"+
+										"<td>项目审核中</td>"+
+										"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+										"</td></tr>"
+										) 
+						 }else if(e.stated==1861){
+							 $("#ccc").append(
+									 "<tr><td>"+e.demandTitle+"</td>"+
+										"<td>"+e.demandDetaIlinformation+"</td>"+
+										"<td>"+e.userAccount+"</td>"+
+										"<td>"+e.demandid+"</td>"+
+										"<td>已接受</td>"+
+										"<td>项目招标中</td>"+
+										"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+										"</td></tr>"
+										) 
+						 }else{
+							 $("#ccc").append(
+									 "<tr><td>"+e.demandTitle+"</td>"+
+										"<td>"+e.demandDetaIlinformation+"</td>"+
+										"<td>"+e.userAccount+"</td>"+
+										"<td>"+e.demandid+"</td>"+
+										"<td>已接受</td>"+
+										"<td>项目失败</td>"+
+										"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+										"</td></tr>"
+										)
+						 }
+						
+					 }else if(e.stateId==904){
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>已拒绝</td>"+
+									"<td>无操作</td>"+
+									"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>&nbsp;"+
+									"</tr>"
+									)
+					 }
 			 }
    		 }
    	})
@@ -691,28 +882,73 @@ function firm1(demandid) {
 			 for(var i=0;i<len;i++){ 
 				 var e = list[i];
 				 if(e.stateId==902){
-			
-				 $("#ccc").append(
-						 "<tr><td>"+e.demandTitle+"</td>"+
-							"<td>"+e.demandDetaIlinformation+"</td>"+
-							"<td>"+e.userAccount+"</td>"+
-							"<td>"+e.demandid+"</td>"+
-							"<td>未处理</td>"+
-							"<td><a class='layui-btn layui-btn-sm layui-btn-danger' onclick='return firm()'>确认接受</a>"+
-							"<a class='layui-btn layui-btn-sm layui-btn-warm' onclick='return firm1()'>拒绝接受</a>"+
-							"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
-							"</tr>"
-				 )
+					 if(e.stated==1863){
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>未处理</td>"+
+									"<td>项目开工</td>"+
+									"<td><a class='btn btn-success   passBtn rightSize' onclick='return firm("+e.demandid+")'>确认接受</a>&nbsp;"+
+									"<a class='btn btn-danger  deleteBtn rightSize' onclick='return firm1("+e.demandid+")'>拒绝接受</a>&nbsp;"+
+									"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>"+
+									"</tr>"
+							
+						 )
+							 }else{
+								 $("#ccc").append(
+										 "<tr><td>"+e.demandTitle+"</td>"+
+											"<td>"+e.demandDetaIlinformation+"</td>"+
+											"<td>"+e.userAccount+"</td>"+
+											"<td>"+e.demandid+"</td>"+
+											"<td>未处理</td>"+
+											"<td>暂无操作</td>"+
+											"<td><a class='btn btn-success   passBtn rightSize' onclick='return firm("+e.demandid+")'>确认接受</a>&nbsp;"+
+											"<a class='btn btn-danger  deleteBtn rightSize' onclick='return firm1("+e.demandid+")'>拒绝接受</a>&nbsp;"+
+											"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>"+
+											"</tr>"
+									
+								 ) 
+							 }
 				 }else if(e.stateId==903){
-					 $("#ccc").append(
-							 "<tr><td>"+e.demandTitle+"</td>"+
-								"<td>"+e.demandDetaIlinformation+"</td>"+
-								"<td>"+e.userAccount+"</td>"+
-								"<td>"+e.demandid+"</td>"+
-								"<td>已接受</td>"+
-								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
-								"</tr>"
-								)
+					 if(e.stated==1865){
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>已接受</td>"+
+									"<td>项目完成</td>"+
+									"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+									"<a onclick='Values1("+e.demandid+")'  data-toggle='modal' data-target='#myModal3' class='btn btn-success   passBtn rightSize'>确认通过</a>&nbsp;"+
+									"<a  onclick='Failure("+e.demandid+")'  data-toggle='modal' data-target='#myModal3' class='btn btn-danger  deleteBtn rightSize'>不通过</a>&nbsp;"+
+									"</td></tr>"
+									) 
+					 }else if(e.stated==1861){
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>已接受</td>"+
+									"<td>项目招标中</td>"+
+									"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+									"</td></tr>"
+									) 
+					 }else {
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>已接受</td>"+
+									"<td>项目失败</td>"+
+									"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+									"</td></tr>"
+									)
+					 }
+					
 				 }else if(e.stateId==904){
 					 $("#ccc").append(
 							 "<tr><td>"+e.demandTitle+"</td>"+
@@ -720,7 +956,7 @@ function firm1(demandid) {
 								"<td>"+e.userAccount+"</td>"+
 								"<td>"+e.demandid+"</td>"+
 								"<td>已拒绝</td>"+
-								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2'  class='layui-btn layui-btn-sm'>查看详情</a></td>"+
+								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>&nbsp;"+
 								"</tr>"
 								)
 				 }
@@ -744,11 +980,157 @@ function evaluation() {
 	var notation=$("#notation").val();
 	var account=$("#account").val();
 	var userId=$("#userId").val();
+	var numm=$("#ddd").val();
 	var radio = $('#wrap input[name="radio"]:checked ').val();
-	window.location.href="<%=path%>counselor/evaluation.action?dailyId="+dailyId+"&notation="+notation+"&radio="+radio+"&account="+account+"&userId="+userId;
+	alert(dailyId+"--"+notation+"---"+account+"---"+userId+"---"+numm+radio)
+	$.ajax({
+ 		 url:"<%=path%>counselor/appraise.action",
+ 		 data:"dailyId="+dailyId+"&notation="+notation+"&radio="+radio+"&account="+account+"&userId="+userId+"&num="+numm+"&page=1",
+ 		 dataType:"json",
+ 		 type:"post",
+ 		 success:function(redata){
+ 			 $('#myModal').modal('hide')
+ 			 $("#eee").empty();
+ 			var list=redata;
+ 			 var len = list.length;
+ 			 for(var i=0;i<len;i++){ 
+				 var e = list[i];
+				 if(e.dailyReview=="未评价"){
+					 $("#eee").append(
+							 "<tr><td>"+e.daiId+"</td>"+
+							 "<td>"+e.publishDate+"</td>"+	 
+							 "<td>"+e.content+"</td>"+
+							 "<td>未评价</td>"+
+							 "<td>无批注</td>"+
+							 "<td><a data-toggle='modal' data-target='#myModal' class='btn btn-info'>点击评价</a></td>"+
+							 "</tr>"
+							 )
+					 }else{
+						 $("#eee").append(
+								 "<tr><td>"+e.daiId+"</td>"+
+								 "<td>"+e.publishDate+"</td>"+	 
+								 "<td>"+e.content+"</td>"+
+								 "<td>"+e.dailyReview+"</td>"+
+								 "<td>"+e.postil+"</td>"+
+								 "<td>无操作</td>"+
+								 "</tr>"
+								 )
+					 }
+ 			 }
+ 		 }
+	})
+	}
+	//总评价
+function Values1(Id) {
+	$("#serialNumber1").val(Id)
 }
-
+function present() {
+	var demandid=$("#serialNumber1").val();
+	var content=$("#notation1").val();
+	var userId=$("#userId").val();
+	  var nn=$("#num").text();
+	   var state2=$("#state1").val();
+	$.ajax({
+		 url:"<%=path%>counselor/overallMerit.action",
+		 data:"demandid="+demandid+"&content="+content+"&userId="+userId+"&number="+nn+"&state="+state2,
+		 dataType:"json",
+		 type:"post",
+		 success:function(redata){
+			 $("#ccc").empty();
+			 $("#num").empty();
+			 var num=redata[0]
+			 $("#num").html(num);
+				var list=redata[1]
+			 var len = list.length;
+			 for(var i=0;i<len;i++){ 
+				 var e = list[i];
+				 if(e.stateId==902){
+					 if(e.stated==1863){
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>未处理</td>"+
+									"<td>项目开工</td>"+
+									"<td><a class='btn btn-success   passBtn rightSize' onclick='return firm("+e.demandid+")'>确认接受</a>&nbsp;"+
+									"<a class='btn btn-danger  deleteBtn rightSize' onclick='return firm1("+e.demandid+")'>拒绝接受</a>&nbsp;"+
+									"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>"+
+									"</tr>"
+							
+						 )
+							 }else{
+								 $("#ccc").append(
+										 "<tr><td>"+e.demandTitle+"</td>"+
+											"<td>"+e.demandDetaIlinformation+"</td>"+
+											"<td>"+e.userAccount+"</td>"+
+											"<td>"+e.demandid+"</td>"+
+											"<td>未处理</td>"+
+											"<td>暂无操作</td>"+
+											"<td><a class='btn btn-success   passBtn rightSize' onclick='return firm("+e.demandid+")'>确认接受</a>&nbsp;"+
+											"<a class='btn btn-danger  deleteBtn rightSize' onclick='return firm1("+e.demandid+")'>拒绝接受</a>&nbsp;"+
+											"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>"+
+											"</tr>"
+									
+								 ) 
+							 }
+				 }else if(e.stateId==903){
+					 if(e.stated==1865){
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>已接受</td>"+
+									"<td>项目完成</td>"+
+									"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+									"<a onclick='Values1("+e.demandid+")'  data-toggle='modal' data-target='#myModal3' class='btn btn-success   passBtn rightSize'>确认通过</a>&nbsp;"+
+									"<a  onclick='Failure("+e.demandid+")'  data-toggle='modal' data-target='#myModal3' class='btn btn-danger  deleteBtn rightSize'>不通过</a>&nbsp;"+
+									"</td></tr>"
+									) 
+					 }else if(e.stated==1861){
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>已接受</td>"+
+									"<td>项目招标中</td>"+
+									"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+									"</td></tr>"
+									) 
+					 }else {
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>已接受</td>"+
+									"<td>项目失败</td>"+
+									"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+									"</td></tr>"
+									)
+					 }
+					
+				 }else if(e.stateId==904){
+					 $("#ccc").append(
+							 "<tr><td>"+e.demandTitle+"</td>"+
+								"<td>"+e.demandDetaIlinformation+"</td>"+
+								"<td>"+e.userAccount+"</td>"+
+								"<td>"+e.demandid+"</td>"+
+								"<td>已拒绝</td>"+
+								"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>&nbsp;"+
+								"</tr>"
+								)
+				 }
+			 } 
+		 }
+	})
+	
+}
+//详细信息
 function particulars(demandid) {
+	
 	$.ajax({
   		 url:"<%=path%>counselor/particulars.action",
   		 data:"demandid="+demandid,
@@ -777,6 +1159,102 @@ function particulars(demandid) {
   		 }
 	})
   		 
+}
+function Failure(demandid) {
+	var userId=$("#userId").val()
+    var nn=$("#num").text();
+   var state2=$("#state1").val();
+	if (confirm("是否确认失败")) {
+		$.ajax({
+	   		 url:"<%=path%>counselor/failure.action",
+	   		 data:"demandid="+demandid+"&state1="+state2+"&number="+nn+"&userId="+userId,
+	   		 dataType:"json",
+	   		 type:"post",
+	   		 success:function(redata){
+	   			 $("#ccc").empty();
+				 $("#num").empty();
+				 var num=redata[0]
+				 $("#num").html(num);
+					var list=redata[1]
+				 var len = list.length;
+				 for(var i=0;i<len;i++){ 
+					 var e = list[i];
+					 if(e.stateId==902){
+						 if(e.stated==1863){
+							 $("#ccc").append(
+									 "<tr><td>"+e.demandTitle+"</td>"+
+										"<td>"+e.demandDetaIlinformation+"</td>"+
+										"<td>"+e.userAccount+"</td>"+
+										"<td>"+e.demandid+"</td>"+
+										"<td>未处理</td>"+
+										"<td>项目开工</td>"+
+										"<td><a class='btn btn-success   passBtn rightSize' onclick='return firm("+e.demandid+")'>确认接受</a>&nbsp;"+
+										"<a class='btn btn-danger  deleteBtn rightSize' onclick='return firm1("+e.demandid+")'>拒绝接受</a>&nbsp;"+
+										"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>"+
+										"</tr>"
+								
+							 )
+								 }else{
+									 $("#ccc").append(
+											 "<tr><td>"+e.demandTitle+"</td>"+
+												"<td>"+e.demandDetaIlinformation+"</td>"+
+												"<td>"+e.userAccount+"</td>"+
+												"<td>"+e.demandid+"</td>"+
+												"<td>未处理</td>"+
+												"<td>暂无操作</td>"+
+												"<td><a class='btn btn-success   passBtn rightSize' onclick='return firm("+e.demandid+")'>确认接受</a>&nbsp;"+
+												"<a class='btn btn-danger  deleteBtn rightSize' onclick='return firm1("+e.demandid+")'>拒绝接受</a>&nbsp;"+
+												"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>"+
+												"</tr>"
+										
+									 ) 
+								 }
+					 }else if(e.stateId==903){
+						 if(e.stated==1865){
+							 $("#ccc").append(
+									 "<tr><td>"+e.demandTitle+"</td>"+
+										"<td>"+e.demandDetaIlinformation+"</td>"+
+										"<td>"+e.userAccount+"</td>"+
+										"<td>"+e.demandid+"</td>"+
+										"<td>已接受</td>"+
+										"<td>项目完成</td>"+
+										"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+										"<a onclick='Values1("+e.demandid+")'  data-toggle='modal' data-target='#myModal3' class='btn btn-success   passBtn rightSize'>确认通过</a>&nbsp;"+
+										"<a  onclick='Failure("+e.demandid+")'  data-toggle='modal' data-target='#myModal3' class='btn btn-danger  deleteBtn rightSize'>不通过</a>&nbsp;"+
+										"</td></tr>"
+										) 
+						 }else {
+							 $("#ccc").append(
+									 "<tr><td>"+e.demandTitle+"</td>"+
+										"<td>"+e.demandDetaIlinformation+"</td>"+
+										"<td>"+e.userAccount+"</td>"+
+										"<td>"+e.demandid+"</td>"+
+										"<td>已接受</td>"+
+										"<td>项目失败</td>"+
+										"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a>&nbsp;"+
+										"</td></tr>"
+										)
+						 }
+						
+					 }else if(e.stateId==904){
+						 $("#ccc").append(
+								 "<tr><td>"+e.demandTitle+"</td>"+
+									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.userAccount+"</td>"+
+									"<td>"+e.demandid+"</td>"+
+									"<td>已拒绝</td>"+
+									"<td><a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>&nbsp;"+
+									"</tr>"
+									)
+					 }
+				 }
+	   		 }
+	   	})
+	       return true;
+}
+else {
+	 return false;
+}
 }
 </script>
 </body>

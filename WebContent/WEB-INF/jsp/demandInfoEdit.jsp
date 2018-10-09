@@ -188,10 +188,13 @@
 									  <div class="ydc-btn" style="margin-top:20px;">
 									  <input type="hidden" id="demandid" name="demandid" value="${demandInfo.demandId}">
                                             <button class="btn">修改</button>
-                                            <button class="btn" onClick="location.href='<%=path%>demand/returnDemand.action'">返回</button>
+                                           
                                        </div>
 									
 								</form>
+								<div class="ydc-btn" style="margin-top:20px;">
+								<button class="btn" onClick="location.href='<%=path%>demand/returnDemand.action'">返回</button>
+								</div>
 							</div>
 						</div>
 					</div>

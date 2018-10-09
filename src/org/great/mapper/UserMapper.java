@@ -39,7 +39,7 @@ public List<UserBean> login(String userAccount,String userPwd);
 public List<UserBean> getCredit();//得到低信誉用户
 public List<UserBean> userCredit(@Param("end")int end,@Param("start")int start);//分页查询低信誉用户
 public UserInfoBean searchCredit(@Param("username")String username);//查询用户信誉
-public List<UserBean> updateInfo(String userAccount); //查询修改单个用户信息
+public List<UserBean> updateInfo(@Param("userAccount")String userAccount); //查询修改单个用户信息
 public int updateUser(UserBean userBean); //修改雇主用户
 public List<UserBean> selectAll();//查询总雇主
 public int insertStory(UserStoryBean usb);//插入故事
@@ -50,6 +50,7 @@ public int countStory(@Param("title")String title,@Param("state")int state);//�
 public int delStory(@Param("userAccount")String userAccount);//删除雇主故事
 public List<UserStoryBean> updateOne(@Param("userAccount")String userAccount); //查询单个故事
 public int updateOk(UserStoryBean usb); //确认修改故事
+
 public int forbiddenStory(@Param("account")String account);//禁用故事
 public int startStory(@Param("account")String account);//启用故事
 /*雇主注册*/

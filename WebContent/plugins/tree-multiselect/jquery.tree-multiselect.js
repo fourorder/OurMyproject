@@ -915,7 +915,7 @@ exports.createSelection = function (option, treeId, createCheckboxes, disableChe
     selectionNode.insertBefore(inputCheckbox, selectionNode.firstChild);
 
     var labelProps = {
-      for: optionLabelCheckboxId,
+      for: optionLabelCheckboxId, 
       text: option.text || option.value 
     };
     var label = exports.createNode('label', labelProps);
