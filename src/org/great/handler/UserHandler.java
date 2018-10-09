@@ -116,10 +116,10 @@ ModelAndView UserInformation(HttpServletRequest request,String userid){
 	}
 	@RequestMapping("/ToUserInforEdit.action") // 修改后返回个人中心
 	public ModelAndView ToUserInforEdit(HttpServletRequest request,String userId,String userProfile,
-			String userName,String userIdentity,String userTel,String userMail,MultipartFile file) {
+			String userName,String userIdentity,String userTel,String userMail,MultipartFile file,String userAddress) {
 		ModelAndView modelAndView = new ModelAndView();
 		
-		userBizImp.userInfoEdit(request,userId, userProfile, userName, userIdentity, userTel, userMail,file);
+		userBizImp.userInfoEdit(request,userId, userProfile, userName, userIdentity, userTel, userMail,file,userAddress);
 		request.setAttribute("userInfo", userBizImp.userinfo(userId));
 		UserBean userBean = (UserBean) request.getSession().getAttribute("user");
 		userBean.setUserHead(userBizImp.userinfo(userId).getUserHead());

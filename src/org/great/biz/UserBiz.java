@@ -45,7 +45,7 @@ public interface UserBiz {
 	public List<List<Object>> userCredit(String page,String state);
 	public UserInfoBean searchCredit(String username);
 	//修改用户资料
-	public boolean userInfoEdit (HttpServletRequest request,String userId,String userProfile,String userName,String userIdentity,String userTel,String userMail,MultipartFile file);	
+	public boolean userInfoEdit (HttpServletRequest request,String userId,String userProfile,String userName,String userIdentity,String userTel,String userMail,MultipartFile file,String userAddress);	
 	public int countEmployers();//查询雇主的总个数；
 	public List<UserBean> countFacilitator();
 	public List<UserBean> countFacilitator2();

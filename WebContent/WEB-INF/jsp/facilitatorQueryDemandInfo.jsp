@@ -173,9 +173,12 @@
 											<label class="aui">服务商签署合同时间:${contract.toTime}</label>
 								</div>
 								
-								<c:if test="${contract.parameterBean.parameterId==2042}">
+								<c:if test="${contract.parameterBean.parameterId==2042 || contract.parameterBean.parameterId==2085}">
 								<div class="aui-card-form-item">
 											<label class="aui"><a href="<%=path %>download.action?upUrl=${contract.contractPath}"   class=" btn btn-warning illegalBtn rightSize"  type="button"  data-id=${list.productionId } id="illegal">下载合同</a></label>
+								</div>
+								<div class="aui-card-form-item">
+											<label class="aui"><a href="<%=path %>#=${contract.contractPath}"   class=" btn btn-warning illegalBtn rightSize"  type="button"  data-id=${list.productionId } id="illegal">打印合同</a></label>
 								</div>
 								</c:if>
 								

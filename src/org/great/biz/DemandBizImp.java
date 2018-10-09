@@ -19,6 +19,7 @@ import org.great.bean.DailyBean;
 import org.great.bean.CounselorInfoBean;
 import org.great.bean.DemandBean;
 import org.great.bean.DemandBeanX;
+import org.great.bean.DemandDealBean;
 import org.great.bean.DemandInfoBean;
 import org.great.bean.ParameterBean;
 import org.great.bean.QueryBean;
@@ -33,6 +34,10 @@ public class DemandBizImp implements DemandBiz {
 	private DemandMapper demandMapper;
 	private int star;
 	private int end;
+	public int result;// ajax返回结果
+	public double myMoney;// 用户金额
+	public double adminMoney;// 管理员金额
+	public double price;
 	@Resource
 	private QueryBean queryBean;
 
@@ -40,9 +45,9 @@ public class DemandBizImp implements DemandBiz {
 	public int addDemand(HttpServletRequest request, String userId, String demandTitle, String demandInformation,
 			String parameterId, MultipartFile file, String dealMoney, String securityMoney) {
 		String demandHead = upLoadFile(request, file);
-		System.out.println("demandHead="+demandHead);
-		if(demandHead == null || demandHead == ""){
-			demandHead="noimg.gif";
+
+		if (demandHead == null || demandHead == "") {
+			demandHead = "noimg.gif";
 		}
 		return demandMapper.addDemand(demandTitle, demandInformation, parameterId, userId, demandHead, dealMoney,
 				securityMoney);
@@ -110,7 +115,7 @@ public class DemandBizImp implements DemandBiz {
 	@Override
 	public List<Object> queayDemandList(String state, String page, String searchName) {
 		// ajax
-		
+
 		List<Object> list = new ArrayList<Object>();
 		int getPage = Integer.parseInt(page);
 
@@ -135,7 +140,7 @@ public class DemandBizImp implements DemandBiz {
 		end = getPage * 8;
 		star = end - 7;
 		queryBean = new QueryBean(searchName, star, end);
-		
+
 		list.add(getPage);
 		list.add(countPage);
 		list.add(demandMapper.getDemandList(queryBean));
@@ -407,7 +412,7 @@ public class DemandBizImp implements DemandBiz {
 	@Override
 	public int sumbit(String content, int processId) {
 		// TODO Auto-generated method stub
-		System.out.println("content=" + content + "processId=" + processId);
+
 		return demandMapper.sumbit(content, processId);
 	}
 
@@ -520,27 +525,27 @@ public class DemandBizImp implements DemandBiz {
 		updateDemandBean.setStateId("1863");
 		updateDemandBean.setDemandId(demandid);
 		demandMapper.updateDemand(updateDemandBean);
-		//修改任务表状态
+		// 修改任务表状态
 		demandMapper.updateDemandDeal(demandid, "2083", totime);
 	}
 
 	@Override
 	public void submissionDemand(HttpServletRequest request, String demandid, MultipartFile file) {
-		//文件路径
+		// 文件路径
 		String filePath = upLoadFile(request, file);
 		// 改需求表状态
-				UpdateDemandBean updateDemandBean = new UpdateDemandBean();
-				updateDemandBean.setFilePath(filePath);
-				updateDemandBean.setDemandId(demandid);
-				updateDemandBean.setStateId("2272");
-				demandMapper.updateDemand(updateDemandBean);
-				//修改任务表状态
-				demandMapper.updateDemandDeal(demandid,"2084",null);
+		UpdateDemandBean updateDemandBean = new UpdateDemandBean();
+		updateDemandBean.setFilePath(filePath);
+		updateDemandBean.setDemandId(demandid);
+		updateDemandBean.setStateId("2272");
+		demandMapper.updateDemand(updateDemandBean);
+		// 修改任务表状态
+		demandMapper.updateDemandDeal(demandid, "2084", null);
 	}
 
 	@Override
 	public void updateDemandInfo(HttpServletRequest request, String demandTitle, String demandInformation,
-			String parameterId, MultipartFile file, String dealMoney, String securityMoney,String demandid) {
+			String parameterId, MultipartFile file, String dealMoney, String securityMoney, String demandid) {
 		String demandHead = upLoadFile(request, file);
 		UpdateDemandBean updateDemandBean = new UpdateDemandBean();
 		updateDemandBean.setDemandId(demandid);
@@ -551,43 +556,44 @@ public class DemandBizImp implements DemandBiz {
 		updateDemandBean.setSecurityMoney(securityMoney);
 		updateDemandBean.setDemandHead(demandHead);
 		demandMapper.updateDemand(updateDemandBean);
-		
+
 	}
 
 	@Override
 	public List<Object> selectDemandFacilitator(String userid, String state, String page, String searchName,
 			String parameterid, String stateid) {
 		// 服务商ajax
-				List<Object> list = new ArrayList<Object>();
+		List<Object> list = new ArrayList<Object>();
 
-				int getPage = Integer.parseInt(page);
+		int getPage = Integer.parseInt(page);
 
-				int count = demandMapper.demandCountFacilitator(searchName, userid, parameterid, stateid);
+		int count = demandMapper.demandCountFacilitator(searchName, userid, parameterid, stateid);
 
-				int countPage = (int) Math.ceil(((float) count) / 6);
+		int countPage = (int) Math.ceil(((float) count) / 6);
 
-				if (state == null) {
-					state = "";
-				}
+		if (state == null) {
+			state = "";
+		}
 
-				if (state.equals("next") && getPage < countPage) {
-					getPage++;
-				} else if (state.equals("last") && getPage > 1) {
-					getPage--;
-				} else if (state.equals("jump")) {
+		if (state.equals("next") && getPage < countPage) {
+			getPage++;
+		} else if (state.equals("last") && getPage > 1) {
+			getPage--;
+		} else if (state.equals("jump")) {
 
-				} else if (state.equals("query")) {
-					getPage = 1;
-				}
-				
-				end = getPage * 6;
-				star = end - 5;
-				list.add(getPage);
-				list.add(countPage);
-				list.add(count);
-				list.add(demandMapper.getDemandInfoFacilitatorList(star + "", end + "", searchName, userid, parameterid, stateid));
-				return list;
-		
+		} else if (state.equals("query")) {
+			getPage = 1;
+		}
+
+		end = getPage * 6;
+		star = end - 5;
+		list.add(getPage);
+		list.add(countPage);
+		list.add(count);
+		list.add(demandMapper.getDemandInfoFacilitatorList(star + "", end + "", searchName, userid, parameterid,
+				stateid));
+		return list;
+
 	}
 
 	@Override
@@ -601,5 +607,276 @@ public class DemandBizImp implements DemandBiz {
 			String parameterid, String stateid) {
 		// TODO Auto-generated method stub
 		return demandMapper.getDemandInfoFacilitatorList(star, end, name, userid, parameterid, stateid);
+	}
+
+	@Override
+	public int applicationConsultantajax(String employerId, String consultantId, String demandId,
+			String counselorMoney) {
+
+		// 找顾问方法ajax跳转
+		// 1是成功
+		// 3金额不足
+		result = 0;
+		// 找顾问的费用
+		price = Double.parseDouble(counselorMoney);
+		// 获取雇主金额
+		myMoney = demandMapper.getUserMoney(employerId);
+
+		if (myMoney - price >= 0) {
+			result = 1;
+			// 扣款
+			myMoney = myMoney - price;
+			// 雇主更新金额，插入记录
+			demandMapper.updateUserMoney(employerId, myMoney + "");
+			demandMapper.addFund(employerId, "4", "4", counselorMoney);
+			// 超级关联员更新金额，插入记录
+			adminMoney = demandMapper.getUserMoney("4");
+			adminMoney = adminMoney + price;
+			demandMapper.updateUserMoney("4", adminMoney + "");
+			demandMapper.addFund("4", "4", employerId, counselorMoney);
+			// 改状态
+			UpdateDemandBean demandBean = new UpdateDemandBean();
+			demandBean.setStateId("1862");
+			demandBean.setDemandId(demandId);
+			demandMapper.updateDemand(demandBean);
+
+		} else {
+			result = 3;
+		}
+		return result;
+	}
+
+	@Override
+	public int stateDemandBidajax(String uesrid, String completeTime, String demandid, String auctionTime,
+			String dealMoney) {
+		// 找顾问方法ajax跳转
+		// 1是成功
+		// 3金额不足
+		result = 0;
+		// 发布需求的费用
+		price = Double.parseDouble(dealMoney);
+		// 获取雇主金额
+		myMoney = demandMapper.getUserMoney(uesrid);
+		if (myMoney - price >= 0) {
+			result = 1;
+			// 扣款
+			myMoney = myMoney - price;
+			// 雇主更新金额，插入记录
+			demandMapper.updateUserMoney(uesrid, myMoney + "");
+			demandMapper.addFund(uesrid, "1", "4", dealMoney);
+			// 超级关联员更新金额，插入记录
+			adminMoney = demandMapper.getUserMoney("4");
+			adminMoney = adminMoney + price;
+			demandMapper.updateUserMoney("4", adminMoney + "");
+			demandMapper.addFund("4", "1", uesrid, dealMoney);
+			// 改状态
+			Date date = new Date();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			String publishTime = format.format(date);
+			UpdateDemandBean demandBean = new UpdateDemandBean();
+			demandBean.setDemandId(demandid);
+			demandBean.setStateId("9");
+			demandBean.setAuctionTime(auctionTime);
+			demandBean.setCompleteTime(completeTime);
+			demandBean.setPublishTime(publishTime);
+			demandMapper.updateDemand(demandBean);
+
+		} else {
+			result = 3;
+		}
+		return result;
+	}
+
+	@Override
+	public List<Object> addBidAjax(String userid, String demandid, String securityMoney) {
+		List<Object> list = new ArrayList<Object>();
+		// 状态
+		// 判断是否已经投标 1已投。2成功3/余额不足
+		result = 0;
+		// ArrayList<BidBean>bidList = demandMapper.getBidList(demandid);
+		BidBean bidBean = demandMapper.getBidBean(userid, demandid);
+
+		if (bidBean != null) {
+			result = 1;
+		} else {
+
+			// 发布需求的费用
+			price = Double.parseDouble(securityMoney);
+			// 获取雇主金额
+			myMoney = demandMapper.getUserMoney(userid);
+			if (myMoney - price >= 0) {
+				result = 2;
+				// 扣款
+				myMoney = myMoney - price;
+				// 雇主更新金额，插入记录
+				demandMapper.updateUserMoney(userid, myMoney + "");
+				demandMapper.addFund(userid, "2", "4", securityMoney);
+				// 超级关联员更新金额，插入记录
+				adminMoney = demandMapper.getUserMoney("4");
+				adminMoney = adminMoney + price;
+				demandMapper.updateUserMoney("4", adminMoney + "");
+				demandMapper.addFund("4", "2", userid, securityMoney);
+				// 插入语句
+				// 改状态
+				Date date = new Date();
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String bidtime = format.format(date);
+				demandMapper.addBid(userid, demandid, bidtime);
+
+			} else {
+				result = 3;
+			}
+		}
+		list.add(result);
+		list.add(demandMapper.getBidList(demandid));
+
+		return list;
+	}
+
+	@Override
+	public void refundBid(String userid, String demandid, String securityMoney) {
+		// 发布需求的费用
+		price = Double.parseDouble(securityMoney);
+		ArrayList<BidBean> bidlist = demandMapper.refundBid(userid, demandid);
+		if (bidlist != null) {
+			for (int i = 0; i < bidlist.size(); i++) {
+				// 管理员扣钱
+				adminMoney = demandMapper.getUserMoney("4");
+				adminMoney = adminMoney - price;
+				demandMapper.updateUserMoney("4", adminMoney + "");
+				demandMapper.addFund("4", "10", bidlist.get(i).getUserId() + "", securityMoney);
+				// 服务商加钱
+				myMoney = demandMapper.getUserMoney(bidlist.get(i).getUserId() + "");
+				myMoney = myMoney + price;
+				// 雇主更新金额，插入记录
+				demandMapper.updateUserMoney(bidlist.get(i).getUserId() + "", myMoney + "");
+				demandMapper.addFund(bidlist.get(i).getUserId() + "", "10", bidlist.get(i).getUserId() + "",
+						securityMoney);
+			}
+		}
+
+	}
+
+	@Override
+	public DemandDealBean getDemandDealBean(String demandId) {
+		// TODO Auto-generated method stub
+		return demandMapper.getDemandDealBean(demandId);
+	}
+
+	@Override
+	public void complete(String demandid, String toUserId, String dealMoney, String securityMoney) {
+		demandMapper.updateDemandDeal(demandid, "2086", null);
+		// 获取押金
+		price = Double.parseDouble(securityMoney);
+		// 获取管理员金额
+		adminMoney = demandMapper.getUserMoney("4");
+		// 退还押金
+		adminMoney = adminMoney - price;
+		demandMapper.updateUserMoney("4", adminMoney + "");
+		demandMapper.addFund("4", "10", toUserId, securityMoney);
+		// 获取服务商金额
+		myMoney = demandMapper.getUserMoney(toUserId);
+		myMoney = myMoney + price;
+		demandMapper.updateUserMoney(toUserId, myMoney + "");
+		demandMapper.addFund(toUserId, "10", toUserId, securityMoney);
+		// 获取管理员金额
+		price = Double.parseDouble(dealMoney);
+		adminMoney = demandMapper.getUserMoney("4");
+		// 扣除佣金
+		adminMoney = adminMoney - price;
+		demandMapper.updateUserMoney("4", adminMoney + "");
+		demandMapper.addFund("4", "13", toUserId, securityMoney);
+		// 计算佣金和中介费
+		double agency = price * 0.02;
+		double my = price - agency;
+		// 管理员加中介费
+		adminMoney = demandMapper.getUserMoney("4");
+		adminMoney = adminMoney + agency;
+		demandMapper.updateUserMoney("4", adminMoney + "");
+		demandMapper.addFund("4", "9", toUserId, agency + "");
+		// 服务商加佣金
+		myMoney = demandMapper.getUserMoney(toUserId);
+		myMoney = myMoney + my;
+		demandMapper.updateUserMoney(toUserId, myMoney + "");
+		demandMapper.addFund(toUserId, "5", "4", my + "");
+
+	}
+
+	@Override
+	public void consultantCosts(String action, String demandid, String userid) {
+		// TODO Auto-generated method stub
+		// 获取需求信息
+		DemandInfoBean infoBean = demandMapper.getDemandInfoBean(demandid);
+		// 获取顾问金额
+		CounselorInfoBean counselorInfoBean = demandMapper.getCounselorInfoXX(userid);
+		String counselorMoney = counselorInfoBean.getCounselorMoney();
+		price = Double.parseDouble(counselorMoney);
+		String employer = infoBean.getFromUserBean().getUserId() + "";
+		if (action.equals("ok")) {
+			// 顾问通过加钱
+			UpdateDemandBean demandBean = new UpdateDemandBean();
+			demandBean.setDemandId(demandid);
+			demandBean.setAdviserId(userid);
+			demandMapper.updateDemand(demandBean);
+			
+			
+			myMoney = demandMapper.getUserMoney(userid);
+			myMoney = myMoney + price;
+			demandMapper.updateUserMoney(userid, myMoney + "");
+			demandMapper.addFund(userid, "4", userid, price + "");
+			// 服务商扣钱
+			adminMoney = demandMapper.getUserMoney("4");
+			adminMoney = adminMoney - price;
+			demandMapper.updateUserMoney("4", adminMoney + "");
+			demandMapper.addFund("4", "4", userid, counselorMoney);
+
+		} else if (action.equals("refuse")) {
+			// 不通过雇主加钱
+			myMoney = demandMapper.getUserMoney(employer);
+			myMoney = myMoney + price;
+			demandMapper.updateUserMoney(employer, myMoney + "");
+			demandMapper.addFund(employer, "14", employer, price + "");
+			// 管理员退钱
+			adminMoney = demandMapper.getUserMoney("4");
+			adminMoney = adminMoney - price;
+			demandMapper.updateUserMoney("4", adminMoney + "");
+			demandMapper.addFund("4", "14", employer, price + "");
+		}
+	}
+
+	@Override
+	public void downline(String userid, String demandid, String dealMoney,String securityMoney) {
+		// TODO Auto-generated method stub
+		price = Double.parseDouble(dealMoney);
+
+		// 用户通过加钱
+		myMoney = demandMapper.getUserMoney(userid);
+		myMoney = myMoney + price;
+		demandMapper.updateUserMoney(userid, myMoney + "");
+		demandMapper.addFund(userid, "12", "4", dealMoney);
+		// 服务商扣钱
+		adminMoney = demandMapper.getUserMoney("4");
+		adminMoney = adminMoney - price;
+		demandMapper.updateUserMoney("4", adminMoney + "");
+		demandMapper.addFund("4", "12", userid, dealMoney);
+		// 发布需求的费用
+		price = Double.parseDouble(securityMoney);
+		ArrayList<BidBean> bidlist = demandMapper.refundBid(userid, demandid);
+		if (bidlist != null) {
+			for (int i = 0; i < bidlist.size(); i++) {
+				// 管理员扣钱
+				adminMoney = demandMapper.getUserMoney("4");
+				adminMoney = adminMoney - price;
+				demandMapper.updateUserMoney("4", adminMoney + "");
+				demandMapper.addFund("4", "10", bidlist.get(i).getUserId() + "", securityMoney);
+				// 服务商加钱
+				myMoney = demandMapper.getUserMoney(bidlist.get(i).getUserId() + "");
+				myMoney = myMoney + price;
+				// 雇主更新金额，插入记录
+				demandMapper.updateUserMoney(bidlist.get(i).getUserId() + "", myMoney + "");
+				demandMapper.addFund(bidlist.get(i).getUserId() + "", "10", bidlist.get(i).getUserId() + "",
+						securityMoney);
+			}
+		}
 	}
 }

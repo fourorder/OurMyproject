@@ -35,6 +35,7 @@ public class DemandHandler {
 	private int countpage;// 总页
 	private String searchName;
 	private int count;// 总条数
+
 	@Resource
 	private DemandBiz demandBizImp;
 	@Resource
@@ -109,12 +110,12 @@ public class DemandHandler {
 	// ajax我要投标
 	@RequestMapping("/addBid.action") // ajax分页跳转
 	@ResponseBody
-	public ArrayList<BidBean> addBid(HttpServletRequest request, String demandid) {
-
+	public List<Object> addBid(HttpServletRequest request, String demandid, String securityMoney) {
+		System.out.println(demandid);
+		System.out.println("securityMoney=" + securityMoney);
 		userBean = (UserBean) request.getSession().getAttribute("user");
 
-		demandBizImp.addBid(userBean.getUserId() + "", demandid);
-		return demandBizImp.getBidList(demandid);
+		return demandBizImp.addBidAjax(userBean.getUserId() + "", demandid, securityMoney);
 	}
 
 	//// 雇主进入个人中心查看已发布需求 demandControl 9/27
@@ -334,13 +335,15 @@ public class DemandHandler {
 
 	// 确定投标人
 	@RequestMapping("/determineBid.action")
-	public ModelAndView determineBid(HttpServletRequest request, String userid, String demandid) {
+	public ModelAndView determineBid(HttpServletRequest request, String userid, String demandid, String securityMoney) {
 		ModelAndView modelAndView = new ModelAndView();
 		UpdateDemandBean demandBean = new UpdateDemandBean();
 		demandBean.setToUserId(userid);
 		demandBean.setStateId("10");
 		demandBean.setDemandId(demandid);
 		demandBizImp.updateDemand(demandBean);
+		// 将未投标成功的用户的钱款退回
+		demandBizImp.refundBid(userid, demandid, securityMoney);
 		modelAndView.setViewName("redirect:/demand/goDemandControl.action");
 		return modelAndView;
 	}
@@ -594,8 +597,9 @@ public class DemandHandler {
 		modelAndView.setViewName("jsp/queryDemandInfo");
 		request.setAttribute("demandInfo", demandBizImp.getDemandInfoBean(demandid));
 		// 获取合同信息
-
 		request.setAttribute("contract", demandBizImp.getContract(demandid));
+		// 获取交易信息
+		request.setAttribute("demandDeal", demandBizImp.getDemandDealBean(demandid));
 		return modelAndView;
 	}
 
@@ -614,14 +618,15 @@ public class DemandHandler {
 
 	// 需求下线
 	@RequestMapping("/demandDownline.action")
-	public ModelAndView demandDownline(HttpServletRequest request, String demandid) {
+	public ModelAndView demandDownline(HttpServletRequest request, String demandid,String dealMoney,String securityMoney) {
 		ModelAndView modelAndView = new ModelAndView();
 		UpdateDemandBean demandBean = new UpdateDemandBean();
 		demandBean.setStateId("1861");
 		demandBean.setDemandId(demandid);
 		demandBizImp.updateDemand(demandBean);
 		modelAndView.setViewName("redirect:/demand/goDemandControl.action");
-
+		userBean = (UserBean) request.getSession().getAttribute("user");
+		demandBizImp.downline(userBean.getUserId()+"", demandid, dealMoney,securityMoney);
 		return modelAndView;
 	}
 
@@ -692,5 +697,37 @@ public class DemandHandler {
 			String parameterid, String stateid) {
 
 		return demandBizImp.selectDemandFacilitator(userid, state, page, searchName, parameterid, stateid);
+	}
+
+	// 申请顾问，改成ajax申请
+	@RequestMapping("/applicationConsultantajax.action") // ajax分页跳转
+	@ResponseBody
+	public int applicationConsultantajax(String employerId, String consultantId, String demandId,
+			String counselorMoney) {
+
+		return demandBizImp.applicationConsultantajax(employerId, consultantId, demandId, counselorMoney);
+
+	}
+
+	// 开始投标，改成ajax申请
+	// 修改需求信息，加工期，加开始时间，改状态，返回需求列表、
+	@RequestMapping("/stateDemandBidajax.action") // ajax分页跳转
+	@ResponseBody
+	public int stateDemandBidajax(String uesrid, String completeTime, String demandid, String auctionTime,
+			String dealMoney) {
+
+		return demandBizImp.stateDemandBidajax(uesrid, completeTime, demandid, auctionTime, dealMoney);
+	}
+
+	// 完成交易。改状态，付款等等~complete
+	// 服务商查看需求详情 complete.jsp
+	@RequestMapping("/complete.action")
+	public ModelAndView complete(HttpServletRequest request, String demandid,String toUserId,String dealMoney,String securityMoney) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/demand/queryDemandInfo.action?demandid="+demandid);
+		
+		demandBizImp.complete(demandid, toUserId, dealMoney, securityMoney);
+		
+		return modelAndView;
 	}
 }

@@ -114,7 +114,7 @@
 							</ul>
 
 						</div>
-						<form method="post" action="<%=path%>demand/stateDemandBid.action">
+						
 
 								<div class="ydc-form-city">
 										<div class="aui-card-form-item">
@@ -176,16 +176,10 @@
 										
 										
 										<div class="ydc-btn">
-											<button class="btn">开始投标</button>
-											
-										</div>
-										</div>
-										</div>
-									</form>
-								<div class="ydc-btn">
+											<button class="btn" onclick="stateDemand()">开始投标</button>
 											<button class="btn" onClick="location.href='<%=path%>demand/returnDemand.action'">返回</button>
-											
 										</div>
+								
 							</div>
 
 						</div>
@@ -199,52 +193,49 @@
 	<!-- content YDC end -->
         <script type="text/javascript" src="<%=path%>admin/js/nicEdit.js"></script>
         <script type="text/javascript" src="<%=path%>admin/js/upImg.js"></script>
-        <script type="text/javascript">
-            
-	    jQuery(function(){
-	        upload_start();
-	    });
-	    //tab切换
-	    $(function(){
-	        $('.aui-ad-tab-title ul li').click(function(){
-	            $(this).addClass('aui-current').siblings().removeClass('aui-current');
-	            $('.aui-ad-tab-body>div:eq('+$(this).index()+')').show().siblings().hide();
-	        })
-	    });
+       
+       <!-- 开始投标ajax	 -->
+ <script type="text/javascript" src="<%=path%>admin/js/jquery.min.js"></script>
+	<script type="text/javascript">
 	
-        </script>
-      <!--   <script type="text/javascript">
-            
-	    bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });//编辑器
-	
-        </script> -->
-        <script type="text/javascript">
-            
-	   
-	
-        </script>
-        <script type="text/javascript">
-            
-	    $(function(){
-	        $('.ydc-tabPanel ul li').click(function(){
-	            $(this).addClass('hit').siblings().removeClass('hit');
-	            $('.ydc-panes>div:eq('+$(this).index()+')').show().siblings().hide();
-	        })
-	    })//tab
-	
-        </script>
-        <script type="text/javascript">
-            
-	    function textLimitCheck(thisArea, maxLength){
-	        if (thisArea.value.length > maxLength){
-	            alert(maxLength + ' 个字限制. \r超出的将自动清除.');
-	            thisArea.value = thisArea.value.substring(0, 30);
-	            thisArea.focus();    }
-	        messageCount.innerText = thisArea.value.length;
-	        messageCount1.innerText = thisArea.value.length;
-	        messageCount2.innerText = thisArea.value.length;
-	    }//标题输入框字数限制
-	
-        </script>
+	function stateDemand() {
+		var uesrId = ${demandInfo.fromUserBean.userId};
+		var demandid=${demandInfo.demandId};
+		var dealmoney=${demandInfo.dealMoney}
+		var completetime = $('#completeTime').val();
+		var auctiontime = $('#auctionTime').val();
+		if(completetime != 0 && completetime != 0 && auctiontime != 0 && auctiontime != 0){
+			var ss = confirm("是否开始投标，投标后我们将在收取需求佣金后开始将你的需求进行投标。");
+			if (ss == true){
+				
+				 $.ajax({
+		        	 url:"<%=path%>demand/stateDemandBidajax.action",
+		       		 data:"uesrid="+uesrId+"&completeTime="+$('#completeTime').val()+"&demandid="+demandid+"&auctionTime="+$('#auctionTime').val()+"&dealMoney="+dealmoney,
+		       		 dataType:"json",
+		       		 type:"post",
+		       		 success:function(redata){
+		       			
+		       			if(redata==1){
+		       				alert("投标成功，可在需求中心查看结果");
+		       				window.location.href="<%=path%>demand/goDemandControl.action";
+
+		       			}else if(redata==3){
+		       				var r = confirm("用户余额不足，是否进入充值页面");
+		       				if (r == true){
+		       					window.location.href="<%=path%>user/accountManage.action?page=1";
+		       				}
+		       			}
+					   
+		       			
+		       		 }
+
+				});
+			}
+		}else{
+			alert("请正确填写工期或招标周期");
+		}
+		
+	}
+</script>
 </body>
 </html>

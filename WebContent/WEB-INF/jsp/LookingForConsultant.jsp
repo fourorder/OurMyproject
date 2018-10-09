@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -28,10 +28,8 @@
 	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">
 	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/home.css">
 <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-<script type="text/javascript"
-	src="<%=path%>admin/js/jquery-1.5.2.min.js"></script>
-	<script src="<%=path%>demand/js/common.js" type="text/javascript"
-	charset="utf-8"></script>
+<script type="text/javascript" src="<%=path%>admin/js/jquery-1.5.2.min.js"></script>
+	<script src="<%=path%>demand/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 
         var currentShowCity=0;
@@ -166,7 +164,8 @@
 											<div class="ydc-actions">
 												<div>
 													<a href="<%=path%>user/EmployerInformation.action?userid=${consList.userBean.userId}" target="_blank" ><button class="ydc-actions-trigger">查看详情</button></a>
-													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/applicationConsultant.action?userid=${consList.userBean.userId} &demandid=${demandInfo.demandId}'">申请</button>
+													<%-- <button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/applicationConsultant.action?userid=${consList.userBean.userId} &demandid=${demandInfo.demandId}'">申请</button> --%>
+												<button class="ydc-actions-trigger" onclick="addAdviser(${consList.userBean.userId},${consList.counselorMoney})">申请</button>
 												</div>
 											</div>
 											<div class="ydc-group-table-item-text">
@@ -223,8 +222,39 @@
 					})
 		});
 	</script>
-	
-	
+<!-- 投标ajax	 -->
+ <script type="text/javascript" src="<%=path%>admin/js/jquery.min.js"></script>
+	<script type="text/javascript">
+	var employerId = ${demandInfo.fromUserBean.userId};
+	function addAdviser(consultantId,counselorMoney) {
+		var ss = confirm("是否选择该用户成为顾问？");
+		if (ss == true){
+			 $.ajax({
+	        	 url:"<%=path%>demand/applicationConsultantajax.action",
+	       		 data:"employerId="+employerId+"&consultantId="+consultantId+"&demandId=${demandInfo.demandId}"+"&counselorMoney="+counselorMoney,
+	       		 dataType:"json",
+	       		 type:"post",
+	       		 success:function(redata){
+	       			 
+	       			if(redata==1){
+	       				alert("申请成功，请耐心等待结果");
+	       				
+	       				window.location.href="<%=path%>demand/goDemandControl.action";
+
+	       			}else if(redata==3){
+	       				var r = confirm("用户余额不足，是否进入充值页面");
+	       				if (r == true){
+	       					window.location.href="<%=path%>user/accountManage.action?page=1";
+	       				}
+	       			}
+				   
+	       			
+	       		 }
+
+			});
+		}
+	}
+</script>
 	
 	
 

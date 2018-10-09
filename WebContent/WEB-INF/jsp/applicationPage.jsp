@@ -308,8 +308,8 @@ function applyForList(page){
 							"<td>"+e.userAccount+"</td>"+
 							"<td>"+e.demandid+"</td>"+
 							"<td>未处理</td>"+
-							"<td><a class='layui-btn layui-btn-sm layui-btn-danger' onclick='return firm()' href='<%=path%>counselor/applyForOk.action?action=ok&demandid="+e.demandid+"' >确认接受</a>"+
-							"<a class='layui-btn layui-btn-sm layui-btn-warm' onclick='return firm1()' href='<%=path%>counselor/applyForOk.action?action=refuse&demandid="+e.demandid+"'>拒绝接受</a>"+
+							"<td><a class='layui-btn layui-btn-sm layui-btn-danger' onclick='return firm()' href='<%=path%>counselor/applyForOk.action?action=ok&demandid="+e.demandid+"&userid="+userId+"' >确认接受</a>"+
+							"<a class='layui-btn layui-btn-sm layui-btn-warm' onclick='return firm1()' href='<%=path%>counselor/applyForOk.action?action=refuse&demandid="+e.demandid+"&userid="+userId+"'>拒绝接受</a>"+
 							"<a class='layui-btn layui-btn-sm' href='<%=path%>counselor/applyForOk.action?action=particulars&demandid="+e.demandid+"'>查看详情</a></td>"+
 							"</tr>"
 				 

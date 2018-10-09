@@ -220,8 +220,10 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 	
 	
 	@RequestMapping("/applyForOk.action")//确认通过雇主审核详情
-	public ModelAndView applyForOk(HttpServletRequest request,String action,String demandid){
+	public ModelAndView applyForOk(HttpServletRequest request,String action,String demandid,String userid){
 		System.out.println("通过拒绝详情操作");
+		System.out.println("userid="+userid);
+		demandBizImp.consultantCosts(action, demandid,userid);
 		int demandId=Integer.parseInt(demandid);
 		if(action.equals("ok")) {
 		int a=demandBizImp.applyFprPass(demandId);

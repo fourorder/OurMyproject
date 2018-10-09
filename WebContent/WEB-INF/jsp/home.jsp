@@ -76,7 +76,7 @@
 
 						</li>
 						<li class="clearfix">
-							<p><a href="#" title="寻找顾问"><i class="o-index3"></i>寻找顾问<b></b></a></p>						
+							<p><a href="<%=path%>demand/goDemandControl.action" title="寻找顾问"><i class="o-index3"></i>需求中心<b></b></a></p>						
 						</li>
 						
 					</ul>		

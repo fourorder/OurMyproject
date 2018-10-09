@@ -13,9 +13,9 @@ import org.springframework.stereotype.Repository;
 
 public interface UserMapper {
 			
-public void updateUserInfo(@Param("userId") String userId, @Param("userProfile") String userProfile,
-		@Param("userName") String userName, @Param("userIdentity") String userIdentity,
-		@Param("userTel") String userTel, @Param("userMail") String userMail, @Param("userHead")String userHead);//修改用户资料
+	public void updateUserInfo(@Param("userId") String userId, @Param("userProfile") String userProfile,
+			@Param("userName") String userName, @Param("userIdentity") String userIdentity,
+			@Param("userTel") String userTel, @Param("userMail") String userMail, @Param("userHead")String userHead,@Param("userAddress")String userAddress);//修改用户资料
 public List<UserBean> serachEmployer(@Param("name")String name,
 		@Param("end")int end,@Param("start")int start);
 public List<UserBean> employerNumber(@Param("name")String name);
