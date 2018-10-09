@@ -50,6 +50,22 @@
 		});
 	}
 </script>
+<script type="text/javascript">
+function checkMoney(){
+	var money=$("#money").val();
+//	alert(money);
+	var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+	if (reg.test(money)) {
+	 //  alert("正确~");
+	   return true;
+	}else{
+	   alert("金额输入有误~");
+	    return false;
+	};
+}
+
+
+</script>
 <style type="text/css">
 .aui {
     float: left;
@@ -111,7 +127,7 @@
 							</ul>
 						</div>
 						<div class="ydc-panes">
-							<form method="post" action="<%=path%>production/finshAddMoney.action"
+							<form method="post" action="<%=path%>production/finshAddMoney.action"  onSubmit="return checkMoney()"
 								enctype="multipart/form-data">
 								<div class="ydc-reg-form-class ydc-reg-form-reg"
 									style="margin-top: 40px;">
@@ -128,7 +144,7 @@
 											<label class="aui">用户账户:${user.userAccount}</label>
 									</div>
 									 <div class="aui-card-form-item">
-											<label class="aui">请输入充值的金额<input type="text" name="money"></label>
+											<label class="aui">请输入充值的金额<input type="text" name="money"   id="money"></label>
 									</div> 
 									 
 									 

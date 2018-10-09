@@ -50,5 +50,7 @@ public interface ProductionBiz {
 	//生成充值记录   插入表	
 		public void addMoneyPayFinish(HttpServletRequest request,SessionBean sessionBean);	
 
-
+      //购买前查询 前是否足够
+		
+		public Integer checkMoney(Integer userId,Integer proId);
 }

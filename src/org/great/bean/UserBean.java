@@ -15,7 +15,7 @@ public String userMail;//邮箱
 public String userIdentity;//身份证
 public String userAddress;//地址
 public String userHead;//头像
-public int userCredit;//信用分
+public double userCredit;//信用分
 public int userMoney;//余额
 public int stateId;//状态id
 public int characterId;//角色id
@@ -54,10 +54,12 @@ public UserBean() {
 	super();
 }
 
+ 
+
 public UserBean(int userId, String userName, String userPwd, long userTel, String userAccount, String userSex,
-		String userMail, String userIdentity, String userAddress, String userHead, int userCredit, int userMoney,
+		String userMail, String userIdentity, String userAddress, String userHead, double userCredit, int userMoney,
 		int stateId, int characterId, String userRegisterTime, String userProfile, String characterName,
-		String stateName) {
+		String stateName, int count, String parameterName) {
 	super();
 	this.userId = userId;
 	this.userName = userName;
@@ -77,6 +79,8 @@ public UserBean(int userId, String userName, String userPwd, long userTel, Strin
 	this.userProfile = userProfile;
 	this.characterName = characterName;
 	this.stateName = stateName;
+	this.count = count;
+	this.parameterName = parameterName;
 }
 
 public int getUserId() {
@@ -139,10 +143,10 @@ public String getUserHead() {
 public void setUserHead(String userHead) {
 	this.userHead = userHead;
 }
-public int getUserCredit() {
+public double getUserCredit() {
 	return userCredit;
 }
-public void setUserCredit(int userCredit) {
+public void setUserCredit(double userCredit) {
 	this.userCredit = userCredit;
 }
 public int getUserMoney() {

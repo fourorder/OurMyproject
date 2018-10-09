@@ -172,7 +172,10 @@ System.out.println("list的长度++++="+list.size());
 
 		ProductionBean productionBean = new ProductionBean();
 		productionBean = productionBizImp.findProductionDetal(proId);
-
+UserBean userBean=new UserBean();
+userBean=userMapper.user(productionBean.getUserId());
+productionBean.setUserName(userBean.getUserName());
+request.setAttribute("userBean", userBean);
 		request.setAttribute("productionBean", productionBean);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsp/productionDetal");
@@ -232,7 +235,7 @@ System.out.println("list的长度++++="+list.size());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsp/alipay.trade.page.pay");
 
-		return mav;
+		return new ModelAndView("redirect:/production/productionPayFinish.action?time="+time);
 
 	}
 
@@ -258,7 +261,7 @@ System.out.println("list的长度++++="+list.size());
 
 		System.out.println("生成交易记录，作品的作者ID=" + proUserId + "作品的价格，交易金额平台抽成10%=" + price);
 		productionBizImp.productionPayFinish(request, proId3, userId, proUserId, price);
-		return new ModelAndView("redirect:/production/toProductionPass.action?currentPage=1");
+		return new ModelAndView("redirect:/production/findBuyProduction.action?currentPage=1");
 
 		// return null;
 	}
@@ -315,7 +318,8 @@ System.out.println("list的长度++++="+list.size());
 		ArrayList<ParameterBean> list = new ArrayList<ParameterBean>();
 		list = parameterMapper.findProductionClass();
 		request.setAttribute("list", list);
-
+		UserBean userBean = (UserBean) request.getSession().getAttribute("user");
+		Menu(request, userBean);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsp/toEditProduction");
 
@@ -375,7 +379,9 @@ System.out.println("list的长度++++="+list.size());
 
 		ProductionBean productionBean = new ProductionBean();
 		productionBean = productionBizImp.findProductionDetal(proId);
-
+		UserBean userBean=new UserBean();
+		userBean=userMapper.user(productionBean.getUserId());
+		productionBean.setUserName(userBean.getUserName());
 		request.setAttribute("productionBean", productionBean);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsp/adminManageProductionDetal");
@@ -665,21 +671,43 @@ System.out.println("已购买作品翻页");
 		
 		//ArrayList<ProAndUserBean> proAndUserList = new ArrayList<ProAndUserBean>();		 
 		ProAndUserBean proAndUserBean=new ProAndUserBean();
-		 proAndUserBean=proAndUserMapper.findPayDetal(proId);
+		UserBean userBean = (UserBean) request.getSession().getAttribute("user");
+		 proAndUserBean=proAndUserMapper.findPayDetal(proId,userBean.getUserId());
 	//	System.out.println(proAndUserBean.getProAndUserId()+"该作品的评价="+proAndUserBean.getProductionEvaluate());
-		request.setAttribute("proAndUserList", proAndUserBean);
+		 UserBean userBean2=new UserBean();
+			userBean2=userMapper.user(productionBean.getUserId());
+			productionBean.setUserName(userBean2.getUserName());
+		 
+		 request.setAttribute("proAndUserList", proAndUserBean);
 		request.setAttribute("productionBean", productionBean);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsp/productionEvaluate");
-
+		// ------------菜单------
+		 
+				Menu(request, userBean);
+				// ---------------------
 		return mav;
 	}
 	@RequestMapping("/submitProductionEvaluate.action")
 	public ModelAndView submitProductionEvaluate(HttpServletRequest request, Integer point,Integer proAndUserId,String evaluate) {
 
+		
+		
 	 if(point!=null ) {
 		 System.out.println(point+"新的评价，购买记录id="+proAndUserId+"==-->"+evaluate);
 			proAndUserMapper.setProductionEvaluate(evaluate, proAndUserId, point);
+			ProAndUserBean proAndUserBean=new ProAndUserBean();
+			proAndUserBean=	proAndUserMapper.findProAndUserDetal(proAndUserId);
+			 ArrayList<Integer> list=new  ArrayList<Integer>();
+			 list=proAndUserMapper.findProUserPoint(proAndUserId);
+			int allPoint=0;
+			 for(int i=0;i<list.size();i++) {
+				 allPoint+=list.get(i);
+				 
+				 
+			 }
+			 double creditPoint=allPoint/(list.size());
+			 userMapper.updateCreditPoint(creditPoint, proAndUserBean.getProUserId());
 	 }
 		
 	 
@@ -799,5 +827,15 @@ long time = System.currentTimeMillis();
 		return new ModelAndView("redirect:/user/UserInformation.action");
 
 		// return null;
+	}
+	
+	@RequestMapping("/checkMoney.action")
+	@ResponseBody
+	public Integer checkMoney(HttpServletRequest request, Integer proId) {
+		System.out.println("检查账户余额");
+		UserBean userBean = (UserBean) request.getSession().getAttribute("user");
+		Integer result=	productionBizImp.checkMoney(userBean.getUserId(), proId);
+	 System.out.println(result);
+		return  result;
 	}
 }

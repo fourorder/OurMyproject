@@ -185,7 +185,7 @@
 									</div>
 									<div class="aui-card-form-item">
 										<label class="aui"><a
-											href="<%=path %>#=${contract.contractPath}"
+											href="<%=path %>user/print.action?url=${contract.contractPath}&page=redirect:/demand/queryDemandInfo.action?demandid=${demandInfo.demandId}"
 											class=" btn btn-warning illegalBtn rightSize" type="button"
 											data-id=${list.productionId } id="illegal">打印合同</a></label>
 									</div>

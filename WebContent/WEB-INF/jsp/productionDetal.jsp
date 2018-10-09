@@ -33,6 +33,39 @@
 	 $.ljsGlasses.pcGlasses(showproduct);//方法调用，务必在加载完后执行
   });
 </script>
+<script type="text/javascript">
+
+function checkMoney(proId){
+	
+	$.ajax({	
+		 async: false,
+		 url:"<%=path %>production/checkMoney.action",
+		 data:"proId="+proId,
+		 dataType:"json",
+		 type:"post",
+		 success:function(redata){
+			
+			 
+			 if(redata==0){
+				 alert("余额不足，请充值");
+				 return false;
+			 }
+			 
+			 if(redata==1){
+				 window.location.href="<%=path%>production/ProductionPay.action?proId="+proId;
+				 return true;
+			 }
+			 if(redata==3){
+				 alert("已购买过该作品！");
+				 return false;
+			 }
+		 }
+	})
+	
+}
+
+
+</script>
 </head>
 <body>
 
@@ -58,7 +91,7 @@
                         			<span class="nowprice">￥<a href=""> ${productionBean.productionMoney }</a></span>
                         			
                         		</div>
-                        	
+          
                         	<script>
                         	$(document).ready(function(){
                         	//����ı������
@@ -86,7 +119,7 @@
                          
                         	<div class="nobdr-btns">
                         		
-                        	<a href="<%=path%>production/ProductionPay.action?proId=${productionBean.productionId }">	<button class="addcart yh"><img src="<%=path%>images/ht.png" width="25" height="25"/>立即购买</button></a>
+                        	<a   onclick=" return checkMoney(${productionBean.productionId })"  >	<button class="addcart yh"><img src="<%=path%>images/ht.png" width="25" height="25"/>立即购买</button></a>
                         	</div>
                         	
                         </div>
@@ -94,7 +127,35 @@
                       
                     </div>                
 <!-- 推荐搭配 -->                
-                
+    <!--right -->
+		<div class="extInfo"">
+			<div class="brand-logo">
+				<a href="" title="服务商头像"> <img
+					src="<%=path%>picture/findPicture.action?url=${userBean.userHead}" width="150px" height="150px" />
+				</a>
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			
+			<div class="seller-pop-box">
+				<span class="tr">服务商名称：${userBean.userName}</span> <span
+					class="tr">服务商信用分：${userBean.userCredit}</span> <span
+					class="tr">服务商电话：${userBean.userTel}</span> <span
+					class="tr hoh"> <a title="服务商地址" href="">服务商地址：${userBean.userAddress}</a>
+				</span>
+			</div>
+			<div class="seller-phone">
+				  <span class="pop in"> <a href="<%=path%>chat/gotochat.action?account=${userBean.userAccount}" target="_blank" data-name="咨询服务商"><img
+						src="<%=path%>demand/images/qq.png" />咨询服务商</a>
+				</span>
+
+			</div>
+
+		</div>
+	</div>            
                 	
                 	     
                 
@@ -120,8 +181,8 @@
 													<div id="ui-a" class="ui-a">
 												        <ul style="display:block;">
 												        <li>商品名称：${productionBean.productionName }</li>
-												        <li>商品作者：${productionBean.userId }</li>
-												        <li>作品类别：${productionBean.parameterId }</li>
+												        <li>商品作者：${productionBean.userName }</li>
+												        <li>作品类别：${productionBean.className }</li>
 												        <li>作品介绍： ${productionBean.productionDetal } </li>
 												        <li>上架时间：${productionBean.productionPublishTime }</li>
 												       <li><img src="<%=path%>picture/findPicture.action?url=${productionBean.productionImage }"/></li>

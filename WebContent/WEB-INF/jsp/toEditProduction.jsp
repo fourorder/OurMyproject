@@ -24,53 +24,35 @@
         <meta name="description" content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。。">
         <meta name="author" content="AUI, a-ui.com">
         <meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
-        <title>发布文章--  媒体开放平台 一点车 -  让您多懂一点车</title>
+        <title>作品编辑</title>
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
         <link type="text/css" rel="stylesheet" href="<%=path%>css/core.css">
         <link type="text/css" rel="stylesheet" href="<%=path%>css/icon.css">
         <link type="text/css" rel="stylesheet" href="<%=path%>css/home.css">
         <script type="text/javascript" src="<%=path%>js/jquery-1.5.2.min.js"></script>
-        
+        <link rel="stylesheet" href="<%=path%>css/oindex.css">
     </head>
     <body>
         <!-- head YDC begin -->
         
-      <form  method="post" action="<%=path%>production/editProduction.action?proId=${production.productionId}" enctype="multipart/form-data" >
+      <form  method="post" action="<%=path%>production/editProduction.action?proId=${production.productionId}" enctype="multipart/form-data"  onSubmit="return check()">
         
-        <header class="ydc-header">
-            <div class="ydc-entered">
-                <div class="ydc-header-content ydc-flex">
-                    <div class="ydc-column">
-                        <a href="index.html" class="ydc-column-ydc-logo">
-                            <img src="<%=path%>/images/icon/ydc-logo.png" title="" about="" alt="">
-                        </a>
-                    </div>
-                    <div class="ydc-column">
-                        <div class="ydc-column-user">
-                            <div class="ydc-user-photo">
-                                <a href="javascript:;">
-                                    <img src="<%=path%>/images/icon/photo.png" title=""  about ="" alt="">
-                                </a>
-                            </div>
-                            <div class="ydc-user-info">
-                                <div class="ydc-user-info-name">
-                                    <a href="javascript:;">一点车</a>
-                                </div>
-                                <div class="ydc-user-info-func ydc-flex">
-                                    <span class="ydc-tag">新手期</span>
-                                    <span class="ydc-mal">
-                                        <i class="ydc-icon ydc-icon-mail fl"></i>
-                                        <em>12</em>
-                                    </span>
-                                    <a href="javascript:;">退出</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <div class="o-top">
+				<div class="width1180">
+					
+					<span class="fr">
+						<!-- <a href="#" title="登录">登录</a>
+						<a href="#" title="注册">注册</a> -->
+						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
+						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
+						<!--登录后
+						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
+						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
+						-->
+					</span>
+				</div>
+</div>
         <!-- head YDC end -->
         <!-- content YDC begin -->
         <section>
@@ -79,81 +61,19 @@
                     <!-- left begin -->
                     <div class="ydc-column ydc-column-2">
                         <div class="ydc-menu">
-                            <ul>
-                                <li class="ydc-menu-item">
-                                    <a href="index.html" class="">
-                                        <i class="ydc-icon ydc-icon-home fl"></i>
-                                        首页
+                             <ul>
+                                <c:forEach items="${menuList}"  var="menuList" >	          
+                               
+                               <li class="ydc-menu-item">
+                                    <a href="<%=path%>${menuList.pathName }" class="">
+                                        <i class="${menuList.divClass }"></i>
+                                        ${menuList.authorityName }
                                     </a>
                                 </li>
-                                <li class="ydc-menu-item">
-                                    <a href="release.html" class="active">
-                                        <i class="ydc-icon ydc-icon-find fl"></i>
-                                        发布
-                                    </a>
-                                </li>
-                                <li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-file fl"></i>
-                                        管理
-                                    </span>
-                                    <ul>
-                                        <li>
-                                            <a href="content.html">内容管理</a>
-                                        </li>
-                                        <li>
-                                            <a href="related.html">内容同步</a>
-                                        </li>
-                                        <li>
-                                            <a href="<%=path%>production/productionToManage.action">作品管理</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-record fl"></i>
-                                        数据
-								
-                                    </span>
-                                    <ul>
-                                        <li>
-                                            <a href="subscribe.html">订阅数据</a>
-                                        </li>
-                                        <li>
-                                            <a href="content-data.html">内容数据</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-starLevel.html">指数星级</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-set fl"></i>
-                                        设置
-								
-                                    </span>
-                                    <ul>
-                                        <li>
-                                            <a href="info.html">账号信息</a>
-                                        </li>
-                                        <li>
-                                            <a href="account.html">账号状态</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="ydc-menu-item">
-                                    <span class="ydc-menu-sub-title">
-                                        <i class="ydc-icon ydc-icon-customer fl"></i>
-                                        客服
-								
-                                    </span>
-                                    <ul>
-                                        <li>
-                                            <a href="#">在线咨询</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                               
+                               
+                               
+                               	</c:forEach>    
                             </ul>
                         </div>
                     </div>
@@ -165,13 +85,10 @@
                                 <div class="ydc-release-tab-head">
                                     <ul>
                                         <li class="hit">发布文章</li>
-                                        <li>发布图集</li>
+                                        
                                     </ul>
                                     <div class="ydc-release-amount">
-                                        <span>
-                                            今日发布数量：<em>0</em>
-                                            /6 <a href="standard.html" target="_blank">发文规范</a>
-                                        </span>
+                                      
                                     </div>
                                 </div>
                                 <div class="ydc-panes">
@@ -181,7 +98,7 @@
                                                 <p>标题字数需在11字到30字之间。</p>
                                             </div>
                                             <div class="ydc-release-form-group-input">
-                                                <input type="text" class="ydc-form-control"  name="title" title=""   value=${production.productionName }  onkeyUp="textLimitCheck(this, 30);">
+                                                <input type="text" class="ydc-form-control"  name="title"   id="title"    title=""   value=${production.productionName }  onkeyUp="textLimitCheck(this, 30);">
                                                 <div class="ydc-form-group-jl">
                                                     <span id="messageCount">0</span>
                                                     /30
@@ -214,7 +131,7 @@
                                                     </div>
                                                     <div class="aui-file-up-btn clearfix ">
                                                           <div class="idPicFile aui-btn aui-file-new">  
-                                                            <input type="file" name="file"   id="1" class="file_photo aui-file-new-up" style="margin:0;"/>
+                                                            <input type="file" name="file"   id="file" class="file_photo aui-file-new-up" style="margin:0;"/>
                                                             <a>上传图片</a>
                                                          </div> 
                                                          </div> 
@@ -223,10 +140,10 @@
                                                         </div>
                                                     
                                                 </div>
-                                                上传作品文件:<input type="file"   name="productionFile" />
+                                                上传作品文件:<input type="file"   name="productionFile"    id="productionFile"    />
                                                 
                                                  <div>
-                                            价格<input  type="text"  name="price"   value=${production.productionMoney} />
+                                            价格<input  type="text"  name="price"   id="price"    value=${production.productionMoney} />
                                             
                                             
                                             </div>
@@ -239,7 +156,7 @@
                                                 <input type="submit "  class="btn"  value="发布" /> -->
                                                     <button class="btn" type="submit"  >发布</button> 
                                                          
-                                                    <button class="btn btn-default">保存草稿</button>
+                                                  <!--   <button class="btn btn-default">保存草稿</button> -->
                                                 </div>
                                              
                                         </div>
@@ -316,7 +233,71 @@
 	    }//标题输入框字数限制
 	
         </script>
+        <script type="text/javascript">
+    function check(){
+    	var areaText=$("#area2").val(); 
+    	var title=$("#title").val();
+    	 var price=$("#price").val();
+    	// alert("qq");
+    	 var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+    	//alert("标题="+title);
+    if(title==""){
+    	alert("请输入标题");
+    	return false;
+    }else{
+    	  if(price==""){
+    	    	alert("请输入金额");
+    	    	return false;
+    	    }else{
+    	    	
+    	    	if (!(reg.test(price))) {
+    	    	 /* //  alert("正确~");
+    	    	   return true; */
+    	    		   alert("金额输入有误~");
+       	    	    return false;
+    	    	}else{
+    	    		if($("#area2").val().length<20){
+    	    			alert("请输入不少于10字的描述");
+    	    			 return false;
+    	    		}else{
+    	    			if(document.getElementById("productionFile").value == null || document.getElementById("productionFile").value == ""){
+        	                alert("请选择上传文件");
+        	                return false;
+        	                }else	{
+        	                					 if(document.getElementById("file").value == null || document.getElementById("file").value == ""){
+        	                	    	                alert("请选择上传图片");
+        	                	    	                return false;
+        	              				  }
+        	    	    }
+    	    		} 
+    	    		
+    	    	}
+    	    	
+    	    }
+    }
+   
+  
+    
+    
+	
+	
+   
+	/* var area2=$("#area2").val();
+	 
+	alert "=="+area2);
+	if(area2.length<10){
+		alert("请输入不少于10字的描述");
+		 return false;
+	}
+	if(area2.length>200){
+		alert("描述超过200字");
+		 return false;
+	}  
+	 */
+    }    
         
+        
+        </script>
         </form>
     </body>
 </html>

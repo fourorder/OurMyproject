@@ -72,5 +72,11 @@ public List<UserBean> checkUserAccount(@Param(value="userAccount")String userAcc
 public List<UserBean> checkAccountTel(@Param(value="userAccount")String userAccount,@Param(value="userTel")String userTel);
 public void changePwd(@Param(value="userAccount")String userAccount);
 
+//更新服务商 信用分
+
+public void updateCreditPoint(@Param(value="creditPoint")double creditPoint,@Param(value="userId")int userId);
+
+
+
 
 }

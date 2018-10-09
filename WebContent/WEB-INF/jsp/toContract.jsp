@@ -150,7 +150,7 @@
 											<label class="aui"><a href="<%=path %>download.action?upUrl=${contract.contractPath}"   class=" btn btn-warning illegalBtn rightSize"  type="button"  data-id=${list.productionId } id="illegal">下载合同</a></label>
 									</div>
 									<div class="aui-card-form-item">
-											<label class="aui"><a href="<%=path %>download.action?upUrl=${contract.contractPath}"   class=" btn btn-warning illegalBtn rightSize"  type="button"  data-id=${list.productionId } id="illegal">打印合同</a></label>
+											<label class="aui"><a href="<%=path %>user/print.action?url=${contract.contractPath}&page=redirect:/demand/goToContract.action?demandid=${demandInfo.demandId}"   class=" btn btn-warning illegalBtn rightSize"  type="button"  data-id=${list.productionId } id="illegal">打印合同</a></label>
 									</div>
 								</div>
 								

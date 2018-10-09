@@ -99,13 +99,33 @@
                                         <div class="ydc-pagination"  style="position:absolute; left:170px;">
                                            当前页<span id="currentPage" >${currentPage}</span>  
 											总页数<span id="totalPages"  >${totalPages } </span>  
-                                                    <button class="ydc-previous-item-btn-medium" onclick="addPages('last')"  >
+                                       
+                                      	<c:if test="${currentPage=='1'}">
+										<button class="ydc-previous-item-btn-medium" onclick="addPages('last')"  disabled="disabled"  id="last" >
                                                         <span>上一页</span>
                                                     </button>
-                                                
-                                                    <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  >
+										</c:if>
+											<c:if test="${currentPage!='1'}">
+										<button class="ydc-previous-item-btn-medium" onclick="addPages('last')"   id="last">
+                                                        <span>上一页</span>
+                                                    </button>
+										</c:if>  
+                                                      <!--  <button class="ydc-previous-item-btn-medium" onclick="addPages('last')"  >
+                                                        <span>上一页</span>
+                                                    </button> -->  
+                                                <c:if test="${totalPages=='1'}">
+                                                <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  disabled="disabled"  id="next">
                                                         <span>下一页</span>
                                                     </button>
+                                                </c:if>
+                                                  <c:if test="${totalPages!='1'}">
+                                                <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  id="next"  >
+                                                        <span>下一页</span>
+                                                    </button>
+                                                </c:if>
+                                                    <!-- <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  >
+                                                        <span>下一页</span>
+                                                    </button> -->
                                                
                                                     第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""  name="toNumber"   id="toNumber"  ></div>页
                                                     <button style="margin-left:5px;" class="ydc-previous-item-btn-medium"  onclick="addPages('toNumber')" >
@@ -151,8 +171,8 @@
 	              <a href="<%=path%>production/toProductionDetal.action?proId=${list.productionId}">
 			 <img src="<%=path%>picture/findPicture.action?url=${demandBeans.demandHead}"  alt="">
 			<span class="ss">${demandBeans.demandTitle}</span>
-		</a>
-	</div>
+		</a> 
+	</div> 
 </c:forEach>	
  
         </script>
@@ -241,6 +261,21 @@ if(state=="toNumber"){
     	     
     			 
     			 } 	 
+    			 if(redata.currentPage==1){
+		        	 $("#last").attr("class","ydc-previous-item-btn-medium"); 
+		        	 $("#last").attr("disabled",true);
+		         }else{
+		        	 $("#last").attr("class","ydc-previous-item-btn-medium");
+		        	 $("#last").attr("disabled",false);
+		         }
+		         if(redata.currentPage==redata.totalPages){
+		        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+		        	 $("#next").attr("disabled",true);
+		         }else{
+		        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+		        	 $("#next").attr("disabled",false);
+		         }	 
+    			 
     			 
     		 }
     	})

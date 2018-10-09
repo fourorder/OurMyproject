@@ -24,7 +24,7 @@
         <meta name="description" content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。。">
         <meta name="author" content="AUI, a-ui.com">
         <meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
-        <title>发布文章--  媒体开放平台 一点车 -  让您多懂一点车</title>
+        <title>发布作品</title>
         <link rel="stylesheet" href="<%=path%>css/oindex.css">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
@@ -67,11 +67,12 @@
 		
 	} --%>  
         </script>
+       
     </head>
     <body>
         <!-- head YDC begin -->
         
-      <form  method="post" action="<%=path%>production/toIssueProduction.action" enctype="multipart/form-data" >
+      <form  method="post" action="<%=path%>production/toIssueProduction.action" enctype="multipart/form-data"  onSubmit="return check()">
         
        <div class="o-top">
 				<div class="width1180">
@@ -134,7 +135,7 @@
                                             </div>
                                             
                                             <div class="ydc-release-form-group-input">
-                                                <input type="text" class="ydc-form-control"  name="title" title="" placeholder="请输入标题，为了更好的展示效果，建议标题字数在30个汉字以内" onkeyUp="textLimitCheck(this, 30);">
+                                                <input type="text" class="ydc-form-control"  name="title"  id="title"   title=""      placeholder="请输入标题，为了更好的展示效果，建议标题字数在30个汉字以内" onkeyUp="textLimitCheck(this, 30);">
                                                 <div class="ydc-form-group-jl">
                                                     <span id="messageCount">0</span>
                                                     /30
@@ -142,7 +143,7 @@
                                             </div>
                                         </div>
                                         <div class="ydc-release-form-text">
-                                            <textarea name="area2" style="width: 100%;">请输入内容
+                                            <textarea    name="area2"  id="area2"   style="width: 100%;">请输入内容
 										</textarea>
                                         </div>
                                         <div class="ydc-form-city">
@@ -166,7 +167,7 @@
                                                     </div>
                                                     <div class="aui-file-up-btn clearfix ">
                                                           <div class="idPicFile aui-btn aui-file-new">  
-                                                            <input type="file" name="file"   id="1" class="file_photo aui-file-new-up" style="margin:0;"/>
+                                                            <input type="file" name="file"   id="file"   class="file_photo aui-file-new-up" style="margin:0;"/>
                                                             <a>上传图片</a>
                                                          </div> 
                                                          </div> 
@@ -175,10 +176,10 @@
                                                         </div>
                                                     
                                                 </div>
-                                                上传作品文件:<input type="file"   name="productionFile" />
+                                                上传作品文件:<input type="file"   name="productionFile"  id="productionFile" />
                                                 
                                                  <div>
-                                            价格<input  type="text"  name="price"   />
+                                            价格<input  type="text"  name="price"   id="price"/>
                                             
                                             
                                             </div>
@@ -191,7 +192,7 @@
                                                 <input type="submit "  class="btn"  value="发布" /> -->
                                                     <button class="btn" type="submit"  >发布</button> 
                                                          
-                                                    <button class="btn btn-default">保存草稿</button>
+                                                   <!--  <button class="btn btn-default">保存草稿</button> -->
                                                 </div>
                                              
                                         </div>
@@ -268,7 +269,77 @@
 	    }//标题输入框字数限制
 	
         </script>
+         <script type="text/javascript">
+    function check(){
+    	var areaText=$("#area2").val(); 
+    	var title=$("#title").val();
+    	 var price=$("#price").val();
+    	// alert("qq");
+    	 var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+    	//alert("标题="+title);
+    if(title==""){
+    	alert("请输入标题");
+    	return false;
+    }else{
+    	  if(price==""){
+    	    	alert("请输入金额");
+    	    	return false;
+    	    }else{
+    	    	
+    	    	if (!(reg.test(price))) {
+    	    	 /* //  alert("正确~");
+    	    	   return true; */
+    	    		   alert("金额输入有误~");
+       	    	    return false;
+    	    	}else{
+    	    		/*  alert("eee"); */
+    	    	
+    	    		
+    	    		if($("#area2").val().length<20){
+    	    			alert("请输入不少于10字的描述");
+    	    			 return false;
+    	    		}else{
+    	    			if(document.getElementById("productionFile").value == null || document.getElementById("productionFile").value == ""){
+        	                alert("请选择上传文件");
+        	                return false;
+        	                }else	{
+        	                					 if(document.getElementById("file").value == null || document.getElementById("file").value == ""){
+        	                	    	                alert("请选择上传图片");
+        	                	    	                return false;
+        	              				  }
+        	    	    }
+    	    		}   
+    	    		
+    	    	}
+    	    	
+    	    }
+    }
+   
+  
+    
+    
+	
+	
+   
+	/* var area2=$("#area2").val();
+	 
+	alert "=="+area2);
+	if(area2.length<10){
+		alert("请输入不少于10字的描述");
+		 return false;
+	}
+	if(area2.length>200){
+		alert("描述超过200字");
+		 return false;
+	}  
+	 */
+    }    
         
+        
+        </script>
         </form>
+        
+        
+        
     </body>
 </html>

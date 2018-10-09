@@ -352,4 +352,13 @@ update userTbl set userPwd='e10adc3949ba59abbe56e057f20f883e' where userAccount=
 </update>
 
 
+
+<update id="updateCreditPoint">
+
+
+UPDATE USERTBL SET USERCREDIT =#{creditPoint} WHERE USERID =#{userId}
+
+
+</update>
+
 </mapper>

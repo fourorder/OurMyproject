@@ -21,7 +21,7 @@ public class ProductionBean {
    private int auditState   ;
    private String auditName;
    private String className;
-   
+   private String userName;
    
    
    public ProductionBean() {
@@ -43,9 +43,11 @@ public ProductionBean(int productionId, String productionName, int parameterId, 
 }
 
 
+ 
+
 public ProductionBean(int productionId, String productionName, int parameterId, int userId, int classId, int stateId,
 		double productionMoney, String productionPublishTime, String productionFile, String productionImage,
-		String productionDetal, int buyCount, int auditState, String auditName) {
+		String productionDetal, int buyCount, int auditState, String auditName, String className, String userName) {
 	super();
 	this.productionId = productionId;
 	this.productionName = productionName;
@@ -61,6 +63,8 @@ public ProductionBean(int productionId, String productionName, int parameterId, 
 	this.buyCount = buyCount;
 	this.auditState = auditState;
 	this.auditName = auditName;
+	this.className = className;
+	this.userName = userName;
 }
 
 public int getProductionId() {
@@ -181,6 +185,14 @@ public String getClassName() {
 
 public void setClassName(String className) {
 	this.className = className;
+}
+
+public String getUserName() {
+	return userName;
+}
+
+public void setUserName(String userName) {
+	this.userName = userName;
 }
 	
 	

@@ -24,7 +24,7 @@ public interface ProductionMapper {
 	
 	//增加 完成作品购买 生成记录
 	
-	public void productionPayFinish( @Param(value="proId")Integer proId,@Param(value="userId")Integer userId);
+	public void productionPayFinish( @Param(value="proId")Integer proId,@Param(value="userId")Integer userId,@Param(value="proUserId")Integer proUserId);
 	//增加 购买记录
 	public void addTradRecord(@Param(value="userId")Integer userId,@Param(value="price")double price,@Param(value="proUserId")Integer proUserId,@Param(value="businessId")Integer businessId );
 		
@@ -88,7 +88,7 @@ public interface ProductionMapper {
 			//作品 总数
 			public ArrayList<ProductionBean> findAllProductionListPass( ConditionBean conditionBean);
 			
-
+     
 			
 
 

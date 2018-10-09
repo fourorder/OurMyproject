@@ -10,10 +10,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.great.bean.ConditionBean;
+import org.great.bean.ProAndUserBean;
 import org.great.bean.ProductionBean;
 import org.great.bean.SessionBean;
 import org.great.bean.UserBean;
 import org.great.mapper.ParameterMapper;
+import org.great.mapper.ProAndUserMapper;
 import org.great.mapper.ProductionMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +25,9 @@ public class ProductionBizImp implements ProductionBiz{
 	private ProductionMapper productionMapper;
 	@Resource
 	private ParameterMapper parameterMapper;
+	@Resource
+	private ProAndUserMapper proAndUserMapper;
+	
 	@Override
 	public void toIssueProduction(HttpServletRequest request, String title, Integer price, Integer className,
 			String area2, MultipartFile file,int userId,MultipartFile productionFile) {
@@ -178,8 +183,8 @@ public class ProductionBizImp implements ProductionBiz{
 		ProductionBean productionBean=new ProductionBean();
 		
 		productionBean=productionMapper.findProductionDetal(id);
-		
-		
+		String className=	productionMapper.findClassName(productionBean.getParameterId());
+		productionBean.setClassName(className);
 		return productionBean;
 	}
 	@Override
@@ -189,7 +194,7 @@ public class ProductionBizImp implements ProductionBiz{
 		System.out.println("BIZ得到作品ID="+proId+"BIZ得到购买者ID="+userId);
 		//增加购买记录 物品归属表 proAndUser
 		System.out.println("作品ID="+proId+"购买者id="+userId+"作品价格="+price+"作品的作者="+proUserId);
-		productionMapper.productionPayFinish(proId, userId);
+		productionMapper.productionPayFinish(proId, userId,proUserId);
 		//增加账户交易记录记录  
 		
 		 //1.查找抽成比例
@@ -572,6 +577,36 @@ public class ProductionBizImp implements ProductionBiz{
        //设置新的购买次数
      productionMapper.setProductionBuyCount(proId, buyCount);*/
        
+	}
+
+
+	@Override
+	public Integer checkMoney(Integer userId, Integer proId) {
+		// TODO Auto-generated method stub
+		
+		//查询是否购买过
+		ArrayList<ProAndUserBean> list=new ArrayList<ProAndUserBean>();
+		list=proAndUserMapper.findHasBeenBuy(userId, proId);
+		
+		if(list.size()>0) {
+			return 3;
+		}
+		
+		//查询余额
+		double proUserMoney=productionMapper.findUserMoney(userId);
+		
+		//查询作品价格
+		ProductionBean productionBean=new ProductionBean();
+		productionBean=	productionMapper.findProductionDetal(proId);
+		double proPrice=productionBean.getProductionMoney();
+		
+		if(proPrice>proUserMoney) {
+			return 0;
+		}else {
+			return 1;
+		}
+		
+	 
 	}
 	
 }

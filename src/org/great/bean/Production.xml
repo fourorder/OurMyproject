@@ -67,7 +67,7 @@ parameterid = (select parameterid from tbparameter where parametername like #{na
 select * from PRODUCTIONTBL where productionname like #{name} or parameterid = (select parameterid from tbparameter where parametername like #{name})
 </select>	 
 	 
-<insert parameterType="java.lang.Integer" id="productionPayFinish"> insert into PROANDUSER (PROANDUSERID,USERID,PRODUCTIONID,PAYTIME) values (seqid.nextval,#{userId},#{proId},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')) </insert>
+<insert parameterType="java.lang.Integer" id="productionPayFinish"> insert into PROANDUSER (PROANDUSERID,USERID,PRODUCTIONID,PAYTIME,proUserId) values (seqid.nextval,#{userId},#{proId},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{proUserId}) </insert>
 
 <insert id="addTradRecord"> insert into FUNDTBL (FUNDID,USERID,BUSINESSID,DEALDATE,TOUSERID,DEALMONEY) values (seqid.nextval,#{userId},#{businessId},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{proUserId},#{price}) </insert>
 <!-- 查找用户余额 -->

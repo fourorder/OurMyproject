@@ -1,5 +1,6 @@
 package org.great.handler;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,9 +10,11 @@ import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.com.print.PrintTest;
 import org.great.bean.AuthorityBean;
 import org.great.bean.UserBean;
 import org.great.bean.UserInfoBean;
@@ -393,6 +396,14 @@ public ModelAndView changePwd(String userAccount) {
 	modelAndView.setViewName("jsp/login");
 	return modelAndView;
 	
+}
+@RequestMapping("/print.action")
+public ModelAndView print(String url,HttpServletRequest request,String page) {
+	 String path = request.getServletContext().getRealPath("/images/");
+	PrintTest.print(path + File.separator + url);
+	ModelAndView modelAndView=new ModelAndView();
+	modelAndView.setViewName(page);
+	return modelAndView;
 }
 
 }

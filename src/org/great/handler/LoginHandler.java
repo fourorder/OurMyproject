@@ -2,13 +2,20 @@ package org.great.handler;
 
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-
+import org.apache.catalina.User;
+import org.apache.struts2.ServletActionContext;
+import org.great.bean.UserBean;
 import org.great.biz.AdvertisingBiz;
 import org.great.biz.FundBiz;
 import org.great.biz.InformationBiz;
@@ -17,8 +24,6 @@ import org.great.biz.LoginBiz;
 import org.great.biz.ProductionBiz;
 import org.great.biz.UserBiz;
 import org.great.biz.UserStoryBiz;
-import org.great.mapper.InformationMapper;
-import org.great.mapper.ProductionMapper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
@@ -50,13 +55,28 @@ private String msg;
 private int a;
 @RequestMapping("/login.action")
 //@Log(operationType = "登入", operationName = "用户登入")
-public ModelAndView login(String userAccount,String userPwd,HttpServletRequest request) {
+public ModelAndView login(String userAccount,String userPwd,HttpServletRequest request,HttpSession session,HttpServletResponse response) {
 	ModelAndView modelAndView=new ModelAndView();
 String userPwd2=DigestUtils.md5DigestAsHex(userPwd.getBytes());
 int flag=loginBizImp.login(userAccount, userPwd2, request);
 
 if(flag==1) {
-	modelAndView.setViewName("redirect:/user/home.action");
+	
+	ServletContext application = session.getServletContext();
+	String sessionId = (String) application.getAttribute(userAccount); //获取登录用户的 sessionId
+
+	if (sessionId!=null && !"".equals(sessionId)) {
+	    System.out.println("该账号已登录，请您更换账号进行登录！");
+	    String msg="该账号已登录，请您更换账号进行登录！";
+	  modelAndView.addObject("message",msg);
+	    
+
+	  
+	    modelAndView.setViewName("jsp/login");
+	} else {
+	    application.setAttribute(userAccount, session.getId());//设置登录用户的 sessionId
+	    modelAndView.setViewName("redirect:/user/home.action");
+	}
 	
 }else if(flag==2){
     String message="用户已被锁定";
@@ -110,8 +130,11 @@ public ModelAndView goToRegist() {
 	
 }
 @RequestMapping("/logout.action")
-public ModelAndView logout(HttpServletRequest request) {
+public ModelAndView logout(HttpServletRequest request,HttpSession session) {
 	ModelAndView modelAndView=new ModelAndView();
+	ServletContext application = session.getServletContext();
+	UserBean user=(UserBean) request.getSession().getAttribute("user");
+	application.removeAttribute(user.userAccount);//系统退出，移除该用户的sessionId
 	request.getSession().invalidate();//移出session中所以信息
 	modelAndView.setViewName("jsp/login");	
 	return modelAndView;
