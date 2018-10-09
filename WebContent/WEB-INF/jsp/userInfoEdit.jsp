@@ -179,7 +179,7 @@
 										<div class="aui-card-form-item">
 											<label class="aui-card-form-label">联系手机:</label>
 											<div class="ydc-reg-form-input">
-												<input type="text" id="userTel" name="userTel" class="ydc-form-control" autocomplete="off" value="${userInfo.userTel}">
+												<input type="text" id="userTel" name="userTel" class="ydc-form-control" readonly="true" autocomplete="off" value="${userInfo.userTel}">
 												
 											</div>
 											
@@ -191,7 +191,7 @@
 										<div class="aui-card-form-item">
 											<label class="aui-card-form-label">邮箱:</label>
 											<div class="ydc-reg-form-input">
-												<input type="text" id="userMail" name="userMail" class="ydc-form-control" autocomplete="off" value="${userInfo.userMail}">
+												<input type="text" id="userMail" name="userMail" class="ydc-form-control"  autocomplete="off" value="${userInfo.userMail}">
 											</div>
 											<div class="ydc-reg-form-text">
 												<p>请使用自己日常使用邮箱便于接受相关信息</p>
@@ -201,6 +201,20 @@
 										<div class="aui-card-form-item">
 								
 								</div>
+								<div class="aui-card-form-item">
+											<label class="aui-card-form-label">地址:</label>
+											<div class="ydc-reg-form-input">
+												<input type="text" id="userAddress" name="userAddress" class="ydc-form-control" autocomplete="off" value="${userInfo.userAddress}">
+											</div>
+											<div class="ydc-reg-form-text">
+												<p>请输入详细地址</p>
+											</div>
+										</div>
+										
+										<div class="aui-card-form-item">
+								
+								</div>
+								
 									
 									  <div class="ydc-btn" style="margin-top:20px;">
                                                 <button class="btn">修改</button>

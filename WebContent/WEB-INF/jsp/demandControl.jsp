@@ -278,7 +278,7 @@
 												<div>
 													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/queryDemandInfo.action?demandid=${demandInfo.demandId}'" >需求详情</button>
 													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/gobidControl.action?demandid=${demandInfo.demandId}'">投标详情</button>
-													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/demandDownline.action?demandid=${demandInfo.demandId}'">下线</button>
+													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/demandDownline.action?demandid=${demandInfo.demandId}&dealMoney=${demandInfo.dealMoney}&securityMoney=${demandInfo.securityMoney}'">下线</button>
 												</div>
 											</div>
 											<div class="ydc-group-table-item-text">
@@ -702,7 +702,7 @@
 				            	+"<div>"
 				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/queryDemandInfo.action?demandid="+e.demandId+"'\">需求详情</button>"
 				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/gobidControl.action?demandid="+e.demandId+"'\">投标详情</button>"
-				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/demandDownline.action?demandid="+e.demandId+"'\">下线</button>"					
+				            	+"<button class='actions-trigger' "+"onClick=\"location.href='<%=path%>demand/demandDownline.action?demandid="+e.demandId+"&dealMoney="+e.dealMoney+"&securityMoney="+e.securityMoney+"'\">下线</button>"					
 							+"</div>"							
 							+"</div>"							
 							+"<div class='item-text'>"
@@ -948,5 +948,6 @@
         
         
         </script>
+
 </body>
 </html>

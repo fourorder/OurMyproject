@@ -19,7 +19,6 @@ public class DemandInfoBean {
 	private String demandHead;//需求头像
 	private String adviserId;//顾问id
 	private String filePath;//文件下载路径
-	
 	private UserBean fromUserBean;//雇主信息
 	private UserBean toUserBean;//供应商信息
 	private UserBean adviserUserBean;//雇主信息信息

@@ -413,6 +413,7 @@ function applyForList(page){
 							"<td><a class='btn btn-success   passBtn rightSize' onclick='return firm("+e.demandid+")'>确认接受</a>&nbsp;"+
 							"<a class='btn btn-danger  deleteBtn rightSize' onclick='return firm1("+e.demandid+")'>拒绝接受</a>&nbsp;"+
 							"<a onclick='particulars("+e.demandid+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>"+
+
 							"</tr>"
 				 )
 				 }else if(e.stateId==903){

@@ -15,6 +15,7 @@ import org.great.bean.CounselorInfoBean;
 import org.great.bean.DemandBean;
 import org.great.bean.BidBean;
 import org.great.bean.DemandBeanX;
+import org.great.bean.DemandDealBean;
 import org.great.bean.DemandInfoBean;
 import org.great.bean.ParameterBean;
 import org.great.bean.UpdateDemandBean;
@@ -181,4 +182,25 @@ public interface DemandBiz {
 	// 服务商初始列表
 	public ArrayList<DemandInfoBean> getDemandInfoFacilitatorList(String star, String end, String name, String userid,
 			String parameterid, String stateid);
+	//找顾问扣款
+	public int applicationConsultantajax(String employerId, String consultantId, String demandId,String counselorMoney);
+
+	//发布需求改状态然后扣款
+	public int stateDemandBidajax(String uesrid, String completeTime, String demandid, String auctionTime,String dealMoney);
+	
+	//我要投标加入扣款，判断是否已投，判断余额
+	public List<Object> addBidAjax(String userid,String demandid,String securityMoney);
+	
+	//投标失败的用户退款
+	public void refundBid(String userid, String demandid,String securityMoney);
+	
+	//交易结果，评价和状态用来判断付款
+	public DemandDealBean getDemandDealBean(@Param("demandId") String demandId);
+	
+	//确定完成交易
+	public void complete(String demandid,String toUserId,String dealMoney,String securityMoney);
+	//找顾问审核通过或者不通过扣款加钱
+	public void consultantCosts(String action,String demandid,String userid);
+	//下线，退还佣金
+	public void downline(String userid,String demandid,String dealMoney,String securityMoney);
 }

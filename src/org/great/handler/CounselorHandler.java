@@ -229,11 +229,18 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 	}
 	
 	
+
 	@RequestMapping("/applyForOk.action")//确认通过雇
 	@ResponseBody
 	public List<Object> applyForOk(HttpServletRequest request,String action,String demandid,String time,String userId,String state1,String number){
+
 		System.out.println("通过拒绝详情操作");
+
 		List<Object> obj=new ArrayList<Object>();
+
+		System.out.println("userid="+userId);
+		demandBizImp.consultantCosts(action, demandid,userId);
+
 		int demandId=Integer.parseInt(demandid);
 		int userid=Integer.parseInt(userId);
 		int num=Integer.parseInt(number);

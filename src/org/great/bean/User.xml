@@ -100,7 +100,7 @@
 			javaType="org.great.bean.CharacterBean" select="getCharacter">
 		</association>
 	</resultMap>
-	<!-- 修改用户资料 -->
+	<!-- 修改用户资料10/8加入修改地址方法 -->
 	<update id="updateUserInfo" parameterType="java.lang.String">
 		UPDATE usertbl
 		<set>
@@ -121,6 +121,9 @@
 			</if>
 			<if test="userHead!=null and userHead!=''">
 				userHead=#{userHead}
+			</if>
+			<if test="userAddress!=null and userAddress!=''">
+				userAddress=#{userAddress}
 			</if>
 		</set>
 		where userid = #{userId}

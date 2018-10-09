@@ -169,7 +169,7 @@
 											<div class="ydc-actions">
 												<div>
 													<a href="<%=path%>user/EmployerInformation.action?userid=${bidList.userBean.userId}" target="_blank" ><button class="ydc-actions-trigger">查看详情</button></a>
-													<button class="ydc-actions-trigger" onClick="location.href='<%=path%>demand/determineBid.action?userid=${bidList.userBean.userId} &demandid=${demandInfo.demandId}'">确定招标</button>
+													<a href="<%=path%>demand/determineBid.action?userid=${bidList.userBean.userId} &demandid=${demandInfo.demandId}&securityMoney=${demandInfo.securityMoney}" onclick="return addBid()"><button class="ydc-actions-trigger" >确定招标</button></a>
 												</div>
 											</div>
 											<div class="ydc-group-table-item-text">
@@ -206,18 +206,18 @@
 
 	<script type="text/javascript" src="<%=path%>admin/js/nicEdit.js"></script>
 	<script type="text/javascript" src="<%=path%>admin/js/upImg.js"></script>
-	
-	
-	<script type="text/javascript">
-		$(function() {
-			$('.ydc-tabPanel ul li').click(
-					function() {
-						$(this).addClass('hit').siblings().removeClass('hit');
-						$('.ydc-panes>div:eq(' + $(this).index() + ')').show()
-								.siblings().hide();
-					})
-		})//tab
-	</script>
+	<!-- 确认雇主ajax	 -->
+ 	<script type="text/javascript">
+ 	function addBid(){
+ 		var ss = confirm("是否选择该用户未招标对象？");
+ 		if (ss == true){
+ 			return true;
+ 		}else{
+ 			return false;
+ 		}
+ 	}
+ 	</script>
+
 	
 </body>
 </html>

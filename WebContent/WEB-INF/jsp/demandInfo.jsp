@@ -22,13 +22,32 @@
 			$("#bidlist").empty();
 			$.ajax({
 	        	 url:"<%=path%>demand/addBid.action",
-	       		 data:"demandid=${demandInfo.demandId}",
+	       		 data:"demandid=${demandInfo.demandId}"+"&securityMoney=${demandInfo.securityMoney}",
 	       		 dataType:"json",
 	       		 type:"post",
 	       		 success:function(redata){
-	       			
-				   	var list=redata;
-			        var len = list.length;    
+	       			var result = redata[0];
+				   	var list=redata[1];
+			        var len = list.length;  
+			       
+			      //判断是否已经投标     1已投。2成功3/余额不足
+			        if(result==1){
+			        	alert("该需求您已投标，请勿重复操作");
+			        }else if(result==2){
+			        	alert("申请成功，请耐心等待投标结果");
+			        }else if(result==3){
+			        	var r = confirm("用户余额不足，是否进入充值页面");
+	       				if (r == true){
+	       					window.location.href="<%=path%>user/accountManage.action?page=1";
+	       				}
+			        }
+			        
+			        
+			        
+			        
+			        
+			        
+			        
 			        for(var i=0;i<len;i++){    
 			        	
 			            var e = list[i];
@@ -38,7 +57,7 @@
 			            
 			            );
 			         } 	
-	       			 alert("申请成功");
+	       			
 	       		 }
 
 			});
@@ -66,21 +85,19 @@
 				<h3>${demandInfo.demandTitle}</h3>
 			</div>
 			<div class="txt">
-				<span class="nowprice">佣金￥<a href="">${demandInfo.dealMoney}</a></span>
-
+				<span class="nowprice"><a href="">佣金￥${demandInfo.dealMoney}&nbsp;&nbsp;&nbsp;押金￥<a href="">${demandInfo.securityMoney}</a></span>
+				
 
 			</div>
 			<div class="txt">
-				<span class="nowprice">押金￥<a href="">${demandInfo.securityMoney}</a></span>
+				<span class="nowprice"><a href="">剩余投标天数${demandInfo.auctionTime}天</a></span>
 
 
 			</div>
 			<div class="txt-h">
 				<span class="tex-o">需求类型:</span>
-				<ul class="glist" id="glist"
-					data-monitor="goodsdetails_fenlei_click">
+				<ul class="glist" id="glist" data-monitor="goodsdetails_fenlei_click">
 					<li><a href="">${demandInfo.parameterBean.parameterName}</a></li>
-
 				</ul>
 			</div>
 
@@ -137,7 +154,9 @@
 			  <c:forEach items="${demandBeans}"  var="demandBeans" >
 			  <dl class="ac-mod-list">
 				<dt>
+				 <a href="<%=path%>demand/queryDemand.action?demandid=${demandBeans.demandId}">
 					<img src="<%=path%>picture/findPicture.action?url=${demandBeans.demandHead}" width='100px' height='100px'>
+				</a>
 				</dt>
 				<dd>
 					${demandBeans.demandTitle}<span>￥${demandBeans.dealMoney}</span>

@@ -23,7 +23,7 @@
 	<select id="getDemandList" parameterType="org.great.bean.QueryBean"
 		resultType="org.great.bean.DemandBeanX">
 		select u.*from ( select rownum as num, DEMANDINFOMATIONTBL.* from
-		DEMANDINFOMATIONTBL where STATEID = 9
+		DEMANDINFOMATIONTBL where STATEID = 9 and AUCTIONTIME != 0
 
 		<if test="name!=null and name!=''">
 			and DEMANDTITLE like '%${name}%'
@@ -35,7 +35,7 @@
 	<!-- 查询总页数 9/27改x -->
 	<select id="demandCount" parameterType="java.lang.String"
 		resultType="java.lang.Integer">
-		select count(1) from DEMANDINFOMATIONTBL where STATEID = 9
+		select count(1) from DEMANDINFOMATIONTBL where STATEID = 9 and AUCTIONTIME != 0
 		<if test="name!=null and name!=''">
 			and DEMANDTITLE like '%${name}%'
 		</if>
@@ -138,12 +138,23 @@
 		select * from bidtbl where
 		demandid = #{demandid}
 	</select>
+	<!-- 查看是否已经投标 -->
+	<select id="getBidBean" parameterType="java.lang.String" resultType="org.great.bean.BidBean">
+		select * from bidtbl where
+		demandId = #{demandId}
+		and userId = #{userId}
+	</select>
+	<!-- 查看投标失败用户 -->
+	<select id="refundBid" parameterType="java.lang.String" resultType="org.great.bean.BidBean">
+		select * from bidtbl where
+		demandId = #{demandId}
+		and userId != #{userId}
+	</select>
 	<select id="getDemandBean" parameterType="org.great.bean.BidBean"
 		resultType="org.great.bean.DemandBeanX">
-		select * from DEMANDINFOMATIONTBL where demandid =
-		#{demandid}
+		select * from DEMANDINFOMATIONTBL where demandid = #{demandid}
 	</select>
-
+	<!-- 雇主查看投标详情 -->
 	<select id="getUserBean" parameterType="org.great.bean.BidBean"
 		resultType="org.great.bean.UserBean">
 		select * from usertbl where userid = #{userid}
@@ -159,6 +170,7 @@
 		</association>
 
 	</resultMap>
+	
 	<!-- 我要投标 x -->
 	<insert id="addBid">
 		insert into bidtbl (bidid,userid,demandid,bidtime)
@@ -229,16 +241,7 @@
 		</association>
 	</resultMap>
 
-	<!-- <resultMap type="org.great.bean.DemandInfoBean" id="getDemandInfoFacilitatorList"> 
-		<association property="fromUserBean" column="fromuserid" javaType="org.great.bean.UserBean" 
-		select="getFromUserBean"> </association> <association property="toUserBean" 
-		column="touserid" javaType="org.great.bean.UserBean" select="getFromUserBean"> 
-		</association> <association property="parameterBean" column="parameterId" 
-		javaType="org.great.bean.ParameterBean" select="getParameterBean"> </association> 
-		<association property="stateParameterBean" column="stateId" javaType="org.great.bean.ParameterBean" 
-		select="getStateid"> </association> <association property="adviserUserBean" 
-		column="adviserId" javaType="org.great.bean.ParameterBean" select="getConselor"> 
-		</association> </resultMap> -->
+
 
 
 
@@ -366,9 +369,8 @@
 
 
 	<!-- 查找用户余额 -->
-	<select id="getUserMoney" resultType="java.lang.Double"
-		parameterType="java.lang.Integer">
-		select USERMONEY from USERTBL where USERID=#{userId}
+	<select id="getUserMoney" resultType="java.lang.Double">
+		select USERMONEY from USERTBL where USERID = #{userId}
 	</select>
 
 
@@ -381,7 +383,18 @@
 	<!-- 插入交易记录 -->
 	<insert id="addFund"> 
 	insert into FUNDTBL (FUNDID,USERID,BUSINESSID,DEALDATE,TOUSERID,DEALMONEY) values
-	(seqid.nextval,#{userId},#{businessId},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{toUserId},#{dealMoney}) </insert>
+	(seqid.nextval,#{userId},#{businessId},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{toUserId},#{dealMoney}) 
+	</insert>
+	
+	<!-- 查看需求结果，评价 -->
+	<select id="getDemandDealBean" resultType="org.great.bean.DemandDealBean">
+	select * from demanddealtbl where demandid = #{demandId}
+	</select>
+	
+	<!-- 查看顾问信息 -->
+	<select id="getCounselorInfoXX" resultType="org.great.bean.CounselorInfoBean">
+	select * from COUNSELORTBL where userid = #{userid}
+	</select>
 	<!-- 佳诚 -->
 
 	<!-- 陈毅 -->
@@ -598,6 +611,7 @@ insert into dailytbl values(SEQID.nextval,(select to_char(sysdate,'yyyy-mm-dd ')
 
 
 
+
 <!-- 评价日报 -->
 <update id="sEvaluation" >
 UPDATE dailytbl set DAILYREVIEW=#{radio},POSTIL=#{notation} WHERE  daiid=#{dailyId}
@@ -616,6 +630,7 @@ UPDATE demandinfomationtbl set stateid=1866 WHERE  demandid=#{demandid}
 <update id="failure1"  parameterType="java.lang.Integer">
 UPDATE demanddealtbl set auditstate=2085 WHERE  demandid=#{demandid}
 </update>
+
 
 	<!-- 查询项目日报总数 -->
 	<select id="countDaily" resultType="java.lang.Integer">

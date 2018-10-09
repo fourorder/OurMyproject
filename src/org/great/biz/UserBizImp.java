@@ -226,12 +226,12 @@ public List<UserBean> updateInfo(String userAccount) {
 }
 @Override
 public boolean userInfoEdit(HttpServletRequest request,String userId, String userProfile, String userName, String userIdentity, String userTel,
-		String userMail,MultipartFile file) {
+		String userMail,MultipartFile file,String userAddress) {
 		String userHead = "";
 		System.out.println(file);
 		userHead = upLoadFile(request, file);
 		System.out.println("userHead="+userHead);
-	userMapper.updateUserInfo(userId, userProfile, userName, userIdentity, userTel, userMail,userHead);
+	userMapper.updateUserInfo(userId, userProfile, userName, userIdentity, userTel, userMail,userHead,userAddress);
 	return true;
 }
 public String upLoadFile(HttpServletRequest request, MultipartFile file) {

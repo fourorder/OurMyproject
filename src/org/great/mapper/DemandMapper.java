@@ -16,6 +16,7 @@ import org.great.bean.CounselorInfoBean;
 
 import org.great.bean.DemandBean;
 import org.great.bean.DemandBeanX;
+import org.great.bean.DemandDealBean;
 import org.great.bean.DemandInfoBean;
 import org.great.bean.ParameterBean;
 import org.great.bean.QueryBean;
@@ -190,9 +191,19 @@ public interface DemandMapper {
 	public double getUserMoney(@Param("userId") String userId);
 
 	// 更新用户金额
-	public double updateUserMoney(@Param("userId") String userId, @Param("userMoney") String userMoney);
+	public int updateUserMoney(@Param("userId") String userId, @Param("userMoney") String userMoney);
 
 	// 插入交易记录
 	public int addFund(@Param("userId") String userId, @Param("businessId") String businessId,
 			@Param("toUserId") String toUserId, @Param("dealMoney") String dealMoney);
+	//查看用户是否已经投标
+	public BidBean getBidBean(@Param("userId") String userId,@Param("demandId") String demandId);
+	
+	//投标退款
+	public ArrayList<BidBean> refundBid(@Param("userId") String userId,@Param("demandId") String demandId);
+	
+	//交易结果，评价和状态用来判断付款
+	public DemandDealBean getDemandDealBean(@Param("demandId") String demandId);
+	//获取顾问信息
+	public CounselorInfoBean getCounselorInfoXX (@Param("userid") String userid);
 }
