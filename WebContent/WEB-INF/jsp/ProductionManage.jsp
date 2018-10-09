@@ -26,7 +26,7 @@
         <meta name="description" content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。。">
         <meta name="author" content="AUI, a-ui.com">
         <meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
-        <title>素材中心--  媒体开放平台 一点车 -  让您多懂一点车</title>
+        <title>作品管理</title>
         <link rel="stylesheet" href="<%=path%>css/oindex.css">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">

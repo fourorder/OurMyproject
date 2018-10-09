@@ -438,5 +438,50 @@ public UserBean user(int userid) {
 }
 
 
+@Override
+public List<UserBean> checkTel(String userTel) {
+	// TODO Auto-generated method stub
+	return userMapper.checkTel(userTel);
+}
+
+
+@Override
+public void deleteTel(String userTel) {
+	// TODO Auto-generated method stub
+	 userMapper.deleteTel(userTel);
+}
+
+
+@Override
+public void boundTel(String userTel, String userId) {
+	// TODO Auto-generated method stub
+	userMapper.boundTel(userTel,userId);
+}
+
+
+@Override
+public List<UserBean> checkUserAccount(String userAccount) {
+	// TODO Auto-generated method stub
+	System.out.println(userAccount+"qqqqqqqq");
+	return userMapper.checkUserAccount(userAccount);
+}
+
+
+@Override
+public List<UserBean> checkAccountTel(String userAccount, String userTel) {
+	// TODO Auto-generated method stub
+	return userMapper.checkAccountTel(userAccount,userTel);
+	
+}
+
+
+@Override
+public void changePwd(String userAccount) {
+	 userMapper.changePwd(userAccount);
+	// TODO Auto-generated method stub
+	
+}
+
+
 
 }

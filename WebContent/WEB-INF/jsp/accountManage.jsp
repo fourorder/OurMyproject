@@ -1,132 +1,93 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<% 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+  
+        <% 
 	String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";	
 %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name='TTUNION_verify' content='b846c3c2b85efabc496d2a2b8399cd62'>
-	<meta name="sogou_site_verification" content="gI1bINaJcL"/>
-	<meta name="360-site-verification" content="37ae9186443cc6e270d8a52943cd3c5a"/>
-	<meta name="baidu_union_verify" content="99203948fbfbb64534dbe0f030cbe817">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="apple-touch-fullscreen" content="yes">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE;chrome=1">
-	<meta name="format-detection" content="telephone=no">
-	<meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
-	<title>交易记录</title>
-	<link rel="stylesheet" href="<%=path%>css/oindex.css">
-	<link rel="icon" type="image/x-icon" href="<%=path%>favicon.ico">
-	<link href="<%=path%>iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
-	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
-	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">
-	<link type="text/css" rel="stylesheet" href="<%=path%>admin/css/home.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>账户管理页</title>
+
+    <script type="text/javascript" src="<%=path%>js/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=path%>plugins/layui/layui.js"></script>
+    <link rel="stylesheet" href="<%=path%>plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="<%=path%>css/global.css" media="all">
+    <link rel="stylesheet" href="<%=path%>laydate/theme/default/laydate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+   
+   <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
 
 
+ <style type="text/css">
+
+        body{TEXT-ALIGN: center;}
+
+    </style>
 </head>
 <body>
+<div style="height: 50%;width: 95%; margin:0 auto;">
 
-<!-- head YDC begin -->
-	
-<!-- head YDC end -->
+<!-- <input type="text" id="query" placeholder="请输入规则内容进行搜索" style="width:30.333%" />&nbsp;&nbsp;&nbsp;<button onclick="query()" class="layui-btn layui-btn-normal" style="width:10.333%" ><span class="layui-btn layui-btn-normal">搜索</span></button> -->
+  
 
-<!-- content YDC begin -->
-	<section>
-		<div class="ydc-content-slide ydc-body">
-			<div class="ydc-flex">
-				<!-- right begin -->
-				<div class="ydc-column ydc-column-8">
-					<div class="ydc-release-content">
-						<div class="ydc-tabPanel ydc-tabPanel-release">
-							<div class="ydc-release-tab-head">
-								<ul>
-									<li class="hit">交易记录</li>
-								</ul>
-							</div>
-							<div class="ydc-panes">
-								<div class="ydc-panes-account">
-									<table>
-										<thead>
-											<tr>
-												<th>用户</th>
-												<th>日期</th>
-												<th>交易类型</th>
-												<th>接收人</th>
-												<th>交易金额</th>
-											</tr>
-										</thead>
-									<tbody id="tb">
-									<c:forEach items="${fundList}"  var="fund">
-									<tr>
-												<td>${fund.userBean.userName}</td>
-												<td>${fund.dealDate}</td>
-												<td>${fund.businessBean.businessName}</td>
-												<td>${fund.toUserBean.userName}</td>
-												<td>${fund.dealMoney}</td>
-									</tr>
-									</c:forEach>											
-										</tbody>
-									</table>
-								</div>
-								<div class="ydc-pagination">
-									<ol>
-										<li class="ydc-previous-item">
-											<button class="ydc-previous-item-btn-medium ydc-disabled" onclick="selectFund('last')" id="last"   disabled="disabled">
-												<span>上一页</span>
-											</button>
-										</li>
-										<li id="l1">${requestScope.page}/${requestScope.countPage}</li>
-										<li class="ydc-previous-item">
-											<button class="ydc-previous-item-btn-medium" onclick="selectFund('next')" id="next">
-												<span>下一页</span>
-											</button>
-										</li>
-										<li class="ydc-item-quick">
-											第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class="" id="btn1"></div>页
-											<button style="margin-left:5px;" class="ydc-previous-item-btn-medium"  onclick="selectFund('jump')" >
-												<span>跳转</span>
-											</button>
-										</li>
-									</ol>
-								</div>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- right end -->
-			</div>
-		</div>
 
-	</section>
-<!-- content YDC end -->
+<table class="layui-table" style="border-collapse:collapse;table-layout:fixed;width:600px;margin:auto;"   border="1">
 
-	<script type="text/javascript" src="<%=path %>admin/js/jquery.min.js"></script>
-	
+  <thead>
+    <tr>
+    
+      <th >用户</th>
+      <th >日期</th>
+      <th >交易类型</th>
+      <th >接收人</th>
+      <th >交易金额</th>
+      
+             
+    </tr> 
+  </thead>
+ 
+  <tr> 
+ 
+        
+         
+        
+  <tbody id="tb">
+   <c:forEach items="${fundList}"  var="fund"> 
 
-	<script type="text/javascript">
-	    /* $(function(){
-	        $('.ydc-tabPanel ul li').click(function(){
-	            $(this).addClass('hit').siblings().removeClass('hit');
-	            $('.ydc-panes>div:eq('+$(this).index()+')').show().siblings().hide();
-	        })
-	    }) */
-	    
+      
+  <tr>
+    <td>${fund.userBean.userName}</td>
+	<td>${fund.dealDate}</td>
+	<td>${fund.businessBean.businessName}</td>
+	<td>${fund.toUserBean.userName}</td>
+	<td>${fund.dealMoney}</td>
+  </tr>
+        </c:forEach>
+  </tbody>
+
+</table>
+<button class="btn btn-primary"  onclick="selectFund('last')" id="last" disabled="disabled">上一页</button>
+   当前页：<a id="aaa">${requestScope.page}</a>
+          总页数：<a id="eee">${requestScope.countPage}</a>
+     第<input type="text" id="btn1" size=2/>页<button onclick="selectFund('jump')" class="layui-btn layui-btn-normal"><span >跳转</span></button>
+     <button class="btn btn-primary"  onclick="selectFund('next')" id="next">下一页</button>
+</div>
+<script type="text/javascript">
 var page="${requestScope.page}";
 var allPage="${requestScope.countPage}";
 $(window).load(function() {
     
 	if(allPage==1){
-    	 $("#next").attr("class","ydc-previous-item-btn-medium ydc-disabled");
+    	 $("#next").attr("class","btn btn-primary");
     	 $("#next").attr("disabled",true);
      }else{
-    	 $("#next").attr("class","ydc-previous-item-btn-medium");
+    	 $("#next").attr("class","btn btn-primary");
     	 $("#next").attr("disabled",false);
      }//等所有的js和图片加载完毕，才执行的方法
 	});
@@ -153,26 +114,32 @@ function selectFund(state){
 		             $("#tb").append("<tr><td>"+e.userBean.userName+"</td><td>"+e.dealDate+"</td><td>"+e.businessBean.businessName+"</td><td>"+e.toUserBean.userName+"</td><td>"+e.dealMoney+"</td></tr>"); 
 		         } 	
 		         if(page==1){
-		        	 $("#last").attr("class","ydc-previous-item-btn-medium ydc-disabled"); 
+		        	 $("#last").attr("class","btn btn-primary"); 
 		        	 $("#last").attr("disabled",true);
 		         }else{
-		        	 $("#last").attr("class","ydc-previous-item-btn-medium");
+		        	 $("#last").attr("class","btn btn-primary");
 		        	 $("#last").attr("disabled",false);
 		         }
 		         if(page==size){
-		        	 $("#next").attr("class","ydc-previous-item-btn-medium ydc-disabled");
+		        	 $("#next").attr("class","btn btn-primary");
 		        	 $("#next").attr("disabled",true);
 		         }else{
-		        	 $("#next").attr("class","ydc-previous-item-btn-medium");
+		        	 $("#next").attr("class","btn btn-primary");
 		        	 $("#next").attr("disabled",false);
 		         }
-		         $("#l1").html(page+"/"+size);
+		         $("#aaa").html(page);
+		         $("#eee").html(size);
+		         
 		         
 		 }
 	 }); 
     	
 }
+	   
 </script>
+
+
+
 
 </body>
 </html>

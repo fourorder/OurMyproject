@@ -180,7 +180,7 @@
                                                     </button>
                                                     
                                                        第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""  name="toNumber"   id="toNumber"  ></div>页
-                                                    <button style="margin-left:5px;" class="ydc-previous-item-btn-medium"  onclick="addPages('toNumber')" >
+                                                    <button style="margin-left:5px;" class="layui-btn layui-btn-normal"  onclick="addPages('toNumber')" >
                                                         <span>跳转</span>
                                                     </button>  
 </div>

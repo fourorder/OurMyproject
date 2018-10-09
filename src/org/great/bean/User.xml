@@ -327,5 +327,25 @@ UPDATE userStorytbl set enableDisableId=3 where userAccount=#{account}
 <select id="findBusinessType" resultType="org.great.bean.ParameterBean">
 select * from tbParameter where pId=41
 </select>
+<!-- 查手机号 -->
+<select id="checkTel" resultType="org.great.bean.UserBean">
+select * from userTbl where userTel=#{userTel}
+</select>
+<update id="deleteTel">
+update userTbl set userTel='' where userTel=#{userTel}
+</update>
+<update id="boundTel">
+update userTbl set userTel=#{userTel} where userId=#{userId}
+</update>
+<select id="checkUserAccount" resultType="org.great.bean.UserBean">
+select * from userTbl where userAccount=#{userAccount}
+</select>
+<select id="checkAccountTel" resultType="org.great.bean.UserBean">
+select * from userTbl where userAccount=#{userAccount} and userTel=#{userTel}
+</select>
+<update id="changePwd">
+update userTbl set userPwd='e10adc3949ba59abbe56e057f20f883e' where userAccount=#{userAccount}
+</update>
+
 
 </mapper>

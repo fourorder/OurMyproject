@@ -54,4 +54,11 @@ public interface UserBiz {
 	public void changeState(int userId,int stateId);
 	public void changeInfo(@Param("userid")int userid,@Param("userName")String userName, @Param("userTel")Long userTel,@Param("userAccount")String userAccount,@Param("userSex")String userSex,@Param("userMail")String userMail,@Param("userIdentity")String userIdentity,@Param("userCredit")int userCredit,@Param("userMoney")int userMoney,@Param("userRegisterTime")String userRegisterTime);
 	public UserBean user(int userid);
+	public List<UserBean> checkTel(String userTel);//核对手机号
+	public void deleteTel(String userTel);
+	public void boundTel(String userTel,String userId);
+	public List<UserBean> checkUserAccount(String userAccount);
+	public List<UserBean> checkAccountTel(String userAccount,String userTel);
+	public void changePwd(String userAccount);
+	
 }

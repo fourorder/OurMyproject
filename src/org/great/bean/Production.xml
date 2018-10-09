@@ -59,11 +59,12 @@ select * from(select t.*,rownum rn from(select * from PRODUCTIONTBL order by buy
 </select>
 	 	 
 <select id="selectProduction" resultType="org.great.bean.ProductionBean" >
-select * from(select t.*,rownum rn from(select * from PRODUCTIONTBL where productionname like #{name})t where rownum &lt;= #{end}) where rn &gt;= #{start}
+select * from(select t.*,rownum rn from(select * from PRODUCTIONTBL where productionname like #{name} or 
+parameterid = (select parameterid from tbparameter where parametername like #{name}))t where rownum &lt;= #{end}) where rn &gt;= #{start}
 </select>
 
 <select id="productionNumber" resultType="org.great.bean.ProductionBean" >
-select * from PRODUCTIONTBL where productionname like #{name}
+select * from PRODUCTIONTBL where productionname like #{name} or parameterid = (select parameterid from tbparameter where parametername like #{name})
 </select>	 
 	 
 <insert parameterType="java.lang.Integer" id="productionPayFinish"> insert into PROANDUSER (PROANDUSERID,USERID,PRODUCTIONID,PAYTIME) values (seqid.nextval,#{userId},#{proId},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')) </insert>

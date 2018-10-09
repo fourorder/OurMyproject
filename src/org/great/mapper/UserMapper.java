@@ -64,4 +64,12 @@ public void changeInfo(@Param(value="userId")int userId ,@Param(value="userName"
 public UserBean user(Integer userid);
 /*寻找服务商类型*/
 public List<ParameterBean> findBusinessType();
+public List<UserBean> checkTel(@Param(value="userTel")String userTel);
+public void deleteTel(@Param(value="userTel")String userTel);
+public void boundTel(@Param(value="userTel")String userTel,@Param(value="userId")String userId);
+public List<UserBean> checkUserAccount(@Param(value="userAccount")String userAccount);
+public List<UserBean> checkAccountTel(@Param(value="userAccount")String userAccount,@Param(value="userTel")String userTel);
+public void changePwd(@Param(value="userAccount")String userAccount);
+
+
 }

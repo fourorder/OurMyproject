@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta name="description" content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。。">
 	<meta name="author" content="AUI, a-ui.com">
 	<meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
-	<title>入驻-- 一点车 -  让您多懂一点车</title>
+	<title>用户注册</title>
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
 	<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
 	<link type="text/css" rel="stylesheet" href="<%=basePath%>admin/css/core.css">
@@ -39,9 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="ydc-entered">
 			<div class="ydc-header-content ydc-flex">
 				<div class="ydc-column">
-					<a href="index.html" class="ydc-column-ydc-logo">
-						<img src="<%=basePath%>admin/images/icon/ydc-logo.png" title="" about="" alt="">
-					</a>
+					
 				</div>
 				<div class="ydc-column">
 					<div class="ydc-column-user">
@@ -173,8 +171,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       var account = /^[a-z0-9]\w+@[a-z0-9]{2,3}(\.[a-z]{2,3}){1,2}$/i;  // .com .com.cn
 
 	       var accountspan = document.getElementById("accountspan");
-	       $.ajax({	
-				
+	       $.ajax({					
 				 url:"<%=basePath%>user/checkAccount.action",
 				 data:{"userAccount":$("#userAccount").val()},
 				 dataType:"json",

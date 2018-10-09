@@ -17,9 +17,10 @@
     <link rel="stylesheet" href="<%=path%>css/global.css" media="all">
     <link rel="stylesheet" href="<%=path%>laydate/theme/default/laydate.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <!--  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="<%=path%>css/bootstrap.css">
     
 
 
@@ -31,7 +32,7 @@
 </head>
 <body>
 <div style="height: 50%;width: 95%; margin:0 auto;">
-  需求标题：<input type="text" id="query" /><button onclick="query()"><span class="layui-btn layui-btn-normal">查询</span></button>
+  <input type="text" id="query" placeholder="请输入需求标题进行搜索" style="width:30.333%" />&nbsp;&nbsp;&nbsp;<button onclick="query()" class="layui-btn layui-btn-normal" style="width:10.333%" ><span class="layui-btn layui-btn-normal">搜索</span></button>
 <!-- </form> -->
 <table class="layui-table">
   <colgroup>
@@ -61,22 +62,17 @@
       <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert" onClick="Values(${demand.demandId})" value="查看详情"/>
       <td>${demand.parameterName}</td>  
      <td>
-      <a class="layui-btn layui-btn-sm layui-btn-danger" id="success" href="#"  onclick="changeState(${demand.demandId},1,${num});return false;" >审核通过</a>
-       <a class="layui-btn layui-btn-sm layui-btn-danger" id="fail" href="#"  onclick="changeState(${demand.demandId},2,${num});return false;" >违规下架</a>    
-     <a class="layui-btn layui-btn-sm layui-btn-danger" id="delete" href="#"  onclick="changeState(${demand.demandId},3,${num});return false;" >删除需求</a>
+      <a class="btn btn-info" id="success" href="#"  onclick="changeState(${demand.demandId},1,${num});return false;" >审核通过</a>
+       <a class="btn btn-danger" id="fail" href="#"  onclick="changeState(${demand.demandId},2,${num});return false;" >违规下架</a>    
+     <a class="btn btn-success" id="delete" href="#"  onclick="changeState(${demand.demandId},3,${num});return false;" >删除需求</a>
       <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert2" onClick="Values2(${demand.demandId})" value="编辑需求"/>	      
        </td>      
         </tr>
         </c:forEach>
   </tbody>  
-   <tr>
-   <td colspan="2"><a class="layui-btn layui-btn-sm" href="#" onclick="lastPage();return false;" id="last">上一页</a></td>
-   <td >当前页：<a id="aaa">${num}</a><br>
-          总页数：<a id="eee">${countPage}</a><br>
-     第<input type="text" id="btn" size=2/>页<button onclick="selectPage()"><span class="layui-btn layui-btn-normal">跳转</span></button>
-   </td>
-   <td colspan="2"><a class="layui-btn layui-btn-sm" href="#"  onclick="nextPage();return false;" id="next">下一页</a></td>
-   </tr>
+
+
+
       
    <div class="modal fade" id="Revert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
                                 <div class="modal-dialog">    
@@ -180,7 +176,12 @@
                           
 
 </table>
+   <a class="btn btn-primary" href="#" onclick="lastPage();return false;" id="last">上一页</a>
 
+   当前页：<a id="aaa">${num}</a>
+          总页数：<a id="eee">${countPage}</a>
+     第<input type="text" id="btn" size=2/>页<button onclick="selectPage()" class="layui-btn layui-btn-normal"><span >跳转</span></button>
+   <a class="btn btn-primary" href="#"  onclick="nextPage();return false;" id="next">下一页</a>
 </div>
 <script type="text/javascript">
 var number=1; 
@@ -226,11 +227,11 @@ function changeState(demandId,stateId,number){
             			 +"</td>"
             			 +"<td>"+e.parameterName+"</td>"
             			 +"<td>"
-            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='success' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
+            			 +"<a class='btn btn-info'id='success' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
              			+"审核通过"+"</a>"
-             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='fail' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
+             			 +"<a class='btn btn-danger'id='fail' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
              			+"违规下架"+"</a>"
-            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
+            			 +"<a class='btn btn-success'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
             			+"删除需求"+"</a>"
             			+"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.demandId+")'value='编辑需求'>"
             			 +"</td>"
@@ -280,11 +281,11 @@ function nextPage(){
         			 +"</td>"
         			 +"<td>"+e.parameterName+"</td>"
         			 +"<td>"
-        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
+        			 +"<a class='btn btn-info'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
          			+"审核通过"+"</a>"
-         			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
+         			 +"<a class='btn btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
          			+"违规下架"+"</a>"
-        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
+        			 +"<a class='btn btn-success'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
         			+"删除需求"+"</a>"
         			+"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.demandId+")'value='编辑需求'>"
         			 +"</td>"
@@ -337,11 +338,11 @@ function nextPage(){
             			 +"</td>"
             			 +"<td>"+e.parameterName+"</td>"
             			 +"<td>"
-            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
+            			 +"<a class='btn btn-info'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
              			+"审核通过"+"</a>"
-             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
+             			 +"<a class='btn btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
              			+"违规下架"+"</a>"
-            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
+            			 +"<a class='btn btn-success'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
             			+"删除需求"+"</a>"
             			+"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.demandId+")'value='编辑需求'>"
             			 +"</td>"
@@ -399,11 +400,11 @@ function nextPage(){
 		            			 +"</td>"
 		            			 +"<td>"+e.parameterName+"</td>"
 		            			 +"<td>"
-		            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
+		            			 +"<a class='btn btn-info'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
 		             			+"审核通过"+"</a>"
-		             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
+		             			 +"<a class='btn btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
 		             			+"违规下架"+"</a>"
-		            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
+		            			 +"<a class='btn btn-success'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
 		            			+"删除需求"+"</a>"
 		            			+"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.demandId+")'value='编辑需求'>"
 		            			 +"</td>"
@@ -459,11 +460,11 @@ function query(){
 	            			 +"</td>"
 	            			 +"<td>"+e.parameterName+"</td>"
 	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
+	            			 +"<a class='btn btn-info'id='zzz' href='#' onclick='changeState("+e.demandId+",1,"+number+");return false;'>"
 	             			+"审核通过"+"</a>"
-	             			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
+	             			 +"<a class='btn btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",2,"+number+");return false;'>"
 	             			+"违规下架"+"</a>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
+	            			 +"<a class='btn btn-success'id='zzz' href='#' onclick='changeState("+e.demandId+",3,"+number+");return false;'>"
 	            			+"删除需求"+"</a>"
 	            			+"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.demandId+")'value='编辑需求'>"
 	            			 +"</td>"

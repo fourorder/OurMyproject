@@ -31,9 +31,29 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class SystemLogAspect {
 
 
-	private static Logger logger = Logger.getLogger("zxtest");  
+	private static Logger logger = Logger.getLogger("zxtest");
     
-    @Pointcut("execution (* org.great.handler..*.*(..)) && !execution (* org.great.handler..*.home(..)) && !execution (* org.great.handler..*.gotoregister(..)) && !execution (* org.great.handler..*.show(..)) && !execution (* org.great.handler..*.findPicture(..)) && !execution (* org.great.handler..*.logout(..))")  
+    @Pointcut("execution (* org.great.handler..*.*(..)) "
+    		+ "&& !execution (* org.great.handler..*.home(..)) "
+    		+ "&& !execution (* org.great.handler..*.goToRegist(..))"
+    		+ " && !execution (* org.great.handler..*.show(..)) "
+    		+ "&& !execution (* org.great.handler..*.findPicture(..))"
+    		+ " && !execution (* org.great.handler..*.logout(..)) "
+    		+ "&& !execution (* org.great.handler..*.changePwd(..))"
+    		+ "&& !execution (* org.great.handler..*.forgetPwd(..))"
+    		+ "&& !execution (* org.great.handler..*.checkUserAccount(..))"
+    		+ "&& !execution (* org.great.handler..*.checkAccountTel(..))"
+    		+ "&& !execution (* org.great.handler..*.sendCode(..))"
+    		+ "&& !execution (* org.great.handler..*.checkAccount(..))"
+    		+ "&& !execution (* org.great.handler..*.show2(..))"
+    		+ "&& !execution (* org.great.handler..*.show3(..))"
+    		+ "&& !execution (* org.great.handler..*.checkTel(..))"
+    		+ "&& !execution (* org.great.handler..*.register(..))"
+    		+ "&& !execution (* org.great.handler..*.serach(..))"
+    		+ "&& !execution (* org.great.handler..*.selectEpage(..))"
+    		+ "&& !execution (* org.great.handler..*.selectBpage(..))"
+    		+ "&& !execution (* org.great.handler..*.selectPpage(..))"
+    		+ "&& !execution (* org.great.handler..*.selectOpage(..))")  
     public  void controllerAspect() {  
     }  
     

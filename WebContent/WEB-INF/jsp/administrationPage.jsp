@@ -77,21 +77,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="admin-header-user">
                         <img src="<%=basePath%>images/0.jpg" />
-                        <span>用户名</span>
+                        <span>${user.userAccount}</span>
                     </a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="javascript:;"><i class="fa fa-user-circle" aria-hidden="true"></i> 个人信息</a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;"><i class="fa fa-gear" aria-hidden="true"></i> 设置</a>
-                        </dd>
-                        <dd id="lock">
-                                <i class="fa fa-lock" aria-hidden="true" style="padding-right: 3px;padding-left: 1px;"></i>
-                            <input  type="button" value="锁屏" onclick="showdiv();"/>
-                        </dd>
-                        <dd>
-                            <a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+                            <a href="<%=basePath%>user/logout.action"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
                         </dd>
                     </dl>
                 </li>

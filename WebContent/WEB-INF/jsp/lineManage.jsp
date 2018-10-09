@@ -35,22 +35,22 @@
 <%-- <form action="<%=path%>employers/page.action?page=tpage&number=1" method="post"> --%>
 <!-- 姓名：<input type="text" name="name"  placeholder="请输入内容"  >  
 <input type="submit" value="查询" id="query"	class="layui-btn layui-btn-normal" />  --> 
-  友情链接名字：<input type="text" id="query" /><button onclick="query()"><span class="layui-btn layui-btn-normal">查询</span></button>
+<input type="text" id="query" placeholder="请输入友情链接名字进行搜索" style="width:30.333%" />&nbsp;&nbsp;&nbsp;<button onclick="query()" class="layui-btn layui-btn-normal" style="width:10.333%" ><span class="layui-btn layui-btn-normal">搜索</span></button>
    <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert3" onClick="Values2(0)" value="添加友情链接"/>	
 <!-- </form> -->
-<table class="layui-table">
-  <colgroup>
+<table class="layui-table" style="border-collapse:collapse;table-layout:fixed;width:650px;margin:auto;"   border="1">
+ <%--  <colgroup>
     <col width="150">
     <col width="200">
     <col>
-  </colgroup>
+  </colgroup> --%>
   <thead>
     <tr>
     
-      <th>友情链接ID</th>
-      <th>友情链接状态</th>
-      <th>友情链接详情</th>
-      <th>操作</th>
+      <th width="150px">友情链接ID</th>
+      <th width="150px">友情链接状态</th>
+      <th width="150px">友情链接详情</th>
+      <th width="300px">操作</th>
              
     </tr> 
   </thead>
@@ -66,25 +66,17 @@
       
   <tr>
   <td>${line.lineId}</td>
-  <td><a class="layui-btn layui-btn-sm layui-btn-danger" id="yyy" href="#"  onclick="changeState(${line.lineId},${line.lineState},${num});return false;" >${line.parameterName}</a></td>
+  <td><a class="btn btn-info" id="yyy" href="#"  onclick="changeState(${line.lineId},${line.lineState},${num});return false;" >${line.parameterName}</a></td>
   <td><input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert" onClick="Values(${line.lineId})" value="查看详情"/></td>
-  <td><a class="layui-btn layui-btn-sm layui-btn-danger" id="yyy" href="#"  onclick="changeState(${line.lineId},3,${num});return false;" >删除友情链接</a>
+  <td><a class="btn btn-danger" id="yyy" href="#"  onclick="changeState(${line.lineId},3,${num});return false;" >删除友情链接</a>
       <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert2" onClick="Values2(${line.lineId})" value="编辑友情链接"/>	
   </td>     
   </tr>
         </c:forEach>
   </tbody>
         
-         <tr>
-   <td colspan="2"><a class="layui-btn layui-btn-sm" href="#" onclick="lastPage();return false;" id="last">上一页</a></td>
-   <td >当前页：<a id="aaa">${num}</a><br>
-          总页数：<a id="eee">${countPage}</a><br>
-     第<input type="text" id="btn" size=2/>页<button onclick="selectPage()"><span class="layui-btn layui-btn-normal">跳转</span></button>
-   
-   
-   </td>
-   <td colspan="2"><a class="layui-btn layui-btn-sm" href="#"  onclick="nextPage();return false;" id="next">下一页</a></td>
-   </tr>
+
+
       
    <div class="modal fade" id="Revert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
                                 <div class="modal-dialog">    
@@ -189,7 +181,11 @@
                           
 
 </table>
-
+ <a class="btn btn-primary" href="#" onclick="lastPage();return false;" id="last">上一页</a>
+   当前页：<a id="aaa">${num}</a>
+          总页数：<a id="eee">${countPage}</a>
+     第<input type="text" id="btn" size=2/>页<button onclick="selectPage()" class="layui-btn layui-btn-normal"><span >跳转</span></button>
+     <a class="btn btn-primary" href="#"  onclick="nextPage();return false;" id="next">下一页</a>
 </div>
 <script type="text/javascript">
 var number=1; 
@@ -232,14 +228,14 @@ function changeState(lineId,lineState,number){
 	            	 $("#ccc").append("<tr><td>"+e.lineId+"</td>"
 	            			 
 	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+","+e.lineState+","+number+");return false;'>"
+	            			 +"<a class='btn btn-info'id='yyy' href='#' onclick='changeState("+e.lineId+","+e.lineState+","+number+");return false;'>"
 	            			                                                                       
 	              			 +e.parameterName+"</a>"
 	            			 +"<td>"
 	            			 +"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert' onclick='Values("+e.lineId+")'value='查看详情'>"
 	            			 +"</td>"
 	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+",3,"+number+");return false;'>"
+	            			 +"<a class='btn btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+",3,"+number+");return false;'>"
 	             			+"删除友情链接"+"</a>"
 	            			+"<input type='button' class='btn btn-primary' data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.lineId+")'value='编辑友情链接'>"
 	            			 +"</td>"
@@ -280,14 +276,14 @@ function nextPage(){
              $("#ccc").append("<tr><td>"+e.lineId+"</td>"
         			 
         			 +"<td>"
-        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+","+e.lineState+","+number+");return false;'>"
+        			 +"<a class='btn btn-info'id='yyy' href='#' onclick='changeState("+e.lineId+","+e.lineState+","+number+");return false;'>"
         			                                                                       
           			 +e.parameterName+"</a>"
         			 +"<td>"
         			 +"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert' onclick='Values("+e.lineId+")'value='查看详情'>"
         			 +"</td>"
         			 +"<td>"
-        			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+",3,"+number+");return false;'>"
+        			 +"<a class='btn btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+",3,"+number+");return false;'>"
          			+"删除友情链接"+"</a>"
         			+"<input type='button' class='btn btn-primary' data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.lineId+")'value='编辑友情链接'>"
         			 +"</td>"
@@ -336,14 +332,14 @@ function nextPage(){
 	             $("#ccc").append("<tr><td>"+e.lineId+"</td>"
             			 
             			 +"<td>"
-            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+","+e.lineState+","+number+");return false;'>"
+            			 +"<a class='btn btn-info'id='yyy' href='#' onclick='changeState("+e.lineId+","+e.lineState+","+number+");return false;'>"
             			                                                                       
               			 +e.parameterName+"</a>"
             			 +"<td>"
             			 +"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert' onclick='Values("+e.lineId+")'value='查看详情'>"
             			 +"</td>"
             			 +"<td>"
-            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+",3,"+number+");return false;'>"
+            			 +"<a class='btn btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+",3,"+number+");return false;'>"
              			+"删除友情链接"+"</a>"
             			+"<input type='button' class='btn btn-primary' data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.lineId+")'value='编辑友情链接'>"
             			 +"</td>"
@@ -394,14 +390,14 @@ function nextPage(){
 			             $("#ccc").append("<tr><td>"+e.lineId+"</td>"
 		            			 
 		            			 +"<td>"
-		            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+","+e.lineState+","+number+");return false;'>"
+		            			 +"<a class='btn btn-info'id='yyy' href='#' onclick='changeState("+e.lineId+","+e.lineState+","+number+");return false;'>"
 		            			                                                                       
 		              			 +e.parameterName+"</a>"
 		            			 +"<td>"
 		            			 +"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert' onclick='Values("+e.lineId+")'value='查看详情'>"
 		            			 +"</td>"
 		            			 +"<td>"
-		            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+",3,"+number+");return false;'>"
+		            			 +"<a class='btn btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+",3,"+number+");return false;'>"
 		             			+"删除友情链接"+"</a>"
 		            			+"<input type='button' class='btn btn-primary' data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.lineId+")'value='编辑友情链接'>"
 		            			 +"</td>"
@@ -451,14 +447,14 @@ function query(){
 		             $("#ccc").append("<tr><td>"+e.lineId+"</td>"
 	            			 
 	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+","+e.lineState+","+number+");return false;'>"
+	            			 +"<a class='btn btn-info'id='yyy' href='#' onclick='changeState("+e.lineId+","+e.lineState+","+number+");return false;'>"
 	            			                                                                       
 	              			 +e.parameterName+"</a>"
 	            			 +"<td>"
 	            			 +"<input type='button' class='btn btn-primary'data-toggle='modal' data-target='#Revert' onclick='Values("+e.lineId+")'value='查看详情'>"
 	            			 +"</td>"
 	            			 +"<td>"
-	            			 +"<a class='layui-btn layui-btn-sm layui-btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+",3,"+number+");return false;'>"
+	            			 +"<a class='btn btn-danger'id='yyy' href='#' onclick='changeState("+e.lineId+",3,"+number+");return false;'>"
 	             			+"删除友情链接"+"</a>"
 	            			+"<input type='button' class='btn btn-primary' data-toggle='modal' data-target='#Revert2' onclick='Values2("+e.lineId+")'value='编辑友情链接'>"
 	            			 +"</td>"

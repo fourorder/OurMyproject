@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta name="description" content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。。">
 	<meta name="author" content="AUI, a-ui.com">
 	<meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
-	<title>帐号状态 -- 一点车 -  让您多懂一点车</title>
+	<title>用户登录</title>
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
 	<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
 	<link type="text/css" rel="stylesheet" href="<%=basePath%>admin/css/core.css">
@@ -65,12 +65,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<p>为了您的账号安全，请勿在公共电脑登录</p>
 					</div>
 					<div class="clearfix">
-						<div class="fl">
+						<!-- <div class="fl">
 							<input type="checkbox" checked="checked">
 							<label>十天内免登录</label>
-						</div>
+						</div> -->
 						<div class="fr">
-							<a href="#">忘记密码</a>
+							<a href="<%=basePath%>user/forgetPwd.action">忘记密码</a>
 						</div>
 					</div>
 				
@@ -80,8 +80,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					<div class="ydc-login-box">
 						<a href="<%=basePath%>register/registerShow.action" target="_blank">立即注册</a>
-						<span>|</span>
-						<a href="customer.html" target="_blank">常见问题</a>
+						<!-- <span>|</span>
+						<a href="customer.html" target="_blank">常见问题</a> -->
 
 					</div>
 				</form>

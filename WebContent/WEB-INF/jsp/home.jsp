@@ -205,7 +205,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 			<li>
 				<div class="tuijian-text">
 					<p class="t-title">${productionList[0].productionName}</p>
-					<p class="t-decoration">${productionList[0].productionDetal}</p>
+					<p class="t-decoration" style="white-space :nowrap ;width :150px;text-overflow:ellipsis;overflow: hidden;">${productionList[0].productionDetal}</p>
 					<p class="t-price">${productionList[0].productionMoney}</p>
 					<a href="#" title="立即购买">立即购买</a>
 				</div>
@@ -214,7 +214,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 			<li>
 				<div class="tuijian-text">
 					<p class="t-title">${productionList[1].productionName}</p>
-					<p class="t-decoration">${productionList[1].productionDetal}</p>
+					<p class="t-decoration" style="white-space :nowrap ;width :150px;text-overflow:ellipsis;overflow: hidden;">${productionList[1].productionDetal}</p>
 					<p class="t-price">${productionList[1].productionMoney}</p>
 					<a href="#" title="立即购买">立即购买</a>
 				</div>
@@ -223,7 +223,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 			<li>
 				<div class="tuijian-text">
 					<p class="t-title">${productionList[2].productionName}</p>
-					<p class="t-decoration">${productionList[2].productionDetal}</p>
+					<p class="t-decoration" style="white-space :nowrap ;width :150px;text-overflow:ellipsis;overflow: hidden;">${productionList[2].productionDetal}</p>
 					<p class="t-price">${productionList[2].productionMoney}</p>
 					<a href="#" title="立即购买">立即购买</a>
 				</div>
