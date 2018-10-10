@@ -7,8 +7,6 @@ public class ApplicationBean {
 	private String userAccount;
 	 private  int demandid;
 	private String stateId;
-	private String stated;
-	private String consultantEvaluation;
 	
 	public ApplicationBean() {
 		super();
@@ -47,21 +45,7 @@ public class ApplicationBean {
 		this.demandid = demandid;
 	}
 
-	public String getStated() {
-		return stated;
-	}
 
-	public void setStated(String stated) {
-		this.stated = stated;
-	}
-
-	public String getConsultantEvaluation() {
-		return consultantEvaluation;
-	}
-
-	public void setConsultantEvaluation(String consultantEvaluation) {
-		this.consultantEvaluation = consultantEvaluation;
-	}
 
 	
 }

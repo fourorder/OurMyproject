@@ -49,7 +49,13 @@
         <style type="text/css">
         
  .ydc-asset-img-list-img img { width: 100%; height: 240px;}       
-  .ydc-asset-img-list img { width: 100%; height: 240px;}   
+    .ydc-asset-img-list-img{
+    width: 100%;
+    height: 240px;;
+    vertical-align: middle;
+    line-height: 217px;
+    background-color: #f3f4f9;
+}  
         </style>
         
     </head>

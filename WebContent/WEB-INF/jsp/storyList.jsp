@@ -25,7 +25,7 @@
 
 
 <body>
-<div style="height: 45%;width: 60%; margin:0 auto;">
+<div style="height: 45%;width: 70%; margin:0 auto;">
 <form action="<%=path %>employers/list.action?page=tpage&number=1" method="post" >
 用户名：<input type="text" name="title" id="title"  placeholder="请输入内容" value="<%= request.getAttribute("title")==null?"":request.getAttribute("title")%>" style="width: 100px;height: 20px" >  
   <select name="state"  id="num" >
@@ -37,11 +37,7 @@
 <input type="button" value="配置故事" 	class="layui-btn layui-btn-normal" onclick="deploy()" /> 
 </form>
 <table class="layui-table">
-  <colgroup>
-    <col width="150">
-    <col width="200">
-    <col>
-  </colgroup>
+ 
   <thead>
     <tr>
       <th>标题</th>
@@ -50,7 +46,7 @@
        <th>账号</th>
          <th>状态</th>
           <th>启用/禁用</th>
-         <th>操作</th>
+         <th width="150">操作</th>
     </tr> 
   </thead>
   <tbody>

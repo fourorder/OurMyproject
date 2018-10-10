@@ -19,6 +19,7 @@ import org.great.bean.DemandDealBean;
 import org.great.bean.DemandInfoBean;
 import org.great.bean.ParameterBean;
 import org.great.bean.UpdateDemandBean;
+import org.great.bean.UserBean;
 import org.springframework.web.multipart.MultipartFile;
 import org.apache.ibatis.annotations.Param;
 
@@ -138,13 +139,25 @@ public interface DemandBiz {
 	public List<DailyBean> selectDaily(int parameterId, int page);// 查询详细项目内容
 	
 	public String detailsState(int demandid);// 查询详细项目状态
+	
+	public int selectTime(int demandid);// 查询项目时间
 
+	public List<DemandBeanX> countAccomplish(int adviserid,int state,int page);// 查询所接项目
+	
+	public int countNumber(int adviserid,int state);// 查询所接项目总数
+	
 	public int countDaily(int parameterId);// 查询项目日报总数
 
 	public int sEvaluation(int dailyId,String notation,String radio);// 提交评价
 	
 	public int failure(int demandid);// 项目失败
+	
+	public int pass(int demandid);// 项目成功
+	
 	public int failure1(int demandid);// 项目失败
+	
+	public String selectEvaluate(int demandid);// 查评价
+	
 	
 	// 找顾问
 
