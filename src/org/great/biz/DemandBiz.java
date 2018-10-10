@@ -127,8 +127,8 @@ public interface DemandBiz {
 	public int sumbit(String content, int processId);// 提交日报
 
 	public List<DemandBeanX> particulars(int demandId);// 详细信息
-	
-	public int projectEvaluation(int demandId,String content);// 项目评价
+
+	public int projectEvaluation(int demandId, String content);// 项目评价
 
 	public int selectId(String account);// 查找Id
 
@@ -137,28 +137,27 @@ public interface DemandBiz {
 	public List<Integer> serialNum(String account);// 查询顾问所接项目编号
 
 	public List<DailyBean> selectDaily(int parameterId, int page);// 查询详细项目内容
-	
+
 	public String detailsState(int demandid);// 查询详细项目状态
-	
+
 	public int selectTime(int demandid);// 查询项目时间
 
-	public List<DemandBeanX> countAccomplish(int adviserid,int state,int page);// 查询所接项目
-	
-	public int countNumber(int adviserid,int state);// 查询所接项目总数
-	
+	public List<DemandBeanX> countAccomplish(int adviserid, int state, int page);// 查询所接项目
+
+	public int countNumber(int adviserid, int state);// 查询所接项目总数
+
 	public int countDaily(int parameterId);// 查询项目日报总数
 
-	public int sEvaluation(int dailyId,String notation,String radio);// 提交评价
-	
+	public int sEvaluation(int dailyId, String notation, String radio);// 提交评价
+
 	public int failure(int demandid);// 项目失败
-	
+
 	public int pass(int demandid);// 项目成功
-	
+
 	public int failure1(int demandid);// 项目失败
-	
+
 	public String selectEvaluate(int demandid);// 查评价
-	
-	
+
 	// 找顾问
 
 	public ArrayList<CounselorInfoBean> getCounselorInfoList();
@@ -195,25 +194,33 @@ public interface DemandBiz {
 	// 服务商初始列表
 	public ArrayList<DemandInfoBean> getDemandInfoFacilitatorList(String star, String end, String name, String userid,
 			String parameterid, String stateid);
-	//找顾问扣款
-	public int applicationConsultantajax(String employerId, String consultantId, String demandId,String counselorMoney);
 
-	//发布需求改状态然后扣款
-	public int stateDemandBidajax(String uesrid, String completeTime, String demandid, String auctionTime,String dealMoney);
-	
-	//我要投标加入扣款，判断是否已投，判断余额
-	public List<Object> addBidAjax(String userid,String demandid,String securityMoney);
-	
-	//投标失败的用户退款
-	public void refundBid(String userid, String demandid,String securityMoney);
-	
-	//交易结果，评价和状态用来判断付款
+	// 找顾问扣款
+	public int applicationConsultantajax(String employerId, String consultantId, String demandId,
+			String counselorMoney);
+
+	// 发布需求改状态然后扣款
+	public int stateDemandBidajax(String uesrid, String completeTime, String demandid, String auctionTime,
+			String dealMoney);
+
+	// 我要投标加入扣款，判断是否已投，判断余额
+	public List<Object> addBidAjax(String userid, String demandid, String securityMoney);
+
+	// 投标失败的用户退款
+	public void refundBid(String userid, String demandid, String securityMoney);
+
+	// 交易结果，评价和状态用来判断付款
 	public DemandDealBean getDemandDealBean(@Param("demandId") String demandId);
+
+	// 确定完成交易
+	public void complete(String demandid, String toUserId, String dealMoney, String securityMoney);
+
+	// 找顾问审核通过或者不通过扣款加钱
+	public void consultantCosts(String action, String demandid, String userid);
+
+	// 下线，退还佣金
+	public void downline(String userid, String demandid, String dealMoney, String securityMoney);
 	
-	//确定完成交易
-	public void complete(String demandid,String toUserId,String dealMoney,String securityMoney);
-	//找顾问审核通过或者不通过扣款加钱
-	public void consultantCosts(String action,String demandid,String userid);
-	//下线，退还佣金
-	public void downline(String userid,String demandid,String dealMoney,String securityMoney);
+	//项目失败
+	public void failures(String demandid);
 }
