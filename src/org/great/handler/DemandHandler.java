@@ -685,8 +685,9 @@ public class DemandHandler {
 		modelAndView.setViewName("jsp/facilitatorQueryDemandInfo");
 		request.setAttribute("demandInfo", demandBizImp.getDemandInfoBean(demandid));
 		// 获取合同信息
-
 		request.setAttribute("contract", demandBizImp.getContract(demandid));
+		// 获取交易信息
+		request.setAttribute("demandDeal", demandBizImp.getDemandDealBean(demandid));
 		return modelAndView;
 	}
 

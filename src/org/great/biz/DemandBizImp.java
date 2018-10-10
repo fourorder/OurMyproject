@@ -515,6 +515,7 @@ public class DemandBizImp implements DemandBiz {
 		demandMapper.updateDemand(updateDemandBean);
 		// 修改任务表状态
 		demandMapper.updateDemandDeal(demandid, "2083", totime);
+		
 	}
 
 	@Override
@@ -657,7 +658,7 @@ public class DemandBizImp implements DemandBiz {
 				demandBean.setStateId("1862");
 				demandBean.setDemandId(demandId);
 				demandMapper.updateDemand(demandBean);
-
+				demandMapper.addCons(employerId, consultantId, demandId, "902");
 			} else {
 				result = 3;
 			}

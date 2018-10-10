@@ -149,20 +149,20 @@
 										<div class="aui-card-form-item">
 											<label class="aui">项目工期：</label>
 											<div class="ydc-reg-form-input">
-												<input type="text" id="completeTime" name="completeTime" class="ydc-form-control"  autocomplete="off">天
+												<input type="text" id="completeTime" name="completeTime" onclick="completeTimeJudge()" class="ydc-form-control"  autocomplete="off">天
 												<input type="hidden" id="demandid" name="demandid" value="${demandInfo.demandId}">
 											 <div class="aui-remarks">
-												<p>完成项目天数</p>
+												<div id="completeTimeDiv" style="color: red; display: inline;"></div>
 												</div>
 											</div>
 										</div>
 										<div class="aui-card-form-item">
 											<label class="aui">投标天数：</label>
 											<div class="ydc-reg-form-input">
-												<input type="text" id="auctionTime" name="auctionTime" class="ydc-form-control"  autocomplete="off">天
+												<input type="text" id="auctionTime" name="auctionTime" onclick="auctionTimeJudge()" class="ydc-form-control"  autocomplete="off">天
 												
 											 <div class="aui-remarks">
-												<p>完成项目天数</p>
+												<div id="auctionTimeDiv" style="color: red; display: inline;"></div>
 												</div>
 											</div>
 										</div>
@@ -196,6 +196,45 @@
        
        <!-- 开始投标ajax	 -->
  <script type="text/javascript" src="<%=path%>admin/js/jquery.min.js"></script>
+ 	<script type="text/javascript">
+ 	/* 工期格式 */
+	function completeTimeJudge() {
+		var inpEle = document.getElementById("completeTime");
+		var myreg = /^[1-9]\d*$/;
+		var x = document.getElementById("completeTimeDiv");
+		inpEle.onblur = function() {
+			var inpVal = this.value;
+			if (!myreg.exec(inpVal)) {
+				x.innerHTML = "<font color='red'>请输入正确工期（天）</font>";
+
+				inpEle.value = "";
+				
+			} else {
+				x.innerHTML = "<font color='green'>完美</font>";
+			}
+		}
+	}
+	//判断押金格式
+	function auctionTimeJudge() {
+		
+		var inpEle = document.getElementById("auctionTime");
+		var myreg = /^[1-9]\d*$/;
+		var x = document.getElementById("auctionTimeDiv");
+		inpEle.onblur = function() {
+			var inpVal = this.value;
+			if (!myreg.exec(inpVal)) {
+				x.innerHTML = "<font color='red'>请输入正确投标天数</font>";
+
+				inpEle.value = "";
+				
+			} else {
+				x.innerHTML = "<font color='green'>完美</font>";
+			}
+		}
+	}
+ 	
+ 	
+ 	</script>
 	<script type="text/javascript">
 	
 	function stateDemand() {

@@ -12,8 +12,9 @@
 
 	
 	<title>修改资料</title>
-	<link rel="icon" type="image/x-icon" href="favicon.ico">
-	<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
+	<link rel="stylesheet" href="<%=path%>css/oindex.css">
+ <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">
         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/home.css">
@@ -66,14 +67,11 @@
 				<div class="width1180">
 					
 					<span class="fr" id="fr1">
-						<!-- <a href="#" title="登录">登录</a>
-						<a href="#" title="注册">注册</a> -->
+						
+					
 						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
 						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
-						<!--登录后
-						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
-						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
-						-->
+						
 					</span>
 				</div>
 </div>
@@ -113,7 +111,7 @@
 	
 									
 			
-						<form  method="post" action="<%=path%>user/ToUserInforEdit.action" enctype="multipart/form-data">
+						<form  method="post" action="<%=path%>user/ToUserInforEdit.action" onSubmit="return check()" enctype="multipart/form-data">
 								 <div class="aui-card-form-item preview  aui-news" style="margin-top:20px;">
                                                 <label class="aui-card-form-label">头像:</label>
                                                 <div class="aui-file-up-img" id="preview_0">
@@ -163,7 +161,7 @@
 										
 										 <div class="aui-card-form-item">
 											<label class="aui-card-form-label">身份证号:</label>
-											<div class="ydc-reg-form-input clearfix">
+											<div class="ydc-reg-form-input">
 												<input type="text" id="userIdentity" name="userIdentity" class="ydc-form-control" readonly="true" autocomplete="off" value="${userInfo.userIdentity}">
 												<div class="ydc-reg-form-text">
 													<p>帐号信息填写需真实有效，如发现虚假以及非个人真实信息导致帐号收益无法提取，责任由帐号个人承担</p>
@@ -191,10 +189,10 @@
 										<div class="aui-card-form-item">
 											<label class="aui-card-form-label">邮箱:</label>
 											<div class="ydc-reg-form-input">
-												<input type="text" id="userMail" name="userMail" class="ydc-form-control"  autocomplete="off" value="${userInfo.userMail}">
+												<input type="text" id="userMail" name="userMail" onclick="userMailJudge()" class="ydc-form-control"  autocomplete="off" value="${userInfo.userMail}">
 											</div>
 											<div class="ydc-reg-form-text">
-												<p>请使用自己日常使用邮箱便于接受相关信息</p>
+												<div id="userMailDiv" style="color: red; display: inline;"></div>	
 											</div>
 										</div>
 										
@@ -237,6 +235,59 @@
        <script type="text/javascript" src="<%=path%>admin/js/jquery.min.js"></script>
        <script type="text/javascript" src="<%=path%>admin/js/nicEdit.js"></script>
         <script type="text/javascript" src="<%=path%>admin/js/upImg.js"></script>
+        <script type="text/javascript">
+        /* 判断邮箱格式 */
+    	function userMailJudge() {
+    		var inpEle = document.getElementById("userMail");
+    		var myreg = /^[a-z0-9]\w+@[a-z0-9]{2,3}(\.[a-z]{2,3}){1,2}$/i;
+    		var x = document.getElementById("userMailDiv");
+    		inpEle.onblur = function() {
+    			var inpVal = this.value;
+    			if (!myreg.exec(inpVal)) {
+    				x.innerHTML = "<font color='red'>邮箱格式错误</font>";
+
+    				inpEle.value = "";
+    				
+    			} else {
+    				x.innerHTML = "<font color='green'>完美</font>";
+    			}
+    		}
+    	}
+    	
+        
+        
+        
+        </script>
+       	<script type="text/javascript">
+	
+		function check() {
+		
+		var userProfile = document.getElementById("userProfile").value;
+		var userName = document.getElementById("userName").value;
+		var userMail = document.getElementById("userMail").value;
+		var userAddress = document.getElementById("userAddress").value;
+		
+		
+		if (userProfile!=null&&userProfile != "" && userName!=null&&userName != "" && userMail!=null&&userMail != "" && userAddress!=null&&userAddress != "") {
+
+			var r = confirm("是否提交本次修改");
+			if (r == true) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} else {
+			alert("文本框不能留空");
+			return false;
+		}
+	}
+	</script> 
+        
+        
+        
+        
+        
 	<script type="text/javascript">
 	    var slideIndex = 0;
 	    showSlides();

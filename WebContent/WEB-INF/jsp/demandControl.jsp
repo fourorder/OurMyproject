@@ -207,7 +207,7 @@
 											</div>
 											<div class="ydc-group-table-item-info">
 												
-												<span>| 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
+												<span> 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
 											</div>
 										</div>
 									 	</c:if>
@@ -234,7 +234,7 @@
 											</div>
 											<div class="ydc-group-table-item-info">
 												
-												<span>| 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
+												<span> 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
 											</div>
 										</div>
 									 	</c:if>
@@ -261,7 +261,7 @@
 											</div>
 											<div class="ydc-group-table-item-info">
 												
-												<span>| 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
+												<span> 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
 											</div>
 										</div>						 	
 									 	</c:if>
@@ -340,7 +340,7 @@
 											</div>
 											<div class="ydc-group-table-item-info">
 												
-												<span>| 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
+												<span> 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
 											</div>
 										</div>
 									 	
@@ -441,7 +441,7 @@
 											</div>
 											<div class="ydc-group-table-item-info">
 												
-												<span>| 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
+												<span> 押金：${demandInfo.securityMoney} | 佣金：${demandInfo.dealMoney} | 类型：${demandInfo.parameterBean.parameterName}</span>
 											</div>
 										</div>
 									 	
@@ -634,7 +634,7 @@
 							
 							+"<div class='group-table-item-info'>"
 						
-							+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+							+"<span> 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
 							+"</div>"			
 							+"</div>"			            	
 		            	);
@@ -659,7 +659,7 @@
 								
 								+"<div class='group-table-item-info'>"
 								
-								+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+								+"<span> 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
 								+"</div>"			
 								+"</div>"        	
 		            	); 
@@ -686,7 +686,7 @@
 							
 							+"<div class='group-table-item-info'>"
 							
-							+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+							+"<span> 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
 							+"</div>"			
 							+"</div>"		            	
 		            	);
@@ -768,7 +768,7 @@
 									
 									+"<div class='group-table-item-info'>"
 									
-									+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+									+"<span> 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
 									+"</div>"			
 									+"</div>"        	
 			            	);
@@ -878,7 +878,7 @@
  						
  						+"<div class='group-table-item-info'>"
  						
- 						+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+ 						+"<span> 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
  						+"</div>"			
  						+"</div>"        	
  	        	);
@@ -927,7 +927,7 @@
  	 						
  	 						+"<div class='group-table-item-info'>"
  	 						+"<span>发布时间："+e.publishTime+"</span>"
- 	 						+"<span>| 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
+ 	 						+"<span>  | 押金："+e.securityMoney+" | 佣金："+e.dealMoney+" | 类型："+e.parameterBean.parameterName+"</span>"
  	 						+"</div>"			
  	 						+"</div>"        	
  	 	        	);

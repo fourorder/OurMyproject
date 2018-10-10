@@ -110,7 +110,7 @@
 	
 									
 			
-						<form  method="post" action="<%=path%>demand/updateDemandInfo.action" enctype="multipart/form-data">
+						<form  method="post" action="<%=path%>demand/updateDemandInfo.action" onSubmit="return check()" enctype="multipart/form-data">
 								 <div class="aui-card-form-item preview  aui-news" style="margin-top:20px;">
                                                 <label class="aui-card-form-label">图标:</label>
                                                 <div class="aui-file-up-img" id="preview_0">
@@ -167,9 +167,9 @@
 								<div class="aui-card-form-item">
 											<label class="aui-card-form-label">佣金：</label>
 											<div class="ydc-reg-form-input">
-												<input type="text" id="dealMoney" name="dealMoney" class="ydc-form-control"  autocomplete="off" value="${demandInfo.dealMoney}">
+												<input type="text" id="dealMoney" name="dealMoney"  onclick="dealMoneyJudge()" class="ydc-form-control"  autocomplete="off" value="${demandInfo.dealMoney}">
 											 <div class="aui-remarks">
-												<p>需求费用</p>
+												<div id="dealMoneyDiv" style="color: red; display: inline;"></div>
 												</div>
 											</div>
 								</div>
@@ -177,9 +177,9 @@
 								<div class="aui-card-form-item">
 											<label class="aui-card-form-label">押金：</label>
 											<div class="ydc-reg-form-input">
-												<input type="text" id="securityMoney" name="securityMoney" class="ydc-form-control"  autocomplete="off" value="${demandInfo.securityMoney}">
+												<input type="text" id="securityMoney" onclick="securityMoneyJudge()" name="securityMoney" class="ydc-form-control"  autocomplete="off" value="${demandInfo.securityMoney}">
 											 <div class="aui-remarks">
-												<p>供应商上缴的押金，在需求后返还给供应商。一般设为需求的10%</p>
+															<div id="securityMoneyDiv" style="color: red; display: inline;"></div>	
 												</div>
 											</div>
 								</div>
@@ -210,6 +210,69 @@
        <script type="text/javascript" src="<%=path%>admin/js/jquery.min.js"></script>
        <script type="text/javascript" src="<%=path%>admin/js/nicEdit.js"></script>
         <script type="text/javascript" src="<%=path%>admin/js/upImg.js"></script>
+   <script type="text/javascript">  
+   /* 判断佣金格式 */
+	function dealMoneyJudge() {
+		var inpEle = document.getElementById("dealMoney");
+		var myreg = /^[1-9]\d*$/;
+		var x = document.getElementById("dealMoneyDiv");
+		inpEle.onblur = function() {
+			var inpVal = this.value;
+			if (!myreg.exec(inpVal)) {
+				x.innerHTML = "<font color='red'>请输入正确佣金（非负整数）</font>";
+
+				inpEle.value = "";
+				
+			} else {
+				x.innerHTML = "<font color='green'>完美</font>";
+			}
+		}
+	}
+	//判断押金格式
+	function securityMoneyJudge() {
+		var inpEle = document.getElementById("securityMoney");
+		var myreg = /^[1-9]\d*$/;
+		var x = document.getElementById("securityMoneyDiv");
+		inpEle.onblur = function() {
+			var inpVal = this.value;
+			if (!myreg.exec(inpVal)) {
+				x.innerHTML = "<font color='red'>请输入正确佣金（非负整数）</font>";
+
+				inpEle.value = "";
+				
+			} else {
+				x.innerHTML = "<font color='green'>完美</font>";
+			}
+		}
+	}
+   
+   
+		function check() {
+		
+		var demandTitle = document.getElementById("demandTitle").value;
+		var demandDetaIlinformation = document.getElementById("demandDetaIlinformation").value;
+		var dealMoney = document.getElementById("dealMoney").value;
+		var securityMoney = document.getElementById("securityMoney").value;
+		
+		
+		if (demandTitle!=null&&demandTitle != "" && demandDetaIlinformation!=null&&demandDetaIlinformation != "" && dealMoney!=null&&dealMoney != "" && securityMoney!=null&&securityMoney != "") {
+
+			var r = confirm("是否提交本次修改");
+			if (r == true) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} else {
+			alert("文本框不能留空");
+			return false;
+		}
+	}
+	</script>    
+        
+        
+        
 	<script type="text/javascript">
 	    var slideIndex = 0;
 	    showSlides();
