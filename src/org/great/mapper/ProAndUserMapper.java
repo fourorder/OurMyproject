@@ -21,4 +21,11 @@ public interface ProAndUserMapper {
 		 //查询是否购买过
 		
 		public ArrayList<ProAndUserBean> findHasBeenBuy(@Param(value="buyUserId")int buyUserId,@Param(value="proId")int proId);
+
+
+		//查找该用户评价
+		public ArrayList<ProAndUserBean> findProductionEvaluate(@Param(value="proId")Integer proId);
+
+
+
 }

@@ -53,6 +53,16 @@ UPDATE PROANDUSER SET PRODUCTIONEVALUATE = #{evaluate},point=#{point},state=1 WH
 	 
 	 
 	 </select>
-	 
+	
+	
+	<select id="findProductionEvaluate"
+	  resultType="org.great.bean.ProAndUserBean" 
+	>
+	
+	select * from PROANDUSER where PRODUCTIONID=#{proId} and STATE=1
+	
+	
+	
+	</select> 
 	 
 </mapper>

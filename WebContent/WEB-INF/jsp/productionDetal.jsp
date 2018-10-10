@@ -14,6 +14,10 @@
  <link rel="stylesheet" type="text/css" href="<%=path%>css/normalize.css"/>
  <script type="text/javascript" src="<%=path%>js/jquery-1.9.1.min.js"></script>
  <script src="<%=path%>js/common.js" type="text/javascript" charset="utf-8"></script>
+         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
+        <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">
+        <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/home.css">
+  <link rel="stylesheet" href="<%=path%>css/oindex.css">
    <script type="text/javascript">
   $(document).ready(function(){
 	  var showproduct = {
@@ -21,8 +25,8 @@
 		  "sumid":"showsum",
 		  "boxw":400,//宽度,该版本中请把宽高填写成一样
 		  "boxh":400,//高度,该版本中请把宽高填写成一样
-		  "sumw":60,//列表每个宽度,该版本中请把宽高填写成一样
-		  "sumh":60,//列表每个高度,该版本中请把宽高填写成一样
+		  "sumw":90,//列表每个宽度,该版本中请把宽高填写成一样
+		  "sumh":90,//列表每个高度,该版本中请把宽高填写成一样
 		  "sumi":7,//列表间隔
 		  "sums":5,//列表显示个数
 		  "sumsel":"sel",
@@ -68,7 +72,22 @@ function checkMoney(proId){
 </script>
 </head>
 <body>
-
+<!-- head YDC begin -->
+        <div class="o-top">
+				<div class="width1180">
+					<span class="fr">
+						<!-- <a href="#" title="登录">登录</a>
+						<a href="#" title="注册">注册</a> -->
+						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
+						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
+						<!--登录后
+						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
+						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>
+						-->
+					</span>
+				</div>
+			</div>
+        <!-- head YDC end -->
  <div class="showall">
 	                <!--left -->
 	                <div class="showbot">
@@ -171,7 +190,9 @@ function checkMoney(proId){
 														<li class="act_active">
 															<a href="#">商品详情</a>
 														</li>
-														
+														<li>
+															<a href="#">商品评价</a>
+														</li>
 													</ul>
 													
 													<div class="clear"></div>
@@ -199,7 +220,34 @@ function checkMoney(proId){
 												    	
 												       
 												 <!--商品评价-->      
-												   
+												   <div id="ui-c" class="ui-c">
+												       
+												         	<ul style="display:none;">
+												      
+												         
+												         				<c:forEach items="${productionEvaluate}" var="list">
+
+  
+										<div class="ydc-group-table-item">
+										 <div class="ydc-group-table-item-img">
+												<img
+													src="<%=path%>picture/findPicture.action?url=${list.userHead}">
+											</div>
+											
+											<div class="ydc-group-table-item-text">
+												<span> <a href="#">评价用户：${list.userName}</a></span> 
+												<span>| 评价时间：${list.payTime} </span>
+												<br>
+													<br>
+														<br>
+												<span>评价内容：${list.productionEvaluate}</span>
+											</div>
+										 
+										</div>
+
+   
+									</c:forEach></ul>
+												    </div>
 												   
 												 <!--售后保障-->
 												
