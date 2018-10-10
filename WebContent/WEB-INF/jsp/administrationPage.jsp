@@ -194,7 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
                 <div class="layui-tab-item layui-show">
                     <!--欢迎页 -->
-                    <iframe id="menuFrame" name="menuFrame" src="<%=basePath%>welcome.jsp" style="overflow:visible;"
+                    <iframe id="menuFrame" name="menuFrame" src="<%=basePath%>employers/page.action?page=tpage&number=1" style="overflow:visible;"
                             scrolling="yes" frameborder="no" width="100%" height="100%"></iframe>
                 </div>
             </div>

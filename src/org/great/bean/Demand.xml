@@ -521,9 +521,9 @@
 		select * from (
 		select e.*,rownum rn from (
 		select
-		d.demandtitle,d.demanddetailinformation,u.useraccount,c.demandid,c.stateid,d.stateid  as stated,m.CONSULTANTEVALUATION
-		from consultantsandneedstbl c,usertbl u,demandinfomationtbl d,demanddealtbl m where
-		c.employerid=u.userid and c.demandid=d.demandid and d.demandid=m.demandid and
+		d.demandtitle,d.demanddetailinformation,u.useraccount,c.demandid,c.stateid,d.stateid  as stated
+		from consultantsandneedstbl c,usertbl u,demandinfomationtbl d where
+		c.employerid=u.userid and c.demandid=d.demandid  and
 		c.consultantid=#{userId}
 
 		<if test="state !=0">
@@ -558,7 +558,8 @@ select parametername from tbparameter where parameterid=#{parameterid}
 </select>
 <!-- 查询审核状态 -->
 <select id="detailsState"   resultType="java.lang.String">
- select parametername from tbparameter where parameterid=(select auditstate from demanddealtbl where demandid=#{demandid})
+  select parametername from tbparameter where parameterid=(select stateid from demandinfomationtbl where demandid=#{demandid})
+    
 </select>
 <!-- 查ID-->
 <select id="selectId" parameterType="java.lang.String" resultType="java.lang.Integer">
@@ -593,8 +594,30 @@ insert into dailytbl values(SEQID.nextval,(select to_char(sysdate,'yyyy-mm-dd ')
 		where rownum &lt;= (#{page}*5))
 		where rn &gt;= (#{page}*5-4)
 	</select>
-
-
+<!-- 查询所接受项目总数 -->
+<select id="countNumber"  resultType="java.lang.Integer">
+select count(*) from demandinfomationtbl  where adviserid=#{adviserid} 
+<if test="state !=0">
+			and Stateid=#{state}
+		</if>
+	
+</select>
+<!-- 查询所接受项目 -->
+<select id="countAccomplish"  resultType="org.great.bean.DemandBeanX">
+select * from (
+select e.*,rownum rn from (
+    select * from demandinfomationtbl  where adviserid=#{adviserid} 
+     <if test="state !=0">
+			and Stateid=#{state}
+		</if>
+         ) e
+		where rownum &lt;= (#{page}*5))
+		where rn &gt;= (#{page}*5-4)
+</select>
+<!-- 查询项目时间 -->
+<select id="selectTime"  resultType="java.lang.Integer">
+select projectschedule from demanddealtbl where demandid=#{demandid}
+</select>
 <!-- 评价日报 -->
 <update id="sEvaluation" >
 UPDATE dailytbl set DAILYREVIEW=#{radio},POSTIL=#{notation} WHERE  daiid=#{dailyId}
@@ -604,15 +627,24 @@ UPDATE dailytbl set DAILYREVIEW=#{radio},POSTIL=#{notation} WHERE  daiid=#{daily
 <update id="projectEvaluation"  >
 UPDATE demanddealtbl set CONSULTANTEVALUATION=#{content} WHERE  demandid=#{demandId}
 </update>
-
+<!-- 查评价 -->
+<select id="selectEvaluate"   resultType="java.lang.String">
+select CONSULTANTEVALUATION from demanddealtbl where demandid=#{demandid}
+</select>
 <!-- 项目失败 -->
 <update id="failure"  parameterType="java.lang.Integer">
 UPDATE demandinfomationtbl set stateid=1866 WHERE  demandid=#{demandid}
 </update>
+<!-- 项目通过 -->
+<update id="pass"  parameterType="java.lang.Integer">
+UPDATE demandinfomationtbl set stateid=1865 WHERE  demandid=#{demandid}
+</update>
+
 <!-- 项目失败 -->
 <update id="failure1"  parameterType="java.lang.Integer">
 UPDATE demanddealtbl set auditstate=2085 WHERE  demandid=#{demandid}
 </update>
+
 
 	<!-- 查询项目日报总数 -->
 	<select id="countDaily" resultType="java.lang.Integer">

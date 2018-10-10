@@ -20,6 +20,7 @@ import org.great.bean.DemandInfoBean;
 import org.great.bean.ParameterBean;
 import org.great.bean.QueryBean;
 import org.great.bean.UpdateDemandBean;
+import org.great.bean.UserBean;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -141,7 +142,17 @@ public interface DemandMapper {
 	
 	public int failure(@Param("demandid")int demandid);// 项目失败
 	
+	public int pass(@Param("demandid")int demandid);// 项目成功
+	
 	public int failure1(@Param("demandid")int demandid);// 项目失败
+	
+	public String selectEvaluate(@Param("demandid")int demandid);// 查评价
+	
+	public int selectTime(@Param("demandid")int demandid);// 查询项目时间
+	
+	public  List<DemandBeanX> countAccomplish(@Param("adviserid")int adviserid,@Param("state")int state,@Param("page")int page);// 查询所接项目
+	
+	public int countNumber(@Param("adviserid")int adviserid,@Param("state")int state);// 查询所接项目总数
 	
 	public int projectEvaluation(@Param("demandId")int demandId,@Param("content")String content);// 项目评价
 

@@ -23,6 +23,7 @@ import org.great.bean.DemandInfoBean;
 import org.great.bean.ParameterBean;
 import org.great.bean.QueryBean;
 import org.great.bean.UpdateDemandBean;
+import org.great.bean.UserBean;
 import org.great.mapper.DemandMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -619,6 +620,38 @@ public class DemandBizImp implements DemandBiz {
 	@Override
 	public int failure1(int demandid) {
 		// TODO Auto-generated method stub
-		return 0;
+		return demandMapper.failure1(demandid);
 	}
+
+	@Override
+	public  List<DemandBeanX> countAccomplish(int adviserid, int state, int page) {
+		// TODO Auto-generated method stub
+		return demandMapper.countAccomplish(adviserid, state, page);
+	}
+
+	@Override
+	public int countNumber(int adviserid, int state) {
+		// TODO Auto-generated method stub
+		return demandMapper.countNumber(adviserid, state);
+	}
+
+	@Override
+	public int selectTime(int demandid) {
+		// TODO Auto-generated method stub
+		return demandMapper.selectTime(demandid);
+	}
+
+	@Override
+	public int pass(int demandid) {
+		// TODO Auto-generated method stub
+		return demandMapper.pass(demandid);
+	}
+
+	@Override
+	public String selectEvaluate(int demandid) {
+		// TODO Auto-generated method stub
+		return demandMapper.selectEvaluate(demandid);
+	}
+
+
 }
