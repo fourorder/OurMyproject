@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	
-	<title>内容同步-- 一点车 -  让您多懂一点车</title>
+	<title>申请顾问</title>
 		<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/core.css">
         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">
@@ -45,7 +45,6 @@
 						<!-- <a href="#" title="登录">登录</a>
 						<a href="#" title="注册">注册</a> -->
 						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
-						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
 						<!--登录后
 						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
 						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>

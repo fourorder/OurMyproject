@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="<%=path%>css/oindex.css">
 <script type="text/javascript" src="<%=path%>js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="<%=path%>js/jquery.superslide.2.1.1.js"></script>
-<title>Insert title here</title>
+<title>曝光台</title>
 <style type="text/css">
 /*图片框样式-------------------------------*/
 
@@ -106,7 +106,7 @@ left:920px;
 						<!-- <a href="#" title="登录">登录</a>
 						<a href="#" title="注册">注册</a> -->
 						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
-						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
+						
 						<!--登录后
 						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
 						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>

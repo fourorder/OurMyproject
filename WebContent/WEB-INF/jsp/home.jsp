@@ -24,7 +24,6 @@
 					</span>
 					<span class="fr" id="fr1">
 						<a href="#" title="众包首页"><i class="o-home"></i>众包首页</a>
-						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
 						<a href="<%=path%>chat/chatlist.action?page=1"  id="msg"><i class="o-contract"></i>新消息(0)</a>
 					</span>
 				</div>

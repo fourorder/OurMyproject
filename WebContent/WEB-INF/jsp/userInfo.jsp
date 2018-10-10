@@ -25,7 +25,7 @@
 					<span class="fr" id="fr1">
 						
 						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
-						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
+						
 						
 					</span>
 				</div>

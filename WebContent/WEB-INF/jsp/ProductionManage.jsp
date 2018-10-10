@@ -49,13 +49,7 @@
         <style type="text/css">
         
  .ydc-asset-img-list-img img { width: 100%; height: 240px;}       
-    .ydc-asset-img-list-img{
-    width: 100%;
-    height: 240px;;
-    vertical-align: middle;
-    line-height: 217px;
-    background-color: #f3f4f9;
-}  
+   
         </style>
         
     </head>
@@ -68,7 +62,7 @@
 						<!-- <a href="#" title="登录">登录</a>
 						<a href="#" title="注册">注册</a> -->
 						<a href="<%=path %>user/home.action" title="众包首页"><i class="o-home"></i>众包首页</a>
-						<a href="#" title="联系我们" ><i class="o-contract"></i>联系我们</a>
+						
 						<!--登录后
 						<a title="管理员" href="http://www.yizhihou.com/member/" target="_blank" rel="nofollow">嘉客</a>
 						<a href="http://www.yizhihou.com/member/logout.php" rel="nofollow">退出</a>

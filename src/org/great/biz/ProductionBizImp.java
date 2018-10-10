@@ -83,7 +83,7 @@ public class ProductionBizImp implements ProductionBiz{
 	//上传图片--------------------
 		
 		//上传文件路径
-		 String path = request.getServletContext().getRealPath("/images/");
+		 String path = request.getRealPath("/images/");
         //上传文件名
         String filename = file.getOriginalFilename();
         

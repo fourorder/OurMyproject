@@ -98,31 +98,31 @@ text-indent:2em;
   </ul><!-- 选项卡头结束 -->
   <div class="layui-tab-content"><!-- 面板开始 -->
     <div class="layui-tab-item layui-show">
-  <strong style="font-size:1.5em">◆ 进展检査 </strong>
+  <strong style="font-size:1em">◆ 进展检査 </strong>
  <p>外包管理小组按照《外包开发合同》力中的“监控计划”，定期检査承包商的开发进展情况， 
 并记录到秒《外包开发过程监控报告》之中。进展检查的重点是:实际进度是否与计划相符? 
 承包商的投入（人力、物力、财力）是否充分? </p>
-<strong style="font-size:1.5em">◆质量检查 </strong>
+<strong style="font-size:1em">◆质量检查 </strong>
 <p>外包管理小组按照《外包开发合同》中的“监控计划”，对组织人员对录包商的工作成果进行技术评审 、
 测试，或者参与承包商组织的技术评审和测试，以保证工作成果的质量符合要求。 
 外包管理小组将评审结论记录到《外包开发过程监控报告》之中。 </p>
-<strong style="font-size:1.5em">◆纠正编差 </strong>
+<strong style="font-size:1em">◆纠正编差 </strong>
 <p>外包管理小组根据进展检查和质量检査的结论，督促承包商纠正工作偏差。如果需要更改合 
 周、产品需求或开学计划，则按照变更控制规程处理。</p>
- <strong style="font-size:1.5em">◆成果验收</strong>
+ <strong style="font-size:1em">◆成果验收</strong>
  <p>验收人员审查接包方应当交付的成果，如代码、文档，等等，确保这些成果是完整的并且是 
 正确酌。验收人员将审査结果记录在《外包合同验收报告力之中。 </p>
- <strong style="font-size:1.5em">◆成果测试</strong>
+ <strong style="font-size:1em">◆成果测试</strong>
 <p>验收人员对待交付的产品进行全面的测试，确保产品符合需求。验收人员将测试结果记录在 
 《外包合同验收报告》之中。</p> 
- <strong style="font-size:1.5em">◆问题处理</strong>
+ <strong style="font-size:1em">◆问题处理</strong>
 <p>如果验收人员在审查与测试时发现工作成果存在缺陷，则外包管理小组应当视问题的严重性 
 与接包方协商，给出合适的处理措施片记录在《外包合同验收报告》之中。 
     如果工作成果存在严重的缺陷，则退回给承包方，接包方应当给出纠正缺陷的措施，双方协 商
 第二次验收的时间。给发包方带来损失的，应当依据合门对接创方做出相成的处罚。 
   如果工作作成果存在一些轻微的缺陷，则接包方应当给出纠正缺陷的措施，双方协商是否 
 需要第二次验收 。</p>
- <strong style="font-size:1.5em">◆成果交付</strong>
+ <strong style="font-size:1em">◆成果交付</strong>
     <p>当所有工作成果都通过验收后，接包方将其交付给外包管理小组。双方责任人签字认可，外包管理员通知本机构的财务人员，将合同余款支付给接包方。</p>
     
     </div>
