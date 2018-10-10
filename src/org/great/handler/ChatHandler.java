@@ -16,11 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @Scope("prototype")
-@RequestMapping("/chat")//顾问
+@RequestMapping("/chat")//聊天
 public class ChatHandler {
 	@Resource
 	private ChatBiz chatBizImp;
-	@RequestMapping("/gotochat.action")//跳到申请页面
+	@RequestMapping("/gotochat.action")//跳到聊天页面
 	public ModelAndView test(HttpServletRequest request,String account){
 		ModelAndView modelAndView=new ModelAndView();
 		request.setAttribute("toUser", account);

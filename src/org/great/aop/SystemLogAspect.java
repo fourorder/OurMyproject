@@ -117,8 +117,6 @@ public class SystemLogAspect {
             	ub.setUserAccount("游客");
             	ub.setUserId(0);
             }
-            System.out.println("请求人:" + ub.getUserAccount()); 
-           System.out.println("请求人:" + ub.getUserId()); 
             LogBean logBean=new LogBean();
             logBean.setUserId(ub.getUserId());
             logBean.setRequestip(mothod);

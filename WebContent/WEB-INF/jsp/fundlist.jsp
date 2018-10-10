@@ -108,7 +108,7 @@
 										</c:if>	
 										</li>
 										<li class="ydc-item-quick">
-											第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class="" id="btn1"></div>页
+											第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class="" id="btn1" onclick="checknum(this)"></div>页
 											<button style="margin-left:5px;" class="ydc-previous-item-btn-medium"  onclick="selectFund('jump')" >
 												<span>跳转</span>
 											</button>
@@ -131,13 +131,21 @@
 	
 
 	<script type="text/javascript">
+	function checknum(obj){
+		if($(obj).val()!=""){
+			if($(obj).val()<1){				
+				$("#btn1").val(1);
+			}	
+		}
+	}
+	
 	    
 var page="${requestScope.page}";
 function selectFund(state){
 	
 	$("#tb").empty();
 	var num=$("#btn1").val();
-	if(num!=""){
+	if(num!=""&&state=="jump"){
 		page=num;		
 	}
 	$.ajax({	

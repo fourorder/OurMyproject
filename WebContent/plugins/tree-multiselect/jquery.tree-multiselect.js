@@ -14,7 +14,7 @@ exports.createSection = function (name) {
     type: 'section',
     name: name,
     items: []
-  };
+  }; 
 };
 
 exports.isSection = function (obj) {

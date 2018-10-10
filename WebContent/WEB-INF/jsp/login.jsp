@@ -105,7 +105,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- content YDC begin -->
 <!-- content YDC end -->
 
-	<script type="text/javascript" src="<%=basePath%>admin/js/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>admin/js/jquery.min.js"></script>\
+	<script type="text/javascript">
+         window.history.forward();
+</script>
 	<script type="text/javascript">
 	    var slideIndex = 0;
 	    showSlides();

@@ -38,7 +38,7 @@ public class LoginBizImp implements LoginBiz {
 				}else {
 					flag=1;//雇主服务商成功登陆跳转
 				}				
-				
+				request.getSession().setAttribute("user",user.get(0));//将用户对象存到session里
 			}else {
 				flag=2;//账号被锁定跳转
 			}
@@ -48,7 +48,7 @@ public class LoginBizImp implements LoginBiz {
 			
 			flag=3;//登陆失败跳转
 		}
-		request.getSession().setAttribute("user",user.get(0));//将用户对象存到session里
+		
 		return flag;
 	}
 

@@ -186,7 +186,7 @@ $(function () {
 <c:if test="${requestScope.objList[0][2]!='1'}">
 <button class="mybtn" onClick="selectepage('next')" id="enext">下一页</button>
 </c:if>
-到第<input type="text" style="width:25px;" id="epageNum" value="">页
+到第<input type="number" style="width:40px;" id="epageNum" value="" onclick="checknum(this)">页
 <button class="mybtn" onClick="selectepage('jump')">跳转</button>
 </div> 
 	</div>
@@ -217,7 +217,7 @@ $(function () {
 <c:if test="${requestScope.objList[1][2]!='1'}">
 <button class="mybtn" onClick="selectbpage('next')" id="bnext">下一页</button>
 </c:if>
-到第<input type="text" style="width:25px;" id="bpageNum" value="">页
+到第<input type="number" style="width:40px;" id="bpageNum" value="" onclick="checknum(this)">页
 <button class="mybtn" onClick="selectbpage('jump')">跳转</button>
 </div> 	
 	</div>
@@ -247,7 +247,7 @@ $(function () {
 <c:if test="${requestScope.objList[2][2]!='1'}">
 <button class="mybtn" onClick="selectppage('next')" id="pnext">下一页</button>
 </c:if>
-到第<input type="text" style="width:25px;" id="ppageNum" value="">页
+到第<input type="number" style="width:40px;" id="ppageNum" value="" onclick="checknum(this)">页
 <button class="mybtn" onClick="selectppage('jump')">跳转</button>
 </div> 		
 	</div>
@@ -277,7 +277,7 @@ $(function () {
 <c:if test="${requestScope.objList[3][2]!='1'}">
 <button class="mybtn" onClick="selectopage('next')" id="onext">下一页</button>
 </c:if>
-到第<input type="text" style="width:25px;" id="opageNum" value="">页
+到第<input type="number" style="width:40px;" id="opageNum" value="" onclick="checknum(this)">页
 <button class="mybtn" onClick="selectopage('jump')">跳转</button>
 </div>  		
 	</div>
@@ -287,6 +287,13 @@ $(function () {
 
 </body>
 <script type="text/javascript">
+function checknum(obj){
+	if($(obj).val()!=""){
+		if($(obj).val()<1){				
+			$(obj).val(1);
+		}	
+	}
+}
 var epage="${requestScope.page}";
 var bpage="${requestScope.page}";
 var ppage="${requestScope.page}";
@@ -294,7 +301,7 @@ var opage="${requestScope.page}";
 function selectepage(state){
 	var num=$("#epageNum").val();
 	$("#con1").empty();
-	if(num!=""){
+	if(num!=""&&state=="jump"){
 		epage=num;		
 	} 
 	$.ajax({	
@@ -334,7 +341,7 @@ function selectepage(state){
 		     		//隐藏标题
 		     		$(this).find('div.caption').stop(false,true).fadeOut(200);
 		     	});		     	
-		     	$("#con1").append("<div  style='position:absolute;top:510px;left:260px;' id='div1'><button class='mybtn' onclick=\"selectepage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectepage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectepage('last')\" id='elast'> 上一页 </button> <button class='mybtn' onclick=\"selectepage('next')\" id='enext'> 下一页 </button> 到第<input type='text' style='width:25px;' id='epageNum' value=''>页 <button class='mybtn' onclick=\"selectepage('jump')\"> 跳转 </button></div>");
+		     	$("#con1").append("<div  style='position:absolute;top:510px;left:260px;' id='div1'><button class='mybtn' onclick=\"selectepage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectepage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectepage('last')\" id='elast'> 上一页 </button> <button class='mybtn' onclick=\"selectepage('next')\" id='enext'> 下一页 </button> 到第<input type='number' style='width:40px;' id='epageNum' value='' onclick='checknum(this)'>页 <button class='mybtn' onclick=\"selectepage('jump')\"> 跳转 </button></div>");
 		     	if(epage==1){
 		        	 $("#elast").attr("disabled",true);
 		         }else{
@@ -355,7 +362,7 @@ function selectepage(state){
 function selectbpage(state){
 	var num=$("#bpageNum").val();
 	$("#con2").empty();
-	if(num!=""){
+	if(num!=""&&state=="jump"){
 		bpage=num;		
 	} 
 	$.ajax({	
@@ -394,7 +401,7 @@ function selectbpage(state){
 		     		//隐藏标题
 		     		$(this).find('div.caption').stop(false,true).fadeOut(200);
 		     	});		     	
-		     	$("#con2").append("<div  style='position:absolute;top:510px;left:260px;' ><button class='mybtn' onclick=\"selectbpage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectbpage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectbpage('last')\"  id='blast'> 上一页 </button> <button class='mybtn' onclick=\"selectbpage('next')\" id='bnext'> 下一页 </button> 到第<input type='text' style='width:25px;' id='bpageNum' value=''>页 <button class='mybtn' onclick=\"selectbpage('jump')\"> 跳转 </button></div>");
+		     	$("#con2").append("<div  style='position:absolute;top:510px;left:260px;' ><button class='mybtn' onclick=\"selectbpage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectbpage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectbpage('last')\"  id='blast'> 上一页 </button> <button class='mybtn' onclick=\"selectbpage('next')\" id='bnext'> 下一页 </button> 到第<input type='number' style='width:40px;' id='bpageNum' value='' onclick='checknum(this)'>页 <button class='mybtn' onclick=\"selectbpage('jump')\"> 跳转 </button></div>");
 		     	if(bpage==1){
 		        	 $("#blast").attr("disabled",true);
 		         }else{
@@ -413,7 +420,7 @@ function selectbpage(state){
 function selectppage(state){
 	var num=$("#ppageNum").val();
 	$("#con3").empty();
-	if(num!=""){
+	if(num!=""&&state=="jump"){
 		ppage=num;		
 	} 
 	$.ajax({	
@@ -452,7 +459,7 @@ function selectppage(state){
 		     		//隐藏标题
 		     		$(this).find('div.caption').stop(false,true).fadeOut(200);
 		     	});		     	
-		     	$("#con3").append("<div  style='position:absolute;top:510px;left:260px;' ><button class='mybtn' onclick=\"selectppage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectppage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectppage('last')\" id='plast'> 上一页 </button> <button class='mybtn' onclick=\"selectppage('next')\" id='pnext'> 下一页 </button> 到第<input type='text' style='width:25px;' id='ppageNum' value=''>页 <button class='mybtn' onclick=\"selectppage('jump')\"> 跳转 </button></div>");
+		     	$("#con3").append("<div  style='position:absolute;top:510px;left:260px;' ><button class='mybtn' onclick=\"selectppage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectppage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectppage('last')\" id='plast'> 上一页 </button> <button class='mybtn' onclick=\"selectppage('next')\" id='pnext'> 下一页 </button> 到第<input type='number' style='width:40px;' id='ppageNum' value='' onclick='checknum(this)'>页 <button class='mybtn' onclick=\"selectppage('jump')\"> 跳转 </button></div>");
 		     	if(ppage==1){
 		        	 $("#plast").attr("disabled",true);
 		         }else{
@@ -471,7 +478,7 @@ function selectppage(state){
 function selectopage(state){
 	var num=$("#opageNum").val();
 	$("#con4").empty();
-	if(num!=""){
+	if(num!=""&&state=="jump"){
 		opage=num;		
 	} 
 	$.ajax({	
@@ -510,7 +517,7 @@ function selectopage(state){
 	     		//隐藏标题
 	     		$(this).find('div.caption').stop(false,true).fadeOut(200);
 	     	});		     	
-	     	$("#con4").append("<div  style='position:absolute;top:510px;left:260px;' ><button class='mybtn' onclick=\"selectopage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectopage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectopage('last')\" id='olast'> 上一页 </button> <button class='mybtn' onclick=\"selectopage('next')\" id='onext'> 下一页 </button> 到第<input type='text' style='width:25px;' id='opageNum' value=''>页 <button class='mybtn' onclick=\"selectopage('jump')\"> 跳转 </button></div>");
+	     	$("#con4").append("<div  style='position:absolute;top:510px;left:260px;' ><button class='mybtn' onclick=\"selectopage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectopage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectopage('last')\" id='olast'> 上一页 </button> <button class='mybtn' onclick=\"selectopage('next')\" id='onext'> 下一页 </button> 到第<input type='number' style='width:40px;' id='opageNum' value='' onclick='checknum(this)'>页 <button class='mybtn' onclick=\"selectopage('jump')\"> 跳转 </button></div>");
 	     	if(opage==1){
 	        	 $("#olast").attr("disabled",true);
 	         }else{

@@ -51,7 +51,7 @@
 							<li><a href="<%=path %>lighthouse/gotolighthouse.action?page=1" title="曝光台">曝光台<img src="<%=path%>images/hot.gif"></a></li>
 							<li><a href="<%=path %>skippage/gotosearchcredit.action" title="信用查询">信用查询<img src="<%=path%>images/hot.gif"></a></li>
 							<li><a href="<%=path %>introduction/getrule.action" title="规则介绍">规则介绍</a></li>
-							<li><a href="<%=path%>chat/gotochat.action?account=&msg=" title="聊天" target="_blank">聊天</a></li>
+<%-- 							<li><a href="<%=path%>chat/gotochat.action?account=&msg=" title="聊天" target="_blank">聊天</a></li> --%>
 							<!-- <li><a href="#" title="关于我们">关于我们</a></li> -->
 							<span class="fr"><img src="<%=path%>images/o-tel.gif"></span>							
 						</ul>
@@ -207,7 +207,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 					<p class="t-title">${productionList[0].productionName}</p>
 					<p class="t-decoration" style="white-space :nowrap ;width :150px;text-overflow:ellipsis;overflow: hidden;">${productionList[0].productionDetal}</p>
 					<p class="t-price">${productionList[0].productionMoney}</p>
-					<a href="#" title="立即购买">立即购买</a>
+					<a href="<%=path%>production/toProductionDetal.action?proId=${productionList[0].productionId}" title="立即购买">立即购买</a>
 				</div>
 				<div class="tuijian-img fl"><img src="<%=path%>picture/findPicture.action?url=${productionList[0].productionImage}" width="148px" height="120px"></div>
 			</li>
@@ -216,7 +216,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 					<p class="t-title">${productionList[1].productionName}</p>
 					<p class="t-decoration" style="white-space :nowrap ;width :150px;text-overflow:ellipsis;overflow: hidden;">${productionList[1].productionDetal}</p>
 					<p class="t-price">${productionList[1].productionMoney}</p>
-					<a href="#" title="立即购买">立即购买</a>
+					<a href="<%=path%>production/toProductionDetal.action?proId=${productionList[1].productionId}" title="立即购买">立即购买</a>
 				</div>
 				<div class="tuijian-img fl"><img src="<%=path%>picture/findPicture.action?url=${productionList[1].productionImage}" width="148px" height="120px"></div>
 			</li>
@@ -225,7 +225,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 					<p class="t-title">${productionList[2].productionName}</p>
 					<p class="t-decoration" style="white-space :nowrap ;width :150px;text-overflow:ellipsis;overflow: hidden;">${productionList[2].productionDetal}</p>
 					<p class="t-price">${productionList[2].productionMoney}</p>
-					<a href="#" title="立即购买">立即购买</a>
+					<a href="<%=path%>production/toProductionDetal.action?proId=${productionList[2].productionId}" title="立即购买">立即购买</a>
 				</div>
 				<div class="tuijian-img fl"><img src="<%=path%>picture/findPicture.action?url=${productionList[2].productionImage}" width="148px" height="120px"></div>
 			</li>

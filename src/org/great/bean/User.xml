@@ -63,6 +63,10 @@
 		select * from usertbl where
 		usercredit &lt; 60 and CHARACTERID != 3
 	</select>
+	<!-- 分页查询低信誉用户 -->
+<select id="userCredit" resultType="org.great.bean.UserBean">
+select * from(select t.*,rownum rn from(select * from usertbl where usercredit &lt; 60 and CHARACTERID != 3)t where rownum &lt;= #{end}) where rn &gt;= #{start}
+</select>
 	<!-- 查询用户信誉 -->
 	<select id="searchCredit" resultMap="userInfo">
 		select * from usertbl where

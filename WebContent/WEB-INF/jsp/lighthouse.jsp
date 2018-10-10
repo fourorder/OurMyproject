@@ -135,19 +135,31 @@ left:920px;
 共${requestScope.lighthouseList[0][3]}条
 当前页数：[${requestScope.lighthouseList[0][1]}/${requestScope.lighthouseList[0][2]}]
 <button class="mybtn" onclick="selectpage('end')">末页</button>
-<button class="mybtn" onclick="selectpage('last')">上一页</button>
-<button class="mybtn" onclick="selectpage('next')">下一页</button>
-到第<input type="text" style="width:25px;" id="epageNum" value="">页
+<button class="mybtn" onclick="selectpage('last')" disabled="disabled" id="last">上一页</button>
+<c:if test="${requestScope.lighthouseList[0][2]=='1'}">
+<button class="mybtn" onClick="selectpage('next')" id="next" disabled="disabled">下一页</button>
+</c:if>
+<c:if test="${requestScope.lighthouseList[0][2]!='1'}">
+<button class="mybtn" onClick="selectpage('next')" id="next">下一页</button>
+</c:if>
+到第<input type="number" style="width:40px;" id="pageNum" value="" onclick="checknum(this)">页
 <button class="mybtn" onclick="selectpage('jump')">跳转</button>
 </div> 
 </div>
 </body>
 <script type="text/javascript">
+function checknum(obj){
+	if($(obj).val()!=""){
+		if($(obj).val()<1){				
+			$(obj).val(1);
+		}	
+	}
+}
 var page=1;
 function selectpage(state){
-	var num=$("#epageNum").val();
+	var num=$("#pageNum").val();
 	$("#con1").empty();
-	if(num!=""){
+	if(num!=""&&state=="jump"){
 		page=num;		
 	} 
 	$.ajax({	
@@ -166,7 +178,7 @@ function selectpage(state){
 		             var e = list[i-1];
 		             $("#con1").append("<a href='#'><div class='item' id='img"+i+"'><img width='150' height='150' alt='"+e.userName+"' src='<%=path%>images/banner-touxiang.png' /><div class='caption' style='text-align:center;' ><p>账户:"+e.userAccount+"</p><p>昵称:"+e.userName+"</p><p>信誉:"+e.userCredit+"</p><p>注册时间:"+e.userRegisterTime+"</p></div><div style='position:absolute;top:120px;'><font color='red' size='4px'>"+e.userName+"</font></div></div></a>"); 
 		         } 		
-		         page=countPage;
+		         page=nowPage;
 		        //移动像素的图像
 		     	var move = -15;
 		     	//缩放比例，1.2 =120％
@@ -186,7 +198,17 @@ function selectpage(state){
 		     		//隐藏标题
 		     		$(this).find('div.caption').stop(false,true).fadeOut(200);
 		     	});		     	
-		     	$("#con1").append("<div  style='position:absolute;top:560px;left:540px;' id='div1'><button class='mybtn' onclick=\"selectpage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectpage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectpage('last')\"> 上一页 </button> <button class='mybtn' onclick=\"selectpage('next')\"> 下一页 </button> 到第<input type='text' style='width:25px;' id='epageNum' value=''>页 <button class='mybtn' onclick=\"selectpage('jump')\"> 跳转 </button></div>");	         
+		     	$("#con1").append("<div  style='position:absolute;top:560px;left:540px;' id='div1'><button class='mybtn' onclick=\"selectpage('home')\"> 首页 </button> 共"+count+"条当前页数：["+nowPage+"/"+countPage+"] <button class='mybtn' onclick=\"selectpage('end')\"> 末页 </button> <button class='mybtn' onclick=\"selectpage('last')\" id='last'> 上一页 </button> <button class='mybtn' onclick=\"selectpage('next')\" id='next'> 下一页 </button> 到第<input type='number' style='width:40px;' id='pageNum' value='' onclick='checknum(this)'>页 <button class='mybtn' onclick=\"selectpage('jump')\"> 跳转 </button></div>");	    
+		     	if(page==1){
+		        	 $("#last").attr("disabled",true);
+		         }else{
+		        	 $("#last").attr("disabled",false);
+		         }
+		         if(page==countPage){
+		        	 $("#next").attr("disabled",true);
+		         }else{
+		        	 $("#next").attr("disabled",false);
+		         }
 		 }
 	 }); 
     	

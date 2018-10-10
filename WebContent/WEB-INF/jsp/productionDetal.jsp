@@ -35,7 +35,12 @@
 </script>
 <script type="text/javascript">
 
-function checkMoney(proId){
+function checkMoney(proId,user){
+	
+	if(user==null){
+		 alert("用户未登录，请登录！");	
+		 return false;
+	}
 	
 	$.ajax({	
 		 async: false,
@@ -44,7 +49,7 @@ function checkMoney(proId){
 		 dataType:"json",
 		 type:"post",
 		 success:function(redata){
-			
+			 
 			 
 			 if(redata==0){
 				 alert("余额不足，请充值");
@@ -119,7 +124,7 @@ function checkMoney(proId){
                          
                         	<div class="nobdr-btns">
                         		
-                        	<a   onclick=" return checkMoney(${productionBean.productionId })"  >	<button class="addcart yh"><img src="<%=path%>images/ht.png" width="25" height="25"/>立即购买</button></a>
+                        	<a   onclick=" return checkMoney(${productionBean.productionId },${user})"  >	<button class="addcart yh"><img src="<%=path%>images/ht.png" width="25" height="25"/>立即购买</button></a>
                         	</div>
                         	
                         </div>

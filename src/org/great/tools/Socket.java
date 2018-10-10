@@ -93,24 +93,27 @@ public class Socket {
     }  
   
     @OnMessage  
-    public void onMessage(String message) throws IOException {  
+    public void onMessage(String message) throws IOException {    	
+    	
     	ChatBean chatBean=new ChatBean();
-    	chatBean.setChatContent(message.split("\\|")[1]);
-    	chatBean.setToUserId(chatBizImp.getUserId(message.split("\\|")[2]).getUserId());    	
+    	chatBean.setChatContent(message.substring(message.split("\\|")[0].length()+1, message.lastIndexOf("|")));
+    	
+    	chatBean.setToUserId(chatBizImp.getUserId(message.substring(message.lastIndexOf("|")+1)).getUserId());    	
     	chatBean.setUserId(chatBizImp.getUserId(message.split("\\|")[0]).getUserId());
     	chatBean.setChatTime(getTime());
-    	if ((clients.get(message.split("\\|")[2])==null)&&(clients.get(message.split("\\|")[2]+"@"+message.split("\\|")[0])==null)) {
+    	if ((clients.get(message.substring(message.lastIndexOf("|")+1))==null)&&(clients.get(message.substring(message.lastIndexOf("|")+1)+"@"+message.split("\\|")[0])==null)) {
     		chatBean.setReceiveFlag(0);//表示不在线
     		
-		}else if (clients.get(message.split("\\|")[2]+"@"+message.split("\\|")[0])!=null) {    		
+		}else if (clients.get(message.substring(message.lastIndexOf("|")+1)+"@"+message.split("\\|")[0])!=null) {    		
 			chatBean.setReceiveFlag(1);//1表示在聊天页
 			
-		}else if(clients.get(message.split("\\|")[2]+"@"+message.split("\\|")[0])==null){			
+		}else if(clients.get(message.substring(message.lastIndexOf("|")+1)+"@"+message.split("\\|")[0])==null){			
 			chatBean.setReceiveFlag(0);//0和其他表示不在聊天页
 		}
     	chatBizImp.addChatRecord(chatBean);
 
-    	sendMessageTo(message.split("\\|")[1], message.split("\\|")[2],message.split("\\|")[0]);
+    	sendMessageTo(message.substring(message.split("\\|")[0].length()+1, message.lastIndexOf("|")), 
+    			message.substring(message.lastIndexOf("|")+1),message.split("\\|")[0]);
     	
     }  
   
