@@ -30,17 +30,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link type="text/css" rel="stylesheet" href="<%=basePath%>admin/css/core.css">
 	<link type="text/css" rel="stylesheet" href="<%=basePath%>admin/css/icon.css">
 	<link type="text/css" rel="stylesheet" href="<%=basePath%>admin/css/home.css">
+    <link href="<%=basePath%>css/drag.css" rel="stylesheet" type="text/css"/>
+     <link rel="stylesheet" href="<%=basePath%>css/jigsaw.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 <body>
 
 <div class="ydc-body-content">
 	<div class="ydc-body-bj">
-		<%-- <div class="ydc-body-logo" >
-			 <a href="login.html">
-				 <img src="<%=basePath%>images/logo1.png" alt="" width="800px" height="20px"> 
-			</a> 
-		</div> --%>
 		<div class="ydc-body-login">
 			<h2>登录</h2>
 			<div class="ydc-body-login-content">
@@ -60,15 +58,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="ydc-user-border">
 							<input type="password" name="userPwd" id="userPwd" data-type="password" placeholder="密码">
 						</div>
+						
 					</div>
+				<div id="captcha" style="position: relative"></div>
+		<div id="msg"></div>
 					<div class="ydc-bod-aq">
 						<p>为了您的账号安全，请勿在公共电脑登录</p>
 					</div>
 					<div class="clearfix">
-						<!-- <div class="fl">
-							<input type="checkbox" checked="checked">
-							<label>十天内免登录</label>
-						</div> -->
+					
 						<div class="fr">
 							<a href="<%=basePath%>user/forgetPwd.action">忘记密码</a>
 						</div>
@@ -76,12 +74,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 					<div class="ydc-body-submit">
 					
-						<a href="javascript:document.myform.submit();">登录</a>
+						<a href="javascript:document.myform.submit();" id="null">登录</a>
 					</div>
 					<div class="ydc-login-box">
 						<a href="<%=basePath%>register/registerShow.action" target="_blank">立即注册</a>
-						<!-- <span>|</span>
-						<a href="customer.html" target="_blank">常见问题</a> -->
+						
 
 					</div>
 				</form>
@@ -104,27 +101,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- content YDC begin -->
 <!-- content YDC end -->
-
-	<script type="text/javascript" src="<%=basePath%>admin/js/jquery.min.js"></script>\
-	<script type="text/javascript">
+<script type="text/javascript">
          window.history.forward();
 </script>
+	<script type="text/javascript" src="<%=basePath%>admin/js/jquery.min.js"></script>
+    <script src="<%=basePath%>js/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="<%=basePath%>js/drag.js" type="text/javascript"></script>
+   
+<script type="text/javascript" src="<%=basePath%>js/jigsaw.js"></script>
 	<script type="text/javascript">
-	    var slideIndex = 0;
-	    showSlides();
-
-	    function showSlides() {
-	        var i;
-	        var slides = document.getElementsByClassName("mySlides");
-	        for (i = 0; i < slides.length; i++) {
-	            slides[i].style.display = "none";
-	        }
-	        slideIndex++;
-	        if (slideIndex> slides.length) {slideIndex = 1}
-	        slides[slideIndex-1].style.display = "block";
-	        setTimeout(showSlides, 3000); // 滚动时间
-	    }
-	</script>
+jigsaw.init(document.getElementById('captcha'), function () {
+	document.getElementById('msg').innerHTML = '验证成功！'
+		$("#null").attr("href","javascript:document.myform.submit();");
+		
+	return true;
+},function () {
+	document.getElementById('msg').innerHTML = '验证失败，重新验证！'
+		/* $("#null").attr("disabled",true); */
+		
+	     $("#null").removeAttr("href");
+	return false;
+})
+</script>	
 
 	<script type="text/javascript">
 	    $(function(){
@@ -137,6 +135,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 <script type="text/javascript">
 window.onload=function(){
+	$("#null").removeAttr("href");
+	
 	var message = "${requestScope.message}";
 	if (message != "") {
 		alert(message);

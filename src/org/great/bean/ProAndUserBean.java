@@ -13,8 +13,8 @@ public class ProAndUserBean {
 			private int point;			 
 	private int state;//评价状态
 	private int proUserId;
-	
-	
+	private String userName;
+	private String userHead;//头像
 	
 	
 	
@@ -30,18 +30,7 @@ public class ProAndUserBean {
 
 
 
-	public ProAndUserBean(int proAndUserId, int userId, int productionId, String payTime, String productionEvaluate,
-			int point, int state, int proUserId) {
-		super();
-		this.proAndUserId = proAndUserId;
-		this.userId = userId;
-		this.productionId = productionId;
-		this.payTime = payTime;
-		this.productionEvaluate = productionEvaluate;
-		this.point = point;
-		this.state = state;
-		this.proUserId = proUserId;
-	}
+	 
 
 
 
@@ -114,6 +103,112 @@ public class ProAndUserBean {
 
 	public void setProUserId(int proUserId) {
 		this.proUserId = proUserId;
+	}
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+
+
+
+
+
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public String getUserHead() {
+		return userHead;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setUserHead(String userHead) {
+		this.userHead = userHead;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public ProAndUserBean(int proAndUserId, int userId, int productionId, String payTime, String productionEvaluate,
+			int point, int state, int proUserId, String userName, String userHead) {
+		super();
+		this.proAndUserId = proAndUserId;
+		this.userId = userId;
+		this.productionId = productionId;
+		this.payTime = payTime;
+		this.productionEvaluate = productionEvaluate;
+		this.point = point;
+		this.state = state;
+		this.proUserId = proUserId;
+		this.userName = userName;
+		this.userHead = userHead;
 	}
 	 
 	 

@@ -22,28 +22,45 @@ public class ProductionBean {
    private String auditName;
    private String className;
    private String userName;
-   
+   private int delState;
    
    public ProductionBean() {
 	super();
 }
  
-public ProductionBean(int productionId, String productionName, int parameterId, int userId, int classId,
-		int productionMoney, String productionPublishTime, String productionFile, String productionImage) {
+ 
+
+
+ 
+
+public ProductionBean(int productionId, String productionName, int parameterId, int userId, int classId, int stateId,
+		double productionMoney, String productionPublishTime, String productionFile, String productionImage,
+		String productionDetal, int buyCount, int auditState, String auditName, String className, String userName,
+		int delState) {
 	super();
 	this.productionId = productionId;
 	this.productionName = productionName;
 	this.parameterId = parameterId;
 	this.userId = userId;
 	this.classId = classId;
+	this.stateId = stateId;
 	this.productionMoney = productionMoney;
 	this.productionPublishTime = productionPublishTime;
 	this.productionFile = productionFile;
 	this.productionImage = productionImage;
+	this.productionDetal = productionDetal;
+	this.buyCount = buyCount;
+	this.auditState = auditState;
+	this.auditName = auditName;
+	this.className = className;
+	this.userName = userName;
+	this.delState = delState;
 }
 
 
- 
+
+
+
 
 public ProductionBean(int productionId, String productionName, int parameterId, int userId, int classId, int stateId,
 		double productionMoney, String productionPublishTime, String productionFile, String productionImage,
@@ -193,6 +210,14 @@ public String getUserName() {
 
 public void setUserName(String userName) {
 	this.userName = userName;
+}
+
+public int getDelState() {
+	return delState;
+}
+
+public void setDelState(int delState) {
+	this.delState = delState;
 }
 	
 	

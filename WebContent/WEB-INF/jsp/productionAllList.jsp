@@ -166,19 +166,21 @@
 	    bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });//编辑器
 	
  
-	  <c:forEach items="${demandBeans}"  var="demandBeans" >	              
+	<%--   
+	 <c:forEach items="${demandBeans}"  var="demandBeans" >	              
 	           <div class="filtr-item" data-category="2">
 	              <a href="<%=path%>production/toProductionDetal.action?proId=${list.productionId}">
-			 <img src="<%=path%>picture/findPicture.action?url=${demandBeans.demandHead}"  alt="">
+			 <img src="<%=path%>picture/findPicture.action?url=${demandBeans.demandHead}"   alt="">
 			<span class="ss">${demandBeans.demandTitle}</span>
 		</a> 
-	</div> 
-</c:forEach>	
+	</div>  
+</c:forEach>	 
+--%> 
  
         </script>
         <script type="text/javascript">
             
-	    var slideIndex = 0;
+	    /* var slideIndex = 0;
 	    showSlides();
 
 	    function showSlides() {
@@ -191,7 +193,7 @@
 	        if (slideIndex> slides.length) {slideIndex = 1}
 	        slides[slideIndex-1].style.display = "block";
 	        setTimeout(showSlides, 3000); // AD滚动时间
-	    }
+	    } */
  
         </script>
         <script type="text/javascript">
@@ -259,6 +261,10 @@ if(state=="toNumber"){
     	            +"<br><div class='ydc-asset-img-list-til'>"+e.productionName +"</div></div> "
     	             );
     	     
+    	             
+    	             
+    	             
+    	             
     			 
     			 } 	 
     			 if(redata.currentPage==1){

@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.dbutils.handlers.columns.StringColumnHandler;
-import org.apache.jasper.tagplugins.jstl.core.If;
 import org.great.bean.UserBean;
 import org.great.biz.UserBiz;
 import org.springframework.context.annotation.Scope;

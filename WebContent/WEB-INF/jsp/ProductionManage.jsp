@@ -49,7 +49,18 @@
         <style type="text/css">
         
  .ydc-asset-img-list-img img { width: 100%; height: 240px;}       
+
+  .ydc-asset-img-list img { width: 100%; height: 240px;}   
+  
+ /*   .ydc-asset-img-list-img{
+    width: 100%;
+    height: 240px;;
+    vertical-align: middle;
    
+    background-color: #f3f4f9;
+}  */
+  
+
         </style>
         
     </head>
@@ -139,7 +150,7 @@
                                         <div class="ydc-asset-img clearfix"   id="proList">                 
              								<c:forEach items="${list}"  var="list" >	  
                          									<div class="ydc-asset-img-list"  >
-                                                <div class="ydc-asset-img-list-img"  ><a   href="<%=path%>production/adminProductionDetal.action?proId=${list.productionId}" target="_blank"  ><img src="<%=path%>picture/findPicture.action?url=${list.productionImage}"  alt=""></a></div>
+                                                <a   href="<%=path%>production/adminProductionDetal.action?proId=${list.productionId}" target="_blank"  ><img src="<%=path%>picture/findPicture.action?url=${list.productionImage}"  alt=""></a> 
                                                <br>
                                                 <div class="ydc-asset-img-list-til">${list.productionName }&nbsp&nbsp&nbsp&nbsp&nbsp<span style="color:#ff0000">${list.auditName}</span></div>
                                                 <div class="ydc-asset-img-list-del">

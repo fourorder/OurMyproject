@@ -108,7 +108,7 @@ public class ProductionHandler {
 	@RequestMapping("/toIssueProduction.action")
 	public ModelAndView toIssueProduction(HttpServletRequest request, String title, Integer price, Integer className,
 			String area2, MultipartFile file, MultipartFile productionFile) {
-
+System.out.println("进入发布写入数据库");
 		UserBean userBean = (UserBean) request.getSession().getAttribute("user");// 从session取出userbean对象
 		productionBizImp.toIssueProduction(request, title, price, className, area2, file, userBean.getUserId(),
 				productionFile);
@@ -177,6 +177,22 @@ userBean=userMapper.user(productionBean.getUserId());
 productionBean.setUserName(userBean.getUserName());
 request.setAttribute("userBean", userBean);
 		request.setAttribute("productionBean", productionBean);
+		
+		
+		//查找该商品的评价
+		ArrayList<ProAndUserBean> list=new ArrayList<ProAndUserBean>();
+		System.out.println("要去查询的作品的评价，ID="+proId);
+		list=proAndUserMapper.findProductionEvaluate(proId);
+	//	UserBean  userBena=null;
+		for(int i=0;i<list.size();i++) {
+			UserBean  userBean2=	userMapper.user(list.get(i).getUserId());
+			System.out.println("用户ID="+list.get(i).getUserId()+"-->"+userBean2.getUserName());
+		list.get(i).setUserName(userBean2.getUserName());
+		list.get(i).setUserHead(userBean2.getUserHead());
+		System.out.println(list.get(i).getUserName());
+		}
+		//
+		request.setAttribute("productionEvaluate", list);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsp/productionDetal");
 

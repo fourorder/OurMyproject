@@ -72,7 +72,7 @@
     <body>
         <!-- head YDC begin -->
         
-      <form  method="post" action="<%=path%>production/toIssueProduction.action" enctype="multipart/form-data"  onSubmit="return check()">
+      <form  method="post" action="<%=path%>production/toIssueProduction.action"    enctype="multipart/form-data"  onSubmit="return check()">
         
        <div class="o-top">
 				<div class="width1180">
@@ -295,7 +295,7 @@
     	    		/*  alert("eee"); */
     	    	
     	    		
-    	    		if($("#area2").val().length<20){
+    	    		if($("#area2").val().length<10){
     	    			alert("请输入不少于10字的描述");
     	    			 return false;
     	    		}else{

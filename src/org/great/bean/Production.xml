@@ -17,7 +17,7 @@ values (seqid.nextval,#{productionName},#{parameterId},#{userId},#{productionMon
 	 parameterType="org.great.bean.ConditionBean">
  
 	  SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (	
-	 	select * from PRODUCTIONTBL  where 1=1 
+	 	select * from PRODUCTIONTBL  where 1=1 and  DELSTATE =1
 	 	
 	 	<if test="fieldName!=null"> and productionName like #{fieldName}</if>
 			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
@@ -33,7 +33,7 @@ values (seqid.nextval,#{productionName},#{parameterId},#{userId},#{productionMon
 	 parameterType="org.great.bean.ConditionBean">
  
 	 
-	 	select * from PRODUCTIONTBL  where 1=1 
+	 	select * from PRODUCTIONTBL  where 1=1 and DELSTATE =1
 	 	
 	 	<if test="fieldName!=null"> and productionName like #{fieldName}</if>
 			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
@@ -88,7 +88,7 @@ UPDATE USERTBL SET USERMONEY =#{userMoney}  WHERE USERID =#{userId}
 	 parameterType="org.great.bean.ConditionBean">
  
 	  SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (	
-	 	select * from PRODUCTIONTBL  where 1=1  and   userid  =#{userName}
+	 	select * from PRODUCTIONTBL  where 1=1  and   userid  =#{userName}  and delState=1
 	 	
 	 	<if test="fieldName!=null"> and productionName like #{fieldName}</if>
 			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
@@ -102,7 +102,7 @@ UPDATE USERTBL SET USERMONEY =#{userMoney}  WHERE USERID =#{userId}
 	 parameterType="org.great.bean.ConditionBean">
  
 	 
-	 	select * from PRODUCTIONTBL  where 1=1   and   userid  =#{userName}
+	 	select * from PRODUCTIONTBL  where 1=1   and   userid  =#{userName}  and delState=1
 	 	
 	  <if test="fieldName!=null"> and productionName like #{fieldName}</if>
 			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
@@ -153,7 +153,7 @@ WHERE PRODUCTIONID =#{productionId}
 
 <delete id="delProduction">
 
- delete from PRODUCTIONTBL  where PRODUCTIONID=#{proId}
+ UPDATE PRODUCTIONTBL SET DELSTATE =0  WHERE PRODUCTIONID =#{proId}
 </delete>
 
 <!-- 查找分类名字 通过id -->
@@ -211,7 +211,7 @@ select * from PRODUCTIONTBL where PRODUCTIONID in (select PRODUCTIONID from PROA
 	 parameterType="org.great.bean.ConditionBean">
  
 	  SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (	
-	 	select * from PRODUCTIONTBL  where 1=1 and AUDITSTATE=903
+	 	select * from PRODUCTIONTBL  where 1=1 and AUDITSTATE=903 and DELSTATE =1
 	 	
 	 	<if test="fieldName!=null"> and productionName like #{fieldName}</if>
 			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>
@@ -227,7 +227,7 @@ select * from PRODUCTIONTBL where PRODUCTIONID in (select PRODUCTIONID from PROA
 	 parameterType="org.great.bean.ConditionBean">
  
 	 
-	 	select * from PRODUCTIONTBL  where 1=1 and AUDITSTATE=903
+	 	select * from PRODUCTIONTBL  where 1=1 and AUDITSTATE=903  and DELSTATE =1
 	 	
 	 	<if test="fieldName!=null"> and productionName like #{fieldName}</if>
 			<if test="conditionName!=null"> and   userid in (select userid from usertbl where USERNAME like #{conditionName} )</if>

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.User;
 import org.apache.struts2.ServletActionContext;
 import org.great.bean.UserBean;
 import org.great.biz.AdvertisingBiz;
