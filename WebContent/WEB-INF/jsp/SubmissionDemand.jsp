@@ -12,7 +12,7 @@
 
 
 
-<title>修改资料</title>
+<title>提交需求</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 	<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
 	<link rel="stylesheet" href="<%=path%>css/oindex.css">
@@ -106,11 +106,11 @@
 					<div class="ydc-tabPanel ydc-tabPanel-release">
 						<div class="ydc-release-tab-head">
 							<ul>
-								<li class="hit">提交合同</li>
+								<li class="hit">提交工程</li>
 							</ul>
 						</div>
 						<div class="ydc-panes">
-							<form method="post" action="<%=path%>demand/submissionDemand.action"
+							<form method="post" action="<%=path%>demand/submissionDemand.action" onSubmit="return check()"
 								enctype="multipart/form-data">
 								<div class="ydc-reg-form-class ydc-reg-form-reg"
 									style="margin-top: 40px;">
@@ -160,7 +160,7 @@
 									<div class="aui-card-form-item">
 									
 										<div class="aui-card-form-item">
-										提交工程:<input type="file"   name="file" />
+										提交工程:<input type="file"  id="file" name="file" />
 										</div>
 										<div class="aui-remarks">
 											<p>提交后将由顾问审核，通过后项目完成</p>
@@ -198,48 +198,26 @@
 	<script type="text/javascript" src="<%=path%>admin/js/nicEdit.js"></script>
 	<script type="text/javascript" src="<%=path%>admin/js/upImg.js"></script>
 	<script type="text/javascript">
-		var slideIndex = 0;
-		showSlides();
+	function check() {
+		
+		var file = document.getElementById("file").value;
+		
+		
+		
+		if (file!=null&&file != "" ) {
 
-		function showSlides() {
-			var i;
-			var slides = document.getElementsByClassName("mySlides");
-			for (i = 0; i < slides.length; i++) {
-				slides[i].style.display = "none";
+			var r = confirm("是否提交工程？（提交后将由顾问审核）");
+			if (r == true) {
+				return true;
+			} else {
+				return false;
 			}
-			slideIndex++;
-			if (slideIndex > slides.length) {
-				slideIndex = 1
-			}
-			slides[slideIndex - 1].style.display = "block";
-			setTimeout(showSlides, 3000); // 滚动时间
+
+		} else {
+			alert("请选择提交的工程");
+			return false;
 		}
-	</script>
-
-	<script type="text/javascript">
-		$(function() {
-			$('.ydc-tabPanel ul li').click(
-					function() {
-						$(this).addClass('hit').siblings().removeClass('hit');
-						$('.ydc-panes>div:eq(' + $(this).index() + ')').show()
-								.siblings().hide();
-					})
-		})
-	</script>
-	<script>
-		jQuery(function() {
-			upload_start();
-		});
-		//tab切换
-		$(function() {
-			$('.aui-ad-tab-title ul li').click(
-					function() {
-						$(this).addClass('aui-current').siblings().removeClass(
-								'aui-current');
-						$('.aui-ad-tab-body>div:eq(' + $(this).index() + ')')
-								.show().siblings().hide();
-					})
-		});
+	}
 	</script>
 
 

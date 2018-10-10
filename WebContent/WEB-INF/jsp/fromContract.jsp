@@ -108,7 +108,7 @@
 							</ul>
 						</div>
 						<div class="ydc-panes">
-							<form method="post" action="<%=path%>demand/addContrac.action"
+							<form method="post" action="<%=path%>demand/addContrac.action" onSubmit="return check()"
 								enctype="multipart/form-data">
 								<div class="ydc-reg-form-class ydc-reg-form-reg"
 									style="margin-top: 40px;">
@@ -152,7 +152,7 @@
 
 									<div class="aui-card-form-item">
 								<div class="aui-card-form-item">
-										上传合同:<input type="file"   name="file" />
+										上传合同:<input type="file" id="file"  name="file" />
 										</div>
 										<div class="aui-remarks">
 											<p>合同建议以DOC或PDF格式的文件上传</p>
@@ -189,49 +189,29 @@
 	<script type="text/javascript" src="<%=path%>admin/js/nicEdit.js"></script>
 	<script type="text/javascript" src="<%=path%>admin/js/upImg.js"></script>
 	<script type="text/javascript">
-		var slideIndex = 0;
-		showSlides();
+	
+function check() {
+		
+		var file = document.getElementById("file").value;
+		
+		
+		
+		if (file!=null&&file != "" ) {
 
-		function showSlides() {
-			var i;
-			var slides = document.getElementsByClassName("mySlides");
-			for (i = 0; i < slides.length; i++) {
-				slides[i].style.display = "none";
+			var r = confirm("是否提交合同交由服务商盖章");
+			if (r == true) {
+				return true;
+			} else {
+				return false;
 			}
-			slideIndex++;
-			if (slideIndex > slides.length) {
-				slideIndex = 1
-			}
-			slides[slideIndex - 1].style.display = "block";
-			setTimeout(showSlides, 3000); // 滚动时间
+
+		} else {
+			alert("请选择上传的合同");
+			return false;
 		}
+	}
 	</script>
 
-	<script type="text/javascript">
-		$(function() {
-			$('.ydc-tabPanel ul li').click(
-					function() {
-						$(this).addClass('hit').siblings().removeClass('hit');
-						$('.ydc-panes>div:eq(' + $(this).index() + ')').show()
-								.siblings().hide();
-					})
-		})
-	</script>
-	<script>
-		jQuery(function() {
-			upload_start();
-		});
-		//tab切换
-		$(function() {
-			$('.aui-ad-tab-title ul li').click(
-					function() {
-						$(this).addClass('aui-current').siblings().removeClass(
-								'aui-current');
-						$('.aui-ad-tab-body>div:eq(' + $(this).index() + ')')
-								.show().siblings().hide();
-					})
-		});
-	</script>
 
 
 

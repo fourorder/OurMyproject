@@ -114,6 +114,17 @@
 							
 								<div class="ydc-reg-form-class ydc-reg-form-reg"
 									style="margin-top: 40px;">
+									
+									<c:if
+									test="${demandDeal.auditState==2083}">
+									<div class="aui-card-form-item">
+										<label class="aui">距离项目结束还剩：${demandDeal.projectSchedule}天</label>
+									</div>
+
+								</c:if>
+									
+									
+									
 									<div class="aui-card-form-item preview  aui-news" style="margin-top:20px;">
                                                 <label class="aui">封面:</label>
                                                 
@@ -139,12 +150,18 @@
 									
 									<div class="aui-card-form-item">
 											<label class="aui">雇主:${demandInfo.fromUserBean.userName}</label>
+											<a href="<%=path%>user/EmployerInformation.action?userid=${demandInfo.fromUserBean.userId}" target="_blank" >
+								详情</a>
 									</div>
 									<div class="aui-card-form-item">
 											<label class="aui">服务商:${demandInfo.toUserBean.userName}</label>
+											<a href="<%=path%>user/EmployerInformation.action?userid=${demandInfo.toUserBean.userId}" target="_blank" >
+								详情</a>
 									</div>
 									<div class="aui-card-form-item">
 											<label class="aui">顾问:${demandInfo.adviserUserBean.userName}</label>
+											<a href="<%=path%>user/EmployerInformation.action?userid=${demandInfo.adviserUserBean.userId}" target="_blank" >
+								详情</a>
 									</div>
 									<div class="aui-card-form-item">
 											<label class="aui">押金:${demandInfo.securityMoney}</label>
@@ -190,6 +207,21 @@
 								
 								</c:if>
 								
+								<c:if
+									test="${demandInfo.stateParameterBean.parameterId==1865&&demandDeal.auditState==2085}">
+									<div class="aui-card-form-item">
+										<label class="aui">等待雇主审核确认完成</label>
+									</div>
+
+								</c:if>
+
+								<c:if
+									test="${demandInfo.stateParameterBean.parameterId==1865&&demandDeal.auditState==2086}">
+									<div class="aui-card-form-item">
+										<label class="aui">交易完成</label>
+									</div>
+
+								</c:if>
 								
 								
 								
