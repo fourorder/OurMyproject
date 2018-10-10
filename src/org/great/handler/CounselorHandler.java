@@ -373,6 +373,9 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 	@RequestMapping("/failure.action")//项目失败
 	@ResponseBody
 	public List<Object> test13(HttpServletRequest request,int demandid,String userId,String state,String number){
+		//项目失败
+		System.out.println("项目失败");
+		demandBizImp.failures(demandid+"");
 	int a=	demandBizImp.failure(demandid);
 	     demandBizImp.failure1(demandid);
 	     if(a>0) {
