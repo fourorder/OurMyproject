@@ -124,10 +124,10 @@ select * from(select t.*,rownum rn from(select * from usertbl where usercredit &
 				userMail=#{userMail},
 			</if>
 			<if test="userHead!=null and userHead!=''">
-				userHead=#{userHead}
+				userHead=#{userHead},
 			</if>
 			<if test="userAddress!=null and userAddress!=''">
-				userAddress=#{userAddress}
+				userAddress=#{userAddress},
 			</if>
 		</set>
 		where userid = #{userId}
