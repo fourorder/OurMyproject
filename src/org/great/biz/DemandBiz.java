@@ -223,4 +223,5 @@ public interface DemandBiz {
 	
 	//项目失败
 	public void failures(String demandid);
+	//s
 }
