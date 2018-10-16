@@ -77,7 +77,7 @@ public interface DemandBiz {
 	public String findStateName(int demandId);
 
 	public void changeInfo(int demandId2, String demandDetailInformation2, int securityMoney2, int dealMoney2,
-			String completeTime2, String auctionTime2, String demandHead2);
+			String completeTime2, String auctionTime2);
 
 	public void changeState(int demandId, int stateId);
 

@@ -297,7 +297,7 @@
 	<!-- 找顾问 10/3 -->
 	<select id="getCounselorInfoList" resultMap="getCounselorInfoX">
 		select * from
-		COUNSELORTBL where AUDITSTATE = 1 and ENABLEDISABLEID = 3
+		COUNSELORTBL where AUDITSTATE = 1 and ENABLEDISABLEID = 3 and userAccount in(select userAccount from usertbl where stateid = 1)
 	</select>
 	<resultMap type="org.great.bean.CounselorInfoBean" id="getCounselorInfoX">
 		<association property="userBean" column="userid"
@@ -449,7 +449,7 @@
 	</select>
 	<update id="changeInfo">
 		UPDATE demandInfomationTbl set
-		demandDetailInformation=#{demandDetailInformation2},securityMoney=#{securityMoney2},dealMoney=#{dealMoney2},completeTime=#{completeTime2},auctionTime=#{auctionTime2},demandHead=#{demandHead2}
+		demandDetailInformation=#{demandDetailInformation2},securityMoney=#{securityMoney2},dealMoney=#{dealMoney2},completeTime=#{completeTime2},auctionTime=#{auctionTime2}
 		WHERE demandId=#{demandId2}
 	</update>
 	<!-- 删除需求 -->
@@ -488,7 +488,7 @@
 	</insert>
 	<!-- 查询顾问总数 -->
 	<select id="countCounserlor" resultType="java.lang.Integer">
-		select count(*) from counselorTbl where userAccount=userAccount
+		select count(*) from counselorTbl where userAccount in(select userAccount from usertbl where stateid = 1)
 		<if test="state !=4">
 			and auditState=#{state}
 		</if>
@@ -498,7 +498,7 @@
 		select * from (
 		select c.*,rownum rn from (
 		select * from counselorTbl
-		where userAccount=userAccount
+		where userAccount in(select userAccount from usertbl where stateid = 1)
 		<if test="state !=4">
 			and auditState=#{state}
 		</if>

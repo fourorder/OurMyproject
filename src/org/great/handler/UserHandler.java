@@ -261,7 +261,8 @@ ModelAndView UserInformation(HttpServletRequest request,String userid){
 		userBizImp.userInfoEdit(request,userId, userProfile, userName, userIdentity, userTel, userMail,file,userAddress);
 		request.setAttribute("userInfo", userBizImp.userinfo(userId));
 		UserBean userBean = (UserBean) request.getSession().getAttribute("user");
-		userBean.setUserHead(userBizImp.userinfo(userId).getUserHead());
+		userBean=userBizImp.user(Integer.parseInt(userId));
+		
 		request.getSession().setAttribute("user", userBean);
 		
 		modelAndView.setViewName("redirect:/user/UserInformation.action");
@@ -287,9 +288,9 @@ ModelAndView accountManage(HttpServletRequest request,String page) {
 	ModelAndView modelAndView=new ModelAndView();
 	String userMoney=fundBizImp.findUserMoney(Integer.valueOf(ub.getUserId()));
 	request.setAttribute("userMoney", userMoney);
-	request.setAttribute("fundList", fundBizImp.getFundList2(page,Integer.valueOf(ub.getUserId())));
+	request.setAttribute("fundList", fundBizImp.getFundList3(page,Integer.valueOf(ub.getUserId())));
 	request.setAttribute("page", 1);
-	request.setAttribute("countPage", fundBizImp.getcountPage2(Integer.valueOf(ub.getUserId())));
+	request.setAttribute("countPage", fundBizImp.getcountPage3(Integer.valueOf(ub.getUserId())));
 	request.setAttribute("userid", ub.getUserId());
 	ArrayList<AuthorityBean> menuList=new ArrayList<AuthorityBean>();
 	menuList=authoriyMapper.findOwnSubclassMenu(ub.getUserId());
@@ -311,6 +312,11 @@ ModelAndView accountManage2(HttpServletRequest request,String page) {
 @ResponseBody
 public List<Object> selectFund(String page,String state,String userid){	
 	return fundBizImp.selectFund2(page, state,Integer.valueOf(userid));	
+}
+@RequestMapping("/selectFund3.action")//ajax分页跳转
+@ResponseBody
+public List<Object> selectFund2(String page,String state,String userid){	
+	return fundBizImp.selectFund3(page, state,Integer.valueOf(userid));	
 }
 @RequestMapping("/changeTel.action")//修改手机号
 public ModelAndView changeTel(HttpServletRequest request) {

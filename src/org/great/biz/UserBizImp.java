@@ -349,6 +349,61 @@ public List<UserBean> countFacilitator2() {
 	// TODO Auto-generated method stub
 	return userMapper.countFacilitator2( );
 }
+
+/*新加代码*/
+@Override
+public List<UserBean> countAdmin() {
+	// TODO Auto-generated method stub
+	return userMapper.countAdmin( );
+}
+@Override
+public List<UserBean> countAdmin2() {
+	// TODO Auto-generated method stub
+	return userMapper.countAdmin2( );
+}
+@Override
+public List<UserBean> countAdmin3(String userAccount) {
+	// TODO Auto-generated method stub
+	userAccount="%"+userAccount+"%";
+	return userMapper.countAdmin3(userAccount);
+}
+@Override
+public List<UserBean> countAdmin4(String userAccount) {
+	// TODO Auto-generated method stub
+	userAccount="%"+userAccount+"%";
+	return userMapper.countAdmin4(userAccount );
+}
+@Override
+public List<UserBean> admin(String userAccount, int num) {
+	// TODO Auto-generated method stub
+	if (userAccount!=null) {
+		userAccount="%"+userAccount+"%";
+	}
+	System.out.println("name="+userAccount);
+	System.out.println("num="+num);
+	return userMapper.admin(userAccount,num);
+}
+@Override
+public void adminChangeState(int userId,int stateId) {
+	// TODO Auto-generated method stub
+	if(stateId==1) {
+		userMapper.adminChangeState(userId);
+	}else if(stateId==2) {
+		userMapper.adminChangeState2(userId);
+	}else if(stateId==3) {
+		userMapper.adminChangeState3(userId);
+	}
+	
+}
+@Override
+	public void addAdmin(String userAccount) {
+		// TODO Auto-generated method stub
+	String userPwd="123456";
+	int stateId=1;
+	int characterId=5;
+	userMapper.addAdmin(userAccount,userPwd,stateId,characterId);
+	}
+
 @Override
 public List<UserBean> countFacilitator3(String userName) {
 	// TODO Auto-generated method stub
@@ -481,6 +536,13 @@ public void changePwd(String userAccount) {
 	 userMapper.changePwd(userAccount);
 	// TODO Auto-generated method stub
 	
+}
+
+
+@Override
+public UserBean getUserName(String userAccount) {
+	// TODO Auto-generated method stub
+	return userMapper.getUserName(userAccount);
 }
 
 

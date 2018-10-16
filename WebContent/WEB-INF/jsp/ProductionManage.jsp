@@ -150,7 +150,8 @@
                                         <div class="ydc-asset-img clearfix"   id="proList">                 
              								<c:forEach items="${list}"  var="list" >	  
                          									<div class="ydc-asset-img-list"  >
-                                                <a   href="<%=path%>production/adminProductionDetal.action?proId=${list.productionId}" target="_blank"  ><img src="<%=path%>picture/findPicture.action?url=${list.productionImage}"  alt=""></a> 
+                         									<div class='ydc-asset-img-list-img'>
+                                                <a   href="<%=path%>production/adminProductionDetal.action?proId=${list.productionId}" target="_blank"  ><img src="<%=path%>picture/findPicture.action?url=${list.productionImage}"  alt=""></a></div> 
                                                <br>
                                                 <div class="ydc-asset-img-list-til">${list.productionName }&nbsp&nbsp&nbsp&nbsp&nbsp<span style="color:#ff0000">${list.auditName}</span></div>
                                                 <div class="ydc-asset-img-list-del">
@@ -161,13 +162,12 @@
                                                     <button style="height:38px;"       type="submit" >删除</button>
                                                </form>
                                                 </div>
+                                                
                                             </div> 
               
 											</c:forEach>                               
               </div>                               
         
-                                           
-                                          
                                         </div>
                                       
                                     </div>
@@ -203,12 +203,12 @@
                                                
                                                 
                                                 <c:if test="${currentPage=='1'}">
-										<button class="btn btn-primary " onclick="addPages('last')"  disabled="disabled"  id="last" >
+										<button class="ydc-previous-item-btn-medium ydc-disabled" onclick="addPages('last')"  disabled="disabled"  id="last" >
                                                         <span>上一页</span>
                                                     </button>
 										</c:if>
 											<c:if test="${currentPage!='1'}">
-										<button class="btn btn-primary " onclick="addPages('last')"   id="last">
+										<button class="ydc-previous-item-btn-medium" onclick="addPages('last')"   id="last">
                                                         <span>上一页</span>
                                                     </button>
 										</c:if>  
@@ -219,12 +219,12 @@
                                                 
                                                  
                                                 <c:if test="${totalPages=='1'}">
-                                                <button class="btn btn-primary"  onclick="addPages('next')"  disabled="disabled"  id="next">
+                                                <button class="ydc-previous-item-btn-medium ydc-disabled"  onclick="addPages('next')"  disabled="disabled"  id="next">
                                                         <span>下一页</span>
                                                     </button>
                                                 </c:if>
                                                   <c:if test="${totalPages!='1'}">
-                                                <button class="btn btn-primary"  onclick="addPages('next')"  id="next"  >
+                                                <button class="ydc-previous-item-btn-medium"  onclick="addPages('next')"  id="next"  >
                                                         <span>下一页</span>
                                                     </button>
                                                 </c:if>

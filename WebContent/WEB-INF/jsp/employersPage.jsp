@@ -16,8 +16,14 @@
     <link rel="stylesheet" href="<%=path %>css/global.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
   <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
-	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<%-- script type="text/javascript" src="<%=path%>js/jquery.min.js"></script>
+      <script type="text/javascript"   src="<%=path%>js/bootstrap.min.js"></script>
+      <link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap.min.css">  --%>
+      
+      
+      <script type="text/javascript" src="<%=path%>js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript"   src="<%=path%>js/bootstrap-3.3.7.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap-3.3.7.min.css">
 
  <style type="text/css">
 
@@ -62,7 +68,7 @@
        <c:if test="${fund.stateId  eq 1}">
       
        <td><a class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" href="<%=path %>employers/operation.action?operation=forbidden&account=${fund.userAccount}&number=1">禁用</a></td>
-       <td> <a class="btn btn-danger  deleteBtn rightSize" onclick="firm()">删除</a>
+       <td> <a href="<%=path %>employers/operation.action?operation=del&account=${fund.userAccount}&number=1" class="btn btn-danger  deleteBtn rightSize" onclick="return firm()">删除</a>
        <a class="btn btn-info"  href="<%=path %>employers/update.action?account=${fund.userAccount}" >修改</a>
        </td>
        </c:if>
@@ -119,7 +125,7 @@
   <div class="layui-form-item">
     <label class="layui-form-label">密码</label>
     <div class="layui-input-block">
-      <input type="text"  id="userPwd"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input">
+      <input type="text"  id="userPwd"  disabled  lay-verify="required" value="未填写" autocomplete="off" class="layui-input" >
     </div>
   </div>
   <div class="layui-form-item">

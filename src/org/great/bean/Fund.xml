@@ -4,7 +4,7 @@
 <mapper namespace="org.great.mapper.FundMapper">
 <!--嵌套查询得到fundlist  -->	
 <select id="getFundList" resultMap="fundList">
-select * from(select t.*,rownum rn from(select * from fundtbl order by dealdate desc)t where rownum &lt;= #{end}) where rn &gt;= #{start}
+select * from(select t.*,rownum rn from(select * from fundtbl where userid!=4 order by dealdate desc)t where rownum &lt;= #{end}) where rn &gt;= #{start}
 </select>
 <select id="getUserInfo" parameterType="org.great.bean.FundBean" resultType="org.great.bean.UserBean">
 select * from usertbl where userid = #{userid}
@@ -26,6 +26,10 @@ select * from businesstbl where businessId = #{businessid}
 <!--嵌套查询得到fundlist (陈毅用) -->	
 <select id="getFundList2" resultMap="fundList2">
 select * from(select t.*,rownum rn from(select * from fundtbl where userid=#{userid} order by dealdate desc)t where rownum &lt;= #{end}) where rn &gt;= #{start}
+</select>
+<!--嵌套查询得到fundlist (陈毅用) -->	
+<select id="getFundList3" resultMap="fundList2">
+select * from(select t.*,rownum rn from(select * from fundtbl where userid=#{userid} and businessId!=9 order by dealdate desc)t where rownum &lt;= #{end}) where rn &gt;= #{start}
 </select>
 <select id="getUserInfo2" parameterType="org.great.bean.FundBean" resultType="org.great.bean.UserBean">
 select * from usertbl where userid = #{userid}
@@ -51,6 +55,10 @@ select * from fundtbl
 <!--得到fundlist总数(陈毅用)  -->
 <select id="getFundNumber2" resultType="org.great.bean.FundBean">
 select * from fundtbl where userid=#{userid}
+</select>
+<!--得到fundlist总数(陈毅用)  -->
+<select id="getFundNumber3" resultType="org.great.bean.FundBean">
+select * from fundtbl where userid=#{userid} and businessId!=9
 </select>
 <select id="findUserMoney" resultType="String">
 select userMoney from userTbl where userid=#{userid}

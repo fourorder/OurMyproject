@@ -2,27 +2,18 @@ package org.great.aop;
 
 
 import java.lang.reflect.Method;
-import java.util.Date;
-import java.util.UUID;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.great.bean.LogBean;
 import org.great.bean.UserBean;
 import org.great.mapper.LogMapper;
-import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -34,12 +25,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class SystemLogAspect {
 
 
-	@Resource LogMapper logMapper;
-	private static Logger logger = Logger.getLogger("zxtest");  
+	@Resource 
+	LogMapper logMapper;
 
     
-    @Pointcut("execution (* org.great.handler..*.*(..)) && !execution (* org.great.handler..*.home(..)) && !execution (* org.great.handler..*.gotoregister(..)) && !execution (* org.great.handler..*.show(..)) && !execution (* org.great.handler..*.findPicture(..))")  
-
+    @Pointcut("execution (* org.great.handler..*.*(..))")
     public  void controllerAspect() {  
     }  
     

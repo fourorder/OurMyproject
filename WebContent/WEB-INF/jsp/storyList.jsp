@@ -13,7 +13,9 @@
     <script type="text/javascript" src="<%=path %>js/jquery-1.9.1.min.js"></script>
     <link rel="stylesheet" href="<%=path %>layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="<%=path %>css/global.css" media="all">
-    <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
+   <%--  <link rel="stylesheet" href="<%=path%>css/bootstrap.css"> --%>
+
+    <link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap-3.3.7.min.css">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
 <style type="text/css">
 

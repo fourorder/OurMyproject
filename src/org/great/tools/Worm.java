@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.great.bean.ProductionBean;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -22,7 +23,9 @@ public class Worm {
 		String path="https://search.zbj.com/s/?kw=";
 		path=path+name;
 		try {
-			String code=Jsoup.connect(path).execute().body();
+			Connection connection=Jsoup.connect(path);
+			connection.referrer("https://search.zbj.com/");
+			String code=connection.execute().body();			
 			Document document=Jsoup.parse(code);
 			Elements elements=document.getElementsByClass("lazy fl");
 			Elements elements1=document.select("div.expertTags>span");//获得id为expertTags的div下的span
@@ -31,8 +34,12 @@ public class Worm {
 			for (int i = 0; i < len; i++) {
 				ProductionBean productionBean=new ProductionBean();
 				productionBean.setProductionImage(elements.get(i).attr("data-original"));
+				if (elements.get(i).attr("data-original").contains("key=service")) {
+		productionBean.setProductionImage("http://localhost:8080/Myproject/picture/findPicture.action?url=noimg.gif");
+					}
 				productionBean.setProductionDetal(elements1.get(i).text());
 				productionBean.setProductionFile(elements2.get(i).attr("href"));
+				
 				list.add(productionBean);
 			}
 			

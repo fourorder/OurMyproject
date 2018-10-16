@@ -110,9 +110,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <dd>
                             <a href="<%=basePath%>counselor/list.action?number=1&page=tpage" target="menuFrame">顾问管理</a>
                         </dd>
-                       <!--  <dd>
-                            <a href="" target="menuFrame">管理员管理</a>
-                        </dd> -->
+                        <dd>
+                            <a href="<%=basePath%>admin/page.action?number=1&page=tpage" target="menuFrame">管理员管理</a>
+                        </dd> 
                          <dd>
                             <a href="<%=basePath%>user/accountManage2.action?page=1" target="menuFrame">账户管理</a>
                         </dd>

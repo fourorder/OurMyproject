@@ -146,7 +146,7 @@
 			
 			</div>
 			
-			<div class="ydc-group-altogether">共<span> ${count}</span>人	投标</div>
+			<div class="ydc-group-altogether">共<span> ${count}</span>人	可选</div>
 			
 								
 									

@@ -794,10 +794,10 @@ long time = System.currentTimeMillis();
 		request.getSession().setAttribute("time", time);
 
  
-		AlipayConfig.notify_url = "http://127.0.0.1:8080/Myproject/production/addMoneyPayFinish.action?time=" + time;
+		AlipayConfig.notify_url = "http://118.25.237.196:8080/Myproject8.0/production/addMoneyPayFinish.action?time=" + time;
 		// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
 		 
-		AlipayConfig.return_url = "http://127.0.0.1:8080/Myproject/production/addMoneyPayFinish.action?time=" + time;
+		AlipayConfig.return_url = "http://118.25.237.196:8080/Myproject8.0/production/addMoneyPayFinish.action?time=" + time;
 		// --------------
 
 		ModelAndView mav = new ModelAndView();

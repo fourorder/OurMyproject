@@ -17,7 +17,7 @@
 			<div class="box">
 				<div class="chat" >
 					<div class="top">
-						<span class=""  id="touser">${toUser}</span>
+						<span class=""  id="touser">${toUserName.userName}</span>
 					</div>
 					 <div class="content">
 						<select multiple="multiple" id="leftContent">
@@ -81,7 +81,7 @@
         	var arr=event.data.split("|");
         	var text=arr[1];
         	touser=arr[0];
-        	$("#touser").html(touser);
+        /* 	$("#touser").html(touser); */
         	var leftContent = document.getElementById("leftContent");
         	var len = text.length;
       		var option1 = document.createElement("option");

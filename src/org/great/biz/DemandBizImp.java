@@ -225,9 +225,9 @@ public class DemandBizImp implements DemandBiz {
 
 	@Override
 	public void changeInfo(int demandId2, String demandDetailInformation2, int securityMoney2, int dealMoney2,
-			String completeTime2, String auctionTime2, String demandHead2) {
+			String completeTime2, String auctionTime2) {
 		demandMapper.changeInfo(demandId2, demandDetailInformation2, securityMoney2, dealMoney2, completeTime2,
-				auctionTime2, demandHead2);
+				auctionTime2);
 
 		// TODO Auto-generated method stub
 
@@ -814,7 +814,7 @@ public class DemandBizImp implements DemandBiz {
 		adminMoney = demandMapper.getUserMoney("4");
 		adminMoney = adminMoney + agency;
 		demandMapper.updateUserMoney("4", adminMoney + "");
-		demandMapper.addFund("4", "9", toUserId, agency + "");
+		demandMapper.addFund("4", "9", "4", agency + "");
 		// 服务商加佣金
 		myMoney = demandMapper.getUserMoney(toUserId);
 		myMoney = myMoney + my;
@@ -873,7 +873,7 @@ public class DemandBizImp implements DemandBiz {
 		myMoney = demandMapper.getUserMoney(userid);
 		myMoney = myMoney + price;
 		demandMapper.updateUserMoney(userid, myMoney + "");
-		demandMapper.addFund(userid, "12", "4", dealMoney);
+		demandMapper.addFund(userid, "12", userid, dealMoney);
 		// 服务商扣钱
 		adminMoney = demandMapper.getUserMoney("4");
 		adminMoney = adminMoney - price;

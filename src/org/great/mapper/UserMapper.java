@@ -32,6 +32,17 @@ public int delEmployers(@Param("account")String account);//删除雇主
 public int countEmployers();//雇主总个数
 public List<UserBean> countFacilitator();
 public List<UserBean> countFacilitator2();
+/*新加代码*/
+public List<UserBean> countAdmin();
+public List<UserBean> countAdmin2();
+public List<UserBean> countAdmin3(String userAccount);
+public List<UserBean> countAdmin4(String userAccount);
+public List<UserBean> admin(@Param("userAccount")String userAccount,@Param("num")int num);
+public void adminChangeState(int userId);
+public void adminChangeState2(int userId);
+public void adminChangeState3(int userId);
+public void addAdmin(@Param("userAccount")String userAccount,@Param("userPwd")String userPwd,@Param("stateId")int stateId,@Param("characterId")int characterId);
+
 public List<UserBean> countFacilitator3(String userName);
 public List<UserBean> countFacilitator4(String userName);
 public List<UserBean> facilitator(@Param("name")String name,@Param("page")int page);
@@ -76,7 +87,7 @@ public void changePwd(@Param(value="userAccount")String userAccount);
 
 public void updateCreditPoint(@Param(value="creditPoint")double creditPoint,@Param(value="userId")int userId);
 
-
+public UserBean getUserName(@Param(value="userAccount")String userAccount);
 
 
 }

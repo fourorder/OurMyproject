@@ -24,7 +24,7 @@
 					</span>
 					<span class="fr" id="fr1">
 						<a href="#" title="众包首页"><i class="o-home"></i>众包首页</a>
-						<a href="<%=path%>chat/chatlist.action?page=1"  id="msg"><i class="o-contract"></i>新消息(0)</a>
+						<a href="<%=path%>chat/chatlist.action?page=1"  id="msg"><i class="o-contract"></i>未读消息(0)</a>
 					</span>
 				</div>
 			</div>
@@ -178,7 +178,7 @@ $(".qianhong-b").slide({ titCell:".num ul" , mainCell:".qianhongpic" , effect:"f
 							<p>成功交易&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=path%>fund/getFundList.action?page=1">更多</a></p>
 							<ul>
 							<c:forEach items="${fundList}"  var="fund">
-								<li>${fund.dealDate}&nbsp;&nbsp;&nbsp;${fund.userBean.userName}&nbsp;&nbsp;&nbsp;成功交易</li>
+								<li>${fund.dealDate}&nbsp;&nbsp;&nbsp;${fund.userBean.userName}</li>
 							</c:forEach>
 								<!-- <li class="fl"><img src="images/b-01.png">价格透明</li>
 								<li class="fr"><img src="images/b-02.png">安全保障</li>
@@ -550,7 +550,7 @@ var flag='0';
 			/* var arr=event.data.split("|");
 			var text=arr[1];
 			var touser=arr[0]; */
-			$("#msg").html("<a href='<%=path%>chat/chatlist.action?page=1'><i class='o-contract'></i>新消息("+event.data+")</a>");
+			$("#msg").html("<a href='<%=path%>chat/chatlist.action?page=1'><i class='o-contract'></i>未读消息("+event.data+")</a>");
 		}
 		
       

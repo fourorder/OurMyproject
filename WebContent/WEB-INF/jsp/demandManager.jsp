@@ -18,8 +18,9 @@
     <link rel="stylesheet" href="<%=path%>laydate/theme/default/laydate.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
    <!--  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=path%>js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript"   src="<%=path%>js/bootstrap-3.3.7.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap-3.3.7.min.css"> 
 	<link rel="stylesheet" href="<%=path%>css/bootstrap.css">
     
 
@@ -105,8 +106,9 @@
                                    <input type="text" name="auctionTime" id="auctionTime" value="" readonly="readonly"/></br>
                                     <label>需求状态：</label>        
                                    <input type="text" name="stateId" id="stateId" value="" readonly="readonly"/> </br>
-                                   <label>需求图片：</label>        
-                                   <input type="text" name="demandHead" id="demandHead" value="" readonly="readonly"/> </br>    
+                                   <label  name="demandHead" id="Head" style="position:absolute; left:10px; top:10px;">需求图片：</label>  
+                                   <div id="demandHead" style="position:absolute; left:10px; top:40px;" ></div>      
+                                  <!--  <input type="text" name="demandHead" id="demandHead" value="" readonly="readonly"/> </br>  -->   
                                    
                                    
                                          
@@ -151,8 +153,8 @@
                                    <input type="text" name="auctionTime2" id="auctionTime2" value="" /></br>
                                     <label>需求状态：</label>        
                                    <input type="text" name="stateId2" id="stateId2" value="" readonly="readonly"/> </br>
-                                   <label>需求图片：</label>        
-                                   <input type="text" name="demandHead2" id="demandHead2" value="" /> </br>    
+                                   <label  name="demandHead" id="Head" style="position:absolute; left:10px; top:10px;">需求图片：</label>  
+                                   <div id="demandHead2" style="position:absolute; left:10px; top:40px;" ></div>    
                                    
                                    
                                          
@@ -508,7 +510,7 @@ function Values(demandId){
 	         for(var i=0;i<len;i++){  
 	     
 	             var e = list[i];
-	             $('#demandDetailInformation').val(e.demandDetaIlinformation);
+	             $('#demandDetailInformation').val(e.demandDetailInformation);
 	             $('#parameterId').val(parameterName);
 	             $('#fromUserId').val(fromUserName);
 	             $('#toUserId').val(toUserName);
@@ -518,7 +520,10 @@ function Values(demandId){
 	             $('#completeTime').val(e.completeTime);
 	             $('#auctionTime').val(e.auctionTime);
 	             $('#stateId').val(stateName);
-	             $('#demandHead').val(e.demandHead);
+	            /*  $('#demandHead').val(e.demandHead); */
+	             $("#demandHead").html(
+						 "<img src='<%=path%>picture/findPicture.action?url="+e.demandHead+"'/>"	 
+				 );
 	            
 	             
                  
@@ -561,7 +566,9 @@ function Values2(demandId){
 	             $('#completeTime2').val(e.completeTime);
 	             $('#auctionTime2').val(e.auctionTime);
 	             $('#stateId2').val(stateName);
-	             $('#demandHead2').val(e.demandHead);
+	             $("#demandHead2").html(
+						 "<img src='<%=path%>picture/findPicture.action?url="+e.demandHead+"'/>"	 
+				 );
 	            
 	             
                  

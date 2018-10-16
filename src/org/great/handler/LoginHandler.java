@@ -61,10 +61,10 @@ int flag=loginBizImp.login(userAccount, userPwd2, request);
 
 if(flag==1) {
 	
-	ServletContext application = session.getServletContext();
+	/*ServletContext application = session.getServletContext();
 	String sessionId = (String) application.getAttribute(userAccount); //获取登录用户的 sessionId
-
-	if (sessionId!=null && !"".equals(sessionId)) {
+*/
+	/*if (sessionId!=null && !"".equals(sessionId)) {
 	    System.out.println("该账号已登录，请您更换账号进行登录！");
 	    String msg="该账号已登录，请您更换账号进行登录！";
 	  modelAndView.addObject("message",msg);
@@ -74,9 +74,9 @@ if(flag==1) {
 	    modelAndView.setViewName("jsp/login");
 	} else {
 	    application.setAttribute(userAccount, session.getId());//设置登录用户的 sessionId
-	    modelAndView.setViewName("redirect:/user/home.action");
-	}
-	
+	    
+	}*/
+	modelAndView.setViewName("redirect:/user/home.action");
 }else if(flag==2){
     String message="用户已被锁定";
 	request.setAttribute("message", message);
@@ -133,8 +133,8 @@ public ModelAndView logout(HttpServletRequest request,HttpSession session) {
 	ModelAndView modelAndView=new ModelAndView();
 	ServletContext application = session.getServletContext();
 	UserBean user=(UserBean) request.getSession().getAttribute("user");
-	application.removeAttribute(user.userAccount);//系统退出，移除该用户的sessionId
-	request.getSession().invalidate();//移出session中所以信息
+	/*application.removeAttribute(user.userAccount);//系统退出，移除该用户的sessionId
+*/	request.getSession().invalidate();//移出session中所以信息
 	modelAndView.setViewName("jsp/login");	
 	return modelAndView;
 	

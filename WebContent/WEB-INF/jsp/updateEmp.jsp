@@ -41,7 +41,7 @@
 <div class="layui-form-item">
             <label class="layui-form-label">密码：</label>
             <div class="layui-input-block">
-                <input type="text" name="userPwd"  required  lay-verify="required" value="${fund.userPwd}" autocomplete="off" class="layui-input">
+                <input type="text" name="userPwd"  required  lay-verify="required" value="${fund.userPwd}" autocomplete="off" class="layui-input" disabled="disabled">
             </div>
         </div>
 <div class="layui-form-item">

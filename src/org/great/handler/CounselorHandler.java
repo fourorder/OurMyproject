@@ -37,9 +37,9 @@ public class CounselorHandler {
 	@RequestMapping("/application.action")//跳到申请页面
 	public ModelAndView test(HttpServletRequest request,String account,String userId){
 		ModelAndView modelAndView=new ModelAndView();
-		List<String> list1=new ArrayList<String>();
-		list1=demandBizImp.type();
-		request.setAttribute("list", list1);
+		/*List<String> list1=new ArrayList<String>();
+		
+		request.setAttribute("typelist", list1);*/
 		request.setAttribute("account", account);
 		request.setAttribute("userId", userId);
 		modelAndView.setViewName("jsp/applicationPage");
@@ -48,21 +48,29 @@ public class CounselorHandler {
 	}
 	@RequestMapping("/judge.action")//判断是否是顾问
 	@ResponseBody
-	public int test8(HttpServletRequest request,String account,int userId){
+	public List<Object> test8(HttpServletRequest request,String account,int userId){
 		List <CounselorBean> list=new ArrayList<CounselorBean>();
+		List<String> list1=new ArrayList<String>();
 		list=demandBizImp.select(account);
+		list1=demandBizImp.type();
+		List<Object> objlist=new ArrayList<Object>();
 		if(list.size()>0) {
 			System.out.println("该用户已申请");
 			if(list.get(0).getAuditState()==0) {
 				System.out.println("该用户正在审核");
-				return 1;
+				objlist.add(1);
+				objlist.add(list1);
+				return objlist;
 			}else if(list.get(0).getAuditState()==1) {
 				System.out.println("该用户已是顾问");
-				return 2;
+				objlist.add(2);
+				objlist.add(list1);
+				return objlist;
 			}
 		}
-
-		return 0;	
+		objlist.add(0);
+		objlist.add(list1);
+		return objlist;	
 	}
 	
 	@RequestMapping("/applyForList.action")//申请列表
@@ -92,7 +100,7 @@ public class CounselorHandler {
 				}
 			}
 			List<ApplicationBean> list=new ArrayList<ApplicationBean>();
-			list=demandBizImp.selectApplyFor(state1, num,userid);
+			list=demandBizImp.selectApplyFor(state1,num,userid);
 			System.out.println("list="+list.size());
 			request.setAttribute("totalPages", totalPages);
 			request.setAttribute("num", num);
@@ -412,9 +420,10 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 	 				state="0";
 	 			}
 	 		 int state2=Integer.parseInt(state);
-	    	 List<ApplicationBean> list=new ArrayList<ApplicationBean>();
-				list=demandBizImp.selectApplyFor(state2, num,userid);
-				System.out.println("list="+list.size());
+	    	 List<DemandBeanX> list=new ArrayList<DemandBeanX>();
+	    	 
+				list=demandBizImp.countAccomplish(userid, state2, num);
+			
 				request.setAttribute("num", num);
 				  obj.add(num);
 		           obj.add(list);
@@ -433,8 +442,8 @@ public String upLoadFile(HttpServletRequest request,MultipartFile file) {
 		int num=Integer.parseInt(number);
 	int a = demandBizImp.projectEvaluation(demandid, content);
 	if(a>0) {
-		List<ApplicationBean> list=new ArrayList<ApplicationBean>();
-		list=demandBizImp.selectApplyFor(state1, num,userid);
+		List<DemandBeanX> list=new ArrayList<DemandBeanX>();
+		list=demandBizImp.countAccomplish(userid, state1, num);
 		System.out.println("list="+list.size());
 		request.setAttribute("num", num);
 		request.setAttribute("state1",state1);

@@ -441,19 +441,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	 </script>
 	
-	 /* window.onload=function(){
-
-	        
-	        var submitBtn = document.getElementById("myform");
-
-	        submitBtn.onsubmit = function () {
-	            if(!document.getElementById("agreement").checked) {
-	                alert("请勾选按钮!");
-	                return false;
-	            }
-	            return true;
-	        };
-	    } */
+	
 	 
 	<script type="text/javascript">
 	    

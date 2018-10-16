@@ -17,10 +17,11 @@
     <link rel="stylesheet" href="<%=path%>css/global.css" media="all">
     <link rel="stylesheet" href="<%=path%>laydate/theme/default/laydate.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
- <!--    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
- <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
-	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+      
+      <script type="text/javascript" src="<%=path%>js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript"   src="<%=path%>js/bootstrap-3.3.7.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap-3.3.7.min.css">
     
 
 
@@ -32,18 +33,11 @@
 </head>
 <body>
 <div style="height: 50%;width: 95%; margin:0 auto;">
-<%-- <form action="<%=path%>employers/page.action?page=tpage&number=1" method="post"> --%>
-<!-- 姓名：<input type="text" name="name"  placeholder="请输入内容"  >  
-<input type="submit" value="查询" id="query"	class="layui-btn layui-btn-normal" />  --> 
+
 <input type="text" id="query" placeholder="请输入友情链接名字进行搜索" style="width:30.333%" />&nbsp;&nbsp;&nbsp;<button onclick="query()" class="layui-btn layui-btn-normal" style="width:10.333%" ><span class="layui-btn layui-btn-normal">搜索</span></button>
    <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert3" onClick="Values2(0)" value="添加友情链接"/>	
-<!-- </form> -->
 <table class="layui-table" style="border-collapse:collapse;table-layout:fixed;width:650px;margin:auto;"   border="1">
- <%--  <colgroup>
-    <col width="150">
-    <col width="200">
-    <col>
-  </colgroup> --%>
+
   <thead>
     <tr>
     
@@ -163,7 +157,7 @@
                                    
                                    
                                          
-                                 <!--   <input type="hidden" name="depid" id="depid" value="" />   -->  
+                              
                                  </div>        
                           <div class="modal-footer text-center">       
                     <input type="submit" class="btn btn-default btn_blue" value="保存">        
@@ -555,33 +549,7 @@ function Values2(lineId){
 $("#Revert3").modal("hide");
 function Values3(lineId){       
 	 $("#lineId3").val(lineId); 
-	 <%-- $.ajax({	
-		 url:"<%=path%>rule/findById.action",
-		 data:"ruleId="+ruleId,
-		 dataType:"json",
-		 type:"post",
-		 success:function(data){
-			 var list=data[0];
-	         var len = list.length;
-	         
-	         for(var i=0;i<len;i++){  
-	        
-	             var e = list[i];
-	             $('#ruleName2 ').val(e.ruleName );
-	             $('#securityMoney2 ').val(e.securityMoney );
-	             $('#dealMoney2 ').val(e.dealMoney );
-	             $('#auctionTime2 ').val(e.auctionTime );
-	             $('#completeTime2').val(e.completeTime );
-	             $('#parameterName2').val(e.parameterName);
-	            
-	             
-                 
-                         
-                     
-                 
-	         }
-		 }
-	 });  --%>
+	
 }
 	   
 </script>

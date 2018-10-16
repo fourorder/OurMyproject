@@ -294,7 +294,7 @@
     	    	}else{
     	    		/*  alert("eee"); */
     	    	
-    	    		
+    	    	
     	    		if($("#area2").val().length<10){
     	    			alert("请输入不少于10字的描述");
     	    			 return false;

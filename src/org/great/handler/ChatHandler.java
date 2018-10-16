@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.great.bean.UserBean;
 import org.great.biz.ChatBiz;
+import org.great.biz.UserBiz;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +21,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class ChatHandler {
 	@Resource
 	private ChatBiz chatBizImp;
+	@Resource
+	private UserBiz userBizImp;
 	@RequestMapping("/gotochat.action")//跳到聊天页面
 	public ModelAndView test(HttpServletRequest request,String account){
 		ModelAndView modelAndView=new ModelAndView();
 		request.setAttribute("toUser", account);
+		request.setAttribute("toUserName", userBizImp.getUserName(account));
 		modelAndView.setViewName("jsp/onlinechat");
 		return modelAndView;	
 	}

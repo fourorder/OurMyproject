@@ -17,13 +17,19 @@
     <link rel="stylesheet" href="<%=path%>css/global.css" media="all">
     <link rel="stylesheet" href="<%=path%>laydate/theme/default/laydate.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
- <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
-	 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script> 
-	 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
-     <%-- <script type="text/javascript"   src="<%=path%>js/bootstrap.min.js"></script>
-          <script type="text/javascript" src="<%=path%>js/jquery.min.js"></script> --%>
+ <!-- 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">  --> 
+	 <!-- <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script> 
+	 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  -->
+<%-- 	  <script type="text/javascript" src="<%=path%>js/jquery.min.js"></script>
+      <script type="text/javascript"   src="<%=path%>js/bootstrap.min.js"></script> --%>
         <link type="text/css" rel="stylesheet" href="<%=path%>css/home.css">
-<%-- <link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap.min.css">   --%>
+     <%--  <link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap.min.css">   --%>
+      
+      
+      
+      <script type="text/javascript" src="<%=path%>js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript"   src="<%=path%>js/bootstrap-3.3.7.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap-3.3.7.min.css"> 
 
  <style type="text/css">
 
@@ -110,7 +116,7 @@
    </tr> --%>
    <!-- ----------------------------------------- -->
   
-   <div class="modal fade" id="delmymodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+   <div class="modal" id="delmymodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
                                 <div class="modal-dialog">    
                                    <div class="modal-content">
             <div class="modal-header">
@@ -130,7 +136,7 @@
    
   <!-- ------------------------------------     -->
 <!-- 下架作品 -->
- <div class="modal fade" id="illegal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+ <div class="modal" id="illegal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
                                 <div class="modal-dialog">    
                                    <div class="modal-content">
             <div class="modal-header">
@@ -150,7 +156,7 @@
    
 <!-- ------------------------------------     -->
       <!-- 审核作品 -->
- <div class="modal fade" id="pass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+ <div class="modal" id="pass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
                                 <div class="modal-dialog">    
                                    <div class="modal-content">
             <div class="modal-header">

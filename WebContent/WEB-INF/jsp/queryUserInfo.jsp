@@ -42,17 +42,21 @@
 									<div class="ydc-reg-form-group clearfix">
 										<label>用户名称</label>
 										<div class="ydc-reg-form-input">
-											<label>${userInfo.userName}</label>
+											<label>${userInfo.userName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<span class="pop in"> <a href="<%=path%>chat/gotochat.action?account=${userInfo.userAccount}" target="_blank" data-name="联系用户"><img
+						src="<%=path%>demand/images/qq.png" />联系用户</a>
+				</span></label>
 										</div>
 									</div>
 									
 									<div class="ydc-reg-form-group clearfix">
 										<label>用户头像</label>
 										<div class="ydc-reg-form-input">
-											<label></label>
+											<label>
 											<div class="ydc-reg-form-text ydc-reg-form-user-logo">
 												<img src="<%=path%>picture/findPicture.action?url=${userInfo.userHead}" alt="">
 											</div>
+											</label>
 										</div>
 									</div>
 									<div class="ydc-reg-form-group clearfix">
@@ -98,7 +102,7 @@
 									</div>
 									
 									<div class="ydc-reg-form-group clearfix">
-										<label>用户信用分：</label>
+										<label>用户信用分</label>
 										<div class="ydc-reg-form-input">
 											<label>${userInfo.userCredit}</label>
 										</div>
@@ -106,12 +110,11 @@
 									
 									
 									<div class="ydc-reg-form-group clearfix">
-										<label>注册时间：</label>
+										<label>注册时间</label>
 										<div class="ydc-reg-form-input">
 											<label>${userInfo.userRegisterTime}</label>
 										</div>
 									</div>
-									
 									
 									
 									

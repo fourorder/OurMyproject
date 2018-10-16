@@ -254,9 +254,9 @@ public class DemandHandler {
 		String dealMoney2 = request.getParameter("dealMoney2");
 		String completeTime2 = request.getParameter("completeTime2");
 		String auctionTime2 = request.getParameter("auctionTime2");
-		String demandHead2 = request.getParameter("demandHead2");
+	/*	String demandHead2 = request.getParameter("demandHead2");*/
 		demandBizImp.changeInfo(Integer.valueOf(demandId2), demandDetailInformation2, Integer.valueOf(securityMoney2),
-				Integer.valueOf(dealMoney2), completeTime2, auctionTime2, demandHead2);
+				Integer.valueOf(dealMoney2), completeTime2, auctionTime2);
 
 		ModelAndView modelAndView = new ModelAndView("redirect:/demand/page.action?page=tpage&number=1");
 

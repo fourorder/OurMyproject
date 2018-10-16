@@ -15,9 +15,10 @@
     <link rel="stylesheet" href="<%=path %>css/global.css" media="all">
      <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
     <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
-	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js">-->
-	</script><style type="text/css"> 
+	<script type="text/javascript" src="<%=path%>js/jquery.min.js"></script>
+      <script type="text/javascript"   src="<%=path%>js/bootstrap.min.js"></script>
+      <link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap.min.css"> 
+	<style type="text/css"> 
 
         body{TEXT-ALIGN: center;}
 

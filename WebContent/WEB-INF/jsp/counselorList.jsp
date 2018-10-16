@@ -12,6 +12,10 @@
 <script type="text/javascript" src="<%=path %>js/jquery.min.js"></script>
  <link rel="stylesheet" href="<%=path %>plugins/layui/css/layui.css" media="all" />
   <script type="text/javascript" src="<%=path %>js/jquery-1.9.1.min.js"></script>
+  
+  
+  
+  
 <style type="text/css">
 
         body{TEXT-ALIGN: center;}

@@ -49,8 +49,17 @@ public interface UserBiz {
 	public int countEmployers();//查询雇主的总个数；
 	public List<UserBean> countFacilitator();
 	public List<UserBean> countFacilitator2();
-	public List<UserBean> countFacilitator3(String userName);
-	public List<UserBean> countFacilitator4(String userName);
+	/*新加代码*/
+	public List<UserBean> countAdmin();
+	public List<UserBean> countAdmin2();
+	public List<UserBean> countAdmin3(String userAccount);
+	public List<UserBean> countAdmin4(String userAccount);
+	public List<UserBean> admin(String userAccount, int num);
+	public void adminChangeState(int userId,int stateId);
+	public void addAdmin(String userAccount);
+	
+	public List<UserBean> countFacilitator3(String userAccount);
+	public List<UserBean> countFacilitator4(String userAccount);
 	public void changeState(int userId,int stateId);
 	public void changeInfo(@Param("userid")int userid,@Param("userName")String userName, @Param("userTel")Long userTel,@Param("userAccount")String userAccount,@Param("userSex")String userSex,@Param("userMail")String userMail,@Param("userIdentity")String userIdentity,@Param("userCredit")int userCredit,@Param("userMoney")int userMoney,@Param("userRegisterTime")String userRegisterTime);
 	public UserBean user(int userid);
@@ -60,5 +69,6 @@ public interface UserBiz {
 	public List<UserBean> checkUserAccount(String userAccount);
 	public List<UserBean> checkAccountTel(String userAccount,String userTel);
 	public void changePwd(String userAccount);
+	public UserBean getUserName(String userAccount);
 	
 }

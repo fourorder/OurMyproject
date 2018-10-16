@@ -104,7 +104,7 @@
 												<th>用户</th>
 												<th>日期</th>
 												<th>交易类型</th>
-												<th>接收人</th>
+												<!-- <th>接收人</th> -->
 												<th>交易金额</th>
 												
 												
@@ -117,7 +117,7 @@
 												<td>${fund.userBean.userName}</td>
 												<td>${fund.dealDate}</td>
 												<td>${fund.businessBean.businessName}</td>
-												<td>${fund.toUserBean.userName}</td>
+												<%-- <td>${fund.toUserBean.userName}</td> --%>
 												<td>${fund.dealMoney}</td>
 												
 												
@@ -196,7 +196,7 @@ function selectFund(state){
 		page=num;		
 	}
 	$.ajax({	
-		 url:"<%=path%>user/selectFund2.action",
+		 url:"<%=path%>user/selectFund3.action",
 		 data:"state="+state+"&page="+page+"&userid="+userid,
 		 dataType:"json",
 		 type:"post",
@@ -208,7 +208,7 @@ function selectFund(state){
 		         var size=redata[2];
 		         for(var i=0;i<len;i++){    			        	 
 		             var e = list[i];
-		             $("#tb").append("<tr><td>"+e.userBean.userName+"</td><td>"+e.dealDate+"</td><td>"+e.businessBean.businessName+"</td><td>"+e.toUserBean.userName+"</td><td>"+e.dealMoney+"</td></tr>"); 
+		             $("#tb").append("<tr><td>"+e.userBean.userName+"</td><td>"+e.dealDate+"</td><td>"+e.businessBean.businessName+"</td><td>"+e.dealMoney+"</td></tr>"); 
 		         } 	
 		         if(page==1){
 		        	 $("#last").attr("class","ydc-previous-item-btn-medium ydc-disabled"); 

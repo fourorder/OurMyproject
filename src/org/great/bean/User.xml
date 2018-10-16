@@ -50,9 +50,9 @@
 	<!-- 服务商注册 -->
 	<insert id="addUser2">
 		insert into
-		userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId,userRegisterTime,userMoney,businessTypeId,userHead)
+		userTbl(userId,userAccount,userPwd,characterId,userName,userTel,userIdentity,stateId,userRegisterTime,userMoney,businessTypeId,userHead,userMail,userCredit)
 		values
-		(SEQID.nextval,#{userAccount},#{userPwd},#{characterId},#{userName},#{userTel},#{userIdentity},#{stateId},#{userRegisterTime},0,#{businessTypeId},'banner-touxiang.png')
+		(SEQID.nextval,#{userAccount},#{userPwd},#{characterId},#{userName},#{userTel},#{userIdentity},#{stateId},#{userRegisterTime},0,#{businessTypeId},'banner-touxiang.png',#{userAccount},60)
 	</insert>
 	<select id="checkAccount" parameterType="String"
 		resultType="org.great.bean.UserBean">
@@ -286,8 +286,47 @@ select * from usertbl where characterId=2 and stateId=1
 select * from usertbl where characterId=2 and stateId=2
 
 </select>  
+<!-- 新加代码 -->
+<select id="countAdmin" resultType="org.great.bean.UserBean">
+select * from usertbl where characterId=5 and stateId=1 
+</select>
+<select id="countAdmin2"  resultType="org.great.bean.UserBean">
+select * from usertbl where characterId=5 and stateId=2 
+</select>
+<select id="countAdmin3" parameterType="String" resultType="org.great.bean.UserBean">
+select * from usertbl where characterId=5 and stateId=1 and userAccount like #{userAccount} 
+
+</select>
+<select id="countAdmin4" parameterType="String" resultType="org.great.bean.UserBean">
+select * from usertbl where characterId=5 and stateId=2 and userAccount like #{userAccount} 
+</select> 
+
+<select id="admin" resultType="org.great.bean.UserBean">
+select * from (
+select c.*,rownum rn from (
+select u.*,c.charactername,s.stateName from usertbl u,characterTbl c,stateTbl s where  u.CharacterId=c.CharacterId and u.CharacterId=5 and u.stateId=s.stateId and u.stateId!=3 
+<if test="userAccount!= null ">
+and u.userAccount like #{userAccount}
+</if>
+ ) c 
+ where rownum &lt;= (#{num}*5))
+ where rn &gt;= (#{num}*5-4)
+</select>
+<update id="adminChangeState" parameterType="java.lang.Integer">
+UPDATE usertbl set stateid=2 WHERE userId=#{userId}
+</update>
+<update id="adminChangeState2" parameterType="java.lang.Integer">
+UPDATE usertbl set stateid=1 WHERE userId=#{userId}
+</update>
+<update id="adminChangeState3" parameterType="java.lang.Integer">
+UPDATE usertbl set stateid=3 WHERE userId=#{userId}
+</update>
+<insert id="addAdmin">
+insert into userTbl(userId,userAccount,userPwd,stateId,characterId) values (SEQID.nextval,#{userAccount},#{userPwd},#{stateId},#{characterId})
+</insert>
+
 <select id="countFacilitator3" parameterType="String" resultType="org.great.bean.UserBean">
-select * from usertbl where characterId=2 and stateId=1 and userName like #{userName}
+select * from usertbl where characterId=2 and stateId=1 and userName like #{userName} 
 
 </select>
 <select id="countFacilitator4" parameterType="String" resultType="org.great.bean.UserBean">
@@ -364,5 +403,9 @@ UPDATE USERTBL SET USERCREDIT =#{creditPoint} WHERE USERID =#{userId}
 
 
 </update>
+
+<select id="getUserName" resultType="org.great.bean.UserBean">
+select * from usertbl where useraccount=#{userAccount}
+</select>
 
 </mapper>

@@ -81,7 +81,7 @@
                                            <c:forEach items="${list}"  var="list" >
                                               <div class="ydc-asset-img-list">
                                                 <div class="ydc-asset-img-list-img"  >
-                                                   <a href="<%=path%>production/toProductionDetal.action?proId=${list.productionId}"  target="_blank">
+                                                   <a href="<%=path%>production/toProductionDetal.action?proId=${list.productionId}">
                                                 <img src="<%=path%>picture/findPicture.action?url=${list.productionImage}"  alt=""></a></div>
                                                <br>
                                                 <div class="ydc-asset-img-list-til">${list.productionName }</div>
@@ -287,6 +287,7 @@ if(state=="toNumber"){
     	})
     	
     }
+ }
     
     
     

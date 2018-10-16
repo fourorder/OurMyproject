@@ -15,9 +15,9 @@
         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/icon.css">
         <link type="text/css" rel="stylesheet" href="<%=path%>admin/css/home.css">
        <link rel="stylesheet" href="<%=path%>css/bootstrap.css">
-	 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	 <script type="text/javascript" src="<%=path%>js/jquery.min.js"></script>
+      <script type="text/javascript"   src="<%=path%>js/bootstrap.min.js"></script>
+      <link type="text/css" rel="stylesheet" href="<%=path%>css/bootstrap.min.css"> 
         <script type="text/javascript" src="<%=path%>admin/js/jquery-1.5.2.min.js"></script>
   <script type="text/javascript" src="<%=path %>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=path %>/plugins/layui/layui.js"></script>
@@ -124,7 +124,7 @@ text-indent:2em;
 需要第二次验收 。</p>
  <strong style="font-size:1em">◆成果交付</strong>
     <p>当所有工作成果都通过验收后，接包方将其交付给外包管理小组。双方责任人签字认可，外包管理员通知本机构的财务人员，将合同余款支付给接包方。</p>
-    
+    								
     </div>
     <!-- 申请成为顾问业务 -->
     <div class='layui-tab-item' id='aaa'>
@@ -387,8 +387,8 @@ text-indent:2em;
 
 <script  src="<%=path %>layui/layui.js"></script>
 <script >
-
-
+var account=$("#account").val();
+var userId=$("#userId").val();
 layui.use(['form','layer','laydte'], function(){
 	  var form = layui.form;
 	  var layer=layui.layer;
@@ -401,16 +401,17 @@ var element = layui.element;
 });
 
 function applyFor(){	
-	var account=$("#account").val();
-	var userId=$("#userId").val();
-	var flist="${list}";
+	
+	
 	$.ajax({
 		 url:"<%=path%>counselor/judge.action",
 		 data:"account="+account+"&userId="+userId,
 		 dataType:"json",
 		 type:"post",
-		 success:function(redata){
+		 success:function(obj){
 			 $('#aaa').empty();
+			 var redata=obj[0];
+			 var flist=obj[1];
 			 if(redata==2){
 				 $("#aaa").html("<a>您已经是顾问！</a>")
 
@@ -434,33 +435,45 @@ function applyFor(){
 			     +   "</div>"
 			        +  "<div class='layui-form-item'>"
 			         +   "<label class='layui-form-label'>服务类型</label>"
-			         +   "<div class='layui-input-block'>"
-			         + "<select name='serviceType'>"
-			     +"<c:forEach items='"+flist+"'  var='fund'>"
-			    + "<option value='${fund} '>${fund}</option>"
-			    + "<c:out value='${fund}' />"
-			    + "</c:forEach>"
-			    + "</select>"
-			     +   "</div>"
-			     +  " </div>"
-			     +  "<label class='layui-form-label'>服务价格</label>"
-			     +  " <div class='layui-input-block'>"
-			     +  " <input type='text' name='counselorMoney'  required  lay-verify='required' placeholder='请输入价格' autocomplete='off' class='layui-input' id='url'>"
-			     +  " </div><br />"
-			     +  " <label class='layui-form-label'>图片</label>"
-			   + " <div class='layui-upload'>"
-			+ "<input type='file' name='file'   id='1' class='file_photo aui-file-new-up' style='margin:0;'/>"                                                    
-		+	"</div>"
-			       + "<br />"
-			      +  "<div class='layui-form-item'>"
-			       +    " <div class='layui-input-block'>"
-			              +  "<input type='submit' class='layui-btn  layui-btn-danger' id='test9' lay-submit lay-filter='formDemo'  value='立即提交'>"
-			             +  " <button type='reset' class='layui-btn layui-btn-primary'>重置</button>"			                
-			          + " </div>"
-			      + " </div>"
-			  +  "</form>")
+			         +   "<div class='layui-input-block' style='width:100px;'>"
+			       + "<select name='serviceType' id='l1'>"
+			       +" </select>"
+			          );
+				  var len=flist.length;
+				  var html = "";
+			         for(var i = 0; i<len; i++){
+			        	 var e = flist[i];
+			        	 html+="<option value='"+e+"'>"+e+"</option>";			        	
+			         } 
+			         $("#l1").append(html);  
+			         var form = layui.form;
+			         form.render();
+			          $("#aaa").append(	        		
+			        		 "</div>"
+			        		 +  " </div>"
+						     +  "<label class='layui-form-label'>服务价格</label>"
+						     +  " <div class='layui-input-block'>"
+						     +  " <input type='text' name='counselorMoney'  required  lay-verify='required' placeholder='请输入价格' autocomplete='off' class='layui-input' id='url'>"
+						     +  " </div><br />"
+						     +  " <label class='layui-form-label'>图片</label>"
+						   + " <div class='layui-upload'>"
+						+ "<input type='file' name='file'   id='1' class='file_photo aui-file-new-up' style='margin:0;'/>"                                                    
+					+	"</div>"
+						       + "<br />"
+						      +  "<div class='layui-form-item'>"
+						       +    " <div class='layui-input-block'>"
+						              +  "<input type='submit' class='layui-btn  layui-btn-danger' id='test9' lay-submit lay-filter='formDemo'  value='立即提交'>"
+						             +  " <button type='reset' class='layui-btn layui-btn-primary'>重置</button>"			                
+						          + " </div>"
+						      + " </div>"
+						  +  "</form>"	 
+			         
+			         ); 
+			         
+			         
+			
 			 }
-
+			 
 		 }
 	})
 }
@@ -489,7 +502,7 @@ function applyForList(page){
 				 if(e.stateId==902){
 				 $("#ccc").append(
 						 "<tr><td>"+e.demandTitle+"</td>"+
-							"<td>"+e.demandDetaIlinformation+"</td>"+
+							"<td>"+e.demandDetailinForMation+"</td>"+
 							"<td>"+e.userAccount+"</td>"+
 							"<td>"+e.demandid+"</td>"+
 							"<td>未处理</td>"+
@@ -505,7 +518,7 @@ function applyForList(page){
 				
 						 $("#ccc").append(
 								 "<tr><td>"+e.demandTitle+"</td>"+
-									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.demandDetailinForMation+"</td>"+
 									"<td>"+e.userAccount+"</td>"+
 									"<td>"+e.demandid+"</td>"+
 									"<td>已接受</td>"+
@@ -516,7 +529,7 @@ function applyForList(page){
 				 }else if(e.stateId==904){
 					 $("#ccc").append(
 							 "<tr><td>"+e.demandTitle+"</td>"+
-								"<td>"+e.demandDetaIlinformation+"</td>"+
+								"<td>"+e.demandDetailinForMation+"</td>"+
 								"<td>"+e.userAccount+"</td>"+
 								"<td>"+e.demandid+"</td>"+
 								"<td>已拒绝</td>"+
@@ -555,7 +568,7 @@ function sstate() {
 							
 						 $("#ccc").append(
 								 "<tr><td>"+e.demandTitle+"</td>"+
-									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.demandDetailinForMation+"</td>"+
 									"<td>"+e.userAccount+"</td>"+
 									"<td>"+e.demandid+"</td>"+
 									"<td>未处理</td>"+
@@ -567,7 +580,7 @@ function sstate() {
 						 }else if(e.stateId==903){
 								 $("#ccc").append(
 										 "<tr><td>"+e.demandTitle+"</td>"+
-											"<td>"+e.demandDetaIlinformation+"</td>"+
+											"<td>"+e.demandDetailinForMation+"</td>"+
 											"<td>"+e.userAccount+"</td>"+
 											"<td>"+e.demandid+"</td>"+
 											"<td>已接受</td>"+
@@ -577,7 +590,7 @@ function sstate() {
 						 }else if(e.stateId==904){
 							 $("#ccc").append(
 									 "<tr><td>"+e.demandTitle+"</td>"+
-										"<td>"+e.demandDetaIlinformation+"</td>"+
+										"<td>"+e.demandDetailinForMation+"</td>"+
 										"<td>"+e.userAccount+"</td>"+
 										"<td>"+e.demandid+"</td>"+
 										"<td>已拒绝</td>"+
@@ -738,7 +751,7 @@ if (confirm("是否确认接受")) {
 				 if(e.stateId==902){
 					 $("#ccc").append(
 							 "<tr><td>"+e.demandTitle+"</td>"+
-								"<td>"+e.demandDetaIlinformation+"</td>"+
+								"<td>"+e.demandDetailinForMation+"</td>"+
 								"<td>"+e.userAccount+"</td>"+
 								"<td>"+e.demandid+"</td>"+
 								"<td>未处理</td>"+
@@ -750,7 +763,7 @@ if (confirm("是否确认接受")) {
 					 }else if(e.stateId==903){
 							 $("#ccc").append(
 									 "<tr><td>"+e.demandTitle+"</td>"+
-										"<td>"+e.demandDetaIlinformation+"</td>"+
+										"<td>"+e.demandDetailinForMation+"</td>"+
 										"<td>"+e.userAccount+"</td>"+
 										"<td>"+e.demandid+"</td>"+
 										"<td>已接受</td>"+
@@ -760,7 +773,7 @@ if (confirm("是否确认接受")) {
 					 }else if(e.stateId==904){
 						 $("#ccc").append(
 								 "<tr><td>"+e.demandTitle+"</td>"+
-									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.demandDetailinForMation+"</td>"+
 									"<td>"+e.userAccount+"</td>"+
 									"<td>"+e.demandid+"</td>"+
 									"<td>已拒绝</td>"+
@@ -801,7 +814,7 @@ function firm1(demandid) {
 				 if(e.stateId==902){
 						 $("#ccc").append(
 								 "<tr><td>"+e.demandTitle+"</td>"+
-									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.demandDetailinForMation+"</td>"+
 									"<td>"+e.userAccount+"</td>"+
 									"<td>"+e.demandid+"</td>"+
 									"<td>未处理</td>"+
@@ -814,7 +827,7 @@ function firm1(demandid) {
 				 }else if(e.stateId==903){
 						 $("#ccc").append(
 								 "<tr><td>"+e.demandTitle+"</td>"+
-									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.demandDetailinForMation+"</td>"+
 									"<td>"+e.userAccount+"</td>"+
 									"<td>"+e.demandid+"</td>"+
 									"<td>已接受</td>"+
@@ -824,7 +837,7 @@ function firm1(demandid) {
 				 }else if(e.stateId==904){
 					 $("#ccc").append(
 							 "<tr><td>"+e.demandTitle+"</td>"+
-								"<td>"+e.demandDetaIlinformation+"</td>"+
+								"<td>"+e.demandDetailinForMation+"</td>"+
 								"<td>"+e.userAccount+"</td>"+
 								"<td>"+e.demandid+"</td>"+
 								"<td>已拒绝</td>"+
@@ -844,7 +857,7 @@ function firm1(demandid) {
 }
 
 function Values(Id) {
-	alert(Id);
+	
 	$("#serialNumber").val(Id)
 }
 
@@ -926,7 +939,7 @@ function present() {
 	var content=$("#notation1").val();
 	var userId=$("#userId").val();
 	  var nn=$("#num3").text();
-	  alert(nn)
+	
 	   var state2=$("#state1").val();
 	$.ajax({
 		 url:"<%=path%>counselor/overallMerit.action",
@@ -945,7 +958,7 @@ function present() {
 				 if(e.stateId==1863){
 					 $("#zzz").append(
 							 "<tr><td>"+e.demandTitle+"</td>"+
-								"<td>"+e.demandDetaIlinformation+"</td>"+
+								"<td>"+e.demandDetailinForMation+"</td>"+
 								"<td>"+e.dealMoney+"</td>"+
 								"<td>项目中</td>"+
 								"<td><a onclick='particulars("+e.demandId+")' data-toggle='modal' data-target='#myModal2'  class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>"+
@@ -955,7 +968,7 @@ function present() {
 					 }else if(e.stateId==2272){
 						 $("#zzz").append(
 						 "<tr><td>"+e.demandTitle+"</td>"+
-							"<td>"+e.demandDetaIlinformation+"</td>"+
+							"<td>"+e.demandDetailinForMation+"</td>"+
 							"<td>"+e.dealMoney+"</td>"+
 							"<td>等待审核</td>"+
 							"<td><a onclick='particulars("+e.demandId+")' data-toggle='modal' data-target='#myModal2'  class='btn btn-warning illegalBtn rightSize'>查看详情</a><td>"+
@@ -967,7 +980,7 @@ function present() {
 					 }else if(e.stateId==1865){
 						 $("#zzz").append(
 								 "<tr><td>"+e.demandTitle+"</td>"+
-									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.demandDetailinForMation+"</td>"+
 									"<td>"+e.dealMoney+"</td>"+
 									"<td>项目完成</td>"+
 									"<td><a onclick='particulars("+e.demandId+")'  data-toggle='modal' data-target='#myModal2' class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>"+
@@ -978,7 +991,7 @@ function present() {
 					 }else if(e.stateId==1866){
 						 $("#zzz").append(
 								 "<tr><td>"+e.demandTitle+"</td>"+
-									"<td>"+e.demandDetaIlinformation+"</td>"+
+									"<td>"+e.demandDetailinForMation+"</td>"+
 									"<td>"+e.dealMoney+"</td>"+
 									"<td>项目失败</td>"+
 									"<td><a onclick='particulars("+e.demandId+")' data-toggle='modal' data-target='#myModal2'  class='btn btn-warning illegalBtn rightSize'>查看详情</a></td>"+
@@ -1005,7 +1018,7 @@ function particulars(demandid) {
   			var type=redata[1]
   			var state=redata[2]
   			var time=redata[3]
-  			 alert(time)
+  			 
 			 var len = list.length
   			 for(var i=0;i<len;i++){ 
 				 var e = list[i];
@@ -1023,7 +1036,7 @@ function particulars(demandid) {
   	  					"<a href='<%=path%>download.action?upUrl="+e.filePath+"' class='btn btn-warning illegalBtn rightSize' type='button' data-id='"+e.filePath+"' id='illegal' >下载项目</a>"
   	  			 )
   			 }else{
-  				 alert(222)
+  				 
   			 }
   			
   			 }
@@ -1127,6 +1140,7 @@ function Pass(demandid) {
 					 var e = list[i];
 					 if(e.stateId==1863){
 						 $("#zzz").append(
+								 
 								 "<tr><td>"+e.demandTitle+"</td>"+
 									"<td>"+e.demandDetaIlinformation+"</td>"+
 									"<td>"+e.dealMoney+"</td>"+
@@ -1135,7 +1149,7 @@ function Pass(demandid) {
 									"<td>无操作</td>"+
 									"</tr>" 
 						 )
-						 }else if(e.stateId==2272){
+						 }else if(e.stateId==2272){						
 							 $("#zzz").append(
 							 "<tr><td>"+e.demandTitle+"</td>"+
 								"<td>"+e.demandDetaIlinformation+"</td>"+
@@ -1173,11 +1187,9 @@ function Pass(demandid) {
 				 }
 	   		 }
 	   	})
-	       return true;
+	    
 }
-else {
-	 return false;
-}
+
 }
 function accomplish(page) {
 	var state2=$("#projectState").val();

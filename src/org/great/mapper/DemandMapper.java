@@ -75,8 +75,7 @@ public interface DemandMapper {
 	public void changeInfo(@Param("demandId2") int demandId2,
 			@Param("demandDetailInformation2") String demandDetailInformation2,
 			@Param("securityMoney2") int securityMoney2, @Param("dealMoney2") int dealMoney2,
-			@Param("completeTime2") String completeTime2, @Param("auctionTime2") String auctionTime2,
-			@Param("demandHead2") String demandHead2);
+			@Param("completeTime2") String completeTime2, @Param("auctionTime2") String auctionTime2);
 
 	public void changeState(int demandId);
 

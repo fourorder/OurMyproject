@@ -49,6 +49,23 @@
 		});
 	}
 </script>
+<script type="text/javascript">
+function check(){
+	var reg = new RegExp("^(\\d|[1-9]\\d|100)$");
+	var testNum = $("#point").val();
+	if(!reg.test(testNum)) {
+	       alert("请输入0-100的整数！");
+	       return false;
+	}else{
+		if($("#evaluate").val().length<10){
+			alert("请输入不少于10字的评价");
+			 return false;
+		}
+		
+	}
+	
+}
+</script>
 <style type="text/css">
 .aui {
     float: left;
@@ -117,7 +134,7 @@
 						</div>
 						<div class="ydc-panes">
 							<form method="post" action="<%=path%>production/submitProductionEvaluate.action?proAndUserId=${proAndUserList.proAndUserId}"
-								enctype="multipart/form-data">
+								enctype="multipart/form-data" onSubmit="return check()">
 								<div class="ydc-reg-form-class ydc-reg-form-reg"
 									style="margin-top: 40px;">
 									<div class="aui-card-form-item preview  aui-news" style="margin-top:20px;">
